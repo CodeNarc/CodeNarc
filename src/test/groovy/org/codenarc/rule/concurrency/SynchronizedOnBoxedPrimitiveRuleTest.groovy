@@ -104,13 +104,13 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase<Synchron
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber: 12, sourceLineText: 'synchronized(byte1)', messageText: 'Synchronizing on the Byte field byte1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 13, sourceLineText: 'synchronized(short1)', messageText: 'Synchronizing on the Short field short1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 14, sourceLineText: 'synchronized(double1)', messageText: 'Synchronizing on the Double field double1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 15, sourceLineText: 'synchronized(integer1)', messageText: 'Synchronizing on the Integer field integer1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 16, sourceLineText: 'synchronized(long1)', messageText: 'Synchronizing on the Long field long1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 17, sourceLineText: 'synchronized(float1)', messageText: 'Synchronizing on the Float field float1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 18, sourceLineText: 'synchronized(char1)', messageText: 'Synchronizing on the Character field char1 is unsafe. Do not synchronize on boxed types'])
+                [line: 12, source: 'synchronized(byte1)', message: 'Synchronizing on the Byte field byte1 is unsafe. Do not synchronize on boxed types'],
+                [line: 13, source: 'synchronized(short1)', message: 'Synchronizing on the Short field short1 is unsafe. Do not synchronize on boxed types'],
+                [line: 14, source: 'synchronized(double1)', message: 'Synchronizing on the Double field double1 is unsafe. Do not synchronize on boxed types'],
+                [line: 15, source: 'synchronized(integer1)', message: 'Synchronizing on the Integer field integer1 is unsafe. Do not synchronize on boxed types'],
+                [line: 16, source: 'synchronized(long1)', message: 'Synchronizing on the Long field long1 is unsafe. Do not synchronize on boxed types'],
+                [line: 17, source: 'synchronized(float1)', message: 'Synchronizing on the Float field float1 is unsafe. Do not synchronize on boxed types'],
+                [line: 18, source: 'synchronized(char1)', message: 'Synchronizing on the Character field char1 is unsafe. Do not synchronize on boxed types'])
     }
 
     @Test
@@ -137,13 +137,13 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase<Synchron
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber: 12, sourceLineText: 'synchronized(byte2)', messageText: 'Synchronizing on the Byte field byte2 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 13, sourceLineText: 'synchronized(short2)', messageText: 'Synchronizing on the Short field short2 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 14, sourceLineText: 'synchronized(double2)', messageText: 'Synchronizing on the Double field double2 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 15, sourceLineText: 'synchronized(integer2)', messageText: 'Synchronizing on the Integer field integer2 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 16, sourceLineText: 'synchronized(long2)', messageText: 'Synchronizing on the Long field long2 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 17, sourceLineText: 'synchronized(float2)', messageText: 'Synchronizing on the Float field float2 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 18, sourceLineText: 'synchronized(char2)', messageText: 'Synchronizing on the Character field char2 is unsafe. Do not synchronize on boxed types'])
+                [line: 12, source: 'synchronized(byte2)', message: 'Synchronizing on the Byte field byte2 is unsafe. Do not synchronize on boxed types'],
+                [line: 13, source: 'synchronized(short2)', message: 'Synchronizing on the Short field short2 is unsafe. Do not synchronize on boxed types'],
+                [line: 14, source: 'synchronized(double2)', message: 'Synchronizing on the Double field double2 is unsafe. Do not synchronize on boxed types'],
+                [line: 15, source: 'synchronized(integer2)', message: 'Synchronizing on the Integer field integer2 is unsafe. Do not synchronize on boxed types'],
+                [line: 16, source: 'synchronized(long2)', message: 'Synchronizing on the Long field long2 is unsafe. Do not synchronize on boxed types'],
+                [line: 17, source: 'synchronized(float2)', message: 'Synchronizing on the Float field float2 is unsafe. Do not synchronize on boxed types'],
+                [line: 18, source: 'synchronized(char2)', message: 'Synchronizing on the Character field char2 is unsafe. Do not synchronize on boxed types'])
     }
 
     @Test
@@ -170,13 +170,13 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase<Synchron
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber: 12, sourceLineText: 'synchronized(byte3)', messageText: 'Synchronizing on the Byte field byte3 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 13, sourceLineText: 'synchronized(short3)', messageText: 'Synchronizing on the Short field short3 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 14, sourceLineText: 'synchronized(double3)', messageText: 'Synchronizing on the Double field double3 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 15, sourceLineText: 'synchronized(integer3)', messageText: 'Synchronizing on the Integer field integer3 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 16, sourceLineText: 'synchronized(long3)', messageText: 'Synchronizing on the Long field long3 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 17, sourceLineText: 'synchronized(float3)', messageText: 'Synchronizing on the Float field float3 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 18, sourceLineText: 'synchronized(char3)', messageText: 'Synchronizing on the Character field char3 is unsafe. Do not synchronize on boxed types'])
+                [line: 12, source: 'synchronized(byte3)', message: 'Synchronizing on the Byte field byte3 is unsafe. Do not synchronize on boxed types'],
+                [line: 13, source: 'synchronized(short3)', message: 'Synchronizing on the Short field short3 is unsafe. Do not synchronize on boxed types'],
+                [line: 14, source: 'synchronized(double3)', message: 'Synchronizing on the Double field double3 is unsafe. Do not synchronize on boxed types'],
+                [line: 15, source: 'synchronized(integer3)', message: 'Synchronizing on the Integer field integer3 is unsafe. Do not synchronize on boxed types'],
+                [line: 16, source: 'synchronized(long3)', message: 'Synchronizing on the Long field long3 is unsafe. Do not synchronize on boxed types'],
+                [line: 17, source: 'synchronized(float3)', message: 'Synchronizing on the Float field float3 is unsafe. Do not synchronize on boxed types'],
+                [line: 18, source: 'synchronized(char3)', message: 'Synchronizing on the Character field char3 is unsafe. Do not synchronize on boxed types'])
     }
 
     @Test
@@ -203,13 +203,13 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase<Synchron
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber: 12, sourceLineText: 'synchronized(byte4)', messageText: 'Synchronizing on the Byte field byte4 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 13, sourceLineText: 'synchronized(short4)', messageText: 'Synchronizing on the Short field short4 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 14, sourceLineText: 'synchronized(double4)', messageText: 'Synchronizing on the Double field double4 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 15, sourceLineText: 'synchronized(integer4)', messageText: 'Synchronizing on the Integer field integer4 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 16, sourceLineText: 'synchronized(long4)', messageText: 'Synchronizing on the Long field long4 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 17, sourceLineText: 'synchronized(float4)', messageText: 'Synchronizing on the Float field float4 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 18, sourceLineText: 'synchronized(char4)', messageText: 'Synchronizing on the Character field char4 is unsafe. Do not synchronize on boxed types'])
+                [line: 12, source: 'synchronized(byte4)', message: 'Synchronizing on the Byte field byte4 is unsafe. Do not synchronize on boxed types'],
+                [line: 13, source: 'synchronized(short4)', message: 'Synchronizing on the Short field short4 is unsafe. Do not synchronize on boxed types'],
+                [line: 14, source: 'synchronized(double4)', message: 'Synchronizing on the Double field double4 is unsafe. Do not synchronize on boxed types'],
+                [line: 15, source: 'synchronized(integer4)', message: 'Synchronizing on the Integer field integer4 is unsafe. Do not synchronize on boxed types'],
+                [line: 16, source: 'synchronized(long4)', message: 'Synchronizing on the Long field long4 is unsafe. Do not synchronize on boxed types'],
+                [line: 17, source: 'synchronized(float4)', message: 'Synchronizing on the Float field float4 is unsafe. Do not synchronize on boxed types'],
+                [line: 18, source: 'synchronized(char4)', message: 'Synchronizing on the Character field char4 is unsafe. Do not synchronize on boxed types'])
     }
 
     @Test
@@ -236,13 +236,13 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase<Synchron
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber: 12, sourceLineText: 'synchronized(byte5)', messageText: 'Synchronizing on the Byte field byte5 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 13, sourceLineText: 'synchronized(short5)', messageText: 'Synchronizing on the Short field short5 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 14, sourceLineText: 'synchronized(double5)', messageText: 'Synchronizing on the Double field double5 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 15, sourceLineText: 'synchronized(integer5)', messageText: 'Synchronizing on the Integer field integer5 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 16, sourceLineText: 'synchronized(long5)', messageText: 'Synchronizing on the Long field long5 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 17, sourceLineText: 'synchronized(float5)', messageText: 'Synchronizing on the Float field float5 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 18, sourceLineText: 'synchronized(char5)', messageText: 'Synchronizing on the Character field char5 is unsafe. Do not synchronize on boxed types'])
+                [line: 12, source: 'synchronized(byte5)', message: 'Synchronizing on the Byte field byte5 is unsafe. Do not synchronize on boxed types'],
+                [line: 13, source: 'synchronized(short5)', message: 'Synchronizing on the Short field short5 is unsafe. Do not synchronize on boxed types'],
+                [line: 14, source: 'synchronized(double5)', message: 'Synchronizing on the Double field double5 is unsafe. Do not synchronize on boxed types'],
+                [line: 15, source: 'synchronized(integer5)', message: 'Synchronizing on the Integer field integer5 is unsafe. Do not synchronize on boxed types'],
+                [line: 16, source: 'synchronized(long5)', message: 'Synchronizing on the Long field long5 is unsafe. Do not synchronize on boxed types'],
+                [line: 17, source: 'synchronized(float5)', message: 'Synchronizing on the Float field float5 is unsafe. Do not synchronize on boxed types'],
+                [line: 18, source: 'synchronized(char5)', message: 'Synchronizing on the Character field char5 is unsafe. Do not synchronize on boxed types'])
     }
 
     @Test
@@ -269,13 +269,13 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase<Synchron
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber: 12, sourceLineText: 'synchronized(byte7)', messageText: 'Synchronizing on the Byte field byte7 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 13, sourceLineText: 'synchronized(short7)', messageText: 'Synchronizing on the Short field short7 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 14, sourceLineText: 'synchronized(double7)', messageText: 'Synchronizing on the Double field double7 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 15, sourceLineText: 'synchronized(integer7)', messageText: 'Synchronizing on the Integer field integer7 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 16, sourceLineText: 'synchronized(long7)', messageText: 'Synchronizing on the Long field long7 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 17, sourceLineText: 'synchronized(float7)', messageText: 'Synchronizing on the Float field float7 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 18, sourceLineText: 'synchronized(char7)', messageText: 'Synchronizing on the Character field char7 is unsafe. Do not synchronize on boxed types'])
+                [line: 12, source: 'synchronized(byte7)', message: 'Synchronizing on the Byte field byte7 is unsafe. Do not synchronize on boxed types'],
+                [line: 13, source: 'synchronized(short7)', message: 'Synchronizing on the Short field short7 is unsafe. Do not synchronize on boxed types'],
+                [line: 14, source: 'synchronized(double7)', message: 'Synchronizing on the Double field double7 is unsafe. Do not synchronize on boxed types'],
+                [line: 15, source: 'synchronized(integer7)', message: 'Synchronizing on the Integer field integer7 is unsafe. Do not synchronize on boxed types'],
+                [line: 16, source: 'synchronized(long7)', message: 'Synchronizing on the Long field long7 is unsafe. Do not synchronize on boxed types'],
+                [line: 17, source: 'synchronized(float7)', message: 'Synchronizing on the Float field float7 is unsafe. Do not synchronize on boxed types'],
+                [line: 18, source: 'synchronized(char7)', message: 'Synchronizing on the Character field char7 is unsafe. Do not synchronize on boxed types'])
     }
 
     @Test
@@ -298,11 +298,11 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase<Synchron
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber: 10, sourceLineText: 'synchronized(integer1)', messageText: 'Synchronizing on the Integer field integer1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 11, sourceLineText: 'synchronized(integer2)', messageText: 'Synchronizing on the Integer field integer2 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 12, sourceLineText: 'synchronized(long1)', messageText: 'Synchronizing on the Long field long1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 13, sourceLineText: 'synchronized(double1)', messageText: 'Synchronizing on the Double field double1 is unsafe. Do not synchronize on boxed types'],
-                [lineNumber: 14, sourceLineText: 'synchronized(float1)', messageText: 'Synchronizing on the Float field float1 is unsafe. Do not synchronize on boxed types'])
+                [line: 10, source: 'synchronized(integer1)', message: 'Synchronizing on the Integer field integer1 is unsafe. Do not synchronize on boxed types'],
+                [line: 11, source: 'synchronized(integer2)', message: 'Synchronizing on the Integer field integer2 is unsafe. Do not synchronize on boxed types'],
+                [line: 12, source: 'synchronized(long1)', message: 'Synchronizing on the Long field long1 is unsafe. Do not synchronize on boxed types'],
+                [line: 13, source: 'synchronized(double1)', message: 'Synchronizing on the Double field double1 is unsafe. Do not synchronize on boxed types'],
+                [line: 14, source: 'synchronized(float1)', message: 'Synchronizing on the Float field float1 is unsafe. Do not synchronize on boxed types'])
     }
 
     @Test

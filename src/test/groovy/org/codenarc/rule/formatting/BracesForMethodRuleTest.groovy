@@ -95,9 +95,9 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber: 2, sourceLineText: 'void method1(String x,', messageText: 'Opening brace for the method method1 should start on the same line'],
-                [lineNumber: 7, sourceLineText: 'def method2(String x,', messageText: 'Opening brace for the method method2 should start on the same line'],
-                [lineNumber: 13, sourceLineText: 'void method3()', messageText: 'Opening brace for the method method3 should start on the same line'])
+                [line: 2, source: 'void method1(String x,', message: 'Opening brace for the method method1 should start on the same line'],
+                [line: 7, source: 'def method2(String x,', message: 'Opening brace for the method method2 should start on the same line'],
+                [line: 13, source: 'void method3()', message: 'Opening brace for the method method3 should start on the same line'])
     }
 
     @Test
@@ -143,9 +143,9 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
         '''
         rule.sameLine = false
         assertViolations(SOURCE,
-                [lineNumber: 2, sourceLineText: 'void method1(String x,', messageText: 'Opening brace for the method method1 should start on a new line'],
-                [lineNumber: 6, sourceLineText: 'def method2(String x,', messageText: 'Opening brace for the method method2 should start on a new line'],
-                [lineNumber: 11, sourceLineText: 'void method3()', messageText: 'Opening brace for the method method3 should start on a new line'])
+                [line: 2, source: 'void method1(String x,', message: 'Opening brace for the method method1 should start on a new line'],
+                [line: 6, source: 'def method2(String x,', message: 'Opening brace for the method method2 should start on a new line'],
+                [line: 11, source: 'void method3()', message: 'Opening brace for the method method3 should start on a new line'])
     }
 
     @Test
@@ -318,12 +318,12 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 9, sourceLineText: 'First()', messageText: 'Opening brace for the method <init> should start on the same line'],
-                [lineNumber: 12, sourceLineText: 'void method1()', messageText: 'Opening brace for the method method1 should start on the same line'],
-                [lineNumber: 19, sourceLineText: 'public Second()', messageText: 'Opening brace for the method <init> should start on the same line'],
-                [lineNumber: 38, sourceLineText: 'private int method2()', messageText: 'Opening brace for the method method2 should start on the same line'],
-                [lineNumber: 71, sourceLineText: 'def singleLine()', messageText: 'Opening brace for the method singleLine should start on the same line'],
-                [lineNumber: 80, sourceLineText: 'def multiLine()', messageText: 'Opening brace for the method multiLine should start on the same line'])
+                [line: 9, source: 'First()', message: 'Opening brace for the method <init> should start on the same line'],
+                [line: 12, source: 'void method1()', message: 'Opening brace for the method method1 should start on the same line'],
+                [line: 19, source: 'public Second()', message: 'Opening brace for the method <init> should start on the same line'],
+                [line: 38, source: 'private int method2()', message: 'Opening brace for the method method2 should start on the same line'],
+                [line: 71, source: 'def singleLine()', message: 'Opening brace for the method singleLine should start on the same line'],
+                [line: 80, source: 'def multiLine()', message: 'Opening brace for the method multiLine should start on the same line'])
     }
 
     @Test
@@ -332,12 +332,12 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 9, sourceLineText: 'First(){}', messageText: 'Opening brace for the method <init> should start on a new line'],
-                [lineNumber: 11, sourceLineText: 'void method1(){}', messageText: 'Opening brace for the method method1 should start on a new line'],
-                [lineNumber: 15, sourceLineText: 'public Second(){', messageText: 'Opening brace for the method <init> should start on a new line'],
-                [lineNumber: 27, sourceLineText: 'private int method2(){', messageText: 'Opening brace for the method method2 should start on a new line'],
-                [lineNumber: 50, sourceLineText: 'def singleLine() {', messageText: 'Opening brace for the method singleLine should start on a new line'],
-                [lineNumber: 56, sourceLineText: 'def multiLine() {', messageText: 'Opening brace for the method multiLine should start on a new line'])
+                [line: 9, source: 'First(){}', message: 'Opening brace for the method <init> should start on a new line'],
+                [line: 11, source: 'void method1(){}', message: 'Opening brace for the method method1 should start on a new line'],
+                [line: 15, source: 'public Second(){', message: 'Opening brace for the method <init> should start on a new line'],
+                [line: 27, source: 'private int method2(){', message: 'Opening brace for the method method2 should start on a new line'],
+                [line: 50, source: 'def singleLine() {', message: 'Opening brace for the method singleLine should start on a new line'],
+                [line: 56, source: 'def multiLine() {', message: 'Opening brace for the method multiLine should start on a new line'])
     }
 
     @Test

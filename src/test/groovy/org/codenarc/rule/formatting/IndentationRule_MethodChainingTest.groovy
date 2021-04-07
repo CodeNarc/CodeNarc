@@ -181,12 +181,12 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
         '''.stripMargin()
         assertViolations(source,
             [
-              lineNumber:3,
-              sourceLineText:'item.name',
-              messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'
+              line:3,
+              source:'item.name',
+              message:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'
             ],
-            [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
-            [lineNumber:11, sourceLineText:'println name', messageText:'The statement on line 11 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 1'],
+            [line:7, source:'println someName', message:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
+            [line:11, source:'println name', message:'The statement on line 11 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 1'],
         )
 
         source = '''
@@ -202,11 +202,11 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
         '''.stripMargin()
         assertViolations(source,
             [
-              lineNumber:3,
-              sourceLineText:'item.name',
-              messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'
+              line:3,
+              source:'item.name',
+              message:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'
             ],
-            [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
+            [line:7, source:'println someName', message:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
         source = '''
@@ -221,8 +221,8 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
             |        }
         '''.stripMargin()
         assertViolations(source,
-            [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
-            [lineNumber:9, sourceLineText:'println name', messageText:'The statement on line 9 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
+            [line:5, source:'println someName', message:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
+            [line:9, source:'println name', message:'The statement on line 9 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
         source = '''
@@ -235,7 +235,7 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
             |        .each4 { name -> println name }
         '''.stripMargin()
         assertViolations(source,
-            [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
+            [line:5, source:'println someName', message:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
         )
     }
 
@@ -315,9 +315,9 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
             |        }
         '''.stripMargin()
         assertViolations(source,
-            [lineNumber:4, sourceLineText:'item.name', messageText:'The statement on line 4 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
-            [lineNumber:8, sourceLineText:'println someName', messageText:'The statement on line 8 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
-            [lineNumber:12, sourceLineText:'println name', messageText:'The statement on line 12 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 1'],
+            [line:4, source:'item.name', message:'The statement on line 4 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
+            [line:8, source:'println someName', message:'The statement on line 8 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
+            [line:12, source:'println name', message:'The statement on line 12 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 1'],
         )
 
         source = '''
@@ -333,8 +333,8 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
             |        .each4 { name -> println name }
         '''.stripMargin()
         assertViolations(source,
-            [lineNumber:4, sourceLineText:'item.name', messageText:'The statement on line 4 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
-            [lineNumber:8, sourceLineText:'println someName', messageText:'The statement on line 8 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
+            [line:4, source:'item.name', message:'The statement on line 4 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
+            [line:8, source:'println someName', message:'The statement on line 8 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
         source = '''
@@ -350,8 +350,8 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
             |        }
         '''.stripMargin()
         assertViolations(source,
-            [lineNumber:6, sourceLineText:'println someName', messageText:'The statement on line 6 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
-            [lineNumber:10, sourceLineText:'println name', messageText:'The statement on line 10 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
+            [line:6, source:'println someName', message:'The statement on line 6 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
+            [line:10, source:'println name', message:'The statement on line 10 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
         source = '''
@@ -365,7 +365,7 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
             |        .each4 { name -> println name }
         '''.stripMargin()
         assertViolations(source,
-            [lineNumber:6, sourceLineText:'println someName', messageText:'The statement on line 6 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
+            [line:6, source:'println someName', message:'The statement on line 6 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
         )
     }
 
@@ -440,12 +440,12 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
         '''.stripMargin()
         assertViolations(source,
             [
-              lineNumber:3,
-              sourceLineText:'item.name',
-              messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'
+              line:3,
+              source:'item.name',
+              message:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'
             ],
-            [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
-            [lineNumber:11, sourceLineText:'println name', messageText:'The statement on line 11 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 1'],
+            [line:7, source:'println someName', message:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
+            [line:11, source:'println name', message:'The statement on line 11 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 1'],
         )
 
         source = '''
@@ -461,11 +461,11 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
         '''.stripMargin()
         assertViolations(source,
             [
-              lineNumber:3,
-              sourceLineText:'item.name',
-              messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'
+              line:3,
+              source:'item.name',
+              message:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'
             ],
-            [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
+            [line:7, source:'println someName', message:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
         )
 
         source = '''
@@ -480,8 +480,8 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
             |               }
         '''.stripMargin()
         assertViolations(source,
-            [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 22'],
-            [lineNumber:9, sourceLineText:'println name', messageText:'The statement on line 9 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
+            [line:5, source:'println someName', message:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 22'],
+            [line:9, source:'println name', message:'The statement on line 9 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
         )
 
         source = '''
@@ -494,7 +494,7 @@ class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<Indentatio
             |               .each4 { name -> println name }
         '''.stripMargin()
         assertViolations(source,
-            [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 22'],
+            [line:5, source:'println someName', message:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 22'],
         )
     }
 }

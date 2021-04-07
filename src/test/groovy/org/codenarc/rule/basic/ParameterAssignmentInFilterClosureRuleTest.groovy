@@ -79,18 +79,18 @@ class ParameterAssignmentInFilterClosureRuleTest extends AbstractRuleTestCase<Pa
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'someList.find { it = 4 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:5, sourceLineText:'someList.findAll { it = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:6, sourceLineText:'someList.findIndexOf { it = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:7, sourceLineText:'someList.every { it = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:8, sourceLineText:'someList.any { it = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:9, sourceLineText:'someList.filter { it = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:10, sourceLineText:'someList.grep { it = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:11, sourceLineText:'someList.dropWhile { it = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:12, sourceLineText:'someList.takeWhile { it = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:13, sourceLineText:'someOtherList.takeWhile { it.someProperty = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:14, sourceLineText:'someOtherList.takeWhile { it.someProperty.aDeeperProperty = 42 }', messageText: VIOLATION_MESSAGE],
-            [lineNumber:16, sourceLineText:'integer = 42', messageText: VIOLATION_MESSAGE])
+            [line:4, source:'someList.find { it = 4 }', message: VIOLATION_MESSAGE],
+            [line:5, source:'someList.findAll { it = 42 }', message: VIOLATION_MESSAGE],
+            [line:6, source:'someList.findIndexOf { it = 42 }', message: VIOLATION_MESSAGE],
+            [line:7, source:'someList.every { it = 42 }', message: VIOLATION_MESSAGE],
+            [line:8, source:'someList.any { it = 42 }', message: VIOLATION_MESSAGE],
+            [line:9, source:'someList.filter { it = 42 }', message: VIOLATION_MESSAGE],
+            [line:10, source:'someList.grep { it = 42 }', message: VIOLATION_MESSAGE],
+            [line:11, source:'someList.dropWhile { it = 42 }', message: VIOLATION_MESSAGE],
+            [line:12, source:'someList.takeWhile { it = 42 }', message: VIOLATION_MESSAGE],
+            [line:13, source:'someOtherList.takeWhile { it.someProperty = 42 }', message: VIOLATION_MESSAGE],
+            [line:14, source:'someOtherList.takeWhile { it.someProperty.aDeeperProperty = 42 }', message: VIOLATION_MESSAGE],
+            [line:16, source:'integer = 42', message: VIOLATION_MESSAGE])
     }
 
     @Override

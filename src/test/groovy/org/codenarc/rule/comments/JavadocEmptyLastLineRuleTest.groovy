@@ -108,16 +108,16 @@ class JavadocEmptyLastLineRuleTest extends AbstractRuleTestCase<JavadocEmptyLast
     @Test
     void test_JavadocWithEmptyLastLines_Violations() {
         assertViolations(SOURCE_WITH_VIOLATIONS,
-                [lineNumber:6, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'],
-                [lineNumber:17, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'])
+                [line:6, source:' * ', message:'The last line of the javadoc is empty'],
+                [line:17, source:' * ', message:'The last line of the javadoc is empty'])
     }
 
     @Test
     void test_JavadocWithEmptyLastLines_WindowsLineEndings_Violations() {
         final SOURCE = SOURCE_WITH_VIOLATIONS.replace('\n', '\r\n')
         assertViolations(SOURCE,
-                [lineNumber:6, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'],
-                [lineNumber:17, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'])
+                [line:6, source:' * ', message:'The last line of the javadoc is empty'],
+                [line:17, source:' * ', message:'The last line of the javadoc is empty'])
     }
 
     @Override

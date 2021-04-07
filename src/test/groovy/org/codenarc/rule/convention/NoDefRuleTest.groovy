@@ -146,8 +146,8 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
             }
             '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'def name', messageText:NoDefRule.MESSAGE_DEF_FIELD],
-                [lineNumber:4, sourceLineText:'def count = 99;', messageText:NoDefRule.MESSAGE_DEF_FIELD]
+                [line:3, source:'def name', message:NoDefRule.MESSAGE_DEF_FIELD],
+                [line:4, source:'def count = 99;', message:NoDefRule.MESSAGE_DEF_FIELD]
         )
     }
 

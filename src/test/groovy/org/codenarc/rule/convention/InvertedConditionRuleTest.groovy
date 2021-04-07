@@ -62,13 +62,13 @@ class InvertedConditionRuleTest extends AbstractRuleTestCase<InvertedConditionRu
         '''
         assertViolations(SOURCE,
             [
-                lineNumber: 4,
-                sourceLineText: 'null == System.nanoTime()',
-                messageText: 'null is a constant expression on the left side of a compare equals operation'],
+                line: 4,
+                source: 'null == System.nanoTime()',
+                message: 'null is a constant expression on the left side of a compare equals operation'],
             [
-                lineNumber: 5,
-                sourceLineText: '"foo" == "oof".reverse()',
-                messageText: 'foo is a constant expression on the left side of a compare equals operation'
+                line: 5,
+                source: '"foo" == "oof".reverse()',
+                message: 'foo is a constant expression on the left side of a compare equals operation'
             ]
         )
     }

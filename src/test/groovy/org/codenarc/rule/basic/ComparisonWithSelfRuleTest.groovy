@@ -84,13 +84,13 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase<ComparisonWithSelf
             def c = (x <=> x) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'println isReady = x == x', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:'if (x != x) { }', messageText:MESSAGE],
-            [lineNumber:4, sourceLineText:'while (x < x) { }', messageText:MESSAGE],
-            [lineNumber:5, sourceLineText:'if (x <= x) { }', messageText:MESSAGE],
-            [lineNumber:6, sourceLineText:'while (x > x) { }', messageText:MESSAGE],
-            [lineNumber:7, sourceLineText:'if (x >= x) { }', messageText:MESSAGE],
-            [lineNumber:8, sourceLineText:'def c = (x <=> x) { }', messageText:MESSAGE]
+            [line:2, source:'println isReady = x == x', message:MESSAGE],
+            [line:3, source:'if (x != x) { }', message:MESSAGE],
+            [line:4, source:'while (x < x) { }', message:MESSAGE],
+            [line:5, source:'if (x <= x) { }', message:MESSAGE],
+            [line:6, source:'while (x > x) { }', message:MESSAGE],
+            [line:7, source:'if (x >= x) { }', message:MESSAGE],
+            [line:8, source:'def c = (x <=> x) { }', message:MESSAGE]
         )
     }
 

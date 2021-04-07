@@ -84,8 +84,8 @@ class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase<TernaryCouldBeElv
             foo(1) ? foo(1) : 123
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'foo() ? foo() : bar()', messageText:'foo() ?: this.bar()'],
-            [lineNumber:3, sourceLineText:'foo(1) ? foo(1) : 123', messageText:'foo(1) ?: 123'])
+            [line:2, source:'foo() ? foo() : bar()', message:'foo() ?: this.bar()'],
+            [line:3, source:'foo(1) ? foo(1) : 123', message:'foo(1) ?: 123'])
     }
 
     @Override

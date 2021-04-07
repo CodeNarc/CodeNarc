@@ -69,12 +69,12 @@ class SpaceAroundClosureArrowRuleTest extends AbstractRuleTestCase<SpaceAroundCl
         '''
         final MESSAGE = 'The closure arrow (->) within class None is not surrounded by a space or whitespace'
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def closure1 = {->}', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:'def closure2 = { ->}', messageText:MESSAGE],
-            [lineNumber:4, sourceLineText:'def closure3 = {-> }', messageText:MESSAGE],
-            [lineNumber:5, sourceLineText:'def closure4 = { count-> println 123 }', messageText:MESSAGE],
-            [lineNumber:6, sourceLineText:'def closure5 = { count, name ->println 123 }', messageText:MESSAGE],
-            [lineNumber:7, sourceLineText:'def closure6 = { ->println 123', messageText:MESSAGE])
+            [line:2, source:'def closure1 = {->}', message:MESSAGE],
+            [line:3, source:'def closure2 = { ->}', message:MESSAGE],
+            [line:4, source:'def closure3 = {-> }', message:MESSAGE],
+            [line:5, source:'def closure4 = { count-> println 123 }', message:MESSAGE],
+            [line:6, source:'def closure5 = { count, name ->println 123 }', message:MESSAGE],
+            [line:7, source:'def closure6 = { ->println 123', message:MESSAGE])
     }
 
     @Override

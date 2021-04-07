@@ -153,8 +153,8 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase<ImplementationAs
             }
             '''
         assertViolations(SOURCE,
-            [lineNumber: 3, sourceLineText:'LinkedList v1'],
-            [lineNumber: 3, sourceLineText:'Vector v2'])
+            [line: 3, source:'LinkedList v1'],
+            [line: 3, source:'Vector v2'])
     }
 
     @Test

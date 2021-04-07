@@ -163,9 +163,9 @@ class AbcMetricRuleTest extends AbstractRuleTestCase<AbcMetricRule> {
         rule.maxClassAverageMethodAbcScore = 1.9
         rule.maxClassAbcScore = 6.0
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '2.2']],
-                [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '6.4']],
-                [lineNumber:8, sourceLineText:'def myMethod3()', messageText:['myMethod3', '6']])
+                [line:2, source:'class MyClass', message:['MyClass', '2.2']],
+                [line:2, source:'class MyClass', message:['MyClass', '6.4']],
+                [line:8, source:'def myMethod3()', message:['myMethod3', '6']])
     }
 
     @Test

@@ -64,10 +64,10 @@ class OptionalMethodParameterRuleTest extends AbstractRuleTestCase<OptionalMetho
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'void doStuff(Optional<Integer> count)', messageText:'The parameter named count of method doStuff in class MyClass is an Optional'],
-                [lineNumber:5, sourceLineText:'protected int countForAlias(Optional<String> alias, Optional<Integer> total)', messageText:'The parameter named alias of method countForAlias in class MyClass is an Optional'],
-                [lineNumber:5, sourceLineText:'protected int countForAlias(Optional<String> alias, Optional<Integer> total)', messageText:'The parameter named total of method countForAlias in class MyClass is an Optional'],
-                [lineNumber:6, sourceLineText:'private doSomething(Optional something)', messageText:'The parameter named something of method doSomething in class MyClass is an Optional'])
+                [line:3, source:'void doStuff(Optional<Integer> count)', message:'The parameter named count of method doStuff in class MyClass is an Optional'],
+                [line:5, source:'protected int countForAlias(Optional<String> alias, Optional<Integer> total)', message:'The parameter named alias of method countForAlias in class MyClass is an Optional'],
+                [line:5, source:'protected int countForAlias(Optional<String> alias, Optional<Integer> total)', message:'The parameter named total of method countForAlias in class MyClass is an Optional'],
+                [line:6, source:'private doSomething(Optional something)', message:'The parameter named something of method doSomething in class MyClass is an Optional'])
     }
 
     @Test
@@ -81,10 +81,10 @@ class OptionalMethodParameterRuleTest extends AbstractRuleTestCase<OptionalMetho
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'MyClass(Optional<Integer> count)', messageText:'The parameter named count of method <init> in class MyClass is an Optional'],
-                [lineNumber:5, sourceLineText:'protected MyClass(Optional<String> alias, Optional<Integer> total)', messageText:'The parameter named alias of method <init> in class MyClass is an Optional'],
-                [lineNumber:5, sourceLineText:'protected MyClass(Optional<String> alias, Optional<Integer> total)', messageText:'The parameter named total of method <init> in class MyClass is an Optional'],
-                [lineNumber:6, sourceLineText:'private MyClass(Optional something)', messageText:'The parameter named something of method <init> in class MyClass is an Optional'])
+                [line:3, source:'MyClass(Optional<Integer> count)', message:'The parameter named count of method <init> in class MyClass is an Optional'],
+                [line:5, source:'protected MyClass(Optional<String> alias, Optional<Integer> total)', message:'The parameter named alias of method <init> in class MyClass is an Optional'],
+                [line:5, source:'protected MyClass(Optional<String> alias, Optional<Integer> total)', message:'The parameter named total of method <init> in class MyClass is an Optional'],
+                [line:6, source:'private MyClass(Optional something)', message:'The parameter named something of method <init> in class MyClass is an Optional'])
     }
 
     @Override

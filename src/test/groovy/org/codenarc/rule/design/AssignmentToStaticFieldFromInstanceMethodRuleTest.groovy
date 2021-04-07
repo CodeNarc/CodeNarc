@@ -91,10 +91,10 @@ class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTest
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:9, sourceLineText:'field1 = new Object()', messageText:'The instance method doStuff in class MyClass contains an assignment to static field field1'],
-            [lineNumber:10, sourceLineText:"field2 = 'xxx'", messageText:'The instance method doStuff in class MyClass contains an assignment to static field field2'],
-            [lineNumber:11, sourceLineText:'field3 = 999', messageText:'The instance method doStuff in class MyClass contains an assignment to static field field3'],
-            [lineNumber:12, sourceLineText:"property1 = 'xxx'", messageText:'The instance method doStuff in class MyClass contains an assignment to static field property1'])
+            [line:9, source:'field1 = new Object()', message:'The instance method doStuff in class MyClass contains an assignment to static field field1'],
+            [line:10, source:"field2 = 'xxx'", message:'The instance method doStuff in class MyClass contains an assignment to static field field2'],
+            [line:11, source:'field3 = 999', message:'The instance method doStuff in class MyClass contains an assignment to static field field3'],
+            [line:12, source:"property1 = 'xxx'", message:'The instance method doStuff in class MyClass contains an assignment to static field property1'])
     }
 
     @Test

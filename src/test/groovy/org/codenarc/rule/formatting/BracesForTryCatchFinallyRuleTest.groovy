@@ -45,11 +45,11 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-            [lineNumber:21, sourceLineText:'try',                 messageText: "Opening brace should be on the same line as 'try'"],
-            [lineNumber:26, sourceLineText:'catch (Exception e)', messageText: "'catch' should be on the same line as the closing brace"],
-            [lineNumber:26, sourceLineText:'catch (Exception e)', messageText: "Opening brace should be on the same line as 'catch'"],
-            [lineNumber:29, sourceLineText:'finally',             messageText: "'finally' should be on the same line as the closing brace"],
-            [lineNumber:29, sourceLineText:'finally',             messageText: "Opening brace should be on the same line as 'finally'"]
+            [line:21, source:'try',                 message: "Opening brace should be on the same line as 'try'"],
+            [line:26, source:'catch (Exception e)', message: "'catch' should be on the same line as the closing brace"],
+            [line:26, source:'catch (Exception e)', message: "Opening brace should be on the same line as 'catch'"],
+            [line:29, source:'finally',             message: "'finally' should be on the same line as the closing brace"],
+            [line:29, source:'finally',             message: "Opening brace should be on the same line as 'finally'"]
         )
     }
 
@@ -74,11 +74,11 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
         final SOURCE = new File(testFile.toURI()).text
         rule.sameLine = false
         assertViolations(SOURCE,
-          [lineNumber:16, sourceLineText:'try{',                  messageText: "Opening brace should not be on the same line as 'try'"],
-          [lineNumber:19, sourceLineText:'}catch (Exception e){', messageText: "'catch' should not be on the same line as the closing brace"],
-          [lineNumber:19, sourceLineText:'}catch (Exception e){', messageText: "Opening brace should not be on the same line as 'catch'"],
-          [lineNumber:20, sourceLineText:'}finally{',             messageText: "'finally' should not be on the same line as the closing brace"],
-          [lineNumber:20, sourceLineText:'}finally{',             messageText: "Opening brace should not be on the same line as 'finally'"]
+          [line:16, source:'try{',                  message: "Opening brace should not be on the same line as 'try'"],
+          [line:19, source:'}catch (Exception e){', message: "'catch' should not be on the same line as the closing brace"],
+          [line:19, source:'}catch (Exception e){', message: "Opening brace should not be on the same line as 'catch'"],
+          [line:20, source:'}finally{',             message: "'finally' should not be on the same line as the closing brace"],
+          [line:20, source:'}finally{',             message: "Opening brace should not be on the same line as 'finally'"]
       )
     }
 
@@ -103,9 +103,9 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:9, sourceLineText:'catch(Exception e) // what about {}', messageText:"'catch' should not be on the same line as the closing brace"],
-            [lineNumber:12, sourceLineText:'finally // what about {}', messageText:"'finally' should not be on the same line as the closing brace"],
-            [lineNumber:12, sourceLineText:'finally // what about {}', messageText:"Opening brace should not be on the same line as 'finally'"]
+            [line:9, source:'catch(Exception e) // what about {}', message:"'catch' should not be on the same line as the closing brace"],
+            [line:12, source:'finally // what about {}', message:"'finally' should not be on the same line as the closing brace"],
+            [line:12, source:'finally // what about {}', message:"Opening brace should not be on the same line as 'finally'"]
         )
     }
 

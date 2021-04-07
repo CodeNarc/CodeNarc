@@ -200,8 +200,8 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase<GetterMet
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText: 'Class getSomething()', messageText: "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal Class something = String"],
-            [lineNumber:8, sourceLineText: 'Class getSomeClass()', messageText: "The method 'getSomeClass ' in class MyClass can be expressed more simply as the field declaration\nfinal Class someClass = Integer"]
+            [line:4, source: 'Class getSomething()', message: "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal Class something = String"],
+            [line:8, source: 'Class getSomeClass()', message: "The method 'getSomeClass ' in class MyClass can be expressed more simply as the field declaration\nfinal Class someClass = Integer"]
         )
     }
 

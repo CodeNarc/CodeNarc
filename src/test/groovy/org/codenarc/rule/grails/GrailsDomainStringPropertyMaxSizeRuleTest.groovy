@@ -89,8 +89,8 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'String firstName', messageText:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'],
-                [lineNumber:4, sourceLineText:'String lastName', messageText:'There is no constraint on the size of String property \'lastName\' which will result in applying database defaults'])
+                [line:3, source:'String firstName', message:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'],
+                [line:4, source:'String lastName', message:'There is no constraint on the size of String property \'lastName\' which will result in applying database defaults'])
     }
 
     @Test
@@ -108,7 +108,7 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'String lastName', messageText:'There is no constraint on the size of String property \'lastName\' which will result in applying database defaults'])
+                [line:4, source:'String lastName', message:'There is no constraint on the size of String property \'lastName\' which will result in applying database defaults'])
     }
 
     @Test
@@ -147,7 +147,7 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'String firstName', messageText:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'])
+                [line:3, source:'String firstName', message:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'])
     }
 
     @Test
@@ -162,8 +162,8 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'String firstName', messageText:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'],
-                [lineNumber:4, sourceLineText:'String lastName', messageText:'There is no constraint on the size of String property \'lastName\' which will result in applying database defaults'])
+                [line:3, source:'String firstName', message:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'],
+                [line:4, source:'String lastName', message:'There is no constraint on the size of String property \'lastName\' which will result in applying database defaults'])
     }
 
     @Test
@@ -233,7 +233,7 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:11, sourceLineText:'String firstName', messageText:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'])
+                [line:11, source:'String firstName', message:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'])
     }
 
     @Before

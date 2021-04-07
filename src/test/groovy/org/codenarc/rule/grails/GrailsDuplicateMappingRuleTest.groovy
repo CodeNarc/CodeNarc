@@ -89,8 +89,8 @@ class GrailsDuplicateMappingRuleTest extends AbstractRuleTestCase<GrailsDuplicat
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:9, sourceLineText:"firstName column: 'First_Name'", messageText:'The mapping for firstName in domain class Person has already been specified'],
-            [lineNumber:10, sourceLineText:"table 'people2'", messageText:'The mapping for table in domain class Person has already been specified'])
+            [line:9, source:"firstName column: 'First_Name'", message:'The mapping for firstName in domain class Person has already been specified'],
+            [line:10, source:"table 'people2'", message:'The mapping for table in domain class Person has already been specified'])
     }
 
     @Test
@@ -110,7 +110,7 @@ class GrailsDuplicateMappingRuleTest extends AbstractRuleTestCase<GrailsDuplicat
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:10, sourceLineText:"firstName column: 'First_Name'", messageText:'The mapping for firstName in domain class Person has already been specified'])
+            [line:10, source:"firstName column: 'First_Name'", message:'The mapping for firstName in domain class Person has already been specified'])
     }
 
     @Test

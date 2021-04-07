@@ -119,8 +119,8 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 6, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 9, sourceLineText: '', messageText: MESSAGE])
+            [line: 6, source: '', message: MESSAGE],
+            [line: 9, source: '', message: MESSAGE])
     }
 
     @Test
@@ -182,17 +182,17 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 11, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 14, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 17, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 19, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 21, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 23, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 25, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 27, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 32, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 34, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 36, sourceLineText: '', messageText: MESSAGE])
+            [line: 11, source: '', message: MESSAGE],
+            [line: 14, source: '', message: MESSAGE],
+            [line: 17, source: '', message: MESSAGE],
+            [line: 19, source: '', message: MESSAGE],
+            [line: 21, source: '', message: MESSAGE],
+            [line: 23, source: '', message: MESSAGE],
+            [line: 25, source: '', message: MESSAGE],
+            [line: 27, source: '', message: MESSAGE],
+            [line: 32, source: '', message: MESSAGE],
+            [line: 34, source: '', message: MESSAGE],
+            [line: 36, source: '', message: MESSAGE])
     }
 
     @Test
@@ -210,8 +210,8 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 8, sourceLineText: '', messageText: MESSAGE])
+            [line: 4, source: '', message: MESSAGE],
+            [line: 8, source: '', message: MESSAGE])
     }
 
     @Test
@@ -250,13 +250,13 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
         '''
 
         assertViolations(SOURCE,
-                [lineNumber: 7, sourceLineText: '', messageText: MESSAGE],
-                [lineNumber: 10, sourceLineText: '', messageText: MESSAGE],
-                [lineNumber: 13, sourceLineText: '', messageText: MESSAGE],
-                [lineNumber: 17, sourceLineText: '', messageText: MESSAGE],
-                [lineNumber: 21, sourceLineText: '', messageText: MESSAGE],
-                [lineNumber: 25, sourceLineText: '', messageText: MESSAGE],
-                [lineNumber: 30, sourceLineText: '', messageText: MESSAGE])
+                [line: 7, source: '', message: MESSAGE],
+                [line: 10, source: '', message: MESSAGE],
+                [line: 13, source: '', message: MESSAGE],
+                [line: 17, source: '', message: MESSAGE],
+                [line: 21, source: '', message: MESSAGE],
+                [line: 25, source: '', message: MESSAGE],
+                [line: 30, source: '', message: MESSAGE])
     }
 
     @Test
@@ -284,8 +284,8 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
             assertNoViolations(SOURCE)
         } else {
             assertViolations(SOURCE,
-                    [lineNumber: 7, sourceLineText: '', messageText: MESSAGE],
-                    [lineNumber: 15, sourceLineText: '', messageText: MESSAGE])
+                    [line: 7, source: '', message: MESSAGE],
+                    [line: 15, source: '', message: MESSAGE])
         }
     }
 

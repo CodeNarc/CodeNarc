@@ -87,13 +87,13 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase<ComparisonOf
             def c = ([a:1] <=> [a:2]) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'println isReady = 23 == 67', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:'if (Boolean.FALSE != false) { }', messageText:MESSAGE],
-            [lineNumber:4, sourceLineText:'while (23 < 88) { }', messageText:MESSAGE],
-            [lineNumber:5, sourceLineText:'if (0.17 <= 0.99) { }', messageText:MESSAGE],
-            [lineNumber:6, sourceLineText:'while ("abc" > "ddd") { }', messageText:MESSAGE],
-            [lineNumber:7, sourceLineText:'if ([Boolean.FALSE] >= [27]) { }', messageText:MESSAGE],
-            [lineNumber:8, sourceLineText:'def c = ([a:1] <=> [a:2]) { }', messageText:MESSAGE]
+            [line:2, source:'println isReady = 23 == 67', message:MESSAGE],
+            [line:3, source:'if (Boolean.FALSE != false) { }', message:MESSAGE],
+            [line:4, source:'while (23 < 88) { }', message:MESSAGE],
+            [line:5, source:'if (0.17 <= 0.99) { }', message:MESSAGE],
+            [line:6, source:'while ("abc" > "ddd") { }', message:MESSAGE],
+            [line:7, source:'if ([Boolean.FALSE] >= [27]) { }', message:MESSAGE],
+            [line:8, source:'def c = ([a:1] <=> [a:2]) { }', message:MESSAGE]
         )
     }
 
@@ -104,8 +104,8 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase<ComparisonOf
             return [a:123, b:true].equals(['a':222, b:Boolean.FALSE])
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'println isReady = [1,2].equals([3,4])', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:"return [a:123, b:true].equals(['a':222, b:Boolean.FALSE])", messageText:MESSAGE]
+            [line:2, source:'println isReady = [1,2].equals([3,4])', message:MESSAGE],
+            [line:3, source:"return [a:123, b:true].equals(['a':222, b:Boolean.FALSE])", message:MESSAGE]
         )
     }
 
@@ -116,8 +116,8 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase<ComparisonOf
             return [a:false, b:true].compareTo(['a':34.5, b:Boolean.TRUE])
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'println cmp = [a:123, b:456].compareTo([a:222, b:567])', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:"return [a:false, b:true].compareTo(['a':34.5, b:Boolean.TRUE])", messageText:MESSAGE])
+            [line:2, source:'println cmp = [a:123, b:456].compareTo([a:222, b:567])', message:MESSAGE],
+            [line:3, source:"return [a:false, b:true].compareTo(['a':34.5, b:Boolean.TRUE])", message:MESSAGE])
     }
 
     @Override

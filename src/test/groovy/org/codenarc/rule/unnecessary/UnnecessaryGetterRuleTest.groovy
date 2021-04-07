@@ -54,8 +54,8 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             x.getPi()
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'x.getProperty()', messageText:'getProperty()'],
-                [lineNumber:3, sourceLineText:'x.getPi()', messageText:'getPi()'])
+                [line:2, source:'x.getProperty()', message:'getProperty()'],
+                [line:3, source:'x.getPi()', message:'getPi()'])
     }
 
     @Test
@@ -72,7 +72,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             x.getA()
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'x.getA()', messageText:'getA()'])
+                [line:2, source:'x.getA()', message:'getA()'])
     }
 
     @Test
@@ -81,7 +81,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             x.getURLs()
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'x.getURLs()', messageText:'getURLs()'])
+                [line:2, source:'x.getURLs()', message:'getURLs()'])
     }
 
     @Test
@@ -91,8 +91,8 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             x.isURL()
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'x.getURL()', messageText:'getURL()'],
-                [lineNumber:3, sourceLineText:'x.isURL()', messageText:'isURL()'])
+                [line:2, source:'x.getURL()', message:'getURL()'],
+                [line:3, source:'x.isURL()', message:'isURL()'])
     }
 
     @Test
@@ -133,9 +133,9 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             x.isX()
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'x.isProperty()', messageText:'isProperty()'],
-                [lineNumber:3, sourceLineText:'x.isPi()', messageText:'isPi'],
-                [lineNumber:4, sourceLineText:'x.isX()', messageText:'isX'])
+                [line:2, source:'x.isProperty()', message:'isProperty()'],
+                [line:3, source:'x.isPi()', message:'isPi'],
+                [line:4, source:'x.isX()', message:'isX'])
     }
 
     @Test
@@ -159,7 +159,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'x.getA()', messageText:'getA() can probably be rewritten as a'])
+                [line:4, source:'x.getA()', message:'getA() can probably be rewritten as a'])
     }
 
     @Test
@@ -172,7 +172,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'getSomeData()', messageText:'getSomeData()'])
+            [line:4, source:'getSomeData()', message:'getSomeData()'])
     }
 
     @Test
@@ -194,12 +194,12 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'getSomeData()', messageText:'getSomeData()'],
-            [lineNumber:6, sourceLineText:'getData2()', messageText:'getData2()'],
-            [lineNumber:9, sourceLineText:'getData3()', messageText:'getData3()'],
-            [lineNumber:11, sourceLineText:'getData4()', messageText:'getData4()'],
-            [lineNumber:12, sourceLineText:'getData5()', messageText:'getData5()'],
-            [lineNumber:14, sourceLineText:'getMoreData()', messageText:'getMoreData()'],
+            [line:3, source:'getSomeData()', message:'getSomeData()'],
+            [line:6, source:'getData2()', message:'getData2()'],
+            [line:9, source:'getData3()', message:'getData3()'],
+            [line:11, source:'getData4()', message:'getData4()'],
+            [line:12, source:'getData5()', message:'getData5()'],
+            [line:14, source:'getMoreData()', message:'getMoreData()'],
         )
     }
 

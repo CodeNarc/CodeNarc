@@ -51,9 +51,9 @@ class SpaceAfterForRuleTest extends AbstractRuleTestCase<SpaceAfterForRule> {
                 String name: names) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for(name in names) { }', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:'for  (int i=0; i < 10; i++) { }', messageText:MESSAGE],
-            [lineNumber:4, sourceLineText:'for(', messageText:MESSAGE])
+            [line:2, source:'for(name in names) { }', message:MESSAGE],
+            [line:3, source:'for  (int i=0; i < 10; i++) { }', message:MESSAGE],
+            [line:4, source:'for(', message:MESSAGE])
     }
 
     @Test

@@ -129,8 +129,8 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: 'aMethod ("arg")', messageText: 'There is whitespace between method name and parenthesis in a method call.'],
-            [lineNumber: 5, sourceLineText: 'aMethod  "arg"', messageText: 'There is more than one space between method name and arguments in a method call.']
+            [line: 4, source: 'aMethod ("arg")', message: 'There is whitespace between method name and parenthesis in a method call.'],
+            [line: 5, source: 'aMethod  "arg"', message: 'There is more than one space between method name and arguments in a method call.']
         )
     }
 

@@ -210,9 +210,9 @@ class CrapMetricRuleTest extends AbstractRuleTestCase<CrapMetricRule> {
         rule.maxClassAverageMethodCrapScore = 1.0
         rule.maxClassCrapScore = 5.9
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'class Email', messageText:[CLASS_NAME, METRIC_DESCRIPTION, 'average', CRAP_SCORE]],
-                [lineNumber:3, sourceLineText:'class Email', messageText:[CLASS_NAME, METRIC_DESCRIPTION, 'total', CRAP_SCORE]],
-                [lineNumber:4, sourceLineText:'String toString() {', messageText:[CLASS_NAME, METRIC_DESCRIPTION, METHOD_NAME, CRAP_SCORE]])
+                [line:3, source:'class Email', message:[CLASS_NAME, METRIC_DESCRIPTION, 'average', CRAP_SCORE]],
+                [line:3, source:'class Email', message:[CLASS_NAME, METRIC_DESCRIPTION, 'total', CRAP_SCORE]],
+                [line:4, source:'String toString() {', message:[CLASS_NAME, METRIC_DESCRIPTION, METHOD_NAME, CRAP_SCORE]])
     }
 
     @Test

@@ -45,12 +45,12 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             result = false && value
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def ready = value && true'],
-            [lineNumber:3, sourceLineText:'if (value || true) {'],
-            [lineNumber:6, sourceLineText:'def result = value && false'],
-            [lineNumber:8, sourceLineText:'ready = true && value'],
-            [lineNumber:9, sourceLineText:'if (true || value)'],
-            [lineNumber:10, sourceLineText:'result = false && value'])
+            [line:2, source:'def ready = value && true'],
+            [line:3, source:'if (value || true) {'],
+            [line:6, source:'def result = value && false'],
+            [line:8, source:'ready = true && value'],
+            [line:9, source:'if (true || value)'],
+            [line:10, source:'result = false && value'])
     }
 
     @Test
@@ -67,12 +67,12 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             result = Boolean.FALSE && value
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def ready = value && Boolean.TRUE'],
-            [lineNumber:3, sourceLineText:'if (value || Boolean.TRUE)'],
-            [lineNumber:6, sourceLineText:'def result = value && Boolean.FALSE'],
-            [lineNumber:8, sourceLineText:'ready = Boolean.TRUE && value'],
-            [lineNumber:9, sourceLineText:'if (Boolean.TRUE || value)'],
-            [lineNumber:10, sourceLineText:'result = Boolean.FALSE && value'])
+            [line:2, source:'def ready = value && Boolean.TRUE'],
+            [line:3, source:'if (value || Boolean.TRUE)'],
+            [line:6, source:'def result = value && Boolean.FALSE'],
+            [line:8, source:'ready = Boolean.TRUE && value'],
+            [line:9, source:'if (Boolean.TRUE || value)'],
+            [line:10, source:'result = Boolean.FALSE && value'])
     }
 
     @Test
@@ -82,8 +82,8 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             result = [a:123] || value
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'result = value && [:]'],
-            [lineNumber:3, sourceLineText:'result = [a:123] || value'])
+            [line:2, source:'result = value && [:]'],
+            [line:3, source:'result = [a:123] || value'])
     }
 
     @Test
@@ -93,8 +93,8 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             result = [x, y, z] || value
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'result = value && []'],
-            [lineNumber:3, sourceLineText:'result = [x, y, z] || value'])
+            [line:2, source:'result = value && []'],
+            [line:3, source:'result = [x, y, z] || value'])
     }
 
     @Test
@@ -104,8 +104,8 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             result = 67.898 || value
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'result = value && 19'],
-            [lineNumber:3, sourceLineText:'result = 67.898 || value'])
+            [line:2, source:'result = value && 19'],
+            [line:3, source:'result = 67.898 || value'])
     }
 
     @Test
@@ -115,8 +115,8 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             result = 'abcdef' || value
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'result = value && ""'],
-            [lineNumber:3, sourceLineText:"result = 'abcdef' || value"])
+            [line:2, source:'result = value && ""'],
+            [line:3, source:"result = 'abcdef' || value"])
     }
 
     @Test
@@ -126,8 +126,8 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             result = null || value
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'result = value && null'],
-            [lineNumber:3, sourceLineText:'result = null || value'])
+            [line:2, source:'result = value && null'],
+            [line:3, source:'result = null || value'])
     }
 
     @Test
@@ -161,10 +161,10 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             println !Boolean.TRUE
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def ready = !true'],
-            [lineNumber:3, sourceLineText:'if (!false)'],
-            [lineNumber:4, sourceLineText:'def result = value && !Boolean.FALSE'],
-            [lineNumber:5, sourceLineText:'println !Boolean.TRUE'])
+            [line:2, source:'def ready = !true'],
+            [line:3, source:'if (!false)'],
+            [line:4, source:'def result = value && !Boolean.FALSE'],
+            [line:5, source:'println !Boolean.TRUE'])
     }
 
     @Test
@@ -177,11 +177,11 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             result = !null
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def ready = !"abc"'],
-            [lineNumber:3, sourceLineText:'if (![])'],
-            [lineNumber:4, sourceLineText:'if (![23]) { doSomething() }'],
-            [lineNumber:5, sourceLineText:'def result = value && ![a:123]'],
-            [lineNumber:6, sourceLineText:'result = !null'])
+            [line:2, source:'def ready = !"abc"'],
+            [line:3, source:'if (![])'],
+            [line:4, source:'if (![23]) { doSomething() }'],
+            [line:5, source:'def result = value && ![a:123]'],
+            [line:6, source:'result = !null'])
     }
 
     @Test

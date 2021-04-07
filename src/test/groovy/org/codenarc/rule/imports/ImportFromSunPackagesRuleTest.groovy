@@ -49,8 +49,8 @@ class ImportFromSunPackagesRuleTest extends AbstractRuleTestCase<ImportFromSunPa
             public class Foo {}
         '''
         assertViolations(SOURCE,
-                [lineNumber: 2, sourceLineText: 'import sun.misc.foo', messageText: 'The file imports sun.misc.foo, which is not portable and likely to change'],
-                [lineNumber: 3, sourceLineText: 'import sun.misc.foo as Foo', messageText: 'The file imports sun.misc.foo, which is not portable and likely to change'])
+                [line: 2, source: 'import sun.misc.foo', message: 'The file imports sun.misc.foo, which is not portable and likely to change'],
+                [line: 3, source: 'import sun.misc.foo as Foo', message: 'The file imports sun.misc.foo, which is not portable and likely to change'])
     }
 
     @Test

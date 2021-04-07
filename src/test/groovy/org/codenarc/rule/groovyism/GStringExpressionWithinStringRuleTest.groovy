@@ -144,8 +144,8 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase<GString
             def str2 = 'average: ${total / count}'
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],
-            [lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])
+            [line:2, source:"def str1 = 'total: \${count}'", message:'\'${count}\''],
+            [line:3, source:"def str2 = 'average: \${total / count}'", message:'\'${total / count}\''])
     }
 
     @Test

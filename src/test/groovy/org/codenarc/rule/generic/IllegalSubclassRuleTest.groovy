@@ -58,9 +58,9 @@ class IllegalSubclassRuleTest extends AbstractRuleTestCase<IllegalSubclassRule> 
         '''
         rule.superclassNames = 'MyClass,Object, Exception, Other'
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyObject extends Object { }', messageText:'The class MyObject extends from the illegal superclass Object'],
-            [lineNumber:3, sourceLineText:'class MyException extends Exception { }', messageText:'The class MyException extends from the illegal superclass Exception'],
-            [lineNumber:4, sourceLineText:'class MyClass2 extends MyClass { }', messageText:'The class MyClass2 extends from the illegal superclass MyClass'])
+            [line:2, source:'class MyObject extends Object { }', message:'The class MyObject extends from the illegal superclass Object'],
+            [line:3, source:'class MyException extends Exception { }', message:'The class MyException extends from the illegal superclass Exception'],
+            [line:4, source:'class MyClass2 extends MyClass { }', message:'The class MyClass2 extends from the illegal superclass MyClass'])
     }
 
     @Test
@@ -72,9 +72,9 @@ class IllegalSubclassRuleTest extends AbstractRuleTestCase<IllegalSubclassRule> 
         '''
         rule.superclassNames = '*MyClass,java.lang.Object, java.*.Exception, Other'
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyObject extends java.lang.Object { }', messageText:'The class MyObject extends from the illegal superclass java.lang.Object'],
-            [lineNumber:3, sourceLineText:'class MyException extends java.lang.Exception { }', messageText:'The class MyException extends from the illegal superclass java.lang.Exception'],
-            [lineNumber:4, sourceLineText:'class MyClass2 extends org.example.MyClass { }', messageText:'The class MyClass2 extends from the illegal superclass org.example.MyClass'])
+            [line:2, source:'class MyObject extends java.lang.Object { }', message:'The class MyObject extends from the illegal superclass java.lang.Object'],
+            [line:3, source:'class MyException extends java.lang.Exception { }', message:'The class MyException extends from the illegal superclass java.lang.Exception'],
+            [line:4, source:'class MyClass2 extends org.example.MyClass { }', message:'The class MyClass2 extends from the illegal superclass org.example.MyClass'])
     }
 
     @Override

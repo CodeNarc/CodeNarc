@@ -81,8 +81,8 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: 'Foo firstAnnotatedField', messageText: 'There is no blank line before the declaration for field "firstAnnotatedField" that has annotations'],
-            [lineNumber: 6, sourceLineText: 'Bar secondAnnotatedField', messageText: 'There is no blank line before the declaration for field "secondAnnotatedField" that has annotations']
+            [line: 4, source: 'Foo firstAnnotatedField', message: 'There is no blank line before the declaration for field "firstAnnotatedField" that has annotations'],
+            [line: 6, source: 'Bar secondAnnotatedField', message: 'There is no blank line before the declaration for field "secondAnnotatedField" that has annotations']
         )
     }
 

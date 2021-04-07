@@ -68,8 +68,8 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:7, sourceLineText:'static final String staticMethod2() { }', messageText:'public method staticMethod2 in class MyClass is declared after a non-public method'],
-            [lineNumber:8, sourceLineText:'public String method2() { }', messageText:'public method method2 in class MyClass is declared after a non-public method'])
+            [line:7, source:'static final String staticMethod2() { }', message:'public method staticMethod2 in class MyClass is declared after a non-public method'],
+            [line:8, source:'public String method2() { }', message:'public method method2 in class MyClass is declared after a non-public method'])
     }
 
     @Test
@@ -83,8 +83,8 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:5, sourceLineText:'static final String staticMethod1() { }', messageText:'public method staticMethod1 in class MyClass is declared after a non-public method'],
-                [lineNumber:6, sourceLineText:'public String method2() { }', messageText:'public method method2 in class MyClass is declared after a non-public method'])
+                [line:5, source:'static final String staticMethod1() { }', message:'public method staticMethod1 in class MyClass is declared after a non-public method'],
+                [line:6, source:'public String method2() { }', message:'public method method2 in class MyClass is declared after a non-public method'])
     }
 
     @Test

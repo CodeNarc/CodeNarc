@@ -43,10 +43,10 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase<UnnecessaryIfS
             if (expression4) return true else return Boolean.FALSE
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (expression1)'],
-            [lineNumber:3, sourceLineText:'if (expression2)'],
-            [lineNumber:4, sourceLineText:'if (expression3)'],
-            [lineNumber:5, sourceLineText:'if (expression4)'])
+            [line:2, source:'if (expression1)'],
+            [line:3, source:'if (expression2)'],
+            [line:4, source:'if (expression3)'],
+            [line:5, source:'if (expression4)'])
     }
 
     @Test
@@ -56,8 +56,8 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase<UnnecessaryIfS
             if (expression2) return Boolean.FALSE else return Boolean.TRUE
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (expression1)'],
-            [lineNumber:3, sourceLineText:'if (expression2)'])
+            [line:2, source:'if (expression1)'],
+            [line:3, source:'if (expression2)'])
     }
 
     @Test
@@ -68,9 +68,9 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase<UnnecessaryIfS
             if (expression3) { return false } else return true
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (expression1)'],
-            [lineNumber:3, sourceLineText:'if (expression2)'],
-            [lineNumber:4, sourceLineText:'if (expression3)'])
+            [line:2, source:'if (expression1)'],
+            [line:3, source:'if (expression2)'],
+            [line:4, source:'if (expression3)'])
     }
 
     @Test
@@ -124,8 +124,8 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase<UnnecessaryIfS
     @Test
     void testApplyTo_IfReturn_FallsThroughToReturn_IsAViolation() {
         assertViolations(SOURCE_FALLS_THROUGH_TO_RETURN,
-            [lineNumber:3, sourceLineText:'if (expression1)'],
-            [lineNumber:9, sourceLineText:'if (expression2)'])
+            [line:3, source:'if (expression1)'],
+            [line:9, source:'if (expression2)'])
     }
 
     @Test

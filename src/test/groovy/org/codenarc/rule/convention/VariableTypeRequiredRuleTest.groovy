@@ -62,10 +62,10 @@ class VariableTypeRequiredRuleTest extends AbstractRuleTestCase<VariableTypeRequ
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'final NAME = "joe"', messageText:'The type is not specified for variable "NAME"'],
-                [lineNumber:5, sourceLineText:'def count = 0, max = 99', messageText:'The type is not specified for variable "count"'],
-                [lineNumber:5, sourceLineText:'def count = 0, max = 99', messageText:'The type is not specified for variable "max"'],
-                [lineNumber:6, sourceLineText:'def defaultName', messageText:'The type is not specified for variable "defaultName"'],
+                [line:4, source:'final NAME = "joe"', message:'The type is not specified for variable "NAME"'],
+                [line:5, source:'def count = 0, max = 99', message:'The type is not specified for variable "count"'],
+                [line:5, source:'def count = 0, max = 99', message:'The type is not specified for variable "max"'],
+                [line:6, source:'def defaultName', message:'The type is not specified for variable "defaultName"'],
         )
     }
 
@@ -79,8 +79,8 @@ class VariableTypeRequiredRuleTest extends AbstractRuleTestCase<VariableTypeRequ
         '''
         rule.ignoreVariableNames = 'other'
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'def max = 99', messageText:'The type is not specified for variable "max"'],
-                [lineNumber:4, sourceLineText:'def defaultName', messageText:'The type is not specified for variable "defaultName"'],
+                [line:3, source:'def max = 99', message:'The type is not specified for variable "max"'],
+                [line:4, source:'def defaultName', message:'The type is not specified for variable "defaultName"'],
         )
     }
 
@@ -95,7 +95,7 @@ class VariableTypeRequiredRuleTest extends AbstractRuleTestCase<VariableTypeRequ
         '''
         rule.ignoreVariableNames = 'other, a*Names, max, abc'
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'def defaultName', messageText:'The type is not specified for variable "defaultName"'],
+                [line:4, source:'def defaultName', message:'The type is not specified for variable "defaultName"'],
         )
     }
 

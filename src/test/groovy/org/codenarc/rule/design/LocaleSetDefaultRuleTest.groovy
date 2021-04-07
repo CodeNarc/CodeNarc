@@ -54,9 +54,9 @@ class LocaleSetDefaultRuleTest extends AbstractRuleTestCase<LocaleSetDefaultRule
             Locale.setDefault(Locale.Category.DISPLAY, Locale.JAPAN)
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'java.util.Locale.setDefault', messageText:'Avoid explicit calls to Locale.setDefault'],
-            [lineNumber:3, sourceLineText:'Locale.setDefault', messageText:'Avoid explicit calls to Locale.setDefault'],
-            [lineNumber:4, sourceLineText:'Locale.setDefault', messageText:'Avoid explicit calls to Locale.setDefault'])
+            [line:2, source:'java.util.Locale.setDefault', message:'Avoid explicit calls to Locale.setDefault'],
+            [line:3, source:'Locale.setDefault', message:'Avoid explicit calls to Locale.setDefault'],
+            [line:4, source:'Locale.setDefault', message:'Avoid explicit calls to Locale.setDefault'])
     }
 
     @Test
@@ -66,8 +66,8 @@ class LocaleSetDefaultRuleTest extends AbstractRuleTestCase<LocaleSetDefaultRule
             Locale.default = Locale.UK
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'java.util.Locale.default', messageText:'Avoid explicit assignment to Locale.default'],
-            [lineNumber:3, sourceLineText:'Locale.default', messageText:'Avoid explicit assignment to Locale.default'])
+            [line:2, source:'java.util.Locale.default', message:'Avoid explicit assignment to Locale.default'],
+            [line:3, source:'Locale.default', message:'Avoid explicit assignment to Locale.default'])
     }
 
     @Override

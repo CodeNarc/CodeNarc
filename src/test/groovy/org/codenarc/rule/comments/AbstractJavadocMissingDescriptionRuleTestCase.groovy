@@ -106,16 +106,16 @@ abstract class AbstractJavadocMissingDescriptionRuleTestCase<T extends AbstractJ
     @Test
     void test_JavadocWithEmptyTag_Violations() {
         assertViolations(sourceWithViolations,
-                [lineNumber:6, sourceLineText:"* ${getTag()} name", messageText:getViolationMessage()],
-                [lineNumber:15, sourceLineText:"${getTag()} otherName", messageText:getViolationMessage()])
+                [line:6, source:"* ${getTag()} name", message:getViolationMessage()],
+                [line:15, source:"${getTag()} otherName", message:getViolationMessage()])
     }
 
     @Test
     void test_JavadocWithEmptyTag_WindowsLineEndings_Violations() {
         final SOURCE = sourceWithViolations.replace('\n', '\r\n')
         assertViolations(SOURCE,
-                [lineNumber:6, sourceLineText:"* ${getTag()} name", messageText:getViolationMessage()],
-                [lineNumber:15, sourceLineText:"${getTag()} otherName", messageText:getViolationMessage()])
+                [line:6, source:"* ${getTag()} name", message:getViolationMessage()],
+                [line:15, source:"${getTag()} otherName", message:getViolationMessage()])
     }
 
     @Test
@@ -160,9 +160,9 @@ abstract class AbstractJavadocMissingDescriptionRuleTestCase<T extends AbstractJ
         """
         rule.allowMultiline = true
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:"* ${getTag()} name", messageText:getViolationMessage()],
-                [lineNumber:10, sourceLineText:"* ${getTag()} name", messageText:getViolationMessage()],
-                [lineNumber:15, sourceLineText:"*${getTag()} name", messageText:getViolationMessage()])
+                [line:4, source:"* ${getTag()} name", message:getViolationMessage()],
+                [line:10, source:"* ${getTag()} name", message:getViolationMessage()],
+                [line:15, source:"*${getTag()} name", message:getViolationMessage()])
     }
 
 }

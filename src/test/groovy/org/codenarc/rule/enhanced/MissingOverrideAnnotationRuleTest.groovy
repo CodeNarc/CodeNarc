@@ -142,17 +142,17 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOver
         assertViolations(SOURCE,
             [
                 lineNumber    : 14,
-                sourceLineText: 'String superClassMethod(String value) {',
+                source: 'String superClassMethod(String value) {',
                 messageText   : '''Method 'superClassMethod' is overriding a method in 'SuperClass' but is not annotated with @Override.'''
             ],
             [
                 lineNumber    : 17,
-                sourceLineText: 'void interfaceMethod(String stringValue, Object objectValue) {',
+                source: 'void interfaceMethod(String stringValue, Object objectValue) {',
                 messageText   : '''Method 'interfaceMethod' is overriding a method in 'ImplementedInterface' but is not annotated with @Override.'''
             ],
             [
                 lineNumber    : 20,
-                sourceLineText: 'String toString() {',
+                source: 'String toString() {',
                 messageText   : '''Method 'toString' is overriding a method in 'java.lang.Object' but is not annotated with @Override.'''
             ]
         )
@@ -179,12 +179,12 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOver
         assertViolations(SOURCE,
             [
                 lineNumber    : 7,
-                sourceLineText: 'void run() {',
+                source: 'void run() {',
                 messageText   : '''Method 'run' is overriding a method in 'java.lang.Runnable' but is not annotated with @Override.'''
             ],
             [
                 lineNumber    : 11,
-                sourceLineText: 'String call() {',
+                source: 'String call() {',
                 messageText   : '''Method 'call' is overriding a method in 'java.util.concurrent.Callable' but is not annotated with @Override.'''
             ]
         )

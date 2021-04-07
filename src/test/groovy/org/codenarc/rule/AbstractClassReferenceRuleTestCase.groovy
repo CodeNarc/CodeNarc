@@ -100,10 +100,10 @@ abstract class AbstractClassReferenceRuleTestCase<T extends Rule> extends Abstra
             }
         """
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:"if (value.class == ${getClassName()}) { }", messageText:violationMessage],
-            [lineNumber:3, sourceLineText:"def isCorrectType = value instanceof ${getClassName()}", messageText:violationMessage],
-            [lineNumber:4, sourceLineText:"def txLevel = ${getClassName()}.TRANSACTION_NONE", messageText:violationMessage],
-            [lineNumber:7, sourceLineText:"def field = new ${getClassName()}()", messageText:violationMessage]
+            [line:2, source:"if (value.class == ${getClassName()}) { }", message:violationMessage],
+            [line:3, source:"def isCorrectType = value instanceof ${getClassName()}", message:violationMessage],
+            [line:4, source:"def txLevel = ${getClassName()}.TRANSACTION_NONE", message:violationMessage],
+            [line:7, source:"def field = new ${getClassName()}()", message:violationMessage]
         )
     }
 
@@ -152,8 +152,8 @@ abstract class AbstractClassReferenceRuleTestCase<T extends Rule> extends Abstra
             void initializeBinding(String name, ${getClassName()} connection) { }
         """
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:"void writeCount(${getClassName()} connection, int count) { }", messageText:violationMessage],
-            [lineNumber:3, sourceLineText:"void initializeBinding(String name, ${getClassName()} connection) { }", messageText:violationMessage])
+            [line:2, source:"void writeCount(${getClassName()} connection, int count) { }", message:violationMessage],
+            [line:3, source:"void initializeBinding(String name, ${getClassName()} connection) { }", message:violationMessage])
     }
 
     @Test
@@ -181,8 +181,8 @@ abstract class AbstractClassReferenceRuleTestCase<T extends Rule> extends Abstra
             def initializeBinding = { String name, ${getClassName()} connection -> }
         """
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:"def writeCount = { ${getClassName()} connection, int count -> }", messageText:violationMessage],
-            [lineNumber:3, sourceLineText:"def initializeBinding = { String name, ${getClassName()} connection -> }", messageText:violationMessage])
+            [line:2, source:"def writeCount = { ${getClassName()} connection, int count -> }", message:violationMessage],
+            [line:3, source:"def initializeBinding = { String name, ${getClassName()} connection -> }", message:violationMessage])
     }
 
     @Test
@@ -200,8 +200,8 @@ abstract class AbstractClassReferenceRuleTestCase<T extends Rule> extends Abstra
             interface MyInterface extends ${getClassName()} { }
         """
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:"class MyConnection extends ${getClassName()} { }", messageText:violationMessage],
-            [lineNumber:3, sourceLineText:"interface MyInterface extends ${getClassName()} { }", messageText:violationMessage])
+            [line:2, source:"class MyConnection extends ${getClassName()} { }", message:violationMessage],
+            [line:3, source:"interface MyInterface extends ${getClassName()} { }", message:violationMessage])
     }
 
     @Test

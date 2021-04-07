@@ -88,8 +88,8 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase<UnusedPr
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private void myMethod(int value, String name) { }', messageText:'value'],
-            [lineNumber:3, sourceLineText:'private void myMethod(int value, String name) { }', messageText:'name'])
+            [line:3, source:'private void myMethod(int value, String name) { }', message:'value'],
+            [line:3, source:'private void myMethod(int value, String name) { }', message:'name'])
     }
 
     @Test
@@ -102,8 +102,8 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase<UnusedPr
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private void myMethod1(String id, int value) { print value }', messageText:'id'],
-            [lineNumber:5, sourceLineText:'private int myMethod3(Date startDate) { }', messageText:'startDate'])
+            [line:3, source:'private void myMethod1(String id, int value) { print value }', message:'id'],
+            [line:5, source:'private int myMethod3(Date startDate) { }', message:'startDate'])
     }
 
     @Test
@@ -116,9 +116,9 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase<UnusedPr
           }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'private MyClass(String id, int value) { print value }', messageText:'id'],
-                [lineNumber:5, sourceLineText:'private MyClass(Date startDate, Date endDate) { }', messageText:'startDate'],
-                [lineNumber:5, sourceLineText:'private MyClass(Date startDate, Date endDate) { }', messageText:'endDate'])
+                [line:3, source:'private MyClass(String id, int value) { print value }', message:'id'],
+                [line:5, source:'private MyClass(Date startDate, Date endDate) { }', message:'startDate'],
+                [line:5, source:'private MyClass(Date startDate, Date endDate) { }', message:'endDate'])
     }
 
     @Test

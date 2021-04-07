@@ -41,9 +41,9 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase<BigDecimalIns
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'new BigDecimal(123.45)'],
-            [lineNumber:4, sourceLineText:'new java.math.BigDecimal(0.26789d)'],
-            [lineNumber:5, sourceLineText:'new BigDecimal(123.45, MathContext.UNLIMITED)'])
+            [line:3, source:'new BigDecimal(123.45)'],
+            [line:4, source:'new java.math.BigDecimal(0.26789d)'],
+            [line:5, source:'new BigDecimal(123.45, MathContext.UNLIMITED)'])
     }
 
     @Test

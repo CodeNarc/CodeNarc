@@ -77,11 +77,11 @@ class StaticSimpleDateFormatFieldRuleTest extends AbstractRuleTestCase<StaticSim
               }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'static final DATE1 = new SimpleDateFormat()', messageText:['SimpleDateFormat', 'DATE1']],
-            [lineNumber:4, sourceLineText:"static final DATE2 = new SimpleDateFormat('MM/dd')", messageText:['SimpleDateFormat', 'DATE2']],
-            [lineNumber:5, sourceLineText:"static final DATE3 = new SimpleDateFormat('MM/dd', DateFormatSymbols.instance)", messageText:['SimpleDateFormat', 'DATE3']],
-            [lineNumber:6, sourceLineText:"static date4 = new SimpleDateFormat('MM/dd', Locale.FRANCE)", messageText:['SimpleDateFormat', 'date4']],
-            [lineNumber:7, sourceLineText:"static date5 = new java.text.SimpleDateFormat('MM/dd')", messageText:['SimpleDateFormat', 'date5']]
+            [line:3, source:'static final DATE1 = new SimpleDateFormat()', message:['SimpleDateFormat', 'DATE1']],
+            [line:4, source:"static final DATE2 = new SimpleDateFormat('MM/dd')", message:['SimpleDateFormat', 'DATE2']],
+            [line:5, source:"static final DATE3 = new SimpleDateFormat('MM/dd', DateFormatSymbols.instance)", message:['SimpleDateFormat', 'DATE3']],
+            [line:6, source:"static date4 = new SimpleDateFormat('MM/dd', Locale.FRANCE)", message:['SimpleDateFormat', 'date4']],
+            [line:7, source:"static date5 = new java.text.SimpleDateFormat('MM/dd')", message:['SimpleDateFormat', 'date5']]
         )
     }
 

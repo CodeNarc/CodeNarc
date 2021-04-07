@@ -76,10 +76,10 @@ class OptionalCollectionReturnTypeRuleTest extends AbstractRuleTestCase<Optional
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'Optional<Collection> getCollection() { }', messageText:messageFor('getCollection')],
-                [lineNumber:4, sourceLineText:'private Optional<List> getList() { }', messageText:messageFor('getList')],
-                [lineNumber:5, sourceLineText:'Optional<Set> getSet() { }', messageText:messageFor('getSet')],
-                [lineNumber:6, sourceLineText:'Optional<Map> getMap() { }', messageText:messageFor('getMap')])
+                [line:3, source:'Optional<Collection> getCollection() { }', message:messageFor('getCollection')],
+                [line:4, source:'private Optional<List> getList() { }', message:messageFor('getList')],
+                [line:5, source:'Optional<Set> getSet() { }', message:messageFor('getSet')],
+                [line:6, source:'Optional<Map> getMap() { }', message:messageFor('getMap')])
     }
 
     @Test
@@ -105,22 +105,22 @@ class OptionalCollectionReturnTypeRuleTest extends AbstractRuleTestCase<Optional
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'Optional<Collection<Object>> getCollection() { }', messageText:messageFor('getCollection')],
-                [lineNumber:4, sourceLineText:'private Optional<List<Integer>> getList() { }', messageText:messageFor('getList')],
-                [lineNumber:5, sourceLineText:'Optional<ArrayList<String>> getArrayList() { }', messageText:messageFor('getArrayList')],
-                [lineNumber:6, sourceLineText:'Optional<LinkedList<Double>> getLinkedList() { }', messageText:messageFor('getLinkedList')],
-                [lineNumber:7, sourceLineText:'protected Optional<Set<BigDecimal>> getSet() { }', messageText:messageFor('getSet')],
-                [lineNumber:8, sourceLineText:'Optional<HashSet<Boolean>> getHashSet() { }', messageText:messageFor('getHashSet')],
-                [lineNumber:9, sourceLineText:'Optional<LinkedHashSet<Boolean>> getLinkedHashSet() { }', messageText:messageFor('getLinkedHashSet')],
-                [lineNumber:10, sourceLineText:'Optional<TreeSet<Boolean>> getTreeSet() { }', messageText:messageFor('getTreeSet')],
-                [lineNumber:11, sourceLineText:'Optional<SortedSet<Boolean>> getSortedSet() { }', messageText:messageFor('getSortedSet')],
-                [lineNumber:12, sourceLineText:'Optional<EnumSet<MyEnum>> getEnumSet() { }', messageText:messageFor('getEnumSet')],
-                [lineNumber:13, sourceLineText:'Optional<Map<Integer, String>> getMap() { }', messageText:messageFor('getMap')],
-                [lineNumber:14, sourceLineText:'Optional<HashMap<String, String>> getHashMap() { }', messageText:messageFor('getHashMap')],
-                [lineNumber:15, sourceLineText:'Optional<LinkedHashMap<String, String>> getLinkedHashMap() { }', messageText:messageFor('getLinkedHashMap')],
-                [lineNumber:16, sourceLineText:'Optional<EnumMap<String, String>> getEnumMap() { }', messageText:messageFor('getEnumMap')],
-                [lineNumber:17, sourceLineText:'Optional<SortedMap<String, String>> getSortedMap() { }', messageText:messageFor('getSortedMap')],
-                [lineNumber:18, sourceLineText:'Optional<TreeMap<String, String>> getTreeMap() { }', messageText:messageFor('getTreeMap')],
+                [line:3, source:'Optional<Collection<Object>> getCollection() { }', message:messageFor('getCollection')],
+                [line:4, source:'private Optional<List<Integer>> getList() { }', message:messageFor('getList')],
+                [line:5, source:'Optional<ArrayList<String>> getArrayList() { }', message:messageFor('getArrayList')],
+                [line:6, source:'Optional<LinkedList<Double>> getLinkedList() { }', message:messageFor('getLinkedList')],
+                [line:7, source:'protected Optional<Set<BigDecimal>> getSet() { }', message:messageFor('getSet')],
+                [line:8, source:'Optional<HashSet<Boolean>> getHashSet() { }', message:messageFor('getHashSet')],
+                [line:9, source:'Optional<LinkedHashSet<Boolean>> getLinkedHashSet() { }', message:messageFor('getLinkedHashSet')],
+                [line:10, source:'Optional<TreeSet<Boolean>> getTreeSet() { }', message:messageFor('getTreeSet')],
+                [line:11, source:'Optional<SortedSet<Boolean>> getSortedSet() { }', message:messageFor('getSortedSet')],
+                [line:12, source:'Optional<EnumSet<MyEnum>> getEnumSet() { }', message:messageFor('getEnumSet')],
+                [line:13, source:'Optional<Map<Integer, String>> getMap() { }', message:messageFor('getMap')],
+                [line:14, source:'Optional<HashMap<String, String>> getHashMap() { }', message:messageFor('getHashMap')],
+                [line:15, source:'Optional<LinkedHashMap<String, String>> getLinkedHashMap() { }', message:messageFor('getLinkedHashMap')],
+                [line:16, source:'Optional<EnumMap<String, String>> getEnumMap() { }', message:messageFor('getEnumMap')],
+                [line:17, source:'Optional<SortedMap<String, String>> getSortedMap() { }', message:messageFor('getSortedMap')],
+                [line:18, source:'Optional<TreeMap<String, String>> getTreeMap() { }', message:messageFor('getTreeMap')],
         )
     }
 

@@ -141,9 +141,9 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase<ParameterReassi
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:5, sourceLineText:'c = 39', messageText:'parameter [c] in class None was reassigned'],
-            [lineNumber:6, sourceLineText:'a = 0', messageText:'parameter [a] in class None was reassigned'],
-            [lineNumber:8, sourceLineText:'b = null', messageText:'parameter [b] in class None was reassigned'])
+            [line:5, source:'c = 39', message:'parameter [c] in class None was reassigned'],
+            [line:6, source:'a = 0', message:'parameter [a] in class None was reassigned'],
+            [line:8, source:'b = null', message:'parameter [b] in class None was reassigned'])
     }
 
     @Test

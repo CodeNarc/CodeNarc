@@ -59,7 +59,7 @@ class ExplicitCallToPutAtMethodRuleTest extends AbstractRuleTestCase<ExplicitCal
             map.putAt(k, v)
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'map.putAt(k, v)', messageText:'Explicit call to map.putAt(k, v) method can be rewritten as map[k] = v'])
+                [line:2, source:'map.putAt(k, v)', message:'Explicit call to map.putAt(k, v) method can be rewritten as map[k] = v'])
     }
 
     @Test
@@ -69,8 +69,8 @@ class ExplicitCallToPutAtMethodRuleTest extends AbstractRuleTestCase<ExplicitCal
             this.putAt(a, b)
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'putAt(k, v)', messageText:'Explicit call to this.putAt(k, v) method can be rewritten as this[k] = v'],
-                [lineNumber:3, sourceLineText:'this.putAt(a, b)', messageText:'Explicit call to this.putAt(a, b) method can be rewritten as this[a] = b'])
+                [line:2, source:'putAt(k, v)', message:'Explicit call to this.putAt(k, v) method can be rewritten as this[k] = v'],
+                [line:3, source:'this.putAt(a, b)', message:'Explicit call to this.putAt(a, b) method can be rewritten as this[a] = b'])
     }
 
     @Override

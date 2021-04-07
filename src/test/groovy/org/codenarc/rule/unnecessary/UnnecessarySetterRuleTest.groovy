@@ -58,10 +58,10 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
             x.setE(3)           // see #364
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'x.setProperty(1)', messageText:'setProperty(1) can probably be rewritten as property = 1'],
-            [lineNumber:3, sourceLineText:'x.setProperty(this.getA())', messageText:'setProperty(this.getA()) can probably be rewritten as property = this.getA()'],
-            [lineNumber:4, sourceLineText:'x.setProperty([])', messageText:'setProperty([]) can probably be rewritten as property = []'],
-            [lineNumber:5, sourceLineText:'x.setE(3)', messageText:'setE(3)'])
+            [line:2, source:'x.setProperty(1)', message:'setProperty(1) can probably be rewritten as property = 1'],
+            [line:3, source:'x.setProperty(this.getA())', message:'setProperty(this.getA()) can probably be rewritten as property = this.getA()'],
+            [line:4, source:'x.setProperty([])', message:'setProperty([]) can probably be rewritten as property = []'],
+            [line:5, source:'x.setE(3)', message:'setE(3)'])
     }
 
     @Test

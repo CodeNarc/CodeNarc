@@ -98,8 +98,8 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase<JUnitPublicFieldRule
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'public int count', messageText:'count'],
-            [lineNumber:5, sourceLineText:'public static final MAX_VALUE = 1000', messageText:'MAX_VALUE'])
+            [line:4, source:'public int count', message:'count'],
+            [line:5, source:'public static final MAX_VALUE = 1000', message:'MAX_VALUE'])
     }
 
     @Test

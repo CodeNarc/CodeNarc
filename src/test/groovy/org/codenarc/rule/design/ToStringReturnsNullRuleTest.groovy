@@ -67,7 +67,7 @@ class ToStringReturnsNullRuleTest extends AbstractRuleTestCase<ToStringReturnsNu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'return null', messageText:ERROR_MESSAGE])
+            [line:4, source:'return null', message:ERROR_MESSAGE])
     }
 
     @Test
@@ -81,7 +81,7 @@ class ToStringReturnsNullRuleTest extends AbstractRuleTestCase<ToStringReturnsNu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:5, sourceLineText:'null', messageText: ERROR_MESSAGE])
+            [line:5, source:'null', message: ERROR_MESSAGE])
     }
 
     @Test
@@ -93,7 +93,7 @@ class ToStringReturnsNullRuleTest extends AbstractRuleTestCase<ToStringReturnsNu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'String toString()', messageText: ERROR_MESSAGE])
+            [line:3, source:'String toString()', message: ERROR_MESSAGE])
     }
 
     @Test
@@ -110,7 +110,7 @@ class ToStringReturnsNullRuleTest extends AbstractRuleTestCase<ToStringReturnsNu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:7, sourceLineText:'return null', messageText:ERROR_MESSAGE])
+            [line:7, source:'return null', message:ERROR_MESSAGE])
     }
 
     @Test

@@ -116,8 +116,8 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase<SpaceAfterOpen
             class MyOtherClass extends AbstractClass {int count }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyClass {int count }', messageText:'The opening brace for class MyClass is not followed'],
-            [lineNumber:3, sourceLineText:'class MyOtherClass extends AbstractClass {int count }', messageText:'The opening brace for class MyOtherClass is not followed'])
+            [line:2, source:'class MyClass {int count }', message:'The opening brace for class MyClass is not followed'],
+            [line:3, source:'class MyOtherClass extends AbstractClass {int count }', message:'The opening brace for class MyOtherClass is not followed'])
     }
 
     @Test
@@ -159,9 +159,9 @@ c        '''
                 int count }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def myMethod() {int count }', messageText:'The opening brace for the method myMethod in class None'],
-            [lineNumber:4, sourceLineText:'{int count }', messageText:'The opening brace for the method otherMethod in class None'],
-            [lineNumber:6, sourceLineText:'{println 9 }', messageText:'The opening brace for the method bigMethod in class None'])
+            [line:2, source:'def myMethod() {int count }', message:'The opening brace for the method myMethod in class None'],
+            [line:4, source:'{int count }', message:'The opening brace for the method otherMethod in class None'],
+            [line:6, source:'{println 9 }', message:'The opening brace for the method bigMethod in class None'])
     }
 
     @Test
@@ -187,9 +187,9 @@ c        '''
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass() {int count }', messageText:'The opening brace for the method <init> in class MyClass'],
-            [lineNumber:4, sourceLineText:'MyClass() {s = \'{"json": true}\' }', messageText:'The opening brace for the method <init> in class MyClass'],
-            [lineNumber:5, sourceLineText:'MyClass(@Annotation(\'${prop}\') String s) {println 123 }', messageText:'The opening brace for the method <init> in class MyClass'])
+            [line:3, source:'MyClass() {int count }', message:'The opening brace for the method <init> in class MyClass'],
+            [line:4, source:'MyClass() {s = \'{"json": true}\' }', message:'The opening brace for the method <init> in class MyClass'],
+            [line:5, source:'MyClass(@Annotation(\'${prop}\') String s) {println 123 }', message:'The opening brace for the method <init> in class MyClass'])
     }
 
     @Test
@@ -201,8 +201,8 @@ c        '''
             if (ready) println '{'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (ready) {println 9 }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) {println 9 }', messageText:BLOCK_VIOLATION_MESSAGE])
+            [line:2, source:'if (ready) {println 9 }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'done) {println 9 }', message:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -228,10 +228,10 @@ c        '''
                 i++) {println name }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for (int i=0; i<10; i++) {println i }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'for (String name in names) {println name }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:5, sourceLineText:'for (String name: names) {println name }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:8, sourceLineText:'i++) {println name }', messageText:BLOCK_VIOLATION_MESSAGE]
+            [line:2, source:'for (int i=0; i<10; i++) {println i }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'for (String name in names) {println name }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:5, source:'for (String name: names) {println name }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:8, source:'i++) {println name }', message:BLOCK_VIOLATION_MESSAGE]
         )
     }
 
@@ -244,8 +244,8 @@ c        '''
             while (ready) println '{'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'while (ready) {println name }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) {println name }', messageText:BLOCK_VIOLATION_MESSAGE],
+            [line:2, source:'while (ready) {println name }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'done) {println name }', message:BLOCK_VIOLATION_MESSAGE],
             )
     }
 
@@ -282,10 +282,10 @@ c        '''
             def m = [a:123, b: {println 7 }]
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'list.each {name -> }', messageText:'The opening brace for the closure in class None'],
-            [lineNumber:3, sourceLineText:'shouldFail(Exception) {doStuff() }', messageText:'The opening brace for the closure in class None'],
-            [lineNumber:4, sourceLineText:'def c = {println 123 }', messageText:'The opening brace for the closure in class None'],
-            [lineNumber:5, sourceLineText:'def m = [a:123, b: {println 7 }]', messageText:'The opening brace for the closure in class'])
+            [line:2, source:'list.each {name -> }', message:'The opening brace for the closure in class None'],
+            [line:3, source:'shouldFail(Exception) {doStuff() }', message:'The opening brace for the closure in class None'],
+            [line:4, source:'def c = {println 123 }', message:'The opening brace for the closure in class None'],
+            [line:5, source:'def m = [a:123, b: {println 7 }]', message:'The opening brace for the closure in class'])
     }
 
     @Test
@@ -358,9 +358,9 @@ c        '''
 
         if (GroovyVersion.isNotGroovyVersion2()) {
             assertViolations(SOURCE,
-                    [lineNumber:2, sourceLineText:'{println "aaa" }', messageText:CLOSURE_VIOLATION_MESSAGE],
-                    [lineNumber:3, sourceLineText:'{println "bbb" }', messageText:CLOSURE_VIOLATION_MESSAGE],
-                    [lineNumber:4, sourceLineText:'{println "ccc" }', messageText:CLOSURE_VIOLATION_MESSAGE])
+                    [line:2, source:'{println "aaa" }', message:CLOSURE_VIOLATION_MESSAGE],
+                    [line:3, source:'{println "bbb" }', message:CLOSURE_VIOLATION_MESSAGE],
+                    [line:4, source:'{println "ccc" }', message:CLOSURE_VIOLATION_MESSAGE])
         }
     }
 

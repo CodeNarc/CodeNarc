@@ -247,9 +247,9 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase<CouldBeSwitchS
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText: 'if (x == 1) {', messageText: rule.errorMessage],
-            [lineNumber:12, sourceLineText: 'if (y instanceof Integer) {', messageText: rule.errorMessage],
-            [lineNumber:23, sourceLineText: 'if (p.value instanceof Integer) {', messageText: rule.errorMessage])
+            [line:2, source: 'if (x == 1) {', message: rule.errorMessage],
+            [line:12, source: 'if (y instanceof Integer) {', message: rule.errorMessage],
+            [line:23, source: 'if (p.value instanceof Integer) {', message: rule.errorMessage])
     }
 
     @Override

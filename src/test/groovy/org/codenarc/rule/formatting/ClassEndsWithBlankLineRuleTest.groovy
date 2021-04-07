@@ -203,8 +203,8 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.blankLineRequired = false
 
         assertViolations(SOURCE,
-                [lineNumber: 8, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'],
-                [lineNumber: 15, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'])
+                [line: 8, source: '            }', message: 'Class ends with an empty line before the closing brace'],
+                [line: 15, source: '            }', message: 'Class ends with an empty line before the closing brace'])
     }
 
     @Test
@@ -227,8 +227,8 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.blankLineRequired = true
 
         assertViolations(SOURCE,
-                [lineNumber    : 7, sourceLineText: '            }', messageText   : 'Class does not end with a blank line before the closing brace'],
-                [lineNumber    : 14, sourceLineText: '            }', messageText   : 'Class does not end with a blank line before the closing brace'])
+                [lineNumber    : 7, source: '            }', messageText   : 'Class does not end with a blank line before the closing brace'],
+                [lineNumber    : 14, source: '            }', messageText   : 'Class does not end with a blank line before the closing brace'])
     }
 
     @Test
@@ -297,8 +297,8 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.blankLineRequired = false
 
         assertViolations(SOURCE,
-                [lineNumber: 13, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'],
-                [lineNumber: 15, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'])
+                [line: 13, source: '            }', message: 'Class ends with an empty line before the closing brace'],
+                [line: 15, source: '            }', message: 'Class ends with an empty line before the closing brace'])
     }
 
     @Test
@@ -321,8 +321,8 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.blankLineRequired = true
 
         assertViolations(SOURCE,
-                [lineNumber: 13, sourceLineText: '            }', messageText: 'Class does not end with a blank line before the closing brace'],
-                [lineNumber: 14, sourceLineText: '            }', messageText: 'Class does not end with a blank line before the closing brace'])
+                [line: 13, source: '            }', message: 'Class does not end with a blank line before the closing brace'],
+                [line: 14, source: '            }', message: 'Class does not end with a blank line before the closing brace'])
     }
 
     @Test
@@ -389,8 +389,8 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.blankLineRequired = true
 
         assertViolations(SOURCE,
-                [lineNumber: 13, sourceLineText: '            }', messageText: 'Class does not end with a blank line before the closing brace'],
-                [lineNumber: 14, sourceLineText: '            }', messageText: 'Class does not end with a blank line before the closing brace'])
+                [line: 13, source: '            }', message: 'Class does not end with a blank line before the closing brace'],
+                [line: 14, source: '            }', message: 'Class does not end with a blank line before the closing brace'])
     }
 
     @Test
@@ -415,8 +415,8 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.blankLineRequired = false
 
         assertViolations(SOURCE,
-                [lineNumber: 14, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'],
-                [lineNumber: 16, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'])
+                [line: 14, source: '            }', message: 'Class ends with an empty line before the closing brace'],
+                [line: 16, source: '            }', message: 'Class ends with an empty line before the closing brace'])
     }
 
     @Test
@@ -461,9 +461,9 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.blankLineRequired = true
 
         assertViolations(SOURCE,
-                [lineNumber    : 3, sourceLineText: 'class Foo extends Bar<String> { }', messageText   : 'Single line classes are not allowed'],
-                [lineNumber    : 5, sourceLineText: 'class Doe extends Bar<String> { }', messageText   : 'Single line classes are not allowed'],
-                [lineNumber    : 6, sourceLineText: 'abstract class John  { abstract void a() }', messageText   : 'Single line classes are not allowed'])
+                [lineNumber    : 3, source: 'class Foo extends Bar<String> { }', messageText   : 'Single line classes are not allowed'],
+                [lineNumber    : 5, source: 'class Doe extends Bar<String> { }', messageText   : 'Single line classes are not allowed'],
+                [lineNumber    : 6, source: 'abstract class John  { abstract void a() }', messageText   : 'Single line classes are not allowed'])
     }
 
     @Test

@@ -87,20 +87,20 @@ class StaticDateFormatFieldRuleTest extends AbstractRuleTestCase<StaticDateForma
               }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'static final DATE1 = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE)', messageText:['DateFormat', 'DATE1']],
-            [lineNumber:4, sourceLineText:'static final def DATE2 = DateFormat.getDateInstance(DateFormat.LONG)', messageText:['DateFormat', 'DATE2']],
-            [lineNumber:5, sourceLineText:'static Object date3 = DateFormat.getDateInstance()', messageText:['DateFormat', 'date3']],
-            [lineNumber:6, sourceLineText:'static date4 = java.text.DateFormat.getDateInstance()', messageText:['DateFormat', 'date4']],
+            [line:3, source:'static final DATE1 = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE)', message:['DateFormat', 'DATE1']],
+            [line:4, source:'static final def DATE2 = DateFormat.getDateInstance(DateFormat.LONG)', message:['DateFormat', 'DATE2']],
+            [line:5, source:'static Object date3 = DateFormat.getDateInstance()', message:['DateFormat', 'date3']],
+            [line:6, source:'static date4 = java.text.DateFormat.getDateInstance()', message:['DateFormat', 'date4']],
 
-            [lineNumber:8, sourceLineText:'static final DATETIME1 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.FRANCE)', messageText:['DateFormat', 'DATETIME1']],
-            [lineNumber:9, sourceLineText:'static final def DATETIME2 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT)', messageText:['DateFormat', 'DATETIME2']],
-            [lineNumber:10, sourceLineText:'static Object dateTime3 = DateFormat.getDateTimeInstance()', messageText:['DateFormat', 'dateTime3']],
-            [lineNumber:11, sourceLineText:'static dateTime4 = java.text.DateFormat.getDateTimeInstance()', messageText:['DateFormat', 'dateTime4']],
+            [line:8, source:'static final DATETIME1 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.FRANCE)', message:['DateFormat', 'DATETIME1']],
+            [line:9, source:'static final def DATETIME2 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT)', message:['DateFormat', 'DATETIME2']],
+            [line:10, source:'static Object dateTime3 = DateFormat.getDateTimeInstance()', message:['DateFormat', 'dateTime3']],
+            [line:11, source:'static dateTime4 = java.text.DateFormat.getDateTimeInstance()', message:['DateFormat', 'dateTime4']],
 
-            [lineNumber:13, sourceLineText:'static final TIME1 = DateFormat.getTimeInstance(DateFormat.LONG, Locale.FRANCE)', messageText:['DateFormat', 'TIME1']],
-            [lineNumber:14, sourceLineText:'static final def TIME2 = DateFormat.getTimeInstance(DateFormat.LONG)', messageText:['DateFormat', 'TIME2']],
-            [lineNumber:15, sourceLineText:'static final Object TIME3 = DateFormat.getTimeInstance()', messageText:['DateFormat', 'TIME3']],
-            [lineNumber:16, sourceLineText:'static time4 = java.text.DateFormat.getTimeInstance()', messageText:['DateFormat', 'time4']],
+            [line:13, source:'static final TIME1 = DateFormat.getTimeInstance(DateFormat.LONG, Locale.FRANCE)', message:['DateFormat', 'TIME1']],
+            [line:14, source:'static final def TIME2 = DateFormat.getTimeInstance(DateFormat.LONG)', message:['DateFormat', 'TIME2']],
+            [line:15, source:'static final Object TIME3 = DateFormat.getTimeInstance()', message:['DateFormat', 'TIME3']],
+            [line:16, source:'static time4 = java.text.DateFormat.getTimeInstance()', message:['DateFormat', 'time4']],
         )
     }
 

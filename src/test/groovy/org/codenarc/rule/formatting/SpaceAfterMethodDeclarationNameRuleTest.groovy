@@ -90,8 +90,8 @@ class SpaceAfterMethodDeclarationNameRuleTest extends AbstractRuleTestCase<Space
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 3, sourceLineText: 'void firstInvalid () {', messageText: 'There is trailing whitespace in method name declaration.'],
-            [lineNumber: 6, sourceLineText: 'void secondInvalid (String argument) {', messageText: 'There is trailing whitespace in method name declaration.']
+            [line: 3, source: 'void firstInvalid () {', message: 'There is trailing whitespace in method name declaration.'],
+            [line: 6, source: 'void secondInvalid (String argument) {', message: 'There is trailing whitespace in method name declaration.']
         )
     }
 

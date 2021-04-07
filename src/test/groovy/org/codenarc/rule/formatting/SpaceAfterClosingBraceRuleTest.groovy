@@ -68,7 +68,7 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
             class MyClass { int count }//comment
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyClass { int count }//comment', messageText:'The closing brace for class MyClass is not followed'])
+            [line:2, source:'class MyClass { int count }//comment', message:'The closing brace for class MyClass is not followed'])
     }
 
     @Test
@@ -98,10 +98,10 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
             }// comment
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def myMethod() { return 9 }', messageText:'The closing brace for the method myMethod in class None is not followed by a space or whitespace'],
-            [lineNumber:4, sourceLineText:'{ return 9 }', messageText:'The closing brace for the method otherMethod in class None is not followed by a space or whitespace'],
-            [lineNumber:5, sourceLineText:'def myMethod2() { }', messageText:'The closing brace for the method myMethod2 in class None is not followed by a space or whitespace'],
-            [lineNumber:6, sourceLineText:'def m4() {', messageText:'The closing brace for the method m4 in class None is not followed by a space or whitespace'])
+            [line:2, source:'def myMethod() { return 9 }', message:'The closing brace for the method myMethod in class None is not followed by a space or whitespace'],
+            [line:4, source:'{ return 9 }', message:'The closing brace for the method otherMethod in class None is not followed by a space or whitespace'],
+            [line:5, source:'def myMethod2() { }', message:'The closing brace for the method myMethod2 in class None is not followed by a space or whitespace'],
+            [line:6, source:'def m4() {', message:'The closing brace for the method m4 in class None is not followed by a space or whitespace'])
     }
 
     @Test
@@ -115,9 +115,9 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass() { int count }', messageText:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'],
-            [lineNumber:4, sourceLineText:'MyClass(int num)', messageText:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'],
-            [lineNumber:6, sourceLineText:'MyClass(String name)', messageText:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'])
+            [line:3, source:'MyClass() { int count }', message:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'],
+            [line:4, source:'MyClass(int num)', message:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'],
+            [line:6, source:'MyClass(String name)', message:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'])
     }
 
     @Test
@@ -129,8 +129,8 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
             if (ready) println '}'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (ready) { return 9 }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) { return 9 }', messageText:BLOCK_VIOLATION_MESSAGE])
+            [line:2, source:'if (ready) { return 9 }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'done) { return 9 }', message:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -156,10 +156,10 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
                 i++) { println i }//comment
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for (int i=0; i<10; i++) { println i }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'for (String name in names) { println name }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:5, sourceLineText:'for (String name: names) { println name }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:8, sourceLineText:'i++) { println i }', messageText:BLOCK_VIOLATION_MESSAGE]
+            [line:2, source:'for (int i=0; i<10; i++) { println i }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'for (String name in names) { println name }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:5, source:'for (String name: names) { println name }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:8, source:'i++) { println i }', message:BLOCK_VIOLATION_MESSAGE]
         )
     }
 
@@ -172,8 +172,8 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
             while (ready) println '{'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'while (ready) { println 9 }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) { println 9 }', messageText:BLOCK_VIOLATION_MESSAGE])
+            [line:2, source:'while (ready) { println 9 }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'done) { println 9 }', message:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -213,9 +213,9 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
             def m2 = [a:123, b: m.each{ println it }]   //not a violation
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'list.each { name -> doStuff() }', messageText:'The closing brace for the closure in class None is not followed'],
-            [lineNumber:3, sourceLineText:'shouldFail(Exception) { doStuff() }', messageText:'The closing brace for the closure in class None is not followed'],
-            [lineNumber:4, sourceLineText:'def c = { println 123 }', messageText:'The closing brace for the closure in class None is not followed'])
+            [line:2, source:'list.each { name -> doStuff() }', message:'The closing brace for the closure in class None is not followed'],
+            [line:3, source:'shouldFail(Exception) { doStuff() }', message:'The closing brace for the closure in class None is not followed'],
+            [line:4, source:'def c = { println 123 }', message:'The closing brace for the closure in class None is not followed'])
     }
 
     @Test

@@ -53,9 +53,9 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase<LoggerForDiff
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private static final LOG = LoggerFactory.getLogger(SomeOtherClass)'],
-            [lineNumber:4, sourceLineText:'def log1 = LoggerFactory.getLogger(SomeOtherClass.class)'],
-            [lineNumber:5, sourceLineText:'def log2 = LoggerFactory.getLogger(SomeOtherClass.class.name)'])
+            [line:3, source:'private static final LOG = LoggerFactory.getLogger(SomeOtherClass)'],
+            [line:4, source:'def log1 = LoggerFactory.getLogger(SomeOtherClass.class)'],
+            [line:5, source:'def log2 = LoggerFactory.getLogger(SomeOtherClass.class.name)'])
     }
 
     @Test
@@ -153,8 +153,8 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase<LoggerForDiff
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private static final LOG = LogFactory.getLog(SomeOtherClass)'],
-            [lineNumber:4, sourceLineText:'Log log = LogFactory.getLog(SomeOtherClass.class)'])
+            [line:3, source:'private static final LOG = LogFactory.getLog(SomeOtherClass)'],
+            [line:4, source:'Log log = LogFactory.getLog(SomeOtherClass.class)'])
     }
 
     @Test
@@ -239,8 +239,8 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase<LoggerForDiff
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private static final LOG = LoggerFactory.getLogger(SomeOtherClass)'],
-            [lineNumber:4, sourceLineText:'Log log = LoggerFactory.getLogger(SomeOtherClass.class)'])
+            [line:3, source:'private static final LOG = LoggerFactory.getLogger(SomeOtherClass)'],
+            [line:4, source:'Log log = LoggerFactory.getLogger(SomeOtherClass.class)'])
     }
 
     @Test

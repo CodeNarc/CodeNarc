@@ -45,7 +45,7 @@ class ExceptionExtendsThrowableRuleTest extends AbstractRuleTestCase<ExceptionEx
             class MyException extends Throwable { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyException extends Throwable', messageText:'The class MyException extends Throwable'])
+            [line:2, source:'class MyException extends Throwable', message:'The class MyException extends Throwable'])
     }
 
     @Override

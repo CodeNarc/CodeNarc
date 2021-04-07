@@ -38,8 +38,8 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             def y = !ready ? Boolean.TRUE : Boolean.FALSE
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def x = !ready ? true : false'],
-            [lineNumber:3, sourceLineText:'def y = !ready ? Boolean.TRUE : Boolean.FALSE'])
+            [line:2, source:'def x = !ready ? true : false'],
+            [line:3, source:'def y = !ready ? Boolean.TRUE : Boolean.FALSE'])
     }
 
     @Test
@@ -79,19 +79,19 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase<Unnecess
             x = (addTax(5) + 5 || calculate(99) && ready) ? true : false
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'x = !ready ? true : false'],
-            [lineNumber:4, sourceLineText:'x = !(y + z) ? Boolean.TRUE : Boolean.FALSE'],
-            [lineNumber:5, sourceLineText:'x = (y == 99) ? false : true'],
-            [lineNumber:6, sourceLineText:'x = (y < 99) ? false : Boolean.TRUE'],
-            [lineNumber:7, sourceLineText:'x = (y <= 99) ? false : true'],
-            [lineNumber:8, sourceLineText:'x = (y > 99) ? true : false'],
-            [lineNumber:9, sourceLineText:'x = (y >= 99) ? false : true'],
-            [lineNumber:10, sourceLineText:'x = (y != 99) ? true : false'],
-            [lineNumber:11, sourceLineText:'x = (y ==~ /../) ? true : false'],
-            [lineNumber:12, sourceLineText:'x = (y && z) ? true : false'],
-            [lineNumber:13, sourceLineText:'x = (y || z) ? true : false'],
-            [lineNumber:14, sourceLineText:'x = (y || calculate(99)) ? true : false'],
-            [lineNumber:15, sourceLineText:'x = (addTax(5) + 5 || calculate(99) && ready) ? true : false']
+            [line:3, source:'x = !ready ? true : false'],
+            [line:4, source:'x = !(y + z) ? Boolean.TRUE : Boolean.FALSE'],
+            [line:5, source:'x = (y == 99) ? false : true'],
+            [line:6, source:'x = (y < 99) ? false : Boolean.TRUE'],
+            [line:7, source:'x = (y <= 99) ? false : true'],
+            [line:8, source:'x = (y > 99) ? true : false'],
+            [line:9, source:'x = (y >= 99) ? false : true'],
+            [line:10, source:'x = (y != 99) ? true : false'],
+            [line:11, source:'x = (y ==~ /../) ? true : false'],
+            [line:12, source:'x = (y && z) ? true : false'],
+            [line:13, source:'x = (y || z) ? true : false'],
+            [line:14, source:'x = (y || calculate(99)) ? true : false'],
+            [line:15, source:'x = (addTax(5) + 5 || calculate(99) && ready) ? true : false']
         )
     }
 

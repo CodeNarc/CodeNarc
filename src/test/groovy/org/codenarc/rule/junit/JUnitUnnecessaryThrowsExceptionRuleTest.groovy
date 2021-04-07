@@ -136,12 +136,12 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase<JUnit
         }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'void shouldDoStuff() throws Exception { }', messageText:'The shouldDoStuff method in class MyTest'],
-            [lineNumber:6, sourceLineText:'@BeforeClass void initialize() throws RuntimeException { }', messageText:'The initialize method in class MyTest'],
-            [lineNumber:7, sourceLineText:'@Before void setUp() throws Exception { }', messageText:'The setUp method in class MyTest'],
-            [lineNumber:8, sourceLineText:'@After void tearDown() throws Exception { }', messageText:'The tearDown method in class MyTest'],
-            [lineNumber:9, sourceLineText:'@AfterClass void cleanUp() throws Exception { }', messageText:'The cleanUp method in class MyTest'],
-            [lineNumber:10, sourceLineText:'@Ignore void ignored() throws Exception { }', messageText:'The ignored method in class MyTest'])
+            [line:4, source:'void shouldDoStuff() throws Exception { }', message:'The shouldDoStuff method in class MyTest'],
+            [line:6, source:'@BeforeClass void initialize() throws RuntimeException { }', message:'The initialize method in class MyTest'],
+            [line:7, source:'@Before void setUp() throws Exception { }', message:'The setUp method in class MyTest'],
+            [line:8, source:'@After void tearDown() throws Exception { }', message:'The tearDown method in class MyTest'],
+            [line:9, source:'@AfterClass void cleanUp() throws Exception { }', message:'The cleanUp method in class MyTest'],
+            [line:10, source:'@Ignore void ignored() throws Exception { }', message:'The ignored method in class MyTest'])
     }
 
     @Test
@@ -153,8 +153,8 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase<JUnit
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void test1() throws Exception { }', messageText:'The test1 method in class MyTest'],
-            [lineNumber:4, sourceLineText:'public void test2() throws IOException { }', messageText:'The test2 method in class MyTest'])
+            [line:3, source:'void test1() throws Exception { }', message:'The test1 method in class MyTest'],
+            [line:4, source:'public void test2() throws IOException { }', message:'The test2 method in class MyTest'])
     }
 
     @Test
@@ -166,8 +166,8 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase<JUnit
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void setUp() throws Exception { }', messageText:'The setUp method in class MyTest'],
-            [lineNumber:4, sourceLineText:'public void tearDown() throws IOException { }', messageText:'The tearDown method in class MyTest'])
+            [line:3, source:'void setUp() throws Exception { }', message:'The setUp method in class MyTest'],
+            [line:4, source:'public void tearDown() throws IOException { }', message:'The tearDown method in class MyTest'])
     }
 
     @Test

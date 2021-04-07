@@ -65,9 +65,9 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase<AssignmentInC
             if (ready && (doSomething() || (value = 5))) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'while(value > 5 || (value = -1)) { }', messageText:VIOLATION_MESSAGE],
-            [lineNumber:3, sourceLineText:'if ((value = 5) && ready && doSomething()) { }', messageText:VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'if (ready && (doSomething() || (value = 5))) { }', messageText:VIOLATION_MESSAGE])
+            [line:2, source:'while(value > 5 || (value = -1)) { }', message:VIOLATION_MESSAGE],
+            [line:3, source:'if ((value = 5) && ready && doSomething()) { }', message:VIOLATION_MESSAGE],
+            [line:4, source:'if (ready && (doSomething() || (value = 5))) { }', message:VIOLATION_MESSAGE])
     }
 
     @Test

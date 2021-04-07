@@ -123,9 +123,9 @@ class JavadocConsecutiveEmptyLinesRuleTest extends AbstractRuleTestCase<JavadocC
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:7, sourceLineText:' * ', messageText:VIOLATION_MESSAGE],
-                [lineNumber:13, sourceLineText:' * ', messageText:VIOLATION_MESSAGE],
-                [lineNumber:21, sourceLineText:' * ', messageText:VIOLATION_MESSAGE])
+                [line:7, source:' * ', message:VIOLATION_MESSAGE],
+                [line:13, source:' * ', message:VIOLATION_MESSAGE],
+                [line:21, source:' * ', message:VIOLATION_MESSAGE])
     }
 
     @Override

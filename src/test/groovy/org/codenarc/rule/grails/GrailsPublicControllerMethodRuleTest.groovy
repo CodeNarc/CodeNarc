@@ -142,7 +142,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase<GrailsPu
             }
         '''
         rule.ignoreMethodNames = 'otherMethod'
-        assertViolations(SOURCE, [lineNumber:3, sourceLineText:'void myMethod()'])
+        assertViolations(SOURCE, [line:3, source:'void myMethod()'])
     }
 
     @Test
@@ -155,7 +155,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase<GrailsPu
             }
         '''
         rule.ignoreMethodNames = 'is*,doO??erSt*ff,other'
-        assertViolations(SOURCE, [lineNumber:5, sourceLineText:'void myMethod()'])
+        assertViolations(SOURCE, [line:5, source:'void myMethod()'])
     }
 
     @Before

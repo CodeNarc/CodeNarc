@@ -98,10 +98,10 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber: 12, sourceLineText: 'assertEquals(result, 2)',                     messageText: VIOLATION_MESSAGE],
-            [lineNumber: 13, sourceLineText: 'assertEquals("Message", result, 2)',          messageText: VIOLATION_MESSAGE],
-            [lineNumber: 14, sourceLineText: 'assertEquals(result, 2.3d, 0.5d)',            messageText: VIOLATION_MESSAGE],
-            [lineNumber: 15, sourceLineText: 'assertEquals("Message", result, 2.3d, 0.5d)', messageText: VIOLATION_MESSAGE]
+            [line: 12, source: 'assertEquals(result, 2)',                     message: VIOLATION_MESSAGE],
+            [line: 13, source: 'assertEquals("Message", result, 2)',          message: VIOLATION_MESSAGE],
+            [line: 14, source: 'assertEquals(result, 2.3d, 0.5d)',            message: VIOLATION_MESSAGE],
+            [line: 15, source: 'assertEquals("Message", result, 2.3d, 0.5d)', message: VIOLATION_MESSAGE]
         )
     }
 

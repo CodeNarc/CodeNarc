@@ -67,10 +67,10 @@ class OptionalFieldRuleTest extends AbstractRuleTestCase<OptionalFieldRule> {
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'Optional<Integer> count;', messageText:'The field count in class MyClass is an Optional'],
-            [lineNumber:5, sourceLineText:'public Optional<String> alias = Optional.of("nobody")', messageText:'The field alias in class MyClass is an Optional'],
-            [lineNumber:6, sourceLineText:'protected static Optional<Object> lock', messageText:'The field lock in class MyClass is an Optional'],
-            [lineNumber:7, sourceLineText:'private Optional something', messageText:'The field something in class MyClass is an Optional'])
+            [line:3, source:'Optional<Integer> count;', message:'The field count in class MyClass is an Optional'],
+            [line:5, source:'public Optional<String> alias = Optional.of("nobody")', message:'The field alias in class MyClass is an Optional'],
+            [line:6, source:'protected static Optional<Object> lock', message:'The field lock in class MyClass is an Optional'],
+            [line:7, source:'private Optional something', message:'The field something in class MyClass is an Optional'])
     }
 
     @Override

@@ -108,16 +108,16 @@ abstract class AbstractJavadocEmptyTagRuleTestCase<T extends AbstractJavadocEmpt
     @Test
     void test_JavadocWithEmptyTag_Violations() {
         assertViolations(sourceWithViolations,
-                [lineNumber:7, sourceLineText:"* ${getTag()}", messageText:getViolationMessage()],
-                [lineNumber:17, sourceLineText:"${getTag()}", messageText:getViolationMessage()])
+                [line:7, source:"* ${getTag()}", message:getViolationMessage()],
+                [line:17, source:"${getTag()}", message:getViolationMessage()])
     }
 
     @Test
     void test_JavadocWithEmptyTag_WindowsLineEndings_Violations() {
         final SOURCE = sourceWithViolations.replace('\n', '\r\n')
         assertViolations(SOURCE,
-                [lineNumber:7, sourceLineText:"* ${getTag()}", messageText:getViolationMessage()],
-                [lineNumber:17, sourceLineText:"${getTag()}", messageText:getViolationMessage()])
+                [line:7, source:"* ${getTag()}", message:getViolationMessage()],
+                [line:17, source:"${getTag()}", message:getViolationMessage()])
     }
 
     @Test
@@ -162,9 +162,9 @@ abstract class AbstractJavadocEmptyTagRuleTestCase<T extends AbstractJavadocEmpt
         """
         rule.allowMultiline = true
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:"* ${getTag()}", messageText:getViolationMessage()],
-                [lineNumber:10, sourceLineText:"* ${getTag()}", messageText:getViolationMessage()],
-                [lineNumber:15, sourceLineText:"*${getTag()}", messageText:getViolationMessage()])
+                [line:4, source:"* ${getTag()}", message:getViolationMessage()],
+                [line:10, source:"* ${getTag()}", message:getViolationMessage()],
+                [line:15, source:"*${getTag()}", message:getViolationMessage()])
     }
 
 }

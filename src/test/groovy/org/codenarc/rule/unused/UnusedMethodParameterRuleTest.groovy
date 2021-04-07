@@ -112,8 +112,8 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void myMethod(int value, String name) { }', messageText:'value'],
-            [lineNumber:3, sourceLineText:'void myMethod(int value, String name) { }', messageText:'name'])
+            [line:3, source:'void myMethod(int value, String name) { }', message:'value'],
+            [line:3, source:'void myMethod(int value, String name) { }', message:'name'])
     }
 
     @Test
@@ -126,8 +126,8 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void myMethod1(String id, int value) { print value }', messageText:'id'],
-            [lineNumber:5, sourceLineText:'int myMethod3(Date startDate) { }', messageText:'startDate'])
+            [line:3, source:'void myMethod1(String id, int value) { print value }', message:'id'],
+            [line:5, source:'int myMethod3(Date startDate) { }', message:'startDate'])
     }
 
     @Test
@@ -140,9 +140,9 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass(String id, int value) { print value }', messageText:'id'],
-            [lineNumber:5, sourceLineText:'protected MyClass(Date startDate, Date endDate) { }', messageText:'startDate'],
-            [lineNumber:5, sourceLineText:'protected MyClass(Date startDate, Date endDate) { }', messageText:'endDate'])
+            [line:3, source:'MyClass(String id, int value) { print value }', message:'id'],
+            [line:5, source:'protected MyClass(Date startDate, Date endDate) { }', message:'startDate'],
+            [line:5, source:'protected MyClass(Date startDate, Date endDate) { }', message:'endDate'])
     }
 
     @Test
@@ -257,11 +257,11 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void main(String[] args) { }', messageText:'args'],
-            [lineNumber:6, sourceLineText:'static main(arg1, arg2) { }', messageText:'arg1'],
-            [lineNumber:6, sourceLineText:'static main(arg1, arg2) { }', messageText:'arg2'],
-            [lineNumber:9, sourceLineText:'static main(int value) { }', messageText:'value'],
-            [lineNumber:12, sourceLineText:'static int main(String[] args) { }', messageText:'args'])
+            [line:3, source:'void main(String[] args) { }', message:'args'],
+            [line:6, source:'static main(arg1, arg2) { }', message:'arg1'],
+            [line:6, source:'static main(arg1, arg2) { }', message:'arg2'],
+            [line:9, source:'static main(int value) { }', message:'value'],
+            [line:12, source:'static int main(String[] args) { }', message:'args'])
     }
 
     @Test

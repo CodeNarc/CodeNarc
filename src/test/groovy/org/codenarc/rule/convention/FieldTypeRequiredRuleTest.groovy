@@ -63,13 +63,13 @@ class FieldTypeRequiredRuleTest extends AbstractRuleTestCase<FieldTypeRequiredRu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'public static final NAME = "joe"', messageText:'The type is not specified for field "NAME"'],
-            [lineNumber:4, sourceLineText:'private static count = 0', messageText:'The type is not specified for field "count"'],
-            [lineNumber:6, sourceLineText:'private def name, phobia', messageText:'The type is not specified for field "name"'],
-            [lineNumber:6, sourceLineText:'private def name, phobia', messageText:'The type is not specified for field "phobia"'],
-            [lineNumber:7, sourceLineText:'protected final date = new Date()', messageText:'The type is not specified for field "date"'],
-            [lineNumber:9, sourceLineText:'def defaultName', messageText:'The type is not specified for field "defaultName"'],
-            [lineNumber:10, sourceLineText:'def maxSoFar = -1L', messageText:'The type is not specified for field "maxSoFar"'],
+            [line:3, source:'public static final NAME = "joe"', message:'The type is not specified for field "NAME"'],
+            [line:4, source:'private static count = 0', message:'The type is not specified for field "count"'],
+            [line:6, source:'private def name, phobia', message:'The type is not specified for field "name"'],
+            [line:6, source:'private def name, phobia', message:'The type is not specified for field "phobia"'],
+            [line:7, source:'protected final date = new Date()', message:'The type is not specified for field "date"'],
+            [line:9, source:'def defaultName', message:'The type is not specified for field "defaultName"'],
+            [line:10, source:'def maxSoFar = -1L', message:'The type is not specified for field "maxSoFar"'],
         )
     }
 
@@ -84,9 +84,9 @@ class FieldTypeRequiredRuleTest extends AbstractRuleTestCase<FieldTypeRequiredRu
         '''
         rule.ignoreFieldNames = 'other'
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'public static final NAME = "joe"', messageText:'The type is not specified for field "NAME"'],
-                [lineNumber:4, sourceLineText:'protected final date = new Date()', messageText:'The type is not specified for field "date"'],
-                [lineNumber:5, sourceLineText:'def defaultName', messageText:'The type is not specified for field "defaultName"'],
+                [line:3, source:'public static final NAME = "joe"', message:'The type is not specified for field "NAME"'],
+                [line:4, source:'protected final date = new Date()', message:'The type is not specified for field "date"'],
+                [line:5, source:'def defaultName', message:'The type is not specified for field "defaultName"'],
         )
     }
 
@@ -101,7 +101,7 @@ class FieldTypeRequiredRuleTest extends AbstractRuleTestCase<FieldTypeRequiredRu
         '''
         rule.ignoreFieldNames = 'other, def*Name, NAME, abc'
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'protected final date = new Date()', messageText:'The type is not specified for field "date"'],
+                [line:4, source:'protected final date = new Date()', message:'The type is not specified for field "date"'],
         )
     }
 

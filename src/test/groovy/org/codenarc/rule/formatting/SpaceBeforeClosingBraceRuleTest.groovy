@@ -107,8 +107,8 @@ class SpaceBeforeClosingBraceRuleTest extends AbstractRuleTestCase<SpaceBeforeCl
             class MyOtherClass extends AbstractClass { int count}
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyClass { int count}', messageText:'The closing brace for class MyClass is not preceded'],
-            [lineNumber:3, sourceLineText:'class MyOtherClass extends AbstractClass { int count}', messageText:'The closing brace for class MyOtherClass is not preceded'])
+            [line:2, source:'class MyClass { int count}', message:'The closing brace for class MyClass is not preceded'],
+            [line:3, source:'class MyOtherClass extends AbstractClass { int count}', message:'The closing brace for class MyOtherClass is not preceded'])
     }
 
     @Test
@@ -137,9 +137,9 @@ c        '''
               /* do nothing */}
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def myMethod() { return 9}', messageText:'The closing brace for the method myMethod in class None'],
-            [lineNumber:4, sourceLineText:'{ return 9}', messageText:'The closing brace for the method otherMethod in class None'],
-            [lineNumber:5, sourceLineText:'def method3()', messageText:'The closing brace for the method method3 in class None'])
+            [line:2, source:'def myMethod() { return 9}', message:'The closing brace for the method myMethod in class None'],
+            [line:4, source:'{ return 9}', message:'The closing brace for the method otherMethod in class None'],
+            [line:5, source:'def method3()', message:'The closing brace for the method method3 in class None'])
     }
 
     @Test
@@ -152,8 +152,8 @@ c        '''
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass() { int count}', messageText:'The closing brace for the method <init> in class MyClass'],
-            [lineNumber:4, sourceLineText:'MyClass(int num)', messageText:'The closing brace for the method <init> in class MyClass'])
+            [line:3, source:'MyClass() { int count}', message:'The closing brace for the method <init> in class MyClass'],
+            [line:4, source:'MyClass(int num)', message:'The closing brace for the method <init> in class MyClass'])
     }
 
     @Test
@@ -165,8 +165,8 @@ c        '''
             if (ready) println '}'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (ready) { return 9}', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) { return 9}', messageText:BLOCK_VIOLATION_MESSAGE])
+            [line:2, source:'if (ready) { return 9}', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'done) { return 9}', message:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -192,10 +192,10 @@ c        '''
                 i++) { println i}
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for (int i=0; i<10; i++) { println i}', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'for (String name in names) { println name}', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:5, sourceLineText:'for (String name: names) { println name}', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:8, sourceLineText:'i++) { println i}', messageText:BLOCK_VIOLATION_MESSAGE]
+            [line:2, source:'for (int i=0; i<10; i++) { println i}', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'for (String name in names) { println name}', message:BLOCK_VIOLATION_MESSAGE],
+            [line:5, source:'for (String name: names) { println name}', message:BLOCK_VIOLATION_MESSAGE],
+            [line:8, source:'i++) { println i}', message:BLOCK_VIOLATION_MESSAGE]
         )
     }
 
@@ -208,8 +208,8 @@ c        '''
             while (ready) println '{'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'while (ready) { println 9}', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) { println 9}', messageText:BLOCK_VIOLATION_MESSAGE])
+            [line:2, source:'while (ready) { println 9}', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'done) { println 9}', message:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -245,10 +245,10 @@ c        '''
             def m = [a:123, b: { println 7}]
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'list.each { name -> doStuff()}', messageText:CLOSURE_VIOLATION_MESSAGE],
-            [lineNumber:3, sourceLineText:'shouldFail(Exception) { doStuff()}', messageText:CLOSURE_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'def c = { println 123}', messageText:CLOSURE_VIOLATION_MESSAGE],
-            [lineNumber:5, sourceLineText:'def m = [a:123, b: { println 7}]', messageText:CLOSURE_VIOLATION_MESSAGE])
+            [line:2, source:'list.each { name -> doStuff()}', message:CLOSURE_VIOLATION_MESSAGE],
+            [line:3, source:'shouldFail(Exception) { doStuff()}', message:CLOSURE_VIOLATION_MESSAGE],
+            [line:4, source:'def c = { println 123}', message:CLOSURE_VIOLATION_MESSAGE],
+            [line:5, source:'def m = [a:123, b: { println 7}]', message:CLOSURE_VIOLATION_MESSAGE])
     }
 
     @Test

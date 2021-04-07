@@ -97,10 +97,10 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'[description: countryCode?.padRight(', messageText:'The operator "+" within class MyClass is not preceded'],
-                [lineNumber:7, sourceLineText:'String myString = ready ?', messageText:'The operator ":" within class MyClass is not surrounded'],
-                [lineNumber:7, sourceLineText:'String myString = ready ?', messageText:'The operator "+" within class MyClass is not preceded'],
-                [lineNumber:7, sourceLineText:'String myString = ready ?', messageText:'The operator "+" within class MyClass is not followed'])
+                [line:4, source:'[description: countryCode?.padRight(', message:'The operator "+" within class MyClass is not preceded'],
+                [line:7, source:'String myString = ready ?', message:'The operator ":" within class MyClass is not surrounded'],
+                [line:7, source:'String myString = ready ?', message:'The operator "+" within class MyClass is not preceded'],
+                [line:7, source:'String myString = ready ?', message:'The operator "+" within class MyClass is not followed'])
     }
 
     @Test
@@ -126,8 +126,8 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
                 null
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:"AstUtil.respondsTo(rule, 'getDescription')?rule.description:", messageText:'The operator "?" within class None is not surrounded'],
-                [lineNumber:2, sourceLineText:"AstUtil.respondsTo(rule, 'getDescription')?rule.description:", messageText:'The operator ":" within class None is not surrounded'])
+                [line:2, source:"AstUtil.respondsTo(rule, 'getDescription')?rule.description:", message:'The operator "?" within class None is not surrounded'],
+                [line:2, source:"AstUtil.respondsTo(rule, 'getDescription')?rule.description:", message:'The operator ":" within class None is not surrounded'])
     }
 
     @Test
@@ -191,14 +191,14 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:"def name = fullname?fullname + 'ME':'unknown'", messageText:'The operator "?" within class MyClass is not surrounded'],
-                [lineNumber:4, sourceLineText:"def name = fullname?fullname + 'ME':'unknown'", messageText:'The operator ":" within class MyClass is not surrounded'],
-                [lineNumber:5, sourceLineText:'println name?', messageText:'The operator "?" within class MyClass is not surrounded'],
-                [lineNumber:6, sourceLineText:"'yes'  :'no'", messageText:'The operator ":" within class MyClass is not surrounded'],
-                [lineNumber:7, sourceLineText:"isEcpr? processRecords(records[0]): ''", messageText:'The operator "?" within class MyClass is not surrounded'],
-                [lineNumber:7, sourceLineText:"isEcpr? processRecords(records[0]): ''", messageText:'The operator ":" within class MyClass is not surrounded'],
-                [lineNumber:8, sourceLineText:"isField ?processFields(records[0]) :''", messageText:'The operator "?" within class MyClass is not surrounded'],
-                [lineNumber:8, sourceLineText:"isField ?processFields(records[0]) :''", messageText:'The operator ":" within class MyClass is not surrounded'])
+                [line:4, source:"def name = fullname?fullname + 'ME':'unknown'", message:'The operator "?" within class MyClass is not surrounded'],
+                [line:4, source:"def name = fullname?fullname + 'ME':'unknown'", message:'The operator ":" within class MyClass is not surrounded'],
+                [line:5, source:'println name?', message:'The operator "?" within class MyClass is not surrounded'],
+                [line:6, source:"'yes'  :'no'", message:'The operator ":" within class MyClass is not surrounded'],
+                [line:7, source:"isEcpr? processRecords(records[0]): ''", message:'The operator "?" within class MyClass is not surrounded'],
+                [line:7, source:"isEcpr? processRecords(records[0]): ''", message:'The operator ":" within class MyClass is not surrounded'],
+                [line:8, source:"isField ?processFields(records[0]) :''", message:'The operator "?" within class MyClass is not surrounded'],
+                [line:8, source:"isField ?processFields(records[0]) :''", message:'The operator ":" within class MyClass is not surrounded'])
     }
 
     @Test
@@ -218,20 +218,20 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'3+ 5-x*23/ 100', messageText:'The operator "-" within class MyClass is not preceded'],
-            [lineNumber:4, sourceLineText:'3+ 5-x*23/ 100', messageText:'The operator "-" within class MyClass is not followed'],
-            [lineNumber:4, sourceLineText:'3+ 5-x*23/ 100', messageText:'The operator "+" within class MyClass is not preceded'],
-            [lineNumber:4, sourceLineText:'3+ 5-x*23/ 100', messageText:'The operator "/" within class MyClass is not preceded'],
-            [lineNumber:4, sourceLineText:'3+ 5-x*23/ 100', messageText:'The operator "*" within class MyClass is not preceded'],
-            [lineNumber:4, sourceLineText:'3+ 5-x*23/ 100', messageText:'The operator "*" within class MyClass is not followed'],
-            [lineNumber:5, sourceLineText:'list <<123', messageText:'The operator "<<" within class MyClass is not followed'],
-            [lineNumber:6, sourceLineText:'other>> writer', messageText:'The operator ">>" within class MyClass is not preceded'],
-            [lineNumber:7, sourceLineText:'x=99', messageText:'The operator "=" within class MyClass is not preceded'],
-            [lineNumber:7, sourceLineText:'x=99', messageText:'The operator "=" within class MyClass is not followed'],
-            [lineNumber:8, sourceLineText:'x&& y', messageText:'The operator "&&" within class MyClass is not preceded'],
-            [lineNumber:9, sourceLineText:'x ||y', messageText:'The operator "||" within class MyClass is not followed'],
-            [lineNumber:10, sourceLineText:'x &y', messageText:'The operator "&" within class MyClass is not followed'],
-            [lineNumber:11, sourceLineText:'x| y', messageText:'The operator "|" within class MyClass is not preceded'])
+            [line:4, source:'3+ 5-x*23/ 100', message:'The operator "-" within class MyClass is not preceded'],
+            [line:4, source:'3+ 5-x*23/ 100', message:'The operator "-" within class MyClass is not followed'],
+            [line:4, source:'3+ 5-x*23/ 100', message:'The operator "+" within class MyClass is not preceded'],
+            [line:4, source:'3+ 5-x*23/ 100', message:'The operator "/" within class MyClass is not preceded'],
+            [line:4, source:'3+ 5-x*23/ 100', message:'The operator "*" within class MyClass is not preceded'],
+            [line:4, source:'3+ 5-x*23/ 100', message:'The operator "*" within class MyClass is not followed'],
+            [line:5, source:'list <<123', message:'The operator "<<" within class MyClass is not followed'],
+            [line:6, source:'other>> writer', message:'The operator ">>" within class MyClass is not preceded'],
+            [line:7, source:'x=99', message:'The operator "=" within class MyClass is not preceded'],
+            [line:7, source:'x=99', message:'The operator "=" within class MyClass is not followed'],
+            [line:8, source:'x&& y', message:'The operator "&&" within class MyClass is not preceded'],
+            [line:9, source:'x ||y', message:'The operator "||" within class MyClass is not followed'],
+            [line:10, source:'x &y', message:'The operator "&" within class MyClass is not followed'],
+            [line:11, source:'x| y', message:'The operator "|" within class MyClass is not preceded'])
     }
 
     @Test
@@ -250,9 +250,9 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'[1,2]as String', messageText:'The operator "as" within class MyClass is not surrounded'],
-            [lineNumber:6, sourceLineText:'{ -> println 456 }as', messageText:'The operator "as" within class MyClass is not surrounded'],
-            [lineNumber:8, sourceLineText:'{ -> println 789', messageText:'The operator "as" within class MyClass is not surrounded'])
+            [line:4, source:'[1,2]as String', message:'The operator "as" within class MyClass is not surrounded'],
+            [line:6, source:'{ -> println 456 }as', message:'The operator "as" within class MyClass is not surrounded'],
+            [line:8, source:'{ -> println 789', message:'The operator "as" within class MyClass is not surrounded'])
     }
 
     @Test
@@ -269,15 +269,15 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         '''
 
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:"def greeting = fullname?:'you'", messageText:'The operator "?:" within class MyClass is not preceded'],
-            [lineNumber:4, sourceLineText:"def greeting = fullname?:'you'", messageText:'The operator "?:" within class MyClass is not followed'],
-            [lineNumber:5, sourceLineText:'def f = funds.collect {it.fundSortOrder}?:[]', messageText:'The operator "?:" within class MyClass is not preceded'],
-            [lineNumber:5, sourceLineText:'def f = funds.collect {it.fundSortOrder}?:[]', messageText:'The operator "?:" within class MyClass is not followed'],
-            [lineNumber:6, sourceLineText:'assert model.UserID == expectedModel.UserID?:null', messageText:'The operator "?:" within class MyClass is not preceded'],
-            [lineNumber:6, sourceLineText:'assert model.UserID == expectedModel.UserID?:null', messageText:'The operator "?:" within class MyClass is not followed'],
-            [lineNumber:7, sourceLineText: "def tripleElvis = fullname ?:lastname ?: middleName?:'me'", messageText:'The operator "?:" within class MyClass is not followed'],
-            [lineNumber:7, sourceLineText: "def tripleElvis = fullname ?:lastname ?: middleName?:'me'", messageText:'The operator "?:" within class MyClass is not preceded'],
-            [lineNumber:7, sourceLineText: "def tripleElvis = fullname ?:lastname ?: middleName?:'me'", messageText:'The operator "?:" within class MyClass is not followed'])
+            [line:4, source:"def greeting = fullname?:'you'", message:'The operator "?:" within class MyClass is not preceded'],
+            [line:4, source:"def greeting = fullname?:'you'", message:'The operator "?:" within class MyClass is not followed'],
+            [line:5, source:'def f = funds.collect {it.fundSortOrder}?:[]', message:'The operator "?:" within class MyClass is not preceded'],
+            [line:5, source:'def f = funds.collect {it.fundSortOrder}?:[]', message:'The operator "?:" within class MyClass is not followed'],
+            [line:6, source:'assert model.UserID == expectedModel.UserID?:null', message:'The operator "?:" within class MyClass is not preceded'],
+            [line:6, source:'assert model.UserID == expectedModel.UserID?:null', message:'The operator "?:" within class MyClass is not followed'],
+            [line:7, source: "def tripleElvis = fullname ?:lastname ?: middleName?:'me'", message:'The operator "?:" within class MyClass is not followed'],
+            [line:7, source: "def tripleElvis = fullname ?:lastname ?: middleName?:'me'", message:'The operator "?:" within class MyClass is not preceded'],
+            [line:7, source: "def tripleElvis = fullname ?:lastname ?: middleName?:'me'", message:'The operator "?:" within class MyClass is not followed'])
     }
 
     @Test
@@ -312,10 +312,10 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
             def obj = something.part.subpart
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:"String bar='bar'", messageText:'The operator "=" within class None is not preceded'],
-                [lineNumber:2, sourceLineText:"String bar='bar'", messageText:'The operator "=" within class None is not followed'],
-                [lineNumber:3, sourceLineText:'def bar2\t=[1, 2,', messageText:'The operator "=" within class None is not followed'],
-                [lineNumber:5, sourceLineText:'int bar3=\t9876', messageText:'The operator "=" within class None is not preceded'])
+                [line:2, source:"String bar='bar'", message:'The operator "=" within class None is not preceded'],
+                [line:2, source:"String bar='bar'", message:'The operator "=" within class None is not followed'],
+                [line:3, source:'def bar2\t=[1, 2,', message:'The operator "=" within class None is not followed'],
+                [line:5, source:'int bar3=\t9876', message:'The operator "=" within class None is not preceded'])
     }
 
     @Test
@@ -338,11 +338,11 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:"private static final String BAR='bar'", messageText:'The operator "=" within class MyClass is not preceded'],
-                [lineNumber:3, sourceLineText:"private static final String BAR='bar'", messageText:'The operator "=" within class MyClass is not followed'],
-                [lineNumber:4, sourceLineText:'def bar2\t=[1, 2', messageText:'The operator "=" within class MyClass is not followed'],
-                [lineNumber:6, sourceLineText:'int bar3=\t9876', messageText:'The operator "=" within class MyClass is not preceded'],
-                [lineNumber:7, sourceLineText:'boolean bar4 =BAR &&', messageText:'The operator "=" within class MyClass is not followed'])
+                [line:3, source:"private static final String BAR='bar'", message:'The operator "=" within class MyClass is not preceded'],
+                [line:3, source:"private static final String BAR='bar'", message:'The operator "=" within class MyClass is not followed'],
+                [line:4, source:'def bar2\t=[1, 2', message:'The operator "=" within class MyClass is not followed'],
+                [line:6, source:'int bar3=\t9876', message:'The operator "=" within class MyClass is not preceded'],
+                [line:7, source:'boolean bar4 =BAR &&', message:'The operator "=" within class MyClass is not followed'])
     }
 
     @Test
@@ -358,9 +358,9 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
 
         rule.ignoreParameterDefaultValueAssignments = false
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'void method1(String name, int count=99', messageText:'The operator "=" within class MyClass is not preceded'],
-                [lineNumber:3, sourceLineText:'void method1(String name, int count=99', messageText:'The operator "=" within class MyClass is not followed'],
-                [lineNumber:4, sourceLineText:'long id =1', messageText:'The operator "=" within class MyClass is not followed'])
+                [line:3, source:'void method1(String name, int count=99', message:'The operator "=" within class MyClass is not preceded'],
+                [line:3, source:'void method1(String name, int count=99', message:'The operator "=" within class MyClass is not followed'],
+                [line:4, source:'long id =1', message:'The operator "=" within class MyClass is not followed'])
 
         rule.ignoreParameterDefaultValueAssignments = true
         assertNoViolations(SOURCE)
@@ -380,8 +380,8 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
 
         rule.ignoreParameterDefaultValueAssignments = false
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'MyClass(int id= 88', messageText:'The operator "=" within class MyClass is not preceded'],
-                [lineNumber:4, sourceLineText:'int maxValue   =99 +', messageText:'The operator "=" within class MyClass is not followed'])
+                [line:3, source:'MyClass(int id= 88', message:'The operator "=" within class MyClass is not preceded'],
+                [line:4, source:'int maxValue   =99 +', message:'The operator "=" within class MyClass is not followed'])
 
         rule.ignoreParameterDefaultValueAssignments = true
         assertNoViolations(SOURCE)
@@ -426,18 +426,18 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         if (GroovyVersion.isGroovyVersion2()) {
             assertViolations(SOURCE,
                 // Known Limitation
-                //[lineNumber:3, sourceLineText:'def relativePath ="111"', messageText:'The operator "=" within class None is not followed'],
-                //[lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "=" within class None is not followed'],
-                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "+" within class None is not preceded'],
-                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "+" within class None is not followed'],
-                [lineNumber:9, sourceLineText:'void method1(String name, int count= 99) { }', messageText:'The operator "=" within class None is not preceded'])
+                //[line:3, source:'def relativePath ="111"', message:'The operator "=" within class None is not followed'],
+                //[line:6, source:'String name =myName+"abc"', message:'The operator "=" within class None is not followed'],
+                [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not preceded'],
+                [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not followed'],
+                [line:9, source:'void method1(String name, int count= 99) { }', message:'The operator "=" within class None is not preceded'])
         } else {
             assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'def relativePath ="111"', messageText:'The operator "=" within class None is not followed'],
-                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "=" within class None is not followed'],
-                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "+" within class None is not preceded'],
-                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "+" within class None is not followed'],
-                [lineNumber:9, sourceLineText:'void method1(String name, int count= 99) { }', messageText:'The operator "=" within class None is not preceded'])
+                [line:3, source:'def relativePath ="111"', message:'The operator "=" within class None is not followed'],
+                [line:6, source:'String name =myName+"abc"', message:'The operator "=" within class None is not followed'],
+                [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not preceded'],
+                [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not followed'],
+                [line:9, source:'void method1(String name, int count= 99) { }', message:'The operator "=" within class None is not preceded'])
         }
     }
 

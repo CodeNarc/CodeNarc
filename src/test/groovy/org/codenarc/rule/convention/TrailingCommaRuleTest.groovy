@@ -120,8 +120,8 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase<TrailingCommaRule> {
         '''
         rule.ignoreSingleElementList = false
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'int[] array1 = [[1,', messageText:LIST_ERROR],
-                [lineNumber:6, sourceLineText:'String[] array2 = [', messageText:LIST_ERROR])
+                [line:2, source:'int[] array1 = [[1,', message:LIST_ERROR],
+                [line:6, source:'String[] array2 = [', message:LIST_ERROR])
     }
 
     @Test
@@ -259,8 +259,8 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase<TrailingCommaRule> {
         '''
         rule.ignoreSingleElementMap = false
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'def map1', messageText:MAP_ERROR],
-                [lineNumber:4, sourceLineText:'def map2 = [', messageText:MAP_ERROR])
+                [line:2, source:'def map1', message:MAP_ERROR],
+                [line:4, source:'def map2 = [', message:MAP_ERROR])
     }
 
     @Override

@@ -118,16 +118,16 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase<IfStatement
              if (x) { return } else { return Boolean.FALSE }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:"if (condition) { return 44 } else { return 'yes' }",
-                messageText:"The if statement in class None can be rewritten using the ternary operator: return condition ? 44 : 'yes'"],
-            [lineNumber:3, sourceLineText:'if (check()) { return [a:1] } else { return "count=$count" }',
-                messageText:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? [a:1] : "count=$count"'],
-            [lineNumber:4, sourceLineText:'if (x + y - z) { return [1, 2, 3] } else { return 99.50 }',
-                messageText:'The if statement in class None can be rewritten using the ternary operator: return ((x + y) - z) ? [1, 2, 3] : 99.50'],
-            [lineNumber:5, sourceLineText:'if (other.name()) { return null } else { return false }',
-                messageText:'The if statement in class None can be rewritten using the ternary operator: return other.name() ? null : false'],
-            [lineNumber:6, sourceLineText:'if (x) { return } else { return Boolean.FALSE }',
-                messageText:'The if statement in class None can be rewritten using the ternary operator: return x ? null : Boolean.FALSE'])
+            [line:2, source:"if (condition) { return 44 } else { return 'yes' }",
+                message:"The if statement in class None can be rewritten using the ternary operator: return condition ? 44 : 'yes'"],
+            [line:3, source:'if (check()) { return [a:1] } else { return "count=$count" }',
+                message:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? [a:1] : "count=$count"'],
+            [line:4, source:'if (x + y - z) { return [1, 2, 3] } else { return 99.50 }',
+                message:'The if statement in class None can be rewritten using the ternary operator: return ((x + y) - z) ? [1, 2, 3] : 99.50'],
+            [line:5, source:'if (other.name()) { return null } else { return false }',
+                message:'The if statement in class None can be rewritten using the ternary operator: return other.name() ? null : false'],
+            [line:6, source:'if (x) { return } else { return Boolean.FALSE }',
+                message:'The if statement in class None can be rewritten using the ternary operator: return x ? null : Boolean.FALSE'])
     }
 
     @Test
@@ -138,7 +138,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase<IfStatement
              else return 55
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (condition)', messageText:'The if statement in class None can be rewritten using the ternary'])
+            [line:2, source:'if (condition)', message:'The if statement in class None can be rewritten using the ternary'])
     }
 
     @Test
@@ -157,7 +157,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase<IfStatement
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:5, sourceLineText:'if (val) {', messageText:'The if statement in class MyDomain can be rewritten using the ternary'])
+            [line:5, source:'if (val) {', message:'The if statement in class MyDomain can be rewritten using the ternary'])
     }
 
     private static final SOURCE_FALLS_THROUGH_TO_RETURN = '''
@@ -177,10 +177,10 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase<IfStatement
     @Test
     void testMatchingIfReturn_NoElse_FallsThroughToReturn_Violation() {
         assertViolations(SOURCE_FALLS_THROUGH_TO_RETURN,
-            [lineNumber:3, sourceLineText:'if (condition)',
-                messageText:"The if statement in class None can be rewritten using the ternary operator: return condition ? 44 : 'yes'"],
-            [lineNumber:9, sourceLineText:'if (check())',
-                messageText:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? Boolean.FALSE : [1, 2]'])
+            [line:3, source:'if (condition)',
+                message:"The if statement in class None can be rewritten using the ternary operator: return condition ? 44 : 'yes'"],
+            [line:9, source:'if (check())',
+                message:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? Boolean.FALSE : [1, 2]'])
     }
 
     @Test

@@ -51,15 +51,15 @@ class NoFloatRuleTest extends AbstractRuleTestCase<NoFloatRule> {
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'float floatProperty', messageText:'The field floatProperty in class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:5, sourceLineText:'private float floatField = 1.2', messageText:'The field floatField in class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:7, sourceLineText:'private float calculateAverage() { return 0 }', messageText:'The method calculateAverage in class MyClass has a return type of float/Float. Prefer using BigDecimal.'],
-                [lineNumber:9, sourceLineText:'protected void setAverage(float average) { }', messageText:'The parameter named average in method setAverage of class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:11, sourceLineText:'MyClass(int count, float rating, float factor) {', messageText:'The parameter named rating in method <init> of class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:11, sourceLineText:'MyClass(int count, float rating, float factor) {', messageText:'The parameter named factor in method <init> of class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:13, sourceLineText:'float floatVar = calculateAverage()', messageText:'The variable floatVar in class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:14, sourceLineText:'float float1, float2 = 0', messageText:'The variable float1 in class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:14, sourceLineText:'float float1, float2 = 0', messageText:'The variable float2 in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:4, source:'float floatProperty', message:'The field floatProperty in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:5, source:'private float floatField = 1.2', message:'The field floatField in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:7, source:'private float calculateAverage() { return 0 }', message:'The method calculateAverage in class MyClass has a return type of float/Float. Prefer using BigDecimal.'],
+                [line:9, source:'protected void setAverage(float average) { }', message:'The parameter named average in method setAverage of class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:11, source:'MyClass(int count, float rating, float factor) {', message:'The parameter named rating in method <init> of class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:11, source:'MyClass(int count, float rating, float factor) {', message:'The parameter named factor in method <init> of class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:13, source:'float floatVar = calculateAverage()', message:'The variable floatVar in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:14, source:'float float1, float2 = 0', message:'The variable float1 in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:14, source:'float float1, float2 = 0', message:'The variable float2 in class MyClass is of type float/Float. Prefer using BigDecimal.'],
                 )
     }
 
@@ -83,15 +83,15 @@ class NoFloatRuleTest extends AbstractRuleTestCase<NoFloatRule> {
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'Float floatProperty', messageText:'The field floatProperty in class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:5, sourceLineText:'private Float floatField = 1.2', messageText:'The field floatField in class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:7, sourceLineText:'private Float calculateAverage() { return 0 }', messageText:'The method calculateAverage in class MyClass has a return type of float/Float. Prefer using BigDecimal.'],
-                [lineNumber:9, sourceLineText:'protected void setAverage(Float average) { }', messageText:'The parameter named average in method setAverage of class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:11, sourceLineText:'MyClass(int count, Float rating, Float factor) {', messageText:'The parameter named rating in method <init> of class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:11, sourceLineText:'MyClass(int count, Float rating, Float factor) {', messageText:'The parameter named factor in method <init> of class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:13, sourceLineText:'Float floatVar = calculateAverage()', messageText:'The variable floatVar in class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:14, sourceLineText:'Float float1, float2 = 0', messageText:'The variable float1 in class MyClass is of type float/Float. Prefer using BigDecimal.'],
-                [lineNumber:14, sourceLineText:'Float float1, float2 = 0', messageText:'The variable float2 in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:4, source:'Float floatProperty', message:'The field floatProperty in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:5, source:'private Float floatField = 1.2', message:'The field floatField in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:7, source:'private Float calculateAverage() { return 0 }', message:'The method calculateAverage in class MyClass has a return type of float/Float. Prefer using BigDecimal.'],
+                [line:9, source:'protected void setAverage(Float average) { }', message:'The parameter named average in method setAverage of class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:11, source:'MyClass(int count, Float rating, Float factor) {', message:'The parameter named rating in method <init> of class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:11, source:'MyClass(int count, Float rating, Float factor) {', message:'The parameter named factor in method <init> of class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:13, source:'Float floatVar = calculateAverage()', message:'The variable floatVar in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:14, source:'Float float1, float2 = 0', message:'The variable float1 in class MyClass is of type float/Float. Prefer using BigDecimal.'],
+                [line:14, source:'Float float1, float2 = 0', message:'The variable float2 in class MyClass is of type float/Float. Prefer using BigDecimal.'],
         )
     }
 

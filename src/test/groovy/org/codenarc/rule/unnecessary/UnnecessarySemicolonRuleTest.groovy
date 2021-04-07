@@ -152,10 +152,10 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
             import static org.other.OtherUtil.doStuff;
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'import java.net.*;', messageText:MESSAGE],
-                [lineNumber:3, sourceLineText:'import java.lang.String;', messageText:MESSAGE],
-                [lineNumber:10, sourceLineText:'import static java.lang.Math.*;', messageText:MESSAGE],
-                [lineNumber:11, sourceLineText:'import static org.other.OtherUtil.doStuff;', messageText:MESSAGE],
+                [line:2, source:'import java.net.*;', message:MESSAGE],
+                [line:3, source:'import java.lang.String;', message:MESSAGE],
+                [line:10, source:'import static java.lang.Math.*;', message:MESSAGE],
+                [line:11, source:'import static org.other.OtherUtil.doStuff;', message:MESSAGE],
         )
     }
 
@@ -206,16 +206,16 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
         '''
         if (GroovyVersion.isGroovyVersion2()) {
             assertViolations(SOURCE,
-                    [lineNumber:3, sourceLineText:'String name;', messageText:MESSAGE],
-                    [lineNumber:4, sourceLineText:'def value = new Object();', messageText:MESSAGE],
-                    [lineNumber:5, sourceLineText:'def closure = { };', messageText:MESSAGE],
-                    [lineNumber:6, sourceLineText:'int count;', messageText:MESSAGE],
+                    [line:3, source:'String name;', message:MESSAGE],
+                    [line:4, source:'def value = new Object();', message:MESSAGE],
+                    [line:5, source:'def closure = { };', message:MESSAGE],
+                    [line:6, source:'int count;', message:MESSAGE],
             )
         } else {
             // Known limitation with Groovy 3.0.x - considers lastColumnNumber for FieldNode to include only field type (not the name)
             assertViolations(SOURCE,
-                    [lineNumber:4, sourceLineText:'def value = new Object();', messageText:MESSAGE],
-                    [lineNumber:5, sourceLineText:'def closure = { };', messageText:MESSAGE],
+                    [line:4, source:'def value = new Object();', message:MESSAGE],
+                    [line:5, source:'def closure = { };', message:MESSAGE],
             )
         }
     }
@@ -257,9 +257,9 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
             println("test") ;
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'package my.company.server ;', messageText:MESSAGE],
-                [lineNumber:3, sourceLineText:'import java.lang.String ;', messageText:MESSAGE],
-                [lineNumber:4, sourceLineText:'println("test") ;', messageText:MESSAGE]
+                [line:2, source:'package my.company.server ;', message:MESSAGE],
+                [line:3, source:'import java.lang.String ;', message:MESSAGE],
+                [line:4, source:'println("test") ;', message:MESSAGE]
         )
     }
 

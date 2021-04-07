@@ -66,8 +66,8 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase<EnumCu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'private static final long serialVersionUID = 1234567L', messageText:'serialVersionUID'],
-            [lineNumber:5, sourceLineText:'private static final ObjectStreamField[] serialPersistentFields', messageText:'serialPersistentFields'])
+            [line:4, source:'private static final long serialVersionUID = 1234567L', message:'serialVersionUID'],
+            [line:5, source:'private static final ObjectStreamField[] serialPersistentFields', message:'serialPersistentFields'])
     }
 
     @Test
@@ -81,8 +81,8 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase<EnumCu
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'Object writeReplace()', messageText:'writeReplace'],
-            [lineNumber:5, sourceLineText:'private void writeObject(ObjectOutputStream stream)', messageText:'writeObject']
+            [line:4, source:'Object writeReplace()', message:'writeReplace'],
+            [line:5, source:'private void writeObject(ObjectOutputStream stream)', message:'writeObject']
         )
     }
 

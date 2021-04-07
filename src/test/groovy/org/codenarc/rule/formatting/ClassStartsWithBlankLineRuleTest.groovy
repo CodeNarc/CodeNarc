@@ -186,8 +186,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = false
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED],
-                [lineNumber: 9, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
+                [line: 3, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED],
+                [line: 9, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
@@ -209,8 +209,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = true
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
-                [lineNumber: 10, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
+                [line: 3, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE],
+                [line: 10, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
@@ -278,8 +278,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = false
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED],
-                [lineNumber: 8, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
+                [line: 3, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED],
+                [line: 8, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
@@ -301,8 +301,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = true
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
-                [lineNumber: 9, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
+                [line: 3, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE],
+                [line: 9, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
@@ -368,8 +368,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = true
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
-                [lineNumber: 9, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
+                [line: 3, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE],
+                [line: 9, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
@@ -394,7 +394,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = false
         assertViolations(SOURCE,
-                [lineNumber: 9, sourceLineText: ' ', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
+                [line: 9, source: ' ', message: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
@@ -435,9 +435,9 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.ignoreSingleLineClasses = false
         rule.blankLineRequired = true
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'class Foo extends Bar<String> { }', messageText: 'Single line classes are not allowed'],
-                [lineNumber: 5, sourceLineText: 'class Doe extends Bar<String> { }', messageText: 'Single line classes are not allowed'],
-                [lineNumber: 6, sourceLineText: 'abstract class John  { abstract void a() }', messageText: 'Single line classes are not allowed'])
+                [line: 3, source: 'class Foo extends Bar<String> { }', message: 'Single line classes are not allowed'],
+                [line: 5, source: 'class Doe extends Bar<String> { }', message: 'Single line classes are not allowed'],
+                [line: 6, source: 'abstract class John  { abstract void a() }', message: 'Single line classes are not allowed'])
     }
 
     @Test

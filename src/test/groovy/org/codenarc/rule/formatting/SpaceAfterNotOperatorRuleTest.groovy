@@ -67,8 +67,8 @@ class SpaceAfterNotOperatorRuleTest extends AbstractRuleTestCase<SpaceAfterNotOp
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: '! aMethod(! "")', messageText: 'There is whitespace after the not operator.'],
-            [lineNumber: 4, sourceLineText: '! aMethod(! "")', messageText: 'There is whitespace after the not operator.']
+            [line: 4, source: '! aMethod(! "")', message: 'There is whitespace after the not operator.'],
+            [line: 4, source: '! aMethod(! "")', message: 'There is whitespace after the not operator.']
         )
     }
 

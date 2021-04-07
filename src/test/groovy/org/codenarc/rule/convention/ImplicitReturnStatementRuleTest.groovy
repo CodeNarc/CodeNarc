@@ -235,10 +235,10 @@ class ImplicitReturnStatementRuleTest extends AbstractRuleTestCase<ImplicitRetur
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'String getName(String id)', messageText:'The method getName in class MyClass is missing an explicit return'],
-            [lineNumber:8, sourceLineText:'boolean example()', messageText:'The method example in class MyClass is missing an explicit return'],
-            [lineNumber:10, sourceLineText:'protected int longerExample()', messageText:'The method longerExample in class MyClass is missing an explicit return'],
-            [lineNumber:21, sourceLineText:'private Object emptyMethod()', messageText:'The method emptyMethod in class MyClass is missing an explicit return'])
+            [line:4, source:'String getName(String id)', message:'The method getName in class MyClass is missing an explicit return'],
+            [line:8, source:'boolean example()', message:'The method example in class MyClass is missing an explicit return'],
+            [line:10, source:'protected int longerExample()', message:'The method longerExample in class MyClass is missing an explicit return'],
+            [line:21, source:'private Object emptyMethod()', message:'The method emptyMethod in class MyClass is missing an explicit return'])
     }
 
     @Override
