@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO Version 2.1.0    (??? 2021)
+Version 2.1.0    (Apr 2021)
 --------------------------------------
 New Rules
  - #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))

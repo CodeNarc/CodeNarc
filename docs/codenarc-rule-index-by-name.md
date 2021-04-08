@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index by Name
 
 # Rule Index by Name
 
-**CodeNarc** includes 393 rules.
+**CodeNarc** includes 394 rules.
 
 ## Rules
   * [AbcMetric](./codenarc-rules-size.html#abcmetric-rule)    (Requires the GMetrics jar)
@@ -253,6 +253,7 @@ title: CodeNarc - Rule Index by Name
   * [OptionalMethodParameter](./codenarc-rules-design.html#optionalmethodparameter-rule)  
   * [PackageName](./codenarc-rules-naming.html#packagename-rule)  
   * [PackageNameMatchesFilePath](./codenarc-rules-naming.html#packagenamematchesfilepath-rule)  
+  * [ParameterAssignmentInFilterClosure](./codenarc-rules-basic.html#parameterassignmentinfilterclosure-rule)  
   * [ParameterCount](./codenarc-rules-size.html#parametercount-rule)  
   * [ParameterName](./codenarc-rules-naming.html#parametername-rule)  
   * [ParameterReassignment](./codenarc-rules-convention.html#parameterreassignment-rule)  
