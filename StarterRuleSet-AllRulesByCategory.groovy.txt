@@ -46,6 +46,7 @@ ruleset {
     HardCodedWindowsRootDirectory 
     IntegerGetInteger 
     MultipleUnaryOperators 
+    ParameterAssignmentInFilterClosure 
     RandomDoubleCoercedToZero 
     RemoveAllOnSelf 
     ReturnFromFinallyBlock 

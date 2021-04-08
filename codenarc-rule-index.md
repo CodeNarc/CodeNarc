@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index
 
 # Rule Index
 
-**CodeNarc** includes 393 rules.
+**CodeNarc** includes 394 rules.
     
 ## [Basic](./codenarc-rules-basic.html)
   * [AssertWithinFinallyBlock](./codenarc-rules-basic.html#assertwithinfinallyblock-rule)  
@@ -47,6 +47,7 @@ title: CodeNarc - Rule Index
   * [HardCodedWindowsRootDirectory](./codenarc-rules-basic.html#hardcodedwindowsrootdirectory-rule)  
   * [IntegerGetInteger](./codenarc-rules-basic.html#integergetinteger-rule)  
   * [MultipleUnaryOperators](./codenarc-rules-basic.html#multipleunaryoperators-rule)  
+  * [ParameterAssignmentInFilterClosure](./codenarc-rules-basic.html#parameterassignmentinfilterclosure-rule)  
   * [RandomDoubleCoercedToZero](./codenarc-rules-basic.html#randomdoublecoercedtozero-rule)  
   * [RemoveAllOnSelf](./codenarc-rules-basic.html#removeallonself-rule)  
   * [ReturnFromFinallyBlock](./codenarc-rules-basic.html#returnfromfinallyblock-rule)  

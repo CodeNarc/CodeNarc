@@ -251,6 +251,7 @@ ruleset {
     OptionalMethodParameter 
     PackageName 
     PackageNameMatchesFilePath 
+    ParameterAssignmentInFilterClosure 
     ParameterCount 
     ParameterName 
     ParameterReassignment 
