@@ -42,7 +42,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
             @SuppressWarnings('Rule1')
-            @SuppressWarnings(['Rule2', 'Rule3'])
+            @SuppressWarnings(['Rule2', 'CodeNarc.Rule3'])
             package foo
 
             println 4

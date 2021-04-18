@@ -34,7 +34,10 @@ public class SuppressionAnalyzer {
 
     public boolean isRuleSuppressed(Rule rule) {
         init();
-        return suppressedRuleNames.contains(rule.getName()) || suppressedRuleNames.contains(ALL) || suppressedRuleNames.contains(CODE_NARC);
+        return suppressedRuleNames.contains(rule.getName())
+            || suppressedRuleNames.contains(CODE_NARC + "." + rule.getName())
+            || suppressedRuleNames.contains(ALL)
+            || suppressedRuleNames.contains(CODE_NARC);
     }
 
     public List<Violation> filterSuppressedViolations(Iterable<Violation> violations) {
