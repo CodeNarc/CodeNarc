@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
+import org.codenarc.util.AstUtil
 
 import java.util.regex.Pattern
 
@@ -40,7 +41,7 @@ class UnusedImportRule extends AbstractRule {
 
     private void processImports(SourceCode sourceCode, List violations) {
         sourceCode.ast?.imports?.each { importNode ->
-            if (!findReference(sourceCode, importNode.alias, importNode.className)) {
+            if (!findReference(sourceCode, importNode.alias, importNode.className) && !AstUtil.isFromGeneratedSourceCode(importNode)) {
                 violations.add(createViolationForImport(sourceCode, importNode, "The [${importNode.className}] import is never referenced"))
             }
         }
@@ -48,7 +49,7 @@ class UnusedImportRule extends AbstractRule {
 
     private void processStaticImports(SourceCode sourceCode, List violations) {
         sourceCode.ast?.staticImports?.each { alias, ImportNode classNode ->
-            if (!findReference(sourceCode, alias)) {
+            if (!findReference(sourceCode, alias) && !AstUtil.isFromGeneratedSourceCode(classNode)) {
                 violations.add(createViolationForImport(sourceCode, classNode.className, alias, "The [${classNode.className}] import is never referenced"))
             }
         }

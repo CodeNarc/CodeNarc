@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.imports
 
+import org.codehaus.groovy.ast.ClassHelper
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.source.SourceString
 import org.junit.Test
 
 /**
@@ -218,6 +220,22 @@ Other$.value()
             def OPERATORS4 = !TestData15.VALUE
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSourceLineAndNumberForImport_AstAddedImports() {
+        final SOURCE = '''
+            import com.example.FaultCode.*
+            import static Math.*
+            class ABC {
+                def name
+            }
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        sourceCode.ast.addImport('LocalDateTime', ClassHelper.make('java.time.LocalDateTime'))
+        sourceCode.ast.addStaticImport(ClassHelper.make('java.time.LocalDateTime'), 'MIN', 'LocalDateTime.MIN')
+        def violations = rule.applyTo(sourceCode)
+        assert violations.size() == 0
     }
 
     @Override
