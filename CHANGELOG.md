@@ -6,7 +6,7 @@ TODO Version 2.x.x    (??? 2021)
  - #607: **AssignCollectionSort**: Fix the violation message. ([Vladimir Orany](https://github.com/musketyr))
  - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
  - #620: **UnusedImportRule**: Ignore generated imports. Fix #619. ([Søren Berg Glasius](https://github.com/sbglasius))
-
+ - #606: **MissingBlankLineBeforeAnnotatedField**: Ignore fields that start on the first line of the class.
 
 Version 2.1.0    (Apr 2021)
 --------------------------------------

@@ -507,7 +507,12 @@ NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToC
 
 *Since CodeNarc 2.1*
 
-Checks that there is a blank line before a field declaration that uses annotations. Ignore field declarations where all annotations are on the same line as the field declaration.
+Checks that there is a blank line before a field declaration that uses annotations. 
+
+Ignore field declarations where:
+ - The previous line contains a comment 
+ - The declaration (annotations) start on the first line of the class
+ - All annotations are on the same line as the field declaration.
 
 Examples of violations:
 ```

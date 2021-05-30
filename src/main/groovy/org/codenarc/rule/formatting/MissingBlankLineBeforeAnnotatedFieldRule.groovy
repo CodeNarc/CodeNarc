@@ -36,11 +36,17 @@ class MissingBlankLineBeforeAnnotatedFieldRuleAstVisitor extends AbstractAstVisi
     void visitField(FieldNode node) {
         if (node.annotations && node.lineNumber > 1) {
             def previousLine = sourceCode.line(node.lineNumber - 2).trim()
-            if (previousLine && !isComment(previousLine) && annotationsNotOnSameLineAsFieldDeclaration(node)) {
+            if (previousLine && !isComment(previousLine)
+                    && annotationIsNotOnFirstLineOfClass(node)
+                    && annotationsNotOnSameLineAsFieldDeclaration(node)) {
                 addViolation(node, 'There is no blank line before the declaration for field "' + node.name + '" that has annotations')
             }
         }
         super.visitField(node)
+    }
+
+    private boolean annotationIsNotOnFirstLineOfClass(FieldNode node) {
+        node.lineNumber != getCurrentClassNode().lineNumber + 1
     }
 
     private boolean annotationsNotOnSameLineAsFieldDeclaration(FieldNode node) {

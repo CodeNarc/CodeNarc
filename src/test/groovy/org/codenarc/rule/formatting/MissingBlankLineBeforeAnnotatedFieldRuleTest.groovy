@@ -24,13 +24,13 @@ import org.junit.Test
 class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<MissingBlankLineBeforeAnnotatedFieldRule> {
 
     @Test
-    void ruleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'MissingBlankLineBeforeAnnotatedField'
     }
 
     @Test
-    void noViolations() {
+    void test_BlankLinesBeforeAnnotation_NoViolations() {
         assertNoViolations '''
             class Valid {
 
@@ -45,7 +45,7 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
     }
 
     @Test
-    void noViolationsForAFieldWithMultipleAnnotations() {
+    void test_FieldWithMultipleAnnotations_BlankLineBeforeFirstAnnotation_NoViolation() {
         assertNoViolations '''
             class Valid {
                 Foo firstAnnotatedField
@@ -58,36 +58,24 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
     }
 
     @Test
-    void testSingleViolation() {
+    void test_MissingBlankLinesBefore_MultipleViolations() {
         final SOURCE = '''
             class Invalid {
-                @Delegate
-                Foo foo
-            }
-        '''
-
-        assertSingleViolation(SOURCE, 4, 'Foo foo', 'There is no blank line before the declaration for field "foo" that has annotations')
-    }
-
-    @Test
-    void testMultipleViolations() {
-        final SOURCE = '''
-            class Invalid {
+                private static final NAME = 'abc'
                 @Delegate
                 Foo firstAnnotatedField
                 @Delegate
                 Bar secondAnnotatedField
             }
         '''
-
         assertViolations(SOURCE,
-            [line: 4, source: 'Foo firstAnnotatedField', message: 'There is no blank line before the declaration for field "firstAnnotatedField" that has annotations'],
-            [line: 6, source: 'Bar secondAnnotatedField', message: 'There is no blank line before the declaration for field "secondAnnotatedField" that has annotations']
+            [line: 5, source: 'Foo firstAnnotatedField', message: 'There is no blank line before the declaration for field "firstAnnotatedField" that has annotations'],
+            [line: 7, source: 'Bar secondAnnotatedField', message: 'There is no blank line before the declaration for field "secondAnnotatedField" that has annotations']
         )
     }
 
     @Test
-    void testViolationForAFieldWithMultipleAnnotations() {
+    void test_FieldWithMultipleAnnotations_Violation() {
         final SOURCE = '''
             class Valid {
                 Foo firstAnnotatedField
@@ -95,31 +83,29 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
                 @PackageScope Bar secondAnnotatedField
             }
         '''
-
         assertSingleViolation(SOURCE, 5, 'Bar secondAnnotatedField', 'There is no blank line before the declaration for field "secondAnnotatedField" that has annotations')
     }
 
     @Test
-    void noViolationsWhenFieldIsOnTheFirstLine() {
+    void test_OnSameLineAsClassDeclaration_NoViolation() {
         final SOURCE = '''class A { @Delegate Foo annotatedField }'''
 
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void noViolationsWhenTheAnnotationIsOnTheSameLineAsTheField() {
+    void test_AnnotationIsOnTheSameLineAsTheField_NoViolation() {
         final SOURCE = '''
             class MyClass {
                 private @Autowired DataSource dataSource
                 private @Value('${name}') String name
             }
         '''
-
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void noViolationWhenPreviousLineContainsAComment() {
+    void test_PreviousLineContainsAComment_NoViolation() {
         final SOURCE = '''
             class Valid {
                 // Foo
@@ -138,7 +124,17 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
                 Bizz
             }
         '''
+        assertNoViolations(SOURCE)
+    }
 
+    @Test
+    void test_AnnotationOnTheFirstLineOfTheClass_NoViolation() {
+        final SOURCE = '''
+            abstract class JerseySpec extends Specification {
+                @Delegate
+                private JerseyTest jerseyTest
+            }
+        '''
         assertNoViolations(SOURCE)
     }
 
