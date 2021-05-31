@@ -30,7 +30,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void noViolations() {
+    void test_NoViolations() {
         assertNoViolations '''
             class Valid {
                 Valid() {
@@ -57,7 +57,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void trailingWhitespaceInMethodCallWithParenthesesCausesViolation() {
+    void test_TrailingWhitespaceInMethodCallWithParentheses_Violation() {
         final SOURCE = '''
             class TrailingWhitespaceInMethodCallWithParentheses {
                 void invalid() {
@@ -73,7 +73,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void trailingWhitespaceInConstructorCallCausesViolation() {
+    void test_TrailingWhitespaceInConstructorCall_Violation() {
         final SOURCE = '''
             class TrailingWhitespaceInConstructorCall {
                 TrailingWhitespaceInConstructorCall() {
@@ -86,7 +86,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void trailingWhitespaceInSuperConstructorCallCausesAViolation() {
+    void test_TrailingWhitespaceInSuperConstructorCall_Violation() {
         final SOURCE = '''
             class TrailingWhitespaceInSuperConstructorCall {
                 TrailingWhitespaceInSuperConstructorCall() {
@@ -99,7 +99,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void excessiveTrailingWhitespaceInMethodCallWithoutParenthesesCausesAViolation() {
+    void test_ExcessiveTrailingWhitespaceInMethodCallWithoutParentheses_Violation() {
         final SOURCE = '''
             class ExcessiveTrailingWhitespaceInMethodCallWithoutParentheses {
                 void invalid() {
@@ -115,7 +115,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void testMultipleViolations() {
+    void test_MultipleViolations() {
         final SOURCE = '''
             class Invalid {
                 void invalid() {
@@ -135,7 +135,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void testEnums_NoViolations() {
+    void test_Enums_NoViolations() {
         final SOURCE = '''
             enum Visibility {
                 PUBLIC('public'), PROTECTED('protected'), PRIVATE('private')
@@ -152,6 +152,29 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             }
         '''
 
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_GroovyScript_NoViolations() {
+        final SOURCE = '''
+            void foo() {
+              echo 'hi'
+            }
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_GroovyScript2_NoViolations() {
+        final SOURCE = '''
+            package example
+
+            int doubleIt(final int x) {
+                x * 2
+            }
+            return this
+            '''
         assertNoViolations(SOURCE)
     }
 

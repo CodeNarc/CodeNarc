@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Checks that there is no whitespace at the end of the method name when a method call contains parenthesis or that
@@ -35,7 +36,7 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call)) {
+        if (isFirstVisit(call) && !AstUtil.isFromGeneratedSourceCode(call)) {
             if (call.superCall) {
                 // In Groovy 2.5, call.columnNumber is the column of the opening parenthesis, while in Groovy 3, it is the column of the method name
                 String superCallSourceText = sourceLine(call).substring(call.columnNumber - 2, call.arguments.columnNumber)
@@ -49,10 +50,6 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
             }
         }
         super.visitConstructorCallExpression(call)
-    }
-
-    private boolean hasPrecedingWhitespace(ConstructorCallExpression call) {
-        sourceLine(call).substring(call.columnNumber - 1) =~ /^[^(]+\s\(/
     }
 
     @Override
@@ -70,6 +67,10 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
         }
 
         super.visitMethodCallExpression(call)
+    }
+
+    private boolean hasPrecedingWhitespace(ConstructorCallExpression call) {
+        sourceLine(call).substring(call.columnNumber - 1) =~ /^[^(]+\s\(/
     }
 
 }
