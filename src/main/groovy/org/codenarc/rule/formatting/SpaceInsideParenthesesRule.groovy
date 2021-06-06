@@ -39,9 +39,12 @@ class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
     private static final String SINGLE_QUOTE = "'"
     private static final String DOUBLE_QUOTE = '"'
     private static final String FORWARD_SLASH = '/'
+    private static final String END_OF_COMMENT = '*/'
+    private static final String EMPTY_STRING = ''
 
     private boolean withinMultilineGString = false
     private boolean withinMultilineString = false
+    private boolean withinMultilineComment = false
 
     @Override
     protected void visitClassComplete(ClassNode node) {
@@ -61,6 +64,10 @@ class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
 
     private void processSourceLine(String line, int lineNumber) {
         String text = stripComments(line.trim())
+
+        if (text.isEmpty()) {
+            return
+        }
 
         def countTripleDoubleQuote = text.count('"""')
         if (countTripleDoubleQuote || withinMultilineGString) {
@@ -92,15 +99,28 @@ class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
     }
 
     private String stripComments(String fullText) {
+        def containsEndOfComment = fullText.contains(END_OF_COMMENT)
+        if (withinMultilineComment && containsEndOfComment) {
+            withinMultilineComment = false
+            return EMPTY_STRING
+        }
+
+        if (withinMultilineComment) {
+            return EMPTY_STRING
+        }
+
         // Strip off from // or /* to the end of line
         def text = fullText
         int startCommentIndex = startOfCommentIndex(text)
         if (startCommentIndex != -1) {
+            // This is a multi-line comment IF the line does not also contain the */ comment terminator
+            withinMultilineComment = text.contains('/*') && !containsEndOfComment
+
             text = text.substring(0, startCommentIndex)
         }
 
         // We already stripped off trailing comments; if the line contains */ or **/, assume the preceding part of the line is a comment
-        return text.contains('*/') ? '' : text
+        return text.contains(END_OF_COMMENT) ? EMPTY_STRING : text
     }
 
     private boolean hasSpaceAfterOpeningParenthesis(String text) {

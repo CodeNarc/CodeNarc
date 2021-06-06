@@ -266,10 +266,12 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
         final SOURCE = '''
             if( running) { }    // comment
             if(running ) { }    /* comment */
+            sum(1 )
         '''
         assertViolations(SOURCE,
                 [line:2, source:'if( running) { }', message: ERROR_MESSAGE_OPENING],
-                [line:3, source:'if(running ) { }', message: ERROR_MESSAGE_CLOSING])
+                [line:3, source:'if(running ) { }', message: ERROR_MESSAGE_CLOSING],
+                [line:4, source:'sum(1 )', message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -286,12 +288,41 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
     }
 
     @Test
+    void test_Comments_MultiLineComments() {
+        final SOURCE = '''
+            class MyClass {
+                /**
+                 * ( x
+                 * ) x
+                 */
+                void someMethod() {
+                }
+
+                /*
+                 * ( 123
+                 * )
+                 */
+                void someOtherMethod() {
+                }
+
+                void method3() {
+                    if( running) { }    // This should be the ONLY violation
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+                [line:18, source:'if( running) { }', message: ERROR_MESSAGE_OPENING])
+    }
+
+    @Test
     void test_SlashyStrings_NoViolations() {
         final SOURCE = '''
-            def pattern = /( foo )/
+            class MyClass {
+                def pattern = /( foo )/
 
-            def p1 = ~/^(\\w{5} )?\\d{2}$/
-            def p2 = ~/^( \\w{5})?\\d{2}$/
+                def p1 = ~/^(\\w{5} )?\\d{2}$/
+                def p2 = ~/^( \\w{5})?\\d{2}$/
+            }
         '''
         assertNoViolations(SOURCE)
     }

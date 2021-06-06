@@ -10,6 +10,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #606: **MissingBlankLineBeforeAnnotatedField**: Ignore fields that start on the first line of the class.
  - #608: **SpaceAfterMethodCallName**: Fix ArrayIndexOutOfBoundsException.
  - #609: **SpaceInsideParentheses**: Fix false-positive inside slashy strings (regular expressions).
+ - #613: **SpaceInsideParentheses**: Fix false positive for parentheses within multi-line comments.
 
 Version 2.1.0    (Apr 2021)
 --------------------------------------
