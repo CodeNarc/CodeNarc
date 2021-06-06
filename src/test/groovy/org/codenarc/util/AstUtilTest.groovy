@@ -149,7 +149,7 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetNodeTest() {
+    void testGetNodeText() {
         assert AstUtil.getNodeText(methodCallForMethodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
         assert AstUtil.getNodeText(methodCallForMethodNamed('multilineMethodCall'), sourceCode) == 'multilineMethodCall(1,'
     }
@@ -170,6 +170,23 @@ class AstUtilTest extends AbstractTestCase {
 
         node = visitor.methodNodes['otherMethod']
         assert AstUtil.getDeclaration(node, sourceCode).trim() == 'def otherMethod()'
+    }
+
+    @Test
+    void test_getSourceLinesForNode() {
+        def node = fieldNamed('myIntField')
+        def lines = AstUtil.getSourceLinesForNode(node, sourceCode)
+        assert lines == ['int myIntField = 45 /*111*/']
+
+        node = fieldNamed('annotatedField1')
+        lines = AstUtil.getSourceLinesForNode(node, sourceCode)
+        log(lines)
+        assert lines == ['@SuppressWarnings', "@Other(\'abc\') // comment", 'int annotatedField1']
+
+        node = methodNamed('doStuff')
+        lines = AstUtil.getSourceLinesForNode(node, sourceCode)
+        log(lines)
+        assert lines == ['def doStuff() {', 'println methodCallWithinEnum(true, \'abc\', 123); doStuff()', '}']
     }
 
     @Test
@@ -379,7 +396,7 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     @Test
-    void getSourceBetweenNodes() {
+    void test_getSourceBetweenNodes() {
         def fieldNode1 = fieldNamed('myIntField')
         def methodNode = methodNamed('someMethod')
         String sourceBetween1 = AstUtil.getSourceBetweenNodes(fieldNode1, methodNode, sourceCode)

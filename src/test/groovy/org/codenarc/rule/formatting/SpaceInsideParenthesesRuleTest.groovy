@@ -286,6 +286,17 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
     }
 
     @Test
+    void test_SlashyStrings_NoViolations() {
+        final SOURCE = '''
+            def pattern = /( foo )/
+
+            def p1 = ~/^(\\w{5} )?\\d{2}$/
+            def p2 = ~/^( \\w{5})?\\d{2}$/
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_Catch_NoViolations() {
         final SOURCE = '''
             try { x= 1 } catch(Exception e) { }

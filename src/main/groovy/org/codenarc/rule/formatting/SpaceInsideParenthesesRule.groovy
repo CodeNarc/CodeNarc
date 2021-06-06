@@ -38,6 +38,7 @@ class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
     private static final String MESSAGE_SPACE_BEFORE_CLOSING_PARENTHESIS = 'The closing parenthesis is preceded by whitespace'
     private static final String SINGLE_QUOTE = "'"
     private static final String DOUBLE_QUOTE = '"'
+    private static final String FORWARD_SLASH = '/'
 
     private boolean withinMultilineGString = false
     private boolean withinMultilineString = false
@@ -103,24 +104,25 @@ class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean hasSpaceAfterOpeningParenthesis(String text) {
-        return matchesAndNotSurroundedByQuotes(text, /\(\s+\S/)
+        return matchesAndNotWithinString(text, /\(\s+\S/)
     }
 
     private boolean hasSpaceBeforeClosingParenthesis(String text) {
-        return matchesAndNotSurroundedByQuotes(text, /\S\s+\)/)
+        return matchesAndNotWithinString(text, /\S\s+\)/)
     }
 
-    private boolean matchesAndNotSurroundedByQuotes(String text, String regex) {
+    private boolean matchesAndNotWithinString(String text, String regex) {
         def matcher = text =~ regex
         if (!matcher) {
             return false
         }
-        // Ignore match if preceded and followed by the same quote char
+        // Ignore match if preceded and followed by the same quote or slash char
         def preceding = text.substring(0, matcher.start())
         def following = text.substring(matcher.end())
         def surroundedBySingleQuotes = preceding.contains(SINGLE_QUOTE) && following.contains(SINGLE_QUOTE)
         def surroundedByDoubleQuotes = preceding.contains(DOUBLE_QUOTE) && following.contains(DOUBLE_QUOTE)
-        return !surroundedBySingleQuotes && !surroundedByDoubleQuotes
+        def surroundedByForwardSlashes = preceding.contains(FORWARD_SLASH) && following.contains(FORWARD_SLASH)
+        return !surroundedBySingleQuotes && !surroundedByDoubleQuotes && !surroundedByForwardSlashes
     }
 
     private int startOfCommentIndex(String text) {

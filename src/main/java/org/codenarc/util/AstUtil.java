@@ -1213,6 +1213,35 @@ public class AstUtil {
         return line.substring(startColumn, expression.getLastColumnNumber() - 1);
     }
 
+    public static List<String> getSourceLinesForNode(ASTNode node, SourceCode sourceCode) {
+        if (node.getLineNumber() < 1 || node.getLastLineNumber() < 1) {
+            return Collections.emptyList();
+        }
+        List<String> lines = new ArrayList<>();
+        for (int lineIndex = node.getLineNumber() - 1; lineIndex <= node.getLastLineNumber() -1; lineIndex++) {
+            // the raw line is required to apply columnNumber and lastColumnNumber
+            String line = getRawLine(sourceCode, lineIndex);
+
+            // extract the relevant part of the first line
+            if (lineIndex == node.getLineNumber() - 1) {
+                int nonRelevantColumns = node.getColumnNumber() - 1;
+                line = line.substring(node.getColumnNumber() - 1);
+            }
+
+            // extract the relevant part of the last line
+            if (lineIndex == node.getLastLineNumber() - 1) {
+                // Groovy 3.0 lastColumnNumber is incorrect for some fields
+                if (GroovyVersion.isGroovyVersion2()) {
+                    int stopIndex = node.getLastColumnNumber() < line.length() ? node.getLastColumnNumber() - 1 : line.length();
+                    line = line.substring(0, stopIndex);
+                }
+            }
+
+            lines.add(line.trim());
+        }
+        return lines;
+    }
+
     public static String getDeclaration(ASTNode node, SourceCode sourceCode) {
         if (node.getLineNumber() < 1) return "";
         if (node.getLastLineNumber() < 1) return "";
