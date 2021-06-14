@@ -138,6 +138,32 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void test_AnnotationOnTheFirstLineOfTheClassWithAnnotations_NoViolation() {
+        final SOURCE = '''
+            @SomeClassAnnotation
+            abstract class JerseySpec extends Specification {
+                @Delegate
+                private JerseyTest jerseyTest
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_AnnotationOnTheFirstLineOfTheClassWithMultipleAnnotations_NoViolation() {
+        final SOURCE = '''
+            @SomeClassAnnotation1
+            @SomeClassAnnotation2
+            @SomeClassAnnotation3
+            abstract class JerseySpec extends Specification {
+                @Delegate
+                private JerseyTest jerseyTest
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected MissingBlankLineBeforeAnnotatedFieldRule createRule() {
         new MissingBlankLineBeforeAnnotatedFieldRule()
