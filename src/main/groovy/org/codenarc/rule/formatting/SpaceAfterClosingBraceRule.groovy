@@ -75,7 +75,7 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
     }
 
     private void processMethodNode(MethodNode node) {
-        if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {
+        if (isFirstVisit(node.code) && node.code && !node.hasAnnotationDefault() && !AstUtil.isFromGeneratedSourceCode(node)) {
             def line = lastSourceLineOrEmpty(node.code)
             int lastIndex = line.lastIndexOf('}')
             if (isNotWhitespace(line, lastIndex + 2)) {
