@@ -432,6 +432,76 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void test_OpeningBraceIsOnItsOwnLine_whenSameLineAllowNewLineForMultilineDeclarationsTrue_NoViolations() {
+        final SOURCE = '''
+            class RemoteWebDriverWithExpectations {
+                RemoteWebDriverWithExpectations(
+                    URL remoteAddress, Capabilities capabilities, List<String> ignoredCommands = DEFAULT_IGNORED_COMMANDS) 
+                {
+                    super(remoteAddress, capabilities)
+                    this.ignoredCommands = ignoredCommands
+                }
+            }
+        '''
+        rule.sameLine = true
+        rule.whenSameLineAllowNewLineForMultilineDeclarations = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_OpeningBraceIsOnItsOwnLine_withExceptions_whenSameLineAllowNewLineForMultilineDeclarationsTrue_NoViolations() {
+        final SOURCE = '''
+            class RemoteWebDriverWithExpectations {
+                RemoteWebDriverWithExpectations(
+                    URL remoteAddress, Capabilities capabilities, List<String> ignoredCommands = DEFAULT_IGNORED_COMMANDS)
+                    throws Exception, OtherException
+                {
+                    super(remoteAddress, capabilities)
+                    this.ignoredCommands = ignoredCommands
+                }
+            }
+        '''
+        rule.sameLine = true
+        rule.whenSameLineAllowNewLineForMultilineDeclarations = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_OpeningBraceIsOnItsOwnLine_whenSameLineAllowNewLineForMultilineDeclarationsFalse_Violations() {
+        final SOURCE = '''
+            class RemoteWebDriverWithExpectations {
+                RemoteWebDriverWithExpectations(
+                    URL remoteAddress, Capabilities capabilities, List<String> ignoredCommands = DEFAULT_IGNORED_COMMANDS)
+                {
+                    super(remoteAddress, capabilities)
+                    this.ignoredCommands = ignoredCommands
+                }
+            }
+        '''
+        rule.sameLine = true
+        rule.whenSameLineAllowNewLineForMultilineDeclarations = false
+        assertSingleViolation(SOURCE, 3, 'RemoteWebDriverWithExpectations(', 'Opening brace for the method <init> should start on the same line')
+    }
+
+    @Test
+    void test_OpeningBraceIsOnItsOwnLine_withExceptions_whenSameLineAllowNewLineForMultilineDeclarationsFalse_Violations() {
+        final SOURCE = '''
+            class RemoteWebDriverWithExpectations {
+                RemoteWebDriverWithExpectations(
+                    URL remoteAddress, Capabilities capabilities, List<String> ignoredCommands = DEFAULT_IGNORED_COMMANDS)
+                    throws Exception, OtherException
+                {
+                    super(remoteAddress, capabilities)
+                    this.ignoredCommands = ignoredCommands
+                }
+            }
+        '''
+        rule.sameLine = true
+        rule.whenSameLineAllowNewLineForMultilineDeclarations = false
+        assertSingleViolation(SOURCE, 3, 'RemoteWebDriverWithExpectations(', 'Opening brace for the method <init> should start on the same line')
+    }
+
     @Override
     protected BracesForMethodRule createRule() {
         new BracesForMethodRule()
