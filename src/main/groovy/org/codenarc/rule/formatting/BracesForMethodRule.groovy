@@ -46,10 +46,7 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
         boolean containsRegex = hasOpeningBraceOnSameLine(node)
 
         if (rule.sameLine && !containsRegex) {
-            if (rule.whenSameLineAllowNewLineForMultilineDeclarations && isMultilineWithOpeningBraceInNewLine(node)) {
-                // noop
-            }
-            else {
+            if (!(rule.whenSameLineAllowNewLineForMultilineDeclarations && isMultilineWithOpeningBraceInNewLine(node))) {
                 addViolation(node, "Opening brace for the method $node.name should start on the same line")
             }
         }
