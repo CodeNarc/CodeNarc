@@ -268,6 +268,16 @@ c        '''
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_AnnotationDefaultDeclaration_NoViolations() {
+        final SOURCE = '''
+            @interface SomeConstraint {
+              String message() default "{my.message}"
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected SpaceBeforeClosingBraceRule createRule() {
         new SpaceBeforeClosingBraceRule()

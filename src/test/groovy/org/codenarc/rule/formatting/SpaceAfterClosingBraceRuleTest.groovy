@@ -315,6 +315,16 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
         ''')
     }
 
+    @Test
+    void testApplyTo_ClosingBraceWithinAnnotationDefaultDeclaration_NoViolations() {
+        final SOURCE = '''
+            @interface SomeConstraint {
+              String message() default "{my.message}"
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected SpaceAfterClosingBraceRule createRule() {
         new SpaceAfterClosingBraceRule()
