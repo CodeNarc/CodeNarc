@@ -46,7 +46,7 @@ class MissingBlankLineBeforeAnnotatedFieldRuleAstVisitor extends AbstractAstVisi
     }
 
     private boolean annotationIsNotOnFirstLineOfClass(FieldNode node) {
-        node.lineNumber != getCurrentClassNode().lineNumber + 1
+        node.lineNumber != AstUtil.findFirstNonAnnotationLine(getCurrentClassNode(), sourceCode) + 1
     }
 
     private boolean annotationsNotOnSameLineAsFieldDeclaration(FieldNode node) {
