@@ -363,7 +363,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
             class MyClass {                             // 3
-                @SuppressWarnings('Rule1')              // 4
+                @SuppressWarnings('CodeNarc.Rule1')     // 4
                 def myProperty = """                    // 5
                            ... multiline content        // 6
                     """                                 // 7
@@ -408,7 +408,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
                     """                                 // 8
                 }                                       // 9
 
-                @SuppressWarnings('Rule1')              // 11
+                @SuppressWarnings('CodeNarc.Rule1')     // 11
                 private String myMethod2() {            // 12
                     """                                 // 13
                            ... multiline content        // 14

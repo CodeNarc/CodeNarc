@@ -73,12 +73,19 @@ public class SuppressionAnalyzer {
             return true;
         }
 
-        BitSet lines = suppressionsByLineNumber.get(ruleName);
-        if (lines != null) {
-            return lines.get(lineNumber);
+        BitSet lines = new BitSet();
+
+        BitSet linesWithoutPrefix = suppressionsByLineNumber.get(ruleName);
+        if (linesWithoutPrefix != null) {
+            lines.or(linesWithoutPrefix);
         }
 
-        return false;
+        BitSet linesWithPrefix = suppressionsByLineNumber.get(CODE_NARC + "." + ruleName);
+        if (linesWithPrefix != null) {
+            lines.or(linesWithPrefix);
+        }
+
+        return lines.get(lineNumber);
     }
 
     private void init() {
