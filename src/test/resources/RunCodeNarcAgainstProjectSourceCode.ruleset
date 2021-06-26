@@ -49,6 +49,7 @@ ruleset {
         exclude 'SpaceAroundMapEntryColon'
         exclude 'ClassEndsWithBlankLine'
         exclude 'ClassStartsWithBlankLine'
+        exclude 'TrailingWhitespace'
     }
 
     ruleset('rulesets/imports.xml') {
