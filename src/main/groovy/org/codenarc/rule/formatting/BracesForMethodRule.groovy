@@ -32,7 +32,7 @@ class BracesForMethodRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = BracesForMethodAstVisitor
     boolean sameLine = true
-    boolean whenSameLineAllowNewLineForMultilineDeclarations = false
+    boolean allowBraceOnNextLineForMultilineDeclarations = false
 }
 
 class BracesForMethodAstVisitor extends AbstractAstVisitor {
@@ -46,7 +46,7 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
         boolean containsRegex = hasOpeningBraceOnSameLine(node)
 
         if (rule.sameLine && !containsRegex) {
-            if (!(rule.whenSameLineAllowNewLineForMultilineDeclarations && isMultilineWithOpeningBraceInNewLine(node))) {
+            if (!(rule.allowBraceOnNextLineForMultilineDeclarations && isMultilineWithOpeningBraceInNewLine(node))) {
                 addViolation(node, "Opening brace for the method $node.name should start on the same line")
             }
         }

@@ -433,7 +433,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void test_OpeningBraceIsOnItsOwnLine_whenSameLineAllowNewLineForMultilineDeclarationsTrue_NoViolations() {
+    void test_OpeningBraceIsOnItsOwnLine_allowBraceOnNextLineForMultilineDeclarationsTrue_NoViolations() {
         final SOURCE = '''
             class RemoteWebDriverWithExpectations {
                 RemoteWebDriverWithExpectations(
@@ -445,12 +445,12 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
             }
         '''
         rule.sameLine = true
-        rule.whenSameLineAllowNewLineForMultilineDeclarations = true
+        rule.allowBraceOnNextLineForMultilineDeclarations = true
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void test_OpeningBraceIsOnItsOwnLine_withExceptions_whenSameLineAllowNewLineForMultilineDeclarationsTrue_NoViolations() {
+    void test_OpeningBraceIsOnItsOwnLine_withExceptions_allowBraceOnNextLineForMultilineDeclarationsTrue_NoViolations() {
         final SOURCE = '''
             class RemoteWebDriverWithExpectations {
                 RemoteWebDriverWithExpectations(
@@ -463,12 +463,12 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
             }
         '''
         rule.sameLine = true
-        rule.whenSameLineAllowNewLineForMultilineDeclarations = true
+        rule.allowBraceOnNextLineForMultilineDeclarations = true
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void test_OpeningBraceIsOnItsOwnLine_whenSameLineAllowNewLineForMultilineDeclarationsFalse_Violations() {
+    void test_OpeningBraceIsOnItsOwnLine_allowBraceOnNextLineForMultilineDeclarationsFalse_Violations() {
         final SOURCE = '''
             class RemoteWebDriverWithExpectations {
                 RemoteWebDriverWithExpectations(
@@ -480,12 +480,12 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
             }
         '''
         rule.sameLine = true
-        rule.whenSameLineAllowNewLineForMultilineDeclarations = false
+        rule.allowBraceOnNextLineForMultilineDeclarations = false
         assertSingleViolation(SOURCE, 3, 'RemoteWebDriverWithExpectations(', 'Opening brace for the method <init> should start on the same line')
     }
 
     @Test
-    void test_OpeningBraceIsOnItsOwnLine_withExceptions_whenSameLineAllowNewLineForMultilineDeclarationsFalse_Violations() {
+    void test_OpeningBraceIsOnItsOwnLine_withExceptions_allowBraceOnNextLineForMultilineDeclarationsFalse_Violations() {
         final SOURCE = '''
             class RemoteWebDriverWithExpectations {
                 RemoteWebDriverWithExpectations(
@@ -498,7 +498,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
             }
         '''
         rule.sameLine = true
-        rule.whenSameLineAllowNewLineForMultilineDeclarations = false
+        rule.allowBraceOnNextLineForMultilineDeclarations = false
         assertSingleViolation(SOURCE, 3, 'RemoteWebDriverWithExpectations(', 'Opening brace for the method <init> should start on the same line')
     }
 
