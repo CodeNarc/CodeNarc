@@ -87,7 +87,7 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
             return false
         }
 
-        return sourceCode.line(methodNode.code.lineNumber - 1).trim() == '{'
+        return sourceCode.line(methodNode.code.lineNumber - 1).trim().startsWith('{')
     }
 
 }

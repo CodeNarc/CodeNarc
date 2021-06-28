@@ -450,6 +450,23 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
+    void test_OpeningBraceIsOnItsOwnLine_withLineComment_allowBraceOnNextLineForMultilineDeclarationsTrue_NoViolations() {
+        final SOURCE = '''
+            class RemoteWebDriverWithExpectations {
+                RemoteWebDriverWithExpectations(
+                    URL remoteAddress, Capabilities capabilities, List<String> ignoredCommands = DEFAULT_IGNORED_COMMANDS)
+                { // Some comment
+                    super(remoteAddress, capabilities)
+                    this.ignoredCommands = ignoredCommands
+                }
+            }
+        '''
+        rule.sameLine = true
+        rule.allowBraceOnNextLineForMultilineDeclarations = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_OpeningBraceIsOnItsOwnLine_withExceptions_allowBraceOnNextLineForMultilineDeclarationsTrue_NoViolations() {
         final SOURCE = '''
             class RemoteWebDriverWithExpectations {
@@ -457,6 +474,24 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
                     URL remoteAddress, Capabilities capabilities, List<String> ignoredCommands = DEFAULT_IGNORED_COMMANDS)
                     throws Exception, OtherException
                 {
+                    super(remoteAddress, capabilities)
+                    this.ignoredCommands = ignoredCommands
+                }
+            }
+        '''
+        rule.sameLine = true
+        rule.allowBraceOnNextLineForMultilineDeclarations = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_OpeningBraceIsOnItsOwnLine_withExceptions_withLineComment_allowBraceOnNextLineForMultilineDeclarationsTrue_NoViolations() {
+        final SOURCE = '''
+            class RemoteWebDriverWithExpectations {
+                RemoteWebDriverWithExpectations(
+                    URL remoteAddress, Capabilities capabilities, List<String> ignoredCommands = DEFAULT_IGNORED_COMMANDS)
+                    throws Exception, OtherException
+                { // Some comment
                     super(remoteAddress, capabilities)
                     this.ignoredCommands = ignoredCommands
                 }
