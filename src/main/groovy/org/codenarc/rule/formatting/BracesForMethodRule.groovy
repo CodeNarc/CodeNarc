@@ -32,6 +32,7 @@ class BracesForMethodRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = BracesForMethodAstVisitor
     boolean sameLine = true
+    boolean allowBraceOnNextLineForMultilineDeclarations = false
 }
 
 class BracesForMethodAstVisitor extends AbstractAstVisitor {
@@ -45,7 +46,9 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
         boolean containsRegex = hasOpeningBraceOnSameLine(node)
 
         if (rule.sameLine && !containsRegex) {
-            addViolation(node, "Opening brace for the method $node.name should start on the same line")
+            if (!(rule.allowBraceOnNextLineForMultilineDeclarations && isMultilineWithOpeningBraceInNewLine(node))) {
+                addViolation(node, "Opening brace for the method $node.name should start on the same line")
+            }
         }
 
         if (!rule.sameLine && containsRegex) {
@@ -73,6 +76,18 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
         def range = node.exceptions[0].lineNumber .. node.exceptions[-1].lastLineNumber
         def lines = range.collect { lineNumber -> sourceCode.line(lineNumber - 1) }
         return lines.join(' ')
+    }
+
+    private boolean isMultilineWithOpeningBraceInNewLine(MethodNode methodNode) {
+        int firstLineOfDeclaration = methodNode.lineNumber
+        int lastLineOfDeclaration = methodNode.parameters ? methodNode.parameters[-1].lineNumber : methodNode.lineNumber
+        lastLineOfDeclaration = methodNode.exceptions ? methodNode.exceptions[-1].lineNumber : lastLineOfDeclaration
+
+        if (firstLineOfDeclaration == lastLineOfDeclaration) {
+            return false
+        }
+
+        return sourceCode.line(methodNode.code.lineNumber - 1).trim().startsWith('{')
     }
 
 }
