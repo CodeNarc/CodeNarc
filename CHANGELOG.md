@@ -11,6 +11,10 @@ Updated/Enhanced Rules and Bug Fixes
  - #608: **SpaceAfterMethodCallName**: Fix ArrayIndexOutOfBoundsException.
  - #609: **SpaceInsideParentheses**: Fix false-positive inside slashy strings (regular expressions).
  - #613: **SpaceInsideParentheses**: Fix false positive for parentheses within multi-line comments.
+ - #633: **MissingBlankLineBeforeAnnotatedField** false positive at the top of an annotated class. ([Damir Murat](https://github.com/dmurat))
+ - #634: **SpaceAfterClosingBrace** and **SpaceBeforeClosingBrace**: Fix false positives with annotated methods. ([Damir Murat](https://github.com/dmurat))
+ - #635: **BracesForMethod**: Allow braces on the next line for multi-line declarations. New *allowBraceOnNextLineForMultilineDeclarations* rule property. ([Damir Murat](https://github.com/dmurat))
+ - #637: Enable "CodeNarc." prefix suppression working for fields and methods. ([Vladimir Orany](https://github.com/musketyr)).
 
 Version 2.1.0    (Apr 2021)
 --------------------------------------
