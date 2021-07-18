@@ -95,6 +95,19 @@ class SpaceAfterMethodDeclarationNameRuleTest extends AbstractRuleTestCase<Space
         )
     }
 
+    @Test
+    void test_AnnotationWithCommentContainingParenthesis_NoViolation() {
+        final SOURCE = '''
+            class MyClass {
+                @Generated // Some comment about main method (bla bla)
+                public void doStuff() {
+                    SpringApplication.run(BookingCommandSideApplication, args)
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected SpaceAfterMethodDeclarationNameRule createRule() {
         new SpaceAfterMethodDeclarationNameRule()
