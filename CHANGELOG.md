@@ -15,6 +15,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #634: **SpaceAfterClosingBrace** and **SpaceBeforeClosingBrace**: Fix false positives with annotated methods. ([Damir Murat](https://github.com/dmurat))
  - #635: **BracesForMethod**: Allow braces on the next line for multi-line declarations. New *allowBraceOnNextLineForMultilineDeclarations* rule property. ([Damir Murat](https://github.com/dmurat))
  - #637: Enable "CodeNarc." prefix suppression working for fields and methods. ([Vladimir Orany](https://github.com/musketyr)).
+ - #618: **ReturnsNullInsteadOfEmptyCollection**: Fix false positive in nested closure.
 
 Version 2.1.0    (Apr 2021)
 --------------------------------------
