@@ -5,7 +5,6 @@ TODO Version 2.x.x    (??? 2021)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #607: **AssignCollectionSort**: Fix the violation message. ([Vladimir Orany](https://github.com/musketyr))
- - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
  - #620: **UnusedImportRule**: Ignore generated imports. Fix #619. ([Søren Berg Glasius](https://github.com/sbglasius))
  - #606: **MissingBlankLineBeforeAnnotatedField**: Ignore fields that start on the first line of the class.
  - #608: **SpaceAfterMethodCallName**: Fix ArrayIndexOutOfBoundsException.
@@ -14,8 +13,15 @@ Updated/Enhanced Rules and Bug Fixes
  - #633: **MissingBlankLineBeforeAnnotatedField** false positive at the top of an annotated class. ([Damir Murat](https://github.com/dmurat))
  - #634: **SpaceAfterClosingBrace** and **SpaceBeforeClosingBrace**: Fix false positives with annotated methods. ([Damir Murat](https://github.com/dmurat))
  - #635: **BracesForMethod**: Allow braces on the next line for multi-line declarations. New *allowBraceOnNextLineForMultilineDeclarations* rule property. ([Damir Murat](https://github.com/dmurat))
- - #637: Enable "CodeNarc." prefix suppression working for fields and methods. ([Vladimir Orany](https://github.com/musketyr)).
  - #618: **ReturnsNullInsteadOfEmptyCollection**: Fix false positive in nested closure.
+ - #623: **ExplicitCallToDivMethod**: Ignore `dev()` method calls if argument is a Map, Closure or String.
+
+Build and Infrastructure
+- #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
+
+Documentation
+- #640: **PackageName**: Fix parameter table for rule documentation. ((Mathias Åhsberg)[https://github.com/goober])
+
 
 Version 2.1.0    (Apr 2021)
 --------------------------------------
