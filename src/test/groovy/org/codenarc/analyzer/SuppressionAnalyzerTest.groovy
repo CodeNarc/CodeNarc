@@ -375,7 +375,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
                 private String name2 = 'joe'            // 13
 
                 @SuppressWarnings('Rule1')              // 15
-                def myProperty = "xxx"                  // 16
+                def myProperty2 = "xxx"                 // 16
             }
         '''))
 
