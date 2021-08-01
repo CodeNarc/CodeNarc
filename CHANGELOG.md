@@ -16,6 +16,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #618: **ReturnsNullInsteadOfEmptyCollection**: Fix false positive in nested closure.
  - #623: **ExplicitCallToDivMethod**: Ignore `dev()` method calls if argument is a Map, Closure or String.
  - #626: **Indentation**: Fix ArrayIndexOutOfBoundsException: -2 for generated method calls.
+ - #624: **JUnitPublicNonTestMethod**: Fix false positive for @ParameterizedTest.
 
 Build and Infrastructure
 - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))

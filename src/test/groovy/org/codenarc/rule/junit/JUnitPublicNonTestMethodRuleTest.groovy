@@ -239,6 +239,19 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase<JUnitPublicN
     }
 
     @Test
+    void testApplyTo_ParameterizedTestAnnotation() {
+        final SOURCE = '''
+            class MyTest {
+                @ParameterizedTest
+                public void myTest(String arg1, String arg2) {
+                    // ....
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_StaticMethods() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
