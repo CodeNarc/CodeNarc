@@ -156,6 +156,7 @@ Known limitations:
   * Does not recognize method reference through property access (e.g. `getName()` accessed as `x.name`)
   * Does not recognize method invocations when method name is a GString (e.g. `this."${methodName}"()`)
   * Does not recognize invoking private method of another instance (i.e. other than `this`)
+  * Does not recognize when a private method is used as @MethodSource
   * Does not differentiate between multiple private methods with the same name but different parameters (i.e., overloaded)
   * Does not check for unused constructors
 
