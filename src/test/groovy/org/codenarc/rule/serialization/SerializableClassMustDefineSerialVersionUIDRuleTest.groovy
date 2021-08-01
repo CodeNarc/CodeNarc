@@ -93,6 +93,16 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
     }
 
     @Test
+    void testInterface_NoViolations() {
+        final SOURCE = '''
+            interface X extends Serializable {
+               // X's method definitions go here
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass implements Serializable {
