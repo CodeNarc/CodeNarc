@@ -16,16 +16,9 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codehaus.groovy.ast.expr.MethodCall
-import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.expr.ListExpression
-import org.codehaus.groovy.ast.expr.MapExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codenarc.util.AstUtil
 import org.codenarc.util.GroovyVersion
 import org.codenarc.util.SourceCodeUtil
 
@@ -91,7 +84,7 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
 
     @SuppressWarnings('NestedBlockDepth')
     private void processMethodOrConstructorCall(MethodCall call) {
-        if (isFirstVisit(call) && !AstUtil.isFromGeneratedSourceCode(call)) {
+        if (isFirstVisit(call) && isNotGeneratedCode(call)) {
             def arguments = call.arguments
             def parameterExpressions = arguments.expressions
 

@@ -204,4 +204,12 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
     protected ClassNode getCurrentClassNode() {
         return currentClassNode;
     }
+
+    protected boolean isGeneratedCode(ASTNode node) {
+        return AstUtil.isFromGeneratedSourceCode(node);
+    }
+
+    protected boolean isNotGeneratedCode(ASTNode node) {
+        return !isGeneratedCode(node);
+    }
 }

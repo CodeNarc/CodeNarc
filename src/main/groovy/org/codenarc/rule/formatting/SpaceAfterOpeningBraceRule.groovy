@@ -17,13 +17,12 @@ package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.MapEntryExpression
+import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Check that there is at least one space (blank) or whitespace after each opening brace ("{").
@@ -67,7 +66,7 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-        if (isFirstVisit(block) && !AstUtil.isFromGeneratedSourceCode(block)) {
+        if (isFirstVisit(block) && isNotGeneratedCode(block)) {
             def line = sourceLineOrEmpty(block)
             def startCol = block.columnNumber
             if (line[startCol - 1] == '{' && isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {
@@ -117,7 +116,7 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
     }
 
     private void processMethodNode(MethodNode node) {
-        if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {  // Register the code block so that it will be ignored in visitBlockStatement()
+        if (isFirstVisit(node.code) && node.code && isNotGeneratedCode(node)) {  // Register the code block so that it will be ignored in visitBlockStatement()
             def line = sourceLineOrEmpty(node.code)
             def startCol = node.code.columnNumber
             if (startCol > 1 && line[startCol - 1] == '{' && isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {

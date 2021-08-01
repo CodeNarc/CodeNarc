@@ -16,14 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.*
-import org.codehaus.groovy.ast.expr.ArgumentListExpression
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.ListExpression
-import org.codehaus.groovy.ast.expr.MapEntryExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.*
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.Statement
@@ -228,7 +221,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     private void recordMethodColumnAndSourceLineForClosureBlocks(MethodCallExpression methodCallExpression) {
         def method = methodCallExpression.method
-        if (AstUtil.isFromGeneratedSourceCode(method)) {
+        if (isGeneratedCode(method)) {
             return
         }
         methodCallExpression.arguments.expressions.each { expr ->

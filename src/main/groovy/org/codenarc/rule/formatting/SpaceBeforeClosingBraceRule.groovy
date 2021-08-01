@@ -15,15 +15,14 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.MapEntryExpression
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Check that there is at least one space (blank) or whitespace before each closing brace ("}").
@@ -69,7 +68,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-        if (isFirstVisit(block) && !AstUtil.isFromGeneratedSourceCode(block)) {
+        if (isFirstVisit(block) && isNotGeneratedCode(block)) {
             def startLine = sourceLineOrEmpty(block)
             def line = lastSourceLineOrEmpty(block)
             def lastCol = block.lastColumnNumber
@@ -107,7 +106,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     }
 
     private void processMethodNode(MethodNode node) {
-        if (isFirstVisit(node.code) && node.code && !node.hasAnnotationDefault() && !AstUtil.isFromGeneratedSourceCode(node)) {
+        if (isFirstVisit(node.code) && node.code && !node.hasAnnotationDefault() && isNotGeneratedCode(node)) {
             def line = lastSourceLineOrEmpty(node.code)
             int lastIndex = line.lastIndexOf('}')
             if (isNotWhitespace(line, lastIndex) && checkIsEmptyBlock(line, lastIndex)) {

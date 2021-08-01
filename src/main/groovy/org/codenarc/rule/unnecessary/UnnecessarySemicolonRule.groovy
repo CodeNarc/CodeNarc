@@ -15,17 +15,12 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.AnnotatedNode
-import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.ImportNode
-import org.codehaus.groovy.ast.PackageNode
+import org.codehaus.groovy.ast.*
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
-import org.codenarc.util.AstUtil
 import org.codenarc.util.ImportUtil
 
 /**
@@ -103,7 +98,7 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
     }
 
     private void checkNode(ASTNode node) {
-        if (AstUtil.isFromGeneratedSourceCode(node)) {
+        if (isGeneratedCode(node)) {
             return
         }
 

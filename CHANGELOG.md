@@ -20,10 +20,11 @@ Updated/Enhanced Rules and Bug Fixes
  - #639: **SerializableClassMustDefineSerialVersionUID**: Ignore interfaces.
 
 Build and Infrastructure
-- #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
+ - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
+ - #643: `AbstractAstVisitor`: Add `isGeneratedCode(ASTNode)` and `isNotGeneratedCode(ASTNode)`.
 
 Documentation
-- #640: **PackageName**: Fix parameter table for rule documentation. ((Mathias Åhsberg)[https://github.com/goober])
+ - #640: **PackageName**: Fix parameter table for rule documentation. ((Mathias Åhsberg)[https://github.com/goober])
 
 
 Version 2.1.0    (Apr 2021)

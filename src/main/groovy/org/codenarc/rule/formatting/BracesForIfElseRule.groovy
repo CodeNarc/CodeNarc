@@ -66,7 +66,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
     void visitIfElse(IfStatement node) {
         BracesForIfElseRule myRule = rule as BracesForIfElseRule
 
-        if (!AstUtil.isFromGeneratedSourceCode(node) && isFirstVisit(node) && AstUtil.isBlock(node.ifBlock)) {
+        if (isNotGeneratedCode(node) && isFirstVisit(node) && AstUtil.isBlock(node.ifBlock)) {
             boolean isBraceOnSameLine = node.ifBlock.lineNumber == node.booleanExpression.lastLineNumber
 
             if (!isBraceOnSameLine && GroovyVersion.isNotGroovyVersion2()) {
@@ -91,7 +91,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
     }
 
     void visitElse(BracesForIfElseRule myRule, IfStatement node) {
-        if (myRule.validateElse && node.elseBlock && !AstUtil.isFromGeneratedSourceCode(node)) {
+        if (myRule.validateElse && node.elseBlock && isNotGeneratedCode(node)) {
             //if user has not explicitly set the else brace settings, 'inherit' them from sameLine
             if (myRule.elseOnSameLineAsClosingBrace == null) {
                 myRule.elseOnSameLineAsClosingBrace = myRule.sameLine

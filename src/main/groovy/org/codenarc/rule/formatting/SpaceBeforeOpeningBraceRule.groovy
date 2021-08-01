@@ -24,7 +24,6 @@ import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 
 /**
  * Check that there is at least one space (blank) or whitespace before each opening brace ("{").
@@ -71,7 +70,7 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     }
 
     private void processMethodNode(MethodNode node, String keyword) {
-        if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {
+        if (isFirstVisit(node.code) && node.code && isNotGeneratedCode(node)) {
             def line = sourceLineOrEmpty(node)
             if (line.contains('){')) {
                 addOpeningBraceViolation(node, keyword)
@@ -81,7 +80,7 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-        if (isFirstVisit(block) && !AstUtil.isFromGeneratedSourceCode(block)) {
+        if (isFirstVisit(block) && isNotGeneratedCode(block)) {
             def line = sourceLineOrEmpty(block)
             def startCol = block.columnNumber
             if (isNotWhitespace(line, startCol - 1)) {
