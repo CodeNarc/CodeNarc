@@ -1039,6 +1039,21 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_GeneratedMethodCall_NoViolations() {
+        final SOURCE = '''
+            |def queueTests() {
+            |  { stages ->
+            |    queue(queueTestStage())(stages, 'tests', []) {
+            |      'tmp/script.sh\'
+            |    }
+            |  }
+            |}
+        '''.stripMargin()
+        rule.spacesPerIndentLevel = 2
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_firstNonWhitespaceColumn() {
         assert IndentationAstVisitor.firstNonWhitespaceColumn('') == -1
         assert IndentationAstVisitor.firstNonWhitespaceColumn('    ') == -1

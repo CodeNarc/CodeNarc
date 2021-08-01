@@ -15,6 +15,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #635: **BracesForMethod**: Allow braces on the next line for multi-line declarations. New *allowBraceOnNextLineForMultilineDeclarations* rule property. ([Damir Murat](https://github.com/dmurat))
  - #618: **ReturnsNullInsteadOfEmptyCollection**: Fix false positive in nested closure.
  - #623: **ExplicitCallToDivMethod**: Ignore `dev()` method calls if argument is a Map, Closure or String.
+ - #626: **Indentation**: Fix ArrayIndexOutOfBoundsException: -2 for generated method calls.
 
 Build and Infrastructure
 - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))

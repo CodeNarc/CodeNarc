@@ -204,7 +204,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
             }
 
             setupFlexibleIndentForAnyClosureParameterBlocks(args)
-            recordMethodColumnAndSourceLineForClosureBlocks(call, args)
+            recordMethodColumnAndSourceLineForClosureBlocks(call)
         }
 
         super.visitMethodCallExpression(call)
@@ -226,12 +226,16 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private void recordMethodColumnAndSourceLineForClosureBlocks(MethodCallExpression methodCallExpression, ArgumentListExpression args) {
-        args.expressions.each { expr ->
+    private void recordMethodColumnAndSourceLineForClosureBlocks(MethodCallExpression methodCallExpression) {
+        def method = methodCallExpression.method
+        if (AstUtil.isFromGeneratedSourceCode(method)) {
+            return
+        }
+        methodCallExpression.arguments.expressions.each { expr ->
             if (isClosureWithBlock(expr)) {
                 BlockStatement blockStatementCode = (expr as ClosureExpression).code as BlockStatement
-                String rawMethodSourceLine = sourceLine(methodCallExpression.method)
-                methodColumnAndSourceLineForClosureBlock[blockStatementCode] = new Tuple2<Integer, String>(methodCallExpression.method.columnNumber, rawMethodSourceLine)
+                String rawMethodSourceLine = sourceLine(method)
+                methodColumnAndSourceLineForClosureBlock[blockStatementCode] = new Tuple2<Integer, String>(method.columnNumber, rawMethodSourceLine)
             }
         }
     }
