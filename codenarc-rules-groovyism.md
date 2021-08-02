@@ -57,8 +57,11 @@ Example of violations:
 
 *Since CodeNarc 0.14*
 
-If a method is called and the last parameter is an inline closure then it can be declared outside
-of the method call parentheses.
+If the last parameter of a method call is an inline closure then it can be declared outside the method call parentheses.
+
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| ignoreCallsToMethodNames    | Specifies one or more (comma-separated) method names; method calls on the named methods are ignored (i.e., do not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null` |
 
 Example of violations:
 
