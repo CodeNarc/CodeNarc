@@ -33,7 +33,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
     }
 
     @Test
-    void testSimpleSuccessScenario() {
+    void test_NoViolations() {
         final SOURCE = '''
             [1,2,3].each { println it }
 
@@ -259,6 +259,17 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
         if (GroovyVersion.isNotGroovyVersion2()) {
             assertNoViolations(SOURCE)
         }
+    }
+
+    @Test
+    void test_ignoreCallsToMethodNames() {
+        final SOURCE = '''
+            def myMethod() {
+                [1,2,3].each({ println it })
+            }
+        '''
+        rule.ignoreCallsToMethodNames = 'otherMethod, each'
+        assertNoViolations(SOURCE)
     }
 
     @Override

@@ -19,6 +19,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #624: **JUnitPublicNonTestMethod**: Fix false positive for @ParameterizedTest.
  - #639: **SerializableClassMustDefineSerialVersionUID**: Ignore interfaces.
  - #631: **ClosureAsLastMethodParameter**: Fix false positive when using Groovy 3 Lambda syntax.
+ - #629: **ClosureAsLastMethodParameter**: Add *ignoreCallsToMethodNames* property.
 
 Build and Infrastructure
  - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))

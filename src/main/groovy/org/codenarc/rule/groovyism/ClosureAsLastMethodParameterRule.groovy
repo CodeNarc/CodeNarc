@@ -22,6 +22,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 import org.codenarc.util.GroovyVersion
+import org.codenarc.util.WildcardPattern
 
 /**
  * If a method is called and the last parameter is an inline closure it can be declared outside of the method call brackets.
@@ -34,6 +35,7 @@ class ClosureAsLastMethodParameterRule extends AbstractAstVisitorRule {
     String name = 'ClosureAsLastMethodParameter'
     int priority = 3
     Class astVisitorClass = ClosureAsLastMethodParameterAstVisitor
+    String ignoreCallsToMethodNames = ''
 }
 
 class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressionVisitor {
@@ -62,7 +64,7 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
                 isViolation = lastArgument.lastLineNumber < call.arguments.lastLineNumber ||
                         (lastArgument.lastLineNumber == call.arguments.lastLineNumber && lastArgument.lastColumnNumber < call.arguments.lastColumnNumber)
             }
-            if (isViolation) {
+            if (isViolation && isNotIgnoredMethodName(call)) {
                 addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure and can appear outside the parenthesis")
             }
         }
@@ -70,6 +72,10 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
 
     private boolean isClosure(Expression expression) {
         return expression.getClass() == ClosureExpression
+    }
+
+    private boolean isNotIgnoredMethodName(MethodCallExpression methodCallExpression) {
+        !(new WildcardPattern(rule.ignoreCallsToMethodNames, false).matches(methodCallExpression.method.text))
     }
 
 }
