@@ -16,6 +16,7 @@
 package org.codenarc.rule.groovyism
 
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
@@ -29,6 +30,7 @@ import org.codenarc.util.GroovyVersion
  * @author Chris Mair
  */
 class ClosureAsLastMethodParameterRule extends AbstractAstVisitorRule {
+
     String name = 'ClosureAsLastMethodParameter'
     int priority = 3
     Class astVisitorClass = ClosureAsLastMethodParameterAstVisitor
@@ -39,7 +41,7 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         def arguments = AstUtil.getMethodArguments(call)
-        if (arguments && arguments.last() instanceof ClosureExpression) {
+        if (arguments && isClosure(arguments.last())) {
             boolean isViolation = false
             def lastArgument = arguments.last()
             if (GroovyVersion.isGroovyVersion2()) {
@@ -64,6 +66,10 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
                 addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure and can appear outside the parenthesis")
             }
         }
+    }
+
+    private boolean isClosure(Expression expression) {
+        return expression.getClass() == ClosureExpression
     }
 
 }

@@ -251,6 +251,16 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testClosureParameter_Groovy3Lambda_NoViolations() {
+        final SOURCE = '''
+            [1, 2, 3].forEach(it -> { println it})
+        '''
+        if (GroovyVersion.isNotGroovyVersion2()) {
+            assertNoViolations(SOURCE)
+        }
+    }
+
     @Override
     protected ClosureAsLastMethodParameterRule createRule() {
         new ClosureAsLastMethodParameterRule()

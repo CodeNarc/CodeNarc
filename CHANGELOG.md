@@ -18,6 +18,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #626: **Indentation**: Fix ArrayIndexOutOfBoundsException: -2 for generated method calls.
  - #624: **JUnitPublicNonTestMethod**: Fix false positive for @ParameterizedTest.
  - #639: **SerializableClassMustDefineSerialVersionUID**: Ignore interfaces.
+ - #631: **ClosureAsLastMethodParameter**: Fix false positive when using Groovy 3 Lambda syntax.
 
 Build and Infrastructure
  - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
