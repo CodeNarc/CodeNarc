@@ -42,8 +42,10 @@ class IllegalStringRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        if (sourceCode.getText().contains(string)) {
-            violations.add(new Violation(rule:this, message:"Match found for illegal string [$string]"))
+        def index = sourceCode.getText().indexOf(string)
+        if (index != -1) {
+            int lineNumber = sourceCode.getLineNumberForCharacterIndex(index)
+            violations.add(new Violation(rule:this, message:"Match found for illegal string [$string]", lineNumber:lineNumber))
         }
     }
 }

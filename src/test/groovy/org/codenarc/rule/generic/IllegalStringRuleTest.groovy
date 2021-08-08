@@ -52,13 +52,24 @@ class IllegalStringRuleTest extends AbstractRuleTestCase<IllegalStringRule> {
     }
 
     @Test
-    void testStringIsPresent() {
+    void testStringIsPresent_Comment() {
         final SOURCE = '''
             /** @author Joe */
             class MyClass {
             }
         '''
-        assertSingleViolation(SOURCE, null, null, ['string', TEXT])
+        assertSingleViolation(SOURCE, 2, null, ['string', TEXT])
+    }
+
+    @Test
+    void testStringIsPresent_String() {
+        final SOURCE = """
+            class MyClass {
+                int count;
+                String name = '$TEXT' 
+            }
+        """
+        assertSingleViolation(SOURCE, 4, null, ['string', TEXT])
     }
 
     @Override
