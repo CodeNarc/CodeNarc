@@ -394,7 +394,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = false
         assertViolations(SOURCE,
-                [line: 9, source: ' ', message: VIOLATION_BLANK_LINE_NOT_ALLOWED])
+                [line: 9, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
@@ -729,6 +729,29 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         final String SOURCE = '''
             @groovy.transform.InheritConstructors
             class AppException extends Exception {}'''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_VeryLongInterfaceDeclaration_NoViolations() {
+        final String SOURCE = '''
+            interface SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProjectRepository 
+                extends MongoRepository<SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProject, String>,
+                        SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProjectRepositoryExtension { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_VeryLongClassDeclaration_NoViolations() {
+        final String SOURCE = '''
+            class SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProjectRepositoryImpl extends BaseRepositoryExtension
+                implements SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProjectRepositoryExtension {
+            
+                @Override
+                void customRepositoryMethod() { }
+            }
+        '''
         assertNoViolations(SOURCE)
     }
 
