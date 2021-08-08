@@ -25,15 +25,19 @@ import org.codenarc.source.SourceCode
  * @author Yuriy Chulovskyy
  */
 class NoTabCharacterRule extends AbstractRule {
+
     String name = 'NoTabCharacter'
     int priority = 3
     String tabCharacter = '\t'
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        if (sourceCode.getText().contains(tabCharacter)) {
-            violations.add(new Violation(rule: this, message: 'The tab character is not allowed in source files'))
+        def index = sourceCode.getText().indexOf(tabCharacter)
+        if (index != -1) {
+            int lineNumber = sourceCode.getLineNumberForCharacterIndex(index)
+            violations.add(new Violation(rule: this, message: 'The tab character is not allowed in source files', lineNumber:lineNumber))
         }
     }
+
 }
 

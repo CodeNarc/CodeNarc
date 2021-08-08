@@ -20,6 +20,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #639: **SerializableClassMustDefineSerialVersionUID**: Ignore interfaces.
  - #631: **ClosureAsLastMethodParameter**: Fix false positive when using Groovy 3 Lambda syntax.
  - #629: **ClosureAsLastMethodParameter**: Add *ignoreCallsToMethodNames* property.
+ - #644: **NoTabCharacter**: Return actual line number containing(first) tab character in violation.
 
 Build and Infrastructure
  - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
