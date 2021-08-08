@@ -22,7 +22,6 @@ ruleset {
         exclude 'ImplicitClosureParameter'
         exclude 'ImplicitReturnStatement'
         FieldTypeRequired(doNotApplyToFilesMatching:TEST_FILES)
-        NoTabCharacter(doNotApplyToFileNames:'NoTabCharacterRuleTest.groovy') //Test should contain tab character to test the rule
     }
 
     ruleset('rulesets/design.xml') {

@@ -23,6 +23,7 @@ import org.junit.Test
  *
  * @author Yuriy Chulovskyy
  */
+// codenarc-disable NoTabCharacter
 class NoTabCharacterRuleTest extends AbstractRuleTestCase<NoTabCharacterRule> {
 
     @Test
