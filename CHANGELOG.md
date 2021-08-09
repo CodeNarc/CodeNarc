@@ -23,6 +23,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #644: **NoTabCharacter**: Return actual line number containing (first) tab character in violation.
  - #646: **IllegalStringRule**: Return actual line number containing (first) matching string in violation.
  - #638: **ClassStartsWithBlankLine**: Fix false positive if interface/class declaration takes more than 1 line.
+ - #645: **SpaceAfterMethodCallName**: Fix false positive if method parameters include parentheses.
 
 Build and Infrastructure
  - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
