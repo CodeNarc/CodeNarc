@@ -16,12 +16,15 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
  * Tests for SpaceAfterMethodCallNameRule
  */
 class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMethodCallNameRule> {
+
+    private static final String ERROR_MESSAGE = 'There is whitespace between method name and parenthesis in a method call.'
 
     @Test
     void ruleProperties() {
@@ -38,6 +41,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 }
 
                 void valid() {
+                    aMethod()
                     aMethod("arg")
                     aMethod("arg")
                     aMethod "arg"
@@ -69,7 +73,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             }
         '''
 
-        assertSingleViolation(SOURCE, 4, 'aMethod ("arg")', 'There is whitespace between method name and parenthesis in a method call.')
+        assertSingleViolation(SOURCE, 4, 'aMethod ("arg")', ERROR_MESSAGE)
     }
 
     @Test
@@ -129,7 +133,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
         '''
 
         assertViolations(SOURCE,
-            [line: 4, source: 'aMethod ("arg")', message: 'There is whitespace between method name and parenthesis in a method call.'],
+            [line: 4, source: 'aMethod ("arg")', message: ERROR_MESSAGE],
             [line: 5, source: 'aMethod  "arg"', message: 'There is more than one space between method name and arguments in a method call.']
         )
     }
@@ -189,6 +193,29 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             someMethod( ( collectionA + collectionB ).toSet() )
             '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Groovy3LambdaSyntax_NoViolations() {
+        final SOURCE = '''
+            [1, 2, 3].forEach (it) -> { println it}
+            
+            doStuff(99, (it) -> { println it})
+            '''
+        if (GroovyVersion.isNotGroovyVersion2()) {
+            assertNoViolations(SOURCE)
+        }
+    }
+
+    @Test
+    void test_Groovy3LambdaSyntax_Violation() {
+        final SOURCE = '''
+            doStuff ((it) -> { println it}, 99)
+            '''
+        if (GroovyVersion.isNotGroovyVersion2()) {
+            assertViolations(SOURCE,
+                    [line: 2, source: 'doStuff ((it) -> { println it}, 99)', message: ERROR_MESSAGE])
+        }
     }
 
     @Override

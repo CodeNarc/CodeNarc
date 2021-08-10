@@ -55,7 +55,7 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
     void visitMethodCallExpression(MethodCallExpression call) {
         def method = call.method
         def arguments = call.arguments
-        if (isFirstVisit(call) && method.lineNumber != -1 && method.lineNumber == arguments.lineNumber) {
+        if (isFirstVisit(call) && method.lineNumber != -1 && method.lineNumber == arguments.lineNumber && !hasSingleLambdaArgument(call)) {
             String methodCallSourceText = sourceLine(method).substring(method.lastColumnNumber - 1, arguments.columnNumber)
             boolean startsWithParenthesis = methodCallSourceText.startsWith('(')
             if (!startsWithParenthesis && methodCallSourceText.contains('  ')) {
@@ -67,6 +67,12 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
         }
 
         super.visitMethodCallExpression(call)
+    }
+
+    private boolean hasSingleLambdaArgument(MethodCallExpression call) {
+        // Can't reliably tell whether opening parentheses are part of lambda or method call parentheses
+        def arguments = call.arguments
+        return arguments.expressions.size() == 1 && arguments.getExpression(0).getClass().name == 'org.codehaus.groovy.ast.expr.LambdaExpression'
     }
 
     private boolean hasPrecedingWhitespace(ConstructorCallExpression call) {
