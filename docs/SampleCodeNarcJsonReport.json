@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://www.codenarc.org",
-        "version": "2.1.0"
+        "version": "2.2.0"
     },
     "report": {
-        "timestamp": "Apr 7, 2021 9:49:13 PM"
+        "timestamp": "Aug 29, 2021 2:00:51 PM"
     },
     "project": {
         "title": "Sample Project",
@@ -502,7 +502,7 @@
                             "priority": 2,
                             "lineNumber": 28,
                             "sourceLine": "class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> {",
-                            "message": "Class org.codenarc.rule.formatting.BracesForMethodRuleTest has 32 methods"
+                            "message": "Class org.codenarc.rule.formatting.BracesForMethodRuleTest has 38 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
@@ -533,7 +533,7 @@
                             "priority": 2,
                             "lineNumber": 27,
                             "sourceLine": "class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {",
-                            "message": "Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 43 methods"
+                            "message": "Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 45 methods"
                         }
                     ]
                 },
@@ -544,14 +544,14 @@
                             "ruleName": "ClassSize",
                             "priority": 3,
                             "lineNumber": 27,
-                            "message": "Class \"IndentationRuleTest\" is 1037 lines"
+                            "message": "Class \"IndentationRuleTest\" is 1052 lines"
                         },
                         {
                             "ruleName": "MethodCount",
                             "priority": 2,
                             "lineNumber": 27,
                             "sourceLine": "class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {",
-                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 52 methods"
+                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 53 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
@@ -601,7 +601,7 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 111,
+                            "lineNumber": 98,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                private @Autowired DataSource dataSource\n                private @Value('${name}') String name\n            }\n        ' contains a GString-type expression: '${name}'"
                         }
@@ -691,7 +691,7 @@
                         {
                             "ruleName": "UnnecessaryReturnKeyword",
                             "priority": 3,
-                            "lineNumber": 156,
+                            "lineNumber": 167,
                             "sourceLine": "return inlineViolation(\"The colon for the literal Map entry for key [$keyName] within class $className\" +",
                             "message": "The return keyword is not needed and can be removed"
                         }
@@ -977,7 +977,7 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 192,
+                            "lineNumber": 194,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            import test.TestData1\n            import test.TestData2\n            import test.TestData3\n            import test.TestData4\n            import test.TestData5\n            import test.TestData6\n            import test.TestData7\n            import test.TestData8\n            import test.TestData9\n            import test.TestData10\n            import test.TestData11\n            import test.TestData12\n            import test.TestData13\n            import test.TestData14\n            import test.TestData15\n\n            def GSTRING1 = \" ${TestData1.GOOD_XML}\"\n            def GSTRING2 = \" $TestData2.XML\"\n            def MAP1 = [(TestData3):123]\n            def MAP2 = [abc:TestData4]\n            def MAP3 = [abc:TestData5, ddd:123]\n            def LIST = [TestData6,TestData7]\n            def OPERATORS1 = 0+TestData8.VALUE-TestData9.VALUE\n            def OPERATORS2 = 9*TestData10.VALUE/TestData11.VALUE\n            def OPERATORS3 = 64&TestData12.VALUE|TestData13.VALUE^TestData14.VALUE\n            def OPERATORS4 = !TestData15.VALUE\n        ' contains a GString-type expression: '${TestData1.GOOD_XML}'"
                         }
@@ -1293,7 +1293,7 @@
                             "priority": 2,
                             "lineNumber": 26,
                             "sourceLine": "class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase<UnusedPrivateMethodRule> {",
-                            "message": "Class org.codenarc.rule.unused.UnusedPrivateMethodRuleTest has 36 methods"
+                            "message": "Class org.codenarc.rule.unused.UnusedPrivateMethodRuleTest has 37 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",

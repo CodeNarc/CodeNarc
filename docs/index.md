@@ -24,7 +24,7 @@ to fit into your project. Build tool, framework support, and report generation a
     <td valign="middle" align="middle" style="margin:auto; vertical-align:middle">
         <div>
             <a class="getitbutton" href="https://github.com/CodeNarc/CodeNarc/releases">
-                Get 2.1.0
+                Get 2.2.0
             </a>
         </div>
         <div>
