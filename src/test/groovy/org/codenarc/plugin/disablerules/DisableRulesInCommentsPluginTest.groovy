@@ -202,6 +202,19 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
         assertAllViolationsEnabled()
     }
 
+    @Test
+    void test_processViolationsForFile_RuleWithInlineDescription() {
+        sourceText = '''
+            class MyClass {         /* codenarc-enable */
+                def value = 123     /* codenarc-disable-line OtherRule -- should not disable rule as it part of the description: Rule2, Rule1 */
+                void doStuff() {
+                    println 123     /* codenarc-disable-line Rule1 -- should disable rule */
+                }
+            }
+        '''.trim()
+        assertViolationsThatAreEnabled([VIOLATION1, VIOLATION2, VIOLATION3, VIOLATION5])
+    }
+
     // Helper methods
 
     private void assertAllViolationsEnabled() {
