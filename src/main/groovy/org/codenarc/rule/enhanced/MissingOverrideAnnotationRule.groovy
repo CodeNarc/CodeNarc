@@ -99,9 +99,11 @@ class MissingOverrideAnnotationAstVisitor extends AbstractAstVisitor {
 
     private Map<String, Set<MethodNode>> findSuperClassMethods(ClassNode node) {
         def nameToMethods = [:].withDefault { [] as Set }
-        def superClassAndInterfacesMethods = node.superClass.allDeclaredMethods + interfaceMethods(node)
+        List<MethodNode> superClassAndInterfacesMethods = node.superClass.allDeclaredMethods + interfaceMethods(node)
         superClassAndInterfacesMethods.each { methodNode ->
-            nameToMethods[methodNode.name] << methodNode
+            if (!methodNode.isPrivate()) {
+                nameToMethods[methodNode.name] << methodNode
+            }
         }
         nameToMethods
     }
