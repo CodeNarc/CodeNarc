@@ -22,6 +22,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  * Tests for ClassStartsWithBlankLineRule
  *
  * @author David Ausín
+ * @author Chris Mair
  */
 @SuppressWarnings('TrailingWhitespace')
 class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {
@@ -568,7 +569,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_AnnotationContainsOpeningBrace_NoViolations() {
+    void test_Annotation_ContainsOpeningBrace_NoViolations() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' })
             class Foo {
@@ -585,7 +586,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_AnnotationContainsOpeningBrace() {
+    void test_Annotation_ContainsOpeningBrace() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' })
             class Foo {
@@ -601,7 +602,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_SingleClassWithSimpleAnnotation_NoViolations() {
+    void test_Annotation_SingleClass_NoViolations() {
         final String SOURCE = '''
             @ToString
             class Foo {
@@ -618,7 +619,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_SingleClassWithSimpleAnnotation() {
+    void test_Annotation_SingleClass_Violation() {
         final String SOURCE = '''
             @ToString
             class Foo {
@@ -634,7 +635,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_AnnotationContainsOpeningBraceAndOnSameLineAsClass() {
+    void test_Annotation_ContainsOpeningBraceAndOnSameLineAsClass() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' }) class Foo {
 
@@ -650,7 +651,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_AnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations() {
+    void test_Annotation_ContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations() {
         final String SOURCE = '''
             @Stuff @Requires({ sys[test] == 'dummy' }) class Foo {
 
@@ -666,7 +667,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_AnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_ReverseOrderingOfAnnotations_NoViolations() {
+    void test_Annotation_ContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_ReverseOrderingOfAnnotations_NoViolations() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' }) @Stuff  class Foo {
 
@@ -682,7 +683,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_AnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_WhenBlankLineIsNotRequired() {
+    void test_Annotation_ContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_WhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             @Stuff @Requires({ sys[test] == 'dummy' }) class Foo {
 
@@ -698,7 +699,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void test_AnnotationContainsAnotherOpeningBraceOnSameLineAsClass_Violation() {
+    void test_Annotation_ContainsAnotherOpeningBraceOnSameLineAsClass_Violation() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' }) class Foo {
                 int a
@@ -722,6 +723,32 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Annotation_SingleLineClass_AnnotationOnSameLine_NoViolations() {
+        final String SOURCE = '''
+            @Target( ElementType.TYPE )
+            @Retention( RetentionPolicy.RUNTIME )
+            @Inherited
+            @interface UnitTest { }'''
+        assertNoViolations(SOURCE)
+
+        // No blank line allowed; but doesn't matter since this is a single-line class
+        rule.blankLineRequired = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Annotation_AnnotationOnSameLine_Violation() {
+        final String SOURCE = '''
+            @Target( ElementType.TYPE )
+            @Retention( RetentionPolicy.RUNTIME )
+            @Inherited
+            @interface UnitTest { 
+                int count()
+            }'''
+        assertSingleViolation(SOURCE, 6, 'int count()')
     }
 
     @Test

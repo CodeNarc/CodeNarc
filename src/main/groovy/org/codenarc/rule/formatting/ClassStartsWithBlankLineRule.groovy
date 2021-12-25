@@ -87,7 +87,7 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
         }
 
         String nextLine = getLine(classStartLine + 1)
-        if (!nextLine.trim()) {
+        if (nextLine != null && !nextLine.trim()) {
             addViolation('Class starts with a blank line after the opening brace', classStartLine + 1)
         }
     }
@@ -102,7 +102,7 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
 
         if (getLine(classStartLine).contains(classNode.nameWithoutPackage)) {
             String nextLine = findFirstLineAfterOpeningBrace(classStartLine)
-            if (nextLine.trim()) {
+            if (nextLine?.trim()) {
                 addViolation('Class does not start with a blank line after the opening brace', classStartLine + 1)
                 return
             }

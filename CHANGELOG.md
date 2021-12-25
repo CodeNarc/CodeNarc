@@ -6,6 +6,7 @@ Version 3.0.0    (??? 2022)
 Updated/Enhanced Rules and Bug Fixes
  - #651: **MissingOverrideAnnotation**: Ignore private superclass methods.
  - #649: Support for description inside CodeNarc enable/disable comments. ([davidkron](https://github.com/davidkron))
+ - #652: **ClassStartsWithBlankLine**: Fix NPE on annotated class with no following line at end of source file.
 
 
 Version 2.2.0    (Aug 2021)
