@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
+import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codehaus.groovy.ast.ClassHelper
@@ -49,6 +50,8 @@ class UseCollectNestedAstVisitor extends AbstractAstVisitor {
     private static final Logger LOG = LoggerFactory.getLogger(UseCollectNestedAstVisitor)
 
     private final Stack<Parameter> parameterStack = []
+    private boolean withinOuterCollectCall = false
+    private boolean withinCollectCallStatement = false
 
     @Override
     protected void visitClassComplete(ClassNode cn) {
@@ -58,22 +61,34 @@ class UseCollectNestedAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    void visitExpressionStatement(ExpressionStatement statement) {
+        boolean originalValue = withinCollectCallStatement
+
+        // We only care about MethodCallStatements for collect() calls if they occur within the context of an outer collect() call
+        if (isCollectMethodCall(statement.expression) && withinOuterCollectCall) {
+            withinCollectCallStatement = true
+        }
+        super.visitExpressionStatement(statement)
+        withinCollectCallStatement = originalValue
+    }
+
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         boolean isCollectCall = false
         Parameter parameter
         Parameter it = new Parameter(ClassHelper.OBJECT_TYPE, 'it')
+        boolean originalWithinOuterCollectCall = withinOuterCollectCall
 
-        /*
-         The idea for this rule is to add the parameter of the
-         closure used in the collect call to the stack of parameters,
-         and check for each collect expression whether it is called on
-         the parameter on the top of the stack
-         */
-        if(AstUtil.isMethodCall(call, 'collect', 1..2)) {
+        // The idea for this rule is to add the parameter of the
+        // closure used in the collect call to the stack of parameters,
+        // and check for each collect expression whether it is called on
+        // the parameter on the top of the stack
+        if(isCollectMethodCall(call)) {
             Expression expression = getMethodCallParameterThatIsAClosure(call)
             isCollectCall = expression instanceof ClosureExpression
 
             if (isCollectCall) {
+                withinOuterCollectCall = true
                 parameter = getClosureParameter(expression, it)
                 checkForCallToClosureParameter(call)
             }
@@ -84,6 +99,11 @@ class UseCollectNestedAstVisitor extends AbstractAstVisitor {
         super.visitMethodCallExpression(call)
 
         removeArgumentList(isCollectCall)
+        withinOuterCollectCall = originalWithinOuterCollectCall
+    }
+
+    private boolean isCollectMethodCall(Expression call) {
+        return AstUtil.isMethodCall(call, 'collect', 1..2)
     }
 
     private Parameter getClosureParameter(ClosureExpression expression, Parameter it) {
@@ -113,9 +133,13 @@ class UseCollectNestedAstVisitor extends AbstractAstVisitor {
     }
 
     private void checkForCallToClosureParameter(MethodCallExpression call) {
-        // Now if the call is to the parameter of the closure then the node on
-        // which collect is called has to be a VariableExpression
-        if (call.objectExpression instanceof VariableExpression
+        // Only check for collect() calls that are standalone (i.e., statements).
+        // If the collect() calls are part of larger expressions then we cannot make assumptions about the result types.
+        if (withinCollectCallStatement
+
+            // Now if the call is to the parameter of the closure then the node on
+            // which collect is called has to be a VariableExpression.
+            && call.objectExpression instanceof VariableExpression
             && !parameterStack.empty()
             && parameterStack.peek().name == call.objectExpression.name) {
             addViolation(call, UseCollectNestedRule.MESSAGE)
