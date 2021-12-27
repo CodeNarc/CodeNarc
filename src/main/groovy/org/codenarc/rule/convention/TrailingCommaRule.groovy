@@ -21,7 +21,6 @@ import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.NamedArgumentListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.GroovyVersion
 import org.codenarc.util.SourceCodeUtil
 
 /**
@@ -99,10 +98,6 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
 
     private static boolean lastExpressionIsEndOfExpression(ListExpression expression) {
         def lastExpression = expression.expressions[-1]
-
-        if (GroovyVersion.isGroovyVersion2()) {
-            return lastExpression.lineNumber == lastExpression.lastLineNumber
-        }
 
         return lastExpression.lineNumber == expression.lastLineNumber
     }

@@ -24,7 +24,4 @@ class GroovyVersion {
         return GroovySystem.getVersion().startsWith('2')
     }
 
-    static boolean isNotGroovyVersion2() {
-        return !isGroovyVersion2()
-    }
 }

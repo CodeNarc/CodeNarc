@@ -1228,15 +1228,6 @@ public class AstUtil {
                 line = line.substring(node.getColumnNumber() - 1);
             }
 
-            // extract the relevant part of the last line
-            if (lineIndex == node.getLastLineNumber() - 1) {
-                // Groovy 3.0 lastColumnNumber is incorrect for some fields
-                if (GroovyVersion.isGroovyVersion2()) {
-                    int stopIndex = node.getLastColumnNumber() < line.length() ? node.getLastColumnNumber() - 1 : line.length();
-                    line = line.substring(0, stopIndex);
-                }
-            }
-
             lines.add(line.trim());
         }
         return lines;
@@ -1262,10 +1253,6 @@ public class AstUtil {
             // extract the relevant part of the last line
             if (lineIndex == node.getLastLineNumber() - 1) {
                 // Groovy 3.0 lastColumnNumber is incorrect up for some fields
-                if (GroovyVersion.isGroovyVersion2()) {
-                    int stopIndex = node.getLastColumnNumber() < line.length() ? node.getLastColumnNumber() - 1 : line.length();
-                    line = line.substring(0, stopIndex);
-                }
             }
 
             if (line.contains("{")) {
@@ -1296,13 +1283,6 @@ public class AstUtil {
 
         String beforeLastLine = lastSourceLine(beforeNode, sourceCode);
         int firstColumnAfterBeforeNode = beforeNode.getLastColumnNumber() - 1;    // That lastColumnNumber is the column after the end, and is 1-based
-
-        if (GroovyVersion.isGroovyVersion2()) {
-            // In Groovy 2.x, some expressions may extend to include the space following them
-            if (beforeLastLine.charAt(firstColumnAfterBeforeNode - 1) == ' ') {
-                firstColumnAfterBeforeNode--;
-            }
-        }
 
         if (beforeNode.getLastLineNumber() == afterNode.getLineNumber()) {
             str.append(beforeLastLine, firstColumnAfterBeforeNode, afterNode.getColumnNumber() - 1);

@@ -16,7 +16,6 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -423,22 +422,12 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
             '''
         rule.ignoreParameterDefaultValueAssignments = false
 
-        if (GroovyVersion.isGroovyVersion2()) {
-            assertViolations(SOURCE,
-                // Known Limitation
-                //[line:3, source:'def relativePath ="111"', message:'The operator "=" within class None is not followed'],
-                //[line:6, source:'String name =myName+"abc"', message:'The operator "=" within class None is not followed'],
-                [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not preceded'],
-                [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not followed'],
-                [line:9, source:'void method1(String name, int count= 99) { }', message:'The operator "=" within class None is not preceded'])
-        } else {
-            assertViolations(SOURCE,
-                [line:3, source:'def relativePath ="111"', message:'The operator "=" within class None is not followed'],
-                [line:6, source:'String name =myName+"abc"', message:'The operator "=" within class None is not followed'],
-                [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not preceded'],
-                [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not followed'],
-                [line:9, source:'void method1(String name, int count= 99) { }', message:'The operator "=" within class None is not preceded'])
-        }
+        assertViolations(SOURCE,
+            [line:3, source:'def relativePath ="111"', message:'The operator "=" within class None is not followed'],
+            [line:6, source:'String name =myName+"abc"', message:'The operator "=" within class None is not followed'],
+            [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not preceded'],
+            [line:6, source:'String name =myName+"abc"', message:'The operator "+" within class None is not followed'],
+            [line:9, source:'void method1(String name, int count= 99) { }', message:'The operator "=" within class None is not preceded'])
     }
 
     @Test

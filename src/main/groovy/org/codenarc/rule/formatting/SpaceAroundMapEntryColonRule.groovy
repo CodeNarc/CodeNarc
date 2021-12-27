@@ -19,7 +19,6 @@ import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.expr.SpreadMapExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.GroovyVersion
 
 /**
  * Check for configured formatting of whitespace around colons for literal Map entries
@@ -68,17 +67,10 @@ class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor {
     }
 
     private String mapEntrySourceLine(MapEntryExpression expression) {
-        if (GroovyVersion.isGroovyVersion2()) {
-            return lastSourceLine(expression)
-        }
         return sourceLine(expression)
     }
 
     private int columnIndexForColon(MapEntryExpression expression) {
-        if (GroovyVersion.isGroovyVersion2()) {
-            return expression.lastColumnNumber - 1
-        }
-
         String line = sourceLine(expression)
         int startIndex = expression.keyExpression.lastColumnNumber - 1
         return line.indexOf(':', startIndex) + 1

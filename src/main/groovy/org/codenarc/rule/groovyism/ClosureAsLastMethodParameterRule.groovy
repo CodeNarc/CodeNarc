@@ -21,7 +21,6 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
-import org.codenarc.util.GroovyVersion
 import org.codenarc.util.WildcardPattern
 
 /**
@@ -44,26 +43,9 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
     void visitMethodCallExpression(MethodCallExpression call) {
         def arguments = AstUtil.getMethodArguments(call)
         if (arguments && isClosure(arguments.last())) {
-            boolean isViolation = false
             def lastArgument = arguments.last()
-            if (GroovyVersion.isGroovyVersion2()) {
-                def sourceLine = sourceCode.lines[call.lineNumber - 1]
-                def firstChar = sourceLine[call.columnNumber - 1]
-
-                // If a method call is surrounded by parentheses (possibly unnecessary) OR braces, then the AST includes those in the
-                // MethodCall start/end column indexes. In that case, it gets too complicated. Just bail.
-                if (firstChar == '(' || firstChar == '{') {
-                    super.visitMethodCallExpression(call)
-                    return
-                }
-
-                isViolation = call.lastLineNumber > lastArgument.lastLineNumber ||
-                        (call.lastLineNumber == lastArgument.lastLineNumber &&
-                                call.lastColumnNumber > lastArgument.lastColumnNumber)
-            } else {
-                isViolation = lastArgument.lastLineNumber < call.arguments.lastLineNumber ||
-                        (lastArgument.lastLineNumber == call.arguments.lastLineNumber && lastArgument.lastColumnNumber < call.arguments.lastColumnNumber)
-            }
+            boolean isViolation = lastArgument.lastLineNumber < call.arguments.lastLineNumber ||
+                    (lastArgument.lastLineNumber == call.arguments.lastLineNumber && lastArgument.lastColumnNumber < call.arguments.lastColumnNumber)
             if (isViolation && isNotIgnoredMethodName(call)) {
                 addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure and can appear outside the parenthesis")
             }

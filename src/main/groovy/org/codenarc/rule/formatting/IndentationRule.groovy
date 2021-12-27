@@ -26,7 +26,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
-import org.codenarc.util.GroovyVersion
 
 import java.util.concurrent.ConcurrentHashMap
 
@@ -102,11 +101,11 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         if (!isAnonymous) {
             String description = "class ${node.getNameWithoutPackage()}"
 
-            if (GroovyVersion.isGroovyVersion2() || !isInnerClass) {
-                checkForCorrectColumn(node, description)
-            } else {
+            if (isInnerClass) {
                 int column = firstNonWhitespaceColumn(sourceLine(node))
                 checkForCorrectColumn(node, description, column)
+            } else {
+                checkForCorrectColumn(node, description)
             }
         }
         if (!node.script) {

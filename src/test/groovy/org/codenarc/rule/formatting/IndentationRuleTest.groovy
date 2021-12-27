@@ -16,7 +16,6 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -171,17 +170,10 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |    private String name        // Field: correct
             |}
         '''.stripMargin()
-        if (GroovyVersion.isGroovyVersion2()) {
-            assertViolations(SOURCE,
-                    [line: 6, source: 'class MyOtherClass', message: 'The class MyOtherClass'],
-                    [line: 16, source: '@Package void two()', message: 'The method two in class TestClass'],
-                    [line: 22, source: 'private String name', message: 'The field name in class TestClass'])
-        } else {
-            assertViolations(SOURCE,
-                    [line: 5, source: '@Component', message: 'The class MyOtherClass'],
-                    [line: 16, source: '@Package void two()', message: 'The method two in class TestClass'],
-                    [line: 22, source: 'private String name', message: 'The field name in class TestClass'])
-        }
+        assertViolations(SOURCE,
+                [line: 5, source: '@Component', message: 'The class MyOtherClass'],
+                [line: 16, source: '@Package void two()', message: 'The method two in class TestClass'],
+                [line: 22, source: 'private String name', message: 'The field name in class TestClass'])
     }
 
     // Tests for method declarations

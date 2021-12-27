@@ -19,7 +19,6 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.GroovyVersion
 import org.codenarc.util.SourceCodeUtil
 
 /**
@@ -104,9 +103,6 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean isClosureParameterOutsideParentheses(Expression e, Expression arguments) {
-        if (GroovyVersion.isGroovyVersion2()) {
-            e instanceof ClosureExpression && e.columnNumber > arguments.lastColumnNumber
-        }
         // Note: Similar logic is in ClosureAsLastMethodParameterAstVisitor
         return e instanceof ClosureExpression &&
                 e.lastLineNumber > arguments.lastLineNumber ||
