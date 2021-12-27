@@ -256,9 +256,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
         final SOURCE = '''
             [1, 2, 3].forEach(it -> { println it})
         '''
-        if (GroovyVersion.isNotGroovyVersion2()) {
-            assertNoViolations(SOURCE)
-        }
+        assertNoViolations(SOURCE)
     }
 
     @Test

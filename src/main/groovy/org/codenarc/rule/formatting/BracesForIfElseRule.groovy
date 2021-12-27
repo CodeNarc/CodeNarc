@@ -19,7 +19,6 @@ import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codenarc.util.GroovyVersion
 
 /**
  * Checks the location of the opening brace ({) for if statements and optionally closing and opening braces
@@ -69,7 +68,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
         if (isNotGeneratedCode(node) && isFirstVisit(node) && AstUtil.isBlock(node.ifBlock)) {
             boolean isBraceOnSameLine = node.ifBlock.lineNumber == node.booleanExpression.lastLineNumber
 
-            if (!isBraceOnSameLine && GroovyVersion.isNotGroovyVersion2()) {
+            if (!isBraceOnSameLine) {
                 String firstLineOfBlock = sourceLineTrimmed(node.ifBlock)
                 isBraceOnSameLine = firstLineOfBlock =~ /\)\s*\{/
             }

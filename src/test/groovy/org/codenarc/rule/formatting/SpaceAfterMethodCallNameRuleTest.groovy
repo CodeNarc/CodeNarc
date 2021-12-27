@@ -16,7 +16,6 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -202,9 +201,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             
             doStuff(99, (it) -> { println it})
             '''
-        if (GroovyVersion.isNotGroovyVersion2()) {
-            assertNoViolations(SOURCE)
-        }
+        assertNoViolations(SOURCE)
     }
 
     @Test
@@ -212,10 +209,8 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
         final SOURCE = '''
             doStuff ((it) -> { println it}, 99)
             '''
-        if (GroovyVersion.isNotGroovyVersion2()) {
-            assertViolations(SOURCE,
-                    [line: 2, source: 'doStuff ((it) -> { println it}, 99)', message: ERROR_MESSAGE])
-        }
+        assertViolations(SOURCE,
+                [line: 2, source: 'doStuff ((it) -> { println it}, 99)', message: ERROR_MESSAGE])
     }
 
     @Override

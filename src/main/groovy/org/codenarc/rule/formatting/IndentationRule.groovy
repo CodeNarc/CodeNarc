@@ -92,7 +92,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         node.annotations.each { annotationNode -> ignoreLineNumbers << annotationNode.lastLineNumber }
 
         // Groovy 3.x ClassNode lineNumber is line number of first annotation
-        if (GroovyVersion.isNotGroovyVersion2() && node.annotations) {
+        if (node.annotations) {
             int classDeclarationLine = AstUtil.findClassDeclarationLineNumber(node, sourceCode)
             ignoreLineNumbers << classDeclarationLine
         }

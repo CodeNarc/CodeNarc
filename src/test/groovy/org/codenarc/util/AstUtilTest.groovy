@@ -401,9 +401,7 @@ class AstUtilTest extends AbstractTestCase {
         def methodNode = methodNamed('someMethod')
         String sourceBetween1 = AstUtil.getSourceBetweenNodes(fieldNode1, methodNode, sourceCode)
         log("sourceBetween1=$sourceBetween1")
-        if (GroovyVersion.isNotGroovyVersion2()) {
-            assert sourceBetween1.contains('/*111*/')
-        }
+        assert sourceBetween1.contains('/*111*/')
         assert sourceBetween1.contains('String myStringField')
         assert sourceBetween1.contains('/*999*/')
 

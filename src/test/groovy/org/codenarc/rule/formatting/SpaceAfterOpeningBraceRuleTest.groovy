@@ -16,7 +16,6 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -342,10 +341,7 @@ c        '''
             myClosure = param1 -> println "bla"
             myClosure = (def param1, def param2) -> { println "bla" }
         '''
-
-        if (GroovyVersion.isNotGroovyVersion2()) {
-            assertNoViolations(SOURCE)
-        }
+        assertNoViolations(SOURCE)
     }
 
     @Test
@@ -355,13 +351,10 @@ c        '''
             myClosure = (def param1) -> {println "bbb" }
             myClosure = param1 -> {println "ccc" }
         '''
-
-        if (GroovyVersion.isNotGroovyVersion2()) {
-            assertViolations(SOURCE,
-                    [line:2, source:'{println "aaa" }', message:CLOSURE_VIOLATION_MESSAGE],
-                    [line:3, source:'{println "bbb" }', message:CLOSURE_VIOLATION_MESSAGE],
-                    [line:4, source:'{println "ccc" }', message:CLOSURE_VIOLATION_MESSAGE])
-        }
+        assertViolations(SOURCE,
+                [line:2, source:'{println "aaa" }', message:CLOSURE_VIOLATION_MESSAGE],
+                [line:3, source:'{println "bbb" }', message:CLOSURE_VIOLATION_MESSAGE],
+                [line:4, source:'{println "ccc" }', message:CLOSURE_VIOLATION_MESSAGE])
     }
 
     @Override
