@@ -16,7 +16,6 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -204,20 +203,12 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
                 int count;//comment
             }
         '''
-        if (GroovyVersion.isGroovyVersion2()) {
-            assertViolations(SOURCE,
-                    [line:3, source:'String name;', message:MESSAGE],
-                    [line:4, source:'def value = new Object();', message:MESSAGE],
-                    [line:5, source:'def closure = { };', message:MESSAGE],
-                    [line:6, source:'int count;', message:MESSAGE],
-            )
-        } else {
-            // Known limitation with Groovy 3.0.x - considers lastColumnNumber for FieldNode to include only field type (not the name)
-            assertViolations(SOURCE,
-                    [line:4, source:'def value = new Object();', message:MESSAGE],
-                    [line:5, source:'def closure = { };', message:MESSAGE],
-            )
-        }
+        assertViolations(SOURCE,
+                [line:3, source:'String name;', message:MESSAGE],
+                [line:4, source:'def value = new Object();', message:MESSAGE],
+                [line:5, source:'def closure = { };', message:MESSAGE],
+                [line:6, source:'int count;', message:MESSAGE],
+        )
     }
 
     @Test
