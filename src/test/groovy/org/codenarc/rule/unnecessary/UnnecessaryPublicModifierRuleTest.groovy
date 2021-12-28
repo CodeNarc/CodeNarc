@@ -16,7 +16,6 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
-  */
+ */
 class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase<UnnecessaryPublicModifierRule> {
 
     private static final String MESSAGE_CLASSES = 'The public keyword is unnecessary for classes'
@@ -113,6 +112,16 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase<Unnecessary
     }
 
     @Test
+    void test_Class_AnnotationWithParametersContainingPublic() {
+        final SOURCE = '''
+            @Special(strings = ['some public value', 'some other value']) 
+            class MyClass {
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_Method_Split() {
         final SOURCE = '''
             class MyClass {
@@ -153,7 +162,6 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase<Unnecessary
         assertNoViolations(SOURCE)
     }
 
-    @Ignore
     @Test
     void test_Method_AnnotationWithParametersContainingPublic() {
         final SOURCE = '''
@@ -169,6 +177,16 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase<Unnecessary
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Interface() {
+        final SOURCE = '''
+            interface MyInterface {
+                public void myMethod()
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'public void myMethod()', MESSAGE_METHODS)
     }
 
     @Override

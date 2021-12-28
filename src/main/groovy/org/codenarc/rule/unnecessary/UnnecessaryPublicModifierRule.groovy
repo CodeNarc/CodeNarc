@@ -15,21 +15,20 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.ConstructorNode
-import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * The 'public' modifier is not required on methods, constructors or classes.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
+
     String name = 'UnnecessaryPublicModifier'
     int priority = 3
     Class astVisitorClass = UnnecessaryPublicModifierAstVisitor
@@ -76,9 +75,18 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
         }
 
         def current = node.lineNumber - 1
+        def startColumn = 0
+
+        if (node instanceof AnnotatedNode && !node.annotations.empty) {
+            // Start checking from the end of the last annotation
+            def lastAnnotation = node.annotations.last()
+            current = lastAnnotation.lastLineNumber - 1
+            startColumn = lastAnnotation.lastColumnNumber - 1
+        }
+
         String acc = ''
         while (current <= node.lastLineNumber) {
-            def line = sourceCode.line(current)
+            def line = sourceCode.lines[current]    // do not trim()
             if (line == null) {
                 if (node.isAbstract()) {
                     return acc // can happen with abstract method in Parrot parser
@@ -86,9 +94,10 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
                 LOG.warn("${rule.name} cannot find source code line $current in ${sourceCode.name}. Scanning lines ${node.lineNumber} to ${node.lastLineNumber}.")
                 return ''
             } else if (line.contains('{')) {
-                return acc + line[0..(line.indexOf('{'))]
+                return acc + line[startColumn..(line.indexOf('{'))]
             }
-            acc = acc + line + ' '
+            acc = acc + line.substring(startColumn) + ' '
+            startColumn = 0
             current++
         }
         acc

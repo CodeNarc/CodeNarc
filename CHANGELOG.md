@@ -7,6 +7,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #651: **MissingOverrideAnnotation**: Ignore private superclass methods.
  - #652: **ClassStartsWithBlankLine**: Fix NPE on annotated class with no following line at end of source file.
  - #653: **UseCollectNested**: Fix false positive when inner collect() call returns a different type.
+ - #650: **UnnecessaryPublicModifier**: Fix false positive with annotations.
 
 Build and Infrastructure
  - #654: Upgrade to Groovy 3.0.9. Groovy 2.x will no longer be supported.
