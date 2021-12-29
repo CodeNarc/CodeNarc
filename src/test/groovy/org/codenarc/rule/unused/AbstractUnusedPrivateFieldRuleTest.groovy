@@ -95,6 +95,18 @@ abstract class AbstractUnusedPrivateFieldRuleTest extends AbstractRuleTestCase<U
     }
 
     @Test
+    void testSuppressWarningsOnField_NoAssignment() {
+        final SOURCE = '''
+            class MyClass {
+                @Deprecated
+                @SuppressWarnings('UnusedPrivateField')
+                private int count
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_AllPrivateFieldsUsed() {
         final SOURCE = '''
             @MyAnnotation(elem = { 1 + 2 })

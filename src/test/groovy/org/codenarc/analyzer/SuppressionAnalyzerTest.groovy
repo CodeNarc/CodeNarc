@@ -336,7 +336,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
                 private String name1 = 'joe'            // 10
 
                 @SuppressWarnings('CodeNarc')           // 12
-                private String name2 = 'joe'            // 13
+                private String name2                    // 13
             }                                           // 14
         '''))
 
