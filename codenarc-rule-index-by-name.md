@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index by Name
 
 # Rule Index by Name
 
-**CodeNarc** includes 394 rules.
+**CodeNarc** includes 393 rules.
 
 ## Rules
   * [AbcMetric](./codenarc-rules-size.html#abcmetric-rule)    (Requires the GMetrics jar)
@@ -372,7 +372,6 @@ title: CodeNarc - Rule Index by Name
   * [UnnecessarySemicolon](./codenarc-rules-unnecessary.html#unnecessarysemicolon-rule)  
   * [UnnecessarySetter](./codenarc-rules-unnecessary.html#unnecessarysetter-rule)  
   * [UnnecessaryStringInstantiation](./codenarc-rules-unnecessary.html#unnecessarystringinstantiation-rule)  
-  * [UnnecessarySubstring](./codenarc-rules-unnecessary.html#unnecessarysubstring-rule)  
   * [UnnecessaryTernaryExpression](./codenarc-rules-unnecessary.html#unnecessaryternaryexpression-rule)  
   * [UnnecessaryToString](./codenarc-rules-unnecessary.html#unnecessarytostring-rule)  
   * [UnnecessaryTransientModifier](./codenarc-rules-unnecessary.html#unnecessarytransientmodifier-rule)  
