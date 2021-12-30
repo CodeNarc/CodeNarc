@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index
 
 # Rule Index
 
-**CodeNarc** includes 394 rules.
+**CodeNarc** includes 393 rules.
     
 ## [Basic](./codenarc-rules-basic.html)
   * [AssertWithinFinallyBlock](./codenarc-rules-basic.html#assertwithinfinallyblock-rule)  
@@ -433,7 +433,6 @@ title: CodeNarc - Rule Index
   * [UnnecessarySemicolon](./codenarc-rules-unnecessary.html#unnecessarysemicolon-rule)  
   * [UnnecessarySetter](./codenarc-rules-unnecessary.html#unnecessarysetter-rule)  
   * [UnnecessaryStringInstantiation](./codenarc-rules-unnecessary.html#unnecessarystringinstantiation-rule)  
-  * [UnnecessarySubstring](./codenarc-rules-unnecessary.html#unnecessarysubstring-rule)  
   * [UnnecessaryTernaryExpression](./codenarc-rules-unnecessary.html#unnecessaryternaryexpression-rule)  
   * [UnnecessaryToString](./codenarc-rules-unnecessary.html#unnecessarytostring-rule)  
   * [UnnecessaryTransientModifier](./codenarc-rules-unnecessary.html#unnecessarytransientmodifier-rule)  

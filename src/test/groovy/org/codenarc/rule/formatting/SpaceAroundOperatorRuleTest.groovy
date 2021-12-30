@@ -389,7 +389,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     @Test
     void testApplyTo_Operator_LineFollowingAnnotation_NoViolations() {
         final SOURCE = '''
-            @SuppressWarnings('UnnecessarySubstring')
+            @SuppressWarnings('CodeNarc')
             def relativePath = filePath.substring(path.length())
 
             @SuppressWarnings('ClassForName')
@@ -411,7 +411,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     @Test
     void testApplyTo_Operator_LineFollowingAnnotation_ShouldBeViolations_KnownLimitation() {
         final SOURCE = '''
-            @SuppressWarnings('UnnecessarySubstring')
+            @Unsafe
             def relativePath ="111"
 
             @SuppressWarnings('Other')
