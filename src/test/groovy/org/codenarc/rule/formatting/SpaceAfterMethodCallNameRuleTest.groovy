@@ -23,7 +23,8 @@ import org.junit.Test
  */
 class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMethodCallNameRule> {
 
-    private static final String ERROR_MESSAGE = 'There is whitespace between method name and parenthesis in a method call.'
+    private static final String ERROR_MESSAGE = 'There is whitespace between the method name and parenthesis in a method call'
+    private static final String ERROR_MESSAGE_SPACES = 'There is more than one space between the method name and its arguments in a method call'
 
     @Test
     void ruleProperties() {
@@ -114,7 +115,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             }
         '''
 
-        assertSingleViolation(SOURCE, 4, 'aMethod  "arg"', 'There is more than one space between method name and arguments in a method call.')
+        assertSingleViolation(SOURCE, 4, 'aMethod  "arg"', ERROR_MESSAGE_SPACES)
     }
 
     @Test
@@ -133,7 +134,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
 
         assertViolations(SOURCE,
             [line: 4, source: 'aMethod ("arg")', message: ERROR_MESSAGE],
-            [line: 5, source: 'aMethod  "arg"', message: 'There is more than one space between method name and arguments in a method call.']
+            [line: 5, source: 'aMethod  "arg"', message: ERROR_MESSAGE_SPACES]
         )
     }
 
@@ -211,6 +212,16 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             '''
         assertViolations(SOURCE,
                 [line: 2, source: 'doStuff ((it) -> { println it}, 99)', message: ERROR_MESSAGE])
+    }
+
+    @Test
+    void test_MultiLine_Violation() {
+        final SOURCE = '''
+            def failEvents = messages.parallelStream()
+                .filter { item -> item.headers.get( headerName ) == 'failed' }.collect ( Collectors.toList() ) as List<Message>
+            '''
+        assertViolations(SOURCE,
+                [line: 3, source: 'collect ( Collectors.toList() )', message: ERROR_MESSAGE])
     }
 
     @Override

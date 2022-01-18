@@ -19,6 +19,8 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.Violation
+import org.codenarc.util.AstUtil
 
 /**
  * Checks that there is no whitespace at the end of the method name when a method call contains parenthesis or that
@@ -56,13 +58,21 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
         def method = call.method
         def arguments = call.arguments
         if (isFirstVisit(call) && method.lineNumber != -1 && method.lineNumber == arguments.lineNumber && !hasSingleLambdaArgument(call)) {
-            String methodCallSourceText = sourceLine(method).substring(method.lastColumnNumber - 1, arguments.columnNumber)
-            boolean startsWithParenthesis = methodCallSourceText.startsWith('(')
-            if (!startsWithParenthesis && methodCallSourceText.contains('  ')) {
-                addViolation(call, 'There is more than one space between method name and arguments in a method call.')
-            }
-            else if (!startsWithParenthesis && methodCallSourceText.contains(' (')) {
-                addViolation(call, 'There is whitespace between method name and parenthesis in a method call.')
+            String methodName = call.methodAsString
+            def regex = methodName + /\s+\(/
+            def lineNumbers = (method.lineNumber .. method.lastLineNumber)
+            for (int lineNumber: lineNumbers) {
+                def line = sourceCode.line(lineNumber - 1)
+                if (line =~ regex) {
+                    def message = 'There is whitespace between the method name and parenthesis in a method call: ' + methodName
+                    addViolation(new Violation(rule: rule, lineNumber: lineNumber, sourceLine: line, message: message))
+                    break
+                }
+                else if (line.contains(methodName + '  ')) {
+                    def message = 'There is more than one space between the method name and its arguments in a method call: ' + methodName
+                    addViolation(new Violation(rule: rule, lineNumber: lineNumber, sourceLine: line, message: message))
+                    break
+                }
             }
         }
 

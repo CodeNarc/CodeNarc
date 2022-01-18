@@ -1,13 +1,14 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-Version 3.0.0    (??? 2022)
+TODO Version 3.0.0    (??? 2022)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #651: **MissingOverrideAnnotation**: Ignore private superclass methods.
  - #652: **ClassStartsWithBlankLine**: Fix NPE on annotated class with no following line at end of source file.
  - #653: **UseCollectNested**: Fix false positive when inner collect() call returns a different type.
  - #650: **UnnecessaryPublicModifier**: Fix false positive with annotations.
+ - #657: **SpaceAfterMethodCallName**: Fix wrong line number for multi-line method calls.
  - #656: Remove deprecated **UnnecessarySubstring** rule.
 
 Build and Infrastructure

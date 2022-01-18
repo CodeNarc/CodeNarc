@@ -1224,7 +1224,6 @@ public class AstUtil {
 
             // extract the relevant part of the first line
             if (lineIndex == node.getLineNumber() - 1) {
-                int nonRelevantColumns = node.getColumnNumber() - 1;
                 line = line.substring(node.getColumnNumber() - 1);
             }
 
