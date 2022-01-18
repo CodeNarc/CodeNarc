@@ -25,6 +25,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
 
     private static final String ERROR_MESSAGE = 'There is whitespace between the method name and parenthesis in a method call'
     private static final String ERROR_MESSAGE_SPACES = 'There is more than one space between the method name and its arguments in a method call'
+    private static final String ERROR_MESSAGE_CONSTRUCTOR = 'There is whitespace between class name and parenthesis in a constructor call.'
 
     @Test
     void ruleProperties() {
@@ -61,7 +62,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void test_TrailingWhitespaceInMethodCallWithParentheses_Violation() {
+    void test_MethodCallWithParentheses_Violation() {
         final SOURCE = '''
             class TrailingWhitespaceInMethodCallWithParentheses {
                 void invalid() {
@@ -72,12 +73,11 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 }
             }
         '''
-
         assertSingleViolation(SOURCE, 4, 'aMethod ("arg")', ERROR_MESSAGE)
     }
 
     @Test
-    void test_TrailingWhitespaceInConstructorCall_Violation() {
+    void test_ConstructorCall_Violation() {
         final SOURCE = '''
             class TrailingWhitespaceInConstructorCall {
                 TrailingWhitespaceInConstructorCall() {
@@ -85,12 +85,22 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 }
             }
         '''
-
-        assertSingleViolation(SOURCE, 4, 'throw new Exception ()', 'There is whitespace between class name and parenthesis in a constructor call.')
+        assertSingleViolation(SOURCE, 4, 'throw new Exception ()', ERROR_MESSAGE_CONSTRUCTOR)
     }
 
     @Test
-    void test_TrailingWhitespaceInSuperConstructorCall_Violation() {
+    void test_ConstructorCall_MultiLine_Violation() {
+        final SOURCE = '''
+            new BigObject(
+                123, 'abc',
+                new Exception ())
+        '''
+        assertViolations(SOURCE,
+                [line: 4, source: 'new Exception ()', message: ERROR_MESSAGE_CONSTRUCTOR])
+    }
+
+    @Test
+    void test_SuperConstructorCall_Violation() {
         final SOURCE = '''
             class TrailingWhitespaceInSuperConstructorCall {
                 TrailingWhitespaceInSuperConstructorCall() {
@@ -103,7 +113,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void test_ExcessiveTrailingWhitespaceInMethodCallWithoutParentheses_Violation() {
+    void test_MethodCallWithoutParentheses_Violation() {
         final SOURCE = '''
             class ExcessiveTrailingWhitespaceInMethodCallWithoutParentheses {
                 void invalid() {
@@ -114,7 +124,6 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 }
             }
         '''
-
         assertSingleViolation(SOURCE, 4, 'aMethod  "arg"', ERROR_MESSAGE_SPACES)
     }
 
@@ -131,7 +140,6 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 }
             }
         '''
-
         assertViolations(SOURCE,
             [line: 4, source: 'aMethod ("arg")', message: ERROR_MESSAGE],
             [line: 5, source: 'aMethod  "arg"', message: ERROR_MESSAGE_SPACES]
@@ -155,7 +163,6 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 }
             }
         '''
-
         assertNoViolations(SOURCE)
     }
 
@@ -165,7 +172,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             void foo() {
               echo 'hi'
             }
-            '''
+        '''
         assertNoViolations(SOURCE)
     }
 
@@ -191,7 +198,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             someMethod( ( a + b ) / c )
             // operation on result
             someMethod( ( collectionA + collectionB ).toSet() )
-            '''
+        '''
         assertNoViolations(SOURCE)
     }
 
@@ -201,7 +208,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             [1, 2, 3].forEach (it) -> { println it}
             
             doStuff(99, (it) -> { println it})
-            '''
+        '''
         assertNoViolations(SOURCE)
     }
 
@@ -219,7 +226,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
         final SOURCE = '''
             def failEvents = messages.parallelStream()
                 .filter { item -> item.headers.get( headerName ) == 'failed' }.collect ( Collectors.toList() ) as List<Message>
-            '''
+        '''
         assertViolations(SOURCE,
                 [line: 3, source: 'collect ( Collectors.toList() )', message: ERROR_MESSAGE])
     }

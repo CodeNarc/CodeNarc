@@ -20,7 +20,6 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
-import org.codenarc.util.AstUtil
 
 /**
  * Checks that there is no whitespace at the end of the method name when a method call contains parenthesis or that
