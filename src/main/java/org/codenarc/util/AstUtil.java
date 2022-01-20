@@ -1116,6 +1116,12 @@ public class AstUtil {
             // is the annotation the last thing on the line?
             if (rawLine.length() > lastAnnotation.getLastColumnNumber()) {
                 // no it is not
+
+                boolean doesItEndsWithLineComment = rawLine.substring(lastAnnotation.getLastColumnNumber() - 1).trim().startsWith("//");
+                if (doesItEndsWithLineComment) {
+                    return lastAnnotation.getLastLineNumber() + 1;
+                }
+
                 if (node.getClass() == MethodNode.class) {      // methods, but not constructors (since their name is different)
                     if (rawLine.contains(((MethodNode) node).getName())) {
                         return lastAnnotation.getLastLineNumber();
