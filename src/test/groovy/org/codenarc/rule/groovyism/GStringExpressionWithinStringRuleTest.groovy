@@ -161,6 +161,17 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase<GString
         assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')
     }
 
+    @Test
+    void testSingleQuoteStrings_WithClassAttributePresent_NoViolations() {
+        final SOURCE = '''
+            class SomeClass {
+                @SomeAnnotationOnField(someClass = SomeOtherClass, message = 'Some message ${sample.property1}')
+                String sampleProperty
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected GStringExpressionWithinStringRule createRule() {
         new GStringExpressionWithinStringRule()

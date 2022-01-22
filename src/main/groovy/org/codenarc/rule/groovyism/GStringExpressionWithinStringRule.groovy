@@ -100,7 +100,9 @@ class ConstantExpressionExtractor {
 
     @SuppressWarnings('UseCollectMany') //collectMany is not available in Groovy 1.7.5
     List<ConstantExpression> extractFrom(AnnotationNode annotationNode) {
-        return annotationNode.members.values().collect { Expression expression ->
+        return annotationNode.members.values().findAll { Expression expression ->
+            expression instanceof ListExpression || expression instanceof ConstantExpression || expression instanceof AnnotationConstantExpression
+        }.collect { Expression expression ->
             extractFromExpression(expression)
         }.flatten()
     }
