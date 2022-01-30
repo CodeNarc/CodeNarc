@@ -29,6 +29,7 @@ import org.codenarc.util.AstUtil
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
   */
 class BracesForClassRule extends AbstractRule {
+
     String name = 'BracesForClass'
     int priority = 2
     boolean sameLine = true
@@ -39,11 +40,7 @@ class BracesForClassRule extends AbstractRule {
             // Scripts don't have opening and closing braces, so ignore them.
             if (!classNode.script) {
                 def (lineNumber, sourceLine) = findOpeningBraceLine(sourceCode, classNode)
-                // Groovy 1.7 returns -1 as line number for a ClassNode representing an enum.
-                // In this case we ignore the rule
-                if (lineNumber != -1) {
-                    applyToClassNode(classNode, lineNumber, sourceLine, violations)
-                }
+                applyToClassNode(classNode, lineNumber, sourceLine, violations)
             }
         }
     }
