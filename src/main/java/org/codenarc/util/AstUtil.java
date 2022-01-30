@@ -1116,16 +1116,21 @@ public class AstUtil {
                     return lastAnnotation.getLastLineNumber() + 1;
                 }
 
-                if (node.getClass() == MethodNode.class) {      // methods, but not constructors (since their name is different)
+                if (node.getClass() == ClassNode.class) {
+                    if (rawLine.contains("class")) {
+                        return lastAnnotation.getLastLineNumber();
+                    }
+                    // Otherwise, fall through to use the next line
+                } else if (node.getClass() == MethodNode.class) {      // methods, but not constructors (since their name is different)
                     if (rawLine.contains(((MethodNode) node).getName())) {
                         return lastAnnotation.getLastLineNumber();
                     }
-                    // Otherwise fall through to use the next line
+                    // Otherwise, fall through to use the next line
                 } else if (node instanceof FieldNode) {
                     if (rawLine.contains(((FieldNode) node).getName())) {
                         return lastAnnotation.getLastLineNumber();
                     }
-                    // Otherwise fall through to use the next line
+                    // Otherwise, fall through to use the next line
                 } else {
                     return lastAnnotation.getLastLineNumber();
                 }
