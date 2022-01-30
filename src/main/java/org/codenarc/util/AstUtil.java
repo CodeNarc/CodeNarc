@@ -1094,18 +1094,12 @@ public class AstUtil {
 
 
     /**
-     * gets the first non annotation line number of a node, taking into account annotations.
+     * Gets the first non annotation line number of a node, taking into account annotations.
      */
     public static int findFirstNonAnnotationLine(ASTNode node, SourceCode sourceCode) {
         if (node instanceof AnnotatedNode && !((AnnotatedNode) node).getAnnotations().isEmpty()) {
-
-            // HACK: Groovy line numbers are broken when annotations have a parameter :(
-            // so we must look at the lineNumber, not the lastLineNumber
-            AnnotationNode lastAnnotation = null;
-            for (AnnotationNode annotation : ((AnnotatedNode) node).getAnnotations()) {
-                if (lastAnnotation == null) lastAnnotation = annotation;
-                else if (lastAnnotation.getLineNumber() < annotation.getLineNumber()) lastAnnotation = annotation;
-            }
+            List<AnnotationNode> annotations = ((AnnotatedNode) node).getAnnotations();
+            AnnotationNode lastAnnotation = annotations.get(annotations.size() - 1);
 
             String rawLine = getRawLine(sourceCode, lastAnnotation.getLastLineNumber()-1);
 

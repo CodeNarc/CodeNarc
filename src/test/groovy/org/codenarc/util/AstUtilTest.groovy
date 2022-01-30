@@ -57,7 +57,7 @@ class AstUtilTest extends AbstractTestCase {
                     2, 3)
             }
             @Before setUp() {  }
-            @First @Second def twoAnnotationsMethod() { }
+            @First @Second(size=1) def twoAnnotationsMethod() { }
         }
         enum MyEnum {
             READ, WRITE
