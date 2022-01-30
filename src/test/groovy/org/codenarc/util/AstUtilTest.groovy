@@ -352,23 +352,32 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testGetAnnotation() {
-        assert AstUtil.getAnnotation(visitor.methodNodes['otherMethod'], 'doesNotExist') == null
-        assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'doesNotExist') == null
-        assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'Before') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(methodNamed('otherMethod'), 'doesNotExist') == null
+        assert AstUtil.getAnnotation(methodNamed('setUp'), 'doesNotExist') == null
+        assert AstUtil.getAnnotation(methodNamed('setUp'), 'Before') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(methodNamed('methodWithAnnotationAndComment'), 'SuppressWarnings') instanceof AnnotationNode
+
+        assert AstUtil.getAnnotation(fieldNamed('annotatedField1'), 'Other') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(fieldNamed('annotatedField1'), 'SuppressWarnings') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(fieldNamed('annotatedField1'), 'DoesNotExist') == null
+
+        assert AstUtil.getAnnotation(classNamed('SomeAnnotatedClass'), 'SuppressWarnings') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(classNamed('SomeAnnotatedClass'), 'Ignore') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(classNamed('SomeAnnotatedClass'), 'DoesNotExist') == null
     }
 
     @Test
     void testHasAnnotation() {
-        assert !AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'doesNotExist')
-        assert AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'Before')
+        assert !AstUtil.hasAnnotation(methodNamed('setUp'), 'doesNotExist')
+        assert AstUtil.hasAnnotation(methodNamed('setUp'), 'Before')
     }
 
     @Test
     void testHasAnyAnnotation() {
-        assert !AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist')
-        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'First')
-        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist', 'First')
-        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist', 'First', 'Second')
+        assert !AstUtil.hasAnyAnnotation(methodNamed('twoAnnotationsMethod'), 'doesNotExist')
+        assert AstUtil.hasAnyAnnotation(methodNamed('twoAnnotationsMethod'), 'First')
+        assert AstUtil.hasAnyAnnotation(methodNamed('twoAnnotationsMethod'), 'doesNotExist', 'First')
+        assert AstUtil.hasAnyAnnotation(methodNamed('twoAnnotationsMethod'), 'doesNotExist', 'First', 'Second')
     }
 
     @Test

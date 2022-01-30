@@ -469,19 +469,15 @@ public class AstUtil {
 
     /**
      * Return the AnnotationNode for the named annotation, or else null.
-     * Supports Groovy 1.5 and Groovy 1.6.
      * @param node - the AnnotatedNode
      * @param name - the name of the annotation
      * @return the AnnotationNode or else null
      */
     public static AnnotationNode getAnnotation(AnnotatedNode node, String name) {
-        List<AnnotationNode> annotations = node.getAnnotations();
-        for (AnnotationNode annot : annotations) {
-            if (annot.getClassNode().getName().equals(name)) {
-                return annot;
-            }
-        }
-        return null;
+        return node.getAnnotations().stream()
+                .filter(a -> a.getClassNode().getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 
     /**

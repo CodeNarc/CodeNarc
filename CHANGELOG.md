@@ -9,12 +9,15 @@ Updated/Enhanced Rules and Bug Fixes
  - #653: **UseCollectNested**: Fix false positive when inner `collect()` call returns a different type.
  - #650: **UnnecessaryPublicModifier**: Fix false positive with annotations.
  - #657: **SpaceAfterMethodCallName**: Fix wrong line number for multi-line method calls.
+ - #661: **GStringExpressionWithinString**: Fix MissingMethodException for some annotations. ([Damir Murat](https://github.com/dmurat))
+ - #663: **MissingBlankLineBeforeAnnotatedField**: Fix false positive for annotation followed by inline comment. ([Damir Murat](https://github.com/dmurat))
  - #656: Remove deprecated **UnnecessarySubstring** rule.
 
 Build and Infrastructure
+ - [BREAKING CHANGE] Requires Java 8 and Groovy 3.x.
  - #654: Upgrade to Groovy 3.0.9. Groovy 2.x will no longer be supported.
  - #649: Support for description inside CodeNarc enable/disable comments. ([davidkron](https://github.com/davidkron))
- - #664: `AstUtil`: Simplify `findFirstNonAnnotationLine()` last annotation logic and check for “class” within the line if it is a ClassNode.
+ - #664: `AstUtil`: Simplify `findFirstNonAnnotationLine()` last annotation logic and check for “class” within the line if it is a ClassNode. Simplify `getAnnotation()`.
 
 
 Version 2.2.0    (Aug 2021)
