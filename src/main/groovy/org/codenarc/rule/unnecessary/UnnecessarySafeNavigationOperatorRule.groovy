@@ -53,7 +53,7 @@ class UnnecessarySafeNavigationOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private void checkExpression(Expression expression, Expression objExpr) {
-        // TODO Could expand this to also check for class expressions, e.g. String?.toString(), but not parsed consistently in Groovy 1.7
+        // TODO Expand to also check for class expressions, e.g. String?.toString(), but AST does not make that obvious at "Conversion" compiler phase
         if (expression.safe && !expression.spreadSafe && (isConstantOrLiteral(objExpr) || isThisReference(objExpr) || isSuperReference(objExpr) || isConstructorCall(objExpr))) {
             def expressionText = '"' + objExpr.text + '"'
             addViolation(expression, "The safe navigation operator (?.) is unnecessary for $expressionText in class $currentClassName")
