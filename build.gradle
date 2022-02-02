@@ -25,6 +25,7 @@ repositories {
 }
 
 def groovyVersion = '3.0.9'
+def gmetricsVersion = '2.0.0'
 def slf4jVersion = '1.7.25'
 
 dependencies {
@@ -35,7 +36,7 @@ dependencies {
     implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
 
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
-    implementation('org.gmetrics:GMetrics:1.1') {
+    implementation("org.gmetrics:GMetrics:$gmetricsVersion") {
         transitive = false
     }
 
