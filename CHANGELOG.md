@@ -18,6 +18,7 @@ Build and Infrastructure
  - [BREAKING CHANGE] Requires Java 8 and Groovy 3.x.
  - #654: Upgrade to Groovy 3.0.9. Groovy 2.x will no longer be supported.
  - #665: Upgrade to GMetrics 2.0.0.
+ - #665: Upgrade to SLF4J 1.7.35.
  - #649: Support for description inside CodeNarc enable/disable comments. ([davidkron](https://github.com/davidkron))
  - #664: `AstUtil`: Simplify `findFirstNonAnnotationLine()` last annotation logic and check for “class” within the line if it is a ClassNode. Simplify `getAnnotation()`.
 
