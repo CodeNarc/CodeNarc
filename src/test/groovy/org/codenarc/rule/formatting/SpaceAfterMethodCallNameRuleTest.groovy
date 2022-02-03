@@ -108,8 +108,19 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 }
             }
         '''
-
         assertSingleViolation(SOURCE, 4, 'super ()', 'There is whitespace between super and parenthesis in a constructor call.')
+    }
+
+    @Test
+    void test_SuperConstructorCall_NoViolation() {
+        final SOURCE = '''
+            class TrailingWhitespaceInSuperConstructorCall {
+                TrailingWhitespaceInSuperConstructorCall() {
+                    super("{(   (}")
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Test
