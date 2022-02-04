@@ -96,7 +96,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase<Consec
             }
         }
         """
-        assertSingleViolation(SOURCE) { v -> v.lineNumber in [4, 5] }  // line number varies between Groovy 2.x and 3.x
+        assertSingleViolation(SOURCE, 4, 'def e =', "String concatenation in class MyClass can be joined into the literal 'Hello")
     }
 
     @Override
