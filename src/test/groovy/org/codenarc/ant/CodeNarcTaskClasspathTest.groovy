@@ -37,7 +37,7 @@ class CodeNarcTaskClasspathTest {
     private AntBuilder ant
 
     @TempDir
-    File tempDir
+    private File tempDir
 
     @BeforeEach
     void setupSources() {
