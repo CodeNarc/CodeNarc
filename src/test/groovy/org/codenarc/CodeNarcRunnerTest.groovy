@@ -35,9 +35,9 @@ import org.codenarc.rule.Violation
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.ruleset.RuleSetConfigurer
 import org.codenarc.test.AbstractTestCase
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CodeNarcRunner
@@ -405,14 +405,14 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     // Test setUp/tearDown and helper methods
     //--------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUp() {
         codeNarcRunner = new CodeNarcRunner()
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
         codeNarcRunner.ruleSetConfigurer = ruleSetConfigurer
     }
 
-    @After
+    @AfterEach
     void cleanUp() {
         System.clearProperty(CodeNarcRunner.PLUGINS_PROPERTY)
     }

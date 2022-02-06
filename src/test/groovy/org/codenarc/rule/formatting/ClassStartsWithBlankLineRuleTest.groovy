@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.codenarc.rule.AbstractRuleTestCase
 
 /**

@@ -18,7 +18,7 @@ package org.codenarc.rule.convention
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CompileStatic rule.

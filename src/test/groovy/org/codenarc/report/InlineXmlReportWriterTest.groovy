@@ -18,8 +18,8 @@ package org.codenarc.report
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for InlineXmlReportWriter.
@@ -97,7 +97,7 @@ class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
         assertXml(xmlAsString, REPORT_XML)
     }
 
-    @Before
+    @BeforeEach
     void setUpInlineXmlReportWriterTest() {
         reportWriter = new InlineXmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }

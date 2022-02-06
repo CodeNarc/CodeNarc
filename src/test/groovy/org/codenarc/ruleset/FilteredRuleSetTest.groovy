@@ -17,8 +17,8 @@ package org.codenarc.ruleset
 
 import org.codenarc.rule.StubRule
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -131,7 +131,7 @@ class FilteredRuleSetTest extends AbstractTestCase {
         shouldFail(UnsupportedOperationException) { rules.add(123) }
     }
 
-    @Before
+    @BeforeEach
     void setUpFilteredRuleSetTest() {
         innerRuleSet = new ListRuleSet([RULE1, RULE2, RULE3])
         filteredRuleSet = new FilteredRuleSet(innerRuleSet)

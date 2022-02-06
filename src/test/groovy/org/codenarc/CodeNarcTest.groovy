@@ -23,9 +23,9 @@ import org.codenarc.report.*
 import org.codenarc.results.Results
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.util.CodeNarcVersion
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CodeNarc command-line runner
@@ -469,7 +469,7 @@ class CodeNarcTest extends AbstractTestCase {
     // Test setUp/tearDown and helper methods
     //--------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUp() {
         codeNarc = new CodeNarc()
         codeNarc.systemExit = { code -> exitCode = code }
@@ -477,7 +477,7 @@ class CodeNarcTest extends AbstractTestCase {
         outputFile = new File(HTML_REPORT_FILE)
     }
 
-    @After
+    @AfterEach
     void tearDown() {
         outputFile.delete()
     }

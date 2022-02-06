@@ -16,8 +16,8 @@
 package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GrailsDomainWithServiceReferenceRule
@@ -32,7 +32,7 @@ class GrailsDomainWithServiceReferenceRuleTest extends AbstractRuleTestCase<Grai
         assert rule.name == 'GrailsDomainWithServiceReference'
     }
 
-    @Before
+    @BeforeEach
     void setup() {
         sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Book.groovy'
     }

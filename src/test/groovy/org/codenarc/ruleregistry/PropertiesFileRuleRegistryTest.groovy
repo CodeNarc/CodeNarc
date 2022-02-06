@@ -19,7 +19,7 @@ import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.rule.naming.MethodNameRule
 import org.codenarc.rule.unused.UnusedPrivateFieldRule
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for PropertiesFileRuleRegistry

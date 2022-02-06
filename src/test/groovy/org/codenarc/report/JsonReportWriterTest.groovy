@@ -28,8 +28,8 @@ import org.codenarc.rule.Violation
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JsonReportWriter
@@ -122,7 +122,7 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
     // Setup and helper methods
     //--------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpJsonReportWriterTest() {
         reportWriter = new JsonReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }

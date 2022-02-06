@@ -18,7 +18,7 @@ package org.codenarc.report
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ReportWriterFactory

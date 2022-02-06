@@ -23,8 +23,8 @@ import org.codenarc.rule.Violation
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -164,7 +164,7 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
     // Setup and helper methods
     //--------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpXmlReportWriterTest() {
         reportWriter = new XmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }

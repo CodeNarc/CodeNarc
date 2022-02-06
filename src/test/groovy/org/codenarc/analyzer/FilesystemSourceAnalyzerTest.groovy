@@ -24,8 +24,8 @@ import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.assertEqualSets
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -192,7 +192,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assertMatches(source, '**/OTHER.*', '', false)
     }
 
-    @Before
+    @BeforeEach
     void before() {
         analyzer = new FilesystemSourceAnalyzer()
         testCountRule = new FakeCountRule()

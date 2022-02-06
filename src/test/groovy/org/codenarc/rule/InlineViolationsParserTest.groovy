@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.rule.InlineViolationsParser.inlineViolation
 

@@ -15,7 +15,7 @@
  */
 package org.codenarc.test
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests that the "site" (online) documentation is up to date.

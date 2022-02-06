@@ -21,8 +21,8 @@ import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFail
 
@@ -41,7 +41,7 @@ class SourceCodeUtilTest extends AbstractTestCase {
     private SourceCode sourceCode
     private SourceCodeUtilTestVisitor visitor
 
-    @Before
+    @BeforeEach
     void setUpSourceCodeUtilTest() {
         sourceCode = new SourceString(SOURCE)
     }

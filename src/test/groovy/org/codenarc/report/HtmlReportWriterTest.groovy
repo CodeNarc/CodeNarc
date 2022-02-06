@@ -20,8 +20,8 @@ import org.codenarc.rule.Rule
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.assertContainsAllInOrder
 
@@ -154,7 +154,7 @@ class HtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpHtmlReportWriterTest() {
         reportWriter = new HtmlReportWriter(outputFile:NEW_REPORT_FILE)
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }

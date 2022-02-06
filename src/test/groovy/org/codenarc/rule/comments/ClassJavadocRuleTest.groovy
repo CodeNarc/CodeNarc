@@ -17,7 +17,7 @@ package org.codenarc.rule.comments
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.source.SourceString
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ClassJavadocRule

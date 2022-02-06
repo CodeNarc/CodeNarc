@@ -16,8 +16,8 @@
 package org.codenarc.source
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFail
 
@@ -175,7 +175,7 @@ class SourceStringTest extends AbstractTestCase {
         assert !new SourceString('%^#@$').valid
     }
 
-    @Before
+    @BeforeEach
     void setUpSourceStringTest() {
         sourceString = new SourceString(SOURCE)
     }

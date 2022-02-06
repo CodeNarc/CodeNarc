@@ -16,8 +16,8 @@
 package org.codenarc.source
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SourceCodeUtil
@@ -113,7 +113,7 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
         assert !new SourceCodeCriteria(doNotApplyToFileNames:"$OTHER_NAME,src/**My*.groovy").matches(sourceCode)
     }
 
-    @Before
+    @BeforeEach
     void setUpSourceCodeCriteriaTest() {
         sourceCode = new SourceString('class ABC { }')
     }

@@ -16,8 +16,8 @@
 package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GrailsDuplicateConstraintRule
@@ -185,7 +185,7 @@ class GrailsDuplicateConstraintRuleTest extends AbstractRuleTestCase<GrailsDupli
         assertNoViolations(SOURCE)
     }
 
-    @Before
+    @BeforeEach
     void setUp() {
         sourceCodePath = 'MyProject/grails-app/domain/com/example/Person.groovy'
     }

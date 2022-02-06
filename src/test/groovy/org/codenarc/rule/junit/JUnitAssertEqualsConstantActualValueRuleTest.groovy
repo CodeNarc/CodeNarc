@@ -16,8 +16,8 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitAssertEqualsConstantActualValueRule
@@ -26,7 +26,7 @@ import org.junit.Test
  */
 class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<JUnitAssertEqualsConstantActualValueRule> {
 
-    @Before
+    @BeforeEach
     void setup() {
         sourceCodePath = '/src/test/SampleTest.groovy'
     }
@@ -40,7 +40,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<
     @Test
     void testNoViolations() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             import static org.junit.Assert.assertEquals
 
             class SampleTest {
@@ -80,7 +80,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<
     @Test
     void testMultipleViolations() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             import static org.junit.Assert.assertEquals
 
             class SampleTest {

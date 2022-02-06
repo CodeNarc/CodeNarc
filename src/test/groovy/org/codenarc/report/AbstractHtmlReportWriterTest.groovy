@@ -23,8 +23,8 @@ import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -124,7 +124,7 @@ class AbstractHtmlReportWriterTest extends AbstractTestCase {
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpHtmlReportWriterTest() {
         reportWriter = new AbstractHtmlReportWriter() {
             @Override

@@ -27,7 +27,7 @@ import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
+import org.junit.jupiter.api.BeforeEach
 
 import static org.junit.Assert.assertEquals
 
@@ -64,7 +64,7 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
     // Setup and tear-down and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpAbstractHtmlReportWriterTest() {
         log(new File('.').absolutePath)
 

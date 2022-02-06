@@ -19,7 +19,7 @@ import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for IdeTestReportWriter

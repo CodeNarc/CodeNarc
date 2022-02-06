@@ -18,7 +18,7 @@ package org.codenarc.rule.imports
 import org.codehaus.groovy.ast.ClassHelper
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.source.SourceString
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedImportRule

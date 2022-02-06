@@ -17,7 +17,7 @@ package org.codenarc.ruleregistry
 
 import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for RuleRegistryInitializer

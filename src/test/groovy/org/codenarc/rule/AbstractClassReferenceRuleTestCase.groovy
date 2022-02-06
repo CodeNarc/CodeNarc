@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Abstract superclass for tests of classes that check for class references.

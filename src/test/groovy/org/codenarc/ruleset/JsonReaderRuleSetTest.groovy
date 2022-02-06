@@ -21,7 +21,7 @@ import org.codenarc.rule.exceptions.CatchRuntimeExceptionRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.ruleregistry.RuleRegistryInitializer
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JsonReaderRuleSetTest

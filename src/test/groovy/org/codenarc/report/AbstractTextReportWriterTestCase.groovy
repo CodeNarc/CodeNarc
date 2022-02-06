@@ -21,8 +21,8 @@ import org.codenarc.results.FileResults
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import java.text.DateFormat
 
@@ -142,7 +142,7 @@ abstract class AbstractTextReportWriterTestCase extends AbstractTestCase {
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpAbstractTextReportWriterTestCase() {
         reportWriter = createReportWriter()
         reportWriter.getTimestamp = { TIMESTAMP_DATE }

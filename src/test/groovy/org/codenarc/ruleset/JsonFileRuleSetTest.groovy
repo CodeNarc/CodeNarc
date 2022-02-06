@@ -22,7 +22,7 @@ import org.codenarc.rule.groovyism.ExplicitCallToEqualsMethodRule
 import org.codenarc.rule.logging.PrintlnRule
 import org.codenarc.ruleregistry.RuleRegistryInitializer
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JsonFileRuleSet

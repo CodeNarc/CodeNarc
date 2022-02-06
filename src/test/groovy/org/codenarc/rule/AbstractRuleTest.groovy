@@ -21,8 +21,8 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 import org.codehaus.groovy.control.Phases
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for the AbstractRule class
@@ -307,7 +307,7 @@ class AbstractRuleTest extends AbstractRuleTestCase<AbstractRule> {
     // Setup and helper methods
     //--------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpAbstractRuleTest() {
         sourceCodePath = PATH
         sourceCodeName = FILENAME

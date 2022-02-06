@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unused
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedPrivateFieldRule when constructor only usages are not allowed

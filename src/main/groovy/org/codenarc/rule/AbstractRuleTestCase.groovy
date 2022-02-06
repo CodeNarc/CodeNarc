@@ -22,8 +22,8 @@ import org.codenarc.source.CustomCompilerPhaseSourceDecorator
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
@@ -319,7 +319,7 @@ actual:               $violation.sourceLine
         results.violations
     }
 
-    @Before
+    @BeforeEach
     void setUpAbstractRuleTestCase() {
         this.rule = createRule()
     }

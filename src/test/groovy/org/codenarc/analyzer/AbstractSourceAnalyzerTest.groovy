@@ -21,7 +21,7 @@ import org.codenarc.rule.Rule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceCode
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for AbstractSourceAnalyzer

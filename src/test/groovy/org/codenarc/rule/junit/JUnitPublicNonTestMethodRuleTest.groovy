@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitPublicNonTestMethodRule
@@ -133,7 +133,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase<JUnitPublicN
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
                 public void testSomething() { println 'ok' }
-                @Before void init() { println 'ok' }
+                @BeforeEach void init() { println 'ok' }
             }
         '''
         assertNoViolations(SOURCE)
@@ -144,7 +144,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase<JUnitPublicN
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
                 public void testSomething() { println 'ok' }
-                @After void cleanUp() { println 'done' }
+                @AfterEach void cleanUp() { println 'done' }
             }
         '''
         assertNoViolations(SOURCE)
@@ -288,7 +288,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase<JUnitPublicN
     }
 
     @Test
-    void testThatAtOverrideSuppressesViolation() {
+    void testOverrideAnnotation_SuppressesViolation() {
         final SOURCE = '''
             class MyTest {
                 @Override

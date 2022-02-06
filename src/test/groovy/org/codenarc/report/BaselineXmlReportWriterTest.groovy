@@ -18,8 +18,8 @@ package org.codenarc.report
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -94,7 +94,7 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpBaselineXmlReportWriterTest() {
         reportWriter = new BaselineXmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }

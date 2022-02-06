@@ -16,8 +16,8 @@
 package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ClassNameSameAsFilenameRule
@@ -29,7 +29,7 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase<ClassNameSame
 
     static skipTestThatUnrelatedCodeHasNoViolations
 
-    @Before
+    @BeforeEach
     void setup() {
         sourceCodeName = 'SameAsFilename.groovy'
     }

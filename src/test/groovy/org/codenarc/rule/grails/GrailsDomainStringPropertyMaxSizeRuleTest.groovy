@@ -16,8 +16,8 @@
 package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GrailsDomainStringPropertyMaxSizeRule
@@ -236,7 +236,7 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
                 [line:11, source:'String firstName', message:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'])
     }
 
-    @Before
+    @BeforeEach
     void setUp() {
         sourceCodePath = 'MyProject/grails-app/domain/com/example/Person.groovy'
     }

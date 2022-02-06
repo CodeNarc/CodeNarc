@@ -19,7 +19,7 @@ import org.codenarc.rule.StubRule
 
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.*
 import org.codenarc.rule.FakePathRule

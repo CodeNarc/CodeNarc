@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitUnnecessarySetUp
@@ -96,7 +96,7 @@ class JUnitUnnecessarySetUpRuleTest extends AbstractRuleTestCase<JUnitUnnecessar
     void testApplyTo_SetUpMethodHasBeforeAnnotation() {
         final SOURCE = '''
           class MyTest extends TestCase {
-            @Before void setUp() {
+            @BeforeEach void setUp() {
                 super.setUp()
             }
           }

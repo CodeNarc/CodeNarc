@@ -19,7 +19,7 @@ import org.codenarc.results.Results
 import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Test for SourceStringAnalyzer.

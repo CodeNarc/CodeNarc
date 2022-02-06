@@ -16,8 +16,8 @@
 package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GrailsServletContextReferenceRule
@@ -111,7 +111,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase<GrailsS
         assertNoViolations(SOURCE)
     }
 
-    @Before
+    @BeforeEach
     void setUpGrailsServletContextReferenceRuleTest() {
         sourceCodePath = CONTROLLER_PATH
     }

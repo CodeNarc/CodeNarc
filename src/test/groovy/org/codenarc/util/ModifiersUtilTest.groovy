@@ -20,7 +20,7 @@ import org.codehaus.groovy.ast.MethodNode
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ModifiersUtil

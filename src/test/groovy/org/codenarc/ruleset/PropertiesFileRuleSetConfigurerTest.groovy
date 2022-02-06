@@ -20,8 +20,8 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 import org.codenarc.rule.Rule
 import org.codenarc.rule.StubRule
 import org.codenarc.test.AbstractTestCase
-import org.junit.After
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for PropertiesFileRuleSetConfigurer
@@ -114,7 +114,7 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
         assert configurer instanceof RuleSetConfigurer
     }
 
-    @After
+    @AfterEach
     void after() {
         System.clearProperty(CODENARC_PROPERTIES_FILE_PROP)
     }

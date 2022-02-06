@@ -16,8 +16,8 @@
 package org.codenarc.util
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFail
 
@@ -101,7 +101,7 @@ class PropertyUtilTest extends AbstractTestCase {
         shouldFail(NoSuchFieldException) { PropertyUtil.setPropertyFromString(object, 'XXX', '23456') }
     }
 
-    @Before
+    @BeforeEach
     void setUpPropertyUtilTest() {
         object = new FakePropertyUtilClass()
     }

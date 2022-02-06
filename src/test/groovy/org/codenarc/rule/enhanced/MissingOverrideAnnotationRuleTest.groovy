@@ -17,7 +17,7 @@ package org.codenarc.rule.enhanced
 
 import org.codehaus.groovy.control.Phases
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for MissingOverrideAnnotationRule

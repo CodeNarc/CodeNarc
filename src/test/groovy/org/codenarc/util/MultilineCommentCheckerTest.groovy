@@ -16,7 +16,7 @@
 package org.codenarc.util
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for MultilineCommentChecker

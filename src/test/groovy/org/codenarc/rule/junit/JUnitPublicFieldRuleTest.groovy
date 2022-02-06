@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitPublicFieldRule
@@ -34,7 +34,7 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase<JUnitPublicFieldRule
     @Test
     void testTestClassWithNoPublicFields_NoViolations() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 private service
                 protected count = 99
@@ -89,7 +89,7 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase<JUnitPublicFieldRule
     @Test
     void testClassWithPublicFields_Violations() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 public int count
                 public static final MAX_VALUE = 1000

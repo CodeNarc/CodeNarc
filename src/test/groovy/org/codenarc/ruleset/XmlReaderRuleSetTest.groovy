@@ -22,7 +22,7 @@ import org.codenarc.rule.basic.EmptyIfStatementRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.*
 

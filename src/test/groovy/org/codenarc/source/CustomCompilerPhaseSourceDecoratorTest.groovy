@@ -19,7 +19,7 @@ import org.codehaus.groovy.ast.ModuleNode
 import org.codehaus.groovy.control.Phases
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.test.TestUtil
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CustomCompilerPhaseSourceDecorator

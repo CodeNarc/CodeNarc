@@ -18,7 +18,7 @@ package org.codenarc.plugin
 import org.codenarc.results.FileResults
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceString
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Unit tests for FileViolations

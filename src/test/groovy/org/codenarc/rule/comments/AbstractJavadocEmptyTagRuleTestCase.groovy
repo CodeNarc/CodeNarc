@@ -16,7 +16,7 @@
 package org.codenarc.rule.comments
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Abstract superclass for Tests for JavadocEmptyXxxTagRule classes

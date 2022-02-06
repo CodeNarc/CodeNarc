@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitPublicPropertyRule
@@ -60,7 +60,7 @@ class JUnitPublicPropertyRuleTest extends AbstractRuleTestCase<JUnitPublicProper
     @Test
     void testTestClassWithProperty_Violation() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 static String id    // static property
                 def helper          // property

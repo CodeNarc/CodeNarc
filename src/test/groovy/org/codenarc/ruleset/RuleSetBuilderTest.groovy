@@ -22,8 +22,8 @@ import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.ruleregistry.RuleRegistry
 import org.codenarc.ruleregistry.RuleRegistryHolder
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -395,7 +395,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
-    @Before
+    @BeforeEach
     void setUpRuleSetBuilderTest() {
         ruleSetBuilder = new RuleSetBuilder()
     }

@@ -19,7 +19,7 @@ import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ImportUtil

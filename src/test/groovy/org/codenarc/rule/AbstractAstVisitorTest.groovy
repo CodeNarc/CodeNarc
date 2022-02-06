@@ -20,8 +20,8 @@ import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for AbstractAstVisitor
@@ -93,7 +93,7 @@ class AbstractAstVisitorTest extends AbstractTestCase {
         assert astVisitor.isNotGeneratedCode(astVisitor.ifStatement)
     }
 
-    @Before
+    @BeforeEach
     void setUpAbstractAstVisitorTest() {
         sourceCode = new SourceString(SOURCE)
         rule = [getName : { 'DummyRule' } ] as Rule

@@ -16,8 +16,8 @@
 package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ImplementationAsTypeRule
@@ -169,7 +169,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase<ImplementationAs
         }
     }
 
-    @Before
+    @BeforeEach
     void setUpImplementationAsTypeRuleTest() {
         def badTypesClassNameOnly = BAD_TYPES.collect { badType ->  classNameOnly(badType) }
         allBadTypes = BAD_TYPES + badTypesClassNameOnly

@@ -15,21 +15,16 @@
  */
 package org.codenarc.rule
 
-import org.codehaus.groovy.control.Phases
-import org.junit.Test
-import org.junit.contrib.java.lang.system.RestoreSystemProperties
-
 import static org.codenarc.rule.AbstractEnhanceableAstVisitorRule.ENHANCED_MODE_SYSTEM_PROPERTY
 import static org.codenarc.source.SourceCode.DEFAULT_COMPILER_PHASE
+
+import org.codehaus.groovy.control.Phases
+import org.junit.jupiter.api.Test
 
 /**
  * @author Marcin Erdmann
  */
 class AbstractEnhanceableAstVisitorRuleTest extends AbstractRuleTestCase<AbstractEnhanceableAstVisitorRuleTestRule> {
-
-    @SuppressWarnings('JUnitPublicField')
-    @org.junit.Rule
-    public RestoreSystemProperties restoreSystemProperties = new RestoreSystemProperties()
 
     @Override
     protected AbstractEnhanceableAstVisitorRuleTestRule createRule() {
@@ -58,8 +53,11 @@ class AbstractEnhanceableAstVisitorRuleTest extends AbstractRuleTestCase<Abstrac
     @Test
     void testEnhancedModeCanBeEnabledUsingASystemProperty() {
         System.setProperty(ENHANCED_MODE_SYSTEM_PROPERTY, 'true')
-
-        assert createRule().enhancedMode
+        try {
+            assert createRule().enhancedMode
+        } finally {
+            System.clearProperty(ENHANCED_MODE_SYSTEM_PROPERTY)
+        }
     }
 
     static class AbstractEnhanceableAstVisitorRuleTestRule extends AbstractEnhanceableAstVisitorRule {

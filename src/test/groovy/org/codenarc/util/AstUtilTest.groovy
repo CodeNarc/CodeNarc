@@ -32,8 +32,8 @@ import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for AstUtil
@@ -422,7 +422,7 @@ class AstUtilTest extends AbstractTestCase {
         assert sourceBetween2.contains('println methodCallWithinEnum')
     }
 
-    @Before
+    @BeforeEach
     void setUpAstUtilTest() {
         visitor = new AstUtilTestVisitor()
         applyVisitor(SOURCE)

@@ -16,9 +16,9 @@
 package org.codenarc.report
 
 import org.codenarc.results.FileResults
-import org.junit.Before
-import org.junit.BeforeClass
-import org.junit.Test
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SortableHtmlReportWriter
@@ -80,12 +80,12 @@ class SortableHtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
-    @BeforeClass
+    @BeforeAll
     static void initializeJavascript() {
         jsFileContents = new File('src/main/resources/js/sort-table.js').text
     }
 
-    @Before
+    @BeforeEach
     void setUpHtmlReportWriterTest() {
         reportWriter = new SortableHtmlReportWriter(outputFile:NEW_REPORT_FILE)
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }

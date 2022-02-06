@@ -21,8 +21,8 @@ import org.codenarc.results.FileResults
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.captureSystemOut
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -95,7 +95,7 @@ abstract class AbstractCompactTextReportWriterTestCase extends AbstractTestCase 
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpAbstractCompactTextReportWriterTestCase() {
         reportWriter = createReportWriter()
         reportWriter.getTimestamp = { TIMESTAMP_DATE }

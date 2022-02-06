@@ -28,8 +28,8 @@ import org.codenarc.rule.FakePathRule
 import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for AntFileSetSourceAnalyzer
@@ -215,7 +215,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assert analyzer.sourceDirectories == [normalizedPath('src/main/groovy')]
     }
 
-    @Before
+    @BeforeEach
     void before() {
         project = new Project()
         project.basedir = '.'

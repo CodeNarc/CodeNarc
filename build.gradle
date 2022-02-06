@@ -27,6 +27,7 @@ repositories {
 def groovyVersion = '3.0.9'
 def gmetricsVersion = '2.0.0'
 def slf4jVersion = '1.7.35'
+def junitVersion = "5.8.2"
 
 dependencies {
     implementation "org.codehaus.groovy:groovy:$groovyVersion"
@@ -41,11 +42,12 @@ dependencies {
     }
 
     // JUnit is only required if you are using the CodeNarc testing framework, e.g. AbstractRuleTestCase
-    compileOnly 'junit:junit:4.12'
+    // compileOnly?
+    implementation("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+//    implementation("org.junit.vintage:junit-vintage-engine:${junitVersion}")
 
     testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
     testImplementation 'commons-cli:commons-cli:1.4'
-    testImplementation 'junit:junit:4.12'
     testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
 
     testRuntime "org.codehaus.groovy:groovy-macro:$groovyVersion"

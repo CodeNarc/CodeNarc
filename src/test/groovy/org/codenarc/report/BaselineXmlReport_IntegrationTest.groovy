@@ -26,8 +26,8 @@ import org.codenarc.rule.imports.UnusedImportRule
 import org.codenarc.rule.unused.UnusedPrivateMethodRule
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.util.io.StringResource
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Integration tests for BaselineXmlReportWriter, BaselineXmlReportParser and BaselineResultsPlugin.
@@ -97,7 +97,7 @@ class BaselineXmlReport_IntegrationTest extends AbstractTestCase {
         assert plugin.numViolationsRemoved == 7
     }
 
-    @Before
+    @BeforeEach
     void setUp() {
         def srcMainDirResults = new DirectoryResults('src/main', 1)
         srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)

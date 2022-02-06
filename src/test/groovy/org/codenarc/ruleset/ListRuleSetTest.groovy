@@ -17,7 +17,7 @@ package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining

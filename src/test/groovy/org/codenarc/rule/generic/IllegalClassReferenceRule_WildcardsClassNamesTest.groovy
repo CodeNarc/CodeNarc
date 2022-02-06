@@ -16,7 +16,7 @@
 package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for IllegalClassReferenceRule - checks for specifying values containing wildcards for the classNames field

@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitTearDownCallsSuperRule
@@ -111,7 +111,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase<JUnitTearDown
     void testApplyTo_TearDownMethodHasAfterAnnotation() {
         final SOURCE = '''
           class MyTest extends TestCase {
-            @After void tearDown() {  }
+            @AfterEach void tearDown() {  }
           }
         '''
         assertNoViolations(SOURCE)
