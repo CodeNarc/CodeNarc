@@ -59,7 +59,6 @@ The *ABC Metric* calculation rules for Groovy:
     eXcentia Sonar ABC Metric Plugin (for Java) includes a table of risk classifications for ABC scores for both methods and classes.
   * See the [GMetrics ABC metric](http://gmetrics.sourceforge.net/gmetrics-AbcMetric.html).
     This includes a discussion of guidelines for interpreting *ABC* scores.
-  * This rule requires Groovy 1.6 (or later).
   * This rule requires the GMetrics jar on the classpath. See [GMetrics](http://gmetrics.sourceforge.net/).
 
 
@@ -185,7 +184,6 @@ Add one (1) for each occurrence of each of the following:*
   * See the [original paper describing Cyclomatic Complexity](http://www.literateprogramming.com/mccabe.pdf)
   * See the [GMetrics Cyclomatic Complexity metric](http://gmetrics.sourceforge.net/gmetrics-CyclomaticComplexityMetric.html).
     This includes a discussion of guidelines for interpreting *cyclomatic complexity* values.
-  * This rule requires Groovy 1.6 (or later).
   * This rule requires the GMetrics jar on the classpath. See [GMetrics](http://gmetrics.sourceforge.net/).
 
 
