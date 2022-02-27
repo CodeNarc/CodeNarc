@@ -67,6 +67,7 @@ class SourceCodeUtil {
             nodeLines[-1] = nodeLines.last()[0..(endColumn - 2)]
             return nodeLines
         }
-        return [nodeLines.first()[(startColumn - 1)..(endColumn - 2)]]
+        // Single line
+        return [nodeLines.first().substring(startColumn - 1, endColumn - 1)]
     }
 }

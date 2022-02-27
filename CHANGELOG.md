@@ -11,6 +11,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #657: **SpaceAfterMethodCallName**: Fix wrong line number for multi-line method calls.
  - #661: **GStringExpressionWithinString**: Fix MissingMethodException for some annotations. ([Damir Murat](https://github.com/dmurat))
  - #663: **MissingBlankLineBeforeAnnotatedField**: Fix false positive for annotation followed by inline comment. ([Damir Murat](https://github.com/dmurat))
+ - #667: **TrailingComma**: Fix StringIndexOutOfBoundsException.
  - #656: Remove deprecated **UnnecessarySubstring** rule.
  - #664: Remove hacks and workarounds required for Groovy 1.x and 2.x.
 

@@ -52,18 +52,28 @@ class SourceCodeUtilTest extends AbstractTestCase {
     }
 
     @Test
-    void testSourceLinesBetweenForSingleLine() {
+    void testSourceLinesBetween_SingleLine() {
         assert SourceCodeUtil.sourceLinesBetween(sourceCode, 2, 19, 2, 23) == ['each']
         assert SourceCodeUtil.sourceLinesBetween(sourceCode, 2, 9, 2, 18) == ['[1, 2, 3]']
     }
 
     @Test
-    void testSourceLinesBetweenForMultiLine() {
+    void testSourceLinesBetween_MultiLine() {
         def lines = SourceCodeUtil.sourceLinesBetween(sourceCode, 3, 23, 5, 10)
         assert lines.size() == 3
         assert lines[0] == '{'
         assert lines[1] == '            it > 3'
         assert lines[2] == '        }'
+    }
+
+    @Test
+    void testSourceLinesBetween_StartSameAsEnd() {
+        assert SourceCodeUtil.sourceLinesBetween(sourceCode, 2, 19, 2, 19) == ['']
+    }
+
+    @Test
+    void testSourceLinesBetween_StartAfterEnd() {
+        shouldFail(IllegalArgumentException) { SourceCodeUtil.sourceLinesBetween(sourceCode, 2, 19, 2, 18) }
     }
 
     @Test

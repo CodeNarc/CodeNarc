@@ -263,6 +263,40 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase<TrailingCommaRule> {
                 [line:4, source:'def map2 = [', message:MAP_ERROR])
     }
 
+    @Test
+    void testScript_NoViolation() {
+        final SOURCE = '''
+            node('something') {
+              stage('whatever') {
+                myLib.someFunction(
+                 aoeu: 'foo',
+                 htns: 'bar',
+                 ) { blah ->
+                println(blah)
+                }
+              }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testScript_Violation() {
+        final SOURCE = '''
+            node('something') {
+              stage('whatever') {
+                myLib.someFunction(
+                 aoeu: 'foo',
+                 htns: 'bar'
+                 ) { blah ->
+                println(blah)
+                }
+              }
+            }
+        '''
+        assertViolations(SOURCE, [line:5, source:"aoeu: 'foo',", message:MAP_ERROR])
+    }
+
     @Override
     protected TrailingCommaRule createRule() {
         new TrailingCommaRule()
