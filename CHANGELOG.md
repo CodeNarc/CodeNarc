@@ -12,6 +12,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #661: **GStringExpressionWithinString**: Fix MissingMethodException for some annotations. ([Damir Murat](https://github.com/dmurat))
  - #663: **MissingBlankLineBeforeAnnotatedField**: Fix false positive for annotation followed by inline comment. ([Damir Murat](https://github.com/dmurat))
  - #667: **TrailingComma**: Fix StringIndexOutOfBoundsException.
+ - #670: **JUnitPublicNonTestMethod**, **JUnitTestMethodWithoutAssert**: Also treat JUnit 5.x @org.junit.jupiter.api.Test as a test method.
  - #656: Remove deprecated **UnnecessarySubstring** rule.
  - #664: Remove hacks and workarounds required for Groovy 1.x and 2.x.
 
