@@ -60,7 +60,7 @@ class JUnitAssertEqualsConstantActualValueAstVisitor extends AbstractAstVisitor 
     }
 
     private boolean isJUnitAssert(ClassNode classNode) {
-        return classNode.name == 'org.junit.Assert'
+        return classNode.name in ['org.junit.Assert', 'org.junit.jupiter.api.Assertions']
     }
 
     private void findViolations(ASTNode methodCall) {
