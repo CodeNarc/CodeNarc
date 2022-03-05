@@ -54,7 +54,7 @@ class StaticMethodsBeforeInstanceMethodsAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodComplete(MethodNode methodNode) {
-        if (!methodNode.synthetic) {
+        if (!methodNode.synthetic && isNotGeneratedCode(methodNode)) {
             Visibility visibility = getVisibility(methodNode)
             if (methodNode.static) {
                 if (hasDeclaredInstanceMethod[visibility]) {

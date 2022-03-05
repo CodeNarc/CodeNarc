@@ -98,6 +98,19 @@ class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<St
             [line:16, source:'private static staticMethod4() { }', message:'private static method staticMethod4 in class MyClass is declared after a private instance method'])
     }
 
+    @Test
+    void test_Script_NoViolations() {
+        final SOURCE = ''' #!/usr/bin/groovy
+            
+            import acme.Utils
+            
+            static boolean call() {
+                new Utils().isSomething()
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected StaticMethodsBeforeInstanceMethodsRule createRule() {
         new StaticMethodsBeforeInstanceMethodsRule()

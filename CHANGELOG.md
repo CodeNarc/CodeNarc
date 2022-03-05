@@ -14,6 +14,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #667: **TrailingComma**: Fix StringIndexOutOfBoundsException.
  - #670: **JUnitPublicNonTestMethod**, **JUnitTestMethodWithoutAssert**: Also treat JUnit 5.x @org.junit.jupiter.api.Test as a test method.
  - #670: **JUnitAssertEqualsConstantActualValue**: Support JUnit 5 `Assertions.assertEquals()`.
+ - #671: **StaticMethodsBeforeInstanceMethods**: Ignore generated instance methods.
  - #656: Remove deprecated **UnnecessarySubstring** rule.
  - #664: Remove hacks and workarounds required for Groovy 1.x and 2.x.
 
