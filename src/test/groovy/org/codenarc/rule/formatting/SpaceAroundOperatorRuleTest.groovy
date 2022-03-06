@@ -332,7 +332,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     }
 
     @Nested
-    class EqualsOperator {
+    class AssignmentOperator {
 
         @Test
         void test_InVariableDeclaration_WithoutSurroundingSpace_Violations() {
@@ -406,14 +406,14 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         @Test
         void test_InConstructorParameterDefaultValue_WithoutSurroundingSpace_Violations() {
             final SOURCE = '''
-            class MyClass {
-                MyClass(int id= 88,
-                    int maxValue   =99 +
-                        23, def other) { }
-
-                MyClass(String name) { }
-            }
-        '''
+                class MyClass {
+                    MyClass(int id= 88,
+                        int maxValue   =99 +
+                            23, def other) { }
+    
+                    MyClass(String name) { }
+                }
+            '''
 
             rule.ignoreParameterDefaultValueAssignments = false
             assertViolations(SOURCE,
@@ -422,6 +422,24 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
 
             rule.ignoreParameterDefaultValueAssignments = true
             assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void test_OtherAssignmentOperators_WithoutSurroundingSpace_Violations() {
+            final SOURCE = '''
+                x +=23
+                x-= 99
+                x*=5
+                x /=6
+                x**= 6
+            '''
+            assertViolations(SOURCE,
+                    [line:2, source:'x +=23', message:'The operator "+=" within class None is not followed'],
+                    [line:3, source:'x-= 99', message:'The operator "-=" within class None is not preceded'],
+                    [line:4, source:'x*=5', message:'The operator "*=" within class None is not preceded'],
+                    [line:4, source:'x*=5', message:'The operator "*=" within class None is not followed'],
+                    [line:5, source:'x /=6', message:'The operator "/=" within class None is not followed'],
+                    [line:6, source:'x**= 6', message:'The operator "**=" within class None is not preceded'])
         }
 
     }
