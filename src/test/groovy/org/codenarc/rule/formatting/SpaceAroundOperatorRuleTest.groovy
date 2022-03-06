@@ -132,6 +132,8 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
                 x> 99
                 x <=17
                 x >=200
+                x ===22
+                x!== 22
             '''
             assertViolations(SOURCE,
                     [line:2, source:'x ==23', message:'The operator "==" within class None is not followed'],
@@ -140,7 +142,9 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
                     [line:4, source:'x<5', message:'The operator "<" within class None is not followed'],
                     [line:5, source:'x> 99', message:'The operator ">" within class None is not preceded'],
                     [line:6, source:'x <=17', message:'The operator "<=" within class None is not followed'],
-                    [line:7, source:'x >=200', message:'The operator ">=" within class None is not followed'])
+                    [line:7, source:'x >=200', message:'The operator ">=" within class None is not followed'],
+                    [line:8, source:'x ===22', message:'The operator "===" within class None is not followed'],
+                    [line:9, source:'x!== 22', message:'The operator "!==" within class None is not preceded'])
         }
 
     }
@@ -151,9 +155,9 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         @Test
         void test_WithMethodCall_WithoutSpace() {
             final SOURCE = '''
-            AstUtil.respondsTo(rule, 'getDescription')?rule.description:
-                null
-        '''
+                AstUtil.respondsTo(rule, 'getDescription')?rule.description:
+                    null
+            '''
             assertViolations(SOURCE,
                     [line:2, source:"AstUtil.respondsTo(rule, 'getDescription')?rule.description:", message:'The operator "?" within class None is not surrounded'],
                     [line:2, source:"AstUtil.respondsTo(rule, 'getDescription')?rule.description:", message:'The operator ":" within class None is not surrounded'])
@@ -162,63 +166,63 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         @Test
         void test_QuestionMarkAndColonEachOnSeparateLines() {
             final SOURCE = '''
-           def x = alert.isInternal()
-                    ? planInfo.isMatchingPlan() ? LOGO_URL_1        // nested ternary
-                    : LOGO_URL_2
-                    : LOGO_URL_1
-
-           def y = alert.isInternal()
-                    ? LOGO_URL_1
-                    : LOGO_URL_2
-
-           def z = alert.isInternal() ?
-                    LOGO_URL_1 :
-                    LOGO_URL_2
-        '''
+                def x = alert.isInternal()
+                        ? planInfo.isMatchingPlan() ? LOGO_URL_1        // nested ternary
+                        : LOGO_URL_2
+                        : LOGO_URL_1
+    
+                def y = alert.isInternal()
+                        ? LOGO_URL_1
+                        : LOGO_URL_2
+    
+                def z = alert.isInternal() ?
+                        LOGO_URL_1 :
+                        LOGO_URL_2
+            '''
             assertNoViolations(SOURCE)
         }
 
         @Test
         void test_SeparateLines_TrueExpressionContainsQuestionMark() {
             final SOURCE = '''
-           def x = (condition
-              ? "a?b"
-              : 'c.d'
-            )
-           def y = (condition
-              ? "a?b" : 'c.d'
-            )
-        '''
+               def x = (condition
+                  ? "a?b"
+                  : 'c.d'
+                )
+               def y = (condition
+                  ? "a?b" : 'c.d'
+                )
+            '''
             assertNoViolations(SOURCE)
         }
 
         @Test
         void test_SeparateLines_FalseExpressionContainsColon() {
             final SOURCE = '''
-           def x = (condition
-              ? "a:b"
-              : 'c:d'
-            )
-           def y = (condition
-              ? "a:b" : 'c:d'
-            )
-        '''
+               def x = (condition
+                  ? "a:b"
+                  : 'c:d'
+                )
+               def y = (condition
+                  ? "a:b" : 'c:d'
+                )
+            '''
             assertNoViolations(SOURCE)
         }
 
         @Test
         void test_WithoutSurroundingSpace_Violations() {
             final SOURCE = '''
-            class MyClass {
-                def myMethod() {
-                    def name = fullname?fullname + 'ME':'unknown'
-                    println name?
-                            'yes'  :'no'
-                    isEcpr? processRecords(records[0]): ''
-                    isField ?processFields(records[0]) :''
+                class MyClass {
+                    def myMethod() {
+                        def name = fullname?fullname + 'ME':'unknown'
+                        println name?
+                                'yes'  :'no'
+                        isEcpr? processRecords(records[0]): ''
+                        isField ?processFields(records[0]) :''
+                    }
                 }
-            }
-        '''
+            '''
             assertViolations(SOURCE,
                     [line:4, source:"def name = fullname?fullname + 'ME':'unknown'", message:'The operator "?" within class MyClass is not surrounded'],
                     [line:4, source:"def name = fullname?fullname + 'ME':'unknown'", message:'The operator ":" within class MyClass is not surrounded'],
@@ -265,25 +269,30 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
             [line:11, source:'x| y', message:'The operator "|" within class MyClass is not preceded'])
     }
 
-    @Test
-    void testApplyTo_AsOperatorWithoutSurroundingSpace_Violations() {
-        final SOURCE = '''
-            class MyClass {
-                def myMethod() {
-                    [1,2]as String
-                    { -> println 123 } as Runnable      // ok
-                    { -> println 456 }as
-                        Runnable
-                    { -> println 789
-                         }as Runnable
-                    (int)34.56                          // ignored
+    @Nested
+    class AsOperator {
+
+        @Test
+        void test_WithoutSurroundingSpace_Violations() {
+            final SOURCE = '''
+                class MyClass {
+                    def myMethod() {
+                        [1,2]as String
+                        { -> println 123 } as Runnable      // ok
+                        { -> println 456 }as
+                            Runnable
+                        { -> println 789
+                             }as Runnable
+                        (int)34.56                          // ignored
+                    }
                 }
-            }
-        '''
-        assertViolations(SOURCE,
-            [line:4, source:'[1,2]as String', message:'The operator "as" within class MyClass is not surrounded'],
-            [line:6, source:'{ -> println 456 }as', message:'The operator "as" within class MyClass is not surrounded'],
-            [line:8, source:'{ -> println 789', message:'The operator "as" within class MyClass is not surrounded'])
+            '''
+            assertViolations(SOURCE,
+                    [line:4, source:'[1,2]as String', message:'The operator "as" within class MyClass is not surrounded'],
+                    [line:6, source:'{ -> println 456 }as', message:'The operator "as" within class MyClass is not surrounded'],
+                    [line:8, source:'{ -> println 789', message:'The operator "as" within class MyClass is not surrounded'])
+        }
+
     }
 
     @Nested
@@ -292,15 +301,15 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         @Test
         void test_WithoutSurroundingSpace_Violations() {
             final SOURCE = '''
-            class MyClass {
-                def myMethod() {
-                    def greeting = fullname?:'you'
-                    def f = funds.collect {it.fundSortOrder}?:[]
-                    assert model.UserID == expectedModel.UserID?:null
-                    def tripleElvis = fullname ?:lastname ?: middleName?:'me'
+                class MyClass {
+                    def myMethod() {
+                        def greeting = fullname?:'you'
+                        def f = funds.collect {it.fundSortOrder}?:[]
+                        assert model.UserID == expectedModel.UserID?:null
+                        def tripleElvis = fullname ?:lastname ?: middleName?:'me'
+                    }
                 }
-            }
-        '''
+            '''
             assertViolations(SOURCE,
                     [line: 4, source: "def greeting = fullname?:'you'", message: 'The operator "?:" within class MyClass is not preceded'],
                     [line: 4, source: "def greeting = fullname?:'you'", message: 'The operator "?:" within class MyClass is not followed'],
@@ -316,17 +325,17 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         @Test
         void test_WithNewLineAsSpace_NoViolation() {
             final SOURCE = '''
-            class MyClass {
-                def myMethod() {
-                    def greeting = fullname ?:
-                    'you'
-                    def doubleElvis = fullname ?: lastname ?:
-                    'me'
-                    def newLineElvis = fullname \
-                    ?: 'you'
+                class MyClass {
+                    def myMethod() {
+                        def greeting = fullname ?:
+                        'you'
+                        def doubleElvis = fullname ?: lastname ?:
+                        'me'
+                        def newLineElvis = fullname \
+                        ?: 'you'
+                    }
                 }
-            }
-        '''
+            '''
             assertNoViolations(SOURCE)
         }
     }
@@ -337,17 +346,17 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         @Test
         void test_InVariableDeclaration_WithoutSurroundingSpace_Violations() {
             final SOURCE = '''
-            String bar='bar'
-            def bar2\t=[1, 2,
-                3, 4]
-            int bar3=\t9876
-
-            String other = bar &&
-                bar2 == null ||
-                bar3
-            String other2 = bar instanceof String
-            def obj = something.part.subpart
-        '''
+                String bar='bar'
+                def bar2\t=[1, 2,
+                    3, 4]
+                int bar3=\t9876
+    
+                String other = bar &&
+                    bar2 == null ||
+                    bar3
+                String other2 = bar instanceof String
+                def obj = something.part.subpart
+            '''
             assertViolations(SOURCE,
                     [line:2, source:"String bar='bar'", message:'The operator "=" within class None is not preceded'],
                     [line:2, source:"String bar='bar'", message:'The operator "=" within class None is not followed'],
@@ -358,22 +367,22 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         @Test
         void test_InFieldDeclaration_WithoutSurroundingSpace_Violations() {
             final SOURCE = '''
-            class MyClass {
-                private static final String BAR='bar'
-                def bar2\t=[1, 2,
-                    3, 4]
-                int bar3=\t9876
-                boolean bar4 =BAR &&
-                    x == null ||
-                    open()
-
-                private String OTHER = BAR &&
-                    x == null ||
-                    open()
-                String other2 = bar instanceof String
-                def obj = something.part.subpart
-            }
-        '''
+                class MyClass {
+                    private static final String BAR='bar'
+                    def bar2\t=[1, 2,
+                        3, 4]
+                    int bar3=\t9876
+                    boolean bar4 =BAR &&
+                        x == null ||
+                        open()
+    
+                    private String OTHER = BAR &&
+                        x == null ||
+                        open()
+                    String other2 = bar instanceof String
+                    def obj = something.part.subpart
+                }
+            '''
             assertViolations(SOURCE,
                     [line:3, source:"private static final String BAR='bar'", message:'The operator "=" within class MyClass is not preceded'],
                     [line:3, source:"private static final String BAR='bar'", message:'The operator "=" within class MyClass is not followed'],
@@ -385,13 +394,13 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         @Test
         void test_InMethodParameterDefaultValue_WithoutSurroundingSpace_Violations() {
             final SOURCE = '''
-            class MyClass {
-                void method1(String name, int count=99,
-                    long id =1) { }
-
-                void method_Okay(String name = 'abc', int count = 99) { }
-            }
-        '''
+                class MyClass {
+                    void method1(String name, int count=99,
+                        long id =1) { }
+    
+                    void method_Okay(String name = 'abc', int count = 99) { }
+                }
+            '''
 
             rule.ignoreParameterDefaultValueAssignments = false
             assertViolations(SOURCE,
@@ -432,6 +441,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
                 x*=5
                 x /=6
                 x**= 6
+                x ?=100
             '''
             assertViolations(SOURCE,
                     [line:2, source:'x +=23', message:'The operator "+=" within class None is not followed'],
@@ -439,7 +449,8 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
                     [line:4, source:'x*=5', message:'The operator "*=" within class None is not preceded'],
                     [line:4, source:'x*=5', message:'The operator "*=" within class None is not followed'],
                     [line:5, source:'x /=6', message:'The operator "/=" within class None is not followed'],
-                    [line:6, source:'x**= 6', message:'The operator "**=" within class None is not preceded'])
+                    [line:6, source:'x**= 6', message:'The operator "**=" within class None is not preceded'],
+                    [line:7, source:'x ?=100', message:'The operator "?=" within class None is not followed'])
         }
 
     }
