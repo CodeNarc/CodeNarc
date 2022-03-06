@@ -26,6 +26,7 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
  */
 class EmptyTryBlockRule extends AbstractAstVisitorRule {
+
     String name = 'EmptyTryBlock'
     int priority = 2
     Class astVisitorClass = EmptyTryBlockAstVisitor
@@ -34,7 +35,7 @@ class EmptyTryBlockRule extends AbstractAstVisitorRule {
 class EmptyTryBlockAstVisitor extends AbstractAstVisitor  {
     @Override
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
-        if (isFirstVisit(tryCatchStatement) && AstUtil.isEmptyBlock(tryCatchStatement.tryStatement)) {
+        if (isFirstVisit(tryCatchStatement) && (AstUtil.isEmptyBlock(tryCatchStatement.tryStatement) || isGeneratedCode(tryCatchStatement.tryStatement))) {
             addViolation(tryCatchStatement, 'The try block is empty')
         }
         super.visitTryCatchFinally(tryCatchStatement)

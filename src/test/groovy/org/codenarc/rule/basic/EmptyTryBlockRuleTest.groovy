@@ -47,6 +47,21 @@ class EmptyTryBlockRuleTest extends AbstractRuleTestCase<EmptyTryBlockRule> {
     }
 
     @Test
+    void testApplyTo_TryWithResources_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    try(FileReader reader = new FileReader("file.txt")) {
+                    } catch(MyException e) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'try(FileReader reader = new FileReader("file.txt"))')
+    }
+
+    @Test
     void testApplyTo_Violation_TryBlockContainsComment() {
         final SOURCE = '''
             try {
