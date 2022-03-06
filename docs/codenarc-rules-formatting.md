@@ -834,7 +834,7 @@ Example of violations:
 *Since CodeNarc 0.18*
 
 Check that there is at least one space (blank) or whitespace around each binary operator,
-including: +, -, *, /, \*\*, \*\*, &&, ||, &, |, ?:, =, "as".
+including: +, -, *, /, \*\*, &&, ||, &, |, ?:, =, "as", ==, !=, >, >=, < and <= operators.
 
 Do not check dot ('.') operator. Do not check unary operators (!, +, -, ++, --, ?.).
 Do not check array ('[') operator.
