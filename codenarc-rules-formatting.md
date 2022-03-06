@@ -835,8 +835,8 @@ Example of violations:
 
 Check that there is at least one space (blank) or whitespace around each binary operator, including: 
  - Arithmetic operators: +, -, *, /, \*\* 
- - Assignment operators: =, +=, -=, *=, /=, \*\*=
- - Relational operators: ==, !=, >, >=, <, <=
+ - Assignment operators: =, +=, -=, *=, /=, \*\*=, ?=
+ - Relational operators: ==, !=, >, >=, <, <=, ===, !==
  - Logical operators: &&, ||
  - Bitwise operators: &, |
  - Other: ?:, "as"
