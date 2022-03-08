@@ -38,6 +38,7 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String BASE_DIR = 'src/test/resources'
     private static final String BASIC_RULESET = 'rulesets/basic.xml'
     private static final String RULESET1 = 'rulesets/RuleSet1.xml'
+    private static final String EXCLUDE_FILE = 'config/CodeNarcBaselineViolations.xml'
     private static final String INCLUDES = 'sourcewithdirs/**/*.groovy'
     private static final String EXCLUDES = '**/*File2.groovy'
     private static final String PROPERTIES_FILENAME = 'some.properties'
@@ -89,6 +90,12 @@ class CodeNarcTest extends AbstractTestCase {
     void test_parseArgs_SingleRuleSetFile() {
         parseArgs("-rulesetfiles=$RULESET1")
         assert codeNarc.ruleSetFiles == RULESET1
+    }
+
+    @Test
+    void test_parseArgs_excludeBaseline() {
+        parseArgs('-excludeBaseline=' + EXCLUDE_FILE)
+        assert codeNarc.excludeBaseline == EXCLUDE_FILE
     }
 
     @Test
@@ -312,6 +319,34 @@ class CodeNarcTest extends AbstractTestCase {
         codeNarc.execute(ARGS)
 
         assert codeNarc.ruleset == URLDecoder.decode(RULESET_AS_JSON, 'UTF-8')
+        assert codeNarc.includes == INCLUDES
+        assert codeNarc.excludes == EXCLUDES
+
+        def sourceAnalyzer = codeNarcRunner.sourceAnalyzer
+        assert sourceAnalyzer.class == FilesystemSourceAnalyzer
+        assert sourceAnalyzer.baseDirectory == BASE_DIR
+        assert sourceAnalyzer.includes == INCLUDES
+        assert sourceAnalyzer.excludes == EXCLUDES
+
+        assert codeNarcRunner.ruleSetString == URLDecoder.decode(RULESET_AS_JSON, 'UTF-8')
+
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
+        assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
+        assert exitCode == 0
+    }
+
+    @Test
+    void test_execute_BaselineExclude() {
+        final ARGS = [
+                "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
+                "-title=$TITLE", "-excludes=$EXCLUDES", "-ruleset=$RULESET_AS_JSON",
+                "-excludeBaseline=$EXCLUDE_FILE"] as String[]
+
+        codeNarc.execute(ARGS)
+
+        assert codeNarc.ruleset == URLDecoder.decode(RULESET_AS_JSON, 'UTF-8')
+        assert codeNarc.excludeBaseline == EXCLUDE_FILE
         assert codeNarc.includes == INCLUDES
         assert codeNarc.excludes == EXCLUDES
 
