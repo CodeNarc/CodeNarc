@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.exceptions
 
+import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.util.AstUtil
 
 /**
  * Checks for classes that extend Throwable. Custom exception classes should subclass Exception or one of its descendants.
@@ -34,9 +34,11 @@ class ExceptionExtendsThrowableRule extends AbstractAstVisitorRule {
 
 class ExceptionExtendsThrowableAstVisitor extends AbstractAstVisitor {
 
+    private final ClassNode throwableClassNode = ClassHelper.make(Throwable)
+
     @Override
     protected void visitClassEx(ClassNode node) {
-        if (AstUtil.classNodeImplementsType(node, Throwable)) {
+        if (node.isDerivedFrom(throwableClassNode) || node.superClass?.name == 'Throwable') {
             addViolation(node, "The class $node.name extends Throwable. Custom exception classes should subclass Exception or one of its descendants.")
         }
         super.visitClassEx(node)
