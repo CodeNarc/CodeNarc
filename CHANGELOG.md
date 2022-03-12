@@ -16,6 +16,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #670: **JUnitAssertEqualsConstantActualValue**: Support JUnit 5 `Assertions.assertEquals()`.
  - #671: **StaticMethodsBeforeInstanceMethods**: Ignore generated instance methods.
  - #672: **EmptyTryBlock**: Also support try-with-resources.
+ - #675: **ExceptionExtendsError**: Exclude interfaces and classes that implement an "Error" interface. 
  - #656: Remove deprecated **UnnecessarySubstring** rule.
  - #664: Remove hacks and workarounds required for Groovy 1.x and 2.x.
 
@@ -25,6 +26,7 @@ Build and Infrastructure
  - #665: Upgrade to GMetrics 2.0.0.
  - #665: Upgrade to SLF4J 1.7.35.
  - #666: Upgrade to JUnit 5.8. Upgrade test framework and all tests to use JUnit 5.
+ - #673: CodeNarc: Add support for *excludeBaseline* parameter for the CodeNarc command-line. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
  - #649: Support for description inside CodeNarc enable/disable comments. ([davidkron](https://github.com/davidkron))
  - #664: `AstUtil`: Simplify `findFirstNonAnnotationLine()` last annotation logic and check for “class” within the line if it is a ClassNode. Simplify `getAnnotation()`.
 
