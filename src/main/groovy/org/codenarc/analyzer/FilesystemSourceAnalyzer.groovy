@@ -68,6 +68,11 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
     private WildcardPattern excludesPattern
 
     /**
+     * Whether to throw an exception if errors occur parsing source files (true), or just log the errors (false)
+     */
+    boolean failOnError = false
+
+    /**
      * Analyze the source with the configured directory tree(s) using the specified RuleSet and return the report results.
      * @param ruleset - the RuleSet to apply to each of the (applicable) files in the source directories
      * @return the results from applying the RuleSet to all of the files in the source directories
@@ -89,7 +94,7 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
         [baseDirectory]
     }
 
-    @SuppressWarnings('CatchThrowable')
+    @SuppressWarnings(['CatchThrowable', 'NestedBlockDepth'])
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
         def dirResults = new DirectoryResults(dir)
         def dirFile = new File((String) baseDirectory, (String) dir)
@@ -108,6 +113,9 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
                     processFile(filePath, dirResults, ruleSet)
                 } catch (Throwable t) {
                     LOG.warn("Error processing file: '" + filePath + "'; " + t)
+                    if (failOnError) {
+                        throw new AnalyzerException("Error analyzing source file: $filePath; $t")
+                    }
                 }
             }
         }

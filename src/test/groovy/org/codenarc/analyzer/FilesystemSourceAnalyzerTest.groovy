@@ -15,21 +15,21 @@
  */
 package org.codenarc.analyzer
 
+import static org.codenarc.test.TestUtil.assertEqualSets
+import static org.codenarc.test.TestUtil.shouldFail
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
+import org.codenarc.rule.FakePathRule
 import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-
-import static org.codenarc.test.TestUtil.assertEqualSets
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-import org.codenarc.rule.FakePathRule
 
 /**
  * Tests for FilesystemSourceAnalyzer.
@@ -39,9 +39,10 @@ import org.codenarc.rule.FakePathRule
 class FilesystemSourceAnalyzerTest extends AbstractTestCase {
 
     private static final BASE_DIR = 'src/test/resources/sourcewithdirs'
-    private analyzer
-    private ruleSet
-    private testCountRule
+
+    private analyzer = new FilesystemSourceAnalyzer()
+    private testCountRule = new FakeCountRule()
+    private ruleSet = new ListRuleSet([new FakePathRule(), testCountRule])
 
     @Test
     void test_analyze_NullRuleSet() {
@@ -173,6 +174,16 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
+    void test_analyze_failOnError_True_RuleThrowsException() {
+        def rule = new StubRule(applyToClosure:{ sourceCode, violations -> throw new Exception() })
+        ruleSet = new ListRuleSet([rule])
+
+        analyzer.failOnError = true
+        analyzer.baseDirectory = BASE_DIR
+        shouldFail(AnalyzerException) { analyzer.analyze(ruleSet) }
+    }
+
+    @Test
     void test_getSourceDirectories_ReturnsListWithBaseDirectory() {
         analyzer.baseDirectory = BASE_DIR
         assert analyzer.sourceDirectories == [BASE_DIR]
@@ -190,13 +201,6 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assertMatches(source, '**/file.txt', '**/file.txt', false)
         assertMatches(source, null, '**/file.txt', false)
         assertMatches(source, '**/OTHER.*', '', false)
-    }
-
-    @BeforeEach
-    void before() {
-        analyzer = new FilesystemSourceAnalyzer()
-        testCountRule = new FakeCountRule()
-        ruleSet = new ListRuleSet([new FakePathRule(), testCountRule])
     }
 
     private void assertMatches(SourceCode source, String includes, String excludes, boolean shouldMatch) {
