@@ -17,7 +17,8 @@ Updated/Enhanced Rules and Bug Fixes
  - #671: **StaticMethodsBeforeInstanceMethods**: Ignore generated instance methods.
  - #672: **EmptyTryBlock**: Also support try-with-resources.
  - #675: **ExceptionExtendsError**: Exclude interfaces and classes that implement an "Error" interface. 
- - #675: **ExceptionExtendsThrowable**: Exclude interfaces and classes that implement a "Throwable" interface. 
+ - #675: **ExceptionExtendsThrowable**: Exclude interfaces and classes that implement a "Throwable" interface.
+ - #676: **BracesForTryCatchFinally**: Fix false positives from try-with-resources.
  - #656: Remove deprecated **UnnecessarySubstring** rule.
  - #664: Remove hacks and workarounds required for Groovy 1.x and 2.x.
 

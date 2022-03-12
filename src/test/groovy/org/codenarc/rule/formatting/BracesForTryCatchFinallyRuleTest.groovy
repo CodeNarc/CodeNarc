@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 /**
@@ -23,11 +24,12 @@ import org.junit.jupiter.api.Test
  *
  * @author Hamlet D'Arcy
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
-  */
+ * @author Chris Mair
+ */
 class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTryCatchFinallyRule> {
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         def rule = new BracesForTryCatchFinallyRule()
         assert rule.priority == 2
         assert rule.name == 'BracesForTryCatchFinally'
@@ -41,7 +43,7 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
     }
 
     @Test
-    void testNewLine() {
+    void test_NewLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
@@ -54,7 +56,7 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
     }
 
     @Test
-    void testNewLineOverride() {
+    void test_NewLineOverride() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         rule.sameLine = false
@@ -62,14 +64,14 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
     }
 
     @Test
-    void testSameLine() {
+    void test_SameLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testSameLineOverride() {
+    void test_SameLineOverride() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         rule.sameLine = false
@@ -83,7 +85,7 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
     }
 
     @Test
-    void testSameLineFalse_BracesWithinComment_KnownIssue_Violation() {
+    void test_SameLineFalse_BracesWithinComment_KnownIssue_Violation() {
         rule.sameLine = false
         final SOURCE = '''
             class MyClass {
@@ -109,12 +111,54 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
         )
     }
 
+    @Nested
+    class TryWithResources {
+
+        @Test
+        void test_NoCatch() {
+            final SOURCE = '''
+                try (Sql sql = new Sql(null)) {
+                    // do something
+                }
+                
+                try (Sql sql = new Sql(null)) {
+                    println 123
+                } finally {
+                    println 'done'
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void test_Catch() {
+            final SOURCE = '''
+                try (Sql sql = new Sql(null)) {
+                    // do something
+                } catch (Exception ex) {
+                    // something else
+                }
+                
+                try (Sql sql = new Sql(null)) {
+                    println 123
+                } catch (IOException e) {
+                    log.error("error", e)
+                } catch (Exception e) {
+                    throw new RuntimeException(e)
+                } finally {
+                    pprintln 'done'
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+    }
+
     @Override
     protected BracesForTryCatchFinallyRule createRule() {
         BracesForTryCatchFinallyRule rule = new BracesForTryCatchFinallyRule()
         rule.validateCatch = true
         rule.validateFinally = true
-
-        rule
+        return rule
     }
 }
