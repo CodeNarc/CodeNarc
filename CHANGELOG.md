@@ -28,7 +28,8 @@ Build and Infrastructure
  - #665: Upgrade to GMetrics 2.0.0.
  - #665: Upgrade to SLF4J 1.7.35.
  - #666: Upgrade to JUnit 5.8. Upgrade test framework and all tests to use JUnit 5.
- - #673: CodeNarc: Add support for *excludeBaseline* parameter for the CodeNarc command-line. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+ - #673: Add support for the *excludeBaseline* parameter for the CodeNarc command-line. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+ - #668: Add support for the *failOnError* parameter for the CodeNarc command-line.
  - #649: Support for description inside CodeNarc enable/disable comments. ([davidkron](https://github.com/davidkron))
  - #664: `AstUtil`: Simplify `findFirstNonAnnotationLine()` last annotation logic and check for “class” within the line if it is a ClassNode. Simplify `getAnnotation()`.
 

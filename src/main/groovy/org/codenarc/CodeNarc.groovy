@@ -50,6 +50,7 @@ import org.codenarc.util.io.ResourceFactory
  *   <li>maxPriority1Violations - The maximum number of priority 1 violations allowed. Optional.</li>
  *   <li>maxPriority2Violations - The maximum number of priority 2 violations allowed. Optional.</li>
  *   <li>maxPriority3Violations - The maximum number of priority 3 violations allowed. Optional.</li>
+ *   <li>failOnError -  whether to terminate and fail the task if any errors occur parsing source files. Optional.</li>
  *   <li>title - The title description for this analysis; used in the output report(s), if supported. Optional.</li>
  *   <li>report - The definition of the report to produce. The option value is of the form TYPE[:FILENAME|:stdout].
  *          where TYPE is 'html' and FILENAME is the filename (with optional path) of the output report filename.
@@ -99,6 +100,8 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         The maximum number of priority 2 violations allowed (int).
     -maxPriority3Violations=<MAX>
         The maximum number of priority 3 violations allowed (int).
+    -failOnError=true/false
+        Whether to terminate and fail the task if any errors occur parsing source files (true), or just log the errors (false). It defaults to false.
     -title=<REPORT TITLE>
         The title for this analysis; used in the output report(s), if supported by the report type. Optional.
     -report=<REPORT-TYPE[:FILENAME|:stdout]>
@@ -140,6 +143,11 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
      * within that report are excluded (filtered) from the current CodeNarc run. If null/empty, then do nothing.
      */
     String excludeBaseline
+
+    /**
+     * Whether to terminate and fail the task if errors occur parsing source files (true), or just log the errors (false)
+     */
+    boolean failOnError = false
 
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()
 
@@ -239,7 +247,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
      * @return a configured SourceAnalyzer instance
      */
     protected SourceAnalyzer createSourceAnalyzer() {
-        new FilesystemSourceAnalyzer(baseDirectory: baseDir, includes: includes, excludes: excludes)
+        new FilesystemSourceAnalyzer(baseDirectory: baseDir, includes: includes, excludes: excludes, failOnError: failOnError)
     }
 
     protected void parseArgs(String[] args) {
@@ -263,6 +271,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
                 case 'maxPriority3Violations': maxPriority3Violations = value as int; break
                 case 'plugins': plugins = value; break
                 case 'properties': propertiesFilename = value; break
+                case 'failOnError': failOnError = Boolean.parseBoolean(value); break
                 default: throw new IllegalArgumentException("Invalid option: [$arg]")
             }
         }
