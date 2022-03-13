@@ -42,7 +42,8 @@ class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
         if (statement.expression instanceof MethodCallExpression) {
             addViolationsIfSetter(statement.expression)
         }
-        super.visitExpressionStatement(statement)
+        // Do not process any contained expressions
+        //super.visitExpressionStatement(statement)
     }
 
     private void addViolationsIfSetter(MethodCallExpression call) {

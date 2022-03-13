@@ -18,7 +18,8 @@ Updated/Enhanced Rules and Bug Fixes
  - #672: **EmptyTryBlock**: Also support try-with-resources.
  - #675: **ExceptionExtendsError**: Exclude interfaces and classes that implement an "Error" interface. 
  - #675: **ExceptionExtendsThrowable**: Exclude interfaces and classes that implement a "Throwable" interface.
- - #676: **BracesForTryCatchFinally**: Fix false positives from try-with-resources.
+ - #676: **BracesForTryCatchFinally**: Fix false positive from try-with-resources.
+ - #677: **UnnecessarySetter**: Fix false positive when the setter return value is used in a nested expression.
  - #656: Remove deprecated **UnnecessarySubstring** rule.
  - #664: Remove hacks and workarounds required for Groovy 1.x and 2.x.
 
