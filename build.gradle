@@ -14,7 +14,7 @@ shadowJar {
 
 group = 'org.codenarc'
 archivesBaseName = 'CodeNarc'
-version = '2.2.0'
+version = '3.0.0'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -49,7 +49,7 @@ dependencies {
     testImplementation 'commons-cli:commons-cli:1.4'
     testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
 
-    testRuntime "org.codehaus.groovy:groovy-macro:$groovyVersion"
+    testRuntimeOnly "org.codehaus.groovy:groovy-macro:$groovyVersion"
 }
 
 sourceSets {
@@ -75,7 +75,6 @@ javadoc {
 
 groovydoc {
     use = true
-    groovyClasspath = configurations.compileClasspath // http://issues.gradle.org/browse/GRADLE-1391
 }
 
 task groovydocJar(type: Jar, dependsOn: groovydoc ) {

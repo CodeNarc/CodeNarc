@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO Version 3.0.0    (??? 2022)
+Version 3.0.0    (Mar 2022)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #651: **MissingOverrideAnnotation**: Ignore private superclass methods.
