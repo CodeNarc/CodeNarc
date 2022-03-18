@@ -16,6 +16,7 @@
 package org.codenarc.ruleset
 
 import groovy.xml.Namespace
+import groovy.xml.XmlParserFactory
 import org.codenarc.rule.Rule
 import org.codenarc.util.PropertyUtil
 import org.codenarc.util.io.ClassPathResource
@@ -48,7 +49,7 @@ class XmlReaderRuleSet implements RuleSet {
         def xml = reader.text
         validateXml(xml)
 
-        def ruleset = new XmlParser().parseText(xml)
+        def ruleset = XmlParserFactory.newParser().parseText(xml)
         loadRuleSetRefElements(ruleset)
         loadRuleElements(ruleset)
         loadRuleScriptElements(ruleset)
