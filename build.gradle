@@ -32,6 +32,7 @@ def junitVersion = "5.8.2"
 dependencies {
     implementation "org.codehaus.groovy:groovy:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-groovydoc:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
