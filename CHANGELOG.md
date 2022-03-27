@@ -7,6 +7,7 @@ Build and Infrastructure
  - #680: Add WARN message to remove "enhanced" rules from the ruleset if a compilation error occurs for a non-default compiler phase. Update docs to list "enhanced" rules.
  - #681: Upgrade Gradle wrapper to Gradle 7.4.1.
  - #679: Use XmlParserFactory for Groovy 4 compatibility. ([Paul King](https://github.com/paulk-asert))
+ - #682: Support Groovy 4.0.
 
 
 Version 3.0.0    (Mar 2022)

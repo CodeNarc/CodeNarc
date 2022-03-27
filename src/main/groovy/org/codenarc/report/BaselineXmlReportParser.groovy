@@ -15,6 +15,8 @@
  */
 package org.codenarc.report
 
+import groovy.xml.XmlSlurper
+
 /**
  * Parser for the BaselineXmlReportWriter report
  */
