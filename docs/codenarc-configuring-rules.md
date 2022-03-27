@@ -218,7 +218,8 @@ this value is used as the description text for this rule, overriding any descrip
 found in the i18n resource bundles. This property defaults to `null`. Also see
 [Include Substitutable Message Parameters in a Rule Description](#include-substitutable-message-parameters-in-a-rule-description)
 
-You can also override the default `name` or `priority` properties for each rule.
+You can also override the default `name` or `priority` properties for each rule. If you override the `name` property, 
+you should also override the `description` property; otherwise it will not find a description for the rule.
 
 
 ## Turning Off A Rule
