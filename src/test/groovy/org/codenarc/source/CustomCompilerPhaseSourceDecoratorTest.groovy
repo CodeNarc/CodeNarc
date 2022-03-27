@@ -33,7 +33,7 @@ class CustomCompilerPhaseSourceDecoratorTest extends AbstractTestCase {
     ]
 
     @Test
-    void testEnsuresCompilerPhaseBeforeClassOutputToDisk() {
+    void EnsuresCompilerPhaseBeforeClassOutputToDisk() {
         def source = new SourceString('class MyClass {}')
 
         PHASES_CAUSING_OUTPUT.each { int phase ->
@@ -44,12 +44,21 @@ class CustomCompilerPhaseSourceDecoratorTest extends AbstractTestCase {
     }
 
     @Test
-    void testOverridesReturnedAST() {
+    void OverridesReturnedAST() {
         def source = new SourceString('class SomeThrowable extends Throwable {}')
         def decoratedSource = new CustomCompilerPhaseSourceDecorator(source, Phases.SEMANTIC_ANALYSIS)
+        log(decoratedSource)
         assert decoratedSource.ast != source.ast
         assert interfacesOfSuperclassIn(source.ast).isEmpty()
         assert interfacesOfSuperclassIn(decoratedSource.ast) == [Serializable.name]
+    }
+
+    @Test
+    void CompilationError_ReferencesClassNotOnClasspath() {
+        def source = new SourceString('class MyClass extends SomeOtherClass {}')
+        def decoratedSource = new CustomCompilerPhaseSourceDecorator(source, Phases.SEMANTIC_ANALYSIS)
+        log(decoratedSource)
+        assert decoratedSource.ast == null
     }
 
     private List<String> interfacesOfSuperclassIn(ModuleNode ast) {
