@@ -8,6 +8,7 @@ Build and Infrastructure
  - #681: Upgrade Gradle wrapper to Gradle 7.4.1.
  - #679: Use XmlParserFactory for Groovy 4 compatibility. ([Paul King](https://github.com/paulk-asert))
  - #682: Support Groovy 4.0.
+ - #683: **UnnecessaryPublicModifier**: Fix StringIndexOutOfBoundsException.
 
 
 Version 3.0.0    (Mar 2022)
