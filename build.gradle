@@ -60,8 +60,11 @@ sourceSets {
     }
 }
 
-test.maxParallelForks = 2
-test.jvmArgs '-Duser.language=en -Duser.country=US'
+test {
+    useJUnitPlatform()
+    maxParallelForks = 2
+    jvmArgs '-Duser.language=en -Duser.country=US'
+}
 
 java {
     //withJavadocJar()
