@@ -54,6 +54,13 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 void aMethod(String argument) {
                 }
 
+                def aMethodWithSpecialRegexCharacter() {
+                    withFormat {
+                        json { }
+                        '*'  { }
+                    }
+                }
+
                 LinkedHashSet<String> set() {
                     new LinkedHashSet<Class<?>>()
                 }
