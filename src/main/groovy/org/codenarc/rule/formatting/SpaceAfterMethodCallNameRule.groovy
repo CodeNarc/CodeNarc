@@ -21,6 +21,8 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 
+import java.util.regex.Pattern
+
 /**
  * Checks that there is no whitespace at the end of the method name when a method call contains parenthesis or that
  * there is at most one space after the method name if the call does not contain parenthesis
@@ -57,7 +59,7 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
         def arguments = call.arguments
         if (isFirstVisit(call) && method.lineNumber != -1 && method.lineNumber == arguments.lineNumber && !hasSingleLambdaArgument(call)) {
             String methodName = call.methodAsString
-            def regex = methodName + /\s+\(/
+            def regex = Pattern.quote(methodName) + /\s+\(/
             def lineNumbers = (method.lineNumber .. method.lastLineNumber)
             for (int lineNumber: lineNumbers) {
                 def line = sourceCode.line(lineNumber - 1)

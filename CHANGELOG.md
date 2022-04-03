@@ -9,6 +9,7 @@ Build and Infrastructure
  - #679: Use XmlParserFactory for Groovy 4 compatibility. ([Paul King](https://github.com/paulk-asert))
  - #682: Support Groovy 4.0.
  - #683: **UnnecessaryPublicModifier**: Fix StringIndexOutOfBoundsException.
+ - #686: **SpaceAfterMethodCallName**: Fix handling methods with special characters.
 
 
 Version 3.0.0    (Mar 2022)
