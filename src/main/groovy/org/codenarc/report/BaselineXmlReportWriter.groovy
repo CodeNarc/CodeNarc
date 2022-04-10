@@ -58,7 +58,7 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
 
     protected Closure buildReportElement() {
         return {
-            Report(timestamp:getFormattedTimestamp(), type:'baseline')
+            Report(type:'baseline')
         }
     }
 

@@ -32,7 +32,7 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
     private static final REPORT_XML = """<?xml version="1.0" encoding="UTF-8"?>
     <CodeNarc url="${CODENARC_URL}" version="${VERSION}">
-        <Report timestamp="${FORMATTED_TIMESTAMP}" type="baseline"/>
+        <Report type="baseline"/>
 
         <Project title="My Cool Project">
             <SourceDirectory>c:/MyProject/src/main/groovy</SourceDirectory>
