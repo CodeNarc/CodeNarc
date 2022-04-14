@@ -53,7 +53,7 @@ abstract class AbstractCompactTextReportWriterTestCase extends AbstractTestCase 
 
     protected reportWriter
     protected analysisContext
-    protected results, srcMainDaoDirResults
+    protected results
     protected stringWriter
 
     //------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ abstract class AbstractCompactTextReportWriterTestCase extends AbstractTestCase 
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
         def srcMainDirResults = new DirectoryResults('src/main', 1)
-        srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
+        def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
         def srcTestDirResults = new DirectoryResults('src/test', 3)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
