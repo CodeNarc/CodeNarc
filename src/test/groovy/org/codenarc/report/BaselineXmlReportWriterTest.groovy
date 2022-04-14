@@ -58,6 +58,7 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
                 <Message><![CDATA[Other info]]></Message>
             </Violation>
         </File>
+
         <File path="src/main/dao/MyOtherDao.groovy">
             <Violation ruleName="UnusedPrivateMethod">
                 <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
@@ -99,22 +100,27 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
         reportWriter = new BaselineXmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
-        def srcMainDirResults = new DirectoryResults('src/main', 1)
-        def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcTestDirResults = new DirectoryResults('src/test', 3)
-        def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def dirResults = new DirectoryResults()
+        def dirResultsMain = new DirectoryResults('src/main', 1)
+        def dirResultsMainDao = new DirectoryResults('src/main/dao', 2)
+        def dirResultsTest = new DirectoryResults('src/test', 3)
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
+        def fileResultsMyAction = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
 
-        srcMainDirResults.addChild(srcMainFileResults1)
-        srcMainDirResults.addChild(srcMainDaoDirResults)
-        srcMainDaoDirResults.addChild(fileResultsMainDao1)
-        srcMainDaoDirResults.addChild(fileResultsMainDao2)
+        // assemble results
+        // The order here is not alphabetically, because directory scanning
+        // isn't either, but the baseline report has to sort the data, which
+        // is done via the comparison with the report XML above.
+        dirResultsMain.addChild(fileResultsMyAction)
+        dirResultsMain.addChild(dirResultsMainDao)
+        dirResultsMainDao.addChild(fileResultsMainDao2)
+        dirResultsMainDao.addChild(fileResultsMainDao1)
+        dirResults.addChild(dirResultsTest)
+        dirResults.addChild(dirResultsMain)
 
-        results = new DirectoryResults()
-        results.addChild(srcMainDirResults)
-        results.addChild(srcTestDirResults)
-
+        // init baseclass fields
+        results = dirResults
         analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:ruleSet)
         stringWriter = new StringWriter()
     }
