@@ -53,7 +53,7 @@ abstract class AbstractXmlReportWriterTestCase extends AbstractTestCase {
 
     protected reportWriter
     protected analysisContext
-    protected results, srcMainDaoDirResults
+    protected results
     protected ruleSet
     protected stringWriter
 
