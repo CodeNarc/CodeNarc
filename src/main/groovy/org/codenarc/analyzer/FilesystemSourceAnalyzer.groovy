@@ -97,7 +97,7 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
     @SuppressWarnings(['CatchThrowable', 'NestedBlockDepth'])
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
         def dirResults = new DirectoryResults(dir)
-        def dirFile = new File((String) baseDirectory, (String) dir)
+        def dirFile = new File(baseDirectory, dir)
         dirFile.eachFile { file ->
             def dirPrefix = dir ? dir + SEP : dir
             def filePath = dirPrefix + file.name
@@ -123,15 +123,13 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
     }
 
     private void processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
-        def file = new File((String) baseDirectory, filePath)
+        def file = new File(baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
         if (matches(sourceFile)) {
-            dirResults.numberOfFilesInThisDirectory++
             List allViolations = collectViolations(sourceFile, ruleSet)
-            if (allViolations) {
-                def fileResults = new FileResults(filePath, allViolations, sourceFile)
-                dirResults.addChild(fileResults)
-            }
+            def fileResults = new FileResults(filePath, allViolations, sourceFile)
+            dirResults.numberOfFilesInThisDirectory++
+            dirResults.addChild(fileResults)
         }
     }
 

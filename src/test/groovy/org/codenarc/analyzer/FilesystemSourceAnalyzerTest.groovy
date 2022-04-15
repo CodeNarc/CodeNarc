@@ -114,7 +114,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         log("results=$results")
 
         def paths = resultsPaths(results)
-        assertEqualSets(paths, ['subdir1', 'subdir2', 'subdir2/subdir2a'])
+        assertEqualSets(paths, ['SourceFile1.groovy', 'subdir1', 'subdir1/Subdir1File2.groovy', 'subdir1/Subdir1File1.groovy', 'subdir2', 'subdir2/subdir2a', 'subdir2/subdir2a/Subdir2aFile1.groovy', 'subdir2/Subdir2File1.groovy'])
 
         assert testCountRule.count == 5
         assert results.getNumberOfFilesWithViolations(3) == 0
@@ -128,7 +128,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
 
         analyzer.baseDirectory = BASE_DIR
         def results = analyzer.analyze(ruleSet)
-        assert results.totalNumberOfFiles == 5
+        assert results.totalNumberOfFiles == 0
     }
 
     @Test
