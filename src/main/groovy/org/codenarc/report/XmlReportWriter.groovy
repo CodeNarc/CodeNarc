@@ -77,10 +77,10 @@ class XmlReportWriter extends AbstractReportWriter {
         def elementName = isRoot(results) ? 'PackageSummary' : 'Package'
         return {
             "$elementName"(buildPackageAttributeMap(results)) {
-                results.children.each { child ->
-                    if (child.isFile()) {
-                        out << buildFileElement(child)
-                    }
+                results.children.findAll { child ->
+                    child.isFile() && !child.violations.isEmpty()
+                }.each { child ->
+                    out << buildFileElement(child)
                 }
             }
             results.children.each { child ->
