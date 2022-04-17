@@ -107,7 +107,7 @@ class AbstractHtmlReportWriterTest extends AbstractTestCase {
         results = new DirectoryResults('')
         assert !reportWriter.isDirectoryContainingFiles(results)
 
-        results.numberOfFilesInThisDirectory = 2
+        results.addChild(new FileResults('', []))
         assert reportWriter.isDirectoryContainingFiles(results)
     }
 
