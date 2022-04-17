@@ -31,7 +31,7 @@ class IdeTextReportWriterTest extends AbstractTextReportWriterTestCase {
     private static final REPORT_TEXT = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 
-Summary: TotalFiles=3 FilesWithViolations=3 P1=3 P2=2 P3=3
+Summary: TotalFiles=4 FilesWithViolations=3 P1=3 P2=2 P3=3
 
 File: src/main/MyAction.groovy
     Violation: Rule=Rule1 P=1 Loc=.(MyAction.groovy:11) Src=[if (count < 23 && index <= 99) {]
@@ -52,7 +52,7 @@ File: src/main/dao/MyOtherDao.groovy
     private static final REPORT_TEXT_MAX_PRIORITY = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 
-Summary: TotalFiles=3 FilesWithViolations=2 P1=3
+Summary: TotalFiles=4 FilesWithViolations=2 P1=3
 
 File: src/main/MyAction.groovy
     Violation: Rule=Rule1 P=1 Loc=.(MyAction.groovy:11) Src=[if (count < 23 && index <= 99) {]
