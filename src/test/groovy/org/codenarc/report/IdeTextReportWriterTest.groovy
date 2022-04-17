@@ -80,7 +80,7 @@ File: src/main/dao/MyDao.groovy
 
         final VIOLATION = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:null, sourceLine:SOURCE_LINE3, message:MESSAGE3)
         def fileResults = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION])
-        results = new DirectoryResults('src/main/dao', 1)
+        results = new DirectoryResults('src/main/dao')
         results.addChild(fileResults)
 
         reportWriter.writeReport(stringWriter, analysisContext, results)
