@@ -56,7 +56,6 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
 
     // Concurrent shared state
     private final ConcurrentMap<String, List<FileResults>> resultsMap = new ConcurrentHashMap<String, List<FileResults>>();
-    private final ConcurrentMap<String, AtomicInteger> fileCountMap = new ConcurrentHashMap<String, AtomicInteger>();
     private final AtomicLong sourceFileErrors = new AtomicLong(0L);
 
     /**
@@ -193,14 +192,6 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
         String parentPath = PathUtil.getParentPath(filePath);
         String safeParentPath = parentPath != null ? parentPath : "";
         addToResultsMap(safeParentPath, fileResults);
-        incrementFileCount(safeParentPath);
-    }
-
-    private void incrementFileCount(String parentPath) {
-        AtomicInteger initialZeroCount = new AtomicInteger(0);
-        fileCountMap.putIfAbsent(parentPath, initialZeroCount);
-        AtomicInteger fileCount = fileCountMap.get(parentPath);
-        fileCount.incrementAndGet();
     }
 
     private void addToResultsMap(String parentPath, FileResults results) {
@@ -244,8 +235,6 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
             for (FileResults child : allResults) {
                 dirResults.addChild(child);
             }
-            AtomicInteger cnt = fileCountMap.get(path);
-            dirResults.setNumberOfFilesInThisDirectory(cnt != null ? cnt.get() : 0);
             addToParentResults(reportResults, dirResults);
         }
     }
