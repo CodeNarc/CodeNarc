@@ -39,7 +39,7 @@ class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
             <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
         </Project>
 
-        <PackageSummary totalFiles='6' filesWithViolations='3' priority1='0' priority2='5' priority3='2'>
+        <PackageSummary totalFiles='3' filesWithViolations='3' priority1='0' priority2='5' priority3='2'>
         </PackageSummary>
 
         <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='0' priority2='5' priority3='2'>
@@ -85,7 +85,7 @@ class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
             </File>
         </Package>
 
-        <Package path='src/test' totalFiles='3' filesWithViolations='0' priority1='0' priority2='0' priority3='0'>
+        <Package path='src/test' totalFiles='0' filesWithViolations='0' priority1='0' priority2='0' priority3='0'>
         </Package>
     </CodeNarc>
     """
@@ -104,7 +104,7 @@ class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
         def srcMainDirResults = new DirectoryResults('src/main', 1)
         def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcTestDirResults = new DirectoryResults('src/test', 3)
+        def srcTestDirResults = new DirectoryResults('src/test', 0)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
