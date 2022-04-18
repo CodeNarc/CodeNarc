@@ -111,7 +111,6 @@ class HtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
             """
         def fileResults4 = new FileResults('src/main/MyActionTest.groovy', [VIOLATION4])
         dirResultsMain.addChild(fileResults4)
-        dirResultsMain.numberOfFilesInThisDirectory++
         reportWriter.maxPriority = 4
         assertReportContents(EXPECTED)
     }
