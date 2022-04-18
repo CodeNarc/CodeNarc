@@ -103,7 +103,7 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
         def dirResults = new DirectoryResults()
         def dirResultsMain = new DirectoryResults('src/main', 1)
         def dirResultsMainDao = new DirectoryResults('src/main/dao', 2)
-        def dirResultsTest = new DirectoryResults('src/test', 3)
+        def dirResultsTest = new DirectoryResults('src/test', 0)
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
         def fileResultsMyAction = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
