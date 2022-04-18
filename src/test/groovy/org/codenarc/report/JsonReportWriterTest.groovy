@@ -76,7 +76,7 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
                 }
             }
         '''
-        def dirResults = new DirectoryResults('', 2)
+        def dirResults = new DirectoryResults('src/main/dao', 1)
         dirResults.addChild(new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3]))
         def rootResults = new DirectoryResults()
         rootResults.addChild(dirResults)
@@ -129,7 +129,7 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
 
         def srcMainDirResults = new DirectoryResults('src/main', 1)
         def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcTestDirResults = new DirectoryResults('src/test', 3)
+        def srcTestDirResults = new DirectoryResults('src/test', 0)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
