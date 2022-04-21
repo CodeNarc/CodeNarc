@@ -159,6 +159,27 @@ class UnusedImportRuleTest extends AbstractRuleTestCase<UnusedImportRule> {
     }
 
     @Test
+    void testApplyTo_StaticImportWithPropertyUsage() {
+        final SOURCE = '''
+            import static System.getProperties
+            import static a.SomeClass.isEnabled
+            import static b.OtherClass.setInstance
+            class ABC {
+                def foo() {
+                    properties.getProperty("foo")
+                }
+                def bar() {
+                    if (enabled) {
+                        instance = this
+                    }
+                }
+            }
+        '''
+        // The static import is used as property style, so no violation
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             import java.io.InputStream
