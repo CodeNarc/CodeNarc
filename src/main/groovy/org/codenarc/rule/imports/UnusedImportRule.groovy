@@ -23,6 +23,8 @@ import org.codenarc.util.AstUtil
 
 import java.util.regex.Pattern
 
+import static org.apache.groovy.util.BeanUtils.decapitalize
+
 /**
  * Rule that checks for an unreferenced import
  *
@@ -49,10 +51,23 @@ class UnusedImportRule extends AbstractRule {
 
     private void processStaticImports(SourceCode sourceCode, List violations) {
         sourceCode.ast?.staticImports?.each { alias, ImportNode classNode ->
-            if (!findReference(sourceCode, alias) && !AstUtil.isFromGeneratedSourceCode(classNode)) {
+            if (!findReference(sourceCode, alias) && !findPropertyReference(sourceCode, alias) && !AstUtil.isFromGeneratedSourceCode(classNode)) {
                 violations.add(createViolationForImport(sourceCode, classNode.className, alias, "The [${classNode.className}] import is never referenced"))
             }
         }
+    }
+
+    private String findPropertyReference(SourceCode sourceCode, String alias) {
+        String propertyName = null
+        if (alias.startsWith("get") || alias.startsWith("set")) {
+            propertyName = decapitalize(alias.substring(3))
+        } else if (alias.startsWith("is")) {
+            propertyName = decapitalize(alias.substring(2))
+        }
+        if (propertyName != null) {
+            return findReference(sourceCode, propertyName)
+        }
+        return null
     }
 
     private String findReference(SourceCode sourceCode, String alias, String className = null) {
