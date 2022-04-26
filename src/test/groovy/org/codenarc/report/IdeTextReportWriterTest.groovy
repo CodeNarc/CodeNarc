@@ -31,7 +31,7 @@ class IdeTextReportWriterTest extends AbstractTextReportWriterTestCase {
     private static final REPORT_TEXT = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 
-Summary: TotalFiles=6 FilesWithViolations=3 P1=3 P2=2 P3=3
+Summary: TotalFiles=3 FilesWithViolations=3 P1=3 P2=2 P3=3
 
 File: src/main/MyAction.groovy
     Violation: Rule=Rule1 P=1 Loc=.(MyAction.groovy:11) Src=[if (count < 23 && index <= 99) {]
@@ -52,7 +52,7 @@ File: src/main/dao/MyOtherDao.groovy
     private static final REPORT_TEXT_MAX_PRIORITY = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 
-Summary: TotalFiles=6 FilesWithViolations=2 P1=3
+Summary: TotalFiles=3 FilesWithViolations=2 P1=3
 
 File: src/main/MyAction.groovy
     Violation: Rule=Rule1 P=1 Loc=.(MyAction.groovy:11) Src=[if (count < 23 && index <= 99) {]
@@ -69,7 +69,7 @@ File: src/main/dao/MyOtherDao.groovy
         final REPORT_TEXT = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 
-Summary: TotalFiles=0 FilesWithViolations=1 P1=0 P2=0 P3=1
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=0 P3=1
 
 File: src/main/dao/MyDao.groovy
     Violation: Rule=BadStuff P=3 Loc=.(MyDao.groovy:0) Msg=[Other info] Src=[throw new Exception() // Something bad happened]
@@ -79,7 +79,7 @@ File: src/main/dao/MyDao.groovy
 
         final VIOLATION = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:null, sourceLine:SOURCE_LINE3, message:MESSAGE3)
         def fileResults = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION])
-        results = new DirectoryResults()
+        results = new DirectoryResults('src/main/dao', 1)
         results.addChild(fileResults)
 
         reportWriter.writeReport(stringWriter, analysisContext, results)

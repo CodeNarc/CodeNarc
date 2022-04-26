@@ -51,7 +51,7 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
             <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
         </Project>
 
-        <PackageSummary totalFiles='6' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
+        <PackageSummary totalFiles='3' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
         </PackageSummary>
 
         <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
@@ -89,7 +89,7 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
             </File>
         </Package>
 
-        <Package path='src/test' totalFiles='3' filesWithViolations='0' priority1='0' priority2='0' priority3='0'>
+        <Package path='src/test' totalFiles='0' filesWithViolations='0' priority1='0' priority2='0' priority3='0'>
         </Package>
 
         <Rules>
@@ -113,12 +113,12 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
     @Test
     void testWriteReport_Writer_ProperPackageSummaryForPackageWithEmptyRelativePath() {
         final XML = """
-            <PackageSummary totalFiles='2' filesWithViolations='1' priority1='0' priority2='0' priority3='1'>
+            <PackageSummary totalFiles='1' filesWithViolations='1' priority1='0' priority2='0' priority3='1'>
             </PackageSummary>
 
-            <Package path='' totalFiles='2' filesWithViolations='1' priority1='0' priority2='0' priority3='1'>
+            <Package path='' totalFiles='1' filesWithViolations='1' priority1='0' priority2='0' priority3='1'>
         """
-        def dirResults = new DirectoryResults('', 2)
+        def dirResults = new DirectoryResults('', 1)
         dirResults.addChild(new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3]))
         def rootResults = new DirectoryResults()
         rootResults.addChild(dirResults)
@@ -171,7 +171,7 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
         def srcMainDirResults = new DirectoryResults('src/main', 1)
         def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcTestDirResults = new DirectoryResults('src/test', 3)
+        def srcTestDirResults = new DirectoryResults('src/test', 0)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
