@@ -57,8 +57,8 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
     void visitMethodCallExpression(MethodCallExpression call) {
         def method = call.method
         def arguments = call.arguments
-        if (isFirstVisit(call) && method.lineNumber != -1 && method.lineNumber == arguments.lineNumber && !hasSingleLambdaArgument(call)) {
-            String methodName = call.methodAsString
+        String methodName = call.methodAsString
+        if (isFirstVisit(call) && methodName && method.lineNumber != -1 && method.lineNumber == arguments.lineNumber && !hasSingleLambdaArgument(call)) {
             def regex = Pattern.quote(methodName) + /\s+\(/
             def lineNumbers = (method.lineNumber .. method.lastLineNumber)
             for (int lineNumber: lineNumbers) {
