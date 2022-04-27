@@ -3,13 +3,20 @@
 
 TODO: Version 3.x.x    (xxx 2022)
 --------------------------------------
-Build and Infrastructure
+Updated/Enhanced Rules and Bug Fixes
+ - #683: **UnnecessaryPublicModifier**: Fix StringIndexOutOfBoundsException.
+ - #686: **SpaceAfterMethodCallName**: Fix handling methods with special characters.
+ - #687: **SpaceAfterMethodCallName**: Fix handling methods with special chars. ([René Scheibe](https://github.com/darxriggs))
+ - #699: **UnusedImportRule**: Detect property-style usage of static imports. ([Leonard Brünings](https://github.com/leonard84))
+
+Build, Infrastructure and Tests
  - #680: Add WARN message to remove "enhanced" rules from the ruleset if a compilation error occurs for a non-default compiler phase. Update docs to list "enhanced" rules.
  - #681: Upgrade Gradle wrapper to Gradle 7.4.1.
  - #679: Use XmlParserFactory for Groovy 4 compatibility. ([Paul King](https://github.com/paulk-asert))
  - #682: Support Groovy 4.0.
- - #683: **UnnecessaryPublicModifier**: Fix StringIndexOutOfBoundsException.
- - #686: **SpaceAfterMethodCallName**: Fix handling methods with special characters.
+ - #694: Test refactoring. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+ - #689: Deterministic baseline report; Don't write timestamp; Sort entries by file path.([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+ - #685: Fix running tests from Gradle. ([René Scheibe](https://github.com/darxriggs))
 
 
 Version 3.0.0    (Mar 2022)
