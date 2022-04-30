@@ -17,6 +17,7 @@ Build, Infrastructure and Tests
  - #694: Test refactoring. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
  - #689: Deterministic baseline report; Don't write timestamp; Sort entries by file path.([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
  - #685: Fix running tests from Gradle. ([René Scheibe](https://github.com/darxriggs))
+ - #700: Change CodeNarc URL in reports to "https://codenarc.org" (fix untrusted SSL certificate).
 
 
 Version 3.0.0    (Mar 2022)
@@ -1680,4 +1681,4 @@ Version 0.1 (24 Jan 2009)
 
  - Initial release. Includes 16 Rules; HtmlReportWriter; CodeNarcAntTask, DirectorySourceAnalyzer; XML RuleSets, etc..
 
-<http://www.codenarc.org>
+<https://codenarc.org/>

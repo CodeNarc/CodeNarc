@@ -105,6 +105,6 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
     private void verifyTextReportFile() {
         def file = new File(TEXT_REPORT_FILE)
         assert file.exists()
-        assertContainsAllInOrder(file.text, ['CodeNarc Report', TITLE, 'www.codenarc.org'])
+        assertContainsAllInOrder(file.text, ['CodeNarc Report', TITLE, 'codenarc.org'])
     }
 }

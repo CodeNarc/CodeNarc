@@ -49,7 +49,7 @@ abstract class AbstractCompactTextReportWriterTestCase extends AbstractTestCase 
     protected static final String SRC_DIR2 = 'c:/MyProject/src/test/groovy'
     protected static final String VERSION_FILE = 'src/main/resources/codenarc-version.txt'
     protected static final String VERSION = new File(VERSION_FILE).text
-    protected static final String CODENARC_URL = 'https://www.codenarc.org'
+    protected static final String CODENARC_URL = 'https://codenarc.org'
 
     protected reportWriter
     protected analysisContext

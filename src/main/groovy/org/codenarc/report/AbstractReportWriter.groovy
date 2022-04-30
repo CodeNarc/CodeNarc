@@ -37,7 +37,7 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     protected static final String BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
     protected static final String CUSTOM_MESSAGES_BUNDLE = 'codenarc-messages'
-    protected static final String CODENARC_URL = 'https://www.codenarc.org'
+    protected static final String CODENARC_URL = 'https://codenarc.org'
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractReportWriter)
 

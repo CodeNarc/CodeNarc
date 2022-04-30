@@ -49,7 +49,7 @@ abstract class AbstractXmlReportWriterTestCase extends AbstractTestCase {
     protected static final VERSION = new File(VERSION_FILE).text
     protected static final TIMESTAMP_DATE = new Date(1262361072497)
     protected static final FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
-    protected static final String CODENARC_URL = 'https://www.codenarc.org'
+    protected static final String CODENARC_URL = 'https://codenarc.org'
 
     protected reportWriter
     protected analysisContext

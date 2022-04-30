@@ -54,7 +54,7 @@ abstract class AbstractTextReportWriterTestCase extends AbstractTestCase {
     protected static final String SRC_DIR2 = 'c:/MyProject/src/test/groovy'
     protected static final String VERSION_FILE = 'src/main/resources/codenarc-version.txt'
     protected static final String VERSION = new File(VERSION_FILE).text
-    protected static final String CODENARC_URL = 'https://www.codenarc.org'
+    protected static final String CODENARC_URL = 'https://codenarc.org'
     protected static final Date TIMESTAMP_DATE = new Date(1262361072497)
     protected static final String FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
 
