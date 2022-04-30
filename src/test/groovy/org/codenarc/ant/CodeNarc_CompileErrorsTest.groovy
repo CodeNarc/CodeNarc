@@ -17,6 +17,7 @@ package org.codenarc.ant
 
 import static org.codenarc.test.TestUtil.*
 
+import groovy.ant.AntBuilder
 import org.apache.tools.ant.BuildException
 import org.codenarc.test.AbstractTestCase
 import org.junit.jupiter.api.BeforeEach

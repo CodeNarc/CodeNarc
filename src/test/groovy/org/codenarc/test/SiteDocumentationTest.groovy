@@ -15,6 +15,7 @@
  */
 package org.codenarc.test
 
+import groovy.xml.XmlSlurper
 import org.junit.jupiter.api.Test
 
 /**

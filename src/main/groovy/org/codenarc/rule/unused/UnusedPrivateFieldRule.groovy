@@ -67,7 +67,7 @@ class UnusedPrivateFieldRule extends AbstractSharedAstVisitorRule {
             if (shouldApplyThisRuleTo(classNode)) {
                 classNode.fields.inject(allPrivateFields) { acc, fieldNode ->
                     def wildcardPattern = new WildcardPattern(ignoreFieldNames, false)
-                    def isPrivate = fieldNode.modifiers & FieldNode.ACC_PRIVATE
+                    def isPrivate = fieldNode.isPrivate()
                     def isNotGenerated = fieldNode.lineNumber != -1
                     def isIgnored = wildcardPattern.matches(fieldNode.name)
                     def hasDelegateAnnotation = AstUtil.hasAnnotation(fieldNode, 'Delegate') || AstUtil.hasAnnotation(fieldNode, 'groovy.lang.Delegate')

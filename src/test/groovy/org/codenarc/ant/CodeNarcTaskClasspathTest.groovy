@@ -15,7 +15,10 @@
  */
 package org.codenarc.ant
 
-import groovy.util.slurpersupport.NodeChildren
+import groovy.ant.AntBuilder
+import groovy.xml.XmlSlurper
+
+import groovy.xml.slurpersupport.NodeChildren
 import org.codehaus.groovy.ant.Groovyc
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

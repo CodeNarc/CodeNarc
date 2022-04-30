@@ -15,7 +15,7 @@
  */
 package org.codenarc.util
 
-import org.codehaus.groovy.ast.MethodNode
+import java.lang.reflect.Modifier
 
 /**
  * Provide static utility methods for parsing AST member modifiers, e.g. public/protected/private, static, final, etc.
@@ -25,13 +25,13 @@ import org.codehaus.groovy.ast.MethodNode
 class ModifiersUtil {
 
     private static final Map MODIFIERS = [
-        public:MethodNode.ACC_PUBLIC,
-        protected:MethodNode.ACC_PROTECTED,
-        private:MethodNode.ACC_PRIVATE,
-        static:MethodNode.ACC_STATIC,
-        final:MethodNode.ACC_FINAL,
-        volatile:MethodNode.ACC_VOLATILE,
-        transient:MethodNode.ACC_TRANSIENT
+        public: Modifier.PUBLIC,
+        protected:Modifier.PROTECTED,
+        private:Modifier.PRIVATE,
+        static:Modifier.STATIC,
+        final:Modifier.FINAL,
+        volatile:Modifier.VOLATILE,
+        transient:Modifier.TRANSIENT
     ]
 
     static boolean matchesAnyModifiers(Integer actualModifiers, List<Integer> expectedModifiersList) {

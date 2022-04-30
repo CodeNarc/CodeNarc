@@ -294,7 +294,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsMethodCall_GStringMethodName() {
-        def methodCall = visitor.methodCallExpressions.find { mc -> log(mc.method); mc.method instanceof GStringExpression }
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method instanceof GStringExpression }
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 1)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 2)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod')

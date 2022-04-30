@@ -15,6 +15,7 @@
  */
 package org.codenarc.plugin.disablerules
 
+import groovy.ant.AntBuilder
 import org.codenarc.AnalysisContext
 import org.codenarc.report.ReportWriter
 import org.codenarc.results.Results

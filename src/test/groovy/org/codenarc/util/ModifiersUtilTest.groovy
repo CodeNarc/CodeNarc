@@ -15,12 +15,12 @@
  */
 package org.codenarc.util
 
-import org.codehaus.groovy.ast.MethodNode
-
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.test.AbstractTestCase
 import org.junit.jupiter.api.Test
+
+import java.lang.reflect.Modifier
 
 /**
  * Tests for ModifiersUtil
@@ -29,13 +29,13 @@ import org.junit.jupiter.api.Test
  */
 class ModifiersUtilTest extends AbstractTestCase {
 
-    private static final ACC_PUBLIC = MethodNode.ACC_PUBLIC
-    private static final ACC_PROTECTED = MethodNode.ACC_PROTECTED
-    private static final ACC_PRIVATE = MethodNode.ACC_PRIVATE
-    private static final ACC_STATIC = MethodNode.ACC_STATIC
-    private static final ACC_FINAL = MethodNode.ACC_FINAL
-    private static final ACC_VOLATILE = MethodNode.ACC_VOLATILE
-    private static final ACC_TRANSIENT = MethodNode.ACC_TRANSIENT
+    private static final ACC_PUBLIC = Modifier.PUBLIC
+    private static final ACC_PROTECTED = Modifier.PROTECTED
+    private static final ACC_PRIVATE = Modifier.PRIVATE
+    private static final ACC_STATIC = Modifier.STATIC
+    private static final ACC_FINAL = Modifier.FINAL
+    private static final ACC_VOLATILE = Modifier.VOLATILE
+    private static final ACC_TRANSIENT = Modifier.TRANSIENT
 
     // Tests for matchesAnyModifiers
 

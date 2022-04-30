@@ -15,6 +15,7 @@
  */
 package org.codenarc.ant
 
+import groovy.ant.AntBuilder
 import org.codenarc.test.AbstractTestCase
 import org.junit.jupiter.api.Test
 

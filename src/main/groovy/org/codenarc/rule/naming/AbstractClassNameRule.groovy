@@ -44,8 +44,8 @@ class AbstractClassNameRule extends AbstractAstVisitorRule {
 class AbstractClassNameAstVisitor extends AbstractTypeNameAstVisitor  {
     @Override
     protected boolean shouldVisit(ClassNode classNode) {
-        def isAbstract = classNode.modifiers & classNode.ACC_ABSTRACT
-        def isInterface = classNode.modifiers & classNode.ACC_INTERFACE
+        def isAbstract = classNode.isAbstract()
+        def isInterface = classNode.isInterface()
         isAbstract && !isInterface
     }
 }
