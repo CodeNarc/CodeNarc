@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO: Version 3.x.x    (xxx 2022)
+Version 3.0.1    (Apr 2022)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #683: **UnnecessaryPublicModifier**: Fix StringIndexOutOfBoundsException.

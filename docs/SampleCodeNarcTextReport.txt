@@ -1,4 +1,4 @@
-CodeNarc Report: Sample Project - Mar 16, 2022 5:27:03 PM
+CodeNarc Report: Sample Project - Apr 30, 2022 1:09:42 PM
 
 Summary: TotalFiles=415 FilesWithViolations=58 P1=0 P2=78 P3=36
 
@@ -551,7 +551,7 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
         ' contains a GString-type expression: '${sample.property1}'] Src=[final SOURCE = ''']
 
 File: imports/UnusedImportRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=194 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=215 Msg=[The String '
             import test.TestData1
             import test.TestData2
             import test.TestData3
@@ -764,4 +764,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (https://www.codenarc.org) v3.0.0]
+[CodeNarc (https://codenarc.org) v3.0.1]
