@@ -1,10 +1,10 @@
 {
     "codeNarc": {
-        "url": "https://www.codenarc.org",
-        "version": "3.0.0"
+        "url": "https://codenarc.org",
+        "version": "3.0.1"
     },
     "report": {
-        "timestamp": "Mar 16, 2022 5:27:02 PM"
+        "timestamp": "Apr 30, 2022 1:09:41 PM"
     },
     "project": {
         "title": "Sample Project",
@@ -988,7 +988,7 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 194,
+                            "lineNumber": 215,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            import test.TestData1\n            import test.TestData2\n            import test.TestData3\n            import test.TestData4\n            import test.TestData5\n            import test.TestData6\n            import test.TestData7\n            import test.TestData8\n            import test.TestData9\n            import test.TestData10\n            import test.TestData11\n            import test.TestData12\n            import test.TestData13\n            import test.TestData14\n            import test.TestData15\n\n            def GSTRING1 = \" ${TestData1.GOOD_XML}\"\n            def GSTRING2 = \" $TestData2.XML\"\n            def MAP1 = [(TestData3):123]\n            def MAP2 = [abc:TestData4]\n            def MAP3 = [abc:TestData5, ddd:123]\n            def LIST = [TestData6,TestData7]\n            def OPERATORS1 = 0+TestData8.VALUE-TestData9.VALUE\n            def OPERATORS2 = 9*TestData10.VALUE/TestData11.VALUE\n            def OPERATORS3 = 64&TestData12.VALUE|TestData13.VALUE^TestData14.VALUE\n            def OPERATORS4 = !TestData15.VALUE\n        ' contains a GString-type expression: '${TestData1.GOOD_XML}'"
                         }
