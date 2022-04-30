@@ -53,7 +53,7 @@ Here is an example Ant XML build file illustrating configuration of
 ```json
 {
     "codeNarc": {
-        "url": "https://www.codenarc.org",
+        "url": "https://codenarc.org",
         "version": "1.5"
     },
     "report": {
