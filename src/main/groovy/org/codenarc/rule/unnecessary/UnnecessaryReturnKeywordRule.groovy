@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
@@ -44,6 +45,11 @@ class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
             addViolation lastStatement, 'The return keyword is not needed and can be removed'
         }
 
+        superVisitMethodEx(node)
+    }
+
+    @CompileStatic
+    private void superVisitMethodEx(MethodNode node) {
         super.visitMethodEx node
     }
 
@@ -54,6 +60,11 @@ class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
             addViolation lastStatement, 'The return keyword is not needed and can be removed'
         }
 
+        superVisitClosureExpression(node)
+    }
+
+    @CompileStatic
+    private void superVisitClosureExpression(ClosureExpression node) {
         super.visitClosureExpression node
     }
 

@@ -15,6 +15,7 @@
  */
  package org.codenarc.rule
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
@@ -46,12 +47,14 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitVariableExpression(VariableExpression expression) {
         fieldReferenced(expression.name)
         super.visitVariableExpression(expression)
     }
 
     @Override
+    @CompileStatic
     void visitProperty(PropertyNode node) {
         fieldReferenced(node.name)
         super.visitProperty(node)
@@ -70,6 +73,11 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
             expression.objectExpression.property.value == 'this') {
             fieldReferenced(expression.property.value)
         }
+        superVisitPropertyExpression(expression)
+    }
+
+    @CompileStatic
+    private void superVisitPropertyExpression(PropertyExpression expression) {
         super.visitPropertyExpression(expression)
     }
 
@@ -83,6 +91,11 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
+        superVisitMethodEx(node)
+    }
+
+    @CompileStatic
+    private void superVisitMethodEx(MethodNode node) {
         super.visitMethodEx(node)
     }
 
@@ -104,6 +117,11 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
             call.objectExpression.property.value == 'this') {
             fieldReferenced(call.method.value)
         }
+        superVisitPropertyExpression(call)
+    }
+
+    @CompileStatic
+    private void superVisitPropertyExpression(MethodCallExpression call) {
         super.visitMethodCallExpression(call)
     }
 

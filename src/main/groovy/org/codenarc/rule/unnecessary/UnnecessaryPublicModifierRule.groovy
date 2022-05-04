@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -39,6 +40,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
     private static final String PUBLIC_REGEX = 'public' + REQUIRED_WHITESPACE
 
     @Override
+    @CompileStatic
     protected void visitClassEx(ClassNode node) {
         if (!node.isScript()) {
             def regex = 'class' + REQUIRED_WHITESPACE + node.name
@@ -48,6 +50,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitMethodEx(MethodNode node) {
         if (node.genericsTypes == null || node.genericsTypes.length == 0) {
             def regex = node.name + OPTIONAL_WHITESPACE + '\\('
@@ -57,6 +60,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitConstructor(ConstructorNode node) {
         def regex = node.declaringClass.name + OPTIONAL_WHITESPACE + '\\('
         checkDeclaration(node, regex, 'constructors')

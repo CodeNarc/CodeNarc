@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
@@ -45,6 +46,7 @@ class UnnecessaryConstructorRule extends AbstractAstVisitorRule {
 class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
 
     @Override
+    @CompileStatic
     void visitClassEx(ClassNode node) {
         if (node.declaredConstructors?.size() == 1) {
             analyzeConstructor node.declaredConstructors[0]

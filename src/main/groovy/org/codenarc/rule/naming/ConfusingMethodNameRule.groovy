@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.naming
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
@@ -74,6 +75,11 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
         lowercaseMethodNames.add(methodName)
         lowercaseMethodNamesWithParameterTypes.add(methodNameWithParameters)
 
+        superVisitMethodEx(node)
+    }
+
+    @CompileStatic
+    private void superVisitMethodEx(MethodNode node) {
         super.visitMethodEx node
     }
 
@@ -91,6 +97,11 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
             String fieldName = node.name.toLowerCase()
             lowercaseFieldNames[fieldName] = node.name
         }
+        superVisitField(node)
+    }
+
+    @CompileStatic
+    private void superVisitField(FieldNode node) {
         super.visitField(node)
     }
 

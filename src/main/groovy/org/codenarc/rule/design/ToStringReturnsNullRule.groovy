@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.design
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
@@ -40,6 +41,7 @@ class ToStringReturnsNullAstVisitor extends AbstractAstVisitor {
     private static final String ERROR_MESSAGE = 'The toString() method within class %s returns null'
 
     @Override
+    @CompileStatic
     protected void visitMethodEx(MethodNode node) {
         if (AstUtil.isMethodNode(node, 'toString', 0)) {
             def errorMessage = String.format(ERROR_MESSAGE, currentClassName)
@@ -52,6 +54,7 @@ class ToStringReturnsNullAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx(node)
     }
 
+    @CompileStatic
     void handleClosure(ClosureExpression expression) {
         super.visitClosureExpression(expression)
     }

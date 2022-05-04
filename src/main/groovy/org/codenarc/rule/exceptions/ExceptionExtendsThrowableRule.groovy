@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -32,6 +33,7 @@ class ExceptionExtendsThrowableRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ExceptionExtendsThrowableAstVisitor
 }
 
+@CompileStatic
 class ExceptionExtendsThrowableAstVisitor extends AbstractAstVisitor {
 
     private final ClassNode throwableClassNode = ClassHelper.make(Throwable)
