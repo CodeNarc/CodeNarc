@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 
 /**
@@ -32,6 +33,7 @@ abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
 
     @SuppressWarnings('CatchThrowable')
     @Override
+    @CompileStatic
     void visitConstructorCallExpression(ConstructorCallExpression constructorCall) {
         if (isFirstVisit(constructorCall) && isConstructorCallAViolation(constructorCall)) {
             try {

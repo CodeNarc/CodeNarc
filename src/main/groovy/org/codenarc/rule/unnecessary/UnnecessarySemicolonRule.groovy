@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.*
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
@@ -38,6 +39,7 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessarySemicolonAstVisitor
 
     @Override
+    @CompileStatic
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         super.applyTo(sourceCode, violations)
         processPackage(sourceCode, violations)
@@ -84,6 +86,7 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
 
     @Override
+    @CompileStatic
     protected void visitStatement(Statement statement) {
         if (isFirstVisit(statement)) {
             checkNode(statement)
@@ -92,6 +95,7 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitField(FieldNode node) {
         checkNode(node)
         super.visitField(node)

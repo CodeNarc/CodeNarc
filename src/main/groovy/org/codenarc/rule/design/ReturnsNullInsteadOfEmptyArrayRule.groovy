@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.design
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
@@ -37,6 +38,7 @@ class ReturnsNullInsteadOfEmptyArrayRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ReturnsNullInsteadOfEmptyArrayAstVisitor
 }
 
+@CompileStatic
 class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
 
     private static final String ERROR_MSG = 'Returning null from a method that might return an Array'
@@ -80,6 +82,7 @@ class ArrayReturnTracker extends AbstractAstVisitor {
     Closure callbackFunction
 
     @Override
+    @CompileStatic
     void visitReturnStatement(ReturnStatement statement) {
         callBackForArrayReturns(statement.expression)
         super.visitReturnStatement(statement)

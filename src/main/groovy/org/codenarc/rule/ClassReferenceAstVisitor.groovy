@@ -15,9 +15,11 @@
  */
  package org.codenarc.rule
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.ImportNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.util.WildcardPattern
@@ -56,36 +58,45 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitImports(ModuleNode node) {
         def allImports = node.imports + node.staticStarImports.values()
         allImports?.each { importNode ->
             if (classNamePattern.matches(importNode.className)) {
                 def violationMessage = formatViolationMessage(importNode.className)
-                addViolation(rule.createViolationForImport(sourceCode, importNode, violationMessage))
+                addViolation(ruleCreateViolationForImport(importNode, violationMessage))
             }
         }
         super.visitImports(node)
     }
 
+    private Violation ruleCreateViolationForImport(ImportNode importNode, String violationMessage) {
+        rule.createViolationForImport(sourceCode, importNode, violationMessage)
+    }
+
     @Override
+    @CompileStatic
     void visitField(FieldNode node) {
         checkNodeType(node)
         super.visitField(node)
     }
 
     @Override
+    @CompileStatic
     void visitPropertyExpression(PropertyExpression expression) {
         checkType(expression.text, expression)
         super.visitPropertyExpression(expression)
     }
 
     @Override
+    @CompileStatic
     void visitClassExpression(ClassExpression expression) {
         checkNodeType(expression)
         super.visitClassExpression(expression)
     }
 
     @Override
+    @CompileStatic
     void visitConstructorCallExpression(ConstructorCallExpression node) {
         if (isFirstVisit(node)) {
             checkNodeType(node)
@@ -94,6 +105,7 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitVariableExpression(VariableExpression expression) {
         checkNodeType(expression)
         checkType(expression.name, expression)
@@ -101,6 +113,7 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         checkType(node.returnType.name, node)
 
@@ -111,6 +124,7 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitClosureExpression(ClosureExpression expression) {
         expression.parameters.each { parameter ->
             checkNodeType(parameter)
@@ -119,12 +133,14 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    @CompileStatic
     void visitCastExpression(CastExpression expression) {
         checkNodeType(expression)
         super.visitCastExpression(expression)
     }
 
     @Override
+    @CompileStatic
     protected void visitClassEx(ClassNode node) {
         def superClassName = node.superClass.name
         if (superClassName != 'java.lang.Object') {

@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.design
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
@@ -42,6 +43,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
     private static final String ERROR_MSG = 'Returning null from a method that might return a Collection or Map'
 
     @Override
+    @CompileStatic
     void visitMethodEx(MethodNode node) {
         if (methodReturnsCollection(node)) {
             // does this method ever return null?

@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.design
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codehaus.groovy.ast.stmt.Statement
@@ -38,6 +39,7 @@ class BooleanMethodReturnsNullRule extends AbstractAstVisitorRule {
     Class astVisitorClass = BooleanMethodReturnsNullAstVisitor
 }
 
+@CompileStatic
 class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
     private static final String ERROR_MSG = 'Returning null from a method that might return a Boolean'
 
@@ -85,6 +87,7 @@ class BooleanReturnTracker extends AbstractAstVisitor {
     boolean returnsBoolean = false
 
     @Override
+    @CompileStatic
     void visitReturnStatement(ReturnStatement statement) {
         checkReturnValues(statement.expression)
         super.visitReturnStatement(statement)

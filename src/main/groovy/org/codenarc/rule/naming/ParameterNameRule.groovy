@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.naming
 
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.Parameter
@@ -54,18 +55,21 @@ class ParameterNameRule extends AbstractAstVisitorRule {
 class ParameterNameAstVisitor extends AbstractAstVisitor  {
 
     @Override
+    @CompileStatic
     void visitMethodEx(MethodNode methodNode) {
         processParameters(methodNode.parameters, methodNode.name)
         super.visitMethodEx(methodNode)
     }
 
     @Override
+    @CompileStatic
     void visitConstructor(ConstructorNode constructorNode) {
         processParameters(constructorNode.parameters, '<init>')
         super.visitConstructor(constructorNode)
     }
 
     @Override
+    @CompileStatic
     void visitClosureExpression(ClosureExpression closureExpression) {
         if (isFirstVisit(closureExpression)) {
             processParameters(closureExpression.parameters, '<closure>')
