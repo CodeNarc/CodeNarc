@@ -104,8 +104,10 @@ class SourceFileTest extends AbstractTestCase {
     void testGetLineNumberForCharacterIndex() {
         assert sourceFile.getLineNumberForCharacterIndex(0) == 1
         assert sourceFile.getLineNumberForCharacterIndex(1) == 1
-        assert sourceFile.getLineNumberForCharacterIndex(19) == 2
-        assert sourceFile.getLineNumberForCharacterIndex(20) == 3
+        // depending on platform and git settings during checkout, source test file may contain CRLF
+        int sepSize = System.lineSeparator().length()
+        assert sourceFile.getLineNumberForCharacterIndex(19) == 2 || sourceFile.getLineNumberForCharacterIndex(18 + sepSize) == 2
+        assert sourceFile.getLineNumberForCharacterIndex(20) == 3 || sourceFile.getLineNumberForCharacterIndex(18 + sepSize * 2) == 3
         assert sourceFile.getLineNumberForCharacterIndex(999) == -1
         assert sourceFile.getLineNumberForCharacterIndex(-1) == -1
     }
