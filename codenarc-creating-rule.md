@@ -93,18 +93,22 @@ that uses an associated AST *Visitor* class that is a subclass of
 with **CodeNarc**.
 
 ```
+    import groovy.transform.CompileStatic
     import org.codenarc.rule.AbstractAstVisitor
     import org.codenarc.rule.AbstractAstVisitorRule
     import org.codehaus.groovy.ast.stmt.TryCatchStatement
     import org.codenarc.util.AstUtil
     
     class EmptyTryBlockRule extends AbstractAstVisitorRule {
+    
         String name = 'EmptyTryBlock'
         int priority = 2
         Class astVisitorClass = EmptyTryBlockAstVisitor
     }
     
     class EmptyTryBlockAstVisitor extends AbstractAstVisitor  {
+
+        @CompileStatic
         void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
             if (AstUtil.isEmptyBlock(tryCatchStatement.tryStatement)) {
                 addViolation(tryCatchStatement, "The try statement block is empty")
@@ -128,6 +132,10 @@ Things to note about this example:
     *visit* every try/catch statement within the source code.
 
   * It uses the `AstUtil` utility class.
+
+  * The visit method is annotated with `@CompileStatic` to enable compatibility between Groovy 3 and Groovy 4. Any 
+    CodeNarc method that calls `super.xx()` should be annotated with `@CompileStatic` so that it can be compiled on
+    Groovy 3 and used on Groovy 4 or vice versa.
 
 See the **CodeNarc** source code and javadocs for more information and further examples.
 
