@@ -191,15 +191,6 @@ class RuleSetBuilderTest extends AbstractTestCase {
     }
 
     @Test
-    void testRule_Class_NoClosure_NullRuleClass() {
-        shouldFailWithMessageContaining('ruleClass') {
-            ruleSetBuilder.ruleset {
-                rule((Class)null)
-            }
-        }
-    }
-
-    @Test
     void testRule_Class_NoClosure_ClassDoesNotImplementRuleInterface() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
@@ -235,17 +226,6 @@ class RuleSetBuilderTest extends AbstractTestCase {
             ruleSetBuilder.ruleset {
                 rule(IllegalRegexRule) {
                     doesNotExist = 1
-                }
-            }
-        }
-    }
-
-    @Test
-    void testRule_Class_Closure_NullRuleClass() {
-        shouldFailWithMessageContaining('ruleClass') {
-            ruleSetBuilder.ruleset {
-                rule((Class)null) {
-                    priority = 1
                 }
             }
         }
