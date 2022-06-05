@@ -1,13 +1,6 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO: Version 3.x.x
---------------------------------------
- - #705: Make SourceFileTest more multi-platform friendly. ([Paul King](https://github.com/paulk-asert))
- - #707: Allow functioning with Groovy 4. Use `@CompileStatic` for calls to `super.visitXxx()`. ([Paul King](https://github.com/paulk-asert))
- - NOTE: Any CodeNarc method that calls `super.xx()` should be annotated with `@CompileStatic` so that it can be compiled on Groovy 3 and used on Groovy 4 or vice versa.
-
-
 Version 3.0.1    (Apr 2022)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
