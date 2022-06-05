@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.junit
 
-import groovy.transform.CompileStatic
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.MethodNode
@@ -42,7 +41,6 @@ class JUnitUnnecessaryThrowsExceptionAstVisitor extends AbstractAstVisitor {
     private static final List JUNIT4_ANNOTATIONS = ['Test', 'Before', 'BeforeClass', 'AfterClass', 'After', 'Ignore']
 
     @Override
-    @CompileStatic
     protected void visitMethodEx(MethodNode node) {
         if (node.exceptions && node.parameters.size() == 0 && node.isPublic() && !node.isStatic() && node.isVoidMethod() &&
                 (isJUnit3MatchingMethod(node) || hasJUnit4Annotation(node)))  {

@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.naming
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -54,11 +53,6 @@ class PackageNameAstVisitor extends AbstractAstVisitor  {
         if (rule.packageNameRequired && classNode.packageName == null) {
             addViolation(classNode, 'Required package declaration is missing for class')
         }
-        superVisitClassEx(classNode)
-    }
-
-    @CompileStatic
-    private void superVisitClassEx(ClassNode classNode) {
         super.visitClassEx(classNode)
     }
 

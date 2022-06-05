@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.design
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -35,7 +34,6 @@ class StatelessSingletonRule extends AbstractAstVisitorRule {
 class StatelessSingletonAstVisitor extends AbstractAstVisitor {
 
     @Override
-    @CompileStatic
     protected void visitClassComplete(ClassNode node) {
         if (isSingleton(node) && !doesExtendClass(node) && !hasState(node)) {
             addViolation node, 'There is no point in creating a stateless Singleton. ' +

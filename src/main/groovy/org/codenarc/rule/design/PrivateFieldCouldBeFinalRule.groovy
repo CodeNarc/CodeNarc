@@ -15,7 +15,6 @@
  */
  package org.codenarc.rule.design
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.FieldNode
@@ -76,7 +75,6 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     private ClassNode currentClassNode
 
     @Override
-    @CompileStatic
     protected void visitClassEx(ClassNode node) {
         currentClassNode = node
         def allClassFields = node.fields.findAll { field -> isPrivate(field) && !field.isFinal() && !field.synthetic }
@@ -87,7 +85,6 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    @CompileStatic
     void visitConstructor(ConstructorNode node) {
         withinConstructor = true
         super.visitConstructor(node)
@@ -95,7 +92,6 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    @CompileStatic
     void visitBinaryExpression(BinaryExpression expression) {
         def matchingFieldName = extractVariableOrFieldName(expression)
         boolean isAssignment = expression.operation.text.endsWith('=') && expression.operation.text != '=='
@@ -111,7 +107,6 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    @CompileStatic
     void visitClosureExpression(ClosureExpression expression) {
         def originalWithinConstructor = withinConstructor
 
@@ -123,14 +118,12 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    @CompileStatic
     void visitPostfixExpression(PostfixExpression expression) {
         removeExpressionVariableName(expression.expression)
         super.visitPostfixExpression(expression)
     }
 
     @Override
-    @CompileStatic
     void visitPrefixExpression(PrefixExpression expression) {
         removeExpressionVariableName(expression.expression)
         super.visitPrefixExpression(expression)

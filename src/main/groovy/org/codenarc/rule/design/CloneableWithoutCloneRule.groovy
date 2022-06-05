@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.design
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.Parameter
@@ -37,7 +36,6 @@ class CloneableWithoutCloneRule extends AbstractAstVisitorRule {
 class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
 
     @Override
-    @CompileStatic
     void visitClassEx(ClassNode node) {
         // is this class a Cloneable?
         def cloneableClassNode = ClassHelper.make(Cloneable)

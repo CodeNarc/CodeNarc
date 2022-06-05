@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.junit
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -39,7 +38,6 @@ class JUnitPublicFieldRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-@CompileStatic
 class JUnitPublicFieldAstVisitor extends AbstractFieldVisitor {
 
     @Override

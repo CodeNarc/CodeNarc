@@ -15,8 +15,6 @@
  */
 package org.codenarc.rule.design
 
-import groovy.transform.CompileDynamic
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
@@ -37,7 +35,6 @@ class AssignmentToStaticFieldFromInstanceMethodRule extends AbstractAstVisitorRu
     Class astVisitorClass = AssignmentToStaticFieldFromInstanceMethodAstVisitor
 }
 
-@CompileStatic
 class AssignmentToStaticFieldFromInstanceMethodAstVisitor extends AbstractAstVisitor {
 
     private Collection<String> fieldNames
@@ -67,21 +64,16 @@ class AssignmentToStaticFieldFromInstanceMethodAstVisitor extends AbstractAstVis
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
         if (expression.leftExpression instanceof VariableExpression) {
-            localVariableNames.add(leftName(expression))
+            localVariableNames.add(expression.leftExpression.name)
         }
         super.visitDeclarationExpression(expression)
-    }
-
-    @CompileDynamic
-    private String leftName(BinaryExpression expression) {
-        expression.leftExpression.name
     }
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         boolean isAssignment = expression.operation.text == '='
         if (isAssignment && withinInstanceMethodName && expression.leftExpression instanceof VariableExpression) {
-            String name = leftName(expression)
+            String name = expression.leftExpression.name
             if (fieldNames.contains(name) && !localVariableNames.contains(name)) {
                 addViolation(expression, "The instance method $withinInstanceMethodName in class $currentClassName contains an assignment to static field $name")
             }

@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.design
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -36,7 +35,6 @@ class AbstractClassWithPublicConstructorRule extends AbstractAstVisitorRule {
 class AbstractClassWithPublicConstructorAstVisitor extends AbstractAstVisitor {
 
     @Override
-    @CompileStatic
     protected void visitClassEx(ClassNode node) {
         if (Modifier.isAbstract(node.modifiers)) {
             node.declaredConstructors.each { constructor ->

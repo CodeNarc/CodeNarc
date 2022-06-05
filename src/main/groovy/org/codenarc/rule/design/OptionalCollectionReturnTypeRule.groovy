@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.design
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
@@ -41,7 +40,6 @@ class OptionalCollectionReturnTypeAstVisitor extends AbstractAstVisitor {
             'Map', 'HashMap', 'LinkedHashMap', 'EnumMap', 'SortedMap', 'TreeMap']
 
     @Override
-    @CompileStatic
     void visitMethodEx(MethodNode methodNode) {
         if (methodNode.returnType.name == 'Optional') {
             def genericsTypes = methodNode.returnType.genericsTypes

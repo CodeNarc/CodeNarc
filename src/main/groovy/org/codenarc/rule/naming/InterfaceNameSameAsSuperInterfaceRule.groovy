@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.naming
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -35,7 +34,6 @@ class InterfaceNameSameAsSuperInterfaceRule extends AbstractAstVisitorRule {
 class InterfaceNameSameAsSuperInterfaceAstVisitor extends AbstractAstVisitor {
 
     @Override
-    @CompileStatic
     protected void visitClassEx(ClassNode node) {
         if (node.isInterface()) {
             node.interfaces.each { superInterface ->

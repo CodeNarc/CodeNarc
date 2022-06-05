@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.basic
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -36,7 +35,6 @@ class EqualsAndHashCodeRule extends AbstractAstVisitorRule {
 class EqualsAndHashCodeAstVisitor extends AbstractAstVisitor {
 
     @Override
-    @CompileStatic
     void visitClassEx(ClassNode classNode) {
         def methods = classNode.methods
         def equalsMethod = methods.find { m ->

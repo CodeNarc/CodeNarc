@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.design
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.Parameter
@@ -34,7 +33,6 @@ class OptionalMethodParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = OptionalMethodParameterAstVisitor
 }
 
-@CompileStatic
 class OptionalMethodParameterAstVisitor extends AbstractAstVisitor {
 
     @Override

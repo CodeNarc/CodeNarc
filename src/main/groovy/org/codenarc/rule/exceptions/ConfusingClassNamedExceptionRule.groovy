@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.exceptions
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -32,7 +31,6 @@ class ConfusingClassNamedExceptionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConfusingClassNamedExceptionAstVisitor
 }
 
-@CompileStatic
 class ConfusingClassNamedExceptionAstVisitor extends AbstractAstVisitor {
 
     @Override

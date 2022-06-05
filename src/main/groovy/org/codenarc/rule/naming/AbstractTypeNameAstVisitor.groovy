@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.naming
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codenarc.rule.AbstractAstVisitor
@@ -34,21 +33,16 @@ abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
 
         if (classNode instanceof InnerClassNode && classNode.anonymous) {
             // do nothing for anonymous inner classes
-            superVisitClassEx(classNode)
+            super.visitClassEx(classNode)
         } else if (classNode.isScript()) {
             // do nothing for script classes
-            superVisitClassEx(classNode)
+            super.visitClassEx(classNode)
         } else {
             if (shouldVisit(classNode) && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
                 addViolation(classNode, "The name ${classNode.getNameWithoutPackage()} failed to match the pattern ${rule.regex}")
             }
-            superVisitClassEx(classNode)
+            super.visitClassEx(classNode)
         }
-    }
-
-    @CompileStatic
-    private void superVisitClassEx(ClassNode classNode) {
-        super.visitClassEx(classNode)
     }
 
     /**
