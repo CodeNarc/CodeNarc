@@ -1,6 +1,12 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
+TODO: Version 3.1.x
+--------------------------------------
+- #709: Upgrade to GMetrics 2.1.0.
+- #705: Make SourceFileTest more multi-platform friendly. ([Paul King](https://github.com/paulk-asert))
+
+
 Version 3.0.1    (Apr 2022)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes

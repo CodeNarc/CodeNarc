@@ -14,7 +14,7 @@ shadowJar {
 
 group = 'org.codenarc'
 archivesBaseName = 'CodeNarc'
-version = '3.0.1'
+version = '3.1.0-SNAPSHOT'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -25,7 +25,7 @@ repositories {
 }
 
 def groovyVersion = '3.0.9'
-def gmetricsVersion = '2.0.0'
+def gmetricsVersion = '2.1.0'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"
 
