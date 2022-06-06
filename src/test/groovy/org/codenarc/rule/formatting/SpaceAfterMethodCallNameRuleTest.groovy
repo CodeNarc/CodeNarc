@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test
 class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMethodCallNameRule> {
 
     private static final String ERROR_MESSAGE = 'There is whitespace between the method name and parenthesis in a method call'
-    private static final String ERROR_MESSAGE_SPACES = 'There is more than one space between the method name and its arguments in a method call'
     private static final String ERROR_MESSAGE_CONSTRUCTOR = 'There is whitespace between class name and parenthesis in a constructor call.'
 
     @Test
@@ -131,7 +130,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     }
 
     @Test
-    void test_MethodCallWithoutParentheses_Violation() {
+    void test_MethodCallWithoutParentheses_NoViolation() {
         final SOURCE = '''
             class ExcessiveTrailingWhitespaceInMethodCallWithoutParentheses {
                 void invalid() {
@@ -142,7 +141,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'aMethod  "arg"', ERROR_MESSAGE_SPACES)
+        assertNoViolations(SOURCE)
     }
 
     @Test
@@ -151,7 +150,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
             class Invalid {
                 void invalid() {
                     aMethod ("arg")
-                    aMethod  "arg"
+                    aMethod    (123, 456)
                 }
 
                 void aMethod(String argument) {
@@ -160,7 +159,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
         '''
         assertViolations(SOURCE,
             [line: 4, source: 'aMethod ("arg")', message: ERROR_MESSAGE],
-            [line: 5, source: 'aMethod  "arg"', message: ERROR_MESSAGE_SPACES]
+            [line: 5, source: 'aMethod    (123, 456)', message: ERROR_MESSAGE]
         )
     }
 
@@ -243,10 +242,21 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
     void test_MultiLine_Violation() {
         final SOURCE = '''
             def failEvents = messages.parallelStream()
-                .filter { item -> item.headers.get( headerName ) == 'failed' }.collect ( Collectors.toList() ) as List<Message>
+                .filter { item -> item.headers.get( headerName ) == 'failed' }
+                .collect ( Collectors.toList() ) as List<Message>
         '''
         assertViolations(SOURCE,
-                [line: 3, source: 'collect ( Collectors.toList() )', message: ERROR_MESSAGE])
+                [line: 4, source: 'collect ( Collectors.toList() )', message: ERROR_MESSAGE])
+    }
+
+    @Test
+    void test_VariableOrMapWithSameNameAsMethod_NoViolation() {
+        final SOURCE = '''
+            def foo  = Factory.foo()
+            def bar = [foo  : foo()]
+            def bar2 = foo  ?: foo()
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override

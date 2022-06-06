@@ -68,11 +68,6 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
                     addViolation(new Violation(rule: rule, lineNumber: lineNumber, sourceLine: line, message: message))
                     break
                 }
-                else if (line.contains(methodName + '  ')) {
-                    def message = 'There is more than one space between the method name and its arguments in a method call: ' + methodName
-                    addViolation(new Violation(rule: rule, lineNumber: lineNumber, sourceLine: line, message: message))
-                    break
-                }
             }
         }
 
