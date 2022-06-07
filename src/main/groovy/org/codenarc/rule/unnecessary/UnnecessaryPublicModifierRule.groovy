@@ -19,6 +19,8 @@ import org.codehaus.groovy.ast.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
+import java.util.regex.Pattern
+
 /**
  * The 'public' modifier is not required on methods, constructors or classes.
  *
@@ -41,7 +43,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
         if (!node.isScript()) {
-            def regex = 'class' + REQUIRED_WHITESPACE + node.name
+            def regex = 'class' + REQUIRED_WHITESPACE + Pattern.quote(node.name)
             checkDeclaration(node, regex, 'classes')
         }
         super.visitClassEx(node)
@@ -50,7 +52,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodEx(MethodNode node) {
         if (node.genericsTypes == null || node.genericsTypes.length == 0) {
-            def regex = node.name + OPTIONAL_WHITESPACE + '\\('
+            def regex = Pattern.quote(node.name) + OPTIONAL_WHITESPACE + '\\('
             checkDeclaration(node, regex, 'methods')
         }
         super.visitMethodEx(node)
@@ -58,7 +60,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructor(ConstructorNode node) {
-        def regex = node.declaringClass.name + OPTIONAL_WHITESPACE + '\\('
+        def regex = Pattern.quote(node.declaringClass.name) + OPTIONAL_WHITESPACE + '\\('
         checkDeclaration(node, regex, 'constructors')
         super.visitConstructor(node)
     }

@@ -206,6 +206,17 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase<Unnecessary
         }
 
         @Test
+        void MethodNameWithSpecialCharacters() {
+            final SOURCE = '''
+                class MyClass {
+                    void "Foo {bar,baz}"() {
+                    }
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
         void AnnotationWithParametersContainingPublic() {
             final SOURCE = '''
                 class FakeTest {

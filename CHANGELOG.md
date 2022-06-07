@@ -5,7 +5,8 @@ TODO: Version 3.1.0
 --------------------------------------
  - #709: Publish Groovy 4.x-specific jar for CodeNarc. Upgrade to GMetrics 2.1.0.
  - #705: Make SourceFileTest more multi-platform friendly. ([Paul King](https://github.com/paulk-asert))
- - #688: **SpaceAfterMethodCallName**: Fix false positives. NOTE: No longer check method calls without parentheses. 
+ - #688: **SpaceAfterMethodCallName** rule: Fix false positives. NOTE: No longer check method calls without parentheses.
+ - #703: **UnnecessaryPublicModifier** rule: Fix PatternSyntaxException if method name contains special (regex) characters.
 
 
 Version 3.0.1    (Apr 2022)
