@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unused
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.rule.AbstractSharedAstVisitorRule
@@ -34,15 +35,33 @@ import org.codenarc.util.WildcardPattern
  * The <code>ignoreFieldNames</code> property optionally specifies one or more
  * (comma-separated) field names that should be ignored (i.e., that should not cause a
  * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
+ * <p/>
+ * The <code>ignoreClassesAnnotatedWithNames</code> property optionally specifies one or more
+ * (comma-separated) annotation names; any classes annotated with those should be ignored (i.e., should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
 class UnusedPrivateFieldRule extends AbstractSharedAstVisitorRule {
+
     String name = 'UnusedPrivateField'
     int priority = 2
     String ignoreFieldNames = 'serialVersionUID'
     boolean allowConstructorOnlyUsages = true
+    String ignoreClassesAnnotatedWithNames = 'Entity'
+
+    @Override
+    protected boolean shouldApplyThisRuleTo(ClassNode classNode) {
+        if (ignoreClassesAnnotatedWithNames) {
+            def wildcardPattern = new WildcardPattern(ignoreClassesAnnotatedWithNames, false)
+            boolean ignore = classNode.annotations.find { annotationNode -> wildcardPattern.matches(annotationNode.classNode.nameWithoutPackage) }
+            if (ignore) {
+                return false
+            }
+        }
+        return super.shouldApplyThisRuleTo(classNode)
+    }
 
     @Override
     protected AstVisitor getAstVisitor(SourceCode sourceCode) {

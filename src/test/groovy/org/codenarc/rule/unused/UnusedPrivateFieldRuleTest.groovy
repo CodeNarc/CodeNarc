@@ -26,6 +26,9 @@ class UnusedPrivateFieldRuleTest extends AbstractUnusedPrivateFieldRuleTest {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedPrivateField'
+        assert rule.ignoreFieldNames == 'serialVersionUID'
+        assert rule.allowConstructorOnlyUsages == true
+        assert rule.ignoreClassesAnnotatedWithNames == 'Entity'
     }
 
     @Test

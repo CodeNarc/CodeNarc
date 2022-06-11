@@ -361,6 +361,26 @@ abstract class AbstractUnusedPrivateFieldRuleTest extends AbstractRuleTestCase<U
     }
 
     @Test
+    void testApplyTo_IgnoreClassesAnnotatedWithNames() {
+        final SOURCE = '''
+          @Entity
+          class MyClass {
+               private field1
+          }
+          
+          @Data
+          @Special(reason='not sure')
+          @Other
+          class OtherClass {
+               private int count
+               private field2
+          }
+        '''
+        rule.ignoreClassesAnnotatedWithNames = 'Entity, Special'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testAnonymousInnerClassAsLocalVariable() {
         final SOURCE = '''
             class MyClass {
