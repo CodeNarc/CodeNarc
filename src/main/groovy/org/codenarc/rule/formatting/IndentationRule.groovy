@@ -248,6 +248,12 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         // finally blocks have extra level of nested BlockStatement
         boolean isNestedBlock = nestedBlocks.contains(block)
         boolean isGenerated = block.lineNumber == -1
+
+        if (isGenerated || block.lineNumber == block.lastLineNumber) {
+            super.visitBlockStatement(block)
+            return
+        }
+
         int addToIndentLevel = (isNestedBlock || isGenerated) ? 0 : 1
         addToIndentLevel += blockIndentLevel[block]
         indentLevel += addToIndentLevel

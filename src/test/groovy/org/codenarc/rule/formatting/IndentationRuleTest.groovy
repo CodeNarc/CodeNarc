@@ -205,6 +205,16 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_Method_SingleLineMethodDeclaration_NoViolation() {
+        final SOURCE = '''
+            |class MyClass {
+            |    protected void addToCount() { count += 10 }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_Method_AbstractMethod_NoViolation() {
         final SOURCE = '''
             |abstract class AbstractRuleFactory implements RuleFactory {
@@ -604,7 +614,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        }
             |        catch(Throwable t) {
             |            println "ERROR: ${t.message}"
-            |            t.printStackTrace()
+            |                 t.printStackTrace()        // wrong column
             |        }
             |        finally {
             |            closeResources()
@@ -612,16 +622,44 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |    }
             |    private void executeOtherOne() {
             |        try {
+            |      println 999                          // wrong column 
             |            executeWithArgs(args)
             |        } catch(Throwable t) {
             |            t.printStackTrace()
             |        } finally {
             |            closeResources()
+            |             notifyUser()                  // wrong column
             |        }
             |    }
             |}
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertViolations(SOURCE,
+                [line:9, source:'t.printStackTrace()', message:'The statement on line 9 in class MyClass'],
+                [line:17, source:'println 999', message:'The statement on line 17 in class MyClass'],
+                [line:23, source:'notifyUser()', message:'The statement on line 23 in class MyClass'])
+    }
+
+    @Test
+    void test_Statement_TryWithResources() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private void execute() {
+            |        try (def input = url.openStream()
+            |            def output = new ByteArrayOutputStream(4096)) {
+            |
+            |            println input.text       
+            |        }
+            |    }
+            |
+            |    private void run() {
+            |        try (InputStream input = url.openStream(); OutputStream output = new ByteArrayOutputStream(4096)) {
+            |               println input.text          // wrong column
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [line:13, source:'println input.text', message:'The statement on line 13 in class MyClass'])
     }
 
     @Test
@@ -727,7 +765,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |class MyClass {
             |    static {
             |        println "Static initializer"
-            |        ClosureExpression.metaClass.getText = { return CLOSURE_TEXT }
+            |          initializeMetaClass()            // wrong column
             |    }
             |
             |    static { println "init" }
@@ -741,10 +779,14 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |    // Instance initializer
             |    {
             |        println "Instance initializer"
+            |      initialize(1)                        // wrong column
+            |        initialize(2)
             |    }
             |}
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertViolations(SOURCE,
+                [line:5, source:'initializeMetaClass()', message:'The statement on line 5 in class MyClass'],
+                [line:19, source:'initialize(1)', message:'The statement on line 19 in class MyClass'])
     }
 
     // Tests for @SuppressWarnings

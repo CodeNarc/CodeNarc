@@ -126,6 +126,11 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
                 } finally {
                     println 'done'
                 }
+                
+                try (def input = url.openStream()
+                     def output = new ByteArrayOutputStream(4096)) {
+                     // some code here to work with streams
+                }
             '''
             assertNoViolations(SOURCE)
         }
@@ -149,6 +154,20 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
                     pprintln 'done'
                 }
             '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void test_MultipleResources() {
+            final SOURCE = '''
+                try (def input = url.openStream(); def output = new ByteArrayOutputStream(4096)) {
+                     // some code here to work with streams
+                }
+                catch (IOException e) {
+                    // some code to handle the exception
+                }
+            '''
+            rule.catchOnSameLineAsClosingBrace = false
             assertNoViolations(SOURCE)
         }
 
