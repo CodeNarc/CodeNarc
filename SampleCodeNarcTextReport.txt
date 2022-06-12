@@ -1,4 +1,4 @@
-CodeNarc Report: Sample Project - Apr 30, 2022 1:09:42 PM
+CodeNarc Report: Sample Project - Jun 12, 2022 9:27:34 AM
 
 Summary: TotalFiles=415 FilesWithViolations=58 P1=0 P2=78 P3=36
 
@@ -104,7 +104,7 @@ File: formatting/BracesForMethodRuleTest.groovy
         ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}'] Src=[final SOURCE = ''']
 
 File: formatting/BracesForTryCatchFinallyRuleTest.groovy
-    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=162 Msg=[The return keyword is not needed and can be removed] Src=[return rule]
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=181 Msg=[The return keyword is not needed and can be removed] Src=[return rule]
 
 File: formatting/ClassEndsWithBlankLineRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.ClassEndsWithBlankLineRuleTest has 33 methods] Src=[class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {]
@@ -113,8 +113,8 @@ File: formatting/ClassStartsWithBlankLineRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 47 methods] Src=[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {]
 
 File: formatting/IndentationRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 53 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=599 Msg=[The String '
+    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 55 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=609 Msg=[The String '
             |class MyClass {
             |    private void execute() {
             |        try {
@@ -122,7 +122,7 @@ File: formatting/IndentationRuleTest.groovy
             |        }
             |        catch(Throwable t) {
             |            println "ERROR: ${t.message}"
-            |            t.printStackTrace()
+            |                 t.printStackTrace()        // wrong column
             |        }
             |        finally {
             |            closeResources()
@@ -130,16 +130,18 @@ File: formatting/IndentationRuleTest.groovy
             |    }
             |    private void executeOtherOne() {
             |        try {
+            |      println 999                          // wrong column 
             |            executeWithArgs(args)
             |        } catch(Throwable t) {
             |            t.printStackTrace()
             |        } finally {
             |            closeResources()
+            |             notifyUser()                  // wrong column
             |        }
             |    }
             |}
         ' contains a GString-type expression: '${t.message}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=889 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=931 Msg=[The String '
             |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->
             |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')
             |    String inputFile = 'COMMAND=PREPARE_LIBRARY\n' +
@@ -148,10 +150,10 @@ File: formatting/IndentationRuleTest.groovy
             |    cacheDir + hash + File.separator + 'output/jars/classes.jar'
             |}).asFileTree
         ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=903 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=945 Msg=[The String '
             |"${if (true) 'content' else ''}"
         ' contains a GString-type expression: '${if (true) 'content' else ''}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=911 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=953 Msg=[The String '
             |package com.sample
             |
             |trait RegressionTest {
@@ -174,7 +176,7 @@ File: formatting/IndentationRuleTest.groovy
             |    }
             |}
         ' contains a GString-type expression: '${callStackPath}${this.class.simpleName}'] Src=[final SOURCE = ''']
-    Violation: Rule=ClassSize P=3 Line=26 Msg=[Class "IndentationRuleTest" is 1045 lines]
+    Violation: Rule=ClassSize P=3 Line=26 Msg=[Class "IndentationRuleTest" is 1087 lines]
 
 File: formatting/IndentationRule_MethodChainingTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=82 Msg=[The String '
@@ -665,7 +667,7 @@ File: unnecessary/UnnecessaryToStringRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=100 Msg=[The String 'processing: ${new Date().toString()}' contains a GString-type expression: '${new Date().toString()}'] Src=[[line:5, source:'processing: ${new Date().toString()}', message:'Calling toString() on [new Date()] in class None is unnecessary']]
 
 File: unused/AbstractUnusedPrivateFieldRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.AbstractUnusedPrivateFieldRuleTest has 31 methods] Src=[abstract class AbstractUnusedPrivateFieldRuleTest extends AbstractRuleTestCase<UnusedPrivateFieldRule> {]
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.AbstractUnusedPrivateFieldRuleTest has 32 methods] Src=[abstract class AbstractUnusedPrivateFieldRuleTest extends AbstractRuleTestCase<UnusedPrivateFieldRule> {]
     Violation: Rule=GStringExpressionWithinString P=2 Line=172 Msg=[The String '
             class MyClass {
                 private int count
@@ -764,4 +766,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (https://codenarc.org) v3.0.1]
+[CodeNarc (https://codenarc.org) v3.1.0]
