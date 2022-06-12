@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO: Version 3.1.0
+Version 3.1.0
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #688: **SpaceAfterMethodCallName** rule: Fix false positives. NOTE: No longer check method calls without parentheses.

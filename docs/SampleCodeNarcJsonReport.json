@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://codenarc.org",
-        "version": "3.0.1"
+        "version": "3.1.0"
     },
     "report": {
-        "timestamp": "Apr 30, 2022 1:09:41 PM"
+        "timestamp": "Jun 12, 2022 9:27:33 AM"
     },
     "project": {
         "title": "Sample Project",
@@ -511,7 +511,7 @@
                         {
                             "ruleName": "UnnecessaryReturnKeyword",
                             "priority": 3,
-                            "lineNumber": 162,
+                            "lineNumber": 181,
                             "sourceLine": "return rule",
                             "message": "The return keyword is not needed and can be removed"
                         }
@@ -548,40 +548,40 @@
                             "ruleName": "ClassSize",
                             "priority": 3,
                             "lineNumber": 26,
-                            "message": "Class \"IndentationRuleTest\" is 1045 lines"
+                            "message": "Class \"IndentationRuleTest\" is 1087 lines"
                         },
                         {
                             "ruleName": "MethodCount",
                             "priority": 2,
                             "lineNumber": 26,
                             "sourceLine": "class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {",
-                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 53 methods"
+                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 55 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 599,
+                            "lineNumber": 609,
                             "sourceLine": "final SOURCE = '''",
-                            "message": "The String '\n            |class MyClass {\n            |    private void execute() {\n            |        try {\n            |            executeWithArgs(args)\n            |        }\n            |        catch(Throwable t) {\n            |            println \"ERROR: ${t.message}\"\n            |            t.printStackTrace()\n            |        }\n            |        finally {\n            |            closeResources()\n            |        }\n            |    }\n            |    private void executeOtherOne() {\n            |        try {\n            |            executeWithArgs(args)\n            |        } catch(Throwable t) {\n            |            t.printStackTrace()\n            |        } finally {\n            |            closeResources()\n            |        }\n            |    }\n            |}\n        ' contains a GString-type expression: '${t.message}'"
+                            "message": "The String '\n            |class MyClass {\n            |    private void execute() {\n            |        try {\n            |            executeWithArgs(args)\n            |        }\n            |        catch(Throwable t) {\n            |            println \"ERROR: ${t.message}\"\n            |                 t.printStackTrace()        // wrong column\n            |        }\n            |        finally {\n            |            closeResources()\n            |        }\n            |    }\n            |    private void executeOtherOne() {\n            |        try {\n            |      println 999                          // wrong column \n            |            executeWithArgs(args)\n            |        } catch(Throwable t) {\n            |            t.printStackTrace()\n            |        } finally {\n            |            closeResources()\n            |             notifyUser()                  // wrong column\n            |        }\n            |    }\n            |}\n        ' contains a GString-type expression: '${t.message}'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 889,
+                            "lineNumber": 931,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->\n            |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')\n            |    String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +\n            |        \"FILE_PATH=${it.absolutePath}\\n\"\n            |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)\n            |    cacheDir + hash + File.separator + 'output/jars/classes.jar'\n            |}).asFileTree\n        ' contains a GString-type expression: '${it.absolutePath}'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 903,
+                            "lineNumber": 945,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            |\"${if (true) 'content' else ''}\"\n        ' contains a GString-type expression: '${if (true) 'content' else ''}'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 911,
+                            "lineNumber": 953,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            |package com.sample\n            |\n            |trait RegressionTest {\n            |\n            |    String callStackPath = \"src/test/resources/callstacks/\"\n            |\n            |   /**\n            |     * Checks the current callstack is the same as the reference callstack.\n            |     * The reference callstack can be updated into a txt file in the callStackPath\n            |     *\n            |     * Pattern: <RegressionTest.callStackPath>/<ClassTestSimpleName><_subname>.txt\n            |     * @param subname optional subname, used in the reference callstack filename\n            |     */\n            |    void testNonRegression(String subname = '') {\n            |        String targetFileName = \"${callStackPath}${this.class.simpleName}\"\n            |        if (subname) {\n            |            targetFileName += \"_${subname}\"\n            |        }\n            |        RegressionTestHelper.testNonRegression(helper, targetFileName)\n            |    }\n            |}\n        ' contains a GString-type expression: '${callStackPath}${this.class.simpleName}'"
                         }
@@ -1261,7 +1261,7 @@
                             "priority": 2,
                             "lineNumber": 27,
                             "sourceLine": "abstract class AbstractUnusedPrivateFieldRuleTest extends AbstractRuleTestCase<UnusedPrivateFieldRule> {",
-                            "message": "Class org.codenarc.rule.unused.AbstractUnusedPrivateFieldRuleTest has 31 methods"
+                            "message": "Class org.codenarc.rule.unused.AbstractUnusedPrivateFieldRuleTest has 32 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
