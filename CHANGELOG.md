@@ -1,7 +1,9 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-Version 3.1.0
+NOTE: CodeNarc now provides a separate **CodeNarc-Groovy4** artifact for use with Groovy 4.x.
+
+Version 3.1.0    (Jun 2022)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #688: **SpaceAfterMethodCallName** rule: Fix false positives. NOTE: No longer check method calls without parentheses.

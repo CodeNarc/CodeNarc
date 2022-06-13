@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.groovy:groovy:${groovy.version}'
+    compile 'org.apache.groovy:groovy-xml:${groovy.version}'
+    compile 'org.apache.groovy:groovy-json:${groovy.version}'
+    compile 'org.apache.groovy:groovy-ant:${groovy.version}'
+    compile 'org.apache.groovy:groovy-templates:${groovy.version}'
+
+    compile('org.codenarc:CodeNarc-Groovy4:${codenarc.version}') {
+        exclude group: 'org.apache.groovy'
+    }
+
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+}
+
+shadowJar {
+    archiveBaseName.set('codenarc-all')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+    manifest {
+        attributes 'Main-Class': 'org.codenarc.CodeNarc'
+    }
+}
+
