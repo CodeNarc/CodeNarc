@@ -109,7 +109,7 @@ class DirectoryResults implements Results {
      * @return the List of child Results objects; may be empty
      */
     @Override
-    List getChildren() {
+    List<Results> getChildren() {
         children
     }
 
@@ -117,7 +117,7 @@ class DirectoryResults implements Results {
      * @return the List of all violations; may be empty
      */
     @Override
-    List getViolations() {
+    List<Violation> getViolations() {
         children.inject([]) { violations, child -> violations.addAll(child.getViolations()); violations }
     }
 

@@ -32,12 +32,12 @@ interface Results {
     /**
      * @return the List of child Results objects; may be empty
      */
-    List getChildren()
+    List<Results> getChildren()
 
     /**
      * @return the List of all violations; may be empty
      */
-    List getViolations()
+    List<Violation> getViolations()
 
     /**
      * Remove the specified violation
