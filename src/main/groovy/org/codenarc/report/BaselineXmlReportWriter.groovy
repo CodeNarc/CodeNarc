@@ -88,7 +88,9 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
         }
 
         return {
-            children.each { child ->
+            children.findAll { child ->
+                !child.violations.isEmpty()
+            }.each { child ->
                 out << buildFileElement(child)
             }
         }

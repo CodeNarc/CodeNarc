@@ -127,14 +127,16 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
         reportWriter = new JsonReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
-        def srcMainDirResults = new DirectoryResults('src/main', 1)
+        def srcMainDirResults = new DirectoryResults('src/main', 2)
         def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
         def srcTestDirResults = new DirectoryResults('src/test', 0)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def srcMainFileResults2 = new FileResults('src/main/MyCleanAction.groovy', [])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
 
         srcMainDirResults.addChild(srcMainFileResults1)
+        srcMainDirResults.addChild(srcMainFileResults2)
         srcMainDirResults.addChild(srcMainDaoDirResults)
         srcMainDaoDirResults.addChild(fileResultsMainDao1)
         srcMainDaoDirResults.addChild(fileResultsMainDao2)

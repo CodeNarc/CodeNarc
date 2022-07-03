@@ -151,7 +151,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         log(results)
         assertResultsCounts(results, 2, 0)
 
-        assert getAllResultsPaths(results) == ['sourcewitherrors']
+        assert getAllResultsPaths(results) == ['sourcewitherrors', 'sourcewitherrors/SourceFile1.txt', 'sourcewitherrors/SourceFileWithCompileError.txt']
     }
 
     @Test

@@ -101,18 +101,20 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
         def dirResults = new DirectoryResults()
-        def dirResultsMain = new DirectoryResults('src/main', 1)
+        def dirResultsMain = new DirectoryResults('src/main', 2)
         def dirResultsMainDao = new DirectoryResults('src/main/dao', 2)
         def dirResultsTest = new DirectoryResults('src/test', 0)
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
         def fileResultsMyAction = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def fileResultsMyCleanAction = new FileResults('src/main/MyCleanAction.groovy', [])
 
         // assemble results
         // The order here is not alphabetically, because directory scanning
         // isn't either, but the baseline report has to sort the data, which
         // is done via the comparison with the report XML above.
         dirResultsMain.addChild(fileResultsMyAction)
+        dirResultsMain.addChild(fileResultsMyCleanAction)
         dirResultsMain.addChild(dirResultsMainDao)
         dirResultsMainDao.addChild(fileResultsMainDao2)
         dirResultsMainDao.addChild(fileResultsMainDao1)
