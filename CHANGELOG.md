@@ -3,6 +3,12 @@
 
 NOTE: CodeNarc now provides a separate **CodeNarc-Groovy4** artifact for use with Groovy 4.x.
 
+Version 3.x.x    (??? 2022)
+--------------------------------------
+ - Create GitHub Action "gradle.yml" to build+test on push or PR.
+ - #708: Include internal results for files without violations, to enable accurate baseline reporting. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+
+
 Version 3.1.0    (Jun 2022)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
