@@ -49,7 +49,10 @@ class SpaceBeforeOpeningBraceRuleTest extends AbstractRuleTestCase<SpaceBeforeOp
                     for(String name: names) { }
                     if (count > this."maxPriority${priority}Violations") { }
                     while (count > this."maxPriority${priority}Violations") { }
+                    poo("with an emoji 💩 should not break") { }
+                    poo("with unicode 𝓈 should not break") { }
                 }
+                def poo(String message, Closure cls) { }
                 MyClass() {
                     this(classNames)
                 }
