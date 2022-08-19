@@ -16,7 +16,7 @@
 package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedObjectRule
@@ -67,8 +67,8 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase<UnusedObjectRule> {
             println "ok"
         '''
         assertViolations(SOURCE,
-                [lineNumber: 2, sourceLineText: 'new Object()'],
-                [lineNumber: 3, sourceLineText: 'new URL("www.google.com")'])
+                [line: 2, source: 'new Object()'],
+                [line: 3, source: 'new URL("www.google.com")'])
     }
 
     @Test
@@ -79,7 +79,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase<UnusedObjectRule> {
                 doSomething()
             }
         '''
-        assertViolations(SOURCE, [lineNumber: 3, sourceLineText: 'new Object()'])
+        assertViolations(SOURCE, [line: 3, source: 'new Object()'])
     }
 
     @Test

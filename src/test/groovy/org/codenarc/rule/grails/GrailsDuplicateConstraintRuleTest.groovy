@@ -16,8 +16,8 @@
 package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GrailsDuplicateConstraintRule
@@ -87,8 +87,8 @@ class GrailsDuplicateConstraintRuleTest extends AbstractRuleTestCase<GrailsDupli
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:8, sourceLineText:'firstName nullable:false', messageText:'The constraint for firstName in domain class Person has already been specified'],
-            [lineNumber:9, sourceLineText:'lastName nullable:false, maxSize:30', messageText:'The constraint for lastName in domain class Person has already been specified'])
+            [line:8, source:'firstName nullable:false', message:'The constraint for firstName in domain class Person has already been specified'],
+            [line:9, source:'lastName nullable:false, maxSize:30', message:'The constraint for lastName in domain class Person has already been specified'])
     }
 
     @Test
@@ -118,7 +118,7 @@ class GrailsDuplicateConstraintRuleTest extends AbstractRuleTestCase<GrailsDupli
                 }
             }
         '''
-        assertViolations(SOURCE, [lineNumber:7, sourceLineText:'importFrom Entity, include: ["firstName"]', messageText:'The constraint for firstName in domain class Person has already been specified'])
+        assertViolations(SOURCE, [line:7, source:'importFrom Entity, include: ["firstName"]', message:'The constraint for firstName in domain class Person has already been specified'])
     }
 
     @Test
@@ -133,7 +133,7 @@ class GrailsDuplicateConstraintRuleTest extends AbstractRuleTestCase<GrailsDupli
                 }
             }
         '''
-        assertViolations(SOURCE, [lineNumber:7, sourceLineText:'firstName blank: false', messageText:'The constraint for firstName in domain class Person has already been specified'])
+        assertViolations(SOURCE, [line:7, source:'firstName blank: false', message:'The constraint for firstName in domain class Person has already been specified'])
     }
 
     @Test
@@ -185,7 +185,7 @@ class GrailsDuplicateConstraintRuleTest extends AbstractRuleTestCase<GrailsDupli
         assertNoViolations(SOURCE)
     }
 
-    @Before
+    @BeforeEach
     void setUp() {
         sourceCodePath = 'MyProject/grails-app/domain/com/example/Person.groovy'
     }

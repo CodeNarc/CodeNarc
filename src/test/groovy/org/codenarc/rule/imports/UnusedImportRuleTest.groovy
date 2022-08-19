@@ -15,8 +15,10 @@
  */
 package org.codenarc.rule.imports
 
+import org.codehaus.groovy.ast.ClassHelper
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.codenarc.source.SourceString
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedImportRule
@@ -157,6 +159,27 @@ class UnusedImportRuleTest extends AbstractRuleTestCase<UnusedImportRule> {
     }
 
     @Test
+    void testApplyTo_StaticImportWithPropertyUsage() {
+        final SOURCE = '''
+            import static System.getProperties
+            import static a.SomeClass.isEnabled
+            import static b.OtherClass.setInstance
+            class ABC {
+                def foo() {
+                    properties.getProperty("foo")
+                }
+                def bar() {
+                    if (enabled) {
+                        instance = this
+                    }
+                }
+            }
+        '''
+        // The static import is used as property style, so no violation
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             import java.io.InputStream
@@ -218,6 +241,22 @@ Other$.value()
             def OPERATORS4 = !TestData15.VALUE
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSourceLineAndNumberForImport_AstAddedImports() {
+        final SOURCE = '''
+            import com.example.FaultCode.*
+            import static Math.*
+            class ABC {
+                def name
+            }
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        sourceCode.ast.addImport('LocalDateTime', ClassHelper.make('java.time.LocalDateTime'))
+        sourceCode.ast.addStaticImport(ClassHelper.make('java.time.LocalDateTime'), 'MIN', 'LocalDateTime.MIN')
+        def violations = rule.applyTo(sourceCode)
+        assert violations.size() == 0
     }
 
     @Override

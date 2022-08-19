@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,29 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule
-
-import org.junit.Test
+package org.codenarc.ruleset
 
 /**
- * Tests related to class resolution
+ * Represents a configurer for a ruleset
  *
- * @author Hamlet D'Arcy
- */
-class ClassResolutionTest extends AbstractRuleTestCase<Rule> {
+ * @author Chris Mair
+  */
+interface RuleSetConfigurer {
 
-    @Test
-    void testGrabError() {
-        def source = '''
-            @Grab(group='org.springframework', module='spring', version='2.5.6')
-            import org.springframework.jdbc.core.JdbcTemplate
-        '''
-        assertNoViolations source
-    }
+    void configure(RuleSet ruleSet, String name)
 
-    @Override
-    protected Rule createRule() {
-        new StubRule()
-    }
 }
-

@@ -16,13 +16,14 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for NoTabCharacterRule
  *
  * @author Yuriy Chulovskyy
  */
+// codenarc-disable NoTabCharacter
 class NoTabCharacterRuleTest extends AbstractRuleTestCase<NoTabCharacterRule> {
 
     @Test
@@ -46,7 +47,7 @@ class NoTabCharacterRuleTest extends AbstractRuleTestCase<NoTabCharacterRule> {
             // the code below contains the tab character
             class MyClass  {	}
         '''
-        assertSingleViolation(SOURCE, null, null, 'The tab character is not allowed in source files')
+        assertSingleViolation(SOURCE, 3, null, 'The tab character is not allowed in source files')
     }
 
     @Override

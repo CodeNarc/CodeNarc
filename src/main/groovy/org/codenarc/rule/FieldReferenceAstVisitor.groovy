@@ -32,7 +32,7 @@ import org.codenarc.util.AstUtil
  */
 class FieldReferenceAstVisitor extends AbstractAstVisitor {
 
-    private final Map<String, FieldNode> unreferencedFieldMap = [:]
+    protected final Map<String, FieldNode> unreferencedFieldMap = [:]
 
     FieldReferenceAstVisitor(Collection<FieldNode> fields) {
         fields.each { fieldNode ->
@@ -47,13 +47,13 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitVariableExpression(VariableExpression expression) {
-        unreferencedFieldMap.remove(expression.name)
+        fieldReferenced(expression.name)
         super.visitVariableExpression(expression)
     }
 
     @Override
     void visitProperty(PropertyNode node) {
-        unreferencedFieldMap.remove(node.name)
+        fieldReferenced(node.name)
         super.visitProperty(node)
     }
 
@@ -62,13 +62,13 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
         if (expression.objectExpression instanceof VariableExpression &&
             expression.objectExpression.name in ['this', currentClassNode.nameWithoutPackage] + outerClassNames &&
             expression.property instanceof ConstantExpression) {
-            unreferencedFieldMap.remove(expression.property.value)
+            fieldReferenced(expression.property.value)
         } else if (expression.objectExpression instanceof PropertyExpression &&
             expression.objectExpression.objectExpression instanceof VariableExpression &&
             expression.objectExpression.property instanceof ConstantExpression &&
             expression.objectExpression.objectExpression.name  == currentClassNode.outerClass?.name &&
-            expression.objectExpression.property.value == 'this' ) {
-            unreferencedFieldMap.remove(expression.property.value)
+            expression.objectExpression.property.value == 'this') {
+            fieldReferenced(expression.property.value)
         }
         super.visitPropertyExpression(expression)
     }
@@ -79,7 +79,7 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
             node.parameters.each { parameter ->
                 def initialExpression = parameter.initialExpression
                 if (initialExpression && AstUtil.respondsTo(initialExpression, 'getName')) {
-                    unreferencedFieldMap.remove(initialExpression.name)
+                    fieldReferenced(initialExpression.name)
                 }
             }
         }
@@ -95,16 +95,20 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
         //      myClosure()
         // But this could potentially "hide" some unused fields (i.e. false negatives).
         if (AstUtil.isMethodCallOnObject(call, 'this') && call.method instanceof ConstantExpression) {
-            unreferencedFieldMap.remove(call.method.value)
+            fieldReferenced(call.method.value)
         } else if (call.objectExpression instanceof PropertyExpression &&
             call.objectExpression.objectExpression instanceof VariableExpression &&
             call.objectExpression.property instanceof ConstantExpression &&
             call.method instanceof ConstantExpression &&
             call.objectExpression.objectExpression.name == currentClassNode.outerClass?.name &&
             call.objectExpression.property.value == 'this') {
-            unreferencedFieldMap.remove(call.method.value)
+            fieldReferenced(call.method.value)
         }
         super.visitMethodCallExpression(call)
+    }
+
+    protected void fieldReferenced(String name) {
+        unreferencedFieldMap.remove(name)
     }
 
     private List<String> getOuterClassNames() {

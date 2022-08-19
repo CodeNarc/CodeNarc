@@ -15,23 +15,32 @@
  */
 package org.codenarc.ruleset
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 import org.codenarc.rule.Rule
 import org.codenarc.rule.exceptions.CatchThrowableRule
+import org.codenarc.ruleregistry.RuleRegistryInitializer
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
-
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for RuleSetUtil
  *
  * @author Chris Mair
+ * @author Nicolas Vuillamy
   */
 class RuleSetUtilTest extends AbstractTestCase {
+
     private static final RULESET_XML_FILE = 'rulesets/RuleSet1.xml'
+    private static final RULESET_JSON_FILE = 'rulesets/JsonRuleSet1.json'
     private static final RULESET_GROOVY_FILE = 'rulesets/GroovyRuleSet1.txt'
     private static final RULE_SCRIPT_FILE = 'rule/DoNothingRule.txt'
     private static final RULE_SCRIPT_FILE_URL = 'file:src/test/resources/rule/DoNothingRule.txt'
+    private static final RULESET_AS_JSON = '''
+            {
+                "org.codenarc.rule.StubRule": { "name": "XXXX"}
+            }
+            '''.trim()
 
     @Test
     void testAssertClassImplementsRuleInterface_RuleClass() {
@@ -54,8 +63,16 @@ class RuleSetUtilTest extends AbstractTestCase {
 
     @Test
     void testLoadRuleSetFile() {
+        new RuleRegistryInitializer().initializeRuleRegistry()
         assert RuleSetUtil.loadRuleSetFile(RULESET_GROOVY_FILE).class == GroovyDslRuleSet
         assert RuleSetUtil.loadRuleSetFile(RULESET_XML_FILE).class == XmlFileRuleSet
+        assert RuleSetUtil.loadRuleSetFile(RULESET_JSON_FILE).class == JsonFileRuleSet
+    }
+
+    @Test
+    void testLoadRuleSetString() {
+        new RuleRegistryInitializer().initializeRuleRegistry()
+        assert RuleSetUtil.loadRuleSetFromString(RULESET_AS_JSON).class == JsonReaderRuleSet
     }
 
     @Test

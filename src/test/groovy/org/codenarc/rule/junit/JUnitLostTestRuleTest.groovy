@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitLostTestRule
@@ -34,7 +34,7 @@ class JUnitLostTestRuleTest extends AbstractRuleTestCase<JUnitLostTestRule> {
     @Test
     void testApplyTo_NonMatchingMethods_NoViolations() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 void doSomething() { }          // not named test*()
                 void testMe1(int count) { }     // not zero-arg
@@ -59,7 +59,7 @@ class JUnitLostTestRuleTest extends AbstractRuleTestCase<JUnitLostTestRule> {
     @Test
     void testApplyTo_AnnotatedWithTest_NoViolations() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 @Test
                 void testMe() { }
@@ -71,7 +71,7 @@ class JUnitLostTestRuleTest extends AbstractRuleTestCase<JUnitLostTestRule> {
     @Test
     void testApplyTo_PublicVoidTestMethod_NoTestAnnotation_Violation() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 void testMe() { }
             }
@@ -82,7 +82,7 @@ class JUnitLostTestRuleTest extends AbstractRuleTestCase<JUnitLostTestRule> {
     @Test
     void testApplyTo_ExplicitlyDeclaredPublicMethod_Violation() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 public void testMe() { }
             }
@@ -93,7 +93,7 @@ class JUnitLostTestRuleTest extends AbstractRuleTestCase<JUnitLostTestRule> {
     @Test
     void testApplyTo_OtherJUnit4Imports() {
         final SOURCE = '''
-            import org.junit.After
+            import org.junit.jupiter.api.AfterEach
             class MyTestCase {
                 void testMe() { }
             }
@@ -127,7 +127,7 @@ class JUnitLostTestRuleTest extends AbstractRuleTestCase<JUnitLostTestRule> {
     @Test
     void testApplyTo_IgnoresAbstractTestMethods() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 abstract void testInternalStuff();
             }

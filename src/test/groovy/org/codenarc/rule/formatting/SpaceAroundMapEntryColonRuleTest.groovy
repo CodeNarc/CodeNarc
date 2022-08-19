@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SpaceAroundMapEntryColonRule
@@ -147,6 +147,17 @@ class SpaceAroundMapEntryColonRuleTest extends AbstractRuleTestCase<SpaceAroundM
               },
               // etc...
             )
+            '''
+        rule.characterAfterColonRegex = /\s/
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_MapEntryFormatting_TestIssue641() {
+        final SOURCE = '''
+                class A {
+                    static x = [a: 1]
+                }
             '''
         rule.characterAfterColonRegex = /\s/
         assertNoViolations(SOURCE)

@@ -12,8 +12,17 @@ being analyzed, as well as any referenced classes, on the classpath.
 
 NOTE: If a rule requiring a later compiler phase is included in the active **CodeNarc** ruleset and
 enabled and one or more of the required classes is not on the classpath, then **CodeNarc** will
-log a Log4J WARN message for each source file that contains the missing references.
+log a WARN message for each source file that contains the missing references, and the rule will not
+be able to process that file. 
 
+The "Enhanced" CodeNarc rules:
+ * CloneWithoutCloneable
+ * JUnitAssertEqualsConstantActualValue
+ * UnsafeImplementationAsMap
+ * MissingOverrideAnnotation
+ * GrailsDomainGormMethods
+
+(There are some other rules that have an *optional* "enhanced" mode, but that is not enabled by default.)
 
 ## Grails-CodeNarc Plugin
 

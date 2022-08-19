@@ -70,7 +70,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
 
         checkMethods(classMetricResult)
 
-        if (!AstUtil.isFromGeneratedSourceCode(classNode)) {
+        if (isNotGeneratedCode(classNode)) {
             if (!(classNode.isScript() && classNode.name == 'None')) {
                 checkClass(classMetricResult, classNode)
             }

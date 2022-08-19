@@ -51,7 +51,6 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessarySemicolonRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessarySetterRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule'/>
-    <rule class='org.codenarc.rule.unnecessary.UnnecessarySubstringRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryToStringRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTransientModifierRule'/>

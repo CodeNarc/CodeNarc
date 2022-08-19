@@ -16,8 +16,8 @@
 package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CloseWithoutCloseableRule
@@ -87,7 +87,7 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase<CloseWithoutClo
 
 class EnhancedCloseWithoutCloseableRuleTest extends CloseWithoutCloseableRuleTest {
 
-    @Before
+    @BeforeEach
     void enableEnhancedMode() {
         rule.enhancedMode = true
     }

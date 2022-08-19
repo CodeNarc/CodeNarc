@@ -15,8 +15,9 @@
  */
 package org.codenarc.ant
 
+import groovy.ant.AntBuilder
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.assertContainsAllInOrder
 
@@ -104,6 +105,6 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
     private void verifyTextReportFile() {
         def file = new File(TEXT_REPORT_FILE)
         assert file.exists()
-        assertContainsAllInOrder(file.text, ['CodeNarc Report', TITLE, 'www.codenarc.org'])
+        assertContainsAllInOrder(file.text, ['CodeNarc Report', TITLE, 'codenarc.org'])
     }
 }

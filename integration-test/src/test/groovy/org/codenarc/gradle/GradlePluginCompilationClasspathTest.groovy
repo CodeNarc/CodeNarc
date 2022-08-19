@@ -2,6 +2,7 @@ package org.codenarc.gradle
 
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
@@ -14,6 +15,7 @@ class GradlePluginCompilationClasspathTest {
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder()
 
+    @Ignore
     @Test
     void testRunningEnhancedRulesFromGradleBuildOnCodeThatUsesAstTransformations() {
         gradleBuildWithCodeNarcCompilationClasspathConfigured()

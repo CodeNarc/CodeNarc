@@ -15,12 +15,13 @@
  */
 package org.codenarc.plugin.disablerules
 
+import groovy.ant.AntBuilder
 import org.codenarc.AnalysisContext
 import org.codenarc.report.ReportWriter
 import org.codenarc.results.Results
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Integration test for disabling rules in comments; uses the Groovy AntBuilder.

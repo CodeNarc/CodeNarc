@@ -939,18 +939,16 @@ Example of violations:
 
 The 'public' modifier is not required on methods, constructors or classes.
 
-Because of Groovy parsing limitations, this rule ignores methods (and constructors) that include Generic types in the method declaration.
+Limitations:
+ * Because of Groovy parsing limitations, this rule ignores methods (and constructors) that include Generic types in the method declaration.
+ * This rule will not catch the `public` modifier if it is on a separate line from the rest of the declaration.
 
 Example of violations:
 
 ```
-    // violation on class
-    public class MyClass {
-        // violation on constructor
-        public MyClass() {}
-
-        // violation on method
-        public void myMethod() {}
+    public class MyClass {              // violation on class
+        public MyClass() {}             // violation on constructor
+        public void myMethod() {}       // violation on method
     }
 ```
 
@@ -1049,6 +1047,10 @@ Example of violations:
     println(value); println (otherValue)
 ```
 
+Known limitations:
+ - Will not flag a semicolon on a field declaration with no initial value specified when running on Groovy 3.x.
+
+
 ## UnnecessarySetter Rule
 
 *Since CodeNarc 1.0*
@@ -1074,23 +1076,6 @@ These bits of code do not:
   x.setSomething('arg1', 'arg2')        // Setter must have exactly one argument
   if (!file.setExecutable(true)) { }    // Set method called within expression
   def count = x.setCount(92)            // Set method called within expression
-```
-
-## UnnecessarySubstring Rule
-
-*Since CodeNarc 0.15*
-
-This rule finds usages of `String.substring(int)` and `String.substring(int, int)` that can be replaced by use of the
-subscript operator. For instance, `var.substring(5)` can be replaced with `var[5..-1]`.
-
-Note that the String.substring(beginIndex,endIndex) method specifies a range of beginIndex..endIndex-1, while
-Groovy's String subscript specifies an inclusive range. So, `"123456".substring(1, 5)` is equivalent to `"123456"[1..4]`.
-
-Example of violations:
-
-```
-    myVar.substring(5)          // can use myVar[5..-1] instead
-    myVar.substring(1, 5)       // can use myVar[1..4] instead
 ```
 
 ## UnnecessaryStringInstantiation Rule

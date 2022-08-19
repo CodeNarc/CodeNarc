@@ -16,11 +16,11 @@
 package org.codenarc.rule
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-import static org.junit.Assert.assertFalse
+import static org.junit.jupiter.api.Assertions.assertFalse
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.util.WildcardPattern
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for AbstractAstVisitorRule
@@ -29,6 +29,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  */
 class AbstractAstVisitorRuleTest extends AbstractRuleTestCase<AbstractAstVisitorRule> {
+
     private static final SOURCE = '''
         class MyClass {
             int value
@@ -215,6 +216,7 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase<AbstractAstVisitor
         assert 'MyTests.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
         assert 'MyTestCase.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
         assert 'MySpec.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
+
         assertFalse 'MyNonTestClass.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
     }
 
@@ -225,7 +227,8 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase<AbstractAstVisitor
         assert wildcardPattern.matches('MyTests')
         assert wildcardPattern.matches('MyTestCase')
         assert wildcardPattern.matches('MySpec')
-        assertFalse wildcardPattern.matches('MyNonTestClass')\
+
+        assertFalse wildcardPattern.matches('MyNonTestClass')
     }
 
     @Override

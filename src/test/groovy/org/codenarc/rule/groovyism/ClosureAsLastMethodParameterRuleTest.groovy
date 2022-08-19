@@ -16,8 +16,7 @@
 package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ClosureAsLastMethodParameterRule
@@ -33,7 +32,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
     }
 
     @Test
-    void testSimpleSuccessScenario() {
+    void test_NoViolations() {
         final SOURCE = '''
             [1,2,3].each { println it }
 
@@ -171,13 +170,13 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
     void testMethodCallSurroundedByExtraParentheses() {
         final SOURCE = '''
             def filterFunds() {
-               (funds.findAll { it.fundCode } )
+               (funds.findAll { it.fundCode })
             }
             def filterFunds_TwoExtraParentheses() {
                ((funds.findAll{it.fundCode}))
             }
             def extendFunds() {
-               (funds.extend(3) { it.fundCode } )
+               (funds.extend(3) { it.fundCode })
             }
             def purgeFunds() {
                (funds.purge {
@@ -196,7 +195,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
 
             // The only violation
             def clearFunds() {
-               (println(funds.clear('clearing', { it.fundCode }) ))
+               (println(funds.clear('clearing', { it.fundCode })))
             }
           '''
         assertSingleViolation(SOURCE, 28, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure and can appear outside the parenthesis")
@@ -206,24 +205,19 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
     void testNestedMethodCallSurroundedByExtraParentheses_KnownLimitation() {
         final SOURCE = '''
             def clearFunds() {
-               (println((funds.clear('clearing', { it.fundCode })) ))
+               (println((funds.clear('clearing', { it.fundCode }))))
             }
           '''
-        if (GroovyVersion.isGroovyVersion2()) {
-            // Should actually fail with violation for inner method call -- clear()
-            assertNoViolations(SOURCE)
-        } else {
-            assertSingleViolation(SOURCE, 3, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call")
-        }
+        assertSingleViolation(SOURCE, 3, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call")
     }
 
     @Test
     void testMultiLineMethodCall_StartsWithParentheses() {
         final SOURCE = '''
-            ((Node)o).children().inject( [:] ){ Map<String, String> m, Node childNode ->
+            ((Node)o).children().inject([:]){ Map<String, String> m, Node childNode ->
                 println m
             }
-            (0..1).inject( [:] ){ Map<String, String> m, Node childNode ->
+            (0..1).inject([:]){ Map<String, String> m, Node childNode ->
                 println m
             }
         '''
@@ -248,6 +242,25 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
         final SOURCE = '''
             new Exception("${it.orElseThrow { new AssertionError() }}")
         '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testClosureParameter_Groovy3Lambda_NoViolations() {
+        final SOURCE = '''
+            [1, 2, 3].forEach(it -> { println it})
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_ignoreCallsToMethodNames() {
+        final SOURCE = '''
+            def myMethod() {
+                [1,2,3].each({ println it })
+            }
+        '''
+        rule.ignoreCallsToMethodNames = 'otherMethod, each'
         assertNoViolations(SOURCE)
     }
 

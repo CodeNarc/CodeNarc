@@ -16,7 +16,7 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessaryCollectCallRule
@@ -53,7 +53,7 @@ class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase<UnnecessaryCol
                 [1, 2, 3].collect { it.multiply(it) }
 
                 // OK, chained methods, too complex to analyze (maybe implement later?)
-                [1, 2, 3].collect { it.multiply(2).multiply(it   ) }
+                [1, 2, 3].collect { it.multiply(2).multiply(it) }
                 ["1", "2", "3"].collect { it.bytes.foo(it) }
                 [1, 2, 3].collect { it.multiply(2).multiply(4) }
 

@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SpaceAfterSemicolonRule
@@ -59,10 +59,10 @@ class SpaceAfterSemicolonRuleTest extends AbstractRuleTestCase<SpaceAfterSemicol
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'println 1;println 2', messageText:'The statement "println 2"'],
-            [lineNumber:5, sourceLineText:'int i=0;i++;println i', messageText:'The statement "i++"'],
-            [lineNumber:5, sourceLineText:'int i=0;i++;println i', messageText:'The statement "println i"'],
-            [lineNumber:6, sourceLineText:'def closure = { x -> println x;x = 23; }', messageText:'The statement "x = 23"'] )
+            [line:4, source:'println 1;println 2', message:'The statement "println 2"'],
+            [line:5, source:'int i=0;i++;println i', message:'The statement "i++"'],
+            [line:5, source:'int i=0;i++;println i', message:'The statement "println i"'],
+            [line:6, source:'def closure = { x -> println x;x = 23; }', message:'The statement "x = 23"'])
     }
 
     // Tests for classic for statements
@@ -103,9 +103,9 @@ class SpaceAfterSemicolonRuleTest extends AbstractRuleTestCase<SpaceAfterSemicol
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'for (int i=0;i<10;i++) {', messageText:'The for loop expression "i<10"'],
-            [lineNumber:4, sourceLineText:'for (int i=0;i<10;i++) {', messageText:'The for loop expression "i++"'] ,
-            [lineNumber:5, sourceLineText:'for (int j=0; j < 10;j++) { }', messageText:'The for loop expression "j++"'] )
+            [line:4, source:'for (int i=0;i<10;i++) {', message:'The for loop expression "i<10"'],
+            [line:4, source:'for (int i=0;i<10;i++) {', message:'The for loop expression "i++"'] ,
+            [line:5, source:'for (int j=0; j < 10;j++) { }', message:'The for loop expression "j++"'])
     }
 
     @Override

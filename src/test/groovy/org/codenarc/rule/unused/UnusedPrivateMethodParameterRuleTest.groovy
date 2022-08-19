@@ -16,7 +16,7 @@
 package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedPrivateMethodParameterRule
@@ -88,8 +88,8 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase<UnusedPr
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private void myMethod(int value, String name) { }', messageText:'value'],
-            [lineNumber:3, sourceLineText:'private void myMethod(int value, String name) { }', messageText:'name'])
+            [line:3, source:'private void myMethod(int value, String name) { }', message:'value'],
+            [line:3, source:'private void myMethod(int value, String name) { }', message:'name'])
     }
 
     @Test
@@ -102,8 +102,23 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase<UnusedPr
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private void myMethod1(String id, int value) { print value }', messageText:'id'],
-            [lineNumber:5, sourceLineText:'private int myMethod3(Date startDate) { }', messageText:'startDate'])
+            [line:3, source:'private void myMethod1(String id, int value) { print value }', message:'id'],
+            [line:5, source:'private int myMethod3(Date startDate) { }', message:'startDate'])
+    }
+
+    @Test
+    void testApplyTo_MultiplePrivateConstructorMethodsWithUnusedParameters() {
+        final SOURCE = '''
+          class MyClass {
+              private MyClass(String id, int value) { print value }
+              private MyClass(int otherValue) { print otherValue }
+              private MyClass(Date startDate, Date endDate) { }
+          }
+        '''
+        assertViolations(SOURCE,
+                [line:3, source:'private MyClass(String id, int value) { print value }', message:'id'],
+                [line:5, source:'private MyClass(Date startDate, Date endDate) { }', message:'startDate'],
+                [line:5, source:'private MyClass(Date startDate, Date endDate) { }', message:'endDate'])
     }
 
     @Test

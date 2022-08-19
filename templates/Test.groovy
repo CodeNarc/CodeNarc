@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 the original author or authors.
+ * Copyright 2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +46,8 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase<${ruleName}Rule> {
             // todo: replace with source that triggers 2 violations
         '''
         assertViolations(SOURCE,
-            [lineNumber:1, sourceLineText:'...', messageText:'...'],    // todo: replace line number, source line and message
-            [lineNumber:1, sourceLineText:'...', messageText:'...'])    // todo: replace line number, source line and message
+            [line:1, source:'...', message:'...'],    // todo: replace line number, source line and message
+            [line:1, source:'...', message:'...'])    // todo: replace line number, source line and message
     }
 
     @Override

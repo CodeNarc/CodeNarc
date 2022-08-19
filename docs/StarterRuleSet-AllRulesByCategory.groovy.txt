@@ -46,6 +46,7 @@ ruleset {
     HardCodedWindowsRootDirectory 
     IntegerGetInteger 
     MultipleUnaryOperators 
+    ParameterAssignmentInFilterClosure 
     RandomDoubleCoercedToZero 
     RemoveAllOnSelf 
     ReturnFromFinallyBlock 
@@ -147,6 +148,9 @@ ruleset {
     Instanceof 
     LocaleSetDefault 
     NestedForLoop 
+    OptionalCollectionReturnType 
+    OptionalField 
+    OptionalMethodParameter 
     PrivateFieldCouldBeFinal 
     PublicInstanceField 
     ReturnsNullInsteadOfEmptyArray 
@@ -207,11 +211,15 @@ ruleset {
     LineLength 
     MissingBlankLineAfterImports 
     MissingBlankLineAfterPackage 
+    MissingBlankLineBeforeAnnotatedField 
     SpaceAfterCatch 
     SpaceAfterClosingBrace 
     SpaceAfterComma 
     SpaceAfterFor 
     SpaceAfterIf 
+    SpaceAfterMethodCallName 
+    SpaceAfterMethodDeclarationName 
+    SpaceAfterNotOperator 
     SpaceAfterOpeningBrace 
     SpaceAfterSemicolon 
     SpaceAfterSwitch 
@@ -221,6 +229,7 @@ ruleset {
     SpaceAroundOperator 
     SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 
+    SpaceInsideParentheses 
     TrailingWhitespace 
     
     // rulesets/generic.xml
@@ -423,7 +432,6 @@ ruleset {
     UnnecessarySemicolon 
     UnnecessarySetter 
     UnnecessaryStringInstantiation 
-    UnnecessarySubstring 
     UnnecessaryTernaryExpression 
     UnnecessaryToString 
     UnnecessaryTransientModifier 

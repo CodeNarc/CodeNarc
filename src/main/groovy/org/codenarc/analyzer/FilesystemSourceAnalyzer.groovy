@@ -22,6 +22,8 @@ import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceFile
 import org.codenarc.util.WildcardPattern
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * SourceAnalyzer implementation that recursively processes files from the file system.
@@ -30,8 +32,9 @@ import org.codenarc.util.WildcardPattern
  */
 class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
 
-    static final String SEP = '/'
-    static final String DEFAULT_INCLUDES = '**/*.groovy'
+    private static final String SEP = '/'
+    private static final String DEFAULT_INCLUDES = '**/*.groovy'
+    private static final Logger LOG = LoggerFactory.getLogger(FilesystemSourceAnalyzer)
 
     /**
      * The base (root) directory. Must not be null or empty.
@@ -65,6 +68,11 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
     private WildcardPattern excludesPattern
 
     /**
+     * Whether to throw an exception if errors occur parsing source files (true), or just log the errors (false)
+     */
+    boolean failOnError = false
+
+    /**
      * Analyze the source with the configured directory tree(s) using the specified RuleSet and return the report results.
      * @param ruleset - the RuleSet to apply to each of the (applicable) files in the source directories
      * @return the results from applying the RuleSet to all of the files in the source directories
@@ -86,9 +94,10 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
         [baseDirectory]
     }
 
+    @SuppressWarnings(['CatchThrowable', 'NestedBlockDepth'])
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
         def dirResults = new DirectoryResults(dir)
-        def dirFile = new File((String) baseDirectory, (String) dir)
+        def dirFile = new File(baseDirectory, dir)
         dirFile.eachFile { file ->
             def dirPrefix = dir ? dir + SEP : dir
             def filePath = dirPrefix + file.name
@@ -100,22 +109,27 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
                 }
             }
             else {
-                processFile(filePath, dirResults, ruleSet)
+                try {
+                    processFile(filePath, dirResults, ruleSet)
+                } catch (Throwable t) {
+                    LOG.warn("Error processing file: '" + filePath + "'; " + t)
+                    if (failOnError) {
+                        throw new AnalyzerException("Error analyzing source file: $filePath; $t")
+                    }
+                }
             }
         }
         dirResults
     }
 
     private void processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
-        def file = new File((String) baseDirectory, filePath)
+        def file = new File(baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
         if (matches(sourceFile)) {
-            dirResults.numberOfFilesInThisDirectory++
             List allViolations = collectViolations(sourceFile, ruleSet)
-            if (allViolations) {
-                def fileResults = new FileResults(filePath, allViolations, sourceFile)
-                dirResults.addChild(fileResults)
-            }
+            def fileResults = new FileResults(filePath, allViolations, sourceFile)
+            dirResults.numberOfFilesInThisDirectory++
+            dirResults.addChild(fileResults)
         }
     }
 

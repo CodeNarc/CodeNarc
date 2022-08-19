@@ -16,7 +16,7 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessarySafeNavigationOperatorRule
@@ -65,17 +65,17 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase<Unn
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'"abc"?.bytes', messageText:'The safe navigation operator (?.) is unnecessary for "abc" in class None'],
-            [lineNumber:4, sourceLineText:'[1,2]?.name', messageText:'The safe navigation operator (?.) is unnecessary for "[1, 2]" in class None'],
-            [lineNumber:5, sourceLineText:'[abc:123]?.name', messageText:'The safe navigation operator (?.) is unnecessary for "[abc:123]" in class None'],
-            [lineNumber:6, sourceLineText:'[:]?.name', messageText:'The safe navigation operator (?.) is unnecessary for'], // Older versions of Groovy show [] instead of [:]
-            [lineNumber:7, sourceLineText:'123?.class', messageText:'The safe navigation operator (?.) is unnecessary for "123" in class None'],
-            [lineNumber:8, sourceLineText:'123.45?.class', messageText:'The safe navigation operator (?.) is unnecessary for "123.45" in class None'],
-            [lineNumber:9, sourceLineText:'Boolean.FALSE?.class', messageText:'The safe navigation operator (?.) is unnecessary for "Boolean.FALSE" in class None'],
-            [lineNumber:10, sourceLineText:'Boolean.TRUE?.class', messageText:'The safe navigation operator (?.) is unnecessary for "Boolean.TRUE" in class None'],
-            [lineNumber:11, sourceLineText:'this?.class', messageText:'The safe navigation operator (?.) is unnecessary for "this" in class None'],
-            [lineNumber:12, sourceLineText:'super?.class', messageText:'The safe navigation operator (?.) is unnecessary for "super" in class None'],
-            [lineNumber:13, sourceLineText:'new Long(0)?.class', messageText:'The safe navigation operator (?.) is unnecessary for "new Long(0)" in class None'],
+            [line:3, source:'"abc"?.bytes', message:'The safe navigation operator (?.) is unnecessary for "abc" in class None'],
+            [line:4, source:'[1,2]?.name', message:'The safe navigation operator (?.) is unnecessary for "[1, 2]" in class None'],
+            [line:5, source:'[abc:123]?.name', message:'The safe navigation operator (?.) is unnecessary for "[abc:123]" in class None'],
+            [line:6, source:'[:]?.name', message:'The safe navigation operator (?.) is unnecessary for'], // Older versions of Groovy show [] instead of [:]
+            [line:7, source:'123?.class', message:'The safe navigation operator (?.) is unnecessary for "123" in class None'],
+            [line:8, source:'123.45?.class', message:'The safe navigation operator (?.) is unnecessary for "123.45" in class None'],
+            [line:9, source:'Boolean.FALSE?.class', message:'The safe navigation operator (?.) is unnecessary for "Boolean.FALSE" in class None'],
+            [line:10, source:'Boolean.TRUE?.class', message:'The safe navigation operator (?.) is unnecessary for "Boolean.TRUE" in class None'],
+            [line:11, source:'this?.class', message:'The safe navigation operator (?.) is unnecessary for "this" in class None'],
+            [line:12, source:'super?.class', message:'The safe navigation operator (?.) is unnecessary for "super" in class None'],
+            [line:13, source:'new Long(0)?.class', message:'The safe navigation operator (?.) is unnecessary for "new Long(0)" in class None'],
         )
     }
 
@@ -97,17 +97,17 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase<Unn
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'"abc"?.toString()', messageText:'The safe navigation operator (?.) is unnecessary for "abc" in class None'],
-            [lineNumber:4, sourceLineText:'[1,2]?.toString()', messageText:'The safe navigation operator (?.) is unnecessary for "[1, 2]" in class None'],
-            [lineNumber:5, sourceLineText:'[abc:123]?.toString()', messageText:'The safe navigation operator (?.) is unnecessary for "[abc:123]" in class None'],
-            [lineNumber:6, sourceLineText:'[:]?.toString()', messageText:'The safe navigation operator (?.) is unnecessary for'], // Older versions of Groovy show [] instead of [:]
-            [lineNumber:7, sourceLineText:'123?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "123" in class None'],
-            [lineNumber:8, sourceLineText:'123.45?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "123.45" in class None'],
-            [lineNumber:9, sourceLineText:'Boolean.FALSE?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "Boolean.FALSE" in class None'],
-            [lineNumber:10, sourceLineText:'Boolean.TRUE?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "Boolean.TRUE" in class None'],
-            [lineNumber:11, sourceLineText:'this?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "this" in class None'],
-            [lineNumber:12, sourceLineText:'super?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "super" in class None'],
-            [lineNumber:13, sourceLineText:'new Long(100)?.toString()', messageText:'The safe navigation operator (?.) is unnecessary for "new Long(100)" in class None'],
+            [line:3, source:'"abc"?.toString()', message:'The safe navigation operator (?.) is unnecessary for "abc" in class None'],
+            [line:4, source:'[1,2]?.toString()', message:'The safe navigation operator (?.) is unnecessary for "[1, 2]" in class None'],
+            [line:5, source:'[abc:123]?.toString()', message:'The safe navigation operator (?.) is unnecessary for "[abc:123]" in class None'],
+            [line:6, source:'[:]?.toString()', message:'The safe navigation operator (?.) is unnecessary for'], // Older versions of Groovy show [] instead of [:]
+            [line:7, source:'123?.getClass()', message:'The safe navigation operator (?.) is unnecessary for "123" in class None'],
+            [line:8, source:'123.45?.getClass()', message:'The safe navigation operator (?.) is unnecessary for "123.45" in class None'],
+            [line:9, source:'Boolean.FALSE?.getClass()', message:'The safe navigation operator (?.) is unnecessary for "Boolean.FALSE" in class None'],
+            [line:10, source:'Boolean.TRUE?.getClass()', message:'The safe navigation operator (?.) is unnecessary for "Boolean.TRUE" in class None'],
+            [line:11, source:'this?.getClass()', message:'The safe navigation operator (?.) is unnecessary for "this" in class None'],
+            [line:12, source:'super?.getClass()', message:'The safe navigation operator (?.) is unnecessary for "super" in class None'],
+            [line:13, source:'new Long(100)?.toString()', message:'The safe navigation operator (?.) is unnecessary for "new Long(100)" in class None'],
         )
     }
 

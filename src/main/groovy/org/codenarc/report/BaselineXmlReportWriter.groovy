@@ -34,6 +34,7 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
 
     @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
+        assert writer
         assert analysisContext
         assert results
 
@@ -58,14 +59,14 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
 
     protected Closure buildReportElement() {
         return {
-            Report(timestamp:getFormattedTimestamp(), type:'baseline')
+            Report(type:'baseline')
         }
     }
 
     protected Closure buildProjectElement(AnalysisContext analysisContext) {
         return {
             Project(title:title) {
-                analysisContext.sourceDirectories.each { sourceDirectory ->
+                analysisContext.sourceDirectories.sort().each { sourceDirectory ->
                     SourceDirectory(sourceDirectory)
                 }
             }
@@ -77,16 +78,20 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
     }
 
     protected Closure buildFileElement(Results results) {
-        return {
-            results.children.each { child ->
-                if (child.isFile()) {
-                    out << buildFileElement(child)
-                }
+        List children = results.children.sort { Results a, Results b ->
+            int diffIsFile = a.isFile() <=> b.isFile()
+            if (diffIsFile != 0) {
+                return -diffIsFile // negate in order to get files first!
             }
-            results.children.each { child ->
-                if (!child.isFile()) {
-                    out << buildFileElement(child)
-                }
+
+            return a.path <=> b.path
+        }
+
+        return {
+            children.findAll { child ->
+                !child.violations.isEmpty()
+            }.each { child ->
+                out << buildFileElement(child)
             }
         }
     }

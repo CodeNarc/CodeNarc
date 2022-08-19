@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SpaceAfterSwitchRule
@@ -58,9 +58,9 @@ class SpaceAfterSwitchRuleTest extends AbstractRuleTestCase<SpaceAfterSwitchRule
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'switch(x) {', messageText:MESSAGE],
-            [lineNumber:5, sourceLineText:'switch  (x) {', messageText:MESSAGE],
-            [lineNumber:8, sourceLineText:'switch(', messageText:MESSAGE])
+            [line:2, source:'switch(x) {', message:MESSAGE],
+            [line:5, source:'switch  (x) {', message:MESSAGE],
+            [line:8, source:'switch(', message:MESSAGE])
     }
 
     @Override

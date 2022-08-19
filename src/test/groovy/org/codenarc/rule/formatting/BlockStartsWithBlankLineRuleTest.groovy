@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for BlockStartsWithBlankLineRule
@@ -114,8 +114,8 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 5, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 8, sourceLineText: '', messageText: MESSAGE])
+            [line: 5, source: '', message: MESSAGE],
+            [line: 8, source: '', message: MESSAGE])
     }
 
     @Test
@@ -155,8 +155,8 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 6, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 11, sourceLineText: '', messageText: MESSAGE])
+            [line: 6, source: '', message: MESSAGE],
+            [line: 11, source: '', message: MESSAGE])
     }
 
     @Test
@@ -202,17 +202,17 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 6, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 8, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 10, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 12, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 14, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 16, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 19, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 22, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 30, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 32, sourceLineText: '', messageText: MESSAGE])
+            [line: 4, source: '', message: MESSAGE],
+            [line: 6, source: '', message: MESSAGE],
+            [line: 8, source: '', message: MESSAGE],
+            [line: 10, source: '', message: MESSAGE],
+            [line: 12, source: '', message: MESSAGE],
+            [line: 14, source: '', message: MESSAGE],
+            [line: 16, source: '', message: MESSAGE],
+            [line: 19, source: '', message: MESSAGE],
+            [line: 22, source: '', message: MESSAGE],
+            [line: 30, source: '', message: MESSAGE],
+            [line: 32, source: '', message: MESSAGE])
     }
 
     @Test
@@ -230,8 +230,8 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: '', messageText: MESSAGE],
-            [lineNumber: 8, sourceLineText: '', messageText: MESSAGE])
+            [line: 4, source: '', message: MESSAGE],
+            [line: 8, source: '', message: MESSAGE])
     }
 
     @Test
@@ -251,8 +251,8 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-                [lineNumber: 4, sourceLineText: '', messageText: MESSAGE],
-                [lineNumber: 10, sourceLineText: '', messageText: MESSAGE])
+                [line: 4, source: '', message: MESSAGE],
+                [line: 10, source: '', message: MESSAGE])
     }
 
     @Test

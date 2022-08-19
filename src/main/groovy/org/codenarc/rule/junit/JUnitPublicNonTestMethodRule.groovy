@@ -46,11 +46,12 @@ import java.lang.reflect.Modifier
  * @author Hamlet D'Arcy
   */
 class JUnitPublicNonTestMethodRule extends AbstractAstVisitorRule {
+
     String name = 'JUnitPublicNonTestMethod'
     int priority = 2
     Class astVisitorClass = JUnitPublicNonTestMethodAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
-    private String[] ignoreMethodsWithAnnotations = 'After,AfterAll,AfterClass,AfterEach,Before,BeforeAll,BeforeClass,BeforeEach,Disabled,Ignore,Override,Test'.split(',')
+    private String[] ignoreMethodsWithAnnotations = 'After,AfterAll,AfterClass,AfterEach,Before,BeforeAll,BeforeClass,BeforeEach,Disabled,Ignore,Override,Test,ParameterizedTest'.split(',')
 
     void setIgnoreMethodsWithAnnotations(String annotations) {
         if (annotations) {

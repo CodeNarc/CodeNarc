@@ -16,7 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for DuplicateSetValueRule
@@ -51,10 +51,10 @@ class DuplicateSetValueRuleTest extends AbstractRuleTestCase<DuplicateSetValueRu
             def d = [1, null, null, 3, 4] as SortedSet
         '''
         assertViolations(SOURCE,
-                [lineNumber: 2, sourceLineText: 'def a = [1, 2, null, 2, 4] as Set', messageText: 'The constant value 2 is duplicated in the Set literal'],
-                [lineNumber: 3, sourceLineText: 'def b = [1, 2, 2, 4] as HashSet', messageText: 'The constant value 2 is duplicated in the Set literal'],
-                [lineNumber: 4, sourceLineText: 'def c = [1, 3, null, 3, 4] as SortedSet', messageText: 'The constant value 3 is duplicated in the Set literal'],
-                [lineNumber: 5, sourceLineText: 'def d = [1, null, null, 3, 4] as SortedSet', messageText: 'The constant value null is duplicated in the Set literal'])
+                [line: 2, source: 'def a = [1, 2, null, 2, 4] as Set', message: 'The constant value 2 is duplicated in the Set literal'],
+                [line: 3, source: 'def b = [1, 2, 2, 4] as HashSet', message: 'The constant value 2 is duplicated in the Set literal'],
+                [line: 4, source: 'def c = [1, 3, null, 3, 4] as SortedSet', message: 'The constant value 3 is duplicated in the Set literal'],
+                [line: 5, source: 'def d = [1, null, null, 3, 4] as SortedSet', message: 'The constant value null is duplicated in the Set literal'])
     }
 
     @Test
@@ -65,9 +65,9 @@ class DuplicateSetValueRuleTest extends AbstractRuleTestCase<DuplicateSetValueRu
             def g = ['1', '3', '3', null, '4'] as SortedSet
         '''
         assertViolations(SOURCE,
-                [lineNumber: 2, sourceLineText: "def e = ['1', '2', '2', null, '4'] as Set", messageText: "The constant value '2' is duplicated in the Set literal"],
-                [lineNumber: 3, sourceLineText: "def f = ['1', '2', '2', null, '4'] as java.util.HashSet", messageText: "The constant value '2' is duplicated in the Set literal"],
-                [lineNumber: 4, sourceLineText: "def g = ['1', '3', '3', null, '4'] as SortedSet", messageText: "The constant value '3' is duplicated in the Set literal"])
+                [line: 2, source: "def e = ['1', '2', '2', null, '4'] as Set", message: "The constant value '2' is duplicated in the Set literal"],
+                [line: 3, source: "def f = ['1', '2', '2', null, '4'] as java.util.HashSet", message: "The constant value '2' is duplicated in the Set literal"],
+                [line: 4, source: "def g = ['1', '3', '3', null, '4'] as SortedSet", message: "The constant value '3' is duplicated in the Set literal"])
     }
 
     @Test
@@ -77,8 +77,8 @@ class DuplicateSetValueRuleTest extends AbstractRuleTestCase<DuplicateSetValueRu
             def h = ['1', '2', '2', '4'] as FooSet
         '''
         assertViolations(SOURCE,
-                [lineNumber: 2, sourceLineText: 'def d = [1, 2, 2, 4] as FooSet', messageText: 'The constant value 2 is duplicated in the Set literal'],
-                [lineNumber: 3, sourceLineText: "def h = ['1', '2', '2', '4'] as FooSet", messageText: "The constant value '2' is duplicated in the Set literal"])
+                [line: 2, source: 'def d = [1, 2, 2, 4] as FooSet', message: 'The constant value 2 is duplicated in the Set literal'],
+                [line: 3, source: "def h = ['1', '2', '2', '4'] as FooSet", message: "The constant value '2' is duplicated in the Set literal"])
     }
 
     @Override

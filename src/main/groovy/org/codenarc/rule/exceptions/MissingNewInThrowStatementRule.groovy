@@ -41,12 +41,12 @@ class MissingNewInThrowStatementAstVisitor extends AbstractAstVisitor {
         if (statement.expression instanceof MethodCallExpression) {
             String name = statement?.expression?.method?.properties['value']
             if (looksLikeAnExceptionType(name)) {
-                addViolation (statement, "The throw statement appears to be throwing the class literal $name instead of a new instance")
+                addViolation(statement, "The throw statement appears to be throwing the class literal $name instead of a new instance")
             }
         } else if (statement.expression instanceof VariableExpression) {
             String name = statement.expression.variable
             if (looksLikeAnExceptionType(name)) {
-                addViolation (statement, "The throw statement appears to be throwing the class literal $name instead of a new instance")
+                addViolation(statement, "The throw statement appears to be throwing the class literal $name instead of a new instance")
             }
         }
         super.visitThrowStatement(statement)

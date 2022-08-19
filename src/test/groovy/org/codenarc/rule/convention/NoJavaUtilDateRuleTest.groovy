@@ -16,7 +16,7 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for NoJavaUtilDateRule
@@ -60,9 +60,9 @@ class NoJavaUtilDateRuleTest extends AbstractRuleTestCase<NoJavaUtilDateRule> {
             Date startTime = new Date(123456789L)
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'def timestamp = new Date()', messageText:VIOLATION_MESSAGE],
-                [lineNumber:3, sourceLineText:'Date myDate = new java.util.Date()', messageText:VIOLATION_MESSAGE],
-                [lineNumber:4, sourceLineText:'Date startTime = new Date(123456789L)', messageText:VIOLATION_MESSAGE])
+                [line:2, source:'def timestamp = new Date()', message:VIOLATION_MESSAGE],
+                [line:3, source:'Date myDate = new java.util.Date()', message:VIOLATION_MESSAGE],
+                [line:4, source:'Date startTime = new Date(123456789L)', message:VIOLATION_MESSAGE])
     }
 
     @Test
@@ -77,7 +77,7 @@ class NoJavaUtilDateRuleTest extends AbstractRuleTestCase<NoJavaUtilDateRule> {
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:5, sourceLineText:'Date myDate = new java.util.Date()', messageText:VIOLATION_MESSAGE])
+                [line:5, source:'Date myDate = new java.util.Date()', message:VIOLATION_MESSAGE])
     }
 
     @Test
@@ -87,8 +87,8 @@ class NoJavaUtilDateRuleTest extends AbstractRuleTestCase<NoJavaUtilDateRule> {
             def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def parsedDate = Date.parse("12 Aug 1995 13:30:00")', messageText:VIOLATION_MESSAGE],
-            [lineNumber:3, sourceLineText:'def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)', messageText:VIOLATION_MESSAGE]
+            [line:2, source:'def parsedDate = Date.parse("12 Aug 1995 13:30:00")', message:VIOLATION_MESSAGE],
+            [line:3, source:'def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)', message:VIOLATION_MESSAGE]
         )
     }
 

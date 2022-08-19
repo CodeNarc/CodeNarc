@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,14 @@ import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.*
 
 /**
- * This rule detects when null is returned from a method that might return a
- * collection. Instead of null, return a zero length array.
+ * This rule detects when null is returned from a method or Closure that might return a
+ * collection. Instead of null, return an empty collection.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class ReturnsNullInsteadOfEmptyCollectionRule extends AbstractAstVisitorRule {
+
     String name = 'ReturnsNullInsteadOfEmptyCollection'
     int priority = 2
     Class astVisitorClass = ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor
@@ -53,7 +55,8 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
             // does this closure ever return null?
             expression.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
         }
-        super.visitClosureExpression(expression)
+        // Do not keep walking into nested Closures
+        //super.visitClosureExpression(expression)
     }
 
     private static boolean methodReturnsCollection(MethodNode node) {
@@ -84,6 +87,14 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
         returnsCollection
     }
 
+    @Override
+    void visitClosureExpression(ClosureExpression expression) {
+        if (closureReturnsCollection(expression)) {
+            // does this closure ever return null?
+            expression.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
+        }
+    }
+
     private static boolean closureReturnsCollection(ClosureExpression node) {
         boolean returnsArray = false
         node.code?.visit(new CollectionReturnTracker(callbackFunction: { returnsArray = true }))
@@ -96,9 +107,16 @@ class CollectionReturnTracker extends AbstractAstVisitor {
     Closure callbackFunction
 
     @Override
+    void visitClosureExpression(ClosureExpression expression) {
+        // skip nested closures
+    }
+
+    @Override
     void visitReturnStatement(ReturnStatement statement) {
         expressionReturnsList(statement.expression)
-        super.visitReturnStatement(statement)
+
+        // Do not keep walking into nested Closures
+        //super.visitReturnStatement(statement)
     }
 
     private void expressionReturnsList(Expression expression) {

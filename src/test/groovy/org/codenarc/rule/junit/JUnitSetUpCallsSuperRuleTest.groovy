@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitSetUpCallsSuperRule
@@ -113,7 +113,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase<JUnitSetUpCallsS
     void testApplyTo_SetUpMethodHasBeforeAnnotation() {
         final SOURCE = '''
           class MyTest extends TestCase {
-            @Before void setUp() {
+            @BeforeEach void setUp() {
                 println 'bad'
             }
           }

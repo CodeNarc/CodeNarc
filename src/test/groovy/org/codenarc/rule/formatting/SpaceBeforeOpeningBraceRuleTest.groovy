@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SpaceBeforeOpeningBraceRule
@@ -68,8 +68,8 @@ class SpaceBeforeOpeningBraceRuleTest extends AbstractRuleTestCase<SpaceBeforeOp
             class MyOtherClass extends AbstractClass{ }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyClass{', messageText:'The opening brace for class MyClass is not preceded'],
-            [lineNumber:3, sourceLineText:'class MyOtherClass extends AbstractClass{ }', messageText:'The opening brace for class MyOtherClass is not preceded'])
+            [line:2, source:'class MyClass{', message:'The opening brace for class MyClass is not preceded'],
+            [line:3, source:'class MyOtherClass extends AbstractClass{ }', message:'The opening brace for class MyOtherClass is not preceded'])
     }
 
     @Test
@@ -100,8 +100,8 @@ c        '''
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def myMethod(){ }', messageText:'The opening brace for the method'],
-            [lineNumber:6, sourceLineText:'int putBulkAccountInfo(List<Map> jsonObject){', messageText:'The opening brace for the method'] )
+            [line:2, source:'def myMethod(){ }', message:'The opening brace for the method'],
+            [line:6, source:'int putBulkAccountInfo(List<Map> jsonObject){', message:'The opening brace for the method'])
     }
 
     @Test
@@ -115,8 +115,8 @@ c        '''
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass(){ }', messageText:'The opening brace for the constructor in class MyClass'],
-            [lineNumber:4, sourceLineText:'MyClass(int num){', messageText:'The opening brace for the constructor in class MyClass'])
+            [line:3, source:'MyClass(){ }', message:'The opening brace for the constructor in class MyClass'],
+            [line:4, source:'MyClass(int num){', message:'The opening brace for the constructor in class MyClass'])
     }
 
     @Test
@@ -128,8 +128,8 @@ c        '''
             if (ready) println '{'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (ready){ }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done){ }', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [line:2, source:'if (ready){ }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'done){ }', message:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -155,10 +155,10 @@ c        '''
                 i++){ }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for (int i=0; i<10; i++){ }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'for (String name in names){ }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:5, sourceLineText:'for (String name: names){ }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:8, sourceLineText:'i++){ }', messageText:BLOCK_VIOLATION_MESSAGE]
+            [line:2, source:'for (int i=0; i<10; i++){ }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'for (String name in names){ }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:5, source:'for (String name: names){ }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:8, source:'i++){ }', message:BLOCK_VIOLATION_MESSAGE]
         )
     }
 
@@ -171,8 +171,8 @@ c        '''
             while (ready) println '{'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'while (ready){ }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done){ }', messageText:BLOCK_VIOLATION_MESSAGE],
+            [line:2, source:'while (ready){ }', message:BLOCK_VIOLATION_MESSAGE],
+            [line:4, source:'done){ }', message:BLOCK_VIOLATION_MESSAGE],
             )
     }
 
@@ -217,10 +217,10 @@ c        '''
             def m = [a:123, b:{ println 7 }]
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'list.each{ name -> }', messageText:'The opening brace for the closure in class None is not preceded'],
-            [lineNumber:3, sourceLineText:'shouldFail(Exception){ doStuff() }', messageText:'The opening brace for the closure in class None is not preceded'],
-            [lineNumber:4, sourceLineText:'def c ={ println 123 }', messageText:'The opening brace for the closure in class None is not preceded'],
-            [lineNumber:5, sourceLineText:'def m = [a:123, b:{ println 7 }]', messageText:'The opening brace for the closure in class None is not preceded'])
+            [line:2, source:'list.each{ name -> }', message:'The opening brace for the closure in class None is not preceded'],
+            [line:3, source:'shouldFail(Exception){ doStuff() }', message:'The opening brace for the closure in class None is not preceded'],
+            [line:4, source:'def c ={ println 123 }', message:'The opening brace for the closure in class None is not preceded'],
+            [line:5, source:'def m = [a:123, b:{ println 7 }]', message:'The opening brace for the closure in class None is not preceded'])
     }
 
     @Test
@@ -229,7 +229,7 @@ c        '''
             if (valid('\\u00A0')){ }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (valid(', messageText:BLOCK_VIOLATION_MESSAGE])
+            [line:2, source:'if (valid(', message:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test

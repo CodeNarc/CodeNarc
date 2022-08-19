@@ -19,10 +19,10 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.stmt.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.stmt.*
 
 /**
  * Rule that checks for blocks or closures nested more than a configured maximum number.
@@ -59,7 +59,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
     private void addClosureFields(ClassNode classNode) {
         closureFieldExpressions = []
         classNode.fields.each { fieldNode ->
-            if (!AstUtil.isFromGeneratedSourceCode(fieldNode) &&
+            if (isNotGeneratedCode(fieldNode) &&
                     fieldNode.initialExpression instanceof ClosureExpression) {
                 closureFieldExpressions << fieldNode.initialExpression
             }

@@ -16,8 +16,8 @@
 package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
@@ -82,7 +82,7 @@ Error: $t.message
         }
     }
 
-    @Before
+    @BeforeEach
     void setUpLoadAllPredefinedRuleSetsTest() {
         messages = ResourceBundle.getBundle(BASE_MESSAGES_BUNDLE)
     }

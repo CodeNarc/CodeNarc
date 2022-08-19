@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.codenarc.rule.AbstractRuleTestCase
 
 /**
@@ -63,8 +63,8 @@ class ImplicitClosureParameterRuleTest extends AbstractRuleTestCase<ImplicitClos
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText: 'it * 2', messageText: 'By convention closure parameters should be specified explicitly.'],
-            [lineNumber:5, sourceLineText: 'it - 2', messageText: 'By convention closure parameters should be specified explicitly.'])
+            [line:3, source: 'it * 2', message: 'By convention closure parameters should be specified explicitly.'],
+            [line:5, source: 'it - 2', message: 'By convention closure parameters should be specified explicitly.'])
     }
 
     @Test

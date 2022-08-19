@@ -469,19 +469,15 @@ public class AstUtil {
 
     /**
      * Return the AnnotationNode for the named annotation, or else null.
-     * Supports Groovy 1.5 and Groovy 1.6.
      * @param node - the AnnotatedNode
      * @param name - the name of the annotation
      * @return the AnnotationNode or else null
      */
     public static AnnotationNode getAnnotation(AnnotatedNode node, String name) {
-        List<AnnotationNode> annotations = node.getAnnotations();
-        for (AnnotationNode annot : annotations) {
-            if (annot.getClassNode().getName().equals(name)) {
-                return annot;
-            }
-        }
-        return null;
+        return node.getAnnotations().stream()
+                .filter(a -> a.getClassNode().getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -1080,7 +1076,7 @@ public class AstUtil {
             AnnotationNode lastAnnotation = node.getAnnotations().get(node.getAnnotations().size() - 1);
             if (lastAnnotation.getLastLineNumber() != -1) {
                 Pattern classDeclarationPattern = Pattern.compile("class\\s+" + node.getNameWithoutPackage());
-                for (int i = lastAnnotation.getLastLineNumber(); i < sourceCode.getLines().size(); i++) {
+                for (int i = lastAnnotation.getLastLineNumber(); i <= sourceCode.getLines().size(); i++) {
                     String line = sourceCode.line(i - 1);
                     Matcher matcher = classDeclarationPattern.matcher(line);
                     if (matcher.find()) {
@@ -1094,18 +1090,12 @@ public class AstUtil {
 
 
     /**
-     * gets the first non annotation line number of a node, taking into account annotations.
+     * Gets the first non annotation line number of a node, taking into account annotations.
      */
     public static int findFirstNonAnnotationLine(ASTNode node, SourceCode sourceCode) {
         if (node instanceof AnnotatedNode && !((AnnotatedNode) node).getAnnotations().isEmpty()) {
-
-            // HACK: Groovy line numbers are broken when annotations have a parameter :(
-            // so we must look at the lineNumber, not the lastLineNumber
-            AnnotationNode lastAnnotation = null;
-            for (AnnotationNode annotation : ((AnnotatedNode) node).getAnnotations()) {
-                if (lastAnnotation == null) lastAnnotation = annotation;
-                else if (lastAnnotation.getLineNumber() < annotation.getLineNumber()) lastAnnotation = annotation;
-            }
+            List<AnnotationNode> annotations = ((AnnotatedNode) node).getAnnotations();
+            AnnotationNode lastAnnotation = annotations.get(annotations.size() - 1);
 
             String rawLine = getRawLine(sourceCode, lastAnnotation.getLastLineNumber()-1);
 
@@ -1116,16 +1106,27 @@ public class AstUtil {
             // is the annotation the last thing on the line?
             if (rawLine.length() > lastAnnotation.getLastColumnNumber()) {
                 // no it is not
-                if (node.getClass() == MethodNode.class) {      // methods, but not constructors (since their name is different)
+
+                boolean doesItEndsWithLineComment = rawLine.substring(lastAnnotation.getLastColumnNumber() - 1).trim().startsWith("//");
+                if (doesItEndsWithLineComment) {
+                    return lastAnnotation.getLastLineNumber() + 1;
+                }
+
+                if (node.getClass() == ClassNode.class) {
+                    if (rawLine.contains("class")) {
+                        return lastAnnotation.getLastLineNumber();
+                    }
+                    // Otherwise, fall through to use the next line
+                } else if (node.getClass() == MethodNode.class) {      // methods, but not constructors (since their name is different)
                     if (rawLine.contains(((MethodNode) node).getName())) {
                         return lastAnnotation.getLastLineNumber();
                     }
-                    // Otherwise fall through to use the next line
+                    // Otherwise, fall through to use the next line
                 } else if (node instanceof FieldNode) {
                     if (rawLine.contains(((FieldNode) node).getName())) {
                         return lastAnnotation.getLastLineNumber();
                     }
-                    // Otherwise fall through to use the next line
+                    // Otherwise, fall through to use the next line
                 } else {
                     return lastAnnotation.getLastLineNumber();
                 }
@@ -1213,6 +1214,25 @@ public class AstUtil {
         return line.substring(startColumn, expression.getLastColumnNumber() - 1);
     }
 
+    public static List<String> getSourceLinesForNode(ASTNode node, SourceCode sourceCode) {
+        if (node.getLineNumber() < 1 || node.getLastLineNumber() < 1) {
+            return Collections.emptyList();
+        }
+        List<String> lines = new ArrayList<>();
+        for (int lineIndex = node.getLineNumber() - 1; lineIndex <= node.getLastLineNumber() -1; lineIndex++) {
+            // the raw line is required to apply columnNumber and lastColumnNumber
+            String line = getRawLine(sourceCode, lineIndex);
+
+            // extract the relevant part of the first line
+            if (lineIndex == node.getLineNumber() - 1) {
+                line = line.substring(node.getColumnNumber() - 1);
+            }
+
+            lines.add(line.trim());
+        }
+        return lines;
+    }
+
     public static String getDeclaration(ASTNode node, SourceCode sourceCode) {
         if (node.getLineNumber() < 1) return "";
         if (node.getLastLineNumber() < 1) return "";
@@ -1233,10 +1253,6 @@ public class AstUtil {
             // extract the relevant part of the last line
             if (lineIndex == node.getLastLineNumber() - 1) {
                 // Groovy 3.0 lastColumnNumber is incorrect up for some fields
-                if (GroovyVersion.isGroovyVersion2()) {
-                    int stopIndex = node.getLastColumnNumber() < line.length() ? node.getLastColumnNumber() - 1 : line.length();
-                    line = line.substring(0, stopIndex);
-                }
             }
 
             if (line.contains("{")) {
@@ -1267,13 +1283,6 @@ public class AstUtil {
 
         String beforeLastLine = lastSourceLine(beforeNode, sourceCode);
         int firstColumnAfterBeforeNode = beforeNode.getLastColumnNumber() - 1;    // That lastColumnNumber is the column after the end, and is 1-based
-
-        if (GroovyVersion.isGroovyVersion2()) {
-            // In Groovy 2.x, some expressions may extend to include the space following them
-            if (beforeLastLine.charAt(firstColumnAfterBeforeNode - 1) == ' ') {
-                firstColumnAfterBeforeNode--;
-            }
-        }
 
         if (beforeNode.getLastLineNumber() == afterNode.getLineNumber()) {
             str.append(beforeLastLine, firstColumnAfterBeforeNode, afterNode.getColumnNumber() - 1);

@@ -16,8 +16,8 @@
 package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CompareToWithoutComparableRule
@@ -87,7 +87,7 @@ class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase<CompareToW
 
 class EnhancedCompareToWithoutComparableRuleTest extends CompareToWithoutComparableRuleTest {
 
-    @Before
+    @BeforeEach
     void enableEnhancedMode() {
         rule.enhancedMode = true
     }

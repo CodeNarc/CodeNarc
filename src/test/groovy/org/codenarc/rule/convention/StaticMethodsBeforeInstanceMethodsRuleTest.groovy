@@ -16,7 +16,7 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for StaticMethodsBeforeInstanceMethodsRule
@@ -93,9 +93,22 @@ class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<St
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:7, sourceLineText:'static final String staticMethod2(int id) { }', messageText:'public static method staticMethod2 in class MyClass is declared after a public instance method'],
-            [lineNumber:11, sourceLineText:'protected static staticMethod3() { }', messageText:'protected static method staticMethod3 in class MyClass is declared after a protected instance method'],
-            [lineNumber:16, sourceLineText:'private static staticMethod4() { }', messageText:'private static method staticMethod4 in class MyClass is declared after a private instance method'])
+            [line:7, source:'static final String staticMethod2(int id) { }', message:'public static method staticMethod2 in class MyClass is declared after a public instance method'],
+            [line:11, source:'protected static staticMethod3() { }', message:'protected static method staticMethod3 in class MyClass is declared after a protected instance method'],
+            [line:16, source:'private static staticMethod4() { }', message:'private static method staticMethod4 in class MyClass is declared after a private instance method'])
+    }
+
+    @Test
+    void test_Script_NoViolations() {
+        final SOURCE = ''' #!/usr/bin/groovy
+            
+            import acme.Utils
+            
+            static boolean call() {
+                new Utils().isSomething()
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override

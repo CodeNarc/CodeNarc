@@ -16,7 +16,7 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for MethodParameterTypeRequiredRule
@@ -85,24 +85,24 @@ class MethodParameterTypeRequiredTest extends AbstractRuleTestCase<MethodParamet
 
         assertViolations(SOURCE,
             [
-                lineNumber: 3,
-                sourceLineText: 'InvalidClass(def defArg, noTypeArg) {',
-                messageText: '"defArg" parameter of "<init>" method is dynamically typed'
+                line: 3,
+                source: 'InvalidClass(def defArg, noTypeArg) {',
+                message: '"defArg" parameter of "<init>" method is dynamically typed'
             ],
             [
-                lineNumber: 3,
-                sourceLineText: 'InvalidClass(def defArg, noTypeArg) {',
-                messageText: '"noTypeArg" parameter of "<init>" method is dynamically typed'
+                line: 3,
+                source: 'InvalidClass(def defArg, noTypeArg) {',
+                message: '"noTypeArg" parameter of "<init>" method is dynamically typed'
             ],
             [
-                lineNumber: 6,
-                sourceLineText: 'void twoArgMethod(def defArg, noTypeArg) {',
-                messageText: '"defArg" parameter of "twoArgMethod" method is dynamically typed'
+                line: 6,
+                source: 'void twoArgMethod(def defArg, noTypeArg) {',
+                message: '"defArg" parameter of "twoArgMethod" method is dynamically typed'
             ],
             [
-                lineNumber: 6,
-                sourceLineText: 'void twoArgMethod(def defArg, noTypeArg) {',
-                messageText: '"noTypeArg" parameter of "twoArgMethod" method is dynamically typed'
+                line: 6,
+                source: 'void twoArgMethod(def defArg, noTypeArg) {',
+                message: '"noTypeArg" parameter of "twoArgMethod" method is dynamically typed'
             ]
         )
     }

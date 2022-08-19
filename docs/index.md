@@ -24,10 +24,12 @@ to fit into your project. Build tool, framework support, and report generation a
     <td valign="middle" align="middle" style="margin:auto; vertical-align:middle">
         <div>
             <a class="getitbutton" href="https://github.com/CodeNarc/CodeNarc/releases">
-                Get 1.6
+                Get 3.1.0
             </a>
         </div>
-        [Release Notes](https://github.com/CodeNarc/CodeNarc/blob/master/CHANGELOG.md)
+        <div>
+            <a href="https://github.com/CodeNarc/CodeNarc/blob/master/CHANGELOG.md">Release Notes</a>
+        </div>
     </td>
 </tr>
 <tr>
@@ -51,10 +53,10 @@ to fit into your project. Build tool, framework support, and report generation a
          <h2>Requirements</h2>
          <strong>CodeNarc</strong> requires:
          <ul>
-              <li>Java 1.6 or later</li>
-              <li><a href="http://groovy-lang.org/">Groovy</a> version 2.3 or later</li>
+              <li>Java 1.7 or later</li>
+              <li><a href="http://groovy-lang.org/">Groovy</a> version 3.0 or later for the CodeNarc jar; Groovy version 4.0 or later for the CodeNarc-Groovy4 jar</li>
               <li><a href="https://www.slf4j.org/">SLF4J</a> API and binding jar(s)</li>
-              <li><a href="https://dx42.github.io/gmetrics/">GMetrics</a> 1.0 or later, if using the Size/Complexity rules</li>
+              <li><a href="https://dx42.github.io/gmetrics/">GMetrics</a> or GMetrics-Groovy4 2.1.0 or later, if using the Size/Complexity rules</li>
          </ul>
      </td>
 </tr>
@@ -66,7 +68,7 @@ to fit into your project. Build tool, framework support, and report generation a
                <a href="https://repo1.maven.org/maven2/org/codenarc/CodeNarc/">Maven Central Repository</a>
                 <ul>
                      <li>groupId = org.codenarc</li>
-                     <li>artifactId = CodeNarc</li>
+                     <li>artifactId = CodeNarc or CodeNarc-Groovy4 (for Groovy 4.x)</li>
                 </ul>
      </td>
      <td class="section">

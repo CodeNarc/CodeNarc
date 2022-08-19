@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index
 
 # Rule Index
 
-**CodeNarc** includes 385 rules.
+**CodeNarc** includes 393 rules.
     
 ## [Basic](./codenarc-rules-basic.html)
   * [AssertWithinFinallyBlock](./codenarc-rules-basic.html#assertwithinfinallyblock-rule)  
@@ -47,6 +47,7 @@ title: CodeNarc - Rule Index
   * [HardCodedWindowsRootDirectory](./codenarc-rules-basic.html#hardcodedwindowsrootdirectory-rule)  
   * [IntegerGetInteger](./codenarc-rules-basic.html#integergetinteger-rule)  
   * [MultipleUnaryOperators](./codenarc-rules-basic.html#multipleunaryoperators-rule)  
+  * [ParameterAssignmentInFilterClosure](./codenarc-rules-basic.html#parameterassignmentinfilterclosure-rule)  
   * [RandomDoubleCoercedToZero](./codenarc-rules-basic.html#randomdoublecoercedtozero-rule)  
   * [RemoveAllOnSelf](./codenarc-rules-basic.html#removeallonself-rule)  
   * [ReturnFromFinallyBlock](./codenarc-rules-basic.html#returnfromfinallyblock-rule)  
@@ -148,6 +149,9 @@ title: CodeNarc - Rule Index
   * [Instanceof](./codenarc-rules-design.html#instanceof-rule)  
   * [LocaleSetDefault](./codenarc-rules-design.html#localesetdefault-rule)  
   * [NestedForLoop](./codenarc-rules-design.html#nestedforloop-rule)  
+  * [OptionalCollectionReturnType](./codenarc-rules-design.html#optionalcollectionreturntype-rule)  
+  * [OptionalField](./codenarc-rules-design.html#optionalfield-rule)  
+  * [OptionalMethodParameter](./codenarc-rules-design.html#optionalmethodparameter-rule)  
   * [PrivateFieldCouldBeFinal](./codenarc-rules-design.html#privatefieldcouldbefinal-rule)  
   * [PublicInstanceField](./codenarc-rules-design.html#publicinstancefield-rule)  
   * [ReturnsNullInsteadOfEmptyArray](./codenarc-rules-design.html#returnsnullinsteadofemptyarray-rule)  
@@ -208,11 +212,15 @@ title: CodeNarc - Rule Index
   * [LineLength](./codenarc-rules-formatting.html#linelength-rule)  
   * [MissingBlankLineAfterImports](./codenarc-rules-formatting.html#missingblanklineafterimports-rule)  
   * [MissingBlankLineAfterPackage](./codenarc-rules-formatting.html#missingblanklineafterpackage-rule)  
+  * [MissingBlankLineBeforeAnnotatedField](./codenarc-rules-formatting.html#missingblanklinebeforeannotatedfield-rule)  
   * [SpaceAfterCatch](./codenarc-rules-formatting.html#spaceaftercatch-rule)  
   * [SpaceAfterClosingBrace](./codenarc-rules-formatting.html#spaceafterclosingbrace-rule)  
   * [SpaceAfterComma](./codenarc-rules-formatting.html#spaceaftercomma-rule)  
   * [SpaceAfterFor](./codenarc-rules-formatting.html#spaceafterfor-rule)  
   * [SpaceAfterIf](./codenarc-rules-formatting.html#spaceafterif-rule)  
+  * [SpaceAfterMethodCallName](./codenarc-rules-formatting.html#spaceaftermethodcallname-rule)  
+  * [SpaceAfterMethodDeclarationName](./codenarc-rules-formatting.html#spaceaftermethoddeclarationname-rule)  
+  * [SpaceAfterNotOperator](./codenarc-rules-formatting.html#spaceafternotoperator-rule)  
   * [SpaceAfterOpeningBrace](./codenarc-rules-formatting.html#spaceafteropeningbrace-rule)  
   * [SpaceAfterSemicolon](./codenarc-rules-formatting.html#spaceaftersemicolon-rule)  
   * [SpaceAfterSwitch](./codenarc-rules-formatting.html#spaceafterswitch-rule)  
@@ -222,6 +230,7 @@ title: CodeNarc - Rule Index
   * [SpaceAroundOperator](./codenarc-rules-formatting.html#spacearoundoperator-rule)  
   * [SpaceBeforeClosingBrace](./codenarc-rules-formatting.html#spacebeforeclosingbrace-rule)  
   * [SpaceBeforeOpeningBrace](./codenarc-rules-formatting.html#spacebeforeopeningbrace-rule)  
+  * [SpaceInsideParentheses](./codenarc-rules-formatting.html#spaceinsideparentheses-rule)  
   * [TrailingWhitespace](./codenarc-rules-formatting.html#trailingwhitespace-rule)  
 
 ## [Generic](./codenarc-rules-generic.html)
@@ -424,7 +433,6 @@ title: CodeNarc - Rule Index
   * [UnnecessarySemicolon](./codenarc-rules-unnecessary.html#unnecessarysemicolon-rule)  
   * [UnnecessarySetter](./codenarc-rules-unnecessary.html#unnecessarysetter-rule)  
   * [UnnecessaryStringInstantiation](./codenarc-rules-unnecessary.html#unnecessarystringinstantiation-rule)  
-  * [UnnecessarySubstring](./codenarc-rules-unnecessary.html#unnecessarysubstring-rule)  
   * [UnnecessaryTernaryExpression](./codenarc-rules-unnecessary.html#unnecessaryternaryexpression-rule)  
   * [UnnecessaryToString](./codenarc-rules-unnecessary.html#unnecessarytostring-rule)  
   * [UnnecessaryTransientModifier](./codenarc-rules-unnecessary.html#unnecessarytransientmodifier-rule)  

@@ -16,14 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.*
-import org.codehaus.groovy.ast.expr.ArgumentListExpression
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.ListExpression
-import org.codehaus.groovy.ast.expr.MapEntryExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.*
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.Statement
@@ -33,7 +26,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
-import org.codenarc.util.GroovyVersion
 
 import java.util.concurrent.ConcurrentHashMap
 
@@ -99,7 +91,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         node.annotations.each { annotationNode -> ignoreLineNumbers << annotationNode.lastLineNumber }
 
         // Groovy 3.x ClassNode lineNumber is line number of first annotation
-        if (GroovyVersion.isNotGroovyVersion2() && node.annotations) {
+        if (node.annotations) {
             int classDeclarationLine = AstUtil.findClassDeclarationLineNumber(node, sourceCode)
             ignoreLineNumbers << classDeclarationLine
         }
@@ -109,11 +101,11 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         if (!isAnonymous) {
             String description = "class ${node.getNameWithoutPackage()}"
 
-            if (GroovyVersion.isGroovyVersion2() || !isInnerClass) {
-                checkForCorrectColumn(node, description)
-            } else {
+            if (isInnerClass) {
                 int column = firstNonWhitespaceColumn(sourceLine(node))
                 checkForCorrectColumn(node, description, column)
+            } else {
+                checkForCorrectColumn(node, description)
             }
         }
         if (!node.script) {
@@ -204,7 +196,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
             }
 
             setupFlexibleIndentForAnyClosureParameterBlocks(args)
-            recordMethodColumnAndSourceLineForClosureBlocks(call, args)
+            recordMethodColumnAndSourceLineForClosureBlocks(call)
         }
 
         super.visitMethodCallExpression(call)
@@ -226,12 +218,16 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private void recordMethodColumnAndSourceLineForClosureBlocks(MethodCallExpression methodCallExpression, ArgumentListExpression args) {
-        args.expressions.each { expr ->
+    private void recordMethodColumnAndSourceLineForClosureBlocks(MethodCallExpression methodCallExpression) {
+        def method = methodCallExpression.method
+        if (isGeneratedCode(method)) {
+            return
+        }
+        methodCallExpression.arguments.expressions.each { expr ->
             if (isClosureWithBlock(expr)) {
                 BlockStatement blockStatementCode = (expr as ClosureExpression).code as BlockStatement
-                String rawMethodSourceLine = sourceLine(methodCallExpression.method)
-                methodColumnAndSourceLineForClosureBlock[blockStatementCode] = new Tuple2<Integer, String>(methodCallExpression.method.columnNumber, rawMethodSourceLine)
+                String rawMethodSourceLine = sourceLine(method)
+                methodColumnAndSourceLineForClosureBlock[blockStatementCode] = new Tuple2<Integer, String>(method.columnNumber, rawMethodSourceLine)
             }
         }
     }
@@ -252,6 +248,12 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         // finally blocks have extra level of nested BlockStatement
         boolean isNestedBlock = nestedBlocks.contains(block)
         boolean isGenerated = block.lineNumber == -1
+
+        if (isGenerated || block.lineNumber == block.lastLineNumber) {
+            super.visitBlockStatement(block)
+            return
+        }
+
         int addToIndentLevel = (isNestedBlock || isGenerated) ? 0 : 1
         addToIndentLevel += blockIndentLevel[block]
         indentLevel += addToIndentLevel

@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SpaceAfterIfRule
@@ -64,9 +64,9 @@ class SpaceAfterIfRuleTest extends AbstractRuleTestCase<SpaceAfterIfRule> {
                 true) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if(true) { }', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:'if  (true) { }', messageText:MESSAGE],
-            [lineNumber:4, sourceLineText:'if(', messageText:MESSAGE])
+            [line:2, source:'if(true) { }', message:MESSAGE],
+            [line:3, source:'if  (true) { }', message:MESSAGE],
+            [line:4, source:'if(', message:MESSAGE])
     }
 
     @Test

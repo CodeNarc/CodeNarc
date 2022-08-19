@@ -16,8 +16,8 @@
 package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnsafeImplementationAsMapRule
@@ -30,7 +30,7 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase<UnsafeImple
         [nextElement: {}] as Enumeration      ${violation('java.util.Enumeration', 'hasMoreElements')}
     """
 
-    @Before
+    @BeforeEach
     void setup() {
         sourceCodePath = '/src/main/where/ever/Whatever.groovy'
     }

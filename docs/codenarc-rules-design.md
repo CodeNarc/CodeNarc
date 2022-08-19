@@ -303,7 +303,7 @@ or 'TestCase.groovy'.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| ignoreTypeNames             | Specifies one or more (comma-separated) class names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | "*Exceptions" |
+| ignoreTypeNames             | Specifies one or more (comma-separated) class names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | "*Exception" |
 
   Example of violations:
 
@@ -368,6 +368,79 @@ for (int i = 0; i * 100; ++i) {
         }
     }
 }
+```
+
+
+## OptionalCollectionReturnType Rule
+
+*Since CodeNarc 2.0.0*
+
+Do not declare a method return type of `Optional<List>` (or `Collection`, `ArrayList`, `Set`, `Map`, `HashMap`, etc.). Return an empty collection instead.  See [The Java Optional class: 11 more recipes for preventing null pointer exceptions](https://blogs.oracle.com/javamagazine/the-java-optional-class-11-more-recipes-for-preventing-null-pointer-exceptions). 
+
+This rule checks for `Optional<collection-type>` return types, where *collection-type* is one of these common collection interfaces or implementation classes:
+ - `Collection`
+ - `List` (and `ArrayList`, `LinkedList`)
+ - `Set` (and `HashSet`, `LinkedHashSet`, `EnumSet`)
+ - `SortedSet` (and `TreeSet`)
+ - `Map` (and `HashMap`, `LinkedHashMap`, `EnumMap`)
+ - `SortedMap` (and `TreeMap`)
+
+
+Example of violations:
+
+```
+    class MyClass {
+        Optional<Collection<Object>> getCollection() { }        // violation
+
+        private Optional<List> getList() { }                    // violation
+        Optional<ArrayList<String>> getArrayList() { }          // violation
+        
+        protected Optional<Set<BigDecimal>> getSet() { }        // violation
+        Optional<HashSet<Boolean>> getHashSet() { }             // violation
+
+        Optional<Map<Integer, String>> getMap() { }             // violation
+        Optional<TreeMap<String, String>> getTreeMap() { }      // violation
+    }
+```
+
+
+## OptionalField Rule
+
+*Since CodeNarc 2.0.0*
+
+Do not use an `Optional` as a field type. See [The Java Optional class: 11 more recipes for preventing null pointer exceptions](https://blogs.oracle.com/javamagazine/the-java-optional-class-11-more-recipes-for-preventing-null-pointer-exceptions).
+
+Example of violations:
+
+```
+    class MyClass {
+        Optional<Integer> count;                            // violation
+        public String name;
+        public Optional<String> alias = Optional.of("x")    // violation
+        protected static Optional<Object> lock              // violation
+    }
+```
+
+
+## OptionalMethodParameter Rule
+
+*Since CodeNarc 2.0.0*
+
+Do not use an `Optional` as a parameter type for a method or constructor. See [The Java Optional class: 11 more recipes for preventing null pointer exceptions](https://blogs.oracle.com/javamagazine/the-java-optional-class-11-more-recipes-for-preventing-null-pointer-exceptions).
+
+Example of violations:
+
+```
+    class MyClass {
+        protected MyClass(Optional<Integer> count) { }                  // violation
+        MyClass(Optional<String> name, Optional<Integer> sum) { }       // 2 violations
+        private MyClass(Optional something) { }                         // violation
+
+        void doStuff(Optional<Integer> count) { }                       // violation
+        public String getName() { return 'abc' }
+        int count(Optional<String> alias, Optional<Integer> total) { }  // 2 violations
+        private doSomething(Optional something) { }                     // violation
+    }
 ```
 
 
@@ -508,4 +581,3 @@ Example of violations:
         }
     }
 ```
-

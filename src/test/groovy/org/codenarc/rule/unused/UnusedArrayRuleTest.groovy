@@ -16,7 +16,7 @@
 package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedArrayRule
@@ -64,7 +64,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase<UnusedArrayRule> {
             new String[3]
             println "ok"
         '''
-        assertViolations(SOURCE, [lineNumber: 2, sourceLineText: 'new String[3]'])
+        assertViolations(SOURCE, [line: 2, source: 'new String[3]'])
     }
 
     @Test
@@ -75,7 +75,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase<UnusedArrayRule> {
                 doStuff()
             }
         '''
-        assertViolations(SOURCE, [lineNumber: 3, sourceLineText: 'new Object[2]'])
+        assertViolations(SOURCE, [line: 3, source: 'new Object[2]'])
     }
 
     @Override

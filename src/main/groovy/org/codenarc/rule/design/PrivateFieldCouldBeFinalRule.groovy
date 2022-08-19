@@ -171,8 +171,8 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private Number isPrivate(FieldNode field) {
-        return field.modifiers & FieldNode.ACC_PRIVATE
+    private boolean isPrivate(FieldNode field) {
+        return field.isPrivate()
     }
 
     private boolean isMatchingField(FieldNode field, String name) {

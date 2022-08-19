@@ -16,7 +16,7 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessarySetterRule
@@ -24,13 +24,13 @@ import org.junit.Test
 class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRule> {
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessarySetter'
     }
 
     @Test
-    void testNoViolations() {
+    void test_NoViolations() {
         final SOURCE = '''
             x.set(1)
             x.setup(2)
@@ -42,15 +42,7 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
-    void testSingleViolation() {
-        final SOURCE = '''
-            x.setProperty(1 + 2)
-        '''
-        assertSingleViolation(SOURCE, 2, 'x.setProperty(1 + 2)', 'setProperty(..) can probably be rewritten as property = ..')
-    }
-
-    @Test
-    void testMultipleViolations() {
+    void test_Violations() {
         final SOURCE = '''
             x.setProperty(1)
             x.setProperty(this.getA())
@@ -58,14 +50,33 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
             x.setE(3)           // see #364
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'x.setProperty(1)', messageText:'setProperty(..) can probably be rewritten as property = ..'],
-            [lineNumber:3, sourceLineText:'x.setProperty(this.getA())', messageText:'setProperty(..) can probably be rewritten as property = ..'],
-            [lineNumber:4, sourceLineText:'x.setProperty([])', messageText:'setProperty(..) can probably be rewritten as property = ..'],
-            [lineNumber:5, sourceLineText:'x.setE(3)', messageText:'setE(..)'])
+            [line:2, source:'x.setProperty(1)', message:'setProperty(1) can probably be rewritten as property = 1'],
+            [line:3, source:'x.setProperty(this.getA())', message:'setProperty(this.getA()) can probably be rewritten as property = this.getA()'],
+            [line:4, source:'x.setProperty([])', message:'setProperty([]) can probably be rewritten as property = []'],
+            [line:5, source:'x.setE(3)', message:'setE(3)'])
     }
 
     @Test
-    void testCallingSetterWithinExpression_NoViolations() {
+    void test_WithinMethods_Violations() {
+        final SOURCE = '''
+            void doStuff() {
+                x.setProperty(1)
+                x.setProperty(this.getA())
+                x.setOther(123)
+            }
+            
+            int calculateStuff() {
+                return setCount(123)        // No violation
+            }
+        '''
+        assertViolations(SOURCE,
+            [line:3, source:'x.setProperty(1)', message:'setProperty(1)'],
+            [line:4, source:'x.setProperty(this.getA())', message:'this.getA()'],
+            [line:5, source:'x.setOther(123)', message:'setOther(123)'])
+    }
+
+    @Test
+    void test_WithinExpression_NoViolations() {
         final SOURCE = '''
             if (!file.setExecutable(true)) {
                 throw new Exception("Cannot set ${file} as executable")
@@ -76,7 +87,7 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
-    void testCallingSettersWithinChainedMethodCall_NoViolations() {
+    void test_WithinChainedMethodCall_NoViolations() {
         final SOURCE = '''
             builder.setFirst(1).setSecond(2).build()
         '''
@@ -84,7 +95,16 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
-    void testCallingSettersOnSuperDoesNotCauseViolations() {
+    void test_SetterMethodCallResultUsedInExpression_NoViolations() {
+        final SOURCE = '''
+            val foo = listOfThings.collect { it.setName('foo') }
+            def x = plan.setName('foo')
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_CallOnSuper_NoViolations() {
         final SOURCE = '''
             super.setProperty(1)
         '''

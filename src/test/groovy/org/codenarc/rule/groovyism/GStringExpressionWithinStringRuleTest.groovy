@@ -16,7 +16,7 @@
 package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GStringExpressionWithinStringRule
@@ -144,8 +144,8 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase<GString
             def str2 = 'average: ${total / count}'
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],
-            [lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])
+            [line:2, source:"def str1 = 'total: \${count}'", message:'\'${count}\''],
+            [line:3, source:"def str2 = 'average: \${total / count}'", message:'\'${total / count}\''])
     }
 
     @Test
@@ -159,6 +159,17 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase<GString
             }
         '''
         assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')
+    }
+
+    @Test
+    void testSingleQuoteStrings_WithClassAttributePresent_NoViolations() {
+        final SOURCE = '''
+            class SomeClass {
+                @SomeAnnotationOnField(someClass = SomeOtherClass, message = 'Some message ${sample.property1}')
+                String sampleProperty
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override

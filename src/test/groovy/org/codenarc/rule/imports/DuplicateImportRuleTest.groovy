@@ -16,7 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for DuplicateImportRule
@@ -56,8 +56,8 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase<DuplicateImportRule> 
             import java.io.InputStream;
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'import java.io.OutputStream     // Some comment'],
-                [lineNumber:5, sourceLineText:'import java.io.InputStream'])
+                [line:4, source:'import java.io.OutputStream     // Some comment'],
+                [line:5, source:'import java.io.InputStream'])
     }
 
     @Test
@@ -104,9 +104,9 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase<DuplicateImportRule> 
             import payroll.util.Constants.*    /* comment */
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'import payroll.util.DataMaintenanceUtil.ONE         // comment'],
-                [lineNumber:5, sourceLineText:'import payroll.util.DataMaintenanceUtil.TWO//comment'],
-                [lineNumber:7, sourceLineText:'import payroll.util.Constants.*    /* comment */'])
+                [line:3, source:'import payroll.util.DataMaintenanceUtil.ONE         // comment'],
+                [line:5, source:'import payroll.util.DataMaintenanceUtil.TWO//comment'],
+                [line:7, source:'import payroll.util.Constants.*    /* comment */'])
     }
 
     @Test
@@ -165,9 +165,9 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase<DuplicateImportRule> 
             import org.sample.MyClass
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'import static payroll.util.DataMaintenanceUtil.ONE         // comment'],
-                [lineNumber:5, sourceLineText:'import static payroll.util.DataMaintenanceUtil.TWO//comment'],
-                [lineNumber:7, sourceLineText:'import static payroll.util.Constants.*    /* comment */'])
+                [line:3, source:'import static payroll.util.DataMaintenanceUtil.ONE         // comment'],
+                [line:5, source:'import static payroll.util.DataMaintenanceUtil.TWO//comment'],
+                [line:7, source:'import static payroll.util.Constants.*    /* comment */'])
     }
 
     @Test

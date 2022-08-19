@@ -16,7 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for MultipleUnaryOperatorsRule
@@ -58,13 +58,13 @@ class MultipleUnaryOperatorsRuleTest extends AbstractRuleTestCase<MultipleUnaryO
         '''
         def message = 'The expression %s in class None contains confusing multiple consecutive unary operators'
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'int z = ~~2', messageText:String.format(message, '(~~2)')],
-            [lineNumber:3, sourceLineText:'boolean b = !!true', messageText:String.format(message, '(!!true)')],
-            [lineNumber:4, sourceLineText:'boolean c = !!!false', messageText:String.format(message, '(!!false)')],
-            [lineNumber:4, sourceLineText:'boolean c = !!!false', messageText:String.format(message, '(!!false)')],
-            [lineNumber:5, sourceLineText:'int j = -~7', messageText:String.format(message, '(-~7)')],
-            [lineNumber:6, sourceLineText:'int k = +~8', messageText:String.format(message, '(+~8)')],
-            [lineNumber:7, sourceLineText:'boolean d = !~1', messageText:String.format(message, '(!~1)')])
+            [line:2, source:'int z = ~~2', message:String.format(message, '(~~2)')],
+            [line:3, source:'boolean b = !!true', message:String.format(message, '(!!true)')],
+            [line:4, source:'boolean c = !!!false', message:String.format(message, '(!!false)')],
+            [line:4, source:'boolean c = !!!false', message:String.format(message, '(!!false)')],
+            [line:5, source:'int j = -~7', message:String.format(message, '(-~7)')],
+            [line:6, source:'int k = +~8', message:String.format(message, '(+~8)')],
+            [line:7, source:'boolean d = !~1', message:String.format(message, '(!~1)')])
     }
 
     @Override

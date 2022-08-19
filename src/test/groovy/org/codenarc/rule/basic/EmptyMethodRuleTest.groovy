@@ -16,7 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for EmptyMethodRule
@@ -32,7 +32,7 @@ class EmptyMethodRuleTest extends AbstractRuleTestCase<EmptyMethodRule> {
     }
 
     @Test
-    void testSuccessScenario() {
+    void testOverrideScenario() {
         final SOURCE = '''
             class MyClass {
                 @Override
@@ -45,6 +45,17 @@ class EmptyMethodRuleTest extends AbstractRuleTestCase<EmptyMethodRule> {
             abstract class MyBaseClass {
                 // OK, handled by EmptyMethodInAbstractClass Rule
                 public void method() {}
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testPointcutScenario() {
+        final SOURCE = '''
+            class MyClass {
+                @Pointcut("@annotation(example.annotation.Test)")
+                public void method1() {}
             }
         '''
         assertNoViolations(SOURCE)

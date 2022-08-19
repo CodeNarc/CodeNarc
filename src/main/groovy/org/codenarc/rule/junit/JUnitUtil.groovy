@@ -128,7 +128,7 @@ class JUnitUtil {
         }
         node.properties['annotations']?.any { annotation ->
             def name = annotation?.properties['classNode']?.name
-            name == 'Test' || name == 'org.junit.Test'
+            return name in ['Test', 'org.junit.Test', 'org.junit.jupiter.api.Test']
         }
     }
 

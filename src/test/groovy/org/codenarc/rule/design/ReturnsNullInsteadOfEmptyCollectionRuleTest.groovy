@@ -16,7 +16,7 @@
 package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ReturnsNullInsteadOfEmptyCollectionRule
@@ -166,7 +166,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase<R
     }
 
     @Test
-    void testDefMethodCtorCall() {
+    void testDefMethodConstructorCall() {
         final SOURCE = '''
             def myMethod() {
                 if (x) return null
@@ -177,7 +177,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase<R
     }
 
     @Test
-    void testDefMethodCtorCallNotCollection() {
+    void testDefMethodConstructorCallNotCollection() {
         final SOURCE = '''
             def myMethod() {
                 if (x) return null
@@ -294,6 +294,20 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase<R
             }
         '''
         assertSingleViolation(SOURCE, 8, 'null')
+    }
+
+    @Test
+    void testReturnWithinNestedClosure_Ignored() {
+        final SOURCE = '''
+            Closure c = {
+                List things = this.stuff.collect { return [ theThing: it ] } //this return is detected (wrongly)
+                if (things.isEmpty()) {
+                    return //violation is raised here
+                }
+                println things
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override

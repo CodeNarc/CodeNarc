@@ -17,7 +17,7 @@ package org.codenarc.rule.comments
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.source.SourceString
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ClassJavadocRule
@@ -164,7 +164,7 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase<ClassJavadocRule> {
         '''
         sourceCodeName = 'TestClass.Groovy'
         assertViolations(SOURCE,
-            [lineNumber:5, sourceLineText:'class TestClass', messageText:'Class org.example.TestClass missing Javadoc'])
+            [line:5, source:'class TestClass', message:'Class org.example.TestClass missing Javadoc'])
     }
 
     @Test
@@ -183,8 +183,8 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase<ClassJavadocRule> {
         sourceCodeName = 'MyClass.groovy'
 
         assertViolations(SOURCE,
-                [lineNumber: 4, sourceLineText: 'class MyClass', messageText: 'Class org.example.MyClass missing Javadoc'],
-                [lineNumber: 8, sourceLineText: 'class OtherClass', messageText: 'Class org.example.OtherClass missing Javadoc'])
+                [line: 4, source: 'class MyClass', message: 'Class org.example.MyClass missing Javadoc'],
+                [line: 8, source: 'class OtherClass', message: 'Class org.example.OtherClass missing Javadoc'])
     }
 
     @Test

@@ -228,6 +228,7 @@ ruleset {
     MisorderedStaticImports 
     MissingBlankLineAfterImports 
     MissingBlankLineAfterPackage 
+    MissingBlankLineBeforeAnnotatedField 
     MissingNewInThrowStatement 
     MissingOverrideAnnotation 
     MultipleLoggers 
@@ -245,8 +246,12 @@ ruleset {
     NonFinalSubclassOfSensitiveInterface 
     ObjectFinalize 
     ObjectOverrideMisspelledMethodName 
+    OptionalCollectionReturnType 
+    OptionalField 
+    OptionalMethodParameter 
     PackageName 
     PackageNameMatchesFilePath 
+    ParameterAssignmentInFilterClosure 
     ParameterCount 
     ParameterName 
     ParameterReassignment 
@@ -274,6 +279,9 @@ ruleset {
     SpaceAfterComma 
     SpaceAfterFor 
     SpaceAfterIf 
+    SpaceAfterMethodCallName 
+    SpaceAfterMethodDeclarationName 
+    SpaceAfterNotOperator 
     SpaceAfterOpeningBrace 
     SpaceAfterSemicolon 
     SpaceAfterSwitch 
@@ -283,6 +291,7 @@ ruleset {
     SpaceAroundOperator 
     SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 
+    SpaceInsideParentheses 
     SpockIgnoreRestUsed 
     StatelessClass 
     StatelessSingleton 
@@ -361,7 +370,6 @@ ruleset {
     UnnecessarySemicolon 
     UnnecessarySetter 
     UnnecessaryStringInstantiation 
-    UnnecessarySubstring 
     UnnecessaryTernaryExpression 
     UnnecessaryToString 
     UnnecessaryTransientModifier 

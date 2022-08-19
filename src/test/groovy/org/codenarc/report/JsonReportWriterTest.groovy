@@ -28,8 +28,8 @@ import org.codenarc.rule.Violation
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JsonReportWriter
@@ -38,12 +38,12 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
 
     private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE2)
-    private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
+    private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3)
     private static final NEW_REPORT_FILE = 'target/NewJsonReport.json'
 
     @SuppressWarnings('LineLength')
     private static final REPORT_JSON = """
-        {"codeNarc":{"url":"https://www.codenarc.org","version":"${VERSION}"},"report":{"timestamp":"${FORMATTED_TIMESTAMP}"},"project":{"title":"My Cool Project","sourceDirectories":["c:/MyProject/src/main/groovy","c:/MyProject/src/test/groovy"]},"summary":{"totalFiles":6,"filesWithViolations":3,"priority1":2,"priority2":2,"priority3":3},"packages":[{"path":"src/main","totalFiles":3,"filesWithViolations":3,"priority1":2,"priority2":2,"priority3":3,"files":[{"name":"MyAction.groovy","violations":[{"ruleName":"RULE1","priority":1,"lineNumber":111,"sourceLine":"if (count < 23 && index <= 99 && name.contains('\\u0000')) {"},{"ruleName":"RULE3","priority":3,"lineNumber":333,"sourceLine":"throw new Exception(\\"cdata=<![CDATA[whatever]]>\\") // Some very long message 1234567890123456789012345678901234567890","message":"Other info"},{"ruleName":"RULE3","priority":3,"lineNumber":333,"sourceLine":"throw new Exception(\\"cdata=<![CDATA[whatever]]>\\") // Some very long message 1234567890123456789012345678901234567890","message":"Other info"},{"ruleName":"RULE1","priority":1,"lineNumber":111,"sourceLine":"if (count < 23 && index <= 99 && name.contains('\\u0000')) {"},{"ruleName":"RULE2","priority":2,"lineNumber":222,"message":"bad stuff: !@#\$%^&*()_+<>"}]}]},{"path":"src/main/dao","totalFiles":2,"filesWithViolations":2,"priority1":0,"priority2":1,"priority3":1,"files":[{"name":"MyDao.groovy","violations":[{"ruleName":"RULE3","priority":3,"lineNumber":333,"sourceLine":"throw new Exception(\\"cdata=<![CDATA[whatever]]>\\") // Some very long message 1234567890123456789012345678901234567890","message":"Other info"}]},{"name":"MyOtherDao.groovy","violations":[{"ruleName":"RULE2","priority":2,"lineNumber":222,"message":"bad stuff: !@#\$%^&*()_+<>"}]}]},{"path":"src/test","totalFiles":3,"filesWithViolations":0,"priority1":0,"priority2":0,"priority3":0,"files":[]}],"rules":[{"name":"DuplicateImport","description":"Custom: Duplicate imports"},{"name":"UnnecessaryBooleanInstantiation","description":"Use Boolean.valueOf() for variable values or Boolean.TRUE and Boolean.FALSE for constant values instead of calling the Boolean() constructor directly or calling Boolean.valueOf(true) or Boolean.valueOf(false)."}]}
+        {"codeNarc":{"url":"https://codenarc.org","version":"${VERSION}"},"report":{"timestamp":"${FORMATTED_TIMESTAMP}"},"project":{"title":"My Cool Project","sourceDirectories":["c:/MyProject/src/main/groovy","c:/MyProject/src/test/groovy"]},"summary":{"totalFiles":6,"filesWithViolations":3,"priority1":2,"priority2":2,"priority3":3},"packages":[{"path":"src/main","totalFiles":3,"filesWithViolations":3,"priority1":2,"priority2":2,"priority3":3,"files":[{"name":"MyAction.groovy","violations":[{"ruleName":"RULE1","priority":1,"lineNumber":111,"sourceLine":"if (count < 23 && index <= 99 && name.contains('\\u0000')) {"},{"ruleName":"RULE3","priority":3,"lineNumber":333,"sourceLine":"throw new Exception(\\"cdata=<![CDATA[whatever]]>\\") // Some very long message 1234567890123456789012345678901234567890","message":"Other info"},{"ruleName":"RULE3","priority":3,"lineNumber":333,"sourceLine":"throw new Exception(\\"cdata=<![CDATA[whatever]]>\\") // Some very long message 1234567890123456789012345678901234567890","message":"Other info"},{"ruleName":"RULE1","priority":1,"lineNumber":111,"sourceLine":"if (count < 23 && index <= 99 && name.contains('\\u0000')) {"},{"ruleName":"RULE2","priority":2,"lineNumber":222,"message":"bad stuff: !@#\$%^&*()_+<>"}]}]},{"path":"src/main/dao","totalFiles":2,"filesWithViolations":2,"priority1":0,"priority2":1,"priority3":1,"files":[{"name":"MyDao.groovy","violations":[{"ruleName":"RULE3","priority":3,"lineNumber":333,"sourceLine":"throw new Exception(\\"cdata=<![CDATA[whatever]]>\\") // Some very long message 1234567890123456789012345678901234567890","message":"Other info"}]},{"name":"MyOtherDao.groovy","violations":[{"ruleName":"RULE2","priority":2,"lineNumber":222,"message":"bad stuff: !@#\$%^&*()_+<>"}]}]},{"path":"src/test","totalFiles":3,"filesWithViolations":0,"priority1":0,"priority2":0,"priority3":0,"files":[]}],"rules":[{"name":"DuplicateImport","description":"Custom: Duplicate imports"},{"name":"UnnecessaryBooleanInstantiation","description":"Use Boolean.valueOf() for variable values or Boolean.TRUE and Boolean.FALSE for constant values instead of calling the Boolean() constructor directly or calling Boolean.valueOf(true) or Boolean.valueOf(false)."}]}
     """
 
     @Test
@@ -76,7 +76,7 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
                 }
             }
         '''
-        def dirResults = new DirectoryResults('', 2)
+        def dirResults = new DirectoryResults('src/main/dao', 1)
         dirResults.addChild(new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3]))
         def rootResults = new DirectoryResults()
         rootResults.addChild(dirResults)
@@ -122,19 +122,21 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
     // Setup and helper methods
     //--------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpJsonReportWriterTest() {
         reportWriter = new JsonReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
-        def srcMainDirResults = new DirectoryResults('src/main', 1)
-        srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcTestDirResults = new DirectoryResults('src/test', 3)
+        def srcMainDirResults = new DirectoryResults('src/main', 2)
+        def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
+        def srcTestDirResults = new DirectoryResults('src/test', 0)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def srcMainFileResults2 = new FileResults('src/main/MyCleanAction.groovy', [])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
 
         srcMainDirResults.addChild(srcMainFileResults1)
+        srcMainDirResults.addChild(srcMainFileResults2)
         srcMainDirResults.addChild(srcMainDaoDirResults)
         srcMainDaoDirResults.addChild(fileResultsMainDao1)
         srcMainDaoDirResults.addChild(fileResultsMainDao2)

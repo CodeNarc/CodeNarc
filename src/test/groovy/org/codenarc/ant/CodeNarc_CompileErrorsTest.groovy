@@ -17,10 +17,11 @@ package org.codenarc.ant
 
 import static org.codenarc.test.TestUtil.*
 
+import groovy.ant.AntBuilder
 import org.apache.tools.ant.BuildException
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CodeNarcTask that use the Groovy AntBuilder to test source files with compile errors
@@ -34,7 +35,7 @@ class CodeNarc_CompileErrorsTest extends AbstractTestCase {
 
     private AntBuilder ant
 
-    @Before
+    @BeforeEach
     void setUp() {
         ant = new AntBuilder()
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')

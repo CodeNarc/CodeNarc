@@ -16,7 +16,7 @@
  package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for PrivateFieldCouldBeFinalRule
@@ -195,8 +195,8 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase<PrivateField
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private int count = 0', messageText:VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'private completed = 0', messageText:'Private field [completed] in class MyClass is only'])
+            [line:3, source:'private int count = 0', message:VIOLATION_MESSAGE],
+            [line:4, source:'private completed = 0', message:'Private field [completed] in class MyClass is only'])
     }
 
     @Test
@@ -250,8 +250,8 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase<PrivateField
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private int count', messageText:VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:"private name = 'abc'", messageText:'Private field [name] in class MyClass is only'])
+            [line:3, source:'private int count', message:VIOLATION_MESSAGE],
+            [line:4, source:"private name = 'abc'", message:'Private field [name] in class MyClass is only'])
     }
 
     @Test
@@ -304,8 +304,8 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase<PrivateField
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private int count = 0', messageText:VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:"private other = 'abc'", messageText:'Private field [other] in class MyClass is only'])
+            [line:3, source:'private int count = 0', message:VIOLATION_MESSAGE],
+            [line:4, source:"private other = 'abc'", message:'Private field [other] in class MyClass is only'])
     }
 
     @Test

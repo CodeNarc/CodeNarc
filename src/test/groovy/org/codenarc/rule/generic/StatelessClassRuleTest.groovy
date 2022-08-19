@@ -16,8 +16,8 @@
 package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for StatelessClassRule
@@ -250,7 +250,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase<StatelessClassRule> {
         assert rule.ignoreFieldNames == 'abc,d*f,gh?'
     }
 
-    @Before
+    @BeforeEach
     void setUpStatelessClassRuleTest() {
         sourceCodeName = 'MyClass.groovy'
         sourceCodePath = "/$sourceCodeName"

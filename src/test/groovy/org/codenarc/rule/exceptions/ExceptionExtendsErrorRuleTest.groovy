@@ -16,12 +16,13 @@
 package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ExceptionExtendsErrorRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase<ExceptionExtendsErrorRule> {
 
@@ -32,7 +33,7 @@ class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase<ExceptionExtend
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
             class MyException extends Exception { }  // OK
         '''
@@ -49,6 +50,23 @@ class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase<ExceptionExtend
         assertTwoViolations(SOURCE,
                 2, 'class MyError1 extends Error', 'The class MyError1 extends Error, which is meant to be used only as a system exception',
                 4, 'class MyError2 extends java.lang.Error', 'The class MyError2 extends Error, which is meant to be used only as a system exception')
+    }
+
+    @Test
+    void testInterface_NoViolations() {
+        final SOURCE = '''
+            interface MyError extends Error { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testClassImplementsErrorInterface_NoViolations() {
+        final SOURCE = '''
+            import some.other.Error
+            class MySpecialError implements Error { }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override

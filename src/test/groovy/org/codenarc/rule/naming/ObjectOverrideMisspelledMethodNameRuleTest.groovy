@@ -16,7 +16,7 @@
 package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ObjectOverrideMisspelledMethodNameRule
@@ -61,8 +61,8 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase<Ob
             boolean equals(Object o, int other) {}       // ok; too many params
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'boolean eQuals(Object o) {}'],
-                [lineNumber:3, sourceLineText:'boolean equaLS(Object o) {}'])
+                [line:2, source:'boolean eQuals(Object o) {}'],
+                [line:3, source:'boolean equaLS(Object o) {}'])
     }
 
     @Test
@@ -73,8 +73,8 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase<Ob
             Object hashCOde() {}            // Note that it does not enforce type
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'int hashcode() {}'],
-                [lineNumber:4, sourceLineText:'Object hashCOde() {}'],
+                [line:2, source:'int hashcode() {}'],
+                [line:4, source:'Object hashCOde() {}'],
         )
     }
 
@@ -86,8 +86,8 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase<Ob
             String toSTring() {}
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'String tostring() {}'],
-                [lineNumber:4, sourceLineText:'String toSTring() {}'],
+                [line:2, source:'String tostring() {}'],
+                [line:4, source:'String toSTring() {}'],
         )
     }
 

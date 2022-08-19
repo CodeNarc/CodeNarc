@@ -10,6 +10,7 @@
 
     <rule class='org.codenarc.rule.design.AbstractClassWithoutAbstractMethodRule'/>
     <rule class='org.codenarc.rule.design.AbstractClassWithPublicConstructorRule'/>
+    <rule class='org.codenarc.rule.design.AssignmentToStaticFieldFromInstanceMethodRule'/>
     <rule class='org.codenarc.rule.design.BooleanMethodReturnsNullRule'/>
     <rule class='org.codenarc.rule.design.BuilderMethodWithSideEffectsRule'/>
     <rule class='org.codenarc.rule.design.CloneableWithoutCloneRule'/>
@@ -21,6 +22,10 @@
     <rule class='org.codenarc.rule.design.ImplementationAsTypeRule'/>
     <rule class='org.codenarc.rule.design.InstanceofRule'/>
     <rule class='org.codenarc.rule.design.LocaleSetDefaultRule'/>
+    <rule class='org.codenarc.rule.design.NestedForLoopRule'/>
+    <rule class='org.codenarc.rule.design.OptionalCollectionReturnTypeRule'/>
+    <rule class='org.codenarc.rule.design.OptionalFieldRule'/>
+    <rule class='org.codenarc.rule.design.OptionalMethodParameterRule'/>
     <rule class='org.codenarc.rule.design.PublicInstanceFieldRule'/>
     <rule class='org.codenarc.rule.design.PrivateFieldCouldBeFinalRule'/>
     <rule class='org.codenarc.rule.design.ReturnsNullInsteadOfEmptyArrayRule'/>
@@ -28,6 +33,4 @@
     <rule class='org.codenarc.rule.design.SimpleDateFormatMissingLocaleRule'/>
     <rule class='org.codenarc.rule.design.StatelessSingletonRule'/>
     <rule class='org.codenarc.rule.design.ToStringReturnsNullRule'/>
-    <rule class='org.codenarc.rule.design.NestedForLoopRule'/>
-    <rule class='org.codenarc.rule.design.AssignmentToStaticFieldFromInstanceMethodRule'/>
 </ruleset>

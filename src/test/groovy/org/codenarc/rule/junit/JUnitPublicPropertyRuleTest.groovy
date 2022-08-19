@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitPublicPropertyRule
@@ -60,7 +60,7 @@ class JUnitPublicPropertyRuleTest extends AbstractRuleTestCase<JUnitPublicProper
     @Test
     void testTestClassWithProperty_Violation() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             class MyTestCase {
                 static String id    // static property
                 def helper          // property
@@ -72,9 +72,9 @@ class JUnitPublicPropertyRuleTest extends AbstractRuleTestCase<JUnitPublicProper
         '''
         def message = 'The test class %s contains a public property %s. There is usually no reason to have a public property (even a constant) on a test class.'
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'static String id', messageText:String.format(message, 'MyTestCase', 'id')],
-            [lineNumber:5, sourceLineText:'def helper', messageText:String.format(message, 'MyTestCase', 'helper')],
-            [lineNumber:6, sourceLineText:'String name', messageText:String.format(message, 'MyTestCase', 'name')])
+            [line:4, source:'static String id', message:String.format(message, 'MyTestCase', 'id')],
+            [line:5, source:'def helper', message:String.format(message, 'MyTestCase', 'helper')],
+            [line:6, source:'String name', message:String.format(message, 'MyTestCase', 'name')])
     }
 
     @Test

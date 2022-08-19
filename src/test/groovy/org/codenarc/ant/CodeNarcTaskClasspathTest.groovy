@@ -15,12 +15,14 @@
  */
 package org.codenarc.ant
 
-import groovy.util.slurpersupport.NodeChildren
+import groovy.ant.AntBuilder
+import groovy.xml.XmlSlurper
+
+import groovy.xml.slurpersupport.NodeChildren
 import org.codehaus.groovy.ant.Groovyc
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
 
 /**
  * Tests exercising CodeNarcTask with regards to configuring the classpath used for compiling analysed sources
@@ -37,16 +39,25 @@ class CodeNarcTaskClasspathTest {
 
     private AntBuilder ant
 
-    @Rule
-    public TemporaryFolder temporaryFolder = new TemporaryFolder()
+    @TempDir
+    private File tempDir
 
-    @Before
+    @BeforeEach
     void setupSources() {
-        ruleSetsFile = temporaryFolder.newFile('rulesets.groovy')
-        analysedDir = temporaryFolder.newFolder('analysed')
-        reportFile = new File(temporaryFolder.root, 'report.xml')
+        ruleSetsFile = new File(tempDir, 'rulesets.groovy')
+        analysedDir = new File(tempDir, 'analysed')
+        reportFile = new File(tempDir, 'report.xml')
 
-        compiler = new TestCompiler(temporaryFolder.newFolder('sources'), temporaryFolder.newFolder('classes'))
+        def sourcesDir = new File(tempDir, 'sources')
+        def classesDir = new File(tempDir, 'classes')
+
+        ruleSetsFile.createNewFile()
+        reportFile.createNewFile()
+        analysedDir.mkdir()
+        sourcesDir.mkdir()
+        classesDir.mkdir()
+
+        compiler = new TestCompiler(sourcesDir, classesDir)
         ant = createAntBuilderWithCodenarcTask()
     }
 

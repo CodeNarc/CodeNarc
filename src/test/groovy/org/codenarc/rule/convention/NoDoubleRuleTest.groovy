@@ -16,7 +16,7 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for NoDoubleRule
@@ -51,15 +51,15 @@ class NoDoubleRuleTest extends AbstractRuleTestCase<NoDoubleRule> {
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'double doubleProperty', messageText:'The field doubleProperty in class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:5, sourceLineText:'private double doubleField = 1.2', messageText:'The field doubleField in class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:7, sourceLineText:'private double calculateAverage() { return 0 }', messageText:'The method calculateAverage in class MyClass has a return type of double/Double. Prefer using BigDecimal.'],
-                [lineNumber:9, sourceLineText:'protected void setAverage(double average) { }', messageText:'The parameter named average in method setAverage of class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:11, sourceLineText:'MyClass(int count, double rating, double factor) {', messageText:'The parameter named rating in method <init> of class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:11, sourceLineText:'MyClass(int count, double rating, double factor) {', messageText:'The parameter named factor in method <init> of class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:13, sourceLineText:'double doubleVar = calculateAverage()', messageText:'The variable doubleVar in class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:14, sourceLineText:'double double1, double2 = 0', messageText:'The variable double1 in class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:14, sourceLineText:'double double1, double2 = 0', messageText:'The variable double2 in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:4, source:'double doubleProperty', message:'The field doubleProperty in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:5, source:'private double doubleField = 1.2', message:'The field doubleField in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:7, source:'private double calculateAverage() { return 0 }', message:'The method calculateAverage in class MyClass has a return type of double/Double. Prefer using BigDecimal.'],
+                [line:9, source:'protected void setAverage(double average) { }', message:'The parameter named average in method setAverage of class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:11, source:'MyClass(int count, double rating, double factor) {', message:'The parameter named rating in method <init> of class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:11, source:'MyClass(int count, double rating, double factor) {', message:'The parameter named factor in method <init> of class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:13, source:'double doubleVar = calculateAverage()', message:'The variable doubleVar in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:14, source:'double double1, double2 = 0', message:'The variable double1 in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:14, source:'double double1, double2 = 0', message:'The variable double2 in class MyClass is of type double/Double. Prefer using BigDecimal.'],
         )
     }
 
@@ -83,15 +83,15 @@ class NoDoubleRuleTest extends AbstractRuleTestCase<NoDoubleRule> {
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'Double doubleProperty', messageText:'The field doubleProperty in class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:5, sourceLineText:'private Double doubleField = 1.2', messageText:'The field doubleField in class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:7, sourceLineText:'private Double calculateAverage() { return 0 }', messageText:'The method calculateAverage in class MyClass has a return type of double/Double. Prefer using BigDecimal.'],
-                [lineNumber:9, sourceLineText:'protected void setAverage(Double average) { }', messageText:'The parameter named average in method setAverage of class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:11, sourceLineText:'MyClass(int count, Double rating, Double factor) {', messageText:'The parameter named rating in method <init> of class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:11, sourceLineText:'MyClass(int count, Double rating, Double factor) {', messageText:'The parameter named factor in method <init> of class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:13, sourceLineText:'Double doubleVar = calculateAverage()', messageText:'The variable doubleVar in class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:14, sourceLineText:'Double double1, double2 = 0', messageText:'The variable double1 in class MyClass is of type double/Double. Prefer using BigDecimal.'],
-                [lineNumber:14, sourceLineText:'Double double1, double2 = 0', messageText:'The variable double2 in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:4, source:'Double doubleProperty', message:'The field doubleProperty in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:5, source:'private Double doubleField = 1.2', message:'The field doubleField in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:7, source:'private Double calculateAverage() { return 0 }', message:'The method calculateAverage in class MyClass has a return type of double/Double. Prefer using BigDecimal.'],
+                [line:9, source:'protected void setAverage(Double average) { }', message:'The parameter named average in method setAverage of class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:11, source:'MyClass(int count, Double rating, Double factor) {', message:'The parameter named rating in method <init> of class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:11, source:'MyClass(int count, Double rating, Double factor) {', message:'The parameter named factor in method <init> of class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:13, source:'Double doubleVar = calculateAverage()', message:'The variable doubleVar in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:14, source:'Double double1, double2 = 0', message:'The variable double1 in class MyClass is of type double/Double. Prefer using BigDecimal.'],
+                [line:14, source:'Double double1, double2 = 0', message:'The variable double2 in class MyClass is of type double/Double. Prefer using BigDecimal.'],
         )
     }
 

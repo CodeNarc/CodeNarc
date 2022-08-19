@@ -16,17 +16,10 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codehaus.groovy.ast.expr.MethodCall
-import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.expr.ListExpression
-import org.codehaus.groovy.ast.expr.MapExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codenarc.util.AstUtil
-import org.codenarc.util.GroovyVersion
+import org.codenarc.util.SourceCodeUtil
 
 /**
  * Check that there is at least one space (blank) or whitespace following each comma. That includes checks
@@ -90,17 +83,18 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
 
     @SuppressWarnings('NestedBlockDepth')
     private void processMethodOrConstructorCall(MethodCall call) {
-        if (isFirstVisit(call) && !AstUtil.isFromGeneratedSourceCode(call)) {
+        if (isFirstVisit(call) && isNotGeneratedCode(call)) {
             def arguments = call.arguments
             def parameterExpressions = arguments.expressions
 
             parameterExpressions.each { e ->
-                if (!isClosureParameterOutsideParentheses(e, arguments)) {
+                if (!isClosureParameterOutsideParentheses(e, arguments) && e.columnNumber > 1) {
                     String line = sourceLine(e)
                     String previousChar = line[e.columnNumber - 2]
 
                     char ch = previousChar as char
-                    if (ch == COMMA) {
+                    // Ignore line if it contains non-ASCII chars; they are nothing but trouble for column indexes
+                    if (ch == COMMA && SourceCodeUtil.containsOnlyAsciiCharacters(line)) {
                         addViolation(call, "The parameter ${e.text} in the call to method ${call.methodAsString} within class $currentClassName is not preceded by a space or whitespace")
                     }
                 }
@@ -109,9 +103,6 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean isClosureParameterOutsideParentheses(Expression e, Expression arguments) {
-        if (GroovyVersion.isGroovyVersion2()) {
-            e instanceof ClosureExpression && e.columnNumber > arguments.lastColumnNumber
-        }
         // Note: Similar logic is in ClosureAsLastMethodParameterAstVisitor
         return e instanceof ClosureExpression &&
                 e.lastLineNumber > arguments.lastLineNumber ||

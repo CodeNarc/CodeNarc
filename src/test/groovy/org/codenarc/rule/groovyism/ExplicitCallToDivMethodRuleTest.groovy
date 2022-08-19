@@ -16,7 +16,7 @@
 package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ExplicitCallToDivMethodRule
@@ -26,13 +26,13 @@ import org.junit.Test
 class ExplicitCallToDivMethodRuleTest extends AbstractRuleTestCase<ExplicitCallToDivMethodRule> {
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitCallToDivMethod'
     }
 
     @Test
-    void testSuccessScenario() {
+    void test_NoViolations() {
         rule.ignoreThisReference = true
         final SOURCE = '''
             a / b
@@ -44,11 +44,28 @@ class ExplicitCallToDivMethodRuleTest extends AbstractRuleTestCase<ExplicitCallT
     }
 
     @Test
-    void testViolation() {
+    void test_Violations() {
         final SOURCE = '''
             a.div(b)
         '''
         assertSingleViolation(SOURCE, 2, 'a.div(b)')
+    }
+
+    @Test
+    void test_MarkupBuilderUsage_Div() {
+        final SOURCE = '''
+            html {
+                body {
+                    div("Some text")
+                    div(a:'aaa', b:'bbb')
+                    div { p("some text") }
+                    // div(7)           // violation
+                    // div(3.1415)      // violation
+                    //div(someVariable) // violation
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override

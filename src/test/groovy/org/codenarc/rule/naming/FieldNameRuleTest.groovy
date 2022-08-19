@@ -18,7 +18,7 @@ package org.codenarc.rule.naming
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for FieldNameRule
@@ -261,7 +261,7 @@ class FieldNameRuleTest extends AbstractRuleTestCase<FieldNameRule> {
     }
 
     @Test
-    void testApplyTo_IgnoresSerialVersionUID () {
+    void testApplyTo_IgnoresSerialVersionUID() {
         final SOURCE = '''
           class MyClass {
             private static final long serialVersionUID = 1234567890L

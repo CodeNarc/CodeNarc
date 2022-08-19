@@ -16,7 +16,7 @@
 package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CloneWithoutCloneableRule
@@ -95,9 +95,9 @@ class CloneWithoutCloneableRuleTest extends AbstractRuleTestCase<CloneWithoutClo
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'def clone()', messageText: violationMessage('ValueClass')],
-            [lineNumber:9, sourceLineText:'Object clone()', messageText:violationMessage('ValueClass2')],
-            [lineNumber:15, sourceLineText:'protected Object clone() throws CloneNotSupportedException', messageText:violationMessage('ValueClass3')]
+            [line:3, source:'def clone()', message: violationMessage('ValueClass')],
+            [line:9, source:'Object clone()', message:violationMessage('ValueClass2')],
+            [line:15, source:'protected Object clone() throws CloneNotSupportedException', message:violationMessage('ValueClass3')]
         )
     }
 

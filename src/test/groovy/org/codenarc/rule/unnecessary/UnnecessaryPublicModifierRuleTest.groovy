@@ -16,143 +16,270 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessaryPublicModifierRule
  *
  * @author Hamlet D'Arcy
-  */
+ * @author Chris Mair
+ */
 class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase<UnnecessaryPublicModifierRule> {
 
+    private static final String MESSAGE_CLASSES = 'The public keyword is unnecessary for classes'
+    private static final String MESSAGE_METHODS = 'The public keyword is unnecessary for methods'
+    private static final String MESSAGE_CONSTRUCTORS = 'The public keyword is unnecessary for constructors'
+
     @Test
-    void testRuleProperties() {
+    void RuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryPublicModifier'
     }
 
-    @Test
-    void testSuccessScenario() {
-        final SOURCE = '''
-            class MyClass {
-                void "my public Method"() {}
-                public String field
-            }
+    @Nested
+    class Classes {
 
-            class publicClass {
-                void publicMyMethod() {}
-                public String field
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
+        @Test
+        void NoViolations() {
+            final SOURCE = '''
+                class MyClass {
+                    void "my public Method"() {}
+                    public String field
+                }
+    
+                class publicClass {
+                    void publicMyMethod() {}
+                    public String field
+                }
+                
+                class publicEmptyClass {}
+            '''
+            assertNoViolations(SOURCE)
+        }
 
-    @Test
-    void testClass0() {
-        final SOURCE = '''public class MyClass {
-            }
-        '''
-        assertSingleViolation(SOURCE, 1, 'public class MyClass', 'The public keyword is unnecessary for classes')
-    }
+        @Test
+        void Violations() {
+            final SOURCE = '''public class MyClass1 {
+                }
+                
+                public class MyClass2 {
+                }
+            '''
+            assertViolations(SOURCE,
+                    [line:1, source:'public class MyClass1', message: MESSAGE_CLASSES],
+                    [line:4, source:'public class MyClass2', message: MESSAGE_CLASSES])
+        }
 
-    @Test
-    void testClass() {
-        final SOURCE = '''
-            public class MyClass {
-            }
-        '''
-        assertSingleViolation(SOURCE, 2, 'public class MyClass', 'The public keyword is unnecessary for classes')
-    }
-
-    @Test
-    void testClassSplit() {
-        final SOURCE = '''
-            public
-            class MyClass {
-            }
-        '''
-        assertSingleViolation(SOURCE, 2, 'public', 'The public keyword is unnecessary for classes')
-    }
-
-    @Test
-    void testClassSplit2() {
-        final SOURCE = '''public
-            class MyClass
-            {
-            }
-        '''
-        assertSingleViolation(SOURCE, 1, 'public', 'The public keyword is unnecessary for classes')
-    }
-
-    @Test
-    void testMethodSplit() {
-        final SOURCE = '''
-            class MyClass {
+        @Test
+        void Split_KnownLimitation() {
+            final SOURCE = '''public
+                class MyClass1
+                {
+                }
+                
                 public
-                void myMethod() {}
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'public', 'The public keyword is unnecessary for methods')
+                class MyClass2 {
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void CommentContainingPublic() {
+            final SOURCE = '''
+                class MyClass { // Should this be public or not?
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void PublicGeneric() {
+            final SOURCE = '''
+                public class MyClass<T> {
+                    T someProperty
+                }
+            '''
+            assertSingleViolation(SOURCE, 2, 'public class MyClass<T>', MESSAGE_CLASSES)
+        }
+
+        @Test
+        void AnnotationWithParametersContainingPublic() {
+            final SOURCE = '''
+                @Special(strings = ['some public value', 'some other value']) 
+                class MyClass {
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void AnnotationOnSameLine_Violation() {
+            final SOURCE = '''
+                @Disabled public class MyClass {
+                }
+            '''
+            assertSingleViolation(SOURCE, 2, '@Disabled public class MyClass', MESSAGE_CLASSES)
+        }
+
     }
 
-    @Test
-    void testMethod() {
-        final SOURCE = '''
-            class MyClass {
-                public void myMethod() {}
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'public void myMethod()', 'The public keyword is unnecessary for methods')
+    @Nested
+    class Constructors {
+
+        @Test
+        void Violation() {
+            final SOURCE = '''
+                class MyClass {
+                    public MyClass() {}
+                }
+            '''
+            assertSingleViolation(SOURCE, 3, 'public MyClass() {}', MESSAGE_CONSTRUCTORS)
+        }
+
+        @Test
+        void PublicGeneric() {
+            final SOURCE = '''
+                 class MyClass<T, K> {
+                    public MyClass(T t, K k) { }
+                }
+            '''
+            assertSingleViolation(SOURCE, 3, 'public MyClass(T t, K k) { }', MESSAGE_CONSTRUCTORS)
+        }
+
     }
 
-    @Test
-    void testConstructor() {
-        final SOURCE = '''
-            class MyClass {
-                public MyClass() {}
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'public MyClass() {}', 'The public keyword is unnecessary for constructors')
-    }
+    @Nested
+    class Methods {
 
-    @Test
-    void testPublicGenericClass() {
-        final SOURCE = '''
-            public class MyClass<T> {
-                T someProperty
-            }
-        '''
-        assertSingleViolation(SOURCE, 2, 'public class MyClass<T>', 'The public keyword is unnecessary for classes')
-    }
+        @Test
+        void Split_KnownLimitation() {
+            final SOURCE = '''
+                class MyClass {
+                    public
+                    void myMethod() {}
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
 
-    @Test
-    void testPublicGenericMethodWithReturnGenericType() {
-        final SOURCE = '''
-             class MyClass {
-                public <T> T myMethod() { }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
+        @Test
+        void Violation() {
+            final SOURCE = '''
+                class MyClass {
+                    public void myMethod() {}
+                }
+            '''
+            assertSingleViolation(SOURCE, 3, 'public void myMethod()', MESSAGE_METHODS)
+        }
 
-    @Test
-    void testPublicGenericMethodWithVoidReturnType() {
-        final SOURCE = '''
-             class MyClass {
-                public <T> void myMethod(T t) { }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
+        @Test
+        void PublicGeneric_ReturnGenericType() {
+            final SOURCE = '''
+                 class MyClass {
+                    public <T> T myMethod() { }
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
 
-    @Test
-    void testPublicGenericConstructor() {
-        final SOURCE = '''
-             class MyClass<T, K> {
-                public MyClass(T t, K k) { }
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'public MyClass(T t, K k) { }', 'The public keyword is unnecessary for constructors')
+        @Test
+        void PublicGeneric_VoidReturnType() {
+            final SOURCE = '''
+                 class MyClass {
+                    public <T> void myMethod(T t) { }
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void CommentContainingPublic() {
+            final SOURCE = '''
+                class MyClass {
+                    void myMethod() {   // Should this be public or protected?
+                    }
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void MethodNameWithSpecialCharacters() {
+            final SOURCE = '''
+                class MyClass {
+                    void "Foo {bar,baz}"() {
+                    }
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void AnnotationWithParametersContainingPublic() {
+            final SOURCE = '''
+                class FakeTest {
+                    @ParameterizedTest
+                    @ValueSource(strings = [
+                            'some public value',
+                            'some other value',
+                    ])
+                    void testNothing(final String value) {
+                        assertFalse(value.isEmpty())
+                    }
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void AnnotationWithOpeningBrace() {
+            final SOURCE = '''
+                import spock.lang.Requires
+                import spock.lang.Specification
+                
+                class SomeSpec extends Specification {
+                    @Requires({ true })
+                    def 'asd'() {
+                        expect:
+                        true
+                    }
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void MethodWithinInterface_Violation() {
+            final SOURCE = '''
+                interface MyInterface {
+                    public void myMethod()
+                }
+            '''
+            assertSingleViolation(SOURCE, 3, 'public void myMethod()', MESSAGE_METHODS)
+        }
+
+        @Test
+        void AnnotationOnTheSameLine_Violation() {
+            final SOURCE = '''
+                class MyClass {
+                    @Ignore public void myMethod() {}
+                }
+            '''
+            assertSingleViolation(SOURCE, 3, 'public void myMethod()', MESSAGE_METHODS)
+        }
+
+        @Test
+        void AnnotationOnTheSameLine_NoViolation() {
+            final SOURCE = '''
+                class MyClass {
+                    @Ignore('public') void myMethod() {}    // but @Ignore('public stuff') will cause violation
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
     }
 
     @Override

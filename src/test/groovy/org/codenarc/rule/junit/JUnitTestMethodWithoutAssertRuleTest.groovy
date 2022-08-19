@@ -16,12 +16,13 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitTestMethodWithoutAssertRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase<JUnitTestMethodWithoutAssertRule> {
 
@@ -32,7 +33,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase<JUnitTes
     }
 
     @Test
-    void testAnnotatedMethods_SuccessScenario() {
+    void testAnnotatedMethods_NoViolations() {
         final SOURCE = '''
             class MyTest {
                 @Test
@@ -51,13 +52,17 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase<JUnitTes
                 void someTestMethod4() {
                     assertEquals(1, 2)
                 }
+                @org.junit.jupiter.api.Test
+                void someTestMethod5() {
+                    assertEquals(1, 2)
+                }
             }
         '''
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testAnnotatedMethodsWithAnnotationParameters_SuccessScenario() {
+    void testAnnotatedMethodsWithAnnotationParameters_NoViolations() {
         final SOURCE = '''
             class MyTest {
                 @Test(expected = IllegalArgumentException)
@@ -82,7 +87,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase<JUnitTes
     }
 
     @Test
-    void testJUnitStyleConventions_SuccessScenario() {
+    void testJUnitStyleConventions_NoViolations() {
         final SOURCE = '''
             class MyTest {
                 private void testPrivate() {
@@ -155,11 +160,18 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase<JUnitTes
                     doSomethingElse()
                     // where is the assertion?
                 }
+                
+                @org.junit.jupiter.api.Test
+                void someTestMethod3() {
+                    println 123
+                }
+                
             }
         '''
-        assertTwoViolations(SOURCE,
-                4,  'void someMethod1()', "Test method 'someMethod1' makes no assertions",
-                12, 'void someMethod2()', "Test method 'someMethod2' makes no assertions")
+        assertViolations(SOURCE,
+                [line:4,  source:'void someMethod1()', message:"Test method 'someMethod1' makes no assertions"],
+                [line:12, source:'void someMethod2()', message:"Test method 'someMethod2' makes no assertions"],
+                [line:19, source:'void someTestMethod3()', message:"Test method 'someTestMethod3' makes no assertions"])
     }
 
     @Test

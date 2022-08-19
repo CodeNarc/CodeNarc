@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for BracesForClassRule
@@ -45,7 +45,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testMultilineDefinitionOfTrait() {
+    void testTrait_Multiline_NoViolation() {
         final SOURCE = '''
             trait MyTrait {
 
@@ -55,7 +55,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testMultilineDefinitionViolation() {
+    void testTrait_Multiline_Violation() {
         final SOURCE = '''
             class MyClass
                         extends File
@@ -67,7 +67,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testMultilineDefinitionOverride() {
+    void testClass_Multiline_NoViolation() {
         final SOURCE = '''
             class MyClass
                         extends File
@@ -80,7 +80,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testMultilineDefinitionOverrideViolation() {
+    void testClass_Multiline_sameLineFalse_Violation() {
         final SOURCE = '''
             class MyClass
                         extends File {
@@ -92,20 +92,13 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testIgnoredForAnnotationTypeDefinition1() {
+    void testAnnotationTypeDefinition_Ignored() {
         final SOURCE = '''
             @interface MyClass {
 
             }
-        '''
-        rule.sameLine = false
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void testIgnoredForAnnotationTypeDefinition2() {
-        final SOURCE = '''
-            public @interface MyClass {
+            
+            public @interface MyClass2 {
 
             }
         '''
@@ -114,7 +107,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testEnumSuccessScenarioSameLine() {
+    void testEnum_BraceSameLine_NoViolation() {
         final SOURCE = '''
             enum MyEnum {
 
@@ -125,7 +118,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testEnumViolationSameLine() {
+    void testEnum_BraceNextLine_Violation() {
         final SOURCE = '''
             enum MyEnum
             {
@@ -137,7 +130,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testEnumSuccessScenarioNewLine() {
+    void testEnum_Brace_NextLine_sameLineFalse_NoViolation() {
         final SOURCE = '''
             enum MyEnum
             {
@@ -149,7 +142,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testEnumViolationNewLine() {
+    void testEnum_BraceSameLine_sameLineFalse_Violation() {
         final SOURCE = '''
             enum MyEnum {
 
@@ -160,14 +153,14 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testSuccessScenarioSameLine() {
+    void test_SameLine_NoViolations() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testSuccessScenarioNewLine() {
+    void test_NextLine_sameLineFalse_NoViolations() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
@@ -175,7 +168,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testSameLineFalse_BracesWithinComment_KnownIssue_Violation() {
+    void testClass_sameLineFalse_BracesWithinComment_KnownIssue_Violation() {
         rule.sameLine = false
         final SOURCE = '''
             class MyClass extends File  // What about {}
@@ -187,30 +180,30 @@ class BracesForClassRuleTest extends AbstractRuleTestCase<BracesForClassRule> {
     }
 
     @Test
-    void testViolationSameLine() {
+    void test_NextLine_Violations() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 6, sourceLineText: '{', messageText: 'Opening brace for the class First should start on the same line'],
-                [lineNumber: 18, sourceLineText: '{', messageText: 'Opening brace for the class Second should start on the same line'],
-                [lineNumber: 64, sourceLineText: '{', messageText: 'Opening brace for the interface Third should start on the same line'],
-                [lineNumber: 70, sourceLineText: '{', messageText: 'Opening brace for the class Forth should start on the same line'])
+                [line: 6, source: '{', message: 'Opening brace for the class First should start on the same line'],
+                [line: 18, source: '{', message: 'Opening brace for the class Second should start on the same line'],
+                [line: 64, source: '{', message: 'Opening brace for the interface Third should start on the same line'],
+                [line: 70, source: '{', message: 'Opening brace for the class Forth should start on the same line'])
     }
 
     @Test
-    void testViolationNewLine() {
+    void test_SameLine_sameLineFalse_Violations() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 6, sourceLineText: 'class First{', messageText: 'Opening brace for the class First should start on a new line'],
-                [lineNumber: 14, sourceLineText: 'class Second{', messageText: 'Opening brace for the class Second should start on a new line'],
-                [lineNumber: 44, sourceLineText: 'interface Third{', messageText: 'Opening brace for the interface Third should start on a new line'],
-                [lineNumber: 49, sourceLineText: 'private class Forth {', messageText: 'Opening brace for the class Forth should start on a new line'])
+                [line: 6, source: 'class First{', message: 'Opening brace for the class First should start on a new line'],
+                [line: 14, source: 'class Second{', message: 'Opening brace for the class Second should start on a new line'],
+                [line: 44, source: 'interface Third{', message: 'Opening brace for the interface Third should start on a new line'],
+                [line: 49, source: 'private class Forth {', message: 'Opening brace for the class Forth should start on a new line'])
     }
 
     @Test
-    void testNoViolationForScriptClassNodes() {
+    void testScript_NoViolation() {
         final SOURCE = '''
              def x = """
              {

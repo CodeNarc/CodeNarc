@@ -16,18 +16,20 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for BracesForTryCatchFinallyRule
  *
  * @author Hamlet D'Arcy
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
-  */
+ * @author Chris Mair
+ */
 class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTryCatchFinallyRule> {
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         def rule = new BracesForTryCatchFinallyRule()
         assert rule.priority == 2
         assert rule.name == 'BracesForTryCatchFinally'
@@ -41,20 +43,20 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
     }
 
     @Test
-    void testNewLine() {
+    void test_NewLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-            [lineNumber:21, sourceLineText:'try',                 messageText: "Opening brace should be on the same line as 'try'"],
-            [lineNumber:26, sourceLineText:'catch (Exception e)', messageText: "'catch' should be on the same line as the closing brace"],
-            [lineNumber:26, sourceLineText:'catch (Exception e)', messageText: "Opening brace should be on the same line as 'catch'"],
-            [lineNumber:29, sourceLineText:'finally',             messageText: "'finally' should be on the same line as the closing brace"],
-            [lineNumber:29, sourceLineText:'finally',             messageText: "Opening brace should be on the same line as 'finally'"]
+            [line:21, source:'try',                 message: "Opening brace should be on the same line as 'try'"],
+            [line:26, source:'catch (Exception e)', message: "'catch' should be on the same line as the closing brace"],
+            [line:26, source:'catch (Exception e)', message: "Opening brace should be on the same line as 'catch'"],
+            [line:29, source:'finally',             message: "'finally' should be on the same line as the closing brace"],
+            [line:29, source:'finally',             message: "Opening brace should be on the same line as 'finally'"]
         )
     }
 
     @Test
-    void testNewLineOverride() {
+    void test_NewLineOverride() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         rule.sameLine = false
@@ -62,28 +64,28 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
     }
 
     @Test
-    void testSameLine() {
+    void test_SameLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testSameLineOverride() {
+    void test_SameLineOverride() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         rule.sameLine = false
         assertViolations(SOURCE,
-          [lineNumber:16, sourceLineText:'try{',                  messageText: "Opening brace should not be on the same line as 'try'"],
-          [lineNumber:19, sourceLineText:'}catch (Exception e){', messageText: "'catch' should not be on the same line as the closing brace"],
-          [lineNumber:19, sourceLineText:'}catch (Exception e){', messageText: "Opening brace should not be on the same line as 'catch'"],
-          [lineNumber:20, sourceLineText:'}finally{',             messageText: "'finally' should not be on the same line as the closing brace"],
-          [lineNumber:20, sourceLineText:'}finally{',             messageText: "Opening brace should not be on the same line as 'finally'"]
+          [line:16, source:'try{',                  message: "Opening brace should not be on the same line as 'try'"],
+          [line:19, source:'}catch (Exception e){', message: "'catch' should not be on the same line as the closing brace"],
+          [line:19, source:'}catch (Exception e){', message: "Opening brace should not be on the same line as 'catch'"],
+          [line:20, source:'}finally{',             message: "'finally' should not be on the same line as the closing brace"],
+          [line:20, source:'}finally{',             message: "Opening brace should not be on the same line as 'finally'"]
       )
     }
 
     @Test
-    void testSameLineFalse_BracesWithinComment_KnownIssue_Violation() {
+    void test_SameLineFalse_BracesWithinComment_KnownIssue_Violation() {
         rule.sameLine = false
         final SOURCE = '''
             class MyClass {
@@ -103,10 +105,72 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:9, sourceLineText:'catch(Exception e) // what about {}', messageText:"'catch' should not be on the same line as the closing brace"],
-            [lineNumber:12, sourceLineText:'finally // what about {}', messageText:"'finally' should not be on the same line as the closing brace"],
-            [lineNumber:12, sourceLineText:'finally // what about {}', messageText:"Opening brace should not be on the same line as 'finally'"]
+            [line:9, source:'catch(Exception e) // what about {}', message:"'catch' should not be on the same line as the closing brace"],
+            [line:12, source:'finally // what about {}', message:"'finally' should not be on the same line as the closing brace"],
+            [line:12, source:'finally // what about {}', message:"Opening brace should not be on the same line as 'finally'"]
         )
+    }
+
+    @Nested
+    class TryWithResources {
+
+        @Test
+        void test_NoCatch() {
+            final SOURCE = '''
+                try (Sql sql = new Sql(null)) {
+                    // do something
+                }
+                
+                try (Sql sql = new Sql(null)) {
+                    println 123
+                } finally {
+                    println 'done'
+                }
+                
+                try (def input = url.openStream()
+                     def output = new ByteArrayOutputStream(4096)) {
+                     // some code here to work with streams
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void test_Catch() {
+            final SOURCE = '''
+                try (Sql sql = new Sql(null)) {
+                    // do something
+                } catch (Exception ex) {
+                    // something else
+                }
+                
+                try (Sql sql = new Sql(null)) {
+                    println 123
+                } catch (IOException e) {
+                    log.error("error", e)
+                } catch (Exception e) {
+                    throw new RuntimeException(e)
+                } finally {
+                    pprintln 'done'
+                }
+            '''
+            assertNoViolations(SOURCE)
+        }
+
+        @Test
+        void test_MultipleResources() {
+            final SOURCE = '''
+                try (def input = url.openStream(); def output = new ByteArrayOutputStream(4096)) {
+                     // some code here to work with streams
+                }
+                catch (IOException e) {
+                    // some code to handle the exception
+                }
+            '''
+            rule.catchOnSameLineAsClosingBrace = false
+            assertNoViolations(SOURCE)
+        }
+
     }
 
     @Override
@@ -114,7 +178,6 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase<BracesForTry
         BracesForTryCatchFinallyRule rule = new BracesForTryCatchFinallyRule()
         rule.validateCatch = true
         rule.validateFinally = true
-
-        rule
+        return rule
     }
 }

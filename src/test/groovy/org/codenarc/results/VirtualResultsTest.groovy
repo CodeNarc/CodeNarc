@@ -18,7 +18,7 @@ package org.codenarc.results
 import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Test for virtual results

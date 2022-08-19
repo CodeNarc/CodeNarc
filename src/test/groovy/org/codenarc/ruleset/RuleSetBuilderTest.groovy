@@ -22,8 +22,8 @@ import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.ruleregistry.RuleRegistry
 import org.codenarc.ruleregistry.RuleRegistryHolder
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -191,15 +191,6 @@ class RuleSetBuilderTest extends AbstractTestCase {
     }
 
     @Test
-    void testRule_Class_NoClosure_NullRuleClass() {
-        shouldFailWithMessageContaining('ruleClass') {
-            ruleSetBuilder.ruleset {
-                rule((Class)null)
-            }
-        }
-    }
-
-    @Test
     void testRule_Class_NoClosure_ClassDoesNotImplementRuleInterface() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
@@ -235,17 +226,6 @@ class RuleSetBuilderTest extends AbstractTestCase {
             ruleSetBuilder.ruleset {
                 rule(IllegalRegexRule) {
                     doesNotExist = 1
-                }
-            }
-        }
-    }
-
-    @Test
-    void testRule_Class_Closure_NullRuleClass() {
-        shouldFailWithMessageContaining('ruleClass') {
-            ruleSetBuilder.ruleset {
-                rule((Class)null) {
-                    priority = 1
                 }
             }
         }
@@ -395,7 +375,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
-    @Before
+    @BeforeEach
     void setUpRuleSetBuilderTest() {
         ruleSetBuilder = new RuleSetBuilder()
     }

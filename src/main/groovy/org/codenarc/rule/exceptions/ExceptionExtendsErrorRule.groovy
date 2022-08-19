@@ -15,26 +15,31 @@
  */
 package org.codenarc.rule.exceptions
 
+import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 
 /**
  * Errors are system exceptions. Do not extend them.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class ExceptionExtendsErrorRule extends AbstractAstVisitorRule {
+
     String name = 'ExceptionExtendsError'
     int priority = 2
     Class astVisitorClass = ExceptionExtendsErrorAstVisitor
 }
 
 class ExceptionExtendsErrorAstVisitor extends AbstractAstVisitor {
+
+    private final ClassNode errorClassNode = ClassHelper.make(Error)
+
     @Override
     protected void visitClassEx(ClassNode node) {
-        if (AstUtil.classNodeImplementsType(node, Error)) {
+        if (node.isDerivedFrom(errorClassNode) || node.superClass?.name == 'Error') {
             addViolation(node, "The class $node.name extends Error, which is meant to be used only as a system exception")
         }
         super.visitClassEx(node)

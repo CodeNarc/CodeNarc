@@ -16,7 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for EmptyTryBlockRule
@@ -44,6 +44,21 @@ class EmptyTryBlockRuleTest extends AbstractRuleTestCase<EmptyTryBlockRule> {
             }
         '''
         assertSingleViolation(SOURCE, 4, 'try {')
+    }
+
+    @Test
+    void testApplyTo_TryWithResources_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    try(FileReader reader = new FileReader("file.txt")) {
+                    } catch(MyException e) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'try(FileReader reader = new FileReader("file.txt"))')
     }
 
     @Test

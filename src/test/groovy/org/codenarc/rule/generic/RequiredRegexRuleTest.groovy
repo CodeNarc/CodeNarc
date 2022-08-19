@@ -18,7 +18,7 @@ package org.codenarc.rule.generic
 import static org.codenarc.test.TestUtil.containsAll
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for RequiredRegexRule

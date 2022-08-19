@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.grails
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.codenarc.rule.AbstractRuleTestCase
 
 /**
@@ -92,19 +92,19 @@ class GrailsDomainGormMethodsRuleTest extends AbstractRuleTestCase<GrailsDomainG
         '''
         assertViolations(SOURCE,
             [
-                    lineNumber: 16,
-                    sourceLineText: 'save()',
-                    messageText: 'Prefer GORM Data Services to GORM instance calls like \'save\'',
+                    line: 16,
+                    source: 'save()',
+                    message: 'Prefer GORM Data Services to GORM instance calls like \'save\'',
             ],
             [
-                    lineNumber: 24,
-                    sourceLineText: 'List<SomeEntity> entities = SomeEntity.list()',
-                    messageText: 'Prefer GORM Data Services to GORM static calls like \'list\'',
+                    line: 24,
+                    source: 'List<SomeEntity> entities = SomeEntity.list()',
+                    message: 'Prefer GORM Data Services to GORM static calls like \'list\'',
             ],
             [
-                    lineNumber: 26,
-                    sourceLineText: 'firstEntity.save()',
-                    messageText: 'Prefer GORM Data Services to GORM instance calls like \'save\'',
+                    line: 26,
+                    source: 'firstEntity.save()',
+                    message: 'Prefer GORM Data Services to GORM instance calls like \'save\'',
             ]
         )
     }
@@ -134,9 +134,9 @@ class GrailsDomainGormMethodsRuleTest extends AbstractRuleTestCase<GrailsDomainG
         '''
         assertViolations(SOURCE,
                 [
-                        lineNumber: 15,
-                        sourceLineText: 'SomeEntity.foobar()',
-                        messageText: 'Prefer GORM Data Services to GORM static calls like \'foobar\'',
+                        line: 15,
+                        source: 'SomeEntity.foobar()',
+                        message: 'Prefer GORM Data Services to GORM static calls like \'foobar\'',
                 ]
         )
     }
@@ -171,9 +171,9 @@ class GrailsDomainGormMethodsRuleTest extends AbstractRuleTestCase<GrailsDomainG
         '''
         assertViolations(SOURCE,
                 [
-                        lineNumber: 15,
-                        sourceLineText: 'SomeEntity.foobar()',
-                        messageText: 'Prefer GORM Data Services to GORM static calls like \'foobar\'',
+                        line: 15,
+                        source: 'SomeEntity.foobar()',
+                        message: 'Prefer GORM Data Services to GORM static calls like \'foobar\'',
                 ]
         )
     }

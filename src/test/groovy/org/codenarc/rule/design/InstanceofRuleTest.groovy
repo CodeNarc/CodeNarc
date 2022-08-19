@@ -16,7 +16,7 @@
 package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for InstanceofRule
@@ -53,7 +53,7 @@ class InstanceofRuleTest extends AbstractRuleTestCase<InstanceofRule> {
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'boolean isRunnable = this instanceof Runnable', messageText:'The instanceof operator is used in class MyClass'])
+            [line:3, source:'boolean isRunnable = this instanceof Runnable', message:'The instanceof operator is used in class MyClass'])
     }
 
     @Test
@@ -89,7 +89,7 @@ class InstanceofRuleTest extends AbstractRuleTestCase<InstanceofRule> {
         '''
         rule.ignoreTypeNames = 'SomeClass'
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'boolean isRunnable = this instanceof Runnable', messageText:'The instanceof operator is used in class MyClass'])
+            [line:3, source:'boolean isRunnable = this instanceof Runnable', message:'The instanceof operator is used in class MyClass'])
     }
 
     @Override

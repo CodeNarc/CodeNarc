@@ -16,7 +16,7 @@
 package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GrailsMassAssignmentRule
@@ -124,8 +124,8 @@ class GrailsMassAssignmentRuleTest extends AbstractRuleTestCase<GrailsMassAssign
             person2.properties = params
         '''
         assertViolations(SOURCE,
-            [lineNumber:7, sourceLineText:'def person = new Person(params)'],
-            [lineNumber:9, sourceLineText:'person2.properties = params'])
+            [line:7, source:'def person = new Person(params)'],
+            [line:9, source:'person2.properties = params'])
     }
 
     @Override

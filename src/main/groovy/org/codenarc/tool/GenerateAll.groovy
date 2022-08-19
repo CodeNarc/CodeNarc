@@ -30,7 +30,7 @@ class GenerateAll {
         GenerateCodeNarcRulesProperties.main(null)
         GenerateRuleSetAllRules.main(null)
         GenerateRuleSetAllRulesByCategory.main(null)
-        GenerateRuleIndexPage.main(null)
+        GenerateRuleIndexPages.main(null)
     }
 
 }

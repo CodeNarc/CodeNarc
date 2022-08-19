@@ -16,7 +16,7 @@
 package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for IllegalClassReferenceRule - checks for specifying a single class name for the classNames field

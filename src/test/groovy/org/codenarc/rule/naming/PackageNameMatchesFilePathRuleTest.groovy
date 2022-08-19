@@ -16,8 +16,8 @@
 package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for PackageMismatchesFilepathRule
@@ -26,7 +26,7 @@ import org.junit.Test
  */
 class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase<PackageNameMatchesFilePathRule> {
 
-    @Before
+    @BeforeEach
     void setup() {
         sourceCodePath = '/some/absolute/path/to/project/org/organization/project/component/module/MyClass.groovy'
         sourceCodeName = 'MyClass.groovy'

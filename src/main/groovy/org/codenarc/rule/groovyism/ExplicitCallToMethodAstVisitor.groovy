@@ -60,8 +60,16 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractMethodCallExpressi
         }
     }
 
+    // Allow subclasses to insert additional checks
+    protected boolean shouldIgnoreViolationForMethodCall(MethodCallExpression ignore) {
+        return false
+    }
+
     @SuppressWarnings('CatchThrowable')
     private void safelyAddViolation(MethodCallExpression call) {
+        if (shouldIgnoreViolationForMethodCall(call)) {
+            return
+        }
         try {
             addViolation call, getViolationMessage(call)
         } catch (Throwable t) {

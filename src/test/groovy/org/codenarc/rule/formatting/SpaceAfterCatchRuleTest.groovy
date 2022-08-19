@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SpaceAfterCatchRule
@@ -50,9 +50,9 @@ class SpaceAfterCatchRuleTest extends AbstractRuleTestCase<SpaceAfterCatchRule> 
                 Exception e) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'try { } catch(Exception e) { }', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:'try { } catch  (Exception e) { }', messageText:MESSAGE],
-            [lineNumber:4, sourceLineText:'try { } catch(', messageText:MESSAGE])
+            [line:2, source:'try { } catch(Exception e) { }', message:MESSAGE],
+            [line:3, source:'try { } catch  (Exception e) { }', message:MESSAGE],
+            [line:4, source:'try { } catch(', message:MESSAGE])
     }
 
     @Override

@@ -15,9 +15,8 @@
  */
 package org.codenarc.test
 
-import org.junit.Before
-import org.junit.Rule
-import org.junit.rules.TestName
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.TestInfo
 import org.slf4j.LoggerFactory
 
 /**
@@ -35,9 +34,6 @@ abstract class AbstractTestCase {
     @SuppressWarnings('FieldName')
     protected final LOG = LoggerFactory.getLogger(getClass())
 
-    @SuppressWarnings('PublicInstanceField')
-    @Rule public TestName testName = new TestName()
-
     /**
      * Write out the specified log message, prefixing with the current class name.
      * @param message - the message to log; toString() is applied first
@@ -47,17 +43,13 @@ abstract class AbstractTestCase {
         LOG.info message.toString()
     }
 
-    protected String getName() {
-        return testName.getMethodName()
-    }
-
     //------------------------------------------------------------------------------------
     // Test Setup and Tear Down
     //------------------------------------------------------------------------------------
 
-    @Before
-    void setUpAbstractTestCase() {
-        log "----------[ ${getName()} ]----------"
+    @BeforeEach
+    void setUpAbstractTestCase(TestInfo testInfo) {
+        log "----------[ ${testInfo.displayName} ]----------"
     }
 
 }

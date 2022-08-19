@@ -13,6 +13,10 @@ title: CodeNarc - Integration with Other Tools / Frameworks
 
   * [Visual Studio Code](https://code.visualstudio.com/) - See the [VsCode Groovy Lint extension](https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint).
 
+## Docker
+
+See [CodeNarc - Docker](./codenarc-docker.html).
+
 ## Application Frameworks
 
   * [Grails](http://grails.org/) - See the [Grails CodeNarc Plugin](http://www.grails.org/plugin/codenarc/) for Grails 2.x.

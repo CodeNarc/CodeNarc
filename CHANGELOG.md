@@ -1,12 +1,163 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO Next Version 2.0?    (??? 2020)
+NOTE: CodeNarc now provides a separate **CodeNarc-Groovy4** artifact for use with Groovy 4.x.
+
+Version 3.x.x    (??? 2022)
 --------------------------------------
+ - Create GitHub Action "gradle.yml" to build+test on push or PR.
+ - #708: Include internal results for files without violations, to enable accurate baseline reporting. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+
+
+Version 3.1.0    (Jun 2022)
+--------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+ - #688: **SpaceAfterMethodCallName** rule: Fix false positives. NOTE: No longer check method calls without parentheses.
+ - #703: **UnnecessaryPublicModifier** rule: Fix PatternSyntaxException if method name contains special (regex) characters.
+ - #702: **Indentation** rule: Fix false positive for try-with-resources. Also skip generated code and single-line blocks.
+ - #692: **UnusedPrivateField**: Ignore classes annotated with @Entity. Add *ignoreClassesAnnotatedWithNames* property.
+
+Build, Infrastructure and Tests
+- #709: Publish Groovy 4.x-specific jar for CodeNarc. Upgrade to GMetrics 2.1.0.
+- #705: Make SourceFileTest more multi-platform friendly. ([Paul King](https://github.com/paulk-asert))
+
+
+Version 3.0.1    (Apr 2022)
+--------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+ - #683: **UnnecessaryPublicModifier**: Fix StringIndexOutOfBoundsException.
+ - #686: **SpaceAfterMethodCallName**: Fix handling methods with special characters.
+ - #687: **SpaceAfterMethodCallName**: Fix handling methods with special chars. ([René Scheibe](https://github.com/darxriggs))
+ - #699: **UnusedImportRule**: Detect property-style usage of static imports. ([Leonard Brünings](https://github.com/leonard84))
+
+Build, Infrastructure and Tests
+ - #680: Add WARN message to remove "enhanced" rules from the ruleset if a compilation error occurs for a non-default compiler phase. Update docs to list "enhanced" rules.
+ - #681: Upgrade Gradle wrapper to Gradle 7.4.1.
+ - #679: Use XmlParserFactory for Groovy 4 compatibility. ([Paul King](https://github.com/paulk-asert))
+ - #682: Support Groovy 4.0.
+ - #694: Test refactoring. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+ - #689: Deterministic baseline report; Don't write timestamp; Sort entries by file path.([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+ - #685: Fix running tests from Gradle. ([René Scheibe](https://github.com/darxriggs))
+ - #700: Change CodeNarc URL in reports to "https://codenarc.org" (fix untrusted SSL certificate).
+
+
+Version 3.0.0    (Mar 2022)
+--------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+ - #651: **MissingOverrideAnnotation**: Ignore private superclass methods.
+ - #652: **ClassStartsWithBlankLine**: Fix NPE on annotated class with no following line at end of source file.
+ - #653: **UseCollectNested**: Fix false positive when inner `collect()` call returns a different type.
+ - #650: **UnnecessaryPublicModifier**: Fix false positive with annotations.
+ - #657: **SpaceAfterMethodCallName**: Fix wrong line number for multi-line method calls.
+ - #661: **GStringExpressionWithinString**: Fix MissingMethodException for some annotations. ([Damir Murat](https://github.com/dmurat))
+ - #663: **MissingBlankLineBeforeAnnotatedField**: Fix false positive for annotation followed by inline comment. ([Damir Murat](https://github.com/dmurat))
+ - #667: **TrailingComma**: Fix StringIndexOutOfBoundsException.
+ - #670: **JUnitPublicNonTestMethod**, **JUnitTestMethodWithoutAssert**: Also treat JUnit 5.x @org.junit.jupiter.api.Test as a test method.
+ - #670: **JUnitAssertEqualsConstantActualValue**: Support JUnit 5 `Assertions.assertEquals()`.
+ - #671: **StaticMethodsBeforeInstanceMethods**: Ignore generated instance methods.
+ - #672: **EmptyTryBlock**: Also support try-with-resources.
+ - #675: **ExceptionExtendsError**: Exclude interfaces and classes that implement an "Error" interface. 
+ - #675: **ExceptionExtendsThrowable**: Exclude interfaces and classes that implement a "Throwable" interface.
+ - #676: **BracesForTryCatchFinally**: Fix false positive from try-with-resources.
+ - #677: **UnnecessarySetter**: Fix false positive when the setter return value is used in a nested expression.
+ - #656: Remove deprecated **UnnecessarySubstring** rule.
+ - #664: Remove hacks and workarounds required for Groovy 1.x and 2.x.
+
+Build and Infrastructure
+ - [BREAKING CHANGE] Requires Java 8 and Groovy 3.x.
+ - #654: Upgrade to Groovy 3.0.9. Groovy 2.x will no longer be supported.
+ - #665: Upgrade to GMetrics 2.0.0.
+ - #665: Upgrade to SLF4J 1.7.35.
+ - #666: Upgrade to JUnit 5.8. Upgrade test framework and all tests to use JUnit 5.
+ - #673: Add support for the *excludeBaseline* parameter for the CodeNarc command-line. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+ - #668: Add support for the *failOnError* parameter for the CodeNarc command-line.
+ - #649: Support for description inside CodeNarc enable/disable comments. ([davidkron](https://github.com/davidkron))
+ - #664: `AstUtil`: Simplify `findFirstNonAnnotationLine()` last annotation logic and check for “class” within the line if it is a ClassNode. Simplify `getAnnotation()`.
+
+
+Version 2.2.0    (Aug 2021)
+--------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+ - #607: **AssignCollectionSort**: Fix the violation message. ([Vladimir Orany](https://github.com/musketyr))
+ - #635: **BracesForMethod**: Allow braces on the next line for multi-line declarations. New *allowBraceOnNextLineForMultilineDeclarations* rule property. ([Damir Murat](https://github.com/dmurat))
+ - #638: **ClassStartsWithBlankLine**: Fix false positive if interface/class declaration takes more than 1 line.
+ - #629: **ClosureAsLastMethodParameter**: Add *ignoreCallsToMethodNames* property.
+ - #631: **ClosureAsLastMethodParameter**: Fix false positive when using Groovy 3 Lambda syntax.
+ - #623: **ExplicitCallToDivMethod**: Ignore `dev()` method calls if argument is a Map, Closure or String.
+ - #646: **IllegalStringRule**: Return actual line number containing (first) matching string in violation.
+ - #626: **Indentation**: Fix ArrayIndexOutOfBoundsException: -2 for generated method calls.
+ - #624: **JUnitPublicNonTestMethod**: Fix false positive for @ParameterizedTest.
+ - #606: **MissingBlankLineBeforeAnnotatedField**: Ignore fields that start on the first line of the class.
+ - #633: **MissingBlankLineBeforeAnnotatedField** false positive at the top of an annotated class. ([Damir Murat](https://github.com/dmurat))
+ - #644: **NoTabCharacter**: Return actual line number containing (first) tab character in violation.
+ - #618: **ReturnsNullInsteadOfEmptyCollection**: Fix false positive in nested closure.
+ - #639: **SerializableClassMustDefineSerialVersionUID**: Ignore interfaces.
+ - #634: **SpaceAfterClosingBrace** and **SpaceBeforeClosingBrace**: Fix false positives with annotated methods. ([Damir Murat](https://github.com/dmurat))
+ - #608: **SpaceAfterMethodCallName**: Fix ArrayIndexOutOfBoundsException.
+ - #627: **SpaceAfterMethodCallName**: Skip method calls with a single Lambda argument.
+ - #645: **SpaceAfterMethodCallName**: Fix false positive if method parameters include parentheses.
+ - #609: **SpaceInsideParentheses**: Fix false-positive inside slashy strings (regular expressions).
+ - #613: **SpaceInsideParentheses**: Fix false positive for parentheses within multi-line comments.
+ - #620: **UnusedImportRule**: Ignore generated imports. Fix #619. ([Søren Berg Glasius](https://github.com/sbglasius))
+
+Build and Infrastructure
+ - #610: Allow “CodeNarc.” prefix in @SuppressWarnings. ([Vladimir Orany](https://github.com/musketyr))
+ - #643: `AbstractAstVisitor`: Add `isGeneratedCode(ASTNode)` and `isNotGeneratedCode(ASTNode)`.
+
+Documentation
+ - #640: **PackageName**: Fix parameter table for rule documentation. ((Mathias Åhsberg)[https://github.com/goober])
+
+
+Version 2.1.0    (Apr 2021)
+--------------------------------------
+New Rules
+ - #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))
+ - #586: New **SpaceAfterMethodCallName** rule (formatting) - Checks that there is no whitespace after the method name when a method call contains parenthesis or that there is at most one space after the method name if the call does not contain parenthesis. ([Marcin Erdmann](https://github.com/erdi))
+ - #584: New **SpaceAfterMethodDeclarationName** rule (formatting) - Checks whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis for parameter list. ([Marcin Erdmann](https://github.com/erdi))
+ - #582: New **MissingBlankLineBeforeAnnotatedField** rule (formatting) - Checks that there is a blank line before a field declaration that uses annotations. ([Marcin Erdmann](https://github.com/erdi))
+ - #592: New **SpaceInsideParentheses** rule (formatting) - Check for whitespace after opening parentheses and before closing parentheses.
+ - #604: New **ParameterAssignmentInFilterClosure** rule (basic) - An assignment operator was used on a parameter in a filtering closure. This is usually a typo, and the comparison operator (==) was intended.
 
 Updated/Enhanced Rules and Bug Fixes
- - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). [BREAKING CHANGE]
- - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'. [BREAKING CHANGE]
+ - #567: **SpaceAfterComma** rule: Do not assume that expression's column number will always be set. ([Marcin Erdmann](https://github.com/erdi))
+ - #571: Support Groovy 3.0.6 and fix test failures.
+ - #576: **EmptyMethod** rule: Ignore pointcuts for empty methods. ([Thomas Lefèvre](https://github.com/tlefevre))
+ - #562: Deprecate the **UnnecessarySubstring** rule. Its recommendation to use subscripts on strings is not always safe/valid.
+ - #578: **UnusedPrivateField** rule: Add ability to raise violations for fields which are only used within constructors. ([Marcin Erdmann](https://github.com/erdi))
+ - #561: **VariableName** rule: Ignore variables with the `@Field` annotation.
+ - #590: **ClassStartsWithBlankLine**: Fix NullPointerException on single-line class at very end of file (no newline).
+ - #599: **SpaceAfterComma**: Fix false positive if source line contains Emoji (non-ASCII chars) on Groovy 3.
+ - #603: **BracesForMethod**: Fix false positive on Groovy 3.0.7 for multi-line method declarations.
+ - #577: **UnusedMethodParameter**: Ignore methods annotated with @Pointcut. 
+
+Build and Infrastructure
+ - #574: CodeNarc command-line: Support `-properties` command-line argument to specify name/location for "codenarc.properties" file.
+ - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
+ - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
+ - #589: Upgrade to Groovy 2.5.14 (minor patch release), to address CVE-2020-17521. Note: CodeNarc does not use any of the vulnerable Groovy components.
+ - #593: Command-line: Catch exception during rule processing, log error message with rule/filename and keep going.
+ - #601: Publish Javadocs. <https://javadoc.io/doc/org.codenarc/CodeNarc>
+ - #569: Adding the Compact Text Report Writer. ([Luís Zimmermann](https://github.com/luiszimmermann)) 
+ - #598: JSON RuleSet: Fixed NPE, added some logging for an invalid rule name.
+ - #605: `AbstractRuleTestCase`: Provide aliases for `assertViolations` Map keys: *lineNumber = line, sourceLineText = source, messageText = message*.
+
+Documentation
+ - #594: Fix a typo in online docs for **Instanceof**, changing "*Exceptions" to "*Exception".  ([qxo](https://github.com/qxo))
+
+Version 2.0.0    (Oct 2020)
+--------------------------------------
+
+New Rules
+- #548: New **OptionalField** rule (design) - Do not use an Optional as a field type.
+- #549: New **OptionalMethodParameter** rule (design) - Do not use an Optional as a parameter type for a method or constructor.
+- #550: New **OptionalCollectionReturnType** rule (design) - Do not declare a method return type of `Optional<List>` (or `Collection`, `ArrayList`, `Set`, `Map`, `HashMap`, etc.). Return an empty collection instead.
+
+Updated/Enhanced Rules and Bug Fixes
+ - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). See **VariableName** [Note](https://codenarc.github.io/CodeNarc/codenarc-rules-naming.html#variablename-rule) [BREAKING CHANGE]
+ - #497: **NoDef** rule: Also check fields. The `excludeRegex` no longer requires (or expects) a method name to include '()'. [BREAKING CHANGE]
+ - #487: **UnusedMethodParameter** rule: Also check for unused parameters of constructors. [BREAKING CHANGE]
+ - #487: **UnusedPrivateMethodParameter** rule: Also check for unused parameters of constructors. [BREAKING CHANGE]
+ - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`. [BREAKING CHANGE]
  - #518: **MissingBlankLineAfterImports** rule: Fix to add support for all import types. ([René Scheibe](https://github.com/darxriggs))
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
@@ -16,11 +167,12 @@ Updated/Enhanced Rules and Bug Fixes
  - #534: **UnnecessarySemicolon** rule: Fix no violation in Groovy 3 if there is a space between code and the semicolon.
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
  - #536: **Indentation** rule: Method chaining improvements. ([Damir Murat](https://github.com/dmurat))
- - #540: **Indentation** rule: Fix false positive violation on inline anonymous classes. 
- - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
-
+ - #540: **Indentation** rule: Fix false positive violation on inline anonymous classes.
+ - #551: **TrailingWhitespace** rule: Optimize execution time.
+ - #556: **CodeNarcTask**: Close `URLClassLoader`.
+ 
 CodeNarc Plugin Mechanism
- - #494: New `CodeNarcPlugin` 
+ - #494: New `CodeNarcPlugin`
      * Add *plugins* property to the CodeNarc Ant Task (`CodeNarcTask`) and `-plugins` parameter to the command-line.
      * `CodeNarcRunner`: Apply plugins for rules, violations and reports. Register any plugin classes specified by the "org.codenarc.plugins" system property.
      * Add `sourceCode` property to `FileResults`; set it from `FilesystemSourceAnalyzer` and `AntFileSetSourceAnalyzer`.
@@ -29,6 +181,10 @@ CodeNarc Plugin Mechanism
 Disabling Rules From Comments
  - #156: Disable rules by specifying `codenarc-disable` in a comment; optionally re-enable by specifying `codenarc-enable` on a subsequent line. Disable rules for the current line with `codenarc-disable-line`.
 
+RuleSets
+ - #554: Allow using RuleSets in JSON format. ([Nicolas Vuillamy](https://github.com/nvuillam))
+ - #557: Command-line: Add a new *ruleset* parameter, to allow specifying a JSON RuleSet as a string. ([Nicolas Vuillamy](https://github.com/nvuillam))
+
 Framework and Infrastructure
  - #525: Upgrade to Groovy 2.5.12. [BREAKING CHANGE]
  - #525: Support Java 14. Upgrade Java source/target compatibility to 1.7. [BREAKING CHANGE]
@@ -36,6 +192,14 @@ Framework and Infrastructure
  - #519: Update Gradle wrapper to 6.5. ([René Scheibe](https://github.com/darxriggs))
  - #520: Update Gradle publishing mechanism. ([René Scheibe](https://github.com/darxriggs))
  - #496: Switched CodeNarc website to publish from `gh-pages` branch.
+
+Documentation
+ - #533: Update command-line instructions to use newer version of Groovy and other jars. Add a section on running with Gradle.
+
+Version 1.6.1    (Aug 2020)
+--------------------------------------
+
+ - #534: **UnnecessarySemicolon** rule: Fix no violation in Groovy 3 if there is a space between code and the semicolon.
 
 Version 1.6    (Jun 2020)
 --------------------------------------
@@ -313,6 +477,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #223: **UnusedVariable**: Don't count variable assignment as a reference (usage).
    - #230: **NoDef**: ClassCastException: ArgumentListExpression cannot be cast to VariableExpression.
    - #226: **UnusedPrivateField** rule should ignore fields annotated with `groovy.lang.Delegate`.
+   - #560: **UnnecessarySetter**: Use Groovy 2.4+ AST to improve violation message. 
 
 Framework and Infrastructure
    - #228: [BREAKING CHANGE] Upgrade to Groovy 2.3.
@@ -1537,4 +1702,4 @@ Version 0.1 (24 Jan 2009)
 
  - Initial release. Includes 16 Rules; HtmlReportWriter; CodeNarcAntTask, DirectorySourceAnalyzer; XML RuleSets, etc..
 
-<http://www.codenarc.org>
+<https://codenarc.org/>

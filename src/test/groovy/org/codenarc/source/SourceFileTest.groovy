@@ -16,8 +16,8 @@
 package org.codenarc.source
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFail
 
@@ -104,8 +104,10 @@ class SourceFileTest extends AbstractTestCase {
     void testGetLineNumberForCharacterIndex() {
         assert sourceFile.getLineNumberForCharacterIndex(0) == 1
         assert sourceFile.getLineNumberForCharacterIndex(1) == 1
-        assert sourceFile.getLineNumberForCharacterIndex(19) == 2
-        assert sourceFile.getLineNumberForCharacterIndex(20) == 3
+        // depending on platform and git settings during checkout, source test file may contain CRLF
+        int sepSize = System.lineSeparator().length()
+        assert sourceFile.getLineNumberForCharacterIndex(19) == 2 || sourceFile.getLineNumberForCharacterIndex(18 + sepSize) == 2
+        assert sourceFile.getLineNumberForCharacterIndex(20) == 3 || sourceFile.getLineNumberForCharacterIndex(18 + sepSize * 2) == 3
         assert sourceFile.getLineNumberForCharacterIndex(999) == -1
         assert sourceFile.getLineNumberForCharacterIndex(-1) == -1
     }
@@ -116,7 +118,7 @@ class SourceFileTest extends AbstractTestCase {
         assert !new SourceFile(new File(INVALID_FILE)).valid
     }
 
-    @Before
+    @BeforeEach
     void setUpSourceFileTest() {
         file = new File(FILE)
         sourceFile = new SourceFile(file)

@@ -17,12 +17,13 @@ package org.codenarc.rule.enhanced
 
 import org.codehaus.groovy.control.Phases
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for MissingOverrideAnnotationRule
  *
  * @author Marcin Erdmann
+ * @author Chris Mair
  */
 class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOverrideAnnotationRule> {
 
@@ -62,9 +63,7 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOver
                 }
             }
         '''
-
-        assertSingleViolation(SOURCE, 8, 'String superClassMethod(String value) {',
-            '''Method 'superClassMethod' is overriding a method in 'SuperClass' but is not annotated with @Override.''')
+        assertSingleViolation(SOURCE, 8, 'String superClassMethod(String value) {', message('superClassMethod', 'SuperClass'))
     }
 
     @Test
@@ -94,9 +93,7 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOver
                 }
             }
         '''
-
-        assertSingleViolation(SOURCE, 7, 'void interfaceMethod(String stringValue, Object objectValue) {',
-            '''Method 'interfaceMethod' is overriding a method in 'ImplementedInterface' but is not annotated with @Override.''')
+        assertSingleViolation(SOURCE, 7, 'void interfaceMethod(String stringValue, Object objectValue) {', message('interfaceMethod', 'ImplementedInterface'))
     }
 
     @Test
@@ -140,21 +137,9 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOver
             }
         '''
         assertViolations(SOURCE,
-            [
-                lineNumber    : 14,
-                sourceLineText: 'String superClassMethod(String value) {',
-                messageText   : '''Method 'superClassMethod' is overriding a method in 'SuperClass' but is not annotated with @Override.'''
-            ],
-            [
-                lineNumber    : 17,
-                sourceLineText: 'void interfaceMethod(String stringValue, Object objectValue) {',
-                messageText   : '''Method 'interfaceMethod' is overriding a method in 'ImplementedInterface' but is not annotated with @Override.'''
-            ],
-            [
-                lineNumber    : 20,
-                sourceLineText: 'String toString() {',
-                messageText   : '''Method 'toString' is overriding a method in 'java.lang.Object' but is not annotated with @Override.'''
-            ]
+            [line: 14, source: 'String superClassMethod(String value) {', message: message('superClassMethod', 'SuperClass')],
+            [line: 17, source: 'void interfaceMethod(String stringValue, Object objectValue) {', message: message('interfaceMethod', 'ImplementedInterface')],
+            [line: 20, source: 'String toString() {', message: message('toString', 'java.lang.Object')]
         )
     }
 
@@ -175,18 +160,9 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOver
 
             }
         '''
-
         assertViolations(SOURCE,
-            [
-                lineNumber    : 7,
-                sourceLineText: 'void run() {',
-                messageText   : '''Method 'run' is overriding a method in 'java.lang.Runnable' but is not annotated with @Override.'''
-            ],
-            [
-                lineNumber    : 11,
-                sourceLineText: 'String call() {',
-                messageText   : '''Method 'call' is overriding a method in 'java.util.concurrent.Callable' but is not annotated with @Override.'''
-            ]
+            [line: 7, source: 'void run() {', message: message('run', 'java.lang.Runnable')],
+            [line: 11, source: 'String call() {', message: message('call', 'java.util.concurrent.Callable')]
         )
     }
 
@@ -224,9 +200,7 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOver
                 }
             }
         '''
-
-        assertSingleViolation(SOURCE, 7, 'void run() {',
-            '''Method 'run' is overriding a method in 'java.lang.Runnable' but is not annotated with @Override.''')
+        assertSingleViolation(SOURCE, 7, 'void run() {', message('run', 'java.lang.Runnable'))
     }
 
     @Test
@@ -260,13 +234,31 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOver
                 }
             }
         '''
-
         assertSingleViolation(SOURCE, 11, 'void run(String first = "", String second = "") {',
-            '''Method 'run' is overriding a method in 'FirstInterface', 'SecondInterface', 'java.lang.Runnable' but is not annotated with @Override.''')
+                message('run', "FirstInterface', 'SecondInterface', 'java.lang.Runnable"))
+    }
+
+    @Test
+    void testPrivateMethodInSubclassWithSameName_NoViolations() {
+        final SOURCE = '''
+            class SuperClass {
+                private doStuff() {}
+            }
+            
+            class SubClass extends SuperClass {
+                private doStuff() {}
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override
     protected MissingOverrideAnnotationRule createRule() {
         new MissingOverrideAnnotationRule()
     }
+
+    private String message(String methodName, String className) {
+        return "Method '$methodName' is overriding a method in '$className' but is not annotated with @Override."
+    }
+
 }

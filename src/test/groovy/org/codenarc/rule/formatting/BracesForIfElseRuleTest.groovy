@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for BracesForIfElseRule
@@ -121,14 +121,14 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase<BracesForIfElseRule> 
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 40, sourceLineText: 'if(1==1)',                 messageText: "Opening brace should be on the same line as 'if'"],
-                [lineNumber: 43, sourceLineText: 'else if (2==2)',           messageText: "'else' should be on the same line as the closing brace"],
-                [lineNumber: 43, sourceLineText: 'else if (2==2)',           messageText: "Opening brace should be on the same line as 'if'"],
-                [lineNumber: 47, sourceLineText: '{',                        messageText: "'else' should be on the same line as the closing brace"],
-                [lineNumber: 47, sourceLineText: '{',                        messageText: "Opening brace should be on the same line as 'else'"],
-                [lineNumber: 50, sourceLineText: 'if (3==3)',                messageText: "Opening brace should be on the same line as 'if'"],
-                [lineNumber: 74, sourceLineText: 'if (list.any { it > 1 })', messageText: "Opening brace should be on the same line as 'if'"],
-                [lineNumber: 83, sourceLineText: 'if (list.size > 5',        messageText: "Opening brace should be on the same line as 'if'"])
+                [line: 40, source: 'if(1==1)',                 message: "Opening brace should be on the same line as 'if'"],
+                [line: 43, source: 'else if (2==2)',           message: "'else' should be on the same line as the closing brace"],
+                [line: 43, source: 'else if (2==2)',           message: "Opening brace should be on the same line as 'if'"],
+                [line: 47, source: '{',                        message: "'else' should be on the same line as the closing brace"],
+                [line: 47, source: '{',                        message: "Opening brace should be on the same line as 'else'"],
+                [line: 50, source: 'if (3==3)',                message: "Opening brace should be on the same line as 'if'"],
+                [line: 74, source: 'if (list.any { it > 1 })', message: "Opening brace should be on the same line as 'if'"],
+                [line: 83, source: 'if (list.size > 5',        message: "Opening brace should be on the same line as 'if'"])
     }
 
     @Test
@@ -137,14 +137,14 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase<BracesForIfElseRule> 
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 28, sourceLineText: 'if(1==1) {',                 messageText: "Opening brace should not be on the same line as 'if'"],
-                [lineNumber: 29, sourceLineText: '} else if(2==2) {',          messageText: "'else' should not be on the same line as the closing brace"],
-                [lineNumber: 29, sourceLineText: '} else if(2==2) {',          messageText: "Opening brace should not be on the same line as 'if'"],
-                [lineNumber: 30, sourceLineText: '} else{',                    messageText: "'else' should not be on the same line as the closing brace"],
-                [lineNumber: 30, sourceLineText: '} else{',                    messageText: "Opening brace should not be on the same line as 'else'"],
-                [lineNumber: 33, sourceLineText: 'if (3==3){',                 messageText: "Opening brace should not be on the same line as 'if'"],
-                [lineNumber: 52, sourceLineText: 'if (list.any { it > 1 }) {', messageText: "Opening brace should not be on the same line as 'if'"],
-                [lineNumber: 58, sourceLineText: 'if (list.size > 5',          messageText: "Opening brace should not be on the same line as 'if'"])
+                [line: 28, source: 'if(1==1) {',                 message: "Opening brace should not be on the same line as 'if'"],
+                [line: 29, source: '} else if(2==2) {',          message: "'else' should not be on the same line as the closing brace"],
+                [line: 29, source: '} else if(2==2) {',          message: "Opening brace should not be on the same line as 'if'"],
+                [line: 30, source: '} else{',                    message: "'else' should not be on the same line as the closing brace"],
+                [line: 30, source: '} else{',                    message: "Opening brace should not be on the same line as 'else'"],
+                [line: 33, source: 'if (3==3){',                 message: "Opening brace should not be on the same line as 'if'"],
+                [line: 52, source: 'if (list.any { it > 1 }) {', message: "Opening brace should not be on the same line as 'if'"],
+                [line: 58, source: 'if (list.size > 5',          message: "Opening brace should not be on the same line as 'if'"])
     }
 
     @Test

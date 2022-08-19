@@ -16,7 +16,7 @@
 package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for IllegalClassMemberRule
@@ -75,8 +75,8 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase<IllegalClassMember
         '''
         rule.illegalFieldModifiers = 'public static, protected'
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'protected field2', messageText:'field2'],
-            [lineNumber:6, sourceLineText:'public static final FIELD4', messageText:'FIELD4'])
+            [line:4, source:'protected field2', message:'field2'],
+            [line:6, source:'public static final FIELD4', message:'FIELD4'])
     }
 
     @Test
@@ -89,8 +89,8 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase<IllegalClassMember
         '''
         rule.allowedFieldModifiers = 'public final, private, protected static'
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'public field1', messageText:'field1'],
-            [lineNumber:4, sourceLineText:'protected field2', messageText:'field2'])
+            [line:3, source:'public field1', message:'field1'],
+            [line:4, source:'protected field2', message:'field2'])
     }
 
     // Properties
@@ -106,7 +106,7 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase<IllegalClassMember
         '''
         rule.illegalPropertyModifiers = 'final'
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'final property2', messageText:'property2'])
+            [line:4, source:'final property2', message:'property2'])
     }
 
     @Test
@@ -120,8 +120,8 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase<IllegalClassMember
         '''
         rule.allowedPropertyModifiers = 'static'
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'def property1', messageText:'property1'],
-            [lineNumber:4, sourceLineText:'final property2', messageText:'property2'])
+            [line:3, source:'def property1', message:'property1'],
+            [line:4, source:'final property2', message:'property2'])
     }
 
     // Methods
@@ -138,8 +138,8 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase<IllegalClassMember
         '''
         rule.illegalMethodModifiers = 'public static, protected'
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'protected method2()', messageText:'method2'],
-            [lineNumber:6, sourceLineText:'public static final method4()', messageText:'method4'])
+            [line:4, source:'protected method2()', message:'method2'],
+            [line:6, source:'public static final method4()', message:'method4'])
     }
 
     @Test
@@ -152,8 +152,8 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase<IllegalClassMember
         '''
         rule.allowedMethodModifiers = 'public final, private, protected static'
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'public method1()', messageText:'method1'],
-            [lineNumber:4, sourceLineText:'protected method2', messageText:'method2'])
+            [line:3, source:'public method1()', message:'method1'],
+            [line:4, source:'protected method2', message:'method2'])
     }
 
     @Test

@@ -15,13 +15,14 @@
  */
 package org.codenarc.rule.formatting
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ClassStartsWithBlankLineRule
  *
  * @author David Ausín
+ * @author Chris Mair
  */
 @SuppressWarnings('TrailingWhitespace')
 class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {
@@ -30,7 +31,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     private static final String VIOLATION_MISSING_BLANK_LINE = 'Class does not start with a blank line after the opening brace'
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ClassStartsWithBlankLine'
         assert rule.ignoreSingleLineClasses == true
@@ -39,7 +40,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithSingleClassWhenBlankLineIsRequired() {
+    void test_BlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
             
@@ -55,7 +56,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithInterfaceClassWhenBlankLineIsRequired() {
+    void test_InterfaceClass_BlankLineIsRequired() {
         final String SOURCE = '''
             interface Foo {
             
@@ -68,7 +69,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithSingleClassWhenBlankLineIsNotRequired() {
+    void test_BlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
             
@@ -83,7 +84,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithInterfaceWhenBlankLineIsNotRequired() {
+    void test_Interface_BlankLineIsNotRequired() {
         final String SOURCE = '''
             interface Foo {
                 
@@ -96,7 +97,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndBlankLineIsRequired() {
+    void test_BraceIsNotInANewLine_BlankLineIsRequired() {
         final String SOURCE = '''
         class Foo 
         {  int a
@@ -110,7 +111,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithCommentLineWhenBlankLineIsRequired() {
+    void test_CommentLine_BlankLineIsRequired() {
         final String SOURCE = '''
         interface Foo {
             // some comment
@@ -123,7 +124,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithInterfaceWhenBlankLineIsRequired() {
+    void test_Interface_BlankLineIsRequired() {
         final String SOURCE = '''
         interface Foo {
             void hi()
@@ -134,7 +135,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithSingleClassWhenBraceIsNotInANewLineAndBlankLineIsNotRequired() {
+    void test_BraceIsNotInANewLine_BlankLineIsNotRequired() {
         final String SOURCE = '''
         class Foo { int a
             
@@ -147,23 +148,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationWithSingleClassWhenBlankLineIsNotRequired() {
-        final String SOURCE = '''
-            class Foo {
-                
-                int a
-                
-                void hi() {
-                }
-
-            }
-        '''
-        rule.blankLineRequired = false
-        assertSingleViolation(SOURCE, 3, '')
-    }
-
-    @Test
-    void testNoViolationsWithSeveralClassesWhenBlankLineIsRequired() {
+    void test_SeveralClasses_BlankLineIsRequired_NoViolations() {
         final String SOURCE = '''
             class Foo {
             
@@ -184,7 +169,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithSeveralClassesWhenBlankLineIsNotRequired() {
+    void test_SeveralClasses_BlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
            
@@ -202,12 +187,12 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = false
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED],
-                [lineNumber: 9, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
+                [line: 3, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED],
+                [line: 9, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
-    void testViolationWithSeveralClassesWhenBlankLineIsRequired() {
+    void test_SeveralClasses_BlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -225,12 +210,12 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = true
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
-                [lineNumber: 10, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
+                [line: 3, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE],
+                [line: 10, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
-    void testNoViolationWithSeveralClassesWhenBlankLineIsNotRequired() {
+    void test_SeveralClasses_BlankLineIsNotRequired_NoViolations() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -251,7 +236,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithNonStaticInnerClassesWhenBlankLineIsRequired() {
+    void test_NonStaticInnerClasses_BlankLineIsRequired_NoViolations() {
         final String SOURCE = '''
             class Foo {
             
@@ -275,7 +260,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithNonStaticInnerClassesWhenBlankLineIsNotRequired() {
+    void test_NonStaticInnerClasses_BlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
             
@@ -294,12 +279,12 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = false
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED],
-                [lineNumber: 8, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
+                [line: 3, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED],
+                [line: 8, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
-    void testViolationsWithNonStaticInnerClassesWhenBlankLineIsRequired() {
+    void test_NonStaticInnerClasses_BlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -317,12 +302,12 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = true
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
-                [lineNumber: 9, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
+                [line: 3, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE],
+                [line: 9, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
-    void testNoViolationsWithStaticInnerClassesWhenBlankLineIsRequired() {
+    void test_StaticInnerClasses_BlankLineIsRequired_NoViolations() {
         final String SOURCE = '''
             class Foo {
             
@@ -346,7 +331,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithStaticInnerClassesWhenBlankLineIsNotRequired() {
+    void test_StaticInnerClasses_BlankLineIsNotRequired_NoViolations() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -366,7 +351,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithStaticInnerClassesWhenBlankLineIsRequired() {
+    void test_StaticInnerClasses_BlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -384,12 +369,12 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = true
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
-                [lineNumber: 9, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
+                [line: 3, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE],
+                [line: 9, source: 'int a', message: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
-    void testViolationsWithStaticInnerClassesWhenBlankLineIsNotRequired() {
+    void test_StaticInnerClasses_BlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -410,11 +395,11 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = false
         assertViolations(SOURCE,
-                [lineNumber: 9, sourceLineText: ' ', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
+                [line: 9, source: '', message: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
-    void testNoViolationsWithSingleLineClassesIgnoredWhenBlankLineIsRequired() {
+    void test_SingleLineClassesIgnored_BlankLineIsRequired() {
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -427,7 +412,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithSingleLineClassesIgnoredWhenBlankLineIsNotRequired() {
+    void test_SingleLineClassesIgnored_BlankLineIsNotRequired() {
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -440,7 +425,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithSingleLineClassesNotAllowedWhenBlankLineIsRequired() {
+    void test_SingleLineClassesNotAllowed_BlankLineIsRequired() {
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -451,13 +436,13 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.ignoreSingleLineClasses = false
         rule.blankLineRequired = true
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'class Foo extends Bar<String> { }', messageText: 'Single line classes are not allowed'],
-                [lineNumber: 5, sourceLineText: 'class Doe extends Bar<String> { }', messageText: 'Single line classes are not allowed'],
-                [lineNumber: 6, sourceLineText: 'abstract class John  { abstract void a() }', messageText: 'Single line classes are not allowed'])
+                [line: 3, source: 'class Foo extends Bar<String> { }', message: 'Single line classes are not allowed'],
+                [line: 5, source: 'class Doe extends Bar<String> { }', message: 'Single line classes are not allowed'],
+                [line: 6, source: 'abstract class John  { abstract void a() }', message: 'Single line classes are not allowed'])
     }
 
     @Test
-    void testNoViolationsWithSingleLineClassesNotAllowedWhenBlankLineIsNotRequired() {
+    void test_SingleLineClassesNotAllowed_BlankLineIsNotRequired() {
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -471,7 +456,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithAnonymousClassesWhenBlankLineIsRequired() {
+    void test_AnonymousClasses_BlankLineIsRequired_NoViolations() {
         final String SOURCE = '''
             class Foo { 
             
@@ -489,7 +474,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithAnonymousClassesWhenBlankLineIsNotRequired() {
+    void test_AnonymousClasses_BlankLineIsNotRequired_NoViolations() {
         final String SOURCE = '''
             class Foo { Bar a = new Bar() {
                     @Override
@@ -504,7 +489,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithAnonymousClassesWhenBlankLineIsRequired() {
+    void test_AnonymousClasses_BlankLineIsRequired() {
         final String SOURCE = '''
             class Foo { 
             
@@ -522,7 +507,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithAnonymousClassesWhenBlankLineIsNotRequired() {
+    void test_AnonymousClasses_BlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
@@ -540,13 +525,13 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsForCodeThatOnlyContainsASemicolon() {
+    void test_OnlyContainsASemicolon() {
         final String SOURCE = ';'
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testNoViolationsForScriptClass() {
+    void test_ScriptClass_NoViolations() {
         final String SOURCE = '''
             job('test-job') {
                 triggers { // fails here, no new line above
@@ -584,7 +569,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithSingleClassWhenAnnotationContainsOpeningBrace() {
+    void test_Annotation_ContainsOpeningBrace_NoViolations() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' })
             class Foo {
@@ -601,7 +586,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithSingleClassWhenAnnotationContainsOpeningBrace() {
+    void test_Annotation_ContainsOpeningBrace() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' })
             class Foo {
@@ -617,7 +602,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithSingleClassWithSimpleAnnotation() {
+    void test_Annotation_SingleClass_NoViolations() {
         final String SOURCE = '''
             @ToString
             class Foo {
@@ -634,7 +619,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithSingleClassWithSimpleAnnotation() {
+    void test_Annotation_SingleClass_Violation() {
         final String SOURCE = '''
             @ToString
             class Foo {
@@ -650,7 +635,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass() {
+    void test_Annotation_ContainsOpeningBraceAndOnSameLineAsClass() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' }) class Foo {
 
@@ -666,7 +651,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations() {
+    void test_Annotation_ContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations() {
         final String SOURCE = '''
             @Stuff @Requires({ sys[test] == 'dummy' }) class Foo {
 
@@ -682,7 +667,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testNoViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_ReverseOrderingOfAnnotations() {
+    void test_Annotation_ContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_ReverseOrderingOfAnnotations_NoViolations() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' }) @Stuff  class Foo {
 
@@ -698,7 +683,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_WhenBlankLineIsNotRequired() {
+    void test_Annotation_ContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_WhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             @Stuff @Requires({ sys[test] == 'dummy' }) class Foo {
 
@@ -714,7 +699,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
-    void testViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass() {
+    void test_Annotation_ContainsAnotherOpeningBraceOnSameLineAsClass_Violation() {
         final String SOURCE = '''
             @Requires({ sys[test] == 'dummy' }) class Foo {
                 int a
@@ -735,6 +720,63 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             @Produces(MediaType.APPLICATION_XML)
              
             class MyService {
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Annotation_SingleLineClass_AnnotationOnSameLine_NoViolations() {
+        final String SOURCE = '''
+            @Target( ElementType.TYPE )
+            @Retention( RetentionPolicy.RUNTIME )
+            @Inherited
+            @interface UnitTest { }'''
+        assertNoViolations(SOURCE)
+
+        // No blank line allowed; but doesn't matter since this is a single-line class
+        rule.blankLineRequired = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Annotation_AnnotationOnSameLine_Violation() {
+        final String SOURCE = '''
+            @Target( ElementType.TYPE )
+            @Retention( RetentionPolicy.RUNTIME )
+            @Inherited
+            @interface UnitTest { 
+                int count()
+            }'''
+        assertSingleViolation(SOURCE, 6, 'int count()')
+    }
+
+    @Test
+    void test_SingleLineClass_NoNewLineAtEndOfFile_NoViolations() {
+        final String SOURCE = '''
+            @groovy.transform.InheritConstructors
+            class AppException extends Exception {}'''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_VeryLongInterfaceDeclaration_NoViolations() {
+        final String SOURCE = '''
+            interface SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProjectRepository 
+                extends MongoRepository<SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProject, String>,
+                        SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProjectRepositoryExtension { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_VeryLongClassDeclaration_NoViolations() {
+        final String SOURCE = '''
+            class SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProjectRepositoryImpl extends BaseRepositoryExtension
+                implements SomeLongCollectionNameWhichIsHardToRenameWithoutUpdatingTheWholeProjectRepositoryExtension {
+            
+                @Override
+                void customRepositoryMethod() { }
             }
         '''
         assertNoViolations(SOURCE)

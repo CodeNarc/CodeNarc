@@ -17,11 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.AnnotationNode
-import org.codehaus.groovy.ast.expr.AnnotationConstantExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.GStringExpression
-import org.codehaus.groovy.ast.expr.ListExpression
+import org.codehaus.groovy.ast.expr.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -98,11 +94,14 @@ class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor {
 
 class ConstantExpressionExtractor {
 
-    @SuppressWarnings('UseCollectMany') //collectMany is not available in Groovy 1.7.5
     List<ConstantExpression> extractFrom(AnnotationNode annotationNode) {
-        return annotationNode.members.values().collect { Expression expression ->
+        def all = annotationNode.members.values().findAll { Expression expression ->
+            expression instanceof ListExpression || expression instanceof ConstantExpression || expression instanceof AnnotationConstantExpression
+        }.collect { Expression expression ->
             extractFromExpression(expression)
-        }.flatten()
+        }
+        // Has nested collections, so cannot use collectMany()
+        return all.flatten()
     }
 
     private List<ConstantExpression> extractFromExpression(ListExpression listExpression) {

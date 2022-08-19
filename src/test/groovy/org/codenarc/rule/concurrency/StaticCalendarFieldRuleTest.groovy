@@ -16,7 +16,7 @@
 package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for StaticCalendarFieldRule
@@ -75,10 +75,10 @@ class StaticCalendarFieldRuleTest extends AbstractRuleTestCase<StaticCalendarFie
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'static final CAL1 = Calendar.getInstance()', messageText:['Calendar', 'CAL1']],
-            [lineNumber:4, sourceLineText:'static final CAL2 = Calendar.getInstance(Locale.FRANCE)', messageText:['Calendar', 'CAL2']],
-            [lineNumber:5, sourceLineText:'static def cal3 = Calendar.getInstance(timezone)', messageText:['Calendar', 'cal3']],
-            [lineNumber:6, sourceLineText:'static Object cal4 = Calendar.getInstance(timezone, locale)', messageText:['Calendar', 'cal4']],
+            [line:3, source:'static final CAL1 = Calendar.getInstance()', message:['Calendar', 'CAL1']],
+            [line:4, source:'static final CAL2 = Calendar.getInstance(Locale.FRANCE)', message:['Calendar', 'CAL2']],
+            [line:5, source:'static def cal3 = Calendar.getInstance(timezone)', message:['Calendar', 'cal3']],
+            [line:6, source:'static Object cal4 = Calendar.getInstance(timezone, locale)', message:['Calendar', 'cal4']],
         )
     }
 

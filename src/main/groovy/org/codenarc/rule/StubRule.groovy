@@ -23,8 +23,9 @@ import org.codenarc.source.SourceCode
  * @author Chris Mair
  */
 class StubRule extends AbstractRule {
-    int priority
-    String name
+    int priority = 0
+    String name = 'stub'
+    Closure applyToClosure = { sourceCode, violations -> }
 
     StubRule() {
     }
@@ -35,6 +36,7 @@ class StubRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
+        this.applyToClosure(sourceCode, violations)
     }
 
 }

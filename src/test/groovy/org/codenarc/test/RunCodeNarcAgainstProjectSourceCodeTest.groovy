@@ -15,8 +15,9 @@
  */
 package org.codenarc.test
 
-import org.junit.After
-import org.junit.Test
+import groovy.ant.AntBuilder
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Test
 
 /**
  * Test that runs CodeNarc against the project source code
@@ -49,7 +50,7 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
         }
     }
 
-    @After
+    @AfterEach
     void tearDownRunCodeNarcAgainstProjectSourceCodeTest() {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, '')
     }

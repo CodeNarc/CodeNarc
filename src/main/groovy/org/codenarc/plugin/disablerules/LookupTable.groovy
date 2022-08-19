@@ -26,6 +26,7 @@ class LookupTable {
     private static final String CODENARC_DISABLE = 'codenarc-disable'
     private static final String CODENARC_DISABLE_LINE = 'codenarc-disable-line'
     private static final String CODENARC_ENABLE = 'codenarc-enable'
+    private static final String CODENARC_DESCRIPTION_START = '--'
     private static final Set<String> EMPTY = []
 
     private final String sourceText
@@ -104,7 +105,9 @@ class LookupTable {
         int startIndex = index + codeNarcToken.length()
         String rawRestOfLine = line.substring(startIndex)
         String restOfLine = rawRestOfLine.trim().replaceAll(/\*\//, '')
-        def names = restOfLine.tokenize(',')
+        int descriptionIndex = restOfLine.indexOf(CODENARC_DESCRIPTION_START)
+        String rawNames = descriptionIndex > -1 ? restOfLine.substring(0, descriptionIndex) : restOfLine
+        def names = rawNames.tokenize(',')
         return names*.trim() as Set
     }
 

@@ -230,7 +230,7 @@ package name consists of only lowercase letters and numbers, separated by period
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the regular expression used to validate the package  |   | name. It is required and cannot be null or empty.              | \[a-z\]+\[a-z0-9\]*(\\.\[a-z0-9\]+)* |
+| regex                       | Specifies the regular expression used to validate the package name. It is required and cannot be null or empty. | \[a-z\]+\[a-z0-9\]*(\\.\[a-z0-9\]+)* |
 | packageNameRequired         | Indicates whether a package name declaration is required for all classes.  | `false`                     |
 
 
@@ -288,8 +288,10 @@ modifiers for the property is the one that is applied for the field name validat
 
 ## VariableName Rule
 
-Verifies that the name of each variable matches a regular expression. By default it checks that
+Verifies that the name of each variable matches a regular expression. By default, this rule checks that
 variable names start with a lowercase letter and contain only letters or numbers.
+
+Variables annotated with @Field are ignored.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|

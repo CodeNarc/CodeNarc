@@ -22,8 +22,8 @@ import org.codenarc.source.CustomCompilerPhaseSourceDecorator
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
@@ -65,9 +65,7 @@ abstract class AbstractRuleTestCase<T extends Rule> extends AbstractTestCase {
 
     @Test
     void testThatInvalidCodeHasNoViolations() {
-        final SOURCE = '''
-            @will not compile@ &^%$#
-        '''
+        final SOURCE = '@will not compile@ &^%$#'
         if (!getProperties().keySet().contains('skipTestThatInvalidCodeHasNoViolations')) {
             // Verify no errors/exceptions
             def sourceCode = prepareSourceCode(SOURCE)
@@ -176,15 +174,19 @@ abstract class AbstractRuleTestCase<T extends Rule> extends AbstractTestCase {
      * in the violations specified in violationMaps.
      * @param source - the full source code to which the rule is applied, as a String
      * @param violationMaps - a list (array) of Maps, each describing a single violation.
-     *      Each element in the map can contain a lineNumber, sourceLineText and messageText entries.
+     *      Each element in the map can contain a line/lineNumber, source/sourceLineText and message/messageText entries.
      */
     protected void assertViolations(String source, Map[] violationMaps) {
         def rawViolations = applyRuleTo(source)
         rawViolations.sort { v -> v.lineNumber }
         assert rawViolations.size() == violationMaps.size(), "Expected ${violationMaps.size()} violations\nFound ${rawViolations.size()}: \n    ${rawViolations.join('\n    ')}\n"
+        def validKeys = ['line', 'lineNumber', 'source', 'sourceLineText', 'message', 'messageText']
         violationMaps.eachWithIndex { violationMap, index ->
-            assert violationMap.keySet().every { key -> key in ['lineNumber', 'sourceLineText', 'messageText'] }, "violationMap keys must be 'lineNumber', 'sourceLineText' and/or 'messageText'"
-            assertViolation(rawViolations[index], violationMap.lineNumber, violationMap.sourceLineText, violationMap.messageText)
+            assert violationMap.keySet().every { key -> key in validKeys }, "violationMap keys must be one of $validKeys"
+            assertViolation(rawViolations[index],
+                    violationMap.line ?: violationMap.lineNumber,
+                    violationMap.source ?: violationMap.sourceLineText,
+                    violationMap.message ?: violationMap.messageText)
         }
     }
 
@@ -317,7 +319,7 @@ actual:               $violation.sourceLine
         results.violations
     }
 
-    @Before
+    @BeforeEach
     void setUpAbstractRuleTestCase() {
         this.rule = createRule()
     }

@@ -16,7 +16,7 @@
 package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GStringAsMapKeyRule
@@ -44,7 +44,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase<GStringAsMapKeyRule> 
         final SOURCE = '''
             Map map = ["${ someRef }" : 'invalid' ]
         '''
-        assertSingleViolation( SOURCE,
+        assertSingleViolation(SOURCE,
                 2, '["${ someRef }" :')
     }
 
@@ -56,7 +56,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase<GStringAsMapKeyRule> 
                           ["nested $x" : 'invalid']
              ]
         '''
-        assertTwoViolations( SOURCE,
+        assertTwoViolations(SOURCE,
                 3, '["outer $x" ',
                 4, '["nested $x" ')
     }
@@ -67,7 +67,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase<GStringAsMapKeyRule> 
             def x = 'something'
             Map map = [ ["outer $x" : 'foo'] : 'invalid' ]
         '''
-        assertSingleViolation( SOURCE, 3, '["outer $x" ' )
+        assertSingleViolation(SOURCE, 3, '["outer $x" ')
     }
 
     @Override

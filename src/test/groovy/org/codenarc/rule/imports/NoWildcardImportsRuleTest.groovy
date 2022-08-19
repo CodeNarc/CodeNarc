@@ -16,7 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for NoWildcardImportsRule
@@ -56,10 +56,10 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase<NoWildcardImportsRu
             public class Foo {}
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'import static Math.*'],
-            [lineNumber:3, sourceLineText:'import static org.codenarc.report.AbstractHtmlReportWriter.*'],
-            [lineNumber:5, sourceLineText:'import com.google.*'],
-            [lineNumber:6, sourceLineText:'import org.codenarc.rule.*'])
+            [line:2, source:'import static Math.*'],
+            [line:3, source:'import static org.codenarc.report.AbstractHtmlReportWriter.*'],
+            [line:5, source:'import com.google.*'],
+            [line:6, source:'import org.codenarc.rule.*'])
     }
 
     @Test

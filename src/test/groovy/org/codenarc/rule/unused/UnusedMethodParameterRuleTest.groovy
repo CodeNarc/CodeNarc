@@ -16,7 +16,7 @@
 package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedMethodParameterRule
@@ -103,7 +103,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
     }
 
     @Test
-    void testApplyTo_MultipleUnusedParametersForSinglePrivateMethod() {
+    void testApplyTo_MultipleUnusedParametersForSingleMethod() {
         final SOURCE = '''
           class MyClass {
               void myMethod(int value, String name) { }
@@ -112,12 +112,12 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void myMethod(int value, String name) { }', messageText:'value'],
-            [lineNumber:3, sourceLineText:'void myMethod(int value, String name) { }', messageText:'name'])
+            [line:3, source:'void myMethod(int value, String name) { }', message:'value'],
+            [line:3, source:'void myMethod(int value, String name) { }', message:'name'])
     }
 
     @Test
-    void testApplyTo_MultiplePrivateMethodsWithUnusedParameters() {
+    void testApplyTo_MultipleMethodsWithUnusedParameters() {
         final SOURCE = '''
           class MyClass {
               void myMethod1(String id, int value) { print value }
@@ -126,14 +126,32 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
           }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void myMethod1(String id, int value) { print value }', messageText:'id'],
-            [lineNumber:5, sourceLineText:'int myMethod3(Date startDate) { }', messageText:'startDate'])
+            [line:3, source:'void myMethod1(String id, int value) { print value }', message:'id'],
+            [line:5, source:'int myMethod3(Date startDate) { }', message:'startDate'])
+    }
+
+    @Test
+    void testApplyTo_MultipleConstructorMethodsWithUnusedParameters() {
+        final SOURCE = '''
+          class MyClass {
+              MyClass(String id, int value) { print value }
+              protected MyClass(int otherValue) { print otherValue }
+              protected MyClass(Date startDate, Date endDate) { }
+          }
+        '''
+        assertViolations(SOURCE,
+            [line:3, source:'MyClass(String id, int value) { print value }', message:'id'],
+            [line:5, source:'protected MyClass(Date startDate, Date endDate) { }', message:'startDate'],
+            [line:5, source:'protected MyClass(Date startDate, Date endDate) { }', message:'endDate'])
     }
 
     @Test
    void testApplyTo_AllParametersUsed() {
         final SOURCE = '''
             class MyClass {
+                MyClass() { }
+                MyClass(String id) { println id }
+
                 String myMethod1(String id, int value) { doSomething(value); return id }
                 void myMethod2(int value) { def x = value }
                 def myMethod3(Date startDate) { return "${startDate}" }
@@ -156,9 +174,23 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
     void testApplyTo_NonPrivateMethodsWithOverride() {
         final SOURCE = '''
             class MyClass {
-                @Override void myMethod1(String id, int value) { }
+                @Override
+                void myMethod1(String id, int value) { }
+
                 @Override protected void myMethod2(int value) { }
+
                 @Override public int myMethod3(Date startDate) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testPointcutAnnotation() {
+        final SOURCE = '''
+            class MyClass {
+                @Pointcut("@annotation(example.annotation.Test)")
+                void myMethod1(String name) { }
             }
         '''
         assertNoViolations(SOURCE)
@@ -225,11 +257,11 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void main(String[] args) { }', messageText:'args'],
-            [lineNumber:6, sourceLineText:'static main(arg1, arg2) { }', messageText:'arg1'],
-            [lineNumber:6, sourceLineText:'static main(arg1, arg2) { }', messageText:'arg2'],
-            [lineNumber:9, sourceLineText:'static main(int value) { }', messageText:'value'],
-            [lineNumber:12, sourceLineText:'static int main(String[] args) { }', messageText:'args'])
+            [line:3, source:'void main(String[] args) { }', message:'args'],
+            [line:6, source:'static main(arg1, arg2) { }', message:'arg1'],
+            [line:6, source:'static main(arg1, arg2) { }', message:'arg2'],
+            [line:9, source:'static main(int value) { }', message:'value'],
+            [line:12, source:'static int main(String[] args) { }', message:'args'])
     }
 
     @Test

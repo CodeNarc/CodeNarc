@@ -189,10 +189,7 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
         if (!sourceFile.isValid()) {
             sourceFileErrors.incrementAndGet();
         }
-        FileResults fileResults = null;
-        if (allViolations != null && !allViolations.isEmpty()) {
-            fileResults = new FileResults(PathUtil.normalizePath(filePath), allViolations, sourceFile);
-        }
+        FileResults fileResults = new FileResults(PathUtil.normalizePath(filePath), allViolations, sourceFile);
         String parentPath = PathUtil.getParentPath(filePath);
         String safeParentPath = parentPath != null ? parentPath : "";
         addToResultsMap(safeParentPath, fileResults);

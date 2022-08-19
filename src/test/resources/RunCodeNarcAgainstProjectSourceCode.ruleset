@@ -22,7 +22,6 @@ ruleset {
         exclude 'ImplicitClosureParameter'
         exclude 'ImplicitReturnStatement'
         FieldTypeRequired(doNotApplyToFilesMatching:TEST_FILES)
-        NoTabCharacter(doNotApplyToFileNames:'NoTabCharacterRuleTest.groovy') //Test should contain tab character to test the rule
     }
 
     ruleset('rulesets/design.xml') {
@@ -49,6 +48,7 @@ ruleset {
         exclude 'SpaceAroundMapEntryColon'
         exclude 'ClassEndsWithBlankLine'
         exclude 'ClassStartsWithBlankLine'
+        exclude 'TrailingWhitespace'
     }
 
     ruleset('rulesets/imports.xml') {
@@ -74,12 +74,12 @@ ruleset {
         exclude 'UnnecessaryGetter'
         exclude 'UnnecessaryObjectReferences'
         exclude 'UnnecessaryReturnKeyword'
-        exclude 'UnnecessarySubstring'
     }
 
     ruleset('rulesets/unused.xml')
 
-    ruleset('rulesets/enhanced.xml')
+    // Having any enhanced rules in the ruleset significantly increases run times
+    //ruleset('rulesets/enhanced.xml')
 
     //------------------------------------------------------------------------------------
     // Custom rules

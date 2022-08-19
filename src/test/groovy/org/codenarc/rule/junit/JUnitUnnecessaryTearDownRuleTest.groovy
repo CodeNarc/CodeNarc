@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitUnnecessaryTearDown
@@ -96,7 +96,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase<JUnitUnneces
     void testApplyTo_TearDownMethodHasAfterAnnotation() {
         final SOURCE = '''
           class MyTest extends TestCase {
-            @After void tearDown() {
+            @AfterEach void tearDown() {
                 super.tearDown()
             }
           }

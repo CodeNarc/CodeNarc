@@ -16,7 +16,7 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for StaticFieldsBeforeInstanceFieldsRule
@@ -70,11 +70,11 @@ class StaticFieldsBeforeInstanceFieldsRuleTest extends AbstractRuleTestCase<Stat
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:9, sourceLineText:'public static final String F1 = "xxx"', messageText:'static field F1'],
-            [lineNumber:10, sourceLineText:'protected static final String F2 = "ABC"', messageText:'static field F2'],
-            [lineNumber:11, sourceLineText:'private static final String F3 = "ABC"', messageText:'static field F3'],
-            [lineNumber:12, sourceLineText:'private static String F4', messageText:'static field F4'],
-            [lineNumber:13, sourceLineText:'static F5 = new Date()', messageText:'static field F5'])
+            [line:9, source:'public static final String F1 = "xxx"', message:'static field F1'],
+            [line:10, source:'protected static final String F2 = "ABC"', message:'static field F2'],
+            [line:11, source:'private static final String F3 = "ABC"', message:'static field F3'],
+            [line:12, source:'private static String F4', message:'static field F4'],
+            [line:13, source:'static F5 = new Date()', message:'static field F5'])
     }
 
     @Override

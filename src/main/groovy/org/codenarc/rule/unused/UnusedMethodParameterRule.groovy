@@ -18,8 +18,8 @@ package org.codenarc.rule.unused
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 import java.lang.reflect.Modifier
@@ -31,6 +31,7 @@ import java.lang.reflect.Modifier
  * @author Chris Mair
  */
 class UnusedMethodParameterRule extends AbstractAstVisitorRule {
+
     String name = 'UnusedMethodParameter'
     int priority = 2
     String ignoreRegex = 'ignore|ignored'
@@ -38,13 +39,17 @@ class UnusedMethodParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnusedMethodParameterAstVisitor
 }
 
-class UnusedMethodParameterAstVisitor extends AbstractMethodVisitor {
+class UnusedMethodParameterAstVisitor extends AbstractAstVisitor {
 
     @Override
-    void visitMethod(MethodNode node) {
-        if (!currentClassNode.isInterface() && !node.isAbstract() && !(currentClassName ==~ rule.ignoreClassRegex)
-            && !Modifier.isPrivate(node.modifiers) && AstUtil.getAnnotation(node, 'Override') == null
-            && !isMainMethod(node)) {
+    protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
+        if (!currentClassNode.isInterface()
+                && !node.isAbstract()
+                && !(currentClassName ==~ rule.ignoreClassRegex)
+                && !Modifier.isPrivate(node.modifiers)
+                && AstUtil.getAnnotation(node, 'Override') == null
+                && AstUtil.getAnnotation(node, 'Pointcut') == null
+                && !isMainMethod(node)) {
             def unusedParameterNames = node.parameters*.name
             def collector = new ReferenceCollector()
             collector.visitMethod(node)

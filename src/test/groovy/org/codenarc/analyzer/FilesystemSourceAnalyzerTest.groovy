@@ -15,21 +15,21 @@
  */
 package org.codenarc.analyzer
 
+import static org.codenarc.test.TestUtil.assertEqualSets
+import static org.codenarc.test.TestUtil.shouldFail
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
-
+import org.codenarc.rule.FakePathRule
+import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
-
-import static org.codenarc.test.TestUtil.assertEqualSets
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-import org.codenarc.rule.FakePathRule
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for FilesystemSourceAnalyzer.
@@ -37,30 +37,32 @@ import org.codenarc.rule.FakePathRule
  * @author Chris Mair
  */
 class FilesystemSourceAnalyzerTest extends AbstractTestCase {
+
     private static final BASE_DIR = 'src/test/resources/sourcewithdirs'
-    private analyzer
-    private ruleSet
-    private testCountRule
+
+    private analyzer = new FilesystemSourceAnalyzer()
+    private testCountRule = new FakeCountRule()
+    private ruleSet = new ListRuleSet([new FakePathRule(), testCountRule])
 
     @Test
-    void testAnalyze_NullRuleSet() {
+    void test_analyze_NullRuleSet() {
         analyzer.baseDirectory = BASE_DIR
         shouldFailWithMessageContaining('ruleSet') { analyzer.analyze(null) }
     }
 
     @Test
-    void testAnalyze_BaseDirectoryNull() {
+    void test_analyze_BaseDirectoryNull() {
         shouldFailWithMessageContaining('baseDirectory') { analyzer.analyze(ruleSet) }
     }
 
     @Test
-    void testAnalyze_BaseDirectoryEmpty() {
+    void test_analyze_BaseDirectoryEmpty() {
         analyzer.baseDirectory = ''
         shouldFailWithMessageContaining('baseDirectory') { analyzer.analyze(ruleSet) }
     }
 
     @Test
-    void testAnalyze_FilesOnly() {
+    void test_analyze_FilesOnly() {
         final DIR = 'src/test/resources/source'
         analyzer.baseDirectory = DIR
         ruleSet = new ListRuleSet([new FakePathRule()])     // override
@@ -81,7 +83,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze() {
+    void test_analyze() {
         analyzer.baseDirectory = BASE_DIR
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
@@ -105,14 +107,14 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_NoViolations() {
+    void test_analyze_NoViolations() {
         analyzer.baseDirectory = BASE_DIR
         ruleSet = new ListRuleSet([testCountRule])
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
         def paths = resultsPaths(results)
-        assertEqualSets(paths, ['subdir1', 'subdir2', 'subdir2/subdir2a'])
+        assertEqualSets(paths, ['SourceFile1.groovy', 'subdir1', 'subdir1/Subdir1File2.groovy', 'subdir1/Subdir1File1.groovy', 'subdir2', 'subdir2/subdir2a', 'subdir2/subdir2a/Subdir2aFile1.groovy', 'subdir2/Subdir2File1.groovy'])
 
         assert testCountRule.count == 5
         assert results.getNumberOfFilesWithViolations(3) == 0
@@ -120,7 +122,17 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_IncludesAndExcludes() {
+    void test_analyze_RuleThrowsNullPointerException() {
+        def rule = new StubRule(applyToClosure:{ sourceCode, violations -> throw new NullPointerException() })
+        ruleSet = new ListRuleSet([rule])
+
+        analyzer.baseDirectory = BASE_DIR
+        def results = analyzer.analyze(ruleSet)
+        assert results.totalNumberOfFiles == 0
+    }
+
+    @Test
+    void test_analyze_IncludesAndExcludes() {
         analyzer.baseDirectory = BASE_DIR
         analyzer.includes = '**ubdir*.groovy'
         analyzer.excludes = '**/*File2*'
@@ -141,7 +153,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_IncludesAndExcludes_Lists() {
+    void test_analyze_IncludesAndExcludes_Lists() {
         analyzer.baseDirectory = BASE_DIR
         analyzer.includes = '**/Subdir1File1.groovy,**/Subdir2a*1.groovy,**/Sub?ir2File1.groovy'
         analyzer.excludes = '**/Subdir2aFile1.groovy,**/DoesNotExist.*'
@@ -162,13 +174,23 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetSourceDirectories_ReturnsListWithBaseDirectory() {
+    void test_analyze_failOnError_True_RuleThrowsException() {
+        def rule = new StubRule(applyToClosure:{ sourceCode, violations -> throw new Exception() })
+        ruleSet = new ListRuleSet([rule])
+
+        analyzer.failOnError = true
+        analyzer.baseDirectory = BASE_DIR
+        shouldFail(AnalyzerException) { analyzer.analyze(ruleSet) }
+    }
+
+    @Test
+    void test_getSourceDirectories_ReturnsListWithBaseDirectory() {
         analyzer.baseDirectory = BASE_DIR
         assert analyzer.sourceDirectories == [BASE_DIR]
     }
 
     @Test
-    void testMatches() {
+    void test_matches() {
         def source = new SourceString('def x', 'dir/file.txt')
         assertMatches(source, null, null, true)
         assertMatches(source, '', null, true)
@@ -179,13 +201,6 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assertMatches(source, '**/file.txt', '**/file.txt', false)
         assertMatches(source, null, '**/file.txt', false)
         assertMatches(source, '**/OTHER.*', '', false)
-    }
-
-    @Before
-    void setUpFilesystemSourceAnalyzerTest() {
-        analyzer = new FilesystemSourceAnalyzer()
-        testCountRule = new FakeCountRule()
-        ruleSet = new ListRuleSet([new FakePathRule(), testCountRule])
     }
 
     private void assertMatches(SourceCode source, String includes, String excludes, boolean shouldMatch) {

@@ -16,7 +16,7 @@
 package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for AssignCollectionUniqueRule
@@ -72,8 +72,8 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase<AssignCollecti
             def y = myList.unique { it % 2 }
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'def x = myList.unique()'],
-                [lineNumber:3, sourceLineText:'def y = myList.unique { it % 2 }'])
+                [line:2, source:'def x = myList.unique()'],
+                [line:3, source:'def y = myList.unique { it % 2 }'])
     }
 
     @Test
@@ -109,8 +109,8 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase<AssignCollecti
             def y = myList.unique(true) { it }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'def x = myList.unique(true, comparator)'],
-                [lineNumber:4, sourceLineText:'def y = myList.unique(true) { it }'])
+                [line:3, source:'def x = myList.unique(true, comparator)'],
+                [line:4, source:'def y = myList.unique(true) { it }'])
     }
 
     @Test
@@ -130,8 +130,8 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase<AssignCollecti
             def y = myList.unique(true).findAll { y < 1 }
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'def x = myList.unique().findAll { x < 1 }'],
-                [lineNumber:3, sourceLineText:'def y = myList.unique(true).findAll { y < 1 }'])
+                [line:2, source:'def x = myList.unique().findAll { x < 1 }'],
+                [line:3, source:'def y = myList.unique(true).findAll { y < 1 }'])
     }
 
     @Override

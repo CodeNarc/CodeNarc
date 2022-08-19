@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitAssertAlwaysFailsRule
@@ -87,10 +87,10 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase<JUnitAssertAlw
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'assertTrue(0)'],
-            [lineNumber:5, sourceLineText:"assertTrue('error message', '')"],
-            [lineNumber:6, sourceLineText:'assertTrue([])'],
-            [lineNumber:7, sourceLineText:"assertTrue('error message', [:])"])
+            [line:4, source:'assertTrue(0)'],
+            [line:5, source:"assertTrue('error message', '')"],
+            [line:6, source:'assertTrue([])'],
+            [line:7, source:"assertTrue('error message', [:])"])
     }
 
     @Test
@@ -173,10 +173,10 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase<JUnitAssertAlw
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'assertFalse(99)'],
-            [lineNumber:5, sourceLineText:"assertFalse('error message', 'abc')"],
-            [lineNumber:6, sourceLineText:'assertFalse([123])'],
-            [lineNumber:7, sourceLineText:"assertFalse('error message', [a:123])"])
+            [line:4, source:'assertFalse(99)'],
+            [line:5, source:"assertFalse('error message', 'abc')"],
+            [line:6, source:'assertFalse([123])'],
+            [line:7, source:"assertFalse('error message', [a:123])"])
     }
 
     // Tests for assertNull
@@ -230,10 +230,10 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase<JUnitAssertAlw
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'assertNull([])'],
-            [lineNumber:5, sourceLineText:'assertNull([123])'],
-            [lineNumber:6, sourceLineText:'assertNull([a:123])'],
-            [lineNumber:7, sourceLineText:'assertNull([:])'])
+            [line:4, source:'assertNull([])'],
+            [line:5, source:'assertNull([123])'],
+            [line:6, source:'assertNull([a:123])'],
+            [line:7, source:'assertNull([:])'])
     }
 
     @Test

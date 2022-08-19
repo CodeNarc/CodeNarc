@@ -66,7 +66,7 @@ class GrailsPublicControllerMethodAstVisitor extends AbstractMethodVisitor {
     @Override
     void visitMethod(MethodNode methodNode) {
         if (Modifier.isPublic(methodNode.modifiers)
-                && !(methodNode.modifiers & MethodNode.ACC_STATIC)
+                && !(methodNode.isStatic())
                 && !isIgnoredMethodName(methodNode))  {
             addViolation(methodNode, "The Grails controller has a public method $methodNode.name. This should be a closure property or moved")
         }

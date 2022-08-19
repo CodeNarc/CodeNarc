@@ -41,7 +41,7 @@ abstract class AbstractXmlReportWriterTestCase extends AbstractTestCase {
     protected static final MESSAGE3 = 'Other info'
     protected static final VIOLATION1 = new Violation(rule:new UnusedImportRule(), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
     protected static final VIOLATION2 = new Violation(rule:new UnusedPrivateMethodRule(), lineNumber:LINE2, message:MESSAGE2)
-    protected static final VIOLATION3 = new Violation(rule:new EmptyCatchBlockRule(), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
+    protected static final VIOLATION3 = new Violation(rule:new EmptyCatchBlockRule(), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3)
     protected static final TITLE = 'My Cool Project'
     protected static final SRC_DIR1 = 'c:/MyProject/src/main/groovy'
     protected static final SRC_DIR2 = 'c:/MyProject/src/test/groovy'
@@ -49,11 +49,11 @@ abstract class AbstractXmlReportWriterTestCase extends AbstractTestCase {
     protected static final VERSION = new File(VERSION_FILE).text
     protected static final TIMESTAMP_DATE = new Date(1262361072497)
     protected static final FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
-    protected static final String CODENARC_URL = 'https://www.codenarc.org'
+    protected static final String CODENARC_URL = 'https://codenarc.org'
 
     protected reportWriter
     protected analysisContext
-    protected results, srcMainDaoDirResults
+    protected results
     protected ruleSet
     protected stringWriter
 

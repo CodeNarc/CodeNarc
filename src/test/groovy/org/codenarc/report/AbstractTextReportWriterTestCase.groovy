@@ -21,8 +21,8 @@ import org.codenarc.results.FileResults
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import java.text.DateFormat
 
@@ -47,14 +47,14 @@ abstract class AbstractTextReportWriterTestCase extends AbstractTestCase {
     protected static final String MESSAGE3 = 'Other info'
     protected static final Violation VIOLATION1 = new Violation(rule:new StubRule(name:'Rule1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
     protected static final Violation VIOLATION2 = new Violation(rule:new StubRule(name:'AnotherRule', priority:2), lineNumber:LINE2, message:MESSAGE2)
-    protected static final Violation VIOLATION3 = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
+    protected static final Violation VIOLATION3 = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3)
     protected static final String NEW_REPORT_FILE = 'target/NewTextReport.txt'
     protected static final String TITLE = 'My Cool Project'
     protected static final String SRC_DIR1 = 'c:/MyProject/src/main/groovy'
     protected static final String SRC_DIR2 = 'c:/MyProject/src/test/groovy'
     protected static final String VERSION_FILE = 'src/main/resources/codenarc-version.txt'
     protected static final String VERSION = new File(VERSION_FILE).text
-    protected static final String CODENARC_URL = 'https://www.codenarc.org'
+    protected static final String CODENARC_URL = 'https://codenarc.org'
     protected static final Date TIMESTAMP_DATE = new Date(1262361072497)
     protected static final String FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
 
@@ -142,19 +142,21 @@ abstract class AbstractTextReportWriterTestCase extends AbstractTestCase {
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpAbstractTextReportWriterTestCase() {
         reportWriter = createReportWriter()
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
-        def srcMainDirResults = new DirectoryResults('src/main', 1)
-        srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcTestDirResults = new DirectoryResults('src/test', 3)
+        def srcMainDirResults = new DirectoryResults('src/main', 2)
+        def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
+        def srcTestDirResults = new DirectoryResults('src/test', 0)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def srcMainFileResults2 = new FileResults('src/main/MyCleanAction.groovy', [])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2, VIOLATION1])
 
         srcMainDirResults.addChild(srcMainFileResults1)
+        srcMainDirResults.addChild(srcMainFileResults2)
         srcMainDirResults.addChild(srcMainDaoDirResults)
         srcMainDaoDirResults.addChild(fileResultsMainDao1)
         srcMainDaoDirResults.addChild(fileResultsMainDao2)

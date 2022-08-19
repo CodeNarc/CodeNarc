@@ -18,7 +18,7 @@ package org.codenarc.report
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ReportWriterFactory
@@ -56,6 +56,13 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     void testGetReportWriter_Console() {
         def reportWriter = reportWriterFactory.getReportWriter('console')
         assert reportWriter.class == TextReportWriter
+        assert reportWriter.writeToStandardOut
+    }
+
+    @Test
+    void testGetReportWriter_Compact() {
+        def reportWriter = reportWriterFactory.getReportWriter('compact')
+        assert reportWriter.class == CompactTextReportWriter
         assert reportWriter.writeToStandardOut
     }
 

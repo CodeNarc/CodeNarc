@@ -21,7 +21,7 @@ import org.codenarc.rule.design.PublicInstanceFieldRule
 import org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for StringSourceAnalyzer

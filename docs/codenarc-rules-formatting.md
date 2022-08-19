@@ -464,7 +464,6 @@ applyToFilesMatching and doNotApplyToFilesMatching.
 | ignorePackageStatements     | If `true`, then do not apply this rule to package statements.| `true` |
 | ignoreLineRegex             | If specified, then ignore lines matching this regular expression.| `null` |
 
-
 ## MissingBlankLineAfterImports Rule
 
 *Since CodeNarc 0.21*
@@ -481,7 +480,7 @@ Example of violation:
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
 [Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
-  
+
 
 ## MissingBlankLineAfterPackage Rule
 
@@ -504,6 +503,63 @@ NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToC
 *doNotApplyToClassNames* rule configuration properties are not available. See
 [Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
+## MissingBlankLineBeforeAnnotatedField
+
+*Since CodeNarc 2.1*
+
+Checks that there is a blank line before a field declaration that uses annotations. 
+
+Ignore field declarations where:
+ - The previous line contains a comment 
+ - The declaration (annotations) start on the first line of the class
+ - All annotations are on the same line as the field declaration.
+
+Examples of violations:
+```
+    class MyClass {
+        // No violations for field declarations preceded by a comment
+        @Delegate
+        AutoCloseable stream
+        
+        String publicField                  // violation
+        @PackageScope
+        String packageScopedField
+    }
+```
+
+## SpaceAfterMethodDeclarationName Rule
+
+*Since CodeNarc 2.1*
+
+Check whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis 
+for parameter list.
+
+Examples of violations:
+
+```
+    class ClassWithWhitespaceInConstructorDeclaration {
+        
+        ClassWithWhitespaceInConstructorDeclaration () { //violation
+        }
+        
+        void methodWithWhitespaceInDeclaration () { //violation
+        }
+    }
+```
+
+## SpaceAfterMethodCallName Rule
+
+*Since CodeNarc 2.1*
+
+Checks that there is no whitespace after the method name when a method call contains parenthesis.
+
+Examples of violations:
+
+```
+    aMethod ("arg")         // violation
+    
+    throw new Exception ()  // violation
+```
 
 ## SpaceAfterCatch Rule
 
@@ -609,6 +665,19 @@ Examples of violations:
     if  (true) { }                          // violation
 ```
 
+## SpaceAfterNotOperator Rule
+
+*Since CodeNarc 2.1*
+
+Check that there are no whitespace characters directly after the not (!) operator.
+
+Examples of violations:
+
+```
+    def negatedValue = ! value //violation
+    
+    if (! items.empty()) { println "not empty" } //violataion
+```
 
 ## SpaceAfterOpeningBrace Rule
 
@@ -760,8 +829,13 @@ Example of violations:
 
 *Since CodeNarc 0.18*
 
-Check that there is at least one space (blank) or whitespace around each binary operator,
-including: +, -, *, /, \*\*, \*\*, &&, ||, &, |, ?:, =, "as".
+Check that there is at least one space (blank) or whitespace around each binary operator, including: 
+ - Arithmetic operators: +, -, *, /, \*\* 
+ - Assignment operators: =, +=, -=, *=, /=, \*\*=, ?=
+ - Relational operators: ==, !=, >, >=, <, <=, ===, !==
+ - Logical operators: &&, ||
+ - Bitwise operators: &, |
+ - Other: ?:, "as"
 
 Do not check dot ('.') operator. Do not check unary operators (!, +, -, ++, --, ?.).
 Do not check array ('[') operator.
@@ -898,6 +972,37 @@ Examples of violations:
     shouldFail(Exception){ doStuff() }          // violation
 ```
 
+
+## SpaceInsideParentheses Rule
+
+*Since CodeNarc 2.1.0*
+
+Check for whitespace after opening parentheses and before closing parentheses
+
+Example of violations:
+
+```
+    if( running) { }                        // violation
+    if(running ) { }                        // violation
+    if(      x < calculateLastIndex(        // violation
+            'name') + 1    ) { }            // violation
+            
+    for(    String name: filterNames(       // violation
+            names)   ) { }                  // violation
+
+    println( 123 )                          // violations
+
+    println (3 + ( 4 * 7 )+7) + (   5 * 1 ) // violations
+    def v =  (y - 7 )*( x + (z - 3))        // violations
+    def v2 =  (y - 7 ) *                    // violation
+        (x + 
+        ( z - 3)                            // violation
+        )
+    def v3 = calc(a) + calc( a + ( b - 1) * 2) + calc(7)  // violation
+    def v4 = (a ) ? (17) : (19 )            // violation
+    
+    void doStuff( int n) { }                // violation
+```
 
 ## TrailingWhitespace Rule
 

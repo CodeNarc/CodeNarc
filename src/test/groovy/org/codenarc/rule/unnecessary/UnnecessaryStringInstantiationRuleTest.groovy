@@ -16,7 +16,7 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessaryStringInstantiationRule
@@ -40,7 +40,7 @@ class UnnecessaryStringInstantiationRuleTest extends AbstractRuleTestCase<Unnece
                 def b2 = new String('abc')
                 def b3 = new java.lang.String("abc")
                 def b4 = new String('abc'.bytes)
-                def b5 = new String( [1,2,3] as char[])
+                def b5 = new String([1,2,3] as char[])
             }
         '''
         assertTwoViolations(SOURCE, 5, "new String('abc')", 6, 'new java.lang.String("abc")')

@@ -16,7 +16,7 @@
 package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ExceptionNotThrownRule
@@ -72,9 +72,9 @@ class ExceptionNotThrownRuleTest extends AbstractRuleTestCase<ExceptionNotThrown
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4,
-                sourceLineText:'try { } catch(Exception e) { new Exception(e) }',
-                messageText:'The catch statement within class MyClass constructs a [Exception] but does not throw it'])
+            [line:4,
+                source:'try { } catch(Exception e) { new Exception(e) }',
+                message:'The catch statement within class MyClass constructs a [Exception] but does not throw it'])
     }
 
     @Test
@@ -90,12 +90,12 @@ class ExceptionNotThrownRuleTest extends AbstractRuleTestCase<ExceptionNotThrown
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:6,
-                sourceLineText:'new ServiceException(e)',
-                messageText:'The catch statement within class None constructs a [ServiceException] but does not throw it'],
-            [lineNumber:8,
-                sourceLineText:'new SystemException(e)',
-                messageText:'The catch statement within class None constructs a [SystemException] but does not throw it'])
+            [line:6,
+                source:'new ServiceException(e)',
+                message:'The catch statement within class None constructs a [ServiceException] but does not throw it'],
+            [line:8,
+                source:'new SystemException(e)',
+                message:'The catch statement within class None constructs a [SystemException] but does not throw it'])
     }
 
     @Override

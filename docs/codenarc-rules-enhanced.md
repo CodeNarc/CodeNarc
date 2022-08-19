@@ -14,6 +14,7 @@ Note that these rules may be reorganized and moved to a other rulesets or packag
 them individually within your ruleset -- refer to them using the rule name, e.g. "CloneWithoutCloneable",
 rather that pulling in the entire "*rulesets/enhanced.xml*" ruleset, to protect against future reorganization.
 
+Note that if your ruleset includes an *enhanced* rule, it can significantly increase execution times for CodeNarc.
 
 ## CloneWithoutCloneable Rule
 

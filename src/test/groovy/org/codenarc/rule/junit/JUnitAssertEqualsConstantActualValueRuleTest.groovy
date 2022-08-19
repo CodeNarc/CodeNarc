@@ -16,8 +16,8 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitAssertEqualsConstantActualValueRule
@@ -26,7 +26,13 @@ import org.junit.Test
  */
 class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<JUnitAssertEqualsConstantActualValueRule> {
 
-    @Before
+    private static final String SOURCE_WITH_SINGLE_VIOLATION = '''
+        import org.junit.Assert
+        def sum = 1 + 1
+        Assert.assertEquals(sum, 2)
+    '''
+
+    @BeforeEach
     void setup() {
         sourceCodePath = '/src/test/SampleTest.groovy'
     }
@@ -40,7 +46,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<
     @Test
     void testNoViolations() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             import static org.junit.Assert.assertEquals
 
             class SampleTest {
@@ -71,16 +77,30 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<
         assertSingleViolation(SOURCE_WITH_SINGLE_VIOLATION, 4, 'Assert.assertEquals(sum, 2)', VIOLATION_MESSAGE)
     }
 
-    private static final String SOURCE_WITH_SINGLE_VIOLATION = '''
-        import org.junit.Assert
-        def sum = 1 + 1
-        Assert.assertEquals(sum, 2)
-    '''
+    @Test
+    void test_Violation_JUnit5() {
+        final SOURCE = '''
+            import org.junit.jupiter.api.Assertions
+            def sum = 1 + 1
+            Assertions.assertEquals(sum, 2)
+        '''
+        assertSingleViolation(SOURCE, 4, 'Assertions.assertEquals(sum, 2)', VIOLATION_MESSAGE)
+    }
+
+    @Test
+    void test_Violation_JUnit5_StaticImport() {
+        final SOURCE = '''
+            import static org.junit.jupiter.api.Assertions.*
+            def sum = 1 + 1
+            assertEquals(sum, 2)
+        '''
+        assertSingleViolation(SOURCE, 4, 'assertEquals(sum, 2)', VIOLATION_MESSAGE)
+    }
 
     @Test
     void testMultipleViolations() {
         final SOURCE = '''
-            import org.junit.Test
+            import org.junit.jupiter.api.Test
             import static org.junit.Assert.assertEquals
 
             class SampleTest {
@@ -98,10 +118,10 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber: 12, sourceLineText: 'assertEquals(result, 2)',                     messageText: VIOLATION_MESSAGE],
-            [lineNumber: 13, sourceLineText: 'assertEquals("Message", result, 2)',          messageText: VIOLATION_MESSAGE],
-            [lineNumber: 14, sourceLineText: 'assertEquals(result, 2.3d, 0.5d)',            messageText: VIOLATION_MESSAGE],
-            [lineNumber: 15, sourceLineText: 'assertEquals("Message", result, 2.3d, 0.5d)', messageText: VIOLATION_MESSAGE]
+            [line: 12, source: 'assertEquals(result, 2)',                     message: VIOLATION_MESSAGE],
+            [line: 13, source: 'assertEquals("Message", result, 2)',          message: VIOLATION_MESSAGE],
+            [line: 14, source: 'assertEquals(result, 2.3d, 0.5d)',            message: VIOLATION_MESSAGE],
+            [line: 15, source: 'assertEquals("Message", result, 2.3d, 0.5d)', message: VIOLATION_MESSAGE]
         )
     }
 

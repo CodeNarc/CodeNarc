@@ -16,7 +16,7 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessaryPackageReferenceRule
@@ -56,9 +56,9 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'java.math.BigDecimal amount = 42.10', messageText:'java.math'],
-            [lineNumber:4, sourceLineText:'java.lang.Integer count = 0', messageText:'java.lang'],
-            [lineNumber:5, sourceLineText:'java.util.Map mapping', messageText:'java.util'] )
+            [line:3, source:'java.math.BigDecimal amount = 42.10', message:'java.math'],
+            [line:4, source:'java.lang.Integer count = 0', message:'java.lang'],
+            [line:5, source:'java.util.Map mapping', message:'java.util'])
     }
 
     @Test
@@ -69,9 +69,9 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             def processors = java.lang.Runtime.availableProcessors()
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (value.class == java.math.BigDecimal) { }', messageText:'java.math'],
-            [lineNumber:3, sourceLineText:'println "isClosure=${value instanceof groovy.lang.Closure}"', messageText:'groovy.lang'],
-            [lineNumber:4, sourceLineText:'def processors = java.lang.Runtime.availableProcessors()', messageText:'java.lang'] )
+            [line:2, source:'if (value.class == java.math.BigDecimal) { }', message:'java.math'],
+            [line:3, source:'println "isClosure=${value instanceof groovy.lang.Closure}"', message:'groovy.lang'],
+            [line:4, source:'def processors = java.lang.Runtime.availableProcessors()', message:'java.lang'])
     }
 
     @Test
@@ -83,8 +83,8 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:"def amount = new java.math.BigDecimal('42.10')", messageText:'java.math'],
-            [lineNumber:4, sourceLineText:"def url = new java.net.URL('http://abc@example.com')", messageText:'java.net'] )
+            [line:3, source:"def amount = new java.math.BigDecimal('42.10')", message:'java.math'],
+            [line:4, source:"def url = new java.net.URL('http://abc@example.com')", message:'java.net'])
     }
 
     @Test
@@ -129,9 +129,9 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'java.math.BigInteger maxValue = 0', messageText:'java.math'],
-            [lineNumber:4, sourceLineText:'java.net.URI uri', messageText:'java.net'],
-            [lineNumber:5, sourceLineText:"groovy.lang.Closure closure = { println 'ok' }", messageText:'groovy.lang'] )
+            [line:3, source:'java.math.BigInteger maxValue = 0', message:'java.math'],
+            [line:4, source:'java.net.URI uri', message:'java.net'],
+            [line:5, source:"groovy.lang.Closure closure = { println 'ok' }", message:'groovy.lang'])
     }
 
     @Test
@@ -144,9 +144,9 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             int noViolationIntegerAutoBox() { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'java.net.Socket getSocket() { }', messageText:'java.net'],
-            [lineNumber:3, sourceLineText:'java.io.Reader getReader() { }', messageText:'java.io'],
-            [lineNumber:4, sourceLineText:'groovy.util.AntBuilder getAntBuilder() { }', messageText:'groovy.util'] )
+            [line:2, source:'java.net.Socket getSocket() { }', message:'java.net'],
+            [line:3, source:'java.io.Reader getReader() { }', message:'java.io'],
+            [line:4, source:'groovy.util.AntBuilder getAntBuilder() { }', message:'groovy.util'])
     }
 
     @Test
@@ -157,8 +157,8 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             void noViolation(def name, int intAutoBox) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'void writeCount(java.io.Writer writer, int count)', messageText:'java.io'],
-            [lineNumber:3, sourceLineText:'void initializeBinding(String name, groovy.lang.Binding binding) { }', messageText:'groovy.lang'] )
+            [line:2, source:'void writeCount(java.io.Writer writer, int count)', message:'java.io'],
+            [line:3, source:'void initializeBinding(String name, groovy.lang.Binding binding) { }', message:'groovy.lang'])
     }
 
     @Test
@@ -169,8 +169,8 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             def noViolation = { name, binding, int count -> }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def writeCount = { java.io.Writer writer, int count -> }', messageText:'java.io'],
-            [lineNumber:3, sourceLineText:'def initializeBinding = { String name, groovy.lang.Binding binding -> }', messageText:'groovy.lang'] )
+            [line:2, source:'def writeCount = { java.io.Writer writer, int count -> }', message:'java.io'],
+            [line:3, source:'def initializeBinding = { String name, groovy.lang.Binding binding -> }', message:'groovy.lang'])
     }
 
     @Test
@@ -180,8 +180,8 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             interface MyList extends java.util.List { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyHashMap extends java.util.HashMap { }', messageText:'java.util'],
-            [lineNumber:3, sourceLineText:'interface MyList extends java.util.List { }', messageText:'java.util'] )
+            [line:2, source:'class MyHashMap extends java.util.HashMap { }', message:'java.util'],
+            [line:3, source:'interface MyList extends java.util.List { }', message:'java.util'])
     }
 
     @Test
@@ -200,8 +200,8 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             class MyRange implements groovy.lang.Range { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyList implements java.util.List { }', messageText:'java.util'],
-            [lineNumber:3, sourceLineText:'class MyRange implements groovy.lang.Range { }', messageText:'groovy.lang'] )
+            [line:2, source:'class MyList implements java.util.List { }', message:'java.util'],
+            [line:3, source:'class MyRange implements groovy.lang.Range { }', message:'groovy.lang'])
     }
 
     @Test
@@ -213,8 +213,8 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'def runnable = [:] as java.lang.Runnable', messageText:'java.lang'],
-            [lineNumber:4, sourceLineText:'def string = (java.lang.String)123', messageText:'java.lang'])
+            [line:3, source:'def runnable = [:] as java.lang.Runnable', message:'java.lang'],
+            [line:4, source:'def string = (java.lang.String)123', message:'java.lang'])
     }
 
     @Test
@@ -242,8 +242,8 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:7, sourceLineText:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', messageText:'javax.servlet.http.Cookie'],
-            [lineNumber:8, sourceLineText:'def dataSource = [:] as javax.sql.DataSource', messageText:'javax.sql.DataSource'] )
+            [line:7, source:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', message:'javax.servlet.http.Cookie'],
+            [line:8, source:'def dataSource = [:] as javax.sql.DataSource', message:'javax.sql.DataSource'])
     }
 
     @Test
@@ -261,8 +261,8 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:7, sourceLineText:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', messageText:'javax.servlet.http.Cookie'],
-            [lineNumber:8, sourceLineText:'def dataSource = new javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
+            [line:7, source:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', message:'javax.servlet.http.Cookie'],
+            [line:8, source:'def dataSource = new javax.sql.DataSource()', message:'javax.sql.DataSource'])
     }
 
     @Test

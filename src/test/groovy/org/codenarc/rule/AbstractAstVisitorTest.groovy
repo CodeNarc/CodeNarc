@@ -17,10 +17,11 @@ package org.codenarc.rule
 
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for AbstractAstVisitor
@@ -41,9 +42,9 @@ class AbstractAstVisitorTest extends AbstractTestCase {
             }
         }
     """
-    private astVisitor
-    private sourceCode
-    private rule
+    private FakeAstVisitor1 astVisitor
+    private SourceCode sourceCode
+    private Rule rule
 
     @Test
     void testIsFirstVisit() {
@@ -82,7 +83,17 @@ class AbstractAstVisitorTest extends AbstractTestCase {
         assert v.message == 'abc'
     }
 
-    @Before
+    @Test
+    void test_isGeneratedCode() {
+        assert astVisitor.isGeneratedCode(astVisitor.ifStatement) == false
+    }
+
+    @Test
+    void test_isNotGeneratedCode() {
+        assert astVisitor.isNotGeneratedCode(astVisitor.ifStatement)
+    }
+
+    @BeforeEach
     void setUpAbstractAstVisitorTest() {
         sourceCode = new SourceString(SOURCE)
         rule = [getName : { 'DummyRule' } ] as Rule
@@ -94,19 +105,17 @@ class AbstractAstVisitorTest extends AbstractTestCase {
 
 // Test AstVisitor implementation class
 class FakeAstVisitor1 extends AbstractAstVisitor {
-    def returnStatement
-    def ifStatement
+    ReturnStatement returnStatement
+    IfStatement ifStatement
 
     @Override
     void visitReturnStatement(ReturnStatement returnStatement) {
         this.returnStatement = returnStatement
-        super.visitReturnStatement(returnStatement)
     }
 
     @Override
     void visitIfElse(IfStatement ifStatement) {
         this.ifStatement = ifStatement
-        super.visitIfElse(ifStatement)
     }
 
 }

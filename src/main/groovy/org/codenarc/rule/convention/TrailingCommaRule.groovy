@@ -21,7 +21,6 @@ import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.NamedArgumentListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.GroovyVersion
 import org.codenarc.util.SourceCodeUtil
 
 /**
@@ -31,6 +30,7 @@ import org.codenarc.util.SourceCodeUtil
  * Set the <code>checkList</code> and <code>checkMap</code> properties to false if needed.
  *
  * @author Yuriy Chulovskyy
+ * @author Chris Mair
  */
 class TrailingCommaRule extends AbstractAstVisitorRule {
 
@@ -94,15 +94,12 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
                 outerExpression.lastLineNumber,
                 outerExpression.lastColumnNumber
         )
-        sourceLinesBetween.any { it.contains(',') }
+        // Also check the full last line of the outer (containing) expression, since the comma might be right after it
+        sourceLinesBetween.any { it.contains(',') } || lastSourceLine(outerExpression).contains(',')
     }
 
     private static boolean lastExpressionIsEndOfExpression(ListExpression expression) {
         def lastExpression = expression.expressions[-1]
-
-        if (GroovyVersion.isGroovyVersion2()) {
-            return lastExpression.lineNumber == lastExpression.lastLineNumber
-        }
 
         return lastExpression.lineNumber == expression.lastLineNumber
     }

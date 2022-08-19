@@ -16,7 +16,7 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessaryParenthesesForMethodCallWithClosureRule
@@ -85,7 +85,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
         final SOURCE = '''
             dependencies {
                 testCompile "org.springframework:spring-test:$springVersion",
-                            ( 'org.spockframework:spock-core:0.5-groovy-1.8' ) {
+                            ('org.spockframework:spock-core:0.5-groovy-1.8') {
                                 exclude group: 'org.codehaus.groovy'
                             }
             }

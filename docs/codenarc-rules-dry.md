@@ -127,6 +127,7 @@ or 'TestCase.groovy'.
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
 | ignoreNumbers               | The optional comma-separated list of numbers that should be ignored (i.e., not cause a violation). | `0,1` |
+| duplicateNumberMinimumValue |  Ignore duplicate numbers less than this value | `null` |
 
 ### Notes
 
@@ -148,6 +149,8 @@ This rule checks for duplicate String literals within the current class.
 
 Code containing duplicate *String* literals can usually be improved by declaring the *String* as a constant field.
 
+This rule ignores (zero-length) empty strings.
+
 By default, the rule does not analyze test files. This rule sets the default value of the
 *doNotApplyToFilesMatching* property to ignore file names ending in 'Spec.groovy', 'Test.groovy', 'Tests.groovy'
 or 'TestCase.groovy'.
@@ -156,6 +159,7 @@ or 'TestCase.groovy'.
 |-----------------------------|------------------------|------------------|
 | ignoreStrings               | The optional comma-separated list of Strings that should be ignored (i.e., not cause a violation). | `''` (empty string) |
 | ignoreStringsDelimiter      | The delimiter char for `ignoreStrings`. | `,` (comma) |
+| duplicateStringMinimumLength| Ignore duplicate strings whose length is less than this value | `null` |
 
 ### Notes
 

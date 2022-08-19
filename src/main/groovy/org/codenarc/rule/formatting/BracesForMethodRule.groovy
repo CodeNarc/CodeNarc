@@ -24,54 +24,70 @@ import org.codenarc.rule.AbstractAstVisitorRule
  *
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class BracesForMethodRule extends AbstractAstVisitorRule {
+
     String name = 'BracesForMethod'
     int priority = 2
     Class astVisitorClass = BracesForMethodAstVisitor
     boolean sameLine = true
+    boolean allowBraceOnNextLineForMultilineDeclarations = false
 }
 
 class BracesForMethodAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
-        if (node.declaringClass?.isInterface() || node.isAbstract()) {
+        if (node.declaringClass?.isInterface() || node.isAbstract() || node.lineNumber == -1) {
             return
         }
 
-        String lastLine
-        if (node.exceptions) {
-            lastLine = lastSourceLineTrimmed(node.exceptions[-1])
-        } else if (node.parameters) {
-            lastLine = lastSourceLineTrimmed(node.parameters[-1])
-        } else {
-            lastLine = sourceLineTrimmed(node)
+        boolean containsRegex = hasOpeningBraceOnSameLine(node)
+
+        if (rule.sameLine && !containsRegex) {
+            if (!(rule.allowBraceOnNextLineForMultilineDeclarations && isMultilineWithOpeningBraceInNewLine(node))) {
+                addViolation(node, "Opening brace for the method $node.name should start on the same line")
+            }
         }
 
-        if (rule.sameLine) {
-            if(!(containsOpeningBraceAfterParenthesis(lastLine))) {
-                if (lineContainsMethodName(lastLine, node)) {
-                    addViolation(node, "Opening brace for the method $node.name should start on the same line")
-                }
-            }
-        } else {
-            if (containsOpeningBraceAfterParenthesis(lastLine)) {
-                if (lineContainsMethodName(lastLine, node)) {
-                    addViolation(node, "Opening brace for the method $node.name should start on a new line")
-                }
-            }
+        if (!rule.sameLine && containsRegex) {
+            addViolation(node, "Opening brace for the method $node.name should start on a new line")
         }
         super.visitConstructorOrMethod(node, isConstructor)
     }
 
-    // Make sure the line we are checking is actually the method declaration
-    private boolean lineContainsMethodName(String line, MethodNode node) {
-        return line?.contains(node.name) || node.name.startsWith('<')   // ignore <init> and <clinit>
+    private boolean hasOpeningBraceOnSameLine(MethodNode node) {
+        if (node.exceptions) {
+            def throwsLines = joinThrowsLines(node)
+            return throwsLines =~ /throws\s+.+\{/
+        }
+
+        // Does not declare any exceptions
+        int lastLineOfDeclaration = node.parameters ? node.parameters[-1].lineNumber : node.lineNumber
+        int firstLineOfBlock = node.code.lineNumber
+        def range = firstLineOfBlock..lastLineOfDeclaration
+        return range.find { lineNumber ->
+            return sourceCode.line(lineNumber - 1) =~ /\)\s*\{/
+        }
     }
 
-    private boolean containsOpeningBraceAfterParenthesis(String lastLine) {
-        int parenthesisIndex = lastLine?.indexOf(')') ?: 0
-        lastLine?.indexOf('{', parenthesisIndex) >= 0
+    private String joinThrowsLines(MethodNode node) {
+        def range = node.exceptions[0].lineNumber .. node.exceptions[-1].lastLineNumber
+        def lines = range.collect { lineNumber -> sourceCode.line(lineNumber - 1) }
+        return lines.join(' ')
     }
+
+    private boolean isMultilineWithOpeningBraceInNewLine(MethodNode methodNode) {
+        int firstLineOfDeclaration = methodNode.lineNumber
+        int lastLineOfDeclaration = methodNode.parameters ? methodNode.parameters[-1].lineNumber : methodNode.lineNumber
+        lastLineOfDeclaration = methodNode.exceptions ? methodNode.exceptions[-1].lineNumber : lastLineOfDeclaration
+
+        if (firstLineOfDeclaration == lastLineOfDeclaration) {
+            return false
+        }
+
+        return sourceCode.line(methodNode.code.lineNumber - 1).trim().startsWith('{')
+    }
+
 }

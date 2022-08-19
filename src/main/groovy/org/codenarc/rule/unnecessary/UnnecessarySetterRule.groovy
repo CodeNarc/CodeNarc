@@ -29,6 +29,7 @@ import org.codenarc.util.AstUtil
  * Setters take one method argument. Setter calls within an expression are ignored.
  */
 class UnnecessarySetterRule extends AbstractAstVisitorRule {
+
     String name = 'UnnecessarySetter'
     int priority = 3
     Class astVisitorClass = UnnecessarySetterAstVisitor
@@ -41,7 +42,8 @@ class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
         if (statement.expression instanceof MethodCallExpression) {
             addViolationsIfSetter(statement.expression)
         }
-        super.visitExpressionStatement(statement)
+        // Do not process any contained expressions
+        //super.visitExpressionStatement(statement)
     }
 
     private void addViolationsIfSetter(MethodCallExpression call) {
@@ -61,16 +63,11 @@ class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
         if (name.length() > 3
                 && name[0..2] == 'set'
                 && (name[3] as Character).isUpperCase()
-                && (name.length() == 4 || name[4..-1] != name[4..-1].toUpperCase()) ) {
-            // TODO Restore once CodeNarc upgrades to Groovy 2.4
-            // def propertyName = name[3..-1].uncapitalize()
-            // def assignment = AstUtil.getNodeText(call.arguments, sourceCode)
+                && (name.length() == 4 || name[4..-1] != name[4..-1].toUpperCase())) {
+            def propertyName = name[3..-1].uncapitalize()
+            def assignment = AstUtil.getNodeText(call.arguments.expressions[0], sourceCode)
 
-            def propertyName = name[3].toLowerCase()
-            if (name.length() > 4) {
-                propertyName += name[4..-1]
-            }
-            addUnnecessarySetterViolation(call, propertyName)
+            addUnnecessarySetterViolation(call, propertyName, assignment)
         }
     }
 
@@ -79,15 +76,12 @@ class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
         objectExpression instanceof VariableExpression && objectExpression.superExpression
     }
 
-    private void addUnnecessarySetterViolation(MethodCallExpression call, String propertyName) {
+    private void addUnnecessarySetterViolation(MethodCallExpression call, String propertyName, String assignment) {
         // Only add if there is not already a field with that name
         def fieldNames = currentClassNode.fields.name
         if (!fieldNames.contains(propertyName)) {
             String name = call.method.value
-            addViolation call, "$name(..) can probably be rewritten as $propertyName = .."
-
-            // TODO Restore once CodeNarc upgrades to Groovy 2.4
-            //addViolation call, "$name($assignment) can probably be rewritten as $propertyName = $assignment"
+            addViolation call, "$name($assignment) can probably be rewritten as $propertyName = $assignment"
         }
     }
 }

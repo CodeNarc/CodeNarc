@@ -16,7 +16,7 @@
 package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CyclomaticComplexityRule
@@ -200,9 +200,9 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase<CyclomaticComple
         rule.maxClassComplexity = 9
         rule.maxClassAverageMethodComplexity = 3
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '3.3']],
-                [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '10']],
-                [lineNumber:8, sourceLineText:'def myMethod3()', messageText:['myMethod3', '6']])
+                [line:2, source:'class MyClass', message:['MyClass', '3.3']],
+                [line:2, source:'class MyClass', message:['MyClass', '10']],
+                [line:8, source:'def myMethod3()', message:['myMethod3', '6']])
     }
 
     @Test

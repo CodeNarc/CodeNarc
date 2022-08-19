@@ -32,8 +32,8 @@ import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for AstUtil
@@ -57,7 +57,7 @@ class AstUtilTest extends AbstractTestCase {
                     2, 3)
             }
             @Before setUp() {  }
-            @First @Second def twoAnnotationsMethod() { }
+            @First @Second(size=1) def twoAnnotationsMethod() { }
         }
         enum MyEnum {
             READ, WRITE
@@ -110,7 +110,10 @@ class AstUtilTest extends AbstractTestCase {
 
         // outside of class -- script
         def scriptMethod() { 456 }
-    '''
+
+        // Annotated class as last line
+        @SuppressWarnings
+        class LastLineClass {}'''
     private visitor
     private sourceCode
 
@@ -121,6 +124,9 @@ class AstUtilTest extends AbstractTestCase {
 
         def annotatedClassNode = classNamed('SomeAnnotatedClass')
         assert AstUtil.findClassDeclarationLineNumber(annotatedClassNode, sourceCode) == 57
+
+        annotatedClassNode = classNamed('LastLineClass')
+        assert AstUtil.findClassDeclarationLineNumber(annotatedClassNode, sourceCode) == 72
     }
 
     @Test
@@ -143,7 +149,7 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetNodeTest() {
+    void testGetNodeText() {
         assert AstUtil.getNodeText(methodCallForMethodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
         assert AstUtil.getNodeText(methodCallForMethodNamed('multilineMethodCall'), sourceCode) == 'multilineMethodCall(1,'
     }
@@ -164,6 +170,23 @@ class AstUtilTest extends AbstractTestCase {
 
         node = visitor.methodNodes['otherMethod']
         assert AstUtil.getDeclaration(node, sourceCode).trim() == 'def otherMethod()'
+    }
+
+    @Test
+    void test_getSourceLinesForNode() {
+        def node = fieldNamed('myIntField')
+        def lines = AstUtil.getSourceLinesForNode(node, sourceCode)
+        assert lines == ['int myIntField = 45 /*111*/']
+
+        node = fieldNamed('annotatedField1')
+        lines = AstUtil.getSourceLinesForNode(node, sourceCode)
+        log(lines)
+        assert lines == ['@SuppressWarnings', "@Other(\'abc\') // comment", 'int annotatedField1']
+
+        node = methodNamed('doStuff')
+        lines = AstUtil.getSourceLinesForNode(node, sourceCode)
+        log(lines)
+        assert lines == ['def doStuff() {', 'println methodCallWithinEnum(true, \'abc\', 123); doStuff()', '}']
     }
 
     @Test
@@ -271,7 +294,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsMethodCall_GStringMethodName() {
-        def methodCall = visitor.methodCallExpressions.find { mc -> log(mc.method); mc.method instanceof GStringExpression }
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method instanceof GStringExpression }
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 1)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 2)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod')
@@ -329,23 +352,32 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testGetAnnotation() {
-        assert AstUtil.getAnnotation(visitor.methodNodes['otherMethod'], 'doesNotExist') == null
-        assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'doesNotExist') == null
-        assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'Before') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(methodNamed('otherMethod'), 'doesNotExist') == null
+        assert AstUtil.getAnnotation(methodNamed('setUp'), 'doesNotExist') == null
+        assert AstUtil.getAnnotation(methodNamed('setUp'), 'Before') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(methodNamed('methodWithAnnotationAndComment'), 'SuppressWarnings') instanceof AnnotationNode
+
+        assert AstUtil.getAnnotation(fieldNamed('annotatedField1'), 'Other') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(fieldNamed('annotatedField1'), 'SuppressWarnings') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(fieldNamed('annotatedField1'), 'DoesNotExist') == null
+
+        assert AstUtil.getAnnotation(classNamed('SomeAnnotatedClass'), 'SuppressWarnings') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(classNamed('SomeAnnotatedClass'), 'Ignore') instanceof AnnotationNode
+        assert AstUtil.getAnnotation(classNamed('SomeAnnotatedClass'), 'DoesNotExist') == null
     }
 
     @Test
     void testHasAnnotation() {
-        assert !AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'doesNotExist')
-        assert AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'Before')
+        assert !AstUtil.hasAnnotation(methodNamed('setUp'), 'doesNotExist')
+        assert AstUtil.hasAnnotation(methodNamed('setUp'), 'Before')
     }
 
     @Test
     void testHasAnyAnnotation() {
-        assert !AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist')
-        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'First')
-        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist', 'First')
-        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist', 'First', 'Second')
+        assert !AstUtil.hasAnyAnnotation(methodNamed('twoAnnotationsMethod'), 'doesNotExist')
+        assert AstUtil.hasAnyAnnotation(methodNamed('twoAnnotationsMethod'), 'First')
+        assert AstUtil.hasAnyAnnotation(methodNamed('twoAnnotationsMethod'), 'doesNotExist', 'First')
+        assert AstUtil.hasAnyAnnotation(methodNamed('twoAnnotationsMethod'), 'doesNotExist', 'First', 'Second')
     }
 
     @Test
@@ -373,14 +405,12 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     @Test
-    void getSourceBetweenNodes() {
+    void test_getSourceBetweenNodes() {
         def fieldNode1 = fieldNamed('myIntField')
         def methodNode = methodNamed('someMethod')
         String sourceBetween1 = AstUtil.getSourceBetweenNodes(fieldNode1, methodNode, sourceCode)
         log("sourceBetween1=$sourceBetween1")
-        if (GroovyVersion.isNotGroovyVersion2()) {
-            assert sourceBetween1.contains('/*111*/')
-        }
+        assert sourceBetween1.contains('/*111*/')
         assert sourceBetween1.contains('String myStringField')
         assert sourceBetween1.contains('/*999*/')
 
@@ -392,7 +422,7 @@ class AstUtilTest extends AbstractTestCase {
         assert sourceBetween2.contains('println methodCallWithinEnum')
     }
 
-    @Before
+    @BeforeEach
     void setUpAstUtilTest() {
         visitor = new AstUtilTestVisitor()
         applyVisitor(SOURCE)

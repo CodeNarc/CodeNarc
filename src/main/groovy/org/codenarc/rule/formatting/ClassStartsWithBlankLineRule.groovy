@@ -87,7 +87,7 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
         }
 
         String nextLine = getLine(classStartLine + 1)
-        if (!nextLine.trim()) {
+        if (nextLine != null && !nextLine.trim()) {
             addViolation('Class starts with a blank line after the opening brace', classStartLine + 1)
         }
     }
@@ -101,8 +101,8 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
         int classStartLine = AstUtil.findFirstNonAnnotationLine(classNode, sourceCode)
 
         if (getLine(classStartLine).contains(classNode.nameWithoutPackage)) {
-            String nextLine = getLine(classStartLine + 1)
-            if (nextLine.trim()) {
+            String nextLine = findFirstLineAfterOpeningBrace(classStartLine)
+            if (nextLine?.trim()) {
                 addViolation('Class does not start with a blank line after the opening brace', classStartLine + 1)
                 return
             }
@@ -112,8 +112,22 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
         classNode.methods.each { methodNode -> checkNonEmptyLineNumber(classStartLine, methodNode.lineNumber) }
     }
 
+    private String findFirstLineAfterOpeningBrace(int startLine) {
+        int lineNumber = startLine
+        while(true) {
+            String nextLine = getLine(lineNumber)
+            if (nextLine == null) {
+                return ''
+            }
+            if (nextLine.contains('{')) {
+                return getLine(lineNumber + 1)
+            }
+            lineNumber++
+        }
+    }
+
     private String getLine(int lineNumber) {
-        AstUtil.getRawLine(sourceCode, lineNumber - 1)
+        sourceCode.line(lineNumber - 1)
     }
 
     private void checkNonEmptyLineNumber(int classStartLine, int lineNumber) {
@@ -127,8 +141,9 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
     }
 
     @Memoized
-    private Boolean isSingleLineClass(ClassNode classNode) {
-        return AstUtil.getNodeText(classNode, sourceCode) == AstUtil.getLastLineOfNodeText(classNode, sourceCode)
+    private boolean isSingleLineClass(ClassNode classNode) {
+        int classDeclarationLine = AstUtil.findClassDeclarationLineNumber(classNode, getSourceCode())
+        return classDeclarationLine == classNode.lastLineNumber
     }
 
     private void addViolation(String message, int lineNumber) {

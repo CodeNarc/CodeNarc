@@ -18,7 +18,7 @@ package org.codenarc.rule.size
 import static org.codenarc.test.TestUtil.shouldFail
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ParameterCountRule

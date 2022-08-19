@@ -16,7 +16,7 @@
 package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedPrivateMethodRule
@@ -519,6 +519,25 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase<UnusedPrivateMeth
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_MethodSource_KnownLimitation() {
+        final SOURCE = '''
+            class MyClass {
+                @ParameterizedTest
+                @MethodSource('myTestArgs')
+                void myTest(String arg1, String arg2) {
+                    // ...
+                }
+                
+                //@SuppressWarnings('UnusedPrivateMethod')
+                private static Stream<Arguments> myTestArgs() {
+                    Stream.of(Arguments.of('one', 'two'), Arguments.of('three', 'four'))
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 10, 'private static Stream<Arguments> myTestArgs()')  // see #642
     }
 
     @Override

@@ -27,7 +27,7 @@ import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
+import org.junit.jupiter.api.BeforeEach
 
 import static org.junit.Assert.assertEquals
 
@@ -51,7 +51,7 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
     protected static final NEW_REPORT_FILE = createTemporaryReportFile().absolutePath
     protected static final TITLE = 'My Cool Project'
     protected static final String LOGO_FILE = 'http://codenarc.github.io/CodeNarc/images/codenarc-logo.png'
-    protected static final String CODENARC_URL = 'https://www.codenarc.org'
+    protected static final String CODENARC_URL = 'https://codenarc.org'
 
     protected reportWriter
     protected analysisContext
@@ -64,18 +64,19 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
     // Setup and tear-down and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpAbstractHtmlReportWriterTest() {
         log(new File('.').absolutePath)
 
         dirResultsMain = new DirectoryResults('src/main', 1)
-        def dirResultsCode = new DirectoryResults('src/main/code', 2)
-        def dirResultsTest = new DirectoryResults('src/main/test', 3)
-        def dirResultsTestSubdirNoViolations = new DirectoryResults('src/main/test/noviolations', 4)
+        def dirResultsCode = new DirectoryResults('src/main/code', 1)
+        def dirResultsTest = new DirectoryResults('src/main/test', 1)
+        def dirResultsTestSubdirNoViolations = new DirectoryResults('src/main/test/noviolations', 1)
         def dirResultsTestSubdirEmpty = new DirectoryResults('src/main/test/empty')
         def fileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
-        def fileResults2 = new FileResults('src/main/MyAction2.groovy', [VIOLATION3])
-        def fileResults3 = new FileResults('src/main/MyActionTest.groovy', [VIOLATION1, VIOLATION2])
+        def fileResults2 = new FileResults('src/main/code/MyAction2.groovy', [VIOLATION3])
+        def fileResults3 = new FileResults('src/main/test/MyActionTest.groovy', [VIOLATION1, VIOLATION2])
+        def fileResults4 = new FileResults('src/main/test/noviolations/CleanCode.groovy', [])
         dirResultsMain.addChild(fileResults1)
         dirResultsMain.addChild(dirResultsCode)
         dirResultsMain.addChild(dirResultsTest)
@@ -83,6 +84,7 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
         dirResultsTest.addChild(fileResults3)
         dirResultsTest.addChild(dirResultsTestSubdirNoViolations)
         dirResultsTest.addChild(dirResultsTestSubdirEmpty)
+        dirResultsTestSubdirNoViolations.addChild(fileResults4)
         results = new DirectoryResults()
         results.addChild(dirResultsMain)
 

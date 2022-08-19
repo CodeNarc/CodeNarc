@@ -63,21 +63,21 @@ a couple of the rules that it contains:
 If you have an XML *RuleSet*, then you can configure rules when you include a whole *RuleSet*
 using `\*ruleset-ref\`*, as in the following example:
 
-```
-    *ruleset-ref path='rulesets/size.xml'*
-        *rule-config name='ClassSize'*
-            *property name='maxLines' value='500'/*
-        */rule-config*
-    */ruleset-ref*
+```xml
+    <ruleset-ref path='rulesets/size.xml'>
+        <rule-config name='ClassSize'>
+            <property name='maxLines' value='500'/>
+        </rule-config>
+    </ruleset-ref>
 ```
 
 Or you can configure *Rules* that you include individually using `\*rule\`*, as in the following example:
 
-```
-    *rule class='org.codenarc.rule.naming.VariableNameRule'*
-        *property name="finalRegex" value="F_[A-Z0-9]*"/*
-        *property name='priority' value='1'/*
-    */rule*
+```xml
+    <rule class='org.codenarc.rule.naming.VariableNameRule'>
+        <property name="finalRegex" value="F_[A-Z0-9]*"/>
+        <property name='priority' value='1'/>
+    </rule>
 ```
 
 
@@ -86,9 +86,11 @@ Or you can configure *Rules* that you include individually using `\*rule\`*, as 
 **CodeNarc** reads the properties file named "codenarc.properties", if found on the classpath,
 and applies the property values to any matching *Rules*. You can optionally override the location
 of the properties file by setting the "codenarc.properties.file" system property to the path or
-URL of the properties file. That can include a "file:" URL to load from a relative or absolute
-path on the filesystem (e.g., "file:relative/path/override-codenarc.properties"). If the
-properties file is not found, then do nothing.
+URL of the properties file. You can also override the location of the properties file by 
+specifying the `-properties=FILENAME` command-line parameter (if executing CodeNarc from the 
+command-line). In either case, that filename can include a "file:" URL to load from a relative 
+or absolute path on the filesystem (e.g., "file:relative/path/override-codenarc.properties").
+If the properties file is not found, then it logs a warning message but does nothing else.
 
 For each properties entry of the form *[rule-name].[property-name]=[property-value]*,
 the named property for the rule matching *rule-name* is set to the
@@ -216,7 +218,8 @@ this value is used as the description text for this rule, overriding any descrip
 found in the i18n resource bundles. This property defaults to `null`. Also see
 [Include Substitutable Message Parameters in a Rule Description](#include-substitutable-message-parameters-in-a-rule-description)
 
-You can also override the default `name` or `priority` properties for each rule.
+You can also override the default `name` or `priority` properties for each rule. If you override the `name` property, 
+you should also override the `description` property; otherwise it will not find a description for the rule.
 
 
 ## Turning Off A Rule
@@ -400,11 +403,11 @@ For example, in the following excerpt from a *RuleSet* file, because the *name* 
 customized for the **IllegalRegexRule**, the new rule name "AuthorTagNotAllowed" will show up
 at the bottom of the HTML report, instead of the default rule name "IllegalRegex".
 
-```
-    *rule class='org.codenarc.rule.generic.IllegalRegexRule'*
-        *property name="name" value="AuthorTagNotAllowed"/*
-        *property name='regex' value='\@author'/*
-    */rule*
+```xml
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name="name" value="AuthorTagNotAllowed"/>
+        <property name='regex' value='\@author'/>
+    </rule>
 ```
 
 The rule description must be added to the custom messages resource bundle file

@@ -16,7 +16,7 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for MethodReturnTypeRequiredRule
@@ -67,14 +67,14 @@ class MethodReturnTypeRequiredRuleTest extends AbstractRuleTestCase<MethodReturn
 
         assertViolations(SOURCE,
             [
-                lineNumber: 3,
-                sourceLineText: 'def defReturningMethod() {',
-                messageText: 'Method "defReturningMethod" has a dynamic return type'
+                line: 3,
+                source: 'def defReturningMethod() {',
+                message: 'Method "defReturningMethod" has a dynamic return type'
             ],
             [
-                lineNumber: 6,
-                sourceLineText: 'private noReturnTypeMethod() {',
-                messageText: 'Method "noReturnTypeMethod" has a dynamic return type'
+                line: 6,
+                source: 'private noReturnTypeMethod() {',
+                message: 'Method "noReturnTypeMethod" has a dynamic return type'
             ]
         )
     }

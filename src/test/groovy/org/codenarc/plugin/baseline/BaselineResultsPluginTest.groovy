@@ -25,8 +25,8 @@ import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.util.io.ClassPathResource
 import org.codenarc.util.io.StringResource
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for BaselineResultsPlugin
@@ -255,7 +255,7 @@ class BaselineResultsPluginTest extends AbstractTestCase {
         shouldFailWithMessageContaining('fileViolations') { plugin.processViolationsForFile(null) }
     }
 
-    @Before
+    @BeforeEach
     void setUp() {
         plugin.initialize()
     }

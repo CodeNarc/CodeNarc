@@ -43,7 +43,7 @@ class JUnitUnnecessaryThrowsExceptionAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitMethodEx(MethodNode node) {
         if (node.exceptions && node.parameters.size() == 0 && node.isPublic() && !node.isStatic() && node.isVoidMethod() &&
-                (isJUnit3MatchingMethod(node) || hasJUnit4Annotation(node)) )  {
+                (isJUnit3MatchingMethod(node) || hasJUnit4Annotation(node)))  {
             addViolation(node, "The ${node.name} method in class $currentClassName declares thrown exceptions, which is not necessary")
         }
         super.visitMethodEx(node)

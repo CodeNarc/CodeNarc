@@ -16,7 +16,7 @@
 package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for IllegalClassReferenceRule - checks for specifying values containing wildcards for the classNames field
@@ -42,10 +42,10 @@ class IllegalClassReferenceRule_WildcardsClassNamesTest extends AbstractRuleTest
         '''
         rule.classNames = 'com.*.Example, com.other.Oth?r,*Dao'
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'import com.other.Example', messageText:'com.other.Example'],
-            [lineNumber:3, sourceLineText:'class MyClass extends com.example.Example {', messageText:'com.example.Example'],
-            [lineNumber:4, sourceLineText:'void writeOther(com.other.Other other) { }', messageText:'com.other.Other'],
-            [lineNumber:5, sourceLineText:'def myDao = new org.stuff.CoolDao', messageText:'org.stuff.CoolDao'])
+            [line:2, source:'import com.other.Example', message:'com.other.Example'],
+            [line:3, source:'class MyClass extends com.example.Example {', message:'com.example.Example'],
+            [line:4, source:'void writeOther(com.other.Other other) { }', message:'com.other.Other'],
+            [line:5, source:'def myDao = new org.stuff.CoolDao', message:'org.stuff.CoolDao'])
     }
 
     @Test

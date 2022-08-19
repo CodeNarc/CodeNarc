@@ -16,7 +16,7 @@
 package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ClassNameSameAsSuperclassRule
@@ -58,14 +58,14 @@ class ClassNameSameAsSuperclassRuleTest extends AbstractRuleTestCase<ClassNameSa
     void testClassNames_SameAsImplicitSuperclass() {
         final SOURCE = 'class Object { }'
         assertViolations(SOURCE,
-            [lineNumber:1, sourceLineText:'class Object', messageText:'Class Object has the same simple name as its superclass java.lang.Object'] )
+            [line:1, source:'class Object', message:'Class Object has the same simple name as its superclass java.lang.Object'])
     }
 
     @Test
     void testClassName_SameAsSuperclass() {
         final SOURCE = 'class MyClass extends other.MyClass { }'
         assertViolations(SOURCE,
-            [lineNumber:1, sourceLineText:'class MyClass extends other.MyClass', messageText:'Class MyClass has the same simple name as its superclass other.MyClass'] )
+            [line:1, source:'class MyClass extends other.MyClass', message:'Class MyClass has the same simple name as its superclass other.MyClass'])
     }
 
     @Test
@@ -75,7 +75,7 @@ class ClassNameSameAsSuperclassRuleTest extends AbstractRuleTestCase<ClassNameSa
             class MyClass extends other.MyClass { }
             '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'class MyClass extends other.MyClass', messageText:'Class com.example.MyClass has the same simple name as its superclass other.MyClass'] )
+            [line:3, source:'class MyClass extends other.MyClass', message:'Class com.example.MyClass has the same simple name as its superclass other.MyClass'])
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import org.codenarc.source.SourceCode
  * Checks that no lines of source code end with whitespace characters.
  *
  * @author Joe Sondow
+ * @author Chris Mair
  */
 class TrailingWhitespaceRule extends AbstractRule {
 
@@ -31,10 +32,10 @@ class TrailingWhitespaceRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        def matcher = sourceCode.getText() =~ /[^\n]*[ \t]+\r?\n/
-        while (matcher.find()) {
-            def lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.start())
-            violations.add(createViolation(lineNumber, matcher.group(), 'Line ends with whitespace characters'))
+        sourceCode.lines.eachWithIndex { line, index ->
+            if (line && line[-1].isAllWhitespace()) {
+                violations.add(createViolation(index + 1, line, 'Line ends with whitespace characters'))
+            }
         }
     }
 }

@@ -15,7 +15,10 @@
  */
 package org.codenarc.rule.groovyism
 
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.NamedArgumentListExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
@@ -38,5 +41,15 @@ class ExplicitCallToDivMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
     @Override
     protected String getViolationMessage(MethodCallExpression exp) {
         "Explicit call to ${exp.text} method can be rewritten as ${exp.objectExpression.text} / ${exp.arguments.text}"
+    }
+
+    @Override
+    protected boolean shouldIgnoreViolationForMethodCall(MethodCallExpression call) {
+        // We know the method call has exactly one argument
+        // Ignore if argument is a Map (named args), Closure or a String
+        def arg1 = call.arguments.expressions[0]
+        return arg1 instanceof NamedArgumentListExpression ||
+                arg1 instanceof ClosureExpression ||
+                (arg1 instanceof ConstantExpression && arg1.value instanceof String)
     }
 }

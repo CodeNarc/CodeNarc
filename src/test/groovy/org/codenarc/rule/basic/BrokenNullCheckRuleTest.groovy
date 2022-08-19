@@ -16,7 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for BrokenNullCheckRule
@@ -67,12 +67,12 @@ class BrokenNullCheckRuleTest extends AbstractRuleTestCase<BrokenNullCheckRule> 
             return record == null && !record.id
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (name != null || name.length > 0) { }', messageText:['name', 'None']],
-            [lineNumber:3, sourceLineText:'if (name != null || name.length) { }', messageText:'name'],
-            [lineNumber:4, sourceLineText:'while (record == null && record.id < 10) { }', messageText:'record'],
-            [lineNumber:5, sourceLineText:'if (record == null && record.id && somethingElse()) { }', messageText:'record'],
-            [lineNumber:6, sourceLineText:'def isNotValid = record == null && record.id < 10', messageText:'record'],
-            [lineNumber:7, sourceLineText:'return record == null && !record.id', messageText:'record'])
+            [line:2, source:'if (name != null || name.length > 0) { }', message:['name', 'None']],
+            [line:3, source:'if (name != null || name.length) { }', message:'name'],
+            [line:4, source:'while (record == null && record.id < 10) { }', message:'record'],
+            [line:5, source:'if (record == null && record.id && somethingElse()) { }', message:'record'],
+            [line:6, source:'def isNotValid = record == null && record.id < 10', message:'record'],
+            [line:7, source:'return record == null && !record.id', message:'record'])
     }
 
     @Test
@@ -88,10 +88,10 @@ class BrokenNullCheckRuleTest extends AbstractRuleTestCase<BrokenNullCheckRule> 
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'if (name != null || name.size() > 0) { }', messageText:['name', 'MyClass']],
-            [lineNumber:5, sourceLineText:'if (string == null && string.equals("")) { }', messageText:'string'],
-            [lineNumber:6, sourceLineText:'def isValid = name != null || name.size() > 0', messageText:'name'],
-            [lineNumber:7, sourceLineText:'return name != null || !name.size()', messageText:'name'])
+            [line:4, source:'if (name != null || name.size() > 0) { }', message:['name', 'MyClass']],
+            [line:5, source:'if (string == null && string.equals("")) { }', message:'string'],
+            [line:6, source:'def isValid = name != null || name.size() > 0', message:'name'],
+            [line:7, source:'return name != null || !name.size()', message:'name'])
     }
 
     @Override

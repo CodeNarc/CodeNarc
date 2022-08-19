@@ -16,7 +16,7 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessaryDotClassRule
@@ -50,8 +50,8 @@ class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase<UnnecessaryDotCla
             def theClass = com.foo.Bar.class
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def x = String.class', messageText:'String.class can be rewritten as String'],
-            [lineNumber:3, sourceLineText:'def theClass = com.foo.Bar.class', messageText:'com.foo.Bar.class can be rewritten as com.foo.Bar'])
+            [line:2, source:'def x = String.class', message:'String.class can be rewritten as String'],
+            [line:3, source:'def theClass = com.foo.Bar.class', message:'com.foo.Bar.class can be rewritten as com.foo.Bar'])
     }
 
     @Test

@@ -16,7 +16,7 @@
 package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for InterfaceNameSameAsSuperInterfaceRule
@@ -55,7 +55,7 @@ class InterfaceNameSameAsSuperInterfaceRuleTest extends AbstractRuleTestCase<Int
             interface MyInterface extends other.MyInterface { }
             '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'interface MyInterface extends other.MyInterface', messageText:'Interface MyInterface has the same simple name as its super-interface other.MyInterface'])
+            [line:2, source:'interface MyInterface extends other.MyInterface', message:'Interface MyInterface has the same simple name as its super-interface other.MyInterface'])
     }
 
     @Test
@@ -65,7 +65,7 @@ class InterfaceNameSameAsSuperInterfaceRuleTest extends AbstractRuleTestCase<Int
             interface MyInterface extends other.MyInterface { }
             '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'interface MyInterface extends other.MyInterface', messageText:'Interface com.example.MyInterface has the same simple name as its super-interface other.MyInterface'] )
+            [line:3, source:'interface MyInterface extends other.MyInterface', message:'Interface com.example.MyInterface has the same simple name as its super-interface other.MyInterface'])
     }
 
     @Override

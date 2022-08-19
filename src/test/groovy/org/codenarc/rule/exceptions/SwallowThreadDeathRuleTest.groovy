@@ -16,7 +16,7 @@
 package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SwallowThreadDeathRule

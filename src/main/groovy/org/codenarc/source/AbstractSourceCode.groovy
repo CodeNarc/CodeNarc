@@ -16,6 +16,7 @@
 package org.codenarc.source
 
 import groovy.grape.GrabAnnotationTransformation
+import org.codehaus.groovy.control.Phases
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codehaus.groovy.ast.ClassNode
@@ -114,6 +115,9 @@ abstract class AbstractSourceCode implements SourceCode {
     }
 
     private void logCompilationError(Throwable e) {
+        if (getAstCompilerPhase() != DEFAULT_COMPILER_PHASE) {
+            LOG.warn("WARNING: Compilation error for non-default compiler phase (${Phases.getDescription(getAstCompilerPhase())}). Consider removing \"enhanced\" rules from your ruleset.")
+        }
         LOG.warn("Compilation failed for [${this}]; ${e}.")
     }
 

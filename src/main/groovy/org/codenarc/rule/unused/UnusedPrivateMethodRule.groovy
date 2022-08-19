@@ -34,9 +34,10 @@ import org.codehaus.groovy.ast.expr.*
  *
  * Known limitations:
  * <ul>
- *  <li>Does not handle method reference through property access: getName() accessed as x.name</li>
- *  <li>Does not handle method invocations when method name is a GString (e.g. this."${methodName}"</li>
- *  <li>Does not handle invoking private method of another instance (i.e. other than 'this')</li>
+ *  <li>Does not recognize method reference through property access: getName() accessed as x.name</li>
+ *  <li>Does not recognize method invocations when method name is a GString (e.g. this."${methodName}"</li>
+ *  <li>Does not recognize invoking private method of another instance (i.e. other than 'this')</li>
+ *  <li>Does not recognize when a private method is used as @MethodSource</li>
  *  <li>Does not differentiate between multiple private methods with the same name but different parameters (i.e., overloaded)</li>
  *  <li>Does not check constructors</li>
  * </ul>

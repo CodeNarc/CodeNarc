@@ -16,8 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for IndentationRule
@@ -69,9 +68,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |\tclass MyClass3 { }
         '''.stripMargin()
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyClass { }', messageText:'The class MyClass'],
-            [lineNumber:3, sourceLineText:'class MyClass2 { }', messageText:'The class MyClass2'],
-            [lineNumber:4, sourceLineText:'class MyClass3 { }', messageText:'The class MyClass3'],
+            [line:2, source:'class MyClass { }', message:'The class MyClass'],
+            [line:3, source:'class MyClass2 { }', message:'The class MyClass2'],
+            [line:4, source:'class MyClass3 { }', message:'The class MyClass3'],
         )
     }
 
@@ -104,8 +103,8 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'protected static final class ArtifactLocation {',
-                        messageText:'The class Artifact$ArtifactLocation is at the incorrect indent level: Expected column 5 but was 3'])
+                [line:3, source:'protected static final class ArtifactLocation {',
+                        message:'The class Artifact$ArtifactLocation is at the incorrect indent level: Expected column 5 but was 3'])
     }
 
     @Test
@@ -171,17 +170,10 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |    private String name        // Field: correct
             |}
         '''.stripMargin()
-        if (GroovyVersion.isGroovyVersion2()) {
-            assertViolations(SOURCE,
-                    [lineNumber: 6, sourceLineText: 'class MyOtherClass', messageText: 'The class MyOtherClass'],
-                    [lineNumber: 16, sourceLineText: '@Package void two()', messageText: 'The method two in class TestClass'],
-                    [lineNumber: 22, sourceLineText: 'private String name', messageText: 'The field name in class TestClass'])
-        } else {
-            assertViolations(SOURCE,
-                    [lineNumber: 5, sourceLineText: '@Component', messageText: 'The class MyOtherClass'],
-                    [lineNumber: 16, sourceLineText: '@Package void two()', messageText: 'The method two in class TestClass'],
-                    [lineNumber: 22, sourceLineText: 'private String name', messageText: 'The field name in class TestClass'])
-        }
+        assertViolations(SOURCE,
+                [line: 6, source: 'class MyOtherClass { }', message: 'The class MyOtherClass'],
+                [line: 16, source: '@Package void two()', message: 'The method two in class TestClass'],
+                [line: 22, source: 'private String name', message: 'The field name in class TestClass'])
     }
 
     // Tests for method declarations
@@ -203,13 +195,23 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'def myMethod1()', messageText:'The method myMethod1 in class MyClass'],
-                [lineNumber:4, sourceLineText:'private String doStuff()', messageText:'The method doStuff in class MyClass'],
-                [lineNumber:6, sourceLineText:'static void printReport(String filename)', messageText:'The method printReport in class MyClass'],
-                [lineNumber:7, sourceLineText:'protected static void count()', messageText:'The method count in class MyClass'],
-                [lineNumber:9, sourceLineText:'public abstract void doStuff()', messageText:'The method doStuff in class MyClass'],
-                [lineNumber:12, sourceLineText:'public abstract void run()', messageText:'The method run in class MyClass'],
+                [line:3, source:'def myMethod1()', message:'The method myMethod1 in class MyClass'],
+                [line:4, source:'private String doStuff()', message:'The method doStuff in class MyClass'],
+                [line:6, source:'static void printReport(String filename)', message:'The method printReport in class MyClass'],
+                [line:7, source:'protected static void count()', message:'The method count in class MyClass'],
+                [line:9, source:'public abstract void doStuff()', message:'The method doStuff in class MyClass'],
+                [line:12, source:'public abstract void run()', message:'The method run in class MyClass'],
         )
+    }
+
+    @Test
+    void test_Method_SingleLineMethodDeclaration_NoViolation() {
+        final SOURCE = '''
+            |class MyClass {
+            |    protected void addToCount() { count += 10 }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
     }
 
     @Test
@@ -247,8 +249,8 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         '''.stripMargin()
         rule.spacesPerIndentLevel = 2
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'def myMethod1()', messageText:'The method myMethod1 in class MyClass'],
-            [lineNumber:4, sourceLineText:'static void printReport(String filename)', messageText:'The method printReport in class MyClass'],
+            [line:3, source:'def myMethod1()', message:'The method myMethod1 in class MyClass'],
+            [line:4, source:'static void printReport(String filename)', message:'The method printReport in class MyClass'],
         )
     }
 
@@ -285,8 +287,8 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'MyAstVisitor() {', messageText:'The constructor in class MyAstVisitor'],
-                [lineNumber:5, sourceLineText:'println 123', messageText:'The statement on line 5 in class MyAstVisitor'],
+                [line:3, source:'MyAstVisitor() {', message:'The constructor in class MyAstVisitor'],
+                [line:5, source:'println 123', message:'The statement on line 5 in class MyAstVisitor'],
         )
     }
 
@@ -329,10 +331,10 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'private static final NAME = "Joe"', messageText:'The field NAME in class MyClass'],
-                [lineNumber:4, sourceLineText:'protected int count', messageText:'The field count in class MyClass'],
-                [lineNumber:5, sourceLineText:'Date date', messageText:'The field date in class MyClass'],
-                [lineNumber:6, sourceLineText:'def lastIndex', messageText:'The field lastIndex in class MyClass'],
+                [line:3, source:'private static final NAME = "Joe"', message:'The field NAME in class MyClass'],
+                [line:4, source:'protected int count', message:'The field count in class MyClass'],
+                [line:5, source:'Date date', message:'The field date in class MyClass'],
+                [line:6, source:'def lastIndex', message:'The field lastIndex in class MyClass'],
         )
     }
 
@@ -345,7 +347,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'def max, min', messageText:'The field max in class MyClass'],
+                [line:4, source:'def max, min', message:'The field max in class MyClass'],
         )
     }
 
@@ -424,10 +426,10 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'def internalCounts = [1, 4, 2]', messageText:'The statement on line 4 in class MyClass'],
-                [lineNumber:5, sourceLineText:'id.trim()', messageText:'The statement on line 5 in class MyClass'],
-                [lineNumber:6, sourceLineText:'new Object()', messageText:'The statement on line 6 in class MyClass'],
-                [lineNumber:12, sourceLineText:'return 99', messageText:'The statement on line 12 in class MyClass'],
+                [line:4, source:'def internalCounts = [1, 4, 2]', message:'The statement on line 4 in class MyClass'],
+                [line:5, source:'id.trim()', message:'The statement on line 5 in class MyClass'],
+                [line:6, source:'new Object()', message:'The statement on line 6 in class MyClass'],
+                [line:12, source:'return 99', message:'The statement on line 12 in class MyClass'],
         )
     }
 
@@ -507,10 +509,10 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber:12, sourceLineText:'println 123', messageText:'The statement on line 12 in class MyClass'],
-                [lineNumber:16, sourceLineText:'println someParam', messageText:'The statement on line 16 in class MyClass'],
-                [lineNumber:17, sourceLineText:'println 123', messageText:'The statement on line 17 in class MyClass'],
-                [lineNumber:21, sourceLineText:'println 123', messageText:'The statement on line 21 in class MyClass'])
+                [line:12, source:'println 123', message:'The statement on line 12 in class MyClass'],
+                [line:16, source:'println someParam', message:'The statement on line 16 in class MyClass'],
+                [line:17, source:'println 123', message:'The statement on line 17 in class MyClass'],
+                [line:21, source:'println 123', message:'The statement on line 21 in class MyClass'])
     }
 
     @Test
@@ -612,7 +614,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        }
             |        catch(Throwable t) {
             |            println "ERROR: ${t.message}"
-            |            t.printStackTrace()
+            |                 t.printStackTrace()        // wrong column
             |        }
             |        finally {
             |            closeResources()
@@ -620,16 +622,44 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |    }
             |    private void executeOtherOne() {
             |        try {
+            |      println 999                          // wrong column 
             |            executeWithArgs(args)
             |        } catch(Throwable t) {
             |            t.printStackTrace()
             |        } finally {
             |            closeResources()
+            |             notifyUser()                  // wrong column
             |        }
             |    }
             |}
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertViolations(SOURCE,
+                [line:9, source:'t.printStackTrace()', message:'The statement on line 9 in class MyClass'],
+                [line:17, source:'println 999', message:'The statement on line 17 in class MyClass'],
+                [line:23, source:'notifyUser()', message:'The statement on line 23 in class MyClass'])
+    }
+
+    @Test
+    void test_Statement_TryWithResources() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private void execute() {
+            |        try (def input = url.openStream()
+            |            def output = new ByteArrayOutputStream(4096)) {
+            |
+            |            println input.text       
+            |        }
+            |    }
+            |
+            |    private void run() {
+            |        try (InputStream input = url.openStream(); OutputStream output = new ByteArrayOutputStream(4096)) {
+            |               println input.text          // wrong column
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [line:13, source:'println input.text', message:'The statement on line 13 in class MyClass'])
     }
 
     @Test
@@ -735,7 +765,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |class MyClass {
             |    static {
             |        println "Static initializer"
-            |        ClosureExpression.metaClass.getText = { return CLOSURE_TEXT }
+            |          initializeMetaClass()            // wrong column
             |    }
             |
             |    static { println "init" }
@@ -749,10 +779,14 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |    // Instance initializer
             |    {
             |        println "Instance initializer"
+            |      initialize(1)                        // wrong column
+            |        initialize(2)
             |    }
             |}
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertViolations(SOURCE,
+                [line:5, source:'initializeMetaClass()', message:'The statement on line 5 in class MyClass'],
+                [line:19, source:'initialize(1)', message:'The statement on line 19 in class MyClass'])
     }
 
     // Tests for @SuppressWarnings
@@ -988,7 +1022,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         final SOURCE = '''
             |class IndentationTest {
             |    private static final CACHE2 = build(
-            |       new CacheLoader<String>() { } )     // Violation - wrong column
+            |       new CacheLoader<String>() { })     // Violation - wrong column
             |
             |    void someMethod() {
             |        CacheBuilder2.build(
@@ -1015,12 +1049,12 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber:4, sourceLineText:'new CacheLoader<String>() { }', messageText:'The inner class IndentationTest$'],
-                [lineNumber:8, sourceLineText:'new CacheLoader2<String>() {', messageText:'The inner class IndentationTest$'],
-                [lineNumber:16, sourceLineText:'new BigDeal() {', messageText:'The statement on line 16'],
-                [lineNumber:20, sourceLineText:'new Runner() { }', messageText:'The statement on line 20'],
-                [lineNumber:23, sourceLineText:'new CacheLoader2() { }', messageText:'The inner class IndentationTest$'],
-                [lineNumber:26, sourceLineText:'new Processor2() { }', messageText:'The inner class IndentationTest$'],
+                [line:4, source:'new CacheLoader<String>() { }', message:'The inner class IndentationTest$'],
+                [line:8, source:'new CacheLoader2<String>() {', message:'The inner class IndentationTest$'],
+                [line:16, source:'new BigDeal() {', message:'The statement on line 16'],
+                [line:20, source:'new Runner() { }', message:'The statement on line 20'],
+                [line:23, source:'new CacheLoader2() { }', message:'The inner class IndentationTest$'],
+                [line:26, source:'new Processor2() { }', message:'The inner class IndentationTest$'],
         )
     }
 
@@ -1029,12 +1063,27 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         final SOURCE = '''
             |class IndentationTest {
             |    static final CACHE = build(
-            |    new Cache<String>() { } )          // Known Limitation: valid indent offset, but not indented enough; no violation
+            |    new Cache<String>() { })          // Known Limitation: valid indent offset, but not indented enough; no violation
             |
             |    def list = [1, 2,
             |      new Processor() { }]             // Known Limitation: Skips List expressions; Wrong column, but no violation
             |}
         '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_GeneratedMethodCall_NoViolations() {
+        final SOURCE = '''
+            |def queueTests() {
+            |  { stages ->
+            |    queue(queueTestStage())(stages, 'tests', []) {
+            |      'tmp/script.sh\'
+            |    }
+            |  }
+            |}
+        '''.stripMargin()
+        rule.spacesPerIndentLevel = 2
         assertNoViolations(SOURCE)
     }
 

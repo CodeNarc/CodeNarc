@@ -32,8 +32,8 @@ import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.util.io.ClassPathResource
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for the CodeNarc Ant Task
@@ -272,7 +272,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
-    @Before
+    @BeforeEach
     void setUpCodeNarcTaskTest() {
         project = new Project(basedir:'.')
         fileSet = new FileSet(

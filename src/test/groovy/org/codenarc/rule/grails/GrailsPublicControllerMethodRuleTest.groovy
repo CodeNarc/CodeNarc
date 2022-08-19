@@ -16,8 +16,8 @@
 package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for GrailsPublicControllerMethodRule
@@ -90,7 +90,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase<GrailsPu
                 }
                 protected boolean isReady() { true }
                 def show = {
-                    [ book : Book.get( params.id ) ]
+                    [ book : Book.get(params.id) ]
                 }
                 private int calculate() { 23 }
             }
@@ -142,7 +142,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase<GrailsPu
             }
         '''
         rule.ignoreMethodNames = 'otherMethod'
-        assertViolations(SOURCE, [lineNumber:3, sourceLineText:'void myMethod()'])
+        assertViolations(SOURCE, [line:3, source:'void myMethod()'])
     }
 
     @Test
@@ -155,10 +155,10 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase<GrailsPu
             }
         '''
         rule.ignoreMethodNames = 'is*,doO??erSt*ff,other'
-        assertViolations(SOURCE, [lineNumber:5, sourceLineText:'void myMethod()'])
+        assertViolations(SOURCE, [line:5, source:'void myMethod()'])
     }
 
-    @Before
+    @BeforeEach
     void setUpGrailsPublicControllerMethodRuleTest() {
         sourceCodePath = CONTROLLER_PATH
     }

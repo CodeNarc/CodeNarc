@@ -16,7 +16,7 @@
 package org.codenarc.rule.comments
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JavadocEmptyFirstLineRule
@@ -110,16 +110,16 @@ class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFir
     @Test
     void test_JavadocWithEmptyFirstLines_Violations() {
         assertViolations(SOURCE_WITH_VIOLATIONS,
-            [lineNumber:2, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'],
-            [lineNumber:10, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'])
+            [line:2, source:'/**', message:'The first line of the javadoc is empty'],
+            [line:10, source:'/**', message:'The first line of the javadoc is empty'])
     }
 
     @Test
     void test_JavadocWithEmptyFirstLines_WindowsLineEndings_Violations() {
         final SOURCE = SOURCE_WITH_VIOLATIONS.replace('\n', '\r\n')
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'],
-                [lineNumber:10, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'])
+                [line:2, source:'/**', message:'The first line of the javadoc is empty'],
+                [line:10, source:'/**', message:'The first line of the javadoc is empty'])
     }
 
     @Override

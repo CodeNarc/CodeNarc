@@ -23,7 +23,7 @@ import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for DisableRulesInCommentsPlugin
@@ -200,6 +200,19 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
             println 123
             '''
         assertAllViolationsEnabled()
+    }
+
+    @Test
+    void test_processViolationsForFile_RuleWithInlineDescription() {
+        sourceText = '''
+            class MyClass {         /* codenarc-enable */
+                def value = 123     /* codenarc-disable-line OtherRule -- should not disable rule as it part of the description: Rule2, Rule1 */
+                void doStuff() {
+                    println 123     /* codenarc-disable-line Rule1 -- should disable rule */
+                }
+            }
+        '''.trim()
+        assertViolationsThatAreEnabled([VIOLATION1, VIOLATION2, VIOLATION3, VIOLATION5])
     }
 
     // Helper methods

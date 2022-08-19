@@ -16,7 +16,7 @@
 package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.assertContainsAllInOrder
 

@@ -17,11 +17,14 @@ package org.codenarc
 
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.plugin.baseline.BaselineResultsPlugin
 import org.codenarc.report.JsonReportWriter
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriterFactory
 import org.codenarc.results.Results
 import org.codenarc.util.CodeNarcVersion
+import org.codenarc.util.io.DefaultResourceFactory
+import org.codenarc.util.io.ResourceFactory
 
 /**
  * Command-line runner for CodeNarc.
@@ -38,6 +41,8 @@ import org.codenarc.util.CodeNarcVersion
  *          or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
  *          any problematic characters, such as comma (',') or hash ('#'). See URLEncoder#encode(java.lang.String, java.lang.String).
  *          Defaults to "rulesets/basic.xml".</li>
+ *   <li>ruleset - JSON string (URL-encoded in UTF-8) containing a ruleSet in JSON format (if set, rulesetfiles will be ignored).
+ *   <li>excludeBaseline - The filename of the optional baseline. If not set, no baseline will be used.
  *   <li>includes - The comma-separated list of Ant file patterns specifying files that must be included;
  *          all files are included when omitted.</li>
  *   <li>excludes - The comma-separated list of Ant file patterns specifying files that must be excluded;
@@ -45,6 +50,7 @@ import org.codenarc.util.CodeNarcVersion
  *   <li>maxPriority1Violations - The maximum number of priority 1 violations allowed. Optional.</li>
  *   <li>maxPriority2Violations - The maximum number of priority 2 violations allowed. Optional.</li>
  *   <li>maxPriority3Violations - The maximum number of priority 3 violations allowed. Optional.</li>
+ *   <li>failOnError -  whether to terminate and fail the task if any errors occur parsing source files. Optional.</li>
  *   <li>title - The title description for this analysis; used in the output report(s), if supported. Optional.</li>
  *   <li>report - The definition of the report to produce. The option value is of the form TYPE[:FILENAME|:stdout].
  *          where TYPE is 'html' and FILENAME is the filename (with optional path) of the output report filename.
@@ -83,12 +89,19 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         can be encoded as:
             file:src%2Ftest%2Fresources%2FRuleSet-%2C%23.txt
         See URLEncoder#encode(java.lang.String, java.lang.String). Defaults to "rulesets/basic.xml"
+    -ruleset=JSON_STRING
+        String containing a ruleSet in JSON format (if set, rulesetfiles argument will be ignored)
+        The JSON string must be URL-encoded in UTF-8 before being sent as argument to CodeNarc
+    -excludeBaseline=<FILENAME>
+        The filename of the optional baseline. If not set, no baseline will be used.
     -maxPriority1Violations=<MAX>
         The maximum number of priority 1 violations allowed (int).
     -maxPriority2Violations=<MAX>
         The maximum number of priority 2 violations allowed (int).
     -maxPriority3Violations=<MAX>
         The maximum number of priority 3 violations allowed (int).
+    -failOnError=true/false
+        Whether to terminate and fail the task if any errors occur parsing source files (true), or just log the errors (false). It defaults to false.
     -title=<REPORT TITLE>
         The title for this analysis; used in the output report(s), if supported by the report type. Optional.
     -report=<REPORT-TYPE[:FILENAME|:stdout]>
@@ -106,6 +119,8 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
   Example command-line invocations:
     java org.codenarc.CodeNarc
     java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" title="My Project"
+    java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" -report=baseline:codenarc-baseline.xml
+    java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" -excludeBaseline=file:codenarc-baseline.xml
     java org.codenarc.CodeNarc -report=xml:MyXmlReport.xml -report=html
     java org.codenarc.CodeNarc -report=json:stdout
     java org.codenarc.CodeNarc -help'"""
@@ -114,15 +129,39 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     protected static Closure systemExit = { exitCode -> System.exit(exitCode) }
 
     protected String ruleSetFiles
+    protected String ruleset
     protected String baseDir
     protected String includes
     protected String excludes
     protected String title
     protected String plugins
+    protected String propertiesFilename
     protected List reports = []
 
+    /**
+     * The path to a Baseline Violations report (report type "baseline"). If set, then all violations specified
+     * within that report are excluded (filtered) from the current CodeNarc run. If null/empty, then do nothing.
+     */
+    String excludeBaseline
+
+    /**
+     * Whether to terminate and fail the task if errors occur parsing source files (true), or just log the errors (false)
+     */
+    boolean failOnError = false
+
+    private final ResourceFactory resourceFactory = new DefaultResourceFactory()
+
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
-    protected Closure createCodeNarcRunner = { new CodeNarcRunner() }
+    protected Closure createCodeNarcRunner = {
+        def codeNarcRunner = new CodeNarcRunner()
+        if (excludeBaseline) {
+            println "Loading baseline violations from [$excludeBaseline]"
+            def resource = resourceFactory.getResource(excludeBaseline)
+            def baselinePlugin = new BaselineResultsPlugin(resource)
+            codeNarcRunner.registerPlugin(baselinePlugin)
+        }
+        return codeNarcRunner
+    }
 
     protected int maxPriority1Violations = Integer.MAX_VALUE
     protected int maxPriority2Violations = Integer.MAX_VALUE
@@ -170,8 +209,10 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
 
         def codeNarcRunner = createCodeNarcRunner()
         codeNarcRunner.ruleSetFiles = ruleSetFiles
+        codeNarcRunner.ruleSetString = ruleset
         codeNarcRunner.reportWriters = reports
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+        codeNarcRunner.propertiesFilename = propertiesFilename
 
         if (plugins) {
             codeNarcRunner.registerPluginsForClassNames(plugins)
@@ -206,7 +247,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
      * @return a configured SourceAnalyzer instance
      */
     protected SourceAnalyzer createSourceAnalyzer() {
-        new FilesystemSourceAnalyzer(baseDirectory: baseDir, includes: includes, excludes: excludes)
+        new FilesystemSourceAnalyzer(baseDirectory: baseDir, includes: includes, excludes: excludes, failOnError: failOnError)
     }
 
     protected void parseArgs(String[] args) {
@@ -218,6 +259,8 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
             def value = matcher[0][2]
             switch (name) {
                 case 'rulesetfiles': ruleSetFiles = value; break
+                case 'ruleset': ruleset = URLDecoder.decode(value, 'UTF-8') ; break
+                case 'excludeBaseline': excludeBaseline = value; break
                 case 'basedir': baseDir = value; break
                 case 'includes': includes = value; break
                 case 'excludes': excludes = value; break
@@ -227,6 +270,8 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
                 case 'maxPriority2Violations': maxPriority2Violations = value as int; break
                 case 'maxPriority3Violations': maxPriority3Violations = value as int; break
                 case 'plugins': plugins = value; break
+                case 'properties': propertiesFilename = value; break
+                case 'failOnError': failOnError = Boolean.parseBoolean(value); break
                 default: throw new IllegalArgumentException("Invalid option: [$arg]")
             }
         }

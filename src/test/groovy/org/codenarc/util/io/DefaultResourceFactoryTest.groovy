@@ -16,8 +16,8 @@
 package org.codenarc.util.io
 
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -63,7 +63,7 @@ class DefaultResourceFactoryTest extends AbstractTestCase {
         assert resource.getPath() == expectedResourcePath
     }
 
-    @Before
+    @BeforeEach
     void setUpDefaultResourceFactoryTest() {
         resourceFactory = new DefaultResourceFactory()
     }

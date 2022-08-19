@@ -22,8 +22,8 @@ import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.util.CodeNarcVersion
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.codenarc.test.TestUtil.captureSystemOut
 
@@ -227,7 +227,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert reportWriter.getCodeNarcVersion() == CodeNarcVersion.getVersion()
     }
 
-    @Before
+    @BeforeEach
     void setUpAbstractReportWriterTest() {
         reportWriter = new FakeAbstractReportWriter()
     }

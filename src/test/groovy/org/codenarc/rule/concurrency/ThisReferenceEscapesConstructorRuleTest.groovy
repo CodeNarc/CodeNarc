@@ -16,7 +16,7 @@
 package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ThisReferenceEscapesConstructorRule
@@ -69,9 +69,9 @@ class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase<ThisR
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: 'publisher.register(this)', messageText:VIOLATION_MESSAGE],
-            [lineNumber: 5, sourceLineText: 'new WorkThread(publisher, this)', messageText:VIOLATION_MESSAGE],
-            [lineNumber: 6, sourceLineText: 'new AnotherWorkThread(listener: this)', messageText:VIOLATION_MESSAGE])
+            [line: 4, source: 'publisher.register(this)', message:VIOLATION_MESSAGE],
+            [line: 5, source: 'new WorkThread(publisher, this)', message:VIOLATION_MESSAGE],
+            [line: 6, source: 'new AnotherWorkThread(listener: this)', message:VIOLATION_MESSAGE])
     }
 
     private static final String VIOLATION_MESSAGE = 'The `this` reference escapes constructor.' +

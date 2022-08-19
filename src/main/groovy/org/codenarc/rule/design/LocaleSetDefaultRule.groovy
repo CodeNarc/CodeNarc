@@ -51,7 +51,7 @@ class LocaleSetDefaultAstVisitor extends AbstractAstVisitor {
             if (leftExpression instanceof PropertyExpression &&
                     (AstUtil.isVariable(leftExpression.objectExpression, /Locale/) ||
                         leftExpression.objectExpression.text == 'java.util.Locale') &&
-                    AstUtil.isConstant(leftExpression.property, 'default') ) {
+                    AstUtil.isConstant(leftExpression.property, 'default')) {
                 addViolation(expression, 'Avoid explicit assignment to Locale.default, which sets the Locale across the entire JVM')
             }
         }

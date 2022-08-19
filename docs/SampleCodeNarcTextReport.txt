@@ -1,15 +1,11 @@
-CodeNarc Report: Sample Project - Jun 11, 2020 5:48:32 PM
+CodeNarc Report: Sample Project - Jun 12, 2022 9:27:34 AM
 
-Summary: TotalFiles=405 FilesWithViolations=53 P1=0 P2=67 P3=34
+Summary: TotalFiles=415 FilesWithViolations=58 P1=0 P2=78 P3=36
 
 File: AbstractAstVisitorRuleTest.groovy
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=184 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=187 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.applyToClassNames = 'Xxx'             // apply = NO]
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=188 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
-
-File: AbstractEnhanceableAstVisitorRuleTest.groovy
-    Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.rule.AbstractEnhanceableAstVisitorRule.ENHANCED_MODE_SYSTEM_PROPERTY]
-    Violation: Rule=MisorderedStaticImports P=3 Line=23 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.source.SourceCode.DEFAULT_COMPILER_PHASE]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=185 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=188 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.applyToClassNames = 'Xxx'             // apply = NO]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=189 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
 
 File: AbstractRuleTest.groovy
     Violation: Rule=UnnecessaryObjectReferences P=3 Line=137 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO]
@@ -71,8 +67,14 @@ File: convention/CompileStaticRuleTest.groovy
 File: design/NestedForLoopRuleTest.groovy
     Violation: Rule=UnnecessaryReturnKeyword P=3 Line=106 Msg=[The return keyword is not needed and can be removed] Src=[return inlineViolation('Nested for loop')]
 
+File: design/OptionalCollectionReturnTypeRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=128 Msg=[The return keyword is not needed and can be removed] Src=[return "The method $methodName in class MyClass returns an Optional collection"]
+
 File: design/PrivateFieldCouldBeFinalRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.design.PrivateFieldCouldBeFinalRuleTest has 34 methods] Src=[class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase<PrivateFieldCouldBeFinalRule> {]
+
+File: enhanced/MissingOverrideAnnotationRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=261 Msg=[The return keyword is not needed and can be removed] Src=[return "Method '$methodName' is overriding a method in '$className' but is not annotated with @Override."]
 
 File: formatting/BracesForForLoopRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=101 Msg=[The String '
@@ -91,7 +93,8 @@ File: formatting/BracesForIfElseRuleTest.groovy
         ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}" != null)  // And what about {}'] Src=[final SOURCE = ''']
 
 File: formatting/BracesForMethodRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=285 Msg=[The String '
+    Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.formatting.BracesForMethodRuleTest has 38 methods] Src=[class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> {]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=356 Msg=[The String '
             class MyClass {
                 int size(String name = "${SomeClass.SOME_CONSTANT}")
                 {
@@ -100,15 +103,18 @@ File: formatting/BracesForMethodRuleTest.groovy
             }
         ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}'] Src=[final SOURCE = ''']
 
+File: formatting/BracesForTryCatchFinallyRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=181 Msg=[The return keyword is not needed and can be removed] Src=[return rule]
+
 File: formatting/ClassEndsWithBlankLineRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.ClassEndsWithBlankLineRuleTest has 33 methods] Src=[class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {]
 
 File: formatting/ClassStartsWithBlankLineRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 43 methods] Src=[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {]
+    Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 47 methods] Src=[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {]
 
 File: formatting/IndentationRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 49 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=607 Msg=[The String '
+    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 55 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=609 Msg=[The String '
             |class MyClass {
             |    private void execute() {
             |        try {
@@ -116,7 +122,7 @@ File: formatting/IndentationRuleTest.groovy
             |        }
             |        catch(Throwable t) {
             |            println "ERROR: ${t.message}"
-            |            t.printStackTrace()
+            |                 t.printStackTrace()        // wrong column
             |        }
             |        finally {
             |            closeResources()
@@ -124,16 +130,18 @@ File: formatting/IndentationRuleTest.groovy
             |    }
             |    private void executeOtherOne() {
             |        try {
+            |      println 999                          // wrong column 
             |            executeWithArgs(args)
             |        } catch(Throwable t) {
             |            t.printStackTrace()
             |        } finally {
             |            closeResources()
+            |             notifyUser()                  // wrong column
             |        }
             |    }
             |}
         ' contains a GString-type expression: '${t.message}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=897 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=931 Msg=[The String '
             |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->
             |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')
             |    String inputFile = 'COMMAND=PREPARE_LIBRARY\n' +
@@ -142,7 +150,36 @@ File: formatting/IndentationRuleTest.groovy
             |    cacheDir + hash + File.separator + 'output/jars/classes.jar'
             |}).asFileTree
         ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=911 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=945 Msg=[The String '
+            |"${if (true) 'content' else ''}"
+        ' contains a GString-type expression: '${if (true) 'content' else ''}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=953 Msg=[The String '
+            |package com.sample
+            |
+            |trait RegressionTest {
+            |
+            |    String callStackPath = "src/test/resources/callstacks/"
+            |
+            |   /**
+            |     * Checks the current callstack is the same as the reference callstack.
+            |     * The reference callstack can be updated into a txt file in the callStackPath
+            |     *
+            |     * Pattern: <RegressionTest.callStackPath>/<ClassTestSimpleName><_subname>.txt
+            |     * @param subname optional subname, used in the reference callstack filename
+            |     */
+            |    void testNonRegression(String subname = '') {
+            |        String targetFileName = "${callStackPath}${this.class.simpleName}"
+            |        if (subname) {
+            |            targetFileName += "_${subname}"
+            |        }
+            |        RegressionTestHelper.testNonRegression(helper, targetFileName)
+            |    }
+            |}
+        ' contains a GString-type expression: '${callStackPath}${this.class.simpleName}'] Src=[final SOURCE = ''']
+    Violation: Rule=ClassSize P=3 Line=26 Msg=[Class "IndentationRuleTest" is 1087 lines]
+
+File: formatting/IndentationRule_MethodChainingTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=82 Msg=[The String '
             |buildFileList()
             |    .collect { File it ->
             |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')
@@ -169,9 +206,14 @@ File: formatting/IndentationRuleTest.groovy
             |    }
             |}
         ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=956 Msg=[The String '
-            |"${if (true) 'content' else ''}"
-        ' contains a GString-type expression: '${if (true) 'content' else ''}'] Src=[final SOURCE = ''']
+
+File: formatting/MissingBlankLineBeforeAnnotatedFieldRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=98 Msg=[The String '
+            class MyClass {
+                private @Autowired DataSource dataSource
+                private @Value('${name}') String name
+            }
+        ' contains a GString-type expression: '${name}'] Src=[final SOURCE = ''']
 
 File: formatting/SpaceAfterClosingBraceRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=38 Msg=[The String '
@@ -222,7 +264,7 @@ File: formatting/SpaceAfterCommaRuleTest.groovy
         ' contains a GString-type expression: '${pathName}'] Src=[final SOURCE = ''']
 
 File: formatting/SpaceAfterOpeningBraceRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=40 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=39 Msg=[The String '
             class MyClass {
                 def myMethod() {
                     def closure = { }
@@ -252,7 +294,7 @@ File: formatting/SpaceAfterOpeningBraceRuleTest.groovy
             enum MyEnum { OK, BAD }
             trait MyTrait { }
         ' contains a GString-type expression: '${priority}Violations") { }'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=87 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=86 Msg=[The String '
             class MyClass {
                 def myMethod() {
                     def closure = {}
@@ -273,7 +315,7 @@ File: formatting/SpaceAfterOpeningBraceRuleTest.groovy
             }
             interface MyInterface2 {}
         ' contains a GString-type expression: '${priority}Violations") {}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=181 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=180 Msg=[The String '
             class MyClass {
                 MyClass() {int count }
                 MyClass() {s = '{"json": true}' }
@@ -281,8 +323,8 @@ File: formatting/SpaceAfterOpeningBraceRuleTest.groovy
 
             }
         ' contains a GString-type expression: '${prop}') String s) {println 123 }'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=192 Msg=[The String 'MyClass(@Annotation('${prop}') String s) {println 123 }' contains a GString-type expression: '${prop}') String s) {println 123 }'] Src=[[lineNumber:5, sourceLineText:'MyClass(@Annotation(\'${prop}\') String s) {println 123 }', messageText:'The opening brace for the method <init> in class MyClass'])]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=310 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=191 Msg=[The String 'MyClass(@Annotation('${prop}') String s) {println 123 }' contains a GString-type expression: '${prop}') String s) {println 123 }'] Src=[[line:5, source:'MyClass(@Annotation(\'${prop}\') String s) {println 123 }', message:'The opening brace for the method <init> in class MyClass'])]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=309 Msg=[The String '
             class MyClass {
                 String s
                 MyClass() { s = '{"json": true}' }
@@ -291,7 +333,7 @@ File: formatting/SpaceAfterOpeningBraceRuleTest.groovy
         ' contains a GString-type expression: '${prop}') String s) { println 123 }'] Src=[final SOURCE = ''']
 
 File: formatting/SpaceAroundMapEntryColonRuleTest.groovy
-    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=156 Msg=[The return keyword is not needed and can be removed] Src=[return inlineViolation("The colon for the literal Map entry for key [$keyName] within class $className" +]
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=167 Msg=[The return keyword is not needed and can be removed] Src=[return inlineViolation("The colon for the literal Map entry for key [$keyName] within class $className" +]
 
 File: formatting/SpaceBeforeClosingBraceRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=39 Msg=[The String '
@@ -373,7 +415,7 @@ File: generic/IllegalPackageReferenceRuleTest.groovy
             println "isClosure=${value instanceof org.bad.OtherClass}"
             def count = org.bad.Helper.getCount()
         ' contains a GString-type expression: '${value instanceof org.bad.OtherClass}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=72 Msg=[The String 'println "isClosure=${value instanceof org.bad.OtherClass}"' contains a GString-type expression: '${value instanceof org.bad.OtherClass}'] Src=[[lineNumber:3, sourceLineText:'println "isClosure=${value instanceof org.bad.OtherClass}"', messageText:'org.bad'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=72 Msg=[The String 'println "isClosure=${value instanceof org.bad.OtherClass}"' contains a GString-type expression: '${value instanceof org.bad.OtherClass}'] Src=[[line:3, source:'println "isClosure=${value instanceof org.bad.OtherClass}"', message:'org.bad'],]
 
 File: generic/StatelessClassRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=84 Msg=[The String '
@@ -411,7 +453,7 @@ File: grails/GrailsServletContextReferenceRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=87 Msg=[The String 'println "amount=${servletContext.amount}"' contains a GString-type expression: '${servletContext.amount}'] Src=[assertTwoViolations(SOURCE, 3, 'def mySession = servletContext', 6, 'println "amount=${servletContext.amount}"')]
 
 File: groovyism/ClosureAsLastMethodParameterRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=248 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=242 Msg=[The String '
             new Exception("${it.orElseThrow { new AssertionError() }}")
         ' contains a GString-type expression: '${it.orElseThrow { new AssertionError() }}'] Src=[final SOURCE = ''']
 
@@ -489,10 +531,10 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
             def str1 = 'total: ${count}'
             def str2 = 'average: ${total / count}'
         ' contains a GString-type expression: '${count}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=147 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[[lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=147 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[[lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=148 Msg=[The String 'def str2 = 'average: ${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=148 Msg=[The String ''${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=147 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[[line:2, source:"def str1 = 'total: \${count}'", message:'\'${count}\''],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=147 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[[line:2, source:"def str1 = 'total: \${count}'", message:'\'${count}\''],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=148 Msg=[The String 'def str2 = 'average: ${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[line:3, source:"def str2 = 'average: \${total / count}'", message:'\'${total / count}\''])]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=148 Msg=[The String ''${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[line:3, source:"def str2 = 'average: \${total / count}'", message:'\'${total / count}\''])]
     Violation: Rule=GStringExpressionWithinString P=2 Line=153 Msg=[The String '
             class SomeClass {
                 @SomeAnnotationOnMethod('${sample.property}')
@@ -503,9 +545,15 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
         ' contains a GString-type expression: '${sample.property}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=161 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
     Violation: Rule=GStringExpressionWithinString P=2 Line=161 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=166 Msg=[The String '
+            class SomeClass {
+                @SomeAnnotationOnField(someClass = SomeOtherClass, message = 'Some message ${sample.property1}')
+                String sampleProperty
+            }
+        ' contains a GString-type expression: '${sample.property1}'] Src=[final SOURCE = ''']
 
 File: imports/UnusedImportRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=192 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=215 Msg=[The String '
             import test.TestData1
             import test.TestData2
             import test.TestData3
@@ -580,19 +628,66 @@ File: unnecessary/UnnecessaryPackageReferenceRuleTest.groovy
             println "isClosure=${value instanceof groovy.lang.Closure}"
             def processors = java.lang.Runtime.availableProcessors()
         ' contains a GString-type expression: '${value instanceof groovy.lang.Closure}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=73 Msg=[The String 'println "isClosure=${value instanceof groovy.lang.Closure}"' contains a GString-type expression: '${value instanceof groovy.lang.Closure}'] Src=[[lineNumber:3, sourceLineText:'println "isClosure=${value instanceof groovy.lang.Closure}"', messageText:'groovy.lang'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=73 Msg=[The String 'println "isClosure=${value instanceof groovy.lang.Closure}"' contains a GString-type expression: '${value instanceof groovy.lang.Closure}'] Src=[[line:3, source:'println "isClosure=${value instanceof groovy.lang.Closure}"', message:'groovy.lang'],]
 
 File: unnecessary/UnnecessarySetterRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=69 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=80 Msg=[The String '
             if (!file.setExecutable(true)) {
                 throw new Exception("Cannot set ${file} as executable")
             }
             def count = x.setCount(92)
         ' contains a GString-type expression: '${file}'] Src=[final SOURCE = ''']
 
-File: unused/UnusedMethodParameterRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=135 Msg=[The String '
+File: unnecessary/UnnecessaryToStringRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=67 Msg=[The String '
             class MyClass {
+                def name = "Joe" + new Date().toString()
+
+                void run() {
+                    Object object = 1
+                    def string = 'some string' + object.toString()
+                    def withinGString = "processing: ${'prefix' + object.toString()}"
+
+                    def bigString = 'some string' + new Date() + object.toString()      // not a violation; known limitation
+                    def other = 123 + object.toString().toInteger()     // not a violation
+                }
+            }
+        ' contains a GString-type expression: '${'prefix' + object.toString()}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=84 Msg=[The String 'def withinGString = "processing: ${'prefix' + object.toString()}"' contains a GString-type expression: '${'prefix' + object.toString()}'] Src=[[line:8, source:'def withinGString = "processing: ${\'prefix\' + object.toString()}"', message:'Calling toString() on [object] in class MyClass is unnecessary'])]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=89 Msg=[The String '
+            def string = "some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}"
+            def string2 = """
+                 processing: ${123L.toString()}
+                 processing: ${new Date().toString()}
+                """
+        ' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=97 Msg=[The String 'def string = "some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}"' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'] Src=[[line:2, source:'def string = "some string${123L.toString()} or ${123} or ${\'ABC\'} or ${new Date().toString()}"', message:'Calling toString() on [123] in class None is unnecessary'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=98 Msg=[The String 'def string = "some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}"' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'] Src=[[line:2, source:'def string = "some string${123L.toString()} or ${123} or ${\'ABC\'} or ${new Date().toString()}"', message:'Calling toString() on [new Date()] in class None is unnecessary'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=99 Msg=[The String 'processing: ${123L.toString()}' contains a GString-type expression: '${123L.toString()}'] Src=[[line:4, source:'processing: ${123L.toString()}', message:'Calling toString() on [123] in class None is unnecessary'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=100 Msg=[The String 'processing: ${new Date().toString()}' contains a GString-type expression: '${new Date().toString()}'] Src=[[line:5, source:'processing: ${new Date().toString()}', message:'Calling toString() on [new Date()] in class None is unnecessary']]
+
+File: unused/AbstractUnusedPrivateFieldRuleTest.groovy
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.AbstractUnusedPrivateFieldRuleTest has 32 methods] Src=[abstract class AbstractUnusedPrivateFieldRuleTest extends AbstractRuleTestCase<UnusedPrivateFieldRule> {]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=172 Msg=[The String '
+            class MyClass {
+                private int count
+                def other = this."${'count'}"
+            }
+        ' contains a GString-type expression: '${'count'}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=183 Msg=[The String '
+            class MyClass {
+                private int count
+                def varName = "count"
+                def other = this."${varName}"     // can't see this
+            }
+        ' contains a GString-type expression: '${varName}'] Src=[final SOURCE = ''']
+
+File: unused/UnusedMethodParameterRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=150 Msg=[The String '
+            class MyClass {
+                MyClass() { }
+                MyClass(String id) { println id }
+
                 String myMethod1(String id, int value) { doSomething(value); return id }
                 void myMethod2(int value) { def x = value }
                 def myMethod3(Date startDate) { return "${startDate}" }
@@ -609,24 +704,8 @@ File: unused/UnusedMethodParameterRuleTest.groovy
             }
         ' contains a GString-type expression: '${startDate}" }'] Src=[final SOURCE = ''']
 
-File: unused/UnusedPrivateFieldRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedPrivateFieldRuleTest has 32 methods] Src=[class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase<UnusedPrivateFieldRule> {]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=166 Msg=[The String '
-            class MyClass {
-                private int count
-                def other = this."${'count'}"
-            }
-        ' contains a GString-type expression: '${'count'}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=177 Msg=[The String '
-            class MyClass {
-                private int count
-                def varName = "count"
-                def other = this."${varName}"     // can't see this
-            }
-        ' contains a GString-type expression: '${varName}'] Src=[final SOURCE = ''']
-
 File: unused/UnusedPrivateMethodParameterRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=111 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=126 Msg=[The String '
             class MyClass {
                 private String myMethod1(String id, int value) { doSomething(value); return id }
                 private void myMethod2(int value) { def x = value }
@@ -645,7 +724,7 @@ File: unused/UnusedPrivateMethodParameterRuleTest.groovy
         ' contains a GString-type expression: '${startDate}" }'] Src=[final SOURCE = ''']
 
 File: unused/UnusedPrivateMethodRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedPrivateMethodRuleTest has 36 methods] Src=[class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase<UnusedPrivateMethodRule> {]
+    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedPrivateMethodRuleTest has 37 methods] Src=[class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase<UnusedPrivateMethodRule> {]
     Violation: Rule=GStringExpressionWithinString P=2 Line=354 Msg=[The String '
             class MyClass {
                 private int countStuff() { return 99 }
@@ -687,4 +766,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (https://www.codenarc.org) v1.6]
+[CodeNarc (https://codenarc.org) v3.1.0]

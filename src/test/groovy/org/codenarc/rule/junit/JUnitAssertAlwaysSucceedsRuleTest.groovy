@@ -16,7 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for JUnitAssertAlwaysSucceedsRule
@@ -87,10 +87,10 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase<JUnitAssert
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'assertTrue(99)'],
-            [lineNumber:5, sourceLineText:"assertTrue('error message', 'abc')"],
-            [lineNumber:6, sourceLineText:'assertTrue([123])'],
-            [lineNumber:7, sourceLineText:"assertTrue('error message', [a:123])"])
+            [line:4, source:'assertTrue(99)'],
+            [line:5, source:"assertTrue('error message', 'abc')"],
+            [line:6, source:'assertTrue([123])'],
+            [line:7, source:"assertTrue('error message', [a:123])"])
     }
 
     // Tests for assertFalse()
@@ -149,10 +149,10 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase<JUnitAssert
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'assertFalse(0)'],
-            [lineNumber:5, sourceLineText:"assertFalse('error message', '')"],
-            [lineNumber:6, sourceLineText:'assertFalse([])'],
-            [lineNumber:7, sourceLineText:"assertFalse('error message', [:])"])
+            [line:4, source:'assertFalse(0)'],
+            [line:5, source:"assertFalse('error message', '')"],
+            [line:6, source:'assertFalse([])'],
+            [line:7, source:"assertFalse('error message', [:])"])
     }
 
     // Tests for assertNull()
@@ -256,10 +256,10 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase<JUnitAssert
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'assertNotNull([])'],
-            [lineNumber:5, sourceLineText:'assertNotNull([123])'],
-            [lineNumber:6, sourceLineText:'assertNotNull([a:123])'],
-            [lineNumber:7, sourceLineText:'assertNotNull([:])'])
+            [line:4, source:'assertNotNull([])'],
+            [line:5, source:'assertNotNull([123])'],
+            [line:6, source:'assertNotNull([a:123])'],
+            [line:7, source:'assertNotNull([:])'])
     }
 
     @Test

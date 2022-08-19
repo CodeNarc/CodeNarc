@@ -16,7 +16,7 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for CouldBeSwitchStatementRule
@@ -108,7 +108,7 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase<CouldBeSwitchS
             y = x
         } else if (x == 2) {
             y = x * 2
-        } else if (x.find { it == 3} ) {
+        } else if (x.find { it == 3}) {
             y = x * 3
         } else {
             y = 0
@@ -247,9 +247,9 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase<CouldBeSwitchS
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText: 'if (x == 1) {', messageText: rule.errorMessage],
-            [lineNumber:12, sourceLineText: 'if (y instanceof Integer) {', messageText: rule.errorMessage],
-            [lineNumber:23, sourceLineText: 'if (p.value instanceof Integer) {', messageText: rule.errorMessage])
+            [line:2, source: 'if (x == 1) {', message: rule.errorMessage],
+            [line:12, source: 'if (y instanceof Integer) {', message: rule.errorMessage],
+            [line:23, source: 'if (p.value instanceof Integer) {', message: rule.errorMessage])
     }
 
     @Override

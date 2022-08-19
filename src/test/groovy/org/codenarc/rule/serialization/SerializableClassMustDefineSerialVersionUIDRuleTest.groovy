@@ -16,7 +16,7 @@
 package org.codenarc.rule.serialization
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SerializableClassMustDefineSerialVersionUIDRule
@@ -87,6 +87,16 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
                 PENDING,
                 ACCEPTED,
                 DENIED
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testInterface_NoViolations() {
+        final SOURCE = '''
+            interface X extends Serializable {
+               // X's method definitions go here
             }
         '''
         assertNoViolations(SOURCE)

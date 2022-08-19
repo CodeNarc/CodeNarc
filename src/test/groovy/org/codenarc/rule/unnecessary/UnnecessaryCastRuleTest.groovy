@@ -16,7 +16,7 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnnecessaryCastRule
@@ -53,13 +53,13 @@ class UnnecessaryCastRuleTest extends AbstractRuleTestCase<UnnecessaryCastRule> 
             def theClass = ((BigDecimal)123.45).class
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'int count = (int)123', messageText:'The cast (int) 123 in class None is unnecessary'],
-            [lineNumber:3, sourceLineText:'def longValue = (long)123456L', messageText:'The cast (long) 123456 in class None is unnecessary'],
-            [lineNumber:4, sourceLineText:'def bigDecimal = (BigDecimal)1234.56', messageText:'The cast (BigDecimal) 1234.56 in class None is unnecessary'],
-            [lineNumber:5, sourceLineText:'String name = (String) "Joe"', messageText:'The cast (String) Joe in class None is unnecessary'],
-            [lineNumber:6, sourceLineText:'def list = (List)[1, 2, 3]', messageText:'The cast (List) [1, 2, 3] in class None is unnecessary'],
-            [lineNumber:7, sourceLineText:'def map = (Map)[a:1]', messageText:'The cast (Map) [a:1] in class None is unnecessary'],
-            [lineNumber:8, sourceLineText:'def theClass = ((BigDecimal)123.45).class', messageText:'The cast (BigDecimal) 123.45 in class None is unnecessary'],
+            [line:2, source:'int count = (int)123', message:'The cast (int) 123 in class None is unnecessary'],
+            [line:3, source:'def longValue = (long)123456L', message:'The cast (long) 123456 in class None is unnecessary'],
+            [line:4, source:'def bigDecimal = (BigDecimal)1234.56', message:'The cast (BigDecimal) 1234.56 in class None is unnecessary'],
+            [line:5, source:'String name = (String) "Joe"', message:'The cast (String) Joe in class None is unnecessary'],
+            [line:6, source:'def list = (List)[1, 2, 3]', message:'The cast (List) [1, 2, 3] in class None is unnecessary'],
+            [line:7, source:'def map = (Map)[a:1]', message:'The cast (Map) [a:1] in class None is unnecessary'],
+            [line:8, source:'def theClass = ((BigDecimal)123.45).class', message:'The cast (BigDecimal) 123.45 in class None is unnecessary'],
         )
     }
 

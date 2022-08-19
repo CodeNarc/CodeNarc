@@ -1,0 +1,13 @@
+---
+layout: default
+title: CodeNarc - Rule Index by Name
+---
+
+# Rule Index by Name
+
+**CodeNarc** includes ${numberOfRules} rules.
+
+## Rules
+<% ruleToRuleSetMap.each { rule, ruleSetName -> def extraInfo = ruleExtraInformation[rule.name] ? "  (${ruleExtraInformation[rule.name]})" : ''  %>\
+  * [${rule.name}](./codenarc-rules-${ruleSetName}.html#${rule.name.toLowerCase()}-rule)  ${extraInfo}
+<% } %>

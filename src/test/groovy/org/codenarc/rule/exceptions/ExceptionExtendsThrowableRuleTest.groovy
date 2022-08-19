@@ -16,7 +16,7 @@
 package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for ExceptionExtendsThrowableRule
@@ -45,7 +45,24 @@ class ExceptionExtendsThrowableRuleTest extends AbstractRuleTestCase<ExceptionEx
             class MyException extends Throwable { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'class MyException extends Throwable', messageText:'The class MyException extends Throwable'])
+            [line:2, source:'class MyException extends Throwable', message:'The class MyException extends Throwable'])
+    }
+
+    @Test
+    void testInterface_NoViolations() {
+        final SOURCE = '''
+            interface MyError extends Throwable { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testClassImplementsThrowableInterface_NoViolations() {
+        final SOURCE = '''
+            import some.other.Throwable
+            class MySpecialThrowable implements Throwable { }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override

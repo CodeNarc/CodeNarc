@@ -16,7 +16,7 @@
 package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for UnusedVariableRule
@@ -337,10 +337,10 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {
     @Test
     void testApplyTo_LoopVariable_NotReferenced() {
         final SOURCE = '''
-            for (int i = 0; ; ) { }
+            for (int i = 0; ;) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for (int i = 0; ; )', messageText:'i'])
+            [line:2, source:'for (int i = 0; ;)', message:'i'])
     }
 
     @Test

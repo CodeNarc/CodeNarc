@@ -16,7 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for SpaceAfterWhileRule
@@ -50,9 +50,9 @@ class SpaceAfterWhileRuleTest extends AbstractRuleTestCase<SpaceAfterWhileRule> 
                 true) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'while(true) { }', messageText:MESSAGE],
-            [lineNumber:3, sourceLineText:'while  (true) { }', messageText:MESSAGE],
-            [lineNumber:4, sourceLineText:'while(', messageText:MESSAGE])
+            [line:2, source:'while(true) { }', message:MESSAGE],
+            [line:3, source:'while  (true) { }', message:MESSAGE],
+            [line:4, source:'while(', message:MESSAGE])
     }
 
     @Test

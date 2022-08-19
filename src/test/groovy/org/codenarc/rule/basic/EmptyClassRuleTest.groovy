@@ -16,7 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for EmptyClassRule
@@ -71,8 +71,8 @@ class EmptyClassRuleTest extends AbstractRuleTestCase<EmptyClassRule> {
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber: 2, sourceLineText: 'class FirstEmpty {', messageText: violationMessage('FirstEmpty')],
-            [lineNumber: 5, sourceLineText: 'class EmptyAsWell', messageText: violationMessage('EmptyAsWell')])
+            [line: 2, source: 'class FirstEmpty {', message: violationMessage('FirstEmpty')],
+            [line: 5, source: 'class EmptyAsWell', message: violationMessage('EmptyAsWell')])
     }
 
     @Test

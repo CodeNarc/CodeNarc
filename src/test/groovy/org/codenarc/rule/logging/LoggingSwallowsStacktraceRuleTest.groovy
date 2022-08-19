@@ -16,7 +16,7 @@
 package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Tests for LoggingSwallowsStacktraceRule
@@ -35,7 +35,7 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase<LoggingSwal
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
-                private static final Log LOG = LogFactory.getLog( Main.class )
+                private static final Log LOG = LogFactory.getLog(Main.class)
 
                 def method() {
                     try {
@@ -56,8 +56,8 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase<LoggingSwal
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass {
-                private static final Log LOG = LogFactory.getLog( Main.class )
-                private static final Log logger = LogFactory.getLog( Main.class )
+                private static final Log LOG = LogFactory.getLog(Main.class)
+                private static final Log logger = LogFactory.getLog(Main.class)
 
                 def method() {
                     try {
