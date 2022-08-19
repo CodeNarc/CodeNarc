@@ -137,7 +137,7 @@ class DirectoryResults implements Results {
         if (this.path == path) {
             return this
         }
-        for(child in this.children) {
+        for (child in this.children) {
             def foundResults = child.findResultsForPath(path)
             if (foundResults) {
                 return foundResults

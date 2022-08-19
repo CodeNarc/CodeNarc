@@ -22,6 +22,9 @@
         "FieldTypeRequired": {
             "enabled": false
         },
+        "ImplicitClosureParameter": {
+            "enabled": false
+        },
         "ImplicitReturnStatement": {
             "enabled": false
         },
