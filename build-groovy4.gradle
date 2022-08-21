@@ -13,8 +13,8 @@ shadowJar {
 }
 
 group = 'org.codenarc'
-archivesBaseName = 'CodeNarc-Groovy4'
-version = '3.1.0'
+archivesBaseName = 'CodeNarc'
+version = '3.1.0-groovy-4.0'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -99,7 +99,7 @@ publishing {
         maven(MavenPublication) {
             from components.java
 
-            artifactId = 'CodeNarc-Groovy4'
+            artifactId = 'CodeNarc'
 
             artifact(groovydocJar) {
                 classifier = 'javadoc'
