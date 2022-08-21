@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory
  */
 class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
 
+    private static final String SEP = '/'
     private static final Logger LOG = LoggerFactory.getLogger(FilesSourceAnalyzer)
 
     /**
@@ -41,7 +42,7 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
      * List of groovy files that will be analyzed.
      * Paths can be absolute, or relative to base directory
      */
-    String sourceFiles
+    String[] sourceFiles
 
     /**
      * Whether to throw an exception if errors occur parsing source files (true), or just log the errors (false)
@@ -64,14 +65,17 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
         for (def sourceFilePath in sourceFiles) {
             def file = new File(sourceFilePath)
             if (!file.exists()) {
-                LOG.error("Unable to find input file: $sourceFilePath")
-                throw new AnalyzerException("Unable to find input file: $sourceFilePath")
+                file = new File(baseDirectory + SEP + sourceFilePath)
+                if (!file.exists()) {
+                    LOG.error("Unable to find input file: $sourceFilePath")
+                    throw new AnalyzerException("Unable to find input file: $sourceFilePath")
+                }
             }
             try  {
                 filesResults.add(processFile(file, baseDirectoryFile, ruleSet))
             }
             catch (Throwable t) {
-                LOG.warn("Error processing file: '" + filePath + "'; " + t)
+                LOG.warn("Error processing file: '" + sourceFilePath + "'; " + t)
                 if (failOnError) {
                     throw new AnalyzerException("Error analyzing source file: $sourceFilePath; $t")
                 }
@@ -89,12 +93,12 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
         [baseDirectory]
     }
 
-    private void processFile(File file, File baseDirectoryFile, RuleSet ruleSet) {
+    private FileResults processFile(File file, File baseDirectoryFile, RuleSet ruleSet) {
         def sourceFile = new SourceFile(file)
         List allViolations = collectViolations(sourceFile, ruleSet)
         def fileRelativePath = baseDirectoryFile.toPath().relativize(file.toPath())
         def fileResults = new FileResults(fileRelativePath, allViolations, sourceFile)
-        return fileResults
+        fileResults
     }
 
 /*

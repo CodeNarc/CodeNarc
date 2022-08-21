@@ -254,7 +254,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         // List of files sent as argument
         if (sourceFiles) {
             return new FilesSourceAnalyzer(
-                sourceFiles: sourceFiles,
+                sourceFiles: sourceFiles.split(','),
                 failOnError: failOnError
             )
         }
