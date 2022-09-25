@@ -94,6 +94,37 @@ class FilesSourceAnalyzerTest extends AbstractTestCase {
         assertEqualSets(childResultsClasses(top), [FileResults, DirectoryResults, DirectoryResults])
     }
 
+    @Test
+    void test_analyze_MultipleFilesNestedDirs() {
+        analyzer.baseDirectory = BASE_DIR
+        analyzer.sourceFiles = [
+                'SourceFile1.groovy',
+                'subdir1/Subdir1File1.groovy',
+                'subdir1/Subdir1File2.groovy',
+                'subdir2/subdir2a/Subdir2aFile1.groovy',
+                'subdir2/Subdir2File1.groovy'
+        ]
+        def results = analyzer.analyze(ruleSet)
+        log("results=$results")
+
+        def fullPaths = results.violations*.message
+        assertEqualSets(fullPaths, [
+                'src/test/resources/sourcewithdirs/SourceFile1.groovy',
+                'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
+                'src/test/resources/sourcewithdirs/subdir1/Subdir1File2.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
+        ])
+        assert testCountRule.count == 5
+        assert results.getNumberOfFilesWithViolations(3) == 5
+        assert results.totalNumberOfFiles == 5
+
+        // Verify that the directory structure is properly reflected within the results
+        assert childResultsClasses(results) == [DirectoryResults]
+        def top = results.children[0]
+        assertEqualSets(childResultsClasses(top), [FileResults, DirectoryResults, DirectoryResults])
+    }
+
     private List resultsPaths(Results results, List paths=[]) {
         if (results.path) {
             paths << results.path

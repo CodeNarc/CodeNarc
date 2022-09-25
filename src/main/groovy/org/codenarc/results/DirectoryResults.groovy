@@ -65,30 +65,48 @@ class DirectoryResults implements Results {
     /**
      * Add file results to current DirectoryResult instance, or recursively in a child Directory result
      * Child DirectoryResults are created if not existing
-    */
+     */
     void addFileResultRecursive(FileResults fileRes) {
         String fileResPath = new File(fileRes.path).getParent()
         if (getPath() == fileResPath || (getPath() == '' && fileResPath == null)) {
             // Same directory: Add FileResults here
             this.addChild(fileRes)
             this.numberOfFilesInThisDirectory++
+        } else {
+            // Find if there is already a child directory result and use it if found
+            DirectoryResults subDirResults = (DirectoryResults) findResultsForPath(fileResPath)
+            if (subDirResults) {
+                subDirResults.addFileResultRecursive(fileRes)
+            }
+            // Create sub directory results if not existing
+            else {
+                createDirectoryResultsRecursive(fileResPath)
+                // Now that sub directory results exists, call again the same method
+                this.addFileResultRecursive(fileRes)
+            }
         }
-        else {
-            // Find if there is already a child directory result
-            DirectoryResults subDirResults = null
-            for (def childResult in getChildren()) {
-                if (childResult.getPath() == fileResPath) {
-                    subDirResults = childResult
-                    break
-                }
+    }
+
+    /**
+     * Make sure that all necessary DirectoryResults for a given path are existing
+     * Ex: Create directory results for dir1 , then dir1/subdir1, then /dir1/subdir1/sub-subdir1 ...
+     */
+    void createDirectoryResultsRecursive(String fileResPath) {
+        String[] subDirSegments = []
+        DirectoryResults currentParentDirResult = this
+        for (String dirSegment in fileResPath.replace('\\', '/').split('/')) {
+            String subDir = (subDirSegments.size() ? subDirSegments.join(File.separator) + File.separator : '') + dirSegment
+            DirectoryResults subPathExistingResults = (DirectoryResults) findResultsForPath(subDir)
+            if (subPathExistingResults) {
+                // Existing DirectoryResults, no need to create it
+                currentParentDirResult = subPathExistingResults
+            } else {
+                // Missing DirectoryResults: create it
+                DirectoryResults subDirResults = new DirectoryResults(subDir)
+                currentParentDirResult.addChild(subDirResults)
+                currentParentDirResult = subDirResults
             }
-            // Create sub directory result if not existing
-            if (subDirResults == null) {
-                subDirResults = new DirectoryResults(fileResPath)
-                addChild(subDirResults)
-            }
-            // Add FileResults in sub directory results
-            subDirResults.addFileResultRecursive(fileRes)
+            subDirSegments += [dirSegment]
         }
     }
 
@@ -118,7 +136,7 @@ class DirectoryResults implements Results {
      * @param recursive - true if the returned count should include subdirectories as well; defaults to true
      * @return the number of violations with the specified priority
      */
-    int getNumberOfViolationsWithPriority(int priority, boolean recursive=true) {
+    int getNumberOfViolationsWithPriority(int priority, boolean recursive = true) {
         children.sum(0) { child ->
             (recursive || child.isFile()) ? child.getNumberOfViolationsWithPriority(priority) : 0
         }
@@ -130,7 +148,7 @@ class DirectoryResults implements Results {
      * @param recursive - true if the returned count should include subdirectories as well; defaults to true
      * @return the number of files containing violations
      */
-    int getNumberOfFilesWithViolations(int maxPriority, boolean recursive=true) {
+    int getNumberOfFilesWithViolations(int maxPriority, boolean recursive = true) {
         children.sum(0) { child ->
             (recursive || child.isFile()) ? child.getNumberOfFilesWithViolations(maxPriority) : 0
         }
@@ -141,7 +159,7 @@ class DirectoryResults implements Results {
      * @param recursive - true if the returned count should include subdirectories as well
      * @return the total number of files (with or without violations)
      */
-    int getTotalNumberOfFiles(boolean recursive=true) {
+    int getTotalNumberOfFiles(boolean recursive = true) {
         def total = numberOfFilesInThisDirectory
         if (recursive) {
             total += children.sum(0) { child -> child.isFile() ? 0 : child.getTotalNumberOfFiles(true) }
