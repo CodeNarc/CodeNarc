@@ -18,8 +18,9 @@ Updated/Enhanced Rules and Bug Fixes
  - #692: **UnusedPrivateField**: Ignore classes annotated with @Entity. Add *ignoreClassesAnnotatedWithNames* property.
 
 Build, Infrastructure and Tests
-- #709: Publish Groovy 4.x-specific jar for CodeNarc. Upgrade to GMetrics 2.1.0.
-- #705: Make SourceFileTest more multi-platform friendly. ([Paul King](https://github.com/paulk-asert))
+ - #709: Publish Groovy 4.x-specific jar for CodeNarc. Upgrade to GMetrics 2.1.0.
+ - #705: Make SourceFileTest more multi-platform friendly. ([Paul King](https://github.com/paulk-asert))
+ - #711: Change Groovy 4 artifact from CodeNarc-Groovy4 to CodeNarc; change version to 3.1.0-groovy-4.0. [Aug 2022]
 
 
 Version 3.0.1    (Apr 2022)
