@@ -49,8 +49,6 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
      */
     boolean failOnError = false
 
-    DirectoryResults baseDirResults
-
     /**
      * Analyze the source with the input list of files using the specified RuleSet and return the report results.
      * @param ruleset - the RuleSet to apply to each of the (applicable) files in the source directories
@@ -61,7 +59,7 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
     Results analyze(RuleSet ruleSet) {
         assert baseDirectory
         assert ruleSet
-        this.baseDirResults = new DirectoryResults('')
+        DirectoryResults baseDirResults = new DirectoryResults('')
         def baseDirectoryFile = new File(baseDirectory)
 
         // Get all results from unique named files
