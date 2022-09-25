@@ -128,7 +128,6 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
         if (matches(sourceFile)) {
             List allViolations = collectViolations(sourceFile, ruleSet)
             def fileResults = new FileResults(filePath, allViolations, sourceFile)
-            dirResults.numberOfFilesInThisDirectory++
             dirResults.addChild(fileResults)
         }
     }
