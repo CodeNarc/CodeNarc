@@ -56,6 +56,7 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
      * @param ruleset - the RuleSet to apply to each of the (applicable) files in the source directories
      * @return the results from applying the RuleSet to all of the files in the source directories
      */
+    @SuppressWarnings(['CatchThrowable'])
     @Override
     Results analyze(RuleSet ruleSet) {
         assert baseDirectory
@@ -104,45 +105,4 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
         def fileResults = new FileResults(fileRelativePath, allViolations, sourceFile)
         fileResults
     }
-
-
-
-/*
-    @SuppressWarnings(['CatchThrowable', 'NestedBlockDepth'])
-    private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
-        def dirResults = new DirectoryResults(dir)
-        def dirFile = new File(baseDirectory, dir)
-        dirFile.eachFile { file ->
-            def dirPrefix = dir ? dir + SEP : dir
-            def filePath = dirPrefix + file.name
-            if (file.directory) {
-                def subdirResults = processDirectory(filePath, ruleSet)
-                // If any of the descendant directories have matching files, then include in final results
-                if (subdirResults.getTotalNumberOfFiles(true)) {
-                    dirResults.addChild(subdirResults)
-                }
-            }
-            else {
-                try {
-                    processFile(filePath, dirResults, ruleSet)
-                } catch (Throwable t) {
-                    LOG.warn("Error processing file: '" + filePath + "'; " + t)
-                    if (failOnError) {
-                        throw new AnalyzerException("Error analyzing source file: $filePath; $t")
-                    }
-                }
-            }
-        }
-        dirResults
-    }
-
-    private void processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
-        def file = new File(baseDirectory, filePath)
-        def sourceFile = new SourceFile(file)
-        List allViolations = collectViolations(sourceFile, ruleSet)
-        def fileResults = new FileResults(filePath, allViolations, sourceFile)
-        dirResults.numberOfFilesInThisDirectory++
-        dirResults.addChild(fileResults)
-    }
-    */
 }

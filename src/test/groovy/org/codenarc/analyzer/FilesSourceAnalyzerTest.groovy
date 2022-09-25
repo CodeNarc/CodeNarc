@@ -16,7 +16,6 @@
 package org.codenarc.analyzer
 
 import static org.codenarc.test.TestUtil.assertEqualSets
-import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.results.DirectoryResults
@@ -24,10 +23,7 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
 import org.codenarc.rule.FakePathRule
-import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
-import org.codenarc.source.SourceCode
-import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
 import org.junit.jupiter.api.Test
 
