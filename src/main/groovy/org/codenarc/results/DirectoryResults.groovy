@@ -63,6 +63,36 @@ class DirectoryResults implements Results {
     }
 
     /**
+     * Add file results to current DirectoryResult instance, or recursively in a child Directory result
+     * Child DirectoryResults are created if not existing
+    */
+    void addFileResultRecursive(FileResults fileRes) {
+        String fileResPath = new File(fileRes.path).getParent()
+        if (getPath() == fileResPath || (getPath() == '' && fileResPath == null)) {
+            // Same directory: Add FileResults here
+            this.addChild(fileRes)
+            this.numberOfFilesInThisDirectory++
+        }
+        else {
+            // Find if there is already a child directory result
+            DirectoryResults subDirResults = null
+            for (def childResult in getChildren()) {
+                if (childResult.getPath() == fileResPath) {
+                    subDirResults = childResult
+                    break
+                }
+            }
+            // Create sub directory result if not existing
+            if (subDirResults == null) {
+                subDirResults = new DirectoryResults(fileResPath)
+                addChild(subDirResults)
+            }
+            // Add FileResults in sub directory results
+            subDirResults.addFileResultRecursive(fileRes)
+        }
+    }
+
+    /**
      * @return the List of child Results objects; may be empty
      */
     @Override
