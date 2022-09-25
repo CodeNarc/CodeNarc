@@ -49,6 +49,8 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
      */
     boolean failOnError = false
 
+    DirectoryResults baseDirResults
+
     /**
      * Analyze the source with the input list of files using the specified RuleSet and return the report results.
      * @param ruleset - the RuleSet to apply to each of the (applicable) files in the source directories
@@ -58,10 +60,10 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
     Results analyze(RuleSet ruleSet) {
         assert baseDirectory
         assert ruleSet
+        this.baseDirResults = new DirectoryResults('')
         def baseDirectoryFile = new File(baseDirectory)
 
         // Get all results from unique named files
-        def filesResults = []
         for (def sourceFilePath in sourceFiles) {
             def file = new File(sourceFilePath)
             if (!file.exists()) {
@@ -72,7 +74,8 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
                 }
             }
             try  {
-                filesResults.add(processFile(file, baseDirectoryFile, ruleSet))
+                FileResults fileRes = processFile(file, baseDirectoryFile, ruleSet)
+                baseDirResults.addFileResultRecursive(fileRes)
             }
             catch (Throwable t) {
                 LOG.warn("Error processing file: '" + sourceFilePath + "'; " + t)
@@ -84,7 +87,7 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
 
         // Convert file results into directory results
         def reportResults = new DirectoryResults()
-        // TODO
+        reportResults.addChild(baseDirResults)
         reportResults
     }
 
@@ -93,13 +96,16 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
         [baseDirectory]
     }
 
+    // Get violations for a single file
     private FileResults processFile(File file, File baseDirectoryFile, RuleSet ruleSet) {
         def sourceFile = new SourceFile(file)
         List allViolations = collectViolations(sourceFile, ruleSet)
-        def fileRelativePath = baseDirectoryFile.toPath().relativize(file.toPath())
+        def fileRelativePath = baseDirectoryFile.toPath().relativize(file.toPath()).toString()
         def fileResults = new FileResults(fileRelativePath, allViolations, sourceFile)
         fileResults
     }
+
+
 
 /*
     @SuppressWarnings(['CatchThrowable', 'NestedBlockDepth'])
@@ -111,7 +117,7 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
             def filePath = dirPrefix + file.name
             if (file.directory) {
                 def subdirResults = processDirectory(filePath, ruleSet)
-                // If any of the descendent directories have matching files, then include in final results
+                // If any of the descendant directories have matching files, then include in final results
                 if (subdirResults.getTotalNumberOfFiles(true)) {
                     dirResults.addChild(subdirResults)
                 }
