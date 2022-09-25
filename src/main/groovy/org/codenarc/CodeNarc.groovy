@@ -80,6 +80,9 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     -excludes=<PATTERNS>
         The comma-separated list of Ant-style file patterns specifying files that must
         be excluded. No files are excluded when omitted.
+    -sourcefiles=<FILENAMES>
+        The comma-separated list of files we want to analyze. If set, -basedir,
+        -includes and -exclude arguments are ignored.
     -rulesetfiles=<FILENAMES>
         The path to the Groovy or XML RuleSet definition files, relative to the classpath.
         This can be a single file path, or multiple paths separated by commas. Each path may be optionally prefixed by
