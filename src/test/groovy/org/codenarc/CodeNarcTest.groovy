@@ -332,7 +332,7 @@ class CodeNarcTest extends AbstractTestCase {
 
         @Test
         void SourceFiles() {
-            final ARGS = ["-sourcefiles=$SOURCEFILES","-rulesetfiles=$RULESET1"] as String[]
+            final ARGS = ["-sourcefiles=$SOURCEFILES", "-rulesetfiles=$RULESET1"] as String[]
 
             codeNarc.execute(ARGS)
 

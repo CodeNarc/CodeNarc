@@ -24,9 +24,9 @@ import org.codenarc.rule.Violation
  */
 class DirectoryResults implements Results {
 
+    private static final String SEP = '/'
     private final String path
     private final List children = []
-    private static final String SEP = '/'
     int numberOfFilesInThisDirectory = 0
 
     /**
