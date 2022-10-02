@@ -162,4 +162,35 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.getViolations() == [VIOLATION1, VIOLATION3]
     }
 
+    @Test
+    void testAddFileResultRecursive() {
+        // Add various results
+        def results = new DirectoryResults('root')
+        def fileResults1 = new FileResults('root/subdir1/file1.groovy', [VIOLATION1, VIOLATION2])
+        results.addFileResultRecursive(fileResults1)
+        def fileResults2 = new FileResults('root/subdir1/file2.groovy', [VIOLATION1, VIOLATION2])
+        results.addFileResultRecursive(fileResults2)
+        def fileResults3 = new FileResults('root/file.groovy', [VIOLATION1, VIOLATION2])
+        results.addFileResultRecursive(fileResults3)
+        def fileResults5 = new FileResults('root/subdir2/subdir3/subdir4/file5.groovy', [VIOLATION1, VIOLATION2])
+        results.addFileResultRecursive(fileResults5)
+
+        // Check results are correctly built
+        DirectoryResults rootRes = results.findResultsForPath("root")
+        assert rootRes != null
+        FileResults fileRes = rootRes.findResultsForPath('root/file.groovy')
+        assert fileRes == fileResults3
+        DirectoryResults subdir1Results = rootRes.findResultsForPath("root/subdir1")
+        assert subdir1Results != null
+        assert subdir1Results.getChildren() == [fileResults1,fileResults2]
+        DirectoryResults subdir2Results = rootRes.findResultsForPath("root/subdir2")
+        assert subdir2Results != null
+        DirectoryResults subdir3Results = subdir2Results.findResultsForPath("root/subdir2/subdir3")
+        assert subdir3Results != null
+        DirectoryResults subdir4Results = subdir3Results.findResultsForPath("root/subdir2/subdir3/subdir4")
+        assert subdir4Results != null
+        FileResults file5Res = subdir4Results.findResultsForPath('root/subdir2/subdir3/subdir4/file5.groovy')
+        assert file5Res == fileResults5
+    }
+
 }

@@ -26,6 +26,7 @@ class DirectoryResults implements Results {
 
     private final String path
     private final List children = []
+    private static final String SEP = '/'
     int numberOfFilesInThisDirectory = 0
 
     /**
@@ -68,6 +69,10 @@ class DirectoryResults implements Results {
      */
     void addFileResultRecursive(FileResults fileRes) {
         String fileResPath = new File(fileRes.path).getParent()
+        if (fileResPath != null) {
+            // Manage windows format
+            fileResPath = fileResPath.replace('\\', SEP)
+        }
         if (getPath() == fileResPath || (getPath() == '' && fileResPath == null)) {
             // Same directory: Add FileResults here
             this.addChild(fileRes)
@@ -80,7 +85,7 @@ class DirectoryResults implements Results {
             }
             // Create sub directory results if not existing
             else {
-                createDirectoryResultsRecursive(fileResPath)
+                this.createDirectoryResultsRecursive(fileResPath)
                 // Now that sub directory results exists, call again the same method
                 this.addFileResultRecursive(fileRes)
             }
@@ -91,11 +96,11 @@ class DirectoryResults implements Results {
      * Make sure that all necessary DirectoryResults for a given path are existing
      * Ex: Create directory results for dir1 , then dir1/subdir1, then /dir1/subdir1/sub-subdir1 ...
      */
-    void createDirectoryResultsRecursive(String fileResPath) {
+    private void createDirectoryResultsRecursive(String fileResPath) {
         String[] subDirSegments = []
         DirectoryResults currentParentDirResult = this
-        for (String dirSegment in fileResPath.replace('\\', '/').split('/')) {
-            String subDir = (subDirSegments.size() ? subDirSegments.join(File.separator) + File.separator : '') + dirSegment
+        for (String dirSegment in fileResPath.replace('\\', SEP).split(SEP)) {
+            String subDir = (subDirSegments.size() ? subDirSegments.join(SEP) + SEP : '') + dirSegment
             DirectoryResults subPathExistingResults = (DirectoryResults) findResultsForPath(subDir)
             if (subPathExistingResults) {
                 // Existing DirectoryResults, no need to create it

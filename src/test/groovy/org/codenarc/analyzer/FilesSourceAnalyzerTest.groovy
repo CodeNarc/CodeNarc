@@ -125,6 +125,28 @@ class FilesSourceAnalyzerTest extends AbstractTestCase {
         assertEqualSets(childResultsClasses(top), [FileResults, DirectoryResults, DirectoryResults])
     }
 
+    @Test
+    void test_analyze_NoViolations() {
+        analyzer.baseDirectory = BASE_DIR
+        analyzer.sourceFiles = [
+                'SourceFile1.groovy',
+                'subdir1/Subdir1File1.groovy',
+                'subdir1/Subdir1File2.groovy',
+                'subdir2/subdir2a/Subdir2aFile1.groovy',
+                'subdir2/Subdir2File1.groovy'
+        ]
+        ruleSet = new ListRuleSet([testCountRule])
+        def results = analyzer.analyze(ruleSet)
+        log("results=$results")
+
+        def paths = resultsPaths(results)
+        assertEqualSets(paths, ['SourceFile1.groovy', 'subdir1', 'subdir1/Subdir1File2.groovy', 'subdir1/Subdir1File1.groovy', 'subdir2', 'subdir2/subdir2a', 'subdir2/subdir2a/Subdir2aFile1.groovy', 'subdir2/Subdir2File1.groovy'])
+
+        assert testCountRule.count == 5
+        assert results.getNumberOfFilesWithViolations(3) == 0
+        assert results.totalNumberOfFiles == 5
+    }
+
     private List resultsPaths(Results results, List paths=[]) {
         if (results.path) {
             paths << results.path

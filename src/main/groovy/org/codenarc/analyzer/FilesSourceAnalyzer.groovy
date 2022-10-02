@@ -99,7 +99,7 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
     private FileResults processFile(File file, File baseDirectoryFile, RuleSet ruleSet) {
         def sourceFile = new SourceFile(file)
         List allViolations = collectViolations(sourceFile, ruleSet)
-        def fileRelativePath = baseDirectoryFile.toPath().relativize(file.toPath()).toString()
+        def fileRelativePath = baseDirectoryFile.toPath().relativize(file.toPath()).toString().replace('\\', SEP)
         def fileResults = new FileResults(fileRelativePath, allViolations, sourceFile)
         fileResults
     }
