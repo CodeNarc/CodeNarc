@@ -16,6 +16,7 @@
 package org.codenarc
 
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
+import org.codenarc.analyzer.FilesSourceAnalyzer
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.plugin.baseline.BaselineResultsPlugin
 import org.codenarc.report.JsonReportWriter
@@ -79,6 +80,9 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     -excludes=<PATTERNS>
         The comma-separated list of Ant-style file patterns specifying files that must
         be excluded. No files are excluded when omitted.
+    -sourcefiles=<FILENAMES>
+        The comma-separated list of files we want to analyze. If set, -basedir,
+        -includes and -exclude arguments are ignored.
     -rulesetfiles=<FILENAMES>
         The path to the Groovy or XML RuleSet definition files, relative to the classpath.
         This can be a single file path, or multiple paths separated by commas. Each path may be optionally prefixed by
@@ -133,6 +137,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     protected String baseDir
     protected String includes
     protected String excludes
+    protected String sourceFiles
     protected String title
     protected String plugins
     protected String propertiesFilename
@@ -225,8 +230,10 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     }
 
     protected void setDefaultsIfNecessary() {
-        baseDir = baseDir ?: '.'
-        includes = includes  ?: '**/*.groovy'
+        if (!sourceFiles) {
+            baseDir = baseDir ?: '.'
+            includes = includes  ?: '**/*.groovy'
+        }
         ruleSetFiles = ruleSetFiles ?: 'rulesets/basic.xml'
 
         if (reports.empty) {
@@ -247,13 +254,26 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
      * @return a configured SourceAnalyzer instance
      */
     protected SourceAnalyzer createSourceAnalyzer() {
-        new FilesystemSourceAnalyzer(baseDirectory: baseDir, includes: includes, excludes: excludes, failOnError: failOnError)
+        // List of files sent as argument
+        if (sourceFiles) {
+            return new FilesSourceAnalyzer(
+                sourceFiles: sourceFiles.split(','),
+                failOnError: failOnError
+            )
+        }
+        // Files will be listed using base directory, includes & excludes
+        return new FilesystemSourceAnalyzer(
+            baseDirectory: baseDir,
+            includes: includes,
+            excludes: excludes,
+            failOnError: failOnError
+        )
     }
 
     protected void parseArgs(String[] args) {
         args.each { arg ->
-            final PATTERN = /\-(.*)\=(.*)/      // -name=value
-            def matcher = arg =~ PATTERN
+            final pattern = /\-(.*)\=(.*)/      // -name=value
+            def matcher = arg =~ pattern
             assert matcher, "Invalid argument format: [$arg]"
             def name = matcher[0][1]
             def value = matcher[0][2]
@@ -264,6 +284,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
                 case 'basedir': baseDir = value; break
                 case 'includes': includes = value; break
                 case 'excludes': excludes = value; break
+                case 'sourcefiles': sourceFiles = value ; break
                 case 'title': title = value; break
                 case 'report': parseReport(value); break
                 case 'maxPriority1Violations': maxPriority1Violations = value as int; break

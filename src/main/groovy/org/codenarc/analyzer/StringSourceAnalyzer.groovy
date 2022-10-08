@@ -26,6 +26,7 @@ import org.codenarc.source.SourceString
  * @author Hamlet D'Arcy
  */
 class StringSourceAnalyzer extends AbstractSourceAnalyzer {
+
     SourceString source
 
     StringSourceAnalyzer(String source) {

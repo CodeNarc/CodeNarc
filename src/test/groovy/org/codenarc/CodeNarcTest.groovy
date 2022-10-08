@@ -15,6 +15,8 @@
  */
 package org.codenarc
 
+import org.codenarc.analyzer.FilesSourceAnalyzer
+
 import static org.codenarc.test.TestUtil.captureSystemOut
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -42,6 +44,7 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String EXCLUDE_FILE = 'config/CodeNarcBaselineViolations.xml'
     private static final String INCLUDES = 'sourcewithdirs/**/*.groovy'
     private static final String EXCLUDES = '**/*File2.groovy'
+    private static final String SOURCEFILES = 'src/test/resources/sourcewithdirs/SourceFile1.groovy,src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy,src/test/resources/sourcewithdirs/subdir1/Subdir1File2.groovy'
     private static final String PROPERTIES_FILENAME = 'some.properties'
     private static final String TITLE = 'My Title'
     private static final String HTML_REPORT_FILE = new File('CodeNarcTest-Report.html').absolutePath
@@ -251,6 +254,17 @@ class CodeNarcTest extends AbstractTestCase {
             assert codeNarc.baseDir == 'ddd'
         }
 
+        @Test
+        void SourceFilesDefaults() {
+            codeNarc.sourceFiles = 'a,b,c'
+            codeNarc.setDefaultsIfNecessary()
+            assert codeNarc.baseDir == null
+            assert codeNarc.includes == null
+            assert codeNarc.sourceFiles == 'a,b,c'
+            assert codeNarc.ruleSetFiles == BASIC_RULESET
+            assertReport(codeNarc.reports[0], HtmlReportWriter, null, null)
+        }
+
     }
 
     @Nested
@@ -313,6 +327,25 @@ class CodeNarcTest extends AbstractTestCase {
             assert codeNarcRunner.reportWriters.size == 1
             def reportWriter = codeNarcRunner.reportWriters[0]
             assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
+            assert exitCode == 0
+        }
+
+        @Test
+        void SourceFiles() {
+            final ARGS = ["-sourcefiles=$SOURCEFILES", "-rulesetfiles=$RULESET1"] as String[]
+
+            codeNarc.execute(ARGS)
+
+            assert codeNarc.ruleSetFiles == RULESET1
+
+            def sourceAnalyzer = codeNarcRunner.sourceAnalyzer
+            assert sourceAnalyzer.class == FilesSourceAnalyzer
+            assert sourceAnalyzer.sourceFiles == SOURCEFILES.split(',')
+            assert sourceAnalyzer.failOnError == false
+
+            assert codeNarcRunner.propertiesFile == null
+            assert codeNarcRunner.ruleSetFiles == RULESET1
+
             assert exitCode == 0
         }
 
