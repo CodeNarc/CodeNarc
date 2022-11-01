@@ -9,8 +9,6 @@ title: CodeNarc - Integration with Other Tools / Frameworks
 
   * [IntelliJ IDEA](http://www.jetbrains.com/idea/) - See the [IDEA CodeNarc Plugin](http://plugins.jetbrains.com/plugin/?idea&id=5925).
 
-  * [Eclipse](http://eclipse.org/) - See the [Eclipse CodeNarc Plugin](http://codenarceclipse.sourceforge.net/).
-
   * [Visual Studio Code](https://code.visualstudio.com/) - See the [VsCode Groovy Lint extension](https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint).
 
 ## Docker
