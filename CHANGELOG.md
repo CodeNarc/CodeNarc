@@ -8,7 +8,7 @@ Version 3.x.x    (??? 2022)
  - Create GitHub Action "gradle.yml" to build+test on push or PR.
  - #708: Include internal results for files without violations, to enable accurate baseline reporting. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
  - #717: Allow to send list of files in argument `sourcefiles` ([Nicolas Vuillamy](https://github.com/nvuillam))
-
+ - #720: **ConsecutiveBlankLines**: Update rule doc. Known limitation: False positive violation for consecutive blank lines within string literals.
 
 Version 3.1.0    (Jun 2022)
 --------------------------------------
