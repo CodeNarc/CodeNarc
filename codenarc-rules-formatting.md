@@ -362,6 +362,11 @@ Makes sure there are no consecutive lines that are either blank or whitespace on
 further than necessary when reading code, and increases the likelihood that a logical block of code will fit on one
 screen for easier comprehension.
 
+Known Limitations:
+
+  * Will create *false positive* violation for consecutive blank lines within string literals. For those cases, 
+    configure the rule to skip that file (using *doNotApplyToFileNames* or *doNotApplyToFilesMatching* rule properties). See [Standard Properties for Configuring Rules](https://codenarc.org/codenarc-configuring-rules.html#standard-properties-for-configuring-rules). Note that the class-based rule properties are not available on this rule.
+
 Example of violation:
 
 ```
