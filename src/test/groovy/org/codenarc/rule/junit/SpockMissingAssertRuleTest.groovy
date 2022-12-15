@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.jupiter.api.Test
 
 /**
+ * Tests for SpockMissingAssertRuleTest
  *
  * @author Jean André Gauthier
  * @author Daniel Clausen
@@ -78,7 +79,26 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                 }
             }
         '''.stripIndent()
-        assertSingleViolation(SOURCE, 8, "false", "'expect:' contains a boolean expression in a nested statement, which is not implicitly asserted")
+        assertSingleViolation(SOURCE, 8, 'false', "'expect:' contains a boolean expression in a nested statement, which is not implicitly asserted")
+    }
+
+    @Test
+    void testIfStatementInWith_NoViolation() {
+        final SOURCE = '''
+            public class MySpec extends spock.lang.Specification {
+                def "testIfStatement_NoViolations"() {
+                    expect:
+                    with(new Object()) {
+                        if (true) {
+                            "123"
+                            123
+                            false
+                        }
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
     }
 
     @Override

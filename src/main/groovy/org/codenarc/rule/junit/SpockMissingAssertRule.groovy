@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codehaus.groovy.ast.ASTNode
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.stmt.DoWhileStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.ForStatement
@@ -28,6 +28,10 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
+ * Spocks treats all expressions on the first level of a then or expect block as an implicit assertion. However,
+ * everything inside an if-block is not an implicit assert, just a useless comparison.
+ *
+ * This rule finds such expressions, where an explicit call to assert would be required.
  *
  * @author Jean André Gauthier
  * @author Daniel Clausen
@@ -42,13 +46,17 @@ class SpockMissingAssertRule extends AbstractAstVisitorRule {
 class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
 
     // Intentionally omitting and, as it doesn't have any semantic impact
-    private final SPOCK_LABELS = ["given", "when", "then", "expect", "where", "cleanup", "setup"]
+    private final List<String> spockLabels = ['given', 'when', 'then', 'expect', 'where', 'cleanup', 'setup']
 
-    private final SPOCK_LABELS_WITH_IMPLICIT_ASSERTIONS = ["then", "expect"]
+    private final List<String> spockLabelsWithImplicitAssertions = ['then', 'expect']
+
+    private final List<String> spockMethodsWithImplicitAssertions = ['with', 'verifyAll']
 
     private String currentLabel = null
 
-    private int nestedStatementDepth = 0
+    private int nNestedStatements = 0
+
+    private int nNestedImplicitAssertMethodCalls = 0
 
     @Override
     void visitDoWhileLoop(DoWhileStatement statement) {
@@ -99,21 +107,35 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    void visitMethodCallExpression(MethodCallExpression call) {
+        boolean isThis = call.objectExpression.variable == 'this'
+        boolean isMethodWithImplicitAssertion = spockMethodsWithImplicitAssertions.contains(call.method.value)
+        if (isThis && isMethodWithImplicitAssertion) {
+            handleNestedImplicitAssertMethodCall {
+                super.visitMethodCallExpression(call)
+            }
+        } else {
+            super.visitMethodCallExpression(call)
+        }
+    }
+
+    @Override
     void visitExpressionStatement(ExpressionStatement statement) {
         updateCurrentLabel(statement)
-        boolean isInLabelWithImplicitAssertions = currentLabel in SPOCK_LABELS_WITH_IMPLICIT_ASSERTIONS
-        boolean isInTopLevel = nestedStatementDepth == 0
-        boolean isBoolean = statement.expression.type.name == "boolean"
-        if (isInLabelWithImplicitAssertions && !isInTopLevel && isBoolean) {
+        boolean isInLabelWithImplicitAssertions = currentLabel in spockLabelsWithImplicitAssertions
+        boolean isInTopLevel = nNestedStatements == 0
+        boolean isBoolean = statement.expression.type.name == 'boolean'
+        boolean isInImplicitAssertMethodCall = nNestedImplicitAssertMethodCalls > 0
+        if (isInLabelWithImplicitAssertions && !isInTopLevel && isBoolean && !isInImplicitAssertMethodCall) {
             addViolation(statement, "'${currentLabel}:' contains a boolean expression in a nested statement, which is not implicitly asserted")
         }
         super.visitExpressionStatement(statement)
     }
 
     private void updateCurrentLabel(Statement statement) {
-        var labels = statement.getStatementLabels();
+        var labels = statement.getStatementLabels()
         if (labels != null) {
-            var spockLabels = labels.intersect(SPOCK_LABELS)
+            var spockLabels = labels.intersect(spockLabels)
             if (spockLabels.size() > 0) {
                 currentLabel = spockLabels.last()
             }
@@ -122,8 +144,14 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     }
 
     private void handleNestedStatement(Closure callVisitorMethod) {
-        nestedStatementDepth++
+        nNestedStatements++
         callVisitorMethod()
-        nestedStatementDepth--
+        nNestedStatements--
+    }
+
+    private void handleNestedImplicitAssertMethodCall(Closure callVisitorMethod) {
+        nNestedImplicitAssertMethodCalls++
+        callVisitorMethod()
+        nNestedImplicitAssertMethodCalls--
     }
 }
