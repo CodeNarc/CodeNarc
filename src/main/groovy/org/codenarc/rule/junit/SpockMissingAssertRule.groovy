@@ -48,9 +48,9 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     // Intentionally omitting and, as it doesn't have any semantic impact
     private final List<String> spockLabels = ['given', 'when', 'then', 'expect', 'where', 'cleanup', 'setup']
 
-    private final List<String> spockLabelsWithImplicitAssertions = ['then', 'expect']
+    private final List<String> labelsWithImplicitAssertions = ['then', 'expect']
 
-    private final List<String> spockMethodsWithImplicitAssertions = ['with', 'verifyAll']
+    private final List<String> methodsWithImplicitAssertions = ['with', 'verifyAll']
 
     private String currentLabel = null
 
@@ -109,7 +109,7 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         boolean isThis = call.objectExpression.variable == 'this'
-        boolean isMethodWithImplicitAssertion = spockMethodsWithImplicitAssertions.contains(call.method.value)
+        boolean isMethodWithImplicitAssertion = methodsWithImplicitAssertions.contains(call.method.value)
         if (isThis && isMethodWithImplicitAssertion) {
             handleNestedImplicitAssertMethodCall {
                 super.visitMethodCallExpression(call)
@@ -122,7 +122,7 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {
         updateCurrentLabel(statement)
-        boolean isInLabelWithImplicitAssertions = currentLabel in spockLabelsWithImplicitAssertions
+        boolean isInLabelWithImplicitAssertions = currentLabel in labelsWithImplicitAssertions
         boolean isInTopLevel = nNestedStatements == 0
         boolean isBoolean = statement.expression.type.name == 'boolean'
         boolean isInImplicitAssertMethodCall = nNestedImplicitAssertMethodCalls > 0

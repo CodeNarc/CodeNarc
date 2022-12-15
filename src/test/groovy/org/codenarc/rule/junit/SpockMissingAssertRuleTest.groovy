@@ -16,7 +16,12 @@
 package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.rule.Violation
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
+
+import java.util.stream.Stream
 
 /**
  * Tests for SpockMissingAssertRuleTest
@@ -33,7 +38,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
-    void testTopLevelExpression_NoViolations() {
+    void testTopLevelBoolean_NoViolations() {
         final SOURCE = '''
             public class MySpec extends spock.lang.Specification {
                 def "testTopLevelExpression_NoViolations"() {
@@ -48,61 +53,169 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
         assertNoViolations(SOURCE)
     }
 
-    @Test
-    void testIfStatement_NoViolations() {
-        final SOURCE = '''
+    @ParameterizedTest
+    @MethodSource("statementsToTest")
+    void testStatement_NoViolations(Closure<GString> statement) {
+        final SOURCE = """
             public class MySpec extends spock.lang.Specification {
                 def "testIfStatement_NoViolations"() {
                     expect:
-                    if (true) {
+                    ${statement("""
                         "123"
                         123
                         assert false
-                    }
+                    """)}
                 }
             }
-        '''.stripIndent()
+        """.stripIndent()
         assertNoViolations(SOURCE)
     }
 
-    @Test
-    void testIfStatement_SingleViolation() {
-        final SOURCE = '''
+    @ParameterizedTest
+    @MethodSource("statementsToTest")
+    void testStatement_SingleViolation(Closure<GString> statement) {
+        final SOURCE = """
             public class MySpec extends spock.lang.Specification {
                 def "testIfStatement_NoViolations"() {
                     expect:
-                    if (true) {
+                    ${statement("""
                         "123"
                         123
                         false
-                    }
+                    """)}
                 }
             }
-        '''.stripIndent()
-        assertSingleViolation(SOURCE, 8, 'false', "'expect:' contains a boolean expression in a nested statement, which is not implicitly asserted")
+        """.stripIndent()
+        assertSingleViolation(SOURCE) { Violation violation ->
+            violation.sourceLine == 'false' &&
+            violation.message == "'expect:' contains a boolean expression in a nested statement, which is not implicitly asserted";
+        }
     }
 
-    @Test
-    void testIfStatementInWith_NoViolation() {
-        final SOURCE = '''
+    @ParameterizedTest
+    @MethodSource("statementsToTest")
+    void testStatementInWith_NoViolation(Closure<GString> statement) {
+        final SOURCE = """
             public class MySpec extends spock.lang.Specification {
                 def "testIfStatement_NoViolations"() {
                     expect:
                     with(new Object()) {
-                        if (true) {
+                        ${statement("""
+                            "123"
+                            123
+                            false
+                        """)}
+                    }
+                }
+            }
+        """.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @ParameterizedTest
+    @MethodSource("statementsToTest")
+    void testWithInStatement_NoViolation(Closure<GString> statement) {
+        final SOURCE = """
+            public class MySpec extends spock.lang.Specification {
+                def "testIfStatement_NoViolations"() {
+                    expect:
+                    ${statement("""
+                        with(new Object()) {
                             "123"
                             123
                             false
                         }
-                    }
+                    """)}
                 }
             }
-        '''.stripIndent()
+        """.stripIndent()
         assertNoViolations(SOURCE)
     }
 
     @Override
     protected SpockMissingAssertRule createRule() {
         new SpockMissingAssertRule()
+    }
+
+    private static Stream<Closure<GString>> statementsToTest() {
+        Stream.of(
+            (content) -> """
+            do {
+                $content
+            } while (true)
+            """,
+                (content) -> """
+            for (int i = 0; i < 10; i++) {
+                $content
+            }
+            """,
+                (content) -> """
+            if (true) {
+                $content
+            }
+            """,
+                (content) -> """
+            if (true) {
+                123
+            } else if (false) {
+                $content
+            }
+            """,
+                (content) -> """
+            if (true) {
+                123
+            } else if (false) {
+                456
+            } else {
+                $content
+            }
+            """,
+                (content) -> """
+            switch (123) {
+                case 123:
+                    $content
+                    break
+                default:
+                    break
+            }
+            """,
+                (content) -> """
+            switch (123) {
+                case 456:
+                    break
+                default:
+                    $content
+                    break
+            }
+            """,
+                (content) -> """
+            try {
+                $content
+            } catch (Exception e) {
+                123
+            }
+            """,
+                (content) -> """
+            try {
+                123
+            } catch (Exception e) {
+                $content
+            }
+            """,
+                (content) -> """
+            try {
+                123
+            } catch (Exception e) {
+                456
+            } finally {
+                $content
+            }
+            """,
+                (content) -> """
+            while (true) {
+                $content
+            }
+            """,
+        )
     }
 }
