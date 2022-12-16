@@ -1,7 +1,7 @@
 ---
 layout: default
 title: CodeNarc - JUnit Rules
----  
+---
 
 # JUnit Rules  ("*rulesets/junit.xml*")
 
@@ -194,8 +194,8 @@ ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| ignoreMethodsWithAnnotations | Specifies one or more (comma-separated) annotation names. Methods annotated with the annotations are ignored by this rule.  | After,AfterAll,AfterClass, AfterEach,Before,BeforeAll, BeforeClass,BeforeEach, Disabled,Ignore, Override,Test |              
-  
+| ignoreMethodsWithAnnotations | Specifies one or more (comma-separated) annotation names. Methods annotated with the annotations are ignored by this rule.  | After,AfterAll,AfterClass, AfterEach,Before,BeforeAll, BeforeClass,BeforeEach, Disabled,Ignore, Override,Test |
+
 
 ## JUnitPublicProperty Rule
 
@@ -384,6 +384,38 @@ Example of violations:
             when: a *= 2
 
             then: a == 4
+        }
+    }
+```
+
+
+## SpockMissingAssert Rule
+
+*Since CodeNarc 3.1.1*
+
+Spock treats all expressions on the first level of a then or expect block as an implicit assertion.
+However, everything inside an if-block is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
+
+This rule finds such expressions, where an explicit call to `assert` would be required.
+
+Example of violations:
+
+```
+    public class MySpec extends spock.lang.Specification {
+        def "test passes - does not behave as expected"() {
+            expect:
+            if (true) {
+                true == false
+            }
+        }
+
+        def "test fails - behaves as expected"() {
+            expect:
+            if (true) {
+                with(new Object()) {
+                    true == false
+                }
+            }
         }
     }
 ```
