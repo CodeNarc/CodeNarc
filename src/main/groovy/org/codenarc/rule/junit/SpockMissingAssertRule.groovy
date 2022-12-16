@@ -28,8 +28,8 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * Spocks treats all expressions on the first level of a then or expect block as an implicit assertion. However,
- * everything inside an if-block is not an implicit assert, just a useless comparison.
+ * Spock treats all expressions on the first level of a then or expect block as an implicit assertion. However,
+ * everything inside an if-block is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
  *
  * This rule finds such expressions, where an explicit call to assert would be required.
  *

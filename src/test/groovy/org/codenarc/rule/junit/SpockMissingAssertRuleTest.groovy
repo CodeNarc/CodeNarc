@@ -58,7 +58,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     void testStatement_NoViolations(Closure<GString> statement) {
         final SOURCE = """
             public class MySpec extends spock.lang.Specification {
-                def "testIfStatement_NoViolations"() {
+                def "testStatement_NoViolations"() {
                     expect:
                     ${statement("""
                         "123"
@@ -76,7 +76,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     void testStatement_SingleViolation(Closure<GString> statement) {
         final SOURCE = """
             public class MySpec extends spock.lang.Specification {
-                def "testIfStatement_NoViolations"() {
+                def "testStatement_SingleViolation"() {
                     expect:
                     ${statement("""
                         "123"
@@ -97,7 +97,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     void testStatementInWith_NoViolation(Closure<GString> statement) {
         final SOURCE = """
             public class MySpec extends spock.lang.Specification {
-                def "testIfStatement_NoViolations"() {
+                def "testStatementInWith_NoViolation"() {
                     expect:
                     with(new Object()) {
                         ${statement("""
@@ -117,7 +117,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     void testWithInStatement_NoViolation(Closure<GString> statement) {
         final SOURCE = """
             public class MySpec extends spock.lang.Specification {
-                def "testIfStatement_NoViolations"() {
+                def "testWithInStatement_NoViolation"() {
                     expect:
                     ${statement("""
                         with(new Object()) {
