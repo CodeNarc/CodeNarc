@@ -106,6 +106,32 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTestCase<EmptyCatchBlockRule> 
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_TryWithResources_NoViolation() {
+        final SOURCE = '''
+            class MyClass {
+                void myMethod()  {
+                    try (def input = url.openStream(); def output = new ByteArrayOutputStream(4096)) {
+                         // Do stuff
+                    }
+                    catch (IOException e) {
+                        println e
+                    }
+                }
+                
+                void myMethod2()  {
+                    try (def input = url.openStream()) {
+                         // Do stuff
+                    }
+                    catch (IOException e) {
+                        println e
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected EmptyCatchBlockRule createRule() {
         new EmptyCatchBlockRule()

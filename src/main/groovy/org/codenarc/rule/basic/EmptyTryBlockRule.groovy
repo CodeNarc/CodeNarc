@@ -35,7 +35,7 @@ class EmptyTryBlockRule extends AbstractAstVisitorRule {
 class EmptyTryBlockAstVisitor extends AbstractAstVisitor  {
     @Override
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
-        if (isFirstVisit(tryCatchStatement) && (AstUtil.isEmptyBlock(tryCatchStatement.tryStatement) || isGeneratedCode(tryCatchStatement.tryStatement))) {
+        if (isFirstVisit(tryCatchStatement) && (AstUtil.isEmptyBlock(tryCatchStatement.tryStatement) && !tryCatchStatement.resourceStatements)) {
             addViolation(tryCatchStatement, 'The try block is empty')
         }
         super.visitTryCatchFinally(tryCatchStatement)

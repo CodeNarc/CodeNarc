@@ -47,18 +47,36 @@ class EmptyTryBlockRuleTest extends AbstractRuleTestCase<EmptyTryBlockRule> {
     }
 
     @Test
-    void testApplyTo_TryWithResources_Violation() {
+    void testApplyTo_TryWithResources_NoViolation() {
         final SOURCE = '''
             class MyClass {
-                def myClosure = {
+                void myMethod1()  {
                     try(FileReader reader = new FileReader("file.txt")) {
                     } catch(MyException e) {
                         e.printStackTrace()
                     }
                 }
+                
+                void myMethod2()  {
+                    try (def input = url.openStream(); def output = new ByteArrayOutputStream(4096)) {
+                         println output
+                    }
+                    catch (IOException e) {
+                        // some code to handle the exception
+                    }
+                }
+                
+                void myMethod3()  {
+                    try (def input = url.openStream()) {
+                         println input
+                    }
+                    catch (IOException e) {
+                        // some code to handle the exception
+                    }
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'try(FileReader reader = new FileReader("file.txt"))')
+        assertNoViolations(SOURCE)
     }
 
     @Test

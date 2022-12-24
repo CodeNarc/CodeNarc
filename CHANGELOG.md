@@ -3,13 +3,17 @@
 
 NOTE: CodeNarc now provides a separate **CodeNarc-Groovy4** artifact for use with Groovy 4.x.
 
-Version 3.x.x    (??? 2022)
+Version 3.x.x    (??? 2023)
 --------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+ - #701: **EmptyTryBlock** rule: Ignore all try-with-resources statements (since having an empty try block with those is a valid scenario).
+
+Build, Infrastructure and Tests
  - Create GitHub Action "gradle.yml" to build+test on push or PR.
  - #708: Include internal results for files without violations, to enable accurate baseline reporting. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
  - #717: Allow to send list of files in argument `sourcefiles` ([Nicolas Vuillamy](https://github.com/nvuillam))
 
- - Documentation
+Documentation
  - #719: Remove CodeNarc Eclipse plugin reference. ([René Scheibe](https://github.com/darxriggs))
  - #720: **ConsecutiveBlankLines**: Document known limitation: False positive violation for consecutive blank lines within string literals.
 
