@@ -571,7 +571,7 @@ Here is an example of code that produces a violation:
 
 ## EmptyTryBlock Rule
 
-Checks for empty *try* blocks. Empty *try* blocks are confusing and serve no purpose.
+Checks for empty *try* blocks. Empty *try* blocks are confusing and serve no purpose. This rule ignores all try-with-resources statements.
 
 Here is an example of code that produces a violation:
 
