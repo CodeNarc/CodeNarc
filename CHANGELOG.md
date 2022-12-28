@@ -1,13 +1,14 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-NOTE: CodeNarc now provides a separate **CodeNarc-Groovy4** artifact for use with Groovy 4.x.
+NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-Version 3.x.x    (??? 2023)
+TODO: Version 3.x.x    (??? 2023)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #701: **EmptyTryBlock** rule: Ignore all try-with-resources statements (since having an empty try block with those is a valid scenario).
  - #715: **SpaceBeforeOpeningBrace** and **SpaceAfterOpeningBrace** rules: Fix false positive when non-printable ASCII chars on the same line.
+ - #716: **Indentation** rule: Fix false positive for nested blocks in closures.
 
 Build, Infrastructure and Tests
  - Create GitHub Action "gradle.yml" to build+test on push or PR.

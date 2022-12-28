@@ -74,9 +74,9 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     ]
 
     private int indentLevel = 0
+    private boolean flexibleIndent = false
     private final Set<Integer> ignoreLineNumbers = []
     private final Set<BlockStatement> nestedBlocks = []
-    private final Set<BlockStatement> flexibleIndentBlocks = []
     private final Set<ConstructorCallExpression> constructorCallInStatements = []
     private final Map<BlockStatement, Integer> blockIndentLevel = [:].withDefault { 0 }
     private final Map<BlockStatement, Tuple2<Integer, String>> methodColumnAndSourceLineForClosureBlock = [:].withDefault { new Tuple2<>(0, '') }
@@ -188,6 +188,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         def args = call.arguments
+        boolean oldFlexibleIndent = flexibleIndent
         if (args instanceof ArgumentListExpression) {
             // If the method name starts on a different line, then assume it is a chained method call,
             // and any blocks that are arguments should be indented.
@@ -195,25 +196,18 @@ class IndentationAstVisitor extends AbstractAstVisitor {
                 increaseIndentForClosureBlocks(args)
             }
 
-            setupFlexibleIndentForAnyClosureParameterBlocks(args)
+            flexibleIndent = true
             recordMethodColumnAndSourceLineForClosureBlocks(call)
         }
 
         super.visitMethodCallExpression(call)
+        flexibleIndent = oldFlexibleIndent
     }
 
     private List<Expression> increaseIndentForClosureBlocks(ArgumentListExpression args) {
         return args.expressions.each { expr ->
             if (isClosureWithBlock(expr)) {
                 blockIndentLevel[expr.code] = blockIndentLevel[expr.code] + 1
-            }
-        }
-    }
-
-    private List<Expression> setupFlexibleIndentForAnyClosureParameterBlocks(ArgumentListExpression args) {
-        args.expressions.each { expr ->
-            if (isClosureWithBlock(expr)) {
-                flexibleIndentBlocks << expr.code
             }
         }
     }
@@ -302,7 +296,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     private void checkStatementIndent(Statement statement, BlockStatement block) {
         String description = "statement on line ${statement.lineNumber} in class ${currentClassName}"
-        if (flexibleIndentBlocks.contains(block)) {
+        if (flexibleIndent) {
             flexibleCheckForCorrectColumn(statement, description, block)
         } else {
             checkForCorrectColumn(statement, description)

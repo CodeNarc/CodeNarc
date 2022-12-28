@@ -1088,6 +1088,23 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_Statement_WithinIf_WithinClosure_NoViolations() {
+        final SOURCE = '''
+            |def foo() {
+            |    1
+            |        .tap {
+            |            println("test")
+            |            if (Boolean.valueOf("true")) {
+            |                println("test")
+            |            }
+            |        }
+            |        .tap { }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_firstNonWhitespaceColumn() {
         assert IndentationAstVisitor.firstNonWhitespaceColumn('') == -1
         assert IndentationAstVisitor.firstNonWhitespaceColumn('    ') == -1
