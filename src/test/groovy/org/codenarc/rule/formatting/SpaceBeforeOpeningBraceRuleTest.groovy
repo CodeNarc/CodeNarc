@@ -62,6 +62,21 @@ class SpaceBeforeOpeningBraceRuleTest extends AbstractRuleTestCase<SpaceBeforeOp
     }
 
     @Test
+    void testApplyTo_ProperSpacing_NonPrintableAsciiChars_NoViolations() {
+        final SOURCE = '''
+            class MyClass /* emoji 💩 */ {
+                def myMethod() /* emoji 💩 */ {
+                    if (someString.contains("emoji 💩 ")) { }
+                    while(someString.contains("emoji 💩 ")) { }
+                    poo("with an emoji 💩 should not break") { }
+                    poo("with unicode 𝓈 should not break") { }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_ClassDeclaration_Violation() {
         final SOURCE = '''
             class MyClass{ }

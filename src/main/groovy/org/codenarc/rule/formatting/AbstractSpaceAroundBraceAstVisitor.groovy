@@ -41,7 +41,7 @@ abstract class AbstractSpaceAroundBraceAstVisitor extends AbstractAstVisitor {
     }
 
     protected String sourceLineOrEmpty(ASTNode node) {
-        (node.lineNumber == -1 || (node instanceof ClassNode && node.script)) ? '' : sourceLine(node)
+        (node.lineNumber == -1 || (node instanceof ClassNode && node.script)) ? '' : replaceNonPrintableCharacters(sourceLine(node))
     }
 
     protected String lastSourceLineOrEmpty(ASTNode node) {
@@ -71,6 +71,10 @@ abstract class AbstractSpaceAroundBraceAstVisitor extends AbstractAstVisitor {
             index--
         }
         return index
+    }
+
+    protected String replaceNonPrintableCharacters(String text) {
+        return text.replaceAll('\\P{Print}', ' ')
     }
 
 }

@@ -70,6 +70,21 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase<SpaceAfterOpen
     }
 
     @Test
+    void testApplyTo_ProperSpacing_NonPrintableAsciiChars_NoViolations() {
+        final SOURCE = '''
+            class MyClass /* emoji 💩 */ { /*xxx*/
+                def myMethod() /* emoji 💩 */ { /*xxx*/
+                    if (someString.contains("emoji 💩 ")) { /*xxx*/ }
+                    while(someString.contains("emoji 💩 ")) { /*xxx*/ }
+                    poo("with an emoji 💩 should not break") { /*xxx*/ }
+                    poo("with unicode 𝓈 should not break") { /*xxx*/ }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_ProperSpacingWithoutIgnoreEmptyBlock_OneViolations() {
         final SOURCE = '''
             class MyClass {
