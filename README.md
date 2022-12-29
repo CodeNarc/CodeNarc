@@ -33,9 +33,17 @@ For projects built using Gradle or Maven, **CodeNarc** is available from the [Ma
 - groupId = org.codenarc
 - artifactId = CodeNarc
 
+## BUILD
+
+To build the CodeNarc jar from source, run the following command:
+
+```bash
+./gradlew jar
+```
+
 ## DEVELOPMENT
 
-When contributing to CodeNarc, run the following command to test on your local machine.
+When contributing to CodeNarc, run the following command to test on your local machine:
 
 ```bash
 ./gradlew check

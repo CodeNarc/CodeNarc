@@ -36,7 +36,8 @@ to fit into your project. Build tool, framework support, and report generation a
      <td class="section">
         <h2>Running CodeNarc</h2>
          Run CodeNarc with the <a href="codenarc-ant-task.html">Ant Task</a>,
-         the <a href="codenarc-command-line.html">command-line runner</a>, or
+         the <a href="codenarc-command-line.html">command-line runner</a>, 
+         <a href="codenarc-docker.html">Docker</a>, or
          <a href="codenarc-run-as-a-test.html">as part of your test suite</a>.
             Also,  plugins exist for <a href="codenarc-other-tools-frameworks.html">Maven</a>,
            <a href="codenarc-other-tools-frameworks.html">Gradle</a>, <a href="codenarc-other-tools-frameworks.html">Grails</a>,
@@ -53,7 +54,7 @@ to fit into your project. Build tool, framework support, and report generation a
          <h2>Requirements</h2>
          <strong>CodeNarc</strong> requires:
          <ul>
-              <li>Java 1.7 or later</li>
+              <li>Java 1.8 or later</li>
               <li><a href="http://groovy-lang.org/">Groovy</a> version 3.0 or later; Groovy version 4.0 or later for the 3.x.x-groovy-4.x versions of CodeNarc</li>
               <li><a href="https://www.slf4j.org/">SLF4J</a> API and binding jar(s)</li>
               <li><a href="https://dx42.github.io/gmetrics/">GMetrics</a> or GMetrics-Groovy4 2.1.0 or later, if using the Size/Complexity rules</li>
