@@ -18,6 +18,7 @@ Build, Infrastructure and Tests
 Documentation
  - #719: Remove CodeNarc Eclipse plugin reference. ([René Scheibe](https://github.com/darxriggs))
  - #720: **ConsecutiveBlankLines**: Document known limitation: False positive violation for consecutive blank lines within string literals.
+ - #674: README and Command-Line page: Add info on building CodeNarc jar locally from running using that jar. Add links for CodeNarc, Groovy and Logback jars.
 
 
 Version 3.1.0    (Jun 2022)

@@ -49,7 +49,7 @@ Make sure that the following are included your CLASSPATH:
 
   2. The CodeNarc jar. Use a published [CodeNarc release](https://github.com/CodeNarc/CodeNarc/releases) or else build the jar from source (see below).
 
-  3. The **SLF4J** api/implementation jars, e.g. [Logback](https://repo1.maven.org/maven2/ch/qos/logback/)*.
+  3. The **SLF4J** api/implementation jars, e.g. [Logback](https://repo1.maven.org/maven2/ch/qos/logback/).
 
   4. The directories containing (or relative to) **CodeNarc** config files such as "codenarc.properties"
         or ruleset files.
