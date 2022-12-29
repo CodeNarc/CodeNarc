@@ -45,11 +45,11 @@ current directory with reasonable defaults, as described below.
 
 Make sure that the following are included your CLASSPATH:
 
-  1. The Groovy jar
+  1. The Groovy-all jar, e.g. https://repo1.maven.org/maven2/org/codehaus/groovy/groovy-all/ (for Groovy 3.0.x).
 
-  2. The CodeNarc jar
+  2. The CodeNarc jar. Use a published [CodeNarc release](https://github.com/CodeNarc/CodeNarc/releases) or else build the jar from source (see below).
 
-  3. The **SLF4J** api/implementation jars, e.g. **Logback**.
+  3. The **SLF4J** api/implementation jars, e.g. [Logback](https://repo1.maven.org/maven2/ch/qos/logback/)*.
 
   4. The directories containing (or relative to) **CodeNarc** config files such as "codenarc.properties"
         or ruleset files.
@@ -87,8 +87,13 @@ Here is an example Gradle script to run CodeNarc using its command-line interfac
     }
 
     dependencies {
-        compile 'org.codenarc:CodeNarc:1.6.1'
-        compile 'ch.qos.logback:logback-classic:1.2.3'
+        // To use a published CodeNarc version
+        implementation 'org.codenarc:CodeNarc:3.2.0'
+            
+        // OR to use a locally built CodeNarc jar; adjust the relative path and jar filename    
+        //implementation files('../../CodeNarc/build/libs/CodeNarc-3.2.0.jar')
+
+        implementation 'ch.qos.logback:logback-classic:1.2.3'
     }
 
     task runCodeNarc(type:JavaExec) {
@@ -102,3 +107,10 @@ Here is an example Gradle script to run CodeNarc using its command-line interfac
 ## Docker
 
 See [CodeNarc - Docker](./codenarc-docker.html).
+
+## Build the CodeNarc Jar From Source
+
+To build the CodeNarc jar from source:
+  1. Clone the GitHub repository, e.g `git clone https://github.com/CodeNarc/CodeNarc.git`.
+  2. From within the project root directory, execute: `./gradlew jar`. That will create a CodeNarc jar within the `build/libs` directory.
+
