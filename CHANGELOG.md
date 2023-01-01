@@ -9,6 +9,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #701: **EmptyTryBlock** rule: Ignore all try-with-resources statements (since having an empty try block with those is a valid scenario).
  - #715: **SpaceBeforeOpeningBrace** and **SpaceAfterOpeningBrace** rules: Fix false positive when non-printable ASCII chars on the same line.
  - #716: **Indentation** rule: Fix false positive for nested blocks in closures.
+ - #722: **CouldBeSwitchStatement** rule: Prevent violation if other statements are between if statements.
 
 Build, Infrastructure and Tests
  - Create GitHub Action "gradle.yml" to build+test on push or PR.

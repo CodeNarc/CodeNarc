@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.PropertyExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.syntax.Token
 import org.codehaus.groovy.syntax.Types
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -45,16 +46,29 @@ class CouldBeSwitchStatementAstVisitor extends AbstractAstVisitor {
     private BinaryExpression prev = null
     private Integer ifCounter = 0
     private Expression firstIfNode = null
+    private boolean withinIfStatement = false
 
     @Override
     void visitIfElse(IfStatement node) {
+        boolean originalWithinIfStatement = withinIfStatement
+        withinIfStatement = true
         checkIfStatementCanBeSwitch(node)
         super.visitIfElse(node)
+        withinIfStatement = originalWithinIfStatement
     }
 
     @Override
     protected void visitMethodEx(MethodNode node) {
         ifCounter = 0
+    }
+
+    @Override
+    protected void visitStatement(Statement statement) {
+        // Any other kind of statement in between if statements resets the context (counter)
+        if (!withinIfStatement) {
+            ifCounter = 0
+        }
+        super.visitStatement(statement)
     }
 
     private void checkIfStatementCanBeSwitch(IfStatement node) {

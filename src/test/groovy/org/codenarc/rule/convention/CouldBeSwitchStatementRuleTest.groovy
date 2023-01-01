@@ -252,6 +252,82 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase<CouldBeSwitchS
             [line:23, source: 'if (p.value instanceof Integer) {', message: rule.errorMessage])
     }
 
+    @Test
+    void testMultipleIfStatements_Violation() {
+        final SOURCE = '''
+            if (x == 1) {
+                y = x
+            } else {
+                // Perhaps this else should prevent a violation?
+                println 'do other stuff'
+            }
+            if (x == 2) {
+                y = x * 2
+            }
+            if (x == 3) {
+                y = x * 3
+            } else {
+                y = 0
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'if (x == 1) {', rule.errorMessage)
+    }
+
+    @Test
+    void testMultipleIfStatements_OtherCodeBetween_NoViolation() {
+        final SOURCE = '''
+            void doStuff() {
+                if (platform == 'win') {
+                    println 'do some Windows stuff'
+                } else {
+                    println 'do some Mac or Linux stuff'
+                }
+    
+                // This code in between should prevent a violation        
+                println 'significant chunk of code common to all platforms'
+            
+                if (platform == 'linux') {
+                    println 'do some Linux stuff in the subdir'
+                } else {
+                    println 'do some Mac or Windows stuff in the subdir'
+                }
+                
+                if (platform == 'mac') {
+                    println 'do some Mac stuff'
+                } else {
+                    println 'other ...'
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testMultipleIfStatements_2ndOneIsNested_NoViolation() {
+        final SOURCE = '''
+            void doStuff() {
+                if (platform == 'win') {
+                    println 'do some Windows stuff'
+                } else {
+                    println 'do some Mac or Linux stuff'
+                }
+            
+                dir('subdir') {
+                    if (platform == 'linux') {
+                        println 'do some Linux stuff in the subdir'
+                    } else {
+                        println 'do some Mac or Windows stuff in the subdir'
+                    }
+                }
+                
+                if (platform == 'mac') {
+                    println 'do some Mac-specific postprocessing'
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected CouldBeSwitchStatementRule createRule() {
         new CouldBeSwitchStatementRule()
