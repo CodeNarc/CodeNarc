@@ -14,7 +14,7 @@ shadowJar {
 
 group = 'org.codenarc'
 archivesBaseName = 'CodeNarc'
-version = '3.1.0-groovy-4.0'
+version = '3.2.0-groovy-4.0'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -24,7 +24,7 @@ repositories {
     maven { url 'https://repo.maven.apache.org/maven2' }
 }
 
-def groovy4Version = '4.0.1'
+def groovy4Version = '4.0.7'
 def gmetricsVersion = '2.1.0'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"
