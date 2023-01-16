@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://codenarc.org",
-        "version": "3.1.0"
+        "version": "3.2.0"
     },
     "report": {
-        "timestamp": "Jun 12, 2022 9:27:33 AM"
+        "timestamp": "Jan 16, 2023 11:06:47 AM"
     },
     "project": {
         "title": "Sample Project",
@@ -52,6 +52,24 @@
                             "sourceLine": "rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO",
                             "message": "The code could be more concise by using a with() or identity() block"
                         }
+                    ]
+                },
+                {
+                    "name": "AbstractAstVisitorTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "AbstractClassReferenceRuleTestCase.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "AbstractEnhanceableAstVisitorRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -109,6 +127,18 @@
                     ]
                 },
                 {
+                    "name": "FakeCountRule.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "FakePathRule.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "InlineViolationsParserTest.groovy",
                     "violations": [
                         {
@@ -126,6 +156,12 @@
                             "message": "The return keyword is not needed and can be removed"
                         }
                     ]
+                },
+                {
+                    "name": "MockRule.groovy",
+                    "violations": [
+                        
+                    ]
                 }
             ]
         },
@@ -137,7 +173,276 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "AssertWithinFinallyBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "AssignmentInConditionalRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BigDecimalInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BitwiseOperatorInConditionalRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BooleanGetBooleanRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BrokenNullCheckRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BrokenOddnessCheckRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ClassForNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ComparisonOfTwoConstantsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ComparisonWithSelfRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConstantAssertExpressionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConstantIfExpressionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConstantTernaryExpressionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConstantTernaryExpressionRule_ElvisTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DeadCodeRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DoubleNegativeRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DuplicateCaseStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DuplicateMapKeyRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DuplicateSetValueRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyCatchBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyClassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyElseBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyFinallyBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyForStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyIfStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyInstanceInitializerRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyStaticInitializerRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptySwitchStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptySynchronizedStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyTryBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyWhileStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EqualsAndHashCodeRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EqualsOverloadedRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitGarbageCollectionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ForLoopShouldBeWhileLoopRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "HardCodedWindowsFileSeparatorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "HardCodedWindowsRootDirectoryRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "IntegerGetIntegerRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MultipleUnaryOperatorsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ParameterAssignmentInFilterClosureRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "RandomDoubleCoercedToZeroRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "RemoveAllOnSelfRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ReturnFromFinallyBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThrowExceptionFromFinallyBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -148,7 +453,30 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "ElseBlockBracesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ForStatementBracesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "IfStatementBracesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "WhileStatementBracesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -198,6 +526,18 @@
                     ]
                 },
                 {
+                    "name": "ClassJavadocRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JavadocConsecutiveEmptyLinesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "JavadocEmptyAuthorTagRuleTest.groovy",
                     "violations": [
                         {
@@ -219,6 +559,18 @@
                             "sourceLine": "return '@exception'",
                             "message": "The return keyword is not needed and can be removed"
                         }
+                    ]
+                },
+                {
+                    "name": "JavadocEmptyFirstLineRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JavadocEmptyLastLineRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -339,7 +691,162 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "BusyWaitRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DoubleCheckedLockingRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "InconsistentPropertyLockingRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "InconsistentPropertySynchronizationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NestedSynchronizationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "StaticCalendarFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "StaticConnectionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "StaticDateFormatFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "StaticMatcherFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "StaticSimpleDateFormatFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SynchronizedMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SynchronizedOnBoxedPrimitiveRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SynchronizedOnGetClassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SynchronizedOnReentrantLockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SynchronizedOnStringRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SynchronizedOnThisRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SynchronizedReadObjectMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SystemRunFinalizersOnExitRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThisReferenceEscapesConstructorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThreadGroupRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThreadLocalNotStaticFinalRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThreadYieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseOfNotifyMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "VolatileArrayFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "VolatileLongOrDoubleFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "WaitOutsideOfWhileLoopRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -361,6 +868,174 @@
                             "message": "The return keyword is not needed and can be removed"
                         }
                     ]
+                },
+                {
+                    "name": "ConfusingTernaryRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CouldBeElvisRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CouldBeSwitchStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "FieldTypeRequiredRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "HashtableIsObsoleteRule_HashtableTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "HashtableIsObsoleteRule_JavaUtilHashtableTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "IfStatementCouldBeTernaryRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ImplicitClosureParameterRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ImplicitReturnStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "InvertedConditionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "InvertedIfElseRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "LongLiteralWithLowerCaseLRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MethodParameterTypeRequiredTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MethodReturnTypeRequiredRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NoDefRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NoDoubleRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NoFloatRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NoJavaUtilDateRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NoTabCharacterRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ParameterReassignmentRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "PublicMethodsBeforeNonPublicMethodsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "StaticFieldsBeforeInstanceFieldsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "StaticMethodsBeforeInstanceMethodsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "TernaryCouldBeElvisRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "TrailingCommaRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "VariableTypeRequiredRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "VectorIsObsoleteRule_JavaUtilVectorTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "VectorIsObsoleteRule_VectorTest.groovy",
+                    "violations": [
+                        
+                    ]
                 }
             ]
         },
@@ -372,6 +1047,96 @@
             "priority2": 1,
             "priority3": 2,
             "files": [
+                {
+                    "name": "AbstractClassWithPublicConstructorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "AbstractClassWithoutAbstractMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "AssignmentToStaticFieldFromInstanceMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BooleanMethodReturnsNullRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BuilderMethodWithSideEffectsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CloneWithoutCloneableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CloneableWithoutCloneRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CloseWithoutCloseableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CompareToWithoutComparableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConstantsOnlyInterfaceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "EmptyMethodInAbstractClassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "FinalClassWithProtectedMemberRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ImplementationAsTypeRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "InstanceofRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "LocaleSetDefaultRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
                 {
                     "name": "NestedForLoopRuleTest.groovy",
                     "violations": [
@@ -397,6 +1162,18 @@
                     ]
                 },
                 {
+                    "name": "OptionalFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "OptionalMethodParameterRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "PrivateFieldCouldBeFinalRuleTest.groovy",
                     "violations": [
                         {
@@ -406,6 +1183,42 @@
                             "sourceLine": "class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase<PrivateFieldCouldBeFinalRule> {",
                             "message": "Class org.codenarc.rule.design.PrivateFieldCouldBeFinalRuleTest has 34 methods"
                         }
+                    ]
+                },
+                {
+                    "name": "PublicInstanceFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ReturnsNullInsteadOfEmptyArrayRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ReturnsNullInsteadOfEmptyCollectionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SimpleDateFormatMissingLocaleRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "StatelessSingletonRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ToStringReturnsNullRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 }
             ]
@@ -418,7 +1231,30 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "DuplicateListLiteralRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DuplicateMapLiteralRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DuplicateNumberLiteralRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "DuplicateStringLiteralRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -451,7 +1287,126 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "CatchArrayIndexOutOfBoundsExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CatchErrorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CatchExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CatchIllegalMonitorStateExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CatchIndexOutOfBoundsExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CatchNullPointerExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CatchRuntimeExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CatchThrowableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConfusingClassNamedExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExceptionExtendsErrorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExceptionExtendsThrowableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExceptionNotThrownRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MissingNewInThrowStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ReturnNullFromCatchBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SwallowThreadDeathRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThrowErrorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThrowExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThrowNullPointerExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThrowRuntimeExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ThrowThrowableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -462,6 +1417,30 @@
             "priority2": 26,
             "priority3": 3,
             "files": [
+                {
+                    "name": "BlankLineBeforePackageRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BlockEndsWithBlankLineRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BlockStartsWithBlankLineRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "BracesForClassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
                 {
                     "name": "BracesForForLoopRuleTest.groovy",
                     "violations": [
@@ -542,20 +1521,38 @@
                     ]
                 },
                 {
+                    "name": "ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConsecutiveBlankLinesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "FileEndsWithoutNewlineRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "IndentationRuleTest.groovy",
                     "violations": [
                         {
                             "ruleName": "ClassSize",
                             "priority": 3,
                             "lineNumber": 26,
-                            "message": "Class \"IndentationRuleTest\" is 1087 lines"
+                            "message": "Class \"IndentationRuleTest\" is 1104 lines"
                         },
                         {
                             "ruleName": "MethodCount",
                             "priority": 2,
                             "lineNumber": 26,
                             "sourceLine": "class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {",
-                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 55 methods"
+                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 56 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
@@ -600,6 +1597,24 @@
                     ]
                 },
                 {
+                    "name": "LineLengthRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MissingBlankLineAfterImportsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MissingBlankLineAfterPackageRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "MissingBlankLineBeforeAnnotatedFieldRuleTest.groovy",
                     "violations": [
                         {
@@ -609,6 +1624,12 @@
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                private @Autowired DataSource dataSource\n                private @Value('${name}') String name\n            }\n        ' contains a GString-type expression: '${name}'"
                         }
+                    ]
+                },
+                {
+                    "name": "SpaceAfterCatchRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -650,6 +1671,36 @@
                     ]
                 },
                 {
+                    "name": "SpaceAfterForRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpaceAfterIfRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpaceAfterMethodCallNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpaceAfterMethodDeclarationNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpaceAfterNotOperatorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "SpaceAfterOpeningBraceRuleTest.groovy",
                     "violations": [
                         {
@@ -662,31 +1713,55 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 86,
+                            "lineNumber": 101,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = {}\n                    if (true) {}\n                    while(ready) {}\n                    try {\n                    } catch(Exception e) {\n                    } finally {}\n                    for(int i=0; i<10; i++) {}\n                    for(String name in names) {}\n                    for(String name: names) {}\n                    if (count > this.\"maxPriority${priority}Violations\") {}\n                    while (count > this.\"maxPriority${priority}Violations\") {}\n                }\n                void doStuff2() {}\n                MyClass() {}\n                MyClass(@Annotation('${prop}') String s) {}\n            }\n            interface MyInterface2 {}\n        ' contains a GString-type expression: '${priority}Violations\") {}'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 180,
+                            "lineNumber": 195,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                MyClass() {int count }\n                MyClass() {s = '{\"json\": true}' }\n                MyClass(@Annotation('${prop}') String s) {println 123 }\n\n            }\n        ' contains a GString-type expression: '${prop}') String s) {println 123 }'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 191,
+                            "lineNumber": 206,
                             "sourceLine": "[line:5, source:'MyClass(@Annotation(\\'${prop}\\') String s) {println 123 }', message:'The opening brace for the method <init> in class MyClass'])",
                             "message": "The String 'MyClass(@Annotation('${prop}') String s) {println 123 }' contains a GString-type expression: '${prop}') String s) {println 123 }'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 309,
+                            "lineNumber": 324,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                String s\n                MyClass() { s = '{\"json\": true}' }\n                MyClass(@Annotation('${prop}') String s) { println 123 }\n            }\n        ' contains a GString-type expression: '${prop}') String s) { println 123 }'"
                         }
+                    ]
+                },
+                {
+                    "name": "SpaceAfterSemicolonRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpaceAfterSwitchRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpaceAfterWhileRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpaceAroundClosureArrowRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -699,6 +1774,12 @@
                             "sourceLine": "return inlineViolation(\"The colon for the literal Map entry for key [$keyName] within class $className\" +",
                             "message": "The return keyword is not needed and can be removed"
                         }
+                    ]
+                },
+                {
+                    "name": "SpaceAroundOperatorRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -733,10 +1814,22 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 262,
+                            "lineNumber": 277,
                             "sourceLine": "assertNoViolations('''",
                             "message": "The String '\n            def foo = 1\n            \"I am a ${ -> foo }\"\n        ' contains a GString-type expression: '${ -> foo }'"
                         }
+                    ]
+                },
+                {
+                    "name": "SpaceInsideParenthesesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "TrailingWhitespaceRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 }
             ]
@@ -749,6 +1842,30 @@
             "priority2": 3,
             "priority3": 0,
             "files": [
+                {
+                    "name": "IllegalClassMemberRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "IllegalClassReferenceRule_MultipleClassNamesTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "IllegalClassReferenceRule_SingleClassNameTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "IllegalClassReferenceRule_WildcardsClassNamesTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
                 {
                     "name": "IllegalPackageReferenceRuleTest.groovy",
                     "violations": [
@@ -766,6 +1883,36 @@
                             "sourceLine": "[line:3, source:'println \"isClosure=${value instanceof org.bad.OtherClass}\"', message:'org.bad'],",
                             "message": "The String 'println \"isClosure=${value instanceof org.bad.OtherClass}\"' contains a GString-type expression: '${value instanceof org.bad.OtherClass}'"
                         }
+                    ]
+                },
+                {
+                    "name": "IllegalRegexRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "IllegalStringRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "IllegalSubclassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "RequiredRegexRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "RequiredStringRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -791,6 +1938,54 @@
             "priority3": 0,
             "files": [
                 {
+                    "name": "GrailsDomainGormMethodsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "GrailsDomainHasEqualsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "GrailsDomainHasToStringRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "GrailsDomainReservedSqlKeywordNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "GrailsDomainStringPropertyMaxSizeRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "GrailsDomainWithServiceReferenceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "GrailsDuplicateConstraintRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "GrailsDuplicateMappingRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "GrailsMassAssignmentRuleTest.groovy",
                     "violations": [
                         {
@@ -800,6 +1995,12 @@
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class Person {\n                String name\n                Boolean isAdmin\n            }\n            def bindingMap = [name: 'John', isAdmin: true]\n            def person = new Person()\n            def p2 = new Person(\"It is currently ${ new Date() }\")\n            def p3 = new Person(bindingMap)\n            person.name = bindingMap['name']\n            person.isAdmin = bindingMap.isAdmin\n            person.properties = \"It is currently ${ new Date() }\"\n        ' contains a GString-type expression: '${ new Date() }'"
                         }
+                    ]
+                },
+                {
+                    "name": "GrailsPublicControllerMethodRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -820,6 +2021,12 @@
                             "message": "The String 'println \"amount=${servletContext.amount}\"' contains a GString-type expression: '${servletContext.amount}'"
                         }
                     ]
+                },
+                {
+                    "name": "GrailsStatelessServiceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
                 }
             ]
         },
@@ -832,6 +2039,18 @@
             "priority3": 0,
             "files": [
                 {
+                    "name": "AssignCollectionSortRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "AssignCollectionUniqueRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "ClosureAsLastMethodParameterRuleTest.groovy",
                     "violations": [
                         {
@@ -841,6 +2060,150 @@
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            new Exception(\"${it.orElseThrow { new AssertionError() }}\")\n        ' contains a GString-type expression: '${it.orElseThrow { new AssertionError() }}'"
                         }
+                    ]
+                },
+                {
+                    "name": "CollectAllIsDeprecatedRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConfusingMultipleReturnsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitArrayListInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToAndMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToCompareToMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToDivMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToEqualsMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToGetAtMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToLeftShiftMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToMinusMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToModMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToMultiplyMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToOrMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToPlusMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToPowerMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToPutAtMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToRightShiftMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitCallToXorMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitHashMapInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitHashSetInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitLinkedHashMapInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitLinkedListInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitStackInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExplicitTreeSetInstantiationRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -971,6 +2334,30 @@
                             "message": "The String '\n            class SomeClass {\n                @SomeAnnotationOnField(someClass = SomeOtherClass, message = 'Some message ${sample.property1}')\n                String sampleProperty\n            }\n        ' contains a GString-type expression: '${sample.property1}'"
                         }
                     ]
+                },
+                {
+                    "name": "GetterMethodCouldBePropertyRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "GroovyLangImmutableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseCollectManyRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseCollectNestedRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
                 }
             ]
         },
@@ -982,6 +2369,42 @@
             "priority2": 1,
             "priority3": 0,
             "files": [
+                {
+                    "name": "DuplicateImportRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ImportFromSamePackageRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ImportFromSunPackagesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MisorderedStaticImportsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NoWildcardImportsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryGroovyImportRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
                 {
                     "name": "UnusedImportRuleTest.groovy",
                     "violations": [
@@ -1004,7 +2427,42 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "DirectConnectionManagementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JdbcConnectionReferenceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JdbcResultSetReferenceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JdbcStatementReferenceRule_CallableStatementTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JdbcStatementReferenceRule_PreparedStatementTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JdbcStatementReferenceRule_StatementTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -1015,7 +2473,156 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "ChainedTestRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CoupledTestCaseRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitAssertAlwaysFailsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitAssertAlwaysSucceedsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitAssertEqualsConstantActualValueRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitFailWithoutMessageRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitLostTestRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitPublicFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitPublicNonTestMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitPublicPropertyRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitSetUpCallsSuperRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitStyleAssertionsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitTearDownCallsSuperRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitTestMethodWithoutAssertRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitUnnecessarySetUpRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitUnnecessaryTearDownRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JUnitUnnecessaryThrowsExceptionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpockIgnoreRestUsedRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryFailRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseAssertEqualsInsteadOfAssertTrueRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseAssertFalseInsteadOfNegationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseAssertNullInsteadOfAssertEqualsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseAssertSameInsteadOfAssertTrueRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseAssertTrueInsteadOfAssertEqualsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UseAssertTrueInsteadOfNegationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -1026,7 +2633,54 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "LoggerForDifferentClassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "LoggerWithWrongModifiersRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "LoggingSwallowsStacktraceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MultipleLoggersRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "PrintStackTraceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "PrintlnRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SystemErrPrintRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SystemOutPrintRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -1038,6 +2692,42 @@
             "priority3": 0,
             "files": [
                 {
+                    "name": "AbstractClassNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ClassNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ClassNameSameAsFilenameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ClassNameSameAsSuperclassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConfusingMethodNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "FactoryMethodNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "FieldNameRuleTest.groovy",
                     "violations": [
                         {
@@ -1047,6 +2737,60 @@
                             "sourceLine": "class FieldNameRuleTest extends AbstractRuleTestCase<FieldNameRule> {",
                             "message": "Class org.codenarc.rule.naming.FieldNameRuleTest has 32 methods"
                         }
+                    ]
+                },
+                {
+                    "name": "InterfaceNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "InterfaceNameSameAsSuperInterfaceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MethodNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ObjectOverrideMisspelledMethodNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "PackageNameMatchesFilePathRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "PackageNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ParameterNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "PropertyNameRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "VariableNameRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 }
             ]
@@ -1059,7 +2803,66 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "FileCreateTempFileRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "InsecureRandomRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JavaIoPackageAccessRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NonFinalPublicFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NonFinalSubclassOfSensitiveInterfaceRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ObjectFinalizeRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "PublicFinalizeMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SystemExitRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnsafeArrayDeclarationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnsafeImplementationAsMapRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -1070,7 +2873,30 @@
             "priority2": 0,
             "priority3": 0,
             "files": [
-                
+                {
+                    "name": "EnumCustomSerializationIgnoredRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SerialPersistentFieldsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SerialVersionUIDRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SerializableClassMustDefineSerialVersionUIDRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
             ]
         },
         {
@@ -1082,6 +2908,30 @@
             "priority3": 2,
             "files": [
                 {
+                    "name": "AbcMetricRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ClassSizeRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CrapMetricRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "CyclomaticComplexityRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "GMetricsSourceCodeAdapterTest.groovy",
                     "violations": [
                         {
@@ -1091,6 +2941,24 @@
                             "sourceLine": "import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining",
                             "message": "Static imports should appear before normal imports"
                         }
+                    ]
+                },
+                {
+                    "name": "MethodCountRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "MethodSizeRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NestedBlockDepthRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -1116,6 +2984,18 @@
             "priority3": 0,
             "files": [
                 {
+                    "name": "AddEmptyStringRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ConsecutiveLiteralAppendsRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "ConsecutiveStringConcatenationRuleTest.groovy",
                     "violations": [
                         {
@@ -1132,6 +3012,120 @@
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            def c = 'Hello' + \"$World\"  // should be \"Hello${World}\"\n        ' contains a GString-type expression: '${World}'"
                         }
+                    ]
+                },
+                {
+                    "name": "UnnecessaryBigDecimalInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryBigIntegerInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryBooleanExpressionRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryBooleanInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryCallForLastElementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryCallToSubstringRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryCastRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryCatchBlockRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryCollectCallRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryCollectionCallRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryConstructorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryDefInFieldDeclarationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryDefInMethodDeclarationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryDefInVariableDeclarationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryDotClassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryDoubleInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryElseStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryFinalOnPrivateMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryFloatInstantiationRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -1159,6 +3153,66 @@
                     ]
                 },
                 {
+                    "name": "UnnecessaryIfStatementRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryInstanceOfCheckRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryInstantiationToGetClassRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryIntegerInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryLongInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryModOneRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryNullCheckBeforeInstanceOfRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryNullCheckRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryObjectReferencesRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryOverridingMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "UnnecessaryPackageReferenceRuleTest.groovy",
                     "violations": [
                         {
@@ -1178,6 +3232,42 @@
                     ]
                 },
                 {
+                    "name": "UnnecessaryParenthesesForMethodCallWithClosureRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryPublicModifierRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryReturnKeywordRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessarySafeNavigationOperatorRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessarySelfAssignmentRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessarySemicolonRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "UnnecessarySetterRuleTest.groovy",
                     "violations": [
                         {
@@ -1187,6 +3277,18 @@
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            if (!file.setExecutable(true)) {\n                throw new Exception(\"Cannot set ${file} as executable\")\n            }\n            def count = x.setCount(92)\n        ' contains a GString-type expression: '${file}'"
                         }
+                    ]
+                },
+                {
+                    "name": "UnnecessaryStringInstantiationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnnecessaryTernaryExpressionRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {
@@ -1242,6 +3344,12 @@
                             "message": "The String 'processing: ${new Date().toString()}' contains a GString-type expression: '${new Date().toString()}'"
                         }
                     ]
+                },
+                {
+                    "name": "UnnecessaryTransientModifierRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
                 }
             ]
         },
@@ -1280,6 +3388,18 @@
                     ]
                 },
                 {
+                    "name": "ConstructorUsagesSkippingUnusedPrivateFieldRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnusedArrayRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
                     "name": "UnusedMethodParameterRuleTest.groovy",
                     "violations": [
                         {
@@ -1289,6 +3409,18 @@
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                MyClass() { }\n                MyClass(String id) { println id }\n\n                String myMethod1(String id, int value) { doSomething(value); return id }\n                void myMethod2(int value) { def x = value }\n                def myMethod3(Date startDate) { return \"${startDate}\" }\n                def myMethod4(Date startDate) {\n                    return new Object() {\n                        def x = startDate\n                    }\n                }\n                def myMethod5(Date startDate) {\n                    return new Object() {\n                        String toString() { return startDate }\n                    }\n                }\n            }\n        ' contains a GString-type expression: '${startDate}\" }'"
                         }
+                    ]
+                },
+                {
+                    "name": "UnusedObjectRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "UnusedPrivateFieldRuleTest.groovy",
+                    "violations": [
+                        
                     ]
                 },
                 {

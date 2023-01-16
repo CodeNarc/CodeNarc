@@ -3,7 +3,7 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-TODO: Version 3.x.x    (??? 2023)
+Version 3.2.0    (Jan 2023)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #701: **EmptyTryBlock** rule: Ignore all try-with-resources statements (since having an empty try block with those is a valid scenario).
@@ -13,6 +13,7 @@ Updated/Enhanced Rules and Bug Fixes
 
 Build, Infrastructure and Tests
  - Create GitHub Action "gradle.yml" to build+test on push or PR.
+ - #724: Use Groovy 4.0.7 to build Groovy 4 CodeNarc jar. 
  - #708: Include internal results for files without violations, to enable accurate baseline reporting. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
  - #717: Allow to send list of files in argument `sourcefiles` ([Nicolas Vuillamy](https://github.com/nvuillam))
 
