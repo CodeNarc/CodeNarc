@@ -14,7 +14,7 @@ dependencies {
     compile 'org.apache.groovy:groovy-ant:${groovy.version}'
     compile 'org.apache.groovy:groovy-templates:${groovy.version}'
 
-    compile('org.codenarc:CodeNarc-Groovy4:${codenarc.version}') {
+    compile('org.codenarc:CodeNarc:${codenarc.version}') {
         exclude group: 'org.apache.groovy'
     }
 
