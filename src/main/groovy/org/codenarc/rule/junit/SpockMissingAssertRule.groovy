@@ -16,6 +16,8 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
@@ -112,10 +114,15 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         resetCurrentLabel()
-        // Ignore helper methods
+        // Do not inspect helper methods
         if (isFeatureMethod(node)) {
             super.visitConstructorOrMethod(node, isConstructor)
         }
+    }
+
+    @Override
+    void visitDeclarationExpression(DeclarationExpression expression) {
+        // Do not inspect declaration expressions
     }
 
     @Override
@@ -166,8 +173,11 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
             MethodCallExpression methodCall = statement.expression as MethodCallExpression
             if (methodCall.objectExpression instanceof VariableExpression) {
                 VariableExpression variable = methodCall.objectExpression as VariableExpression
-                if (variable.getName() == 'this' && METHODS_WITH_IMPLICIT_ASSERTIONS.contains(methodCall.method.value)) {
-                    return true
+                if (variable.getName() == 'this') {
+                    if (methodCall.method instanceof ConstantExpression) {
+                        ConstantExpression method = methodCall.method as ConstantExpression
+                        return METHODS_WITH_IMPLICIT_ASSERTIONS.contains(method.value)
+                    }
                 }
             }
         }
