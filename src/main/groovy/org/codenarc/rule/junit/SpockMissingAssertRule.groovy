@@ -15,7 +15,10 @@
  */
 package org.codenarc.rule.junit
 
+import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.DoWhileStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.ForStatement
@@ -46,11 +49,11 @@ class SpockMissingAssertRule extends AbstractAstVisitorRule {
 class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
 
     // Intentionally omitting and, as it doesn't have any semantic impact
-    private final List<String> spockLabels = ['given', 'when', 'then', 'expect', 'where', 'cleanup', 'setup']
+    private static final List<String> SPOCK_LABELS = ['given', 'when', 'then', 'expect', 'where', 'cleanup', 'setup']
 
-    private final List<String> labelsWithImplicitAssertions = ['then', 'expect']
+    private static final List<String> LABELS_WITH_IMPLICIT_ASSERTIONS = ['then', 'expect']
 
-    private final List<String> methodsWithImplicitAssertions = ['with', 'verifyAll']
+    private static final List<String> METHODS_WITH_IMPLICIT_ASSERTIONS = ['with', 'verifyAll']
 
     private String currentLabel = null
 
@@ -107,24 +110,46 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    void visitMethodCallExpression(MethodCallExpression call) {
-        boolean isThis = call.objectExpression.variable == 'this'
-        boolean isMethodWithImplicitAssertion = methodsWithImplicitAssertions.contains(call.method.value)
-        if (isThis && isMethodWithImplicitAssertion) {
-            handleNestedImplicitAssertMethodCall {
-                super.visitMethodCallExpression(call)
-            }
-        } else {
-            super.visitMethodCallExpression(call)
+    void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
+        resetCurrentLabel()
+        // Ignore helper methods
+        if (isFeatureMethod(node)) {
+            super.visitConstructorOrMethod(node, isConstructor)
         }
+    }
+
+    @Override
+    void visitMethodCallExpression(MethodCallExpression call) {
+        if (call instanceof VariableExpression) {
+            boolean isThis = call.objectExpression.variable == 'this'
+            boolean isMethodWithImplicitAssertion = METHODS_WITH_IMPLICIT_ASSERTIONS.contains(call.method.value)
+            if (isThis && isMethodWithImplicitAssertion) {
+                handleNestedImplicitAssertMethodCall {
+                    super.visitMethodCallExpression(call)
+                }
+                return
+            }
+        }
+        super.visitMethodCallExpression(call)
+    }
+
+    private static boolean isFeatureMethod(MethodNode node) {
+        if (node.code instanceof BlockStatement) {
+            BlockStatement block = (BlockStatement) node.code
+            return block.statements.any(s -> s.getStatementLabels() != null && !s.getStatementLabels().isEmpty())
+        }
+        return false
     }
 
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {
         updateCurrentLabel(statement)
-        boolean isInLabelWithImplicitAssertions = currentLabel in labelsWithImplicitAssertions
+        if (isMethodsWithImplicitAssertionsExpression(statement)) {
+            return
+        }
+        boolean isInLabelWithImplicitAssertions = currentLabel in LABELS_WITH_IMPLICIT_ASSERTIONS
         boolean isInTopLevel = nNestedStatements == 0
-        boolean isBoolean = statement.expression.type.name == 'boolean'
+        boolean isBoolean = isBooleanExpression(statement)
         boolean isInImplicitAssertMethodCall = nNestedImplicitAssertMethodCalls > 0
         if (isInLabelWithImplicitAssertions && !isInTopLevel && isBoolean && !isInImplicitAssertMethodCall) {
             addViolation(statement, "'${currentLabel}:' contains a boolean expression in a nested statement, which is not implicitly asserted")
@@ -132,10 +157,31 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
         super.visitExpressionStatement(statement)
     }
 
+    private static boolean isBooleanExpression(ExpressionStatement statement) {
+        statement.expression.type.name == 'boolean'
+    }
+
+    private static boolean isMethodsWithImplicitAssertionsExpression(ExpressionStatement statement) {
+        if (statement.expression instanceof MethodCallExpression) {
+            MethodCallExpression methodCall = statement.expression as MethodCallExpression
+            if (methodCall.objectExpression instanceof VariableExpression) {
+                VariableExpression variable = methodCall.objectExpression as VariableExpression
+                if (variable.getName() == 'this' && METHODS_WITH_IMPLICIT_ASSERTIONS.contains(methodCall.method.value)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    private void resetCurrentLabel() {
+        currentLabel = null
+    }
+
     private void updateCurrentLabel(Statement statement) {
-        var labels = statement.getStatementLabels()
+        List<String> labels = statement.getStatementLabels()
         if (labels != null) {
-            var spockLabels = labels.intersect(spockLabels)
+            Collection<String> spockLabels = labels.intersect(SPOCK_LABELS)
             if (spockLabels.size() > 0) {
                 currentLabel = spockLabels.last()
             }

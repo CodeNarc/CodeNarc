@@ -39,27 +39,30 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
 
     @Test
     void testTopLevelBoolean_NoViolations() {
-        final SOURCE = '''
+        final SOURCES = labelsToTest.collect { label ->
+            """
             public class MySpec extends spock.lang.Specification {
                 def "testTopLevelExpression_NoViolations"() {
-                    expect:
+                    ${label}:
                     "123"
                     123
                     false
                     assert false
                 }
             }
-        '''.stripIndent()
-        assertNoViolations(SOURCE)
+            """.stripIndent()
+        }
+        assertNoViolations(SOURCES)
     }
 
     @ParameterizedTest
-    @MethodSource("statementsToTest")
+    @MethodSource('statementsToTest')
     void testStatement_NoViolations(Closure<GString> statement) {
-        final SOURCE = """
+        final SOURCES = labelsToTest.collect { label ->
+            """
             public class MySpec extends spock.lang.Specification {
                 def "testStatement_NoViolations"() {
-                    expect:
+                    ${label}:
                     ${statement("""
                         "123"
                         123
@@ -67,38 +70,73 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                     """)}
                 }
             }
-        """.stripIndent()
-        assertNoViolations(SOURCE)
+            """.stripIndent()
+        }
+        assertNoViolations(SOURCES)
     }
 
     @ParameterizedTest
-    @MethodSource("statementsToTest")
+    @MethodSource('statementsToTest')
     void testStatement_SingleViolation(Closure<GString> statement) {
-        final SOURCE = """
-            public class MySpec extends spock.lang.Specification {
-                def "testStatement_SingleViolation"() {
-                    expect:
-                    ${statement("""
-                        "123"
-                        123
-                        false
-                    """)}
+        final SOURCES = labelsToTest.collect { label ->
+            new Tuple2<>(
+                label,
+                """
+                public class MySpec extends spock.lang.Specification {
+                    def "testStatement_SingleViolation"() {
+                        ${label}:
+                        ${statement("""
+                            "123"
+                            123
+                            false
+                            def foo = {
+                                [1,2,3].find {
+                                    it == 1
+                                }
+                            }
+                        """)}
+                    }
                 }
+                """.stripIndent())
+        }
+        SOURCES.forEach { lblSrc ->
+            assertSingleViolation(lblSrc.v2) { Violation violation ->
+                violation.sourceLine == 'false' &&
+                    violation.message == "'${lblSrc.v1}:' contains a boolean expression in a nested statement, which is not implicitly asserted"
             }
-        """.stripIndent()
-        assertSingleViolation(SOURCE) { Violation violation ->
-            violation.sourceLine == 'false' &&
-            violation.message == "'expect:' contains a boolean expression in a nested statement, which is not implicitly asserted";
         }
     }
 
     @ParameterizedTest
-    @MethodSource("statementsToTest")
+    @MethodSource('statementsToTest')
+    void testStatementWithDef_NoViolation(Closure<GString> statement) {
+        final SOURCES = labelsToTest.collect { label ->
+                """
+                public class MySpec extends spock.lang.Specification {
+                    def "def_NoViolation"() {
+                        ${label}:
+                        ${statement("""
+                            def foo = {
+                                [1,2,3].find {
+                                    it == 1
+                                }
+                            }
+                        """)}
+                    }
+                }
+                """.stripIndent()
+        }
+        assertNoViolations(SOURCES)
+    }
+
+    @ParameterizedTest
+    @MethodSource('statementsToTest')
     void testStatementInWith_NoViolation(Closure<GString> statement) {
-        final SOURCE = """
+        final SOURCES = labelsToTest.collect { label ->
+            """
             public class MySpec extends spock.lang.Specification {
                 def "testStatementInWith_NoViolation"() {
-                    expect:
+                    ${label}:
                     with(new Object()) {
                         ${statement("""
                             "123"
@@ -108,17 +146,19 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                     }
                 }
             }
-        """.stripIndent()
-        assertNoViolations(SOURCE)
+            """.stripIndent()
+        }
+        assertNoViolations(SOURCES)
     }
 
     @ParameterizedTest
-    @MethodSource("statementsToTest")
+    @MethodSource('statementsToTest')
     void testWithInStatement_NoViolation(Closure<GString> statement) {
-        final SOURCE = """
+        final SOURCES = labelsToTest.collect { label ->
+            """
             public class MySpec extends spock.lang.Specification {
                 def "testWithInStatement_NoViolation"() {
-                    expect:
+                    ${label}:
                     ${statement("""
                         with(new Object()) {
                             "123"
@@ -128,7 +168,92 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                     """)}
                 }
             }
+            """.stripIndent()
+        }
+        assertNoViolations(SOURCES)
+    }
+
+    @Test
+    void helperMethod_NoViolation() {
+        final SOURCE = """
+            public class MySpec extends spock.lang.Specification {
+
+                def 'test1'() {
+                    when:
+                    if (bar()) {
+                        assert true
+                    }
+
+                    then:
+                    [1, 2, 3].each {
+                        assert true
+                    }
+                }
+
+                def 'test2'() {
+                    expect:
+                    assert true
+                }
+
+                private static boolean bar() {
+                    def abc = baz.method()
+                    if (abc) {
+                        false
+                    } else {
+                        true
+                    }
+                }
+            }
         """.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void realisticTest_NoViolation() {
+        final SOURCE = '''
+            import spock.lang.*
+
+            class DataDrivenSpec extends Specification {
+              def "maximum of two numbers"() {
+                expect:
+                Math.max(a, b) == c
+
+                where:
+                a << [3, 5, 9]
+                b << [7, 4, 9]
+                c << [7, 5, 9]
+              }
+
+              def "minimum of #a and #b is #c"() {
+                expect:
+                Math.min(a, b) == c
+
+                where:
+                a | b || c
+                3 | 7 || 3
+                5 | 4 || 4
+                9 | 9 || 9
+              }
+
+              def "#person.name is a #sex.toLowerCase() person"() {
+                expect:
+                if (true)
+                    person.getSex() == sex
+
+                where:
+                person                    || sex
+                new Person(name: "Fred")  || "Male"
+                new Person(name: "Wilma") || "Female"
+              }
+
+              static class Person {
+                String name
+                String getSex() {
+                  name == "Fred" ? "Male" : "Female"
+                }
+              }
+            }
+        '''.stripIndent()
         assertNoViolations(SOURCE)
     }
 
@@ -137,6 +262,9 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
         new SpockMissingAssertRule()
     }
 
+    private static List<String> labelsToTest = ['then', 'expect']
+
+    @SuppressWarnings('UnusedPrivateMethod')
     private static Stream<Closure<GString>> statementsToTest() {
         Stream.of(
             (content) -> """
@@ -217,5 +345,9 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
             }
             """,
         )
+    }
+
+    private void assertNoViolations(List<String> sources) {
+        sources.forEach { source -> assertNoViolations(source) }
     }
 }
