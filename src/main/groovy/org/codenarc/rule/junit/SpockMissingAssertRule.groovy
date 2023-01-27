@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.stmt.AssertStatement
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.DoWhileStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
@@ -126,6 +127,11 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    void visitAssertStatement(AssertStatement statement) {
+        // Do not inspect assert expressions
+    }
+
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (call instanceof VariableExpression) {
             boolean isThis = call.objectExpression.variable == 'this'
@@ -151,6 +157,7 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {
         updateCurrentLabel(statement)
+        // Do not inspect content in with/verifyAll methods
         if (isMethodsWithImplicitAssertionsExpression(statement)) {
             return
         }

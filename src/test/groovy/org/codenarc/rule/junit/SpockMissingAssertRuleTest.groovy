@@ -254,6 +254,21 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
+    void assertWithCollectionMethod_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "assertWithCollectionMethod_NoViolation"() {
+                    expect:
+                    if (a == b) {
+                        assert [1, 2, 3].every { true }
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void realisticTest_NoViolation() {
         final SOURCE = '''
             import spock.lang.*
