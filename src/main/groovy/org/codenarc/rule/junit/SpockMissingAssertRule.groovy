@@ -168,6 +168,7 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
         statement.expression.type.name == 'boolean'
     }
 
+    @SuppressWarnings('NestedBlockDepth')
     private static boolean isMethodsWithImplicitAssertionsExpression(ExpressionStatement statement) {
         if (statement.expression instanceof MethodCallExpression) {
             MethodCallExpression methodCall = statement.expression as MethodCallExpression
