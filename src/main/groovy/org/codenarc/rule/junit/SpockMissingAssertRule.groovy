@@ -58,6 +58,8 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
 
     private static final List<String> METHODS_WITH_IMPLICIT_ASSERTIONS = ['with', 'verifyAll']
 
+    private static final List<String> METHODS_FOR_COLLECTION_ITERATION = ['each', 'eachWithIndex', 'times']
+
     private String currentLabel = null
 
     private int nNestedStatements = 0
@@ -168,28 +170,41 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
         if (isInLabelWithImplicitAssertions && !isInTopLevel && isBoolean && !isInImplicitAssertMethodCall) {
             addViolation(statement, "'${currentLabel}:' contains a boolean expression in a nested statement, which is not implicitly asserted")
         }
-        super.visitExpressionStatement(statement)
+        if (isCollectionIterationMethods(statement)) {
+            super.visitExpressionStatement(statement)
+        }
     }
 
     private static boolean isBooleanExpression(ExpressionStatement statement) {
         statement.expression.type.name == 'boolean'
     }
 
-    @SuppressWarnings('NestedBlockDepth')
     private static boolean isMethodsWithImplicitAssertionsExpression(ExpressionStatement statement) {
+        var variableAndMethod = getVariableAndMethod(statement)
+        var variable = variableAndMethod.v1
+        var method = variableAndMethod.v2
+        return variable != null && variable.getName() == 'this' && method != null && METHODS_WITH_IMPLICIT_ASSERTIONS.contains(method.value)
+    }
+
+    private static boolean isCollectionIterationMethods(ExpressionStatement statement) {
+        var variableAndMethod = getVariableAndMethod(statement)
+        var method = variableAndMethod.v2
+        return method != null && METHODS_FOR_COLLECTION_ITERATION.contains(method.value)
+    }
+
+    private static Tuple2<VariableExpression, ConstantExpression> getVariableAndMethod(ExpressionStatement statement) {
+        var variable = null
+        var method = null
         if (statement.expression instanceof MethodCallExpression) {
             MethodCallExpression methodCall = statement.expression as MethodCallExpression
             if (methodCall.objectExpression instanceof VariableExpression) {
-                VariableExpression variable = methodCall.objectExpression as VariableExpression
-                if (variable.getName() == 'this') {
-                    if (methodCall.method instanceof ConstantExpression) {
-                        ConstantExpression method = methodCall.method as ConstantExpression
-                        return METHODS_WITH_IMPLICIT_ASSERTIONS.contains(method.value)
-                    }
-                }
+                variable = methodCall.objectExpression as VariableExpression
+            }
+            if (methodCall.method instanceof ConstantExpression) {
+                method = methodCall.method as ConstantExpression
             }
         }
-        return false
+        return new Tuple2<>(variable, method)
     }
 
     private void resetCurrentLabel() {

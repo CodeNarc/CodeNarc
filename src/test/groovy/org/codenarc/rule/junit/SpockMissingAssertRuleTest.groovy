@@ -102,7 +102,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
         SOURCES.forEach { lblSrc ->
             assertSingleViolation(lblSrc.v2) { Violation violation ->
                 violation.sourceLine == 'false' &&
-                    violation.message == "'${lblSrc.v1}:' contains a boolean expression in a nested statement, which is not implicitly asserted"
+                    violation.message == violationMessage(lblSrc.v1)
             }
         }
     }
@@ -269,6 +269,52 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
+    void assertWithNestedClosureInFor_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "assertWithNestedClosureInFor_NoViolation"() {
+                    expect:
+                    for (a in [1,2,3]) {
+                        then:
+                        methodCall {
+                            !myCondition()
+                        }
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void assertWithNestedClosureInCollectionLoops_MultipleViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "assertWithNestedClosureInFor_NoViolation"() {
+                    expect:
+                    for (a in [1,2,3]) {
+                        then:
+                        [1,2,3].each {
+                            !myCondition()
+                        }
+                        [1,2,3].eachWithIndex {
+                            !myCondition()
+                        }
+                        3.times {
+                            !myCondition()
+                        }
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertViolations(SOURCE,
+            [line: 8, source: '!myCondition()', message: violationMessage('then')],
+            [line: 11, source: '!myCondition()', message: violationMessage('then')],
+            [line: 14, source: '!myCondition()', message: violationMessage('then')]
+        )
+    }
+
+    @Test
     void realisticTest_NoViolation() {
         final SOURCE = '''
             import spock.lang.*
@@ -405,6 +451,10 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
             }
             """,
         )
+    }
+
+    private static String violationMessage(String label) {
+        "'${label}:' contains a boolean expression in a nested statement, which is not implicitly asserted"
     }
 
     private void assertNoViolations(List<String> sources) {
