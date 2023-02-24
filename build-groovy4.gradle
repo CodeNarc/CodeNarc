@@ -14,7 +14,7 @@ shadowJar {
 
 group = 'org.codenarc'
 archivesBaseName = 'CodeNarc'
-version = '3.2.0-groovy-4.0'
+version = '3.2.1-groovy-4.0'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -49,6 +49,7 @@ dependencies {
     compileOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
     testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
     testImplementation 'commons-cli:commons-cli:1.4'
     testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
