@@ -16,6 +16,7 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -59,6 +60,10 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     private static final List<String> METHODS_WITH_IMPLICIT_ASSERTIONS = ['with', 'verifyAll']
 
     private static final List<String> METHODS_FOR_COLLECTION_ITERATION = ['each', 'eachWithIndex', 'times']
+
+    private static final List<String> BOOLEAN_METHOD_PATTERNS = [~/^is(\p{Lu}.*)?/, ~/^asBoolean$/, ~/^any(\p{Lu}.*)?/, ~/^contains(\p{Lu}.*)?/, ~/^every(\p{Lu}.*)?/, ~/^equals(\p{Lu}.*)?/]
+
+    private static final List<String> RELATIONAL_OPERATORS = ['==', '!=', '<', '<=', '>', '>=', '===', '!==']
 
     private String currentLabel = null
 
@@ -176,7 +181,18 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     }
 
     private static boolean isBooleanExpression(ExpressionStatement statement) {
-        statement.expression.type.name == 'boolean'
+        if (statement.expression.type.name == 'boolean') {
+            return true
+        }
+        if (statement.expression instanceof BinaryExpression) {
+            BinaryExpression binaryExpression = statement.expression as BinaryExpression
+            if (binaryExpression.operation.text in RELATIONAL_OPERATORS) {
+                return true
+            }
+        }
+        var variableAndMethod = getVariableAndMethod(statement)
+        var method = variableAndMethod.v2
+        return method != null && BOOLEAN_METHOD_PATTERNS.any { it -> method.value.toString().matches(it) }
     }
 
     private static boolean isMethodsWithImplicitAssertionsExpression(ExpressionStatement statement) {

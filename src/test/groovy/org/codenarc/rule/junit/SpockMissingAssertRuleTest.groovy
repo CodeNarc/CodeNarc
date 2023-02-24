@@ -32,17 +32,17 @@ import java.util.stream.Stream
 class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssertRule> {
 
     @Test
-    void testRuleProperties() {
+    void ruleProperties_AreValid() {
         assert rule.priority == 2
         assert rule.name == 'SpockMissingAssert'
     }
 
     @Test
-    void testTopLevelBoolean_NoViolations() {
+    void topLevelBoolean_NoViolations() {
         final SOURCES = labelsToTest.collect { label ->
             """
             public class MySpec extends spock.lang.Specification {
-                def "testTopLevelExpression_NoViolations"() {
+                def "topLevelBoolean_NoViolations"() {
                     ${label}:
                     "123"
                     123
@@ -57,11 +57,11 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
 
     @ParameterizedTest
     @MethodSource('statementsToTest')
-    void testStatement_NoViolations(Closure<GString> statement) {
+    void statement_NoViolations(Closure<GString> statement) {
         final SOURCES = labelsToTest.collect { label ->
             """
             public class MySpec extends spock.lang.Specification {
-                def "testStatement_NoViolations"() {
+                def "statement_NoViolations"() {
                     ${label}:
                     ${statement("""
                         "123"
@@ -77,13 +77,13 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
 
     @ParameterizedTest
     @MethodSource('statementsToTest')
-    void testStatement_SingleViolation(Closure<GString> statement) {
+    void statement_SingleViolation(Closure<GString> statement) {
         final SOURCES = labelsToTest.collect { label ->
             new Tuple2<>(
                 label,
                 """
                 public class MySpec extends spock.lang.Specification {
-                    def "testStatement_SingleViolation"() {
+                    def "statement_SingleViolation"() {
                         ${label}:
                         ${statement("""
                             "123"
@@ -109,11 +109,11 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
 
     @ParameterizedTest
     @MethodSource('statementsToTest')
-    void testStatementWithDef_NoViolation(Closure<GString> statement) {
+    void statementWithDef_NoViolation(Closure<GString> statement) {
         final SOURCES = labelsToTest.collect { label ->
                 """
                 public class MySpec extends spock.lang.Specification {
-                    def "def_NoViolation"() {
+                    def "statementWithDef_NoViolation"() {
                         ${label}:
                         ${statement("""
                             def foo = {
@@ -131,11 +131,11 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
 
     @ParameterizedTest
     @MethodSource('statementsToTest')
-    void testStatementInWith_NoViolation(Closure<GString> statement) {
+    void statementInWith_NoViolation(Closure<GString> statement) {
         final SOURCES = labelsToTest.collect { label ->
             """
             public class MySpec extends spock.lang.Specification {
-                def "testStatementInWith_NoViolation"() {
+                def "statementInWith_NoViolation"() {
                     ${label}:
                     with(new Object()) {
                         ${statement("""
@@ -153,11 +153,11 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
 
     @ParameterizedTest
     @MethodSource('statementsToTest')
-    void testWithInStatement_NoViolation(Closure<GString> statement) {
+    void withInStatement_NoViolation(Closure<GString> statement) {
         final SOURCES = labelsToTest.collect { label ->
             """
             public class MySpec extends spock.lang.Specification {
-                def "testWithInStatement_NoViolation"() {
+                def "withInStatement_NoViolation"() {
                     ${label}:
                     ${statement("""
                         with(new Object()) {
@@ -269,10 +269,10 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
-    void assertWithNestedClosureInFor_NoViolation() {
+    void nestedClosureInFor_NoViolation() {
         final SOURCE = '''
             class MySpec extends spock.lang.Specification {
-                def "assertWithNestedClosureInFor_NoViolation"() {
+                def "nestedClosureInFor_NoViolation"() {
                     expect:
                     for (a in [1,2,3]) {
                         then:
@@ -287,11 +287,11 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
-    void assertWithNestedClosureInCollectionLoops_MultipleViolations() {
+    void nestedClosureInCollectionLoops_MultipleViolations() {
         final SOURCE = '''
             class MySpec extends spock.lang.Specification {
-                def "assertWithNestedClosureInFor_NoViolation"() {
-                    expect:
+                def "nestedClosureInCollectionLoops_MultipleViolations"() {
+                    given:
                     for (a in [1,2,3]) {
                         then:
                         [1,2,3].each {
@@ -315,7 +315,68 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
-    void realisticTest_NoViolation() {
+    void complexBooleanExpression_MultipleViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "complexBooleanExpression_MultipleViolations"() {
+                    expect:
+                    for (a in [1,2,3]) {
+                        myCondition()
+                        isMyCondition()
+                        !myCondition()
+                        myCondition() == myVariable
+                        myCondition() != myVariable
+                        obj.method().myCondition()
+                        obj.method().isMyCondition()
+                        !obj.method().myCondition()
+                        obj.method().myCondition() == obj.method().myVariable
+                        obj.method().myCondition() != obj.method().myVariable
+                        myVar.asBoolean()
+                        [1,2,3].any { myCondition() }
+                        [1,2,3].contains(4)
+                        [1,2,3].every { myCondition() }
+                        abc.equals(myVariable)
+                        obj.method() == obj.method()
+                        obj.method() != obj.method()
+                        obj.method() < obj.method()
+                        obj.method() <= obj.method()
+                        obj.method() > obj.method()
+                        obj.method() >= obj.method()
+                        obj.method() === obj.method()
+                        obj.method() !== obj.method()
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertViolations(SOURCE,
+            // line: 6 myCondition() doesn't match boolean method pattern
+            [line: 7, source: 'isMyCondition()', message: violationMessage('expect')],
+            [line: 8, source: '!myCondition()', message: violationMessage('expect')],
+            [line: 9, source: 'myCondition() == myVariable', message: violationMessage('expect')],
+            [line: 10, source: 'myCondition() != myVariable', message: violationMessage('expect')],
+            // line: 11 myCondition() doesn't match boolean method pattern
+            [line: 12, source: 'obj.method().isMyCondition()', message: violationMessage('expect')],
+            [line: 13, source: '!obj.method().myCondition()', message: violationMessage('expect')],
+            [line: 14, source: 'obj.method().myCondition() == obj.method().myVariable', message: violationMessage('expect')],
+            [line: 15, source: 'obj.method().myCondition() != obj.method().myVariable', message: violationMessage('expect')],
+            [line: 16, source: 'myVar.asBoolean()', message: violationMessage('expect')],
+            [line: 17, source: '[1,2,3].any { myCondition() }', message: violationMessage('expect')],
+            [line: 18, source: '[1,2,3].contains(4)', message: violationMessage('expect')],
+            [line: 19, source: '[1,2,3].every { myCondition() }', message: violationMessage('expect')],
+            [line: 20, source: 'abc.equals(myVariable)', message: violationMessage('expect')],
+            [line: 21, source: 'obj.method() == obj.method()', message: violationMessage('expect')],
+            [line: 22, source: 'obj.method() != obj.method()', message: violationMessage('expect')],
+            [line: 23, source: 'obj.method() < obj.method()', message: violationMessage('expect')],
+            [line: 24, source: 'obj.method() <= obj.method()', message: violationMessage('expect')],
+            [line: 25, source: 'obj.method() > obj.method()', message: violationMessage('expect')],
+            [line: 26, source: 'obj.method() >= obj.method()', message: violationMessage('expect')],
+            [line: 27, source: 'obj.method() === obj.method()', message: violationMessage('expect')],
+            [line: 28, source: 'obj.method() !== obj.method()', message: violationMessage('expect')]
+        )
+    }
+
+    @Test
+    void realisticTest_SingleViolation() {
         final SOURCE = '''
             import spock.lang.*
 
@@ -360,7 +421,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
               }
             }
         '''.stripIndent()
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 29, 'person.getSex() == sex', violationMessage('expect'))
     }
 
     @Override
