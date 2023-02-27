@@ -183,6 +183,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                     if (bar()) {
                         assert true
                     }
+                    bar()
 
                     then:
                     [1, 2, 3].each {
