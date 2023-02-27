@@ -438,7 +438,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
-    void booleanExpressionRegexxOperators_MultipleViolations() {
+    void booleanExpressionRegexOperators_MultipleViolations() {
         final SOURCE = '''
             class MySpec extends spock.lang.Specification {
                 def "complexBooleanExpression_MultipleViolations"() {
@@ -494,9 +494,11 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                     for (a in [1,2,3]) {
                         myCondition()
                         isMyCondition()
+                        hasMyCondition()
                         !myCondition()
                         obj.method().myCondition()
                         obj.method().isMyCondition()
+                        obj.method().hasMyCondition()
                         !obj.method().myCondition()
                         obj.method() in [1,2,3]
                     }
@@ -506,11 +508,13 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
         assertViolations(SOURCE,
             // line: 6 myCondition() doesn't match boolean method pattern
             [line: 7, source: 'isMyCondition()', message: violationMessage('expect')],
-            [line: 8, source: '!myCondition()', message: violationMessage('expect')],
-            // line: 9 myCondition() doesn't match boolean method pattern
-            [line: 10, source: 'obj.method().isMyCondition()', message: violationMessage('expect')],
-            [line: 11, source: '!obj.method().myCondition()', message: violationMessage('expect')],
-            [line: 12, source: 'obj.method() in [1,2,3]', message: violationMessage('expect')]
+            [line: 8, source: 'hasMyCondition()', message: violationMessage('expect')],
+            [line: 9, source: '!myCondition()', message: violationMessage('expect')],
+            // line: 10 myCondition() doesn't match boolean method pattern
+            [line: 11, source: 'obj.method().isMyCondition()', message: violationMessage('expect')],
+            [line: 12, source: 'obj.method().hasMyCondition()', message: violationMessage('expect')],
+            [line: 13, source: '!obj.method().myCondition()', message: violationMessage('expect')],
+            [line: 14, source: 'obj.method() in [1,2,3]', message: violationMessage('expect')]
         )
     }
 

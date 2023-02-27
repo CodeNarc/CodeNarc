@@ -34,6 +34,8 @@ import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
+import java.util.regex.Pattern
+
 /**
  * Spock treats all expressions on the first level of a then or expect block as an implicit assertion. However,
  * everything inside an if-block is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
@@ -61,7 +63,7 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
 
     private static final List<String> METHODS_FOR_COLLECTION_ITERATION = ['each', 'eachWithIndex', 'times']
 
-    private static final List<String> BOOLEAN_METHOD_PATTERNS = [~/^is(\p{Lu}.*)?/, ~/^asBoolean$/, ~/^any(\p{Lu}.*)?/, ~/^contains(\p{Lu}.*)?/, ~/^every(\p{Lu}.*)?/, ~/^equals(\p{Lu}.*)?/]
+    private static final List<Pattern> BOOLEAN_METHOD_PATTERNS = [~/^is(\p{Lu}.*)?/, ~/^has(\p{Lu}.*)?/, ~/^asBoolean$/, ~/^any(\p{Lu}.*)?/, ~/^contains(\p{Lu}.*)?/, ~/^every(\p{Lu}.*)?/, ~/^equals(\p{Lu}.*)?/]
 
     private static final List<String> RELATIONAL_OPERATORS = ['==', '!=', '<', '<=', '>', '>=', '===', '!==']
 
