@@ -69,6 +69,8 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
 
     private static final List<String> REGEX_OPERATORS = ['==~']
 
+    private static final List<String> CAST_OPERATORS = ['instanceof']
+
     private String currentLabel = null
 
     private int nNestedStatements = 0
@@ -145,7 +147,8 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (call instanceof VariableExpression) {
-            boolean isThis = call.objectExpression.variable == 'this'
+            VariableExpression variableExpression = (VariableExpression) call
+            boolean isThis = variableExpression.getText() == 'this'
             boolean isMethodWithImplicitAssertion = METHODS_WITH_IMPLICIT_ASSERTIONS.contains(call.method.value)
             if (isThis && isMethodWithImplicitAssertion) {
                 handleNestedImplicitAssertMethodCall {
@@ -185,7 +188,7 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     }
 
     private static boolean isBooleanExpression(ExpressionStatement statement) {
-        if (statement.expression.type.name == 'boolean') {
+        if (statement.expression.type.name == 'boolean' || statement.expression.type.name == 'Boolean') {
             return true
         }
         if (statement.expression instanceof BinaryExpression) {
@@ -197,6 +200,9 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
                 return true
             }
             if (binaryExpression.operation.text in REGEX_OPERATORS) {
+                return true
+            }
+            if (binaryExpression.operation.text in CAST_OPERATORS) {
                 return true
             }
         }

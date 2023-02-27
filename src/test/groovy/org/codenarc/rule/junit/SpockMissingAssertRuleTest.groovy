@@ -450,6 +450,31 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
+    void booleanExpressionCasts_MultipleViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "complexBooleanExpression_MultipleViolations"() {
+                    expect:
+                    for (a in [1,2,3]) {
+                        (boolean) obj.method()
+                        (Boolean) obj.method()
+                        obj.method() as boolean
+                        obj.method() as Boolean
+                        obj.method() instanceof Boolean
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertViolations(SOURCE,
+            [line: 6, source: '(boolean) obj.method()', message: violationMessage('expect')],
+            [line: 7, source: '(Boolean) obj.method()', message: violationMessage('expect')],
+            [line: 8, source: 'obj.method() as boolean', message: violationMessage('expect')],
+            [line: 9, source: 'obj.method() as Boolean', message: violationMessage('expect')],
+            [line: 10, source: 'obj.method() instanceof Boolean', message: violationMessage('expect')]
+        )
+    }
+
+    @Test
     void booleanExpressionMiscExpressions_MultipleViolations() {
         final SOURCE = '''
             class MySpec extends spock.lang.Specification {
