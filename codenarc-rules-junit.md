@@ -391,12 +391,13 @@ Example of violations:
 
 ## SpockMissingAssert Rule
 
-*Since CodeNarc 3.1.1*
+*Since CodeNarc 3.2.1*
 
 Spock treats all expressions on the first level of a then or expect block as an implicit assertion.
-However, everything inside an if-block is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
+However, everything inside if/for/switch/... blocks is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
 
-This rule finds such expressions, where an explicit call to `assert` would be required.
+This rule finds such expressions, where an explicit call to `assert` would be required. Please note that the rule might
+produce false positives, as it relies on method names to determine whether an expression has a boolean type or not.
 
 Example of violations:
 
