@@ -65,6 +65,8 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
 
     private static final List<String> RELATIONAL_OPERATORS = ['==', '!=', '<', '<=', '>', '>=', '===', '!==']
 
+    private static final List<String> LOGICAL_OPERATORS = ['&&', '||']
+
     private String currentLabel = null
 
     private int nNestedStatements = 0
@@ -187,6 +189,9 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
         if (statement.expression instanceof BinaryExpression) {
             BinaryExpression binaryExpression = statement.expression as BinaryExpression
             if (binaryExpression.operation.text in RELATIONAL_OPERATORS) {
+                return true
+            }
+            if (binaryExpression.operation.text in LOGICAL_OPERATORS) {
                 return true
             }
         }
