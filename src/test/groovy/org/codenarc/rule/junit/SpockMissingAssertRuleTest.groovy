@@ -388,6 +388,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                         obj.method() & obj.method()
                         obj.method() | obj.method()
                         obj.method() ^ obj.method()
+                        ~obj.method()
                         !obj.method()
                         obj.method() && obj.method()
                         obj.method() || obj.method()
@@ -396,9 +397,55 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
             }
         '''.stripIndent()
         assertViolations(SOURCE,
-            [line: 9, source: '!obj.method()', message: violationMessage('expect')],
-            [line: 10, source: 'obj.method() && obj.method()', message: violationMessage('expect')],
-            [line: 11, source: 'obj.method() || obj.method()', message: violationMessage('expect')],
+            [line: 10, source: '!obj.method()', message: violationMessage('expect')],
+            [line: 11, source: 'obj.method() && obj.method()', message: violationMessage('expect')],
+            [line: 12, source: 'obj.method() || obj.method()', message: violationMessage('expect')],
+        )
+    }
+
+    @Test
+    void booleanExpressionConditionalOperators_MultipleViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "complexBooleanExpression_MultipleViolations"() {
+                    expect:
+                    for (a in [1,2,3]) {
+                        !obj.method()
+                        !'foo'
+                        obj.method() ? obj.isBoolean() : obj.asBoolean()
+                        obj.method() ?: obj.isBoolean()
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertViolations(SOURCE,
+            [line: 6, source: '!obj.method()', message: violationMessage('expect')],
+            [line: 7, source: '!\'foo\'', message: violationMessage('expect')]
+            // line: 8 ternary operator is not supported
+            // line: 9 elvis operator is not supported
+        )
+    }
+
+    @Test
+    void booleanExpressionRegexxOperators_MultipleViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "complexBooleanExpression_MultipleViolations"() {
+                    expect:
+                    for (a in [1,2,3]) {
+                        ~'foo'
+                        text =~ /match/
+                        text !=~ /match/
+                        text ==~ /match/
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertViolations(SOURCE,
+            // line: 6 Pattern
+            // line: 7 Matcher
+            [line: 8, source: 'text !=~ /match/', message: violationMessage('expect')],
+            [line: 9, source: 'text ==~ /match/', message: violationMessage('expect')]
         )
     }
 
