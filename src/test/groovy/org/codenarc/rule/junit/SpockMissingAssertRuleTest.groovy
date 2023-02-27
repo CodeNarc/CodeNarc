@@ -658,7 +658,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     private static String violationMessage(String label) {
-        "'${label}:' contains a boolean expression in a nested statement, which is not implicitly asserted"
+        "'${label}:' might contain a boolean expression in a nested statement, which is not implicitly asserted"
     }
 
     private void assertNoViolations(List<String> sources) {

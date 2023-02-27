@@ -38,9 +38,10 @@ import java.util.regex.Pattern
 
 /**
  * Spock treats all expressions on the first level of a then or expect block as an implicit assertion. However,
- * everything inside an if-block is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
+ * everything inside if/for/switch/... blocks is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
  *
- * This rule finds such expressions, where an explicit call to assert would be required.
+ * This rule finds such expressions, where an explicit call to assert would be required. Please note that the rule might
+ * produce false positives, as it relies on method names to determine whether an expression has a boolean type or not.
  *
  * @author Jean André Gauthier
  * @author Daniel Clausen
@@ -184,7 +185,7 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
         boolean isBoolean = isBooleanExpression(statement)
         boolean isInImplicitAssertMethodCall = nNestedImplicitAssertMethodCalls > 0
         if (isInLabelWithImplicitAssertions && !isInTopLevel && isBoolean && !isInImplicitAssertMethodCall) {
-            addViolation(statement, "'${currentLabel}:' contains a boolean expression in a nested statement, which is not implicitly asserted")
+            addViolation(statement, "'${currentLabel}:' might contain a boolean expression in a nested statement, which is not implicitly asserted")
         }
         visitCollectionIterationMethods(statement)
     }
