@@ -487,6 +487,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                         obj.method().myCondition()
                         obj.method().isMyCondition()
                         !obj.method().myCondition()
+                        obj.method() in [1,2,3]
                     }
                 }
             }
@@ -497,7 +498,8 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
             [line: 8, source: '!myCondition()', message: violationMessage('expect')],
             // line: 9 myCondition() doesn't match boolean method pattern
             [line: 10, source: 'obj.method().isMyCondition()', message: violationMessage('expect')],
-            [line: 11, source: '!obj.method().myCondition()', message: violationMessage('expect')]
+            [line: 11, source: '!obj.method().myCondition()', message: violationMessage('expect')],
+            [line: 12, source: 'obj.method() in [1,2,3]', message: violationMessage('expect')]
         )
     }
 

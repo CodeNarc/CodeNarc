@@ -71,6 +71,8 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
 
     private static final List<String> CAST_OPERATORS = ['instanceof']
 
+    private static final List<String> MEMBERSHIP_OPERATORS = ['in']
+
     private String currentLabel = null
 
     private int nNestedStatements = 0
@@ -193,16 +195,12 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
         }
         if (statement.expression instanceof BinaryExpression) {
             BinaryExpression binaryExpression = statement.expression as BinaryExpression
-            if (binaryExpression.operation.text in RELATIONAL_OPERATORS) {
-                return true
-            }
-            if (binaryExpression.operation.text in LOGICAL_OPERATORS) {
-                return true
-            }
-            if (binaryExpression.operation.text in REGEX_OPERATORS) {
-                return true
-            }
-            if (binaryExpression.operation.text in CAST_OPERATORS) {
+            if (binaryExpression.operation.text in RELATIONAL_OPERATORS
+                || binaryExpression.operation.text in LOGICAL_OPERATORS
+                || binaryExpression.operation.text in REGEX_OPERATORS
+                || binaryExpression.operation.text in CAST_OPERATORS
+                || binaryExpression.operation.text in MEMBERSHIP_OPERATORS
+            ) {
                 return true
             }
         }
