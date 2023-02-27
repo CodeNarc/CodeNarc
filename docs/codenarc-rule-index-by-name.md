@@ -295,6 +295,7 @@ title: CodeNarc - Rule Index by Name
   * [SpaceBeforeOpeningBrace](./codenarc-rules-formatting.html#spacebeforeopeningbrace-rule)  
   * [SpaceInsideParentheses](./codenarc-rules-formatting.html#spaceinsideparentheses-rule)  
   * [SpockIgnoreRestUsed](./codenarc-rules-junit.html#spockignorerestused-rule)  
+  * [SpockMissingAssert](./codenarc-rules-junit.html#spockmissingassert-rule)  
   * [StatelessClass](./codenarc-rules-generic.html#statelessclass-rule)  
   * [StatelessSingleton](./codenarc-rules-design.html#statelesssingleton-rule)  
   * [StaticCalendarField](./codenarc-rules-concurrency.html#staticcalendarfield-rule)  
