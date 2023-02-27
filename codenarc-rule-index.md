@@ -326,6 +326,7 @@ title: CodeNarc - Rule Index
   * [JUnitUnnecessaryTearDown](./codenarc-rules-junit.html#junitunnecessaryteardown-rule)  
   * [JUnitUnnecessaryThrowsException](./codenarc-rules-junit.html#junitunnecessarythrowsexception-rule)  
   * [SpockIgnoreRestUsed](./codenarc-rules-junit.html#spockignorerestused-rule)  
+  * [SpockMissingAssert](./codenarc-rules-junit.html#spockmissingassert-rule)  
   * [UnnecessaryFail](./codenarc-rules-junit.html#unnecessaryfail-rule)  
   * [UseAssertEqualsInsteadOfAssertTrue](./codenarc-rules-junit.html#useassertequalsinsteadofasserttrue-rule)  
   * [UseAssertFalseInsteadOfNegation](./codenarc-rules-junit.html#useassertfalseinsteadofnegation-rule)  
