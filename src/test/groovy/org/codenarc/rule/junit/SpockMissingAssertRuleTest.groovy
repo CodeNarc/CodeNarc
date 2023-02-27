@@ -273,7 +273,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
         final SOURCE = '''
             class MySpec extends spock.lang.Specification {
                 def "nestedClosureInFor_NoViolation"() {
-                    expect:
+                    given:
                     for (a in [1,2,3]) {
                         then:
                         methodCall {
@@ -304,13 +304,24 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                             !myCondition()
                         }
                     }
+                    then:
+                    for (a in [1,2,3]) {
+                        methodCall({ it in ["a","b","c"] }).each {
+                            with(it) {
+                                !myCondition1()
+                            }
+                            assert !myCondition2()
+                            !myCondition3()
+                        }
+                    }
                 }
             }
         '''.stripIndent()
         assertViolations(SOURCE,
             [line: 8, source: '!myCondition()', message: violationMessage('then')],
             [line: 11, source: '!myCondition()', message: violationMessage('then')],
-            [line: 14, source: '!myCondition()', message: violationMessage('then')]
+            [line: 14, source: '!myCondition()', message: violationMessage('then')],
+            [line: 24, source: '!myCondition3()', message: violationMessage('then')]
         )
     }
 

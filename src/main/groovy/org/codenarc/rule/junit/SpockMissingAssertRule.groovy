@@ -184,8 +184,13 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
         if (isInLabelWithImplicitAssertions && !isInTopLevel && isBoolean && !isInImplicitAssertMethodCall) {
             addViolation(statement, "'${currentLabel}:' contains a boolean expression in a nested statement, which is not implicitly asserted")
         }
-        if (isCollectionIterationMethods(statement)) {
-            super.visitExpressionStatement(statement)
+        visitCollectionIterationMethods(statement)
+    }
+
+    private void visitCollectionIterationMethods(ExpressionStatement statement) {
+        if (isCollectionIterationMethods(statement) && statement.expression instanceof MethodCallExpression) {
+            MethodCallExpression methodCallExpression = statement.expression as MethodCallExpression
+            super.visitTupleExpression(methodCallExpression.arguments)
         }
     }
 
