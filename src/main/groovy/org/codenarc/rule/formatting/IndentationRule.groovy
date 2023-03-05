@@ -40,6 +40,7 @@ class IndentationRule extends AbstractAstVisitorRule {
     int priority = 3
     Class astVisitorClass = IndentationAstVisitor
     int spacesPerIndentLevel = 4
+    boolean indentUnderLabel = false
 
     // Global Map of indent levels by class; enables coordination across different Class Nodes.
     protected final Map<SourceCode, Map<ClassNode, Integer>> classNodeIndentLevels = new ConcurrentHashMap<>()
@@ -75,6 +76,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     private int indentLevel = 0
     private boolean flexibleIndent = false
+    private boolean isInsideSpockBlockLabel = false
     private final Set<Integer> ignoreLineNumbers = []
     private final Set<BlockStatement> nestedBlocks = []
     private final Set<ConstructorCallExpression> constructorCallInStatements = []
@@ -253,9 +255,13 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         indentLevel += addToIndentLevel
 
         block.statements.each { statement ->
+            boolean isSpockBlockLabel = isSpockBlockLabel(statement)
+            if (isSpockBlockLabel) {
+                isInsideSpockBlockLabel = true
+            }
             // Skip statements on the same line as another statement or a field declaration
             // Skip statements that are spock block labels
-            if (!ignoreLineNumbers.contains(statement.lineNumber) && !isSpockBlockLabel(statement)) {
+            if (!ignoreLineNumbers.contains(statement.lineNumber) && !isSpockBlockLabel) {
                 ignoreLineNumbers << statement.lineNumber
 
                 // Ignore nested BlockStatement (e.g. finally blocks)
@@ -280,6 +286,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         }
         super.visitBlockStatement(block)
         indentLevel -= addToIndentLevel
+        resetSpockFlagIfExitingMethod(indentLevel)
     }
 
     private void registerConstructorCalls(Statement statement) {
@@ -300,6 +307,12 @@ class IndentationAstVisitor extends AbstractAstVisitor {
             flexibleCheckForCorrectColumn(statement, description, block)
         } else {
             checkForCorrectColumn(statement, description)
+        }
+    }
+
+    private void resetSpockFlagIfExitingMethod(int indentLevel) {
+        if (indentLevel == 1) {
+            isInsideSpockBlockLabel = false
         }
     }
 
@@ -394,15 +407,17 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     }
 
     private int columnForIndentLevel(int indentLevel) {
-        return indentLevel * rule.spacesPerIndentLevel + 1
+        return indentLevel * rule.spacesPerIndentLevel + 1 + resolveLabelIndent()
     }
 
-    private boolean isSpockBlockLabel(Statement statement) {
+    private static boolean isSpockBlockLabel(Statement statement) {
         return (statement.statementLabel in SPOCK_BLOCKS &&
-                statement instanceof ExpressionStatement &&
-                statement.expression.class == ConstantExpression &&
-                statement.expression.type.clazz == String
+                statement instanceof ExpressionStatement
         )
+    }
+
+    private int resolveLabelIndent() {
+        return isInsideSpockBlockLabel && rule.indentUnderLabel ? rule.spacesPerIndentLevel : 0
     }
 
     protected static int firstNonWhitespaceColumn(String string) {

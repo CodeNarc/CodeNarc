@@ -864,6 +864,93 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_SpockTestWithIndentAfterLabels_NoViolations() {
+        final SOURCE = '''
+            |class MyFeatureSpec extends Specification {
+            |    MyFeature feature
+            |    Collaborator collaborator = Mock()
+            |
+            |    def setup() {
+            |        feature = new MyFeature(collaborator)
+            |    }
+            |
+            |    void 'should do something'() {
+            |        given: 'an input'
+            |            Input input = new Input(arg1, arg2)
+            |
+            |        when: 'something is done'
+            |            def result = feature.doSomething(input)
+            |
+            |        then: 'some interactions occur'
+            |            1 * collaborator.performAction({
+            |                verifyAll(it, Person) {
+            |                    firstname == "Jane"
+            |                    lastname == "Doe"
+            |                    age == 42
+            |                }
+            |            })
+            |            1 * collaborator.performAnotherAction(_) >> { args -> args[0].size() > 3 ? "ok" : "fail" }
+            |            0 * _
+            |
+            |        and: 'result is the expected'
+            |            if (true) {
+            |                assert result == expected
+            |            }
+            |
+            |        where:
+            |            arg1 | arg2  || expected
+            |            101  | true  || foo
+            |            102  | false || bar
+            |    }
+            |
+            |    void 'should do something else'() {
+            |        when:
+            |            def result = feature.doSomethingElse()
+            |        then:
+            |            0 * _
+            |        and:
+            |            if (true) {
+            |                result == "abc123"
+            |            }
+            |    }
+            |
+            |    def cleanup() {
+            |        doSomeCleanup()
+            |    }
+            |}
+        '''.stripMargin()
+        rule.indentUnderLabel = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_SpockTestWithIndentAfterLabels_Violations() {
+        final SOURCE = '''
+            |class MyFeatureSpec extends Specification {
+            |    void 'should do something'() {
+            |        when:
+            |            def result = new MyFeature().doSomething()
+            |
+            |        then:
+            |        if (true) {
+            |            result == "abc123"
+            |        }
+            |    }
+            |
+            |    void 'should be true'() {
+            |        expect:
+            |            true
+            |    }
+            |}
+        '''.stripMargin()
+        rule.indentUnderLabel = true
+        assertViolations(SOURCE,
+          [line:8, source:'if (true) {', message:'The statement on line 8 in class MyFeatureSpec is at the incorrect indent level: Expected column 13 but was 9'],
+          [line:9, source:'result == "abc123"', message:'The statement on line 9 in class MyFeatureSpec is at the incorrect indent level: Expected column 17 but was 13']
+        )
+    }
+
+    @Test
     void test_ListExpressions() {
         final SOURCE = '''
             |[
