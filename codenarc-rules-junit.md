@@ -391,7 +391,7 @@ Example of violations:
 
 ## SpockMissingAssert Rule
 
-*Since CodeNarc 3.2.1*
+*Since CodeNarc 3.3.0*
 
 Spock treats all expressions on the first level of a then or expect block as an implicit assertion.
 However, everything inside if/for/switch/... blocks is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
@@ -406,7 +406,7 @@ Example of violations:
         def "test passes - does not behave as expected"() {
             expect:
             if (true) {
-                true == false
+                true == false // violation - not treated as an implicit assertion by spock
             }
         }
 
@@ -414,7 +414,7 @@ Example of violations:
             expect:
             if (true) {
                 with(new Object()) {
-                    true == false
+                    true == false // no violation - expressions in with are treated as implicit assertions by spock
                 }
             }
         }
