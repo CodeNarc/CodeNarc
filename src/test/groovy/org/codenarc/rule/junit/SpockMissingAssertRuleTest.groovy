@@ -538,6 +538,37 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
+    void spockClassWithBaseClass_MultipleViolations() {
+        final TEST = '''
+            def "spockClassWithBaseClass_MultipleViolations"() {
+                expect:
+                for (a in [1,2,3]) {
+                    !myCondition()
+                }
+            }
+        '''.stripIndent()
+        final SPOCK_CLASS1 = """
+            class SpockClass1 extends spock.lang.Specification {
+                $TEST
+            }
+        """.stripIndent()
+        final SPOCK_CLASS2 = """
+            import spock.lang.*
+            class SpockClass3 extends Specification {
+                $TEST
+            }
+        """.stripIndent()
+        final NON_SPOCK_CLASS = """
+            class NonSpockClass extends Foo {
+                $TEST
+            }
+        """.stripIndent()
+        assertViolations(SPOCK_CLASS1, [line: 7, source: '!myCondition()', message: violationMessage('expect')])
+        assertViolations(SPOCK_CLASS2, [line: 8, source: '!myCondition()', message: violationMessage('expect')])
+        assertNoViolations(NON_SPOCK_CLASS)
+    }
+
+    @Test
     void realisticTest_SingleViolation() {
         final SOURCE = '''
             import spock.lang.*
