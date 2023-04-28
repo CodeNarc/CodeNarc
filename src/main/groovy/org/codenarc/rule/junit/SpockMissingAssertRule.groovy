@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2023 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,22 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.*
-import org.codehaus.groovy.ast.stmt.*
+import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.stmt.AssertStatement
+import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codehaus.groovy.ast.stmt.DoWhileStatement
+import org.codehaus.groovy.ast.stmt.ExpressionStatement
+import org.codehaus.groovy.ast.stmt.ForStatement
+import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codehaus.groovy.ast.stmt.Statement
+import org.codehaus.groovy.ast.stmt.SwitchStatement
+import org.codehaus.groovy.ast.stmt.TryCatchStatement
+import org.codehaus.groovy.ast.stmt.WhileStatement
+
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.WildcardPattern
@@ -37,7 +51,7 @@ import java.util.regex.Pattern
 class SpockMissingAssertRule extends AbstractAstVisitorRule {
 
     String name = 'SpockMissingAssert'
-    int priority = 2
+    int priority = 3
     String specificationSuperclassNames = '*Specification'
     String specificationClassNames = null
     Class astVisitorClass = SpockMissingAssertAstVisitor

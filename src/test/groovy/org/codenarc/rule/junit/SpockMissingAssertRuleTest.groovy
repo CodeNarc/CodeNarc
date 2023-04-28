@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2023 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
 
     @Test
     void ruleProperties_AreValid() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == 'SpockMissingAssert'
     }
 
@@ -67,6 +67,11 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                         "123"
                         123
                         assert false
+                        def foo = {
+                            [1,2,3].find {
+                                it == 1
+                            }
+                        }
                     """)}
                 }
             }
@@ -85,16 +90,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                 public class MySpec extends spock.lang.Specification {
                     def "statement_SingleViolation"() {
                         ${label}:
-                        ${statement("""
-                            "123"
-                            123
-                            false
-                            def foo = {
-                                [1,2,3].find {
-                                    it == 1
-                                }
-                            }
-                        """)}
+                        ${statement("""false""")}
                     }
                 }
                 """.stripIndent())
@@ -171,6 +167,30 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
             """.stripIndent()
         }
         assertNoViolations(SOURCES)
+    }
+
+    @ParameterizedTest
+    @MethodSource('statementsToTest')
+    void statementInAnd_SingleViolation(Closure<GString> statement) {
+        final SOURCES = labelsToTest.collect { label ->
+            """
+            public class MySpec extends spock.lang.Specification {
+                def "statementInAnd_SingleViolation"() {
+                    ${label}:
+                    foo == bar
+                    and:
+                    ${statement("""bar == baz""")}
+                }
+            }
+            """.stripIndent()
+        }
+        [SOURCES, labelsToTest].transpose().forEach {
+            def (String source, String label) = it
+            assertSingleViolation(source, {
+                it.sourceLine ==  'bar == baz'
+                it.message == violationMessage(label)
+            })
+        }
     }
 
     @Test
