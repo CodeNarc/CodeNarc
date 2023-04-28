@@ -131,8 +131,10 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     private static boolean isSpockFeatureMethod(MethodNode node) {
         if (node.code instanceof BlockStatement) {
             BlockStatement block = (BlockStatement) node.code
-            // To be considered as a feature method by Spock, the method must have at least one statement label
-            return block.statements.any(s -> s.getStatementLabels() != null && !s.getStatementLabels().isEmpty())
+            // To be considered as a feature method by Spock, the method must have at least one statement label.
+            // More details can be found in org.spockframework.compiler.SpecParser.isFeatureMethod() at
+            // https://github.com/spockframework/spock/blob/52e7688b3f89533857006539e5905c9b4121f32b/spock-core/src/main/java/org/spockframework/compiler/SpecParser.java#LL153C5-L153C5
+            return block.statements.any(s -> s.statementLabels != null && !s.statementLabels.isEmpty())
         }
         return false
     }
@@ -191,14 +193,14 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
         var variable = variableAndMethod.v1
         var method = variableAndMethod.v2
         // To keep things simple, we only consider methods called on this
-        return variable != null && variable.getName() == 'this' && method != null && METHODS_WITH_IMPLICIT_ASSERTIONS.contains(method.value)
+        return variable != null && variable.name == 'this' && method != null && METHODS_WITH_IMPLICIT_ASSERTIONS.contains(method.value)
     }
 
     private void visitCollectionIterationMethods(ExpressionStatement statement) {
         // Inspect the arguments from collection iteration methods (i.e loop equivalents)
         if (isCollectionIterationMethods(statement) && statement.expression instanceof MethodCallExpression) {
             MethodCallExpression methodCallExpression = statement.expression as MethodCallExpression
-            methodCallExpression.getArguments().visit(this)
+            methodCallExpression.arguments.visit(this)
         }
     }
 
@@ -225,11 +227,14 @@ class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
     }
 
     private void updateCurrentLabel(Statement statement) {
-        List<String> labels = statement.getStatementLabels()
-        if (labels != null) {
-            Collection<String> spockLabels = labels.intersect(SPOCK_LABELS)
-            if (spockLabels.size() > 0) {
-                currentLabel = spockLabels.last()
+        // Spock only treats top-level labels as blocks
+        if (nNestedStatements == 0) {
+            List<String> labels = statement.statementLabels
+            if (labels != null) {
+                Collection<String> spockLabels = labels.intersect(SPOCK_LABELS)
+                if (spockLabels.size() > 0) {
+                    currentLabel = spockLabels.last()
+                }
             }
         }
         super.visitStatement(statement)

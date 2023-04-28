@@ -288,24 +288,45 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @Test
-    void nestedClosureInCollectionLoops_MultipleViolations() {
+    void nonTopLevelLabels_MultipleViolations() {
         final SOURCE = '''
             class MySpec extends spock.lang.Specification {
-                def "nestedClosureInCollectionLoops_MultipleViolations"() {
+                def "nonTopLevelLabels_MultipleViolations"() {
                     given:
+                    123
+                    expect:
+                    !myCondition()
                     for (a in [1,2,3]) {
                         then:
                         [1,2,3].each {
                             !myCondition()
                         }
-                        [1,2,3].eachWithIndex {
+                        [1,2,3].eachWithIndex { it, i ->
                             !myCondition()
                         }
                         3.times {
                             !myCondition()
                         }
                     }
-                    then:
+                }
+            }
+        '''.stripIndent()
+        // Spock only treats top-level labels as blocks, so we're reporting expect instead of then here
+        assertViolations(SOURCE,
+            [line: 11, source: '!myCondition()', message: violationMessage('expect')],
+            [line: 14, source: '!myCondition()', message: violationMessage('expect')],
+            [line: 17, source: '!myCondition()', message: violationMessage('expect')]
+        )
+    }
+
+    @Test
+    void nestedClosureInCollectionLoops_SingleViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "nestedClosureInCollectionLoops_SingleViolation"() {
+                    given:
+                    123
+                    expect:
                     for (a in [1,2,3]) {
                         methodCall({ it in ["a","b","c"] }).each {
                             with(it) {
@@ -319,10 +340,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
             }
         '''.stripIndent()
         assertViolations(SOURCE,
-            [line: 8, source: '!myCondition()', message: violationMessage('then')],
-            [line: 11, source: '!myCondition()', message: violationMessage('then')],
-            [line: 14, source: '!myCondition()', message: violationMessage('then')],
-            [line: 24, source: '!myCondition3()', message: violationMessage('then')]
+            [line: 13, source: '!myCondition3()', message: violationMessage('expect')]
         )
     }
 
