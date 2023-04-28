@@ -421,6 +421,11 @@ Example of violations:
     }
 ```
 
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| specificationClassNames     | Specifies one or more (comma-separated) class names that should be treated as Spock Specification classes. The class names may optionally contain wildcards (*,?), e.g. "*Spec". | `null` |
+| specificationSuperclassNames| Specifies one or more (comma-separated) class names that should be treated as Spock Specification superclasses. In other words, a class that extends a matching class name is considered a Spock Specification . The class names may optionally contain wildcards (*,?), e.g. "*Spec". | "*Specification" |
+
 
 ## UnnecessaryFail Rule
 
