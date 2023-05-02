@@ -406,7 +406,7 @@ Example of violations:
         def "test passes - does not behave as expected"() {
             expect:
             if (true) {
-                true == false // violation - not treated as an implicit assertion by spock
+                true == false // violation - is inside an if block, and therefore not treated as an implicit assertion by spock
             }
         }
 
