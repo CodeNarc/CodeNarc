@@ -90,7 +90,7 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                 public class MySpec extends spock.lang.Specification {
                     def "statement_SingleViolation"() {
                         ${label}:
-                        ${statement("""false""")}
+                        ${statement('''false''')}
                     }
                 }
                 """.stripIndent())
@@ -179,17 +179,17 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
                     ${label}:
                     foo == bar
                     and:
-                    ${statement("""bar == baz""")}
+                    ${statement('''bar == baz''')}
                 }
             }
             """.stripIndent()
         }
         [SOURCES, labelsToTest].transpose().forEach {
             def (String source, String label) = it
-            assertSingleViolation(source, {
+            assertSingleViolation(source) {
                 it.sourceLine ==  'bar == baz'
                 it.message == violationMessage(label)
-            })
+            }
         }
     }
 
