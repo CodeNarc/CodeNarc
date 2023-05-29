@@ -1,7 +1,7 @@
 ---
 layout: default
 title: CodeNarc - JUnit Rules
----  
+---
 
 # JUnit Rules  ("*rulesets/junit.xml*")
 
@@ -194,8 +194,8 @@ ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| ignoreMethodsWithAnnotations | Specifies one or more (comma-separated) annotation names. Methods annotated with the annotations are ignored by this rule.  | After,AfterAll,AfterClass, AfterEach,Before,BeforeAll, BeforeClass,BeforeEach, Disabled,Ignore, Override,Test |              
-  
+| ignoreMethodsWithAnnotations | Specifies one or more (comma-separated) annotation names. Methods annotated with the annotations are ignored by this rule.  | After,AfterAll,AfterClass, AfterEach,Before,BeforeAll, BeforeClass,BeforeEach, Disabled,Ignore, Override,Test |
+
 
 ## JUnitPublicProperty Rule
 
@@ -387,6 +387,44 @@ Example of violations:
         }
     }
 ```
+
+
+## SpockMissingAssert Rule
+
+*Since CodeNarc 3.3.0*
+
+Spock treats all expressions on the first level of a then or expect block as an implicit assertion.
+However, everything inside if/for/switch/... blocks is not an implicit assert, just a useless comparison (unless wrapped by a `with` or `verifyAll`).
+
+This rule finds such expressions, where an explicit call to `assert` would be required. Please note that the rule might
+produce false positives, as it relies on method names to determine whether an expression has a boolean type or not.
+
+Example of violations:
+
+```
+    public class MySpec extends spock.lang.Specification {
+        def "test passes - does not behave as expected"() {
+            expect:
+            if (true) {
+                true == false // violation - is inside an if block, and therefore not treated as an implicit assertion by spock
+            }
+        }
+
+        def "test fails - behaves as expected"() {
+            expect:
+            if (true) {
+                with(new Object()) {
+                    true == false // no violation - expressions in with are treated as implicit assertions by spock
+                }
+            }
+        }
+    }
+```
+
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| specificationClassNames     | Specifies one or more (comma-separated) class names that should be treated as Spock Specification classes. The class names may optionally contain wildcards (*,?), e.g. "*Spec". | `null` |
+| specificationSuperclassNames| Specifies one or more (comma-separated) class names that should be treated as Spock Specification superclasses. In other words, a class that extends a matching class name is considered a Spock Specification . The class names may optionally contain wildcards (*,?), e.g. "*Spec". | "*Specification" |
 
 
 ## UnnecessaryFail Rule
