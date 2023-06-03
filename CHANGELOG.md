@@ -11,6 +11,10 @@ New Rules
 Updated/Enhanced Rules and Bug Fixes
  - #729: **IndentationRule**: Add optional *indentUnderLabel* property to allow indenting code underneath labels. ([Charalampos Makrylakis](https://github.com/xmac11)) 
 
+Documentation
+ - codenarc-other-tools-frameworks: Added link to #630 for info on controlling the version of Groovy that CodeNarc uses for the Gradle plugin.
+
+
 Version 3.2.0    (Jan 2023)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes

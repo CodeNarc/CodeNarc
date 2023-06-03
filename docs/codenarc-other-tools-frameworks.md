@@ -27,6 +27,7 @@ See [CodeNarc - Docker](./codenarc-docker.html).
 ## Build and Code Quality Tools
 
   * [Gradle](http://www.gradle.org/) build system - See the [Gradle CodeNarc Plugin](http://gradle.org/docs/current/userguide/codenarc_plugin.html).
+      * See [#630](https://github.com/CodeNarc/CodeNarc/issues/630) for info on controlling the version of Groovy that CodeNarc uses for the Gradle plugin.
 
   * [Maven](http://maven.apache.org/) - See the [Maven CodeNarc Plugin](https://github.com/gleclaire/codenarc-maven-plugin)
 
