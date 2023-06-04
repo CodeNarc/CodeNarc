@@ -3,7 +3,7 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-TODO Version 3.2.0    (??? 2023)
+TODO Version 3.3.0    (??? 2023)
 --------------------------------------
 New Rules
  - #728: New **SpockMissingAssert** rule (junit) - Checks for boolean conditions intended as assertions within Spock tests that are nested within a block and are thus ignored. ([Jean André Gauthier](https://github.com/jean-andre-gauthier))
