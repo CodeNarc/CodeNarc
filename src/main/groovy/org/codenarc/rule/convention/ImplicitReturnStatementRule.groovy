@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codehaus.groovy.ast.stmt.SwitchStatement
+import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codehaus.groovy.ast.stmt.ThrowStatement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codehaus.groovy.ast.stmt.WhileStatement
@@ -73,7 +74,8 @@ class ImplicitReturnStatementAstVisitor extends AbstractAstVisitor {
                 lastStatement instanceof WhileStatement ||
                 lastStatement instanceof DoWhileStatement ||
                 lastStatement instanceof SwitchStatement ||
-                lastStatement instanceof ThrowStatement
+                lastStatement instanceof ThrowStatement ||
+                lastStatement instanceof SynchronizedStatement
     }
 
 }

@@ -9,7 +9,8 @@ New Rules
  - #728: New **SpockMissingAssert** rule (junit) - Checks for boolean conditions intended as assertions within Spock tests that are nested within a block and are thus ignored. ([Jean André Gauthier](https://github.com/jean-andre-gauthier))
 
 Updated/Enhanced Rules and Bug Fixes
- - #729: **IndentationRule**: Add optional *indentUnderLabel* property to allow indenting code underneath labels. ([Charalampos Makrylakis](https://github.com/xmac11)) 
+ - #729: **Indentation** rule: Add optional *indentUnderLabel* property to allow indenting code underneath labels. ([Charalampos Makrylakis](https://github.com/xmac11)) 
+ - #725: **ImplicitReturnStatement** rule: Fix false positive for return within a synchronized block.
 
 Documentation
  - codenarc-other-tools-frameworks: Added link to #630 for info on controlling the version of Groovy that CodeNarc uses for the Gradle plugin.

@@ -241,6 +241,21 @@ class ImplicitReturnStatementRuleTest extends AbstractRuleTestCase<ImplicitRetur
             [line:21, source:'private Object emptyMethod()', message:'The method emptyMethod in class MyClass is missing an explicit return'])
     }
 
+    @Test
+    void test_SynchronizedBlock_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                String someMethod() {
+                    synchronized (someObject) {
+                        String result = doSomething();
+                        return result;
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected ImplicitReturnStatementRule createRule() {
         new ImplicitReturnStatementRule()
