@@ -96,7 +96,7 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
                 }
             }
 
-            if (!ignore && isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {
+            if (!ignore && line[startCol - 1] == '{' && isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }

@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.junit.Assume
 import org.junit.jupiter.api.Test
 
 /**
@@ -370,6 +371,40 @@ c        '''
                 [line:2, source:'{println "aaa" }', message:CLOSURE_VIOLATION_MESSAGE],
                 [line:3, source:'{println "bbb" }', message:CLOSURE_VIOLATION_MESSAGE],
                 [line:4, source:'{println "ccc" }', message:CLOSURE_VIOLATION_MESSAGE])
+    }
+
+    @Test
+    void testApplyTo_Switch_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                int doStuff( int code ) {
+                     switch ( code ) {
+                        case 1: return 99
+                        case 2: return 333 
+                        default: return null
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_SwitchExpressions_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                String constructDateRange( Context context ) {
+                     def request = context.request
+                     switch ( request ) {
+                        case DateRangeRequest -> constructReportDate( request.isoStartDate, request.isoStopDate, context.dateFormat )
+                        case SingleDateRequest -> constructReportDate( request.isoReportDate, context.dateFormat )
+                        default -> null
+                    }
+                }
+            }
+        '''
+        Assume.assumeTrue(GroovySystem.getVersion().startsWith('4'))
+        assertNoViolations(SOURCE)
     }
 
     @Override
