@@ -23,4 +23,5 @@
     <rule class='org.codenarc.rule.comments.JavadocMissingExceptionDescriptionRule'/>
     <rule class='org.codenarc.rule.comments.JavadocMissingParamDescriptionRule'/>
     <rule class='org.codenarc.rule.comments.JavadocMissingThrowsDescriptionRule'/>
+    <rule class='org.codenarc.rule.comments.SpaceAfterCommentDelimiterRule'/>
 </ruleset>
