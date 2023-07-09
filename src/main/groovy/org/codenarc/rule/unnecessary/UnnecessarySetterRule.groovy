@@ -43,7 +43,7 @@ class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
             addViolationsIfSetter(statement.expression)
         }
         // Do not process any contained expressions
-        //super.visitExpressionStatement(statement)
+        // super.visitExpressionStatement(statement)
     }
 
     private void addViolationsIfSetter(MethodCallExpression call) {

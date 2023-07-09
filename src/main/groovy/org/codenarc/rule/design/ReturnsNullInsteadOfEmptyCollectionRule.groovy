@@ -56,7 +56,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
             expression.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
         }
         // Do not keep walking into nested Closures
-        //super.visitClosureExpression(expression)
+        // super.visitClosureExpression(expression)
     }
 
     private static boolean methodReturnsCollection(MethodNode node) {
@@ -116,7 +116,7 @@ class CollectionReturnTracker extends AbstractAstVisitor {
         expressionReturnsList(statement.expression)
 
         // Do not keep walking into nested Closures
-        //super.visitReturnStatement(statement)
+        // super.visitReturnStatement(statement)
     }
 
     private void expressionReturnsList(Expression expression) {
