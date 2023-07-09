@@ -20,19 +20,19 @@ import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
- * Checks that there is whitespace after comment characters: // and /*
+ * Checks that there is whitespace before comment characters: // and /*
  *
  * @author Chris Mair
  */
-class SpaceAfterCommentDelimiterRule extends AbstractRule {
+class SpaceBeforeCommentDelimiterRule extends AbstractRule {
 
-    private static final String SLASH_SLASH = /[^\:]\/\/\w/
-    private static final String SLASH_STAR = /\/\*\w/
-    private static final String SLASH_STAR_STAR = /[^\/]\/\*\*\w/
+    private static final String SLASH_SLASH = /[^\s\:]\/\//
+    private static final String SLASH_STAR = /\S\/\*/
+    private static final String SLASH_STAR_STAR = /\S\/\*\*/
     private static final String REGEX = SLASH_SLASH + '|' + SLASH_STAR + '|' + SLASH_STAR_STAR
-    private static final String MESSAGE = 'The comment does not begin with space or whitespace'
+    private static final String MESSAGE = 'The comment is not preceded by a space or whitespace'
 
-    String name = 'SpaceAfterCommentDelimiter'
+    String name = 'SpaceBeforeCommentDelimiter'
     int priority = 3
 
     @Override
@@ -43,9 +43,14 @@ class SpaceAfterCommentDelimiterRule extends AbstractRule {
             String sourceLine = sourceCode.line(lineNumber - 1)
 
             // Heuristic to avoid false positives when a string contains // or /*
-            if (!sourceLine.contains("'") && !sourceLine.contains('"')) {
+            if (!sourceLine.contains("'") && !sourceLine.contains('"') && !isWithinRegularExpression(sourceLine)) {
                 violations.add(new Violation(rule: this, lineNumber: lineNumber, sourceLine: sourceLine, message: MESSAGE))
             }
         }
     }
+
+    private boolean isWithinRegularExpression(String line) {
+        return line =~ /\/.*\/\// || line =~ /\/.*\/\*.*\//
+    }
+
 }
