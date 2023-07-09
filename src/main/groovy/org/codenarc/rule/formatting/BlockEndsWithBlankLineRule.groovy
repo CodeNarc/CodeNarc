@@ -51,19 +51,19 @@ class BlockEndsWithBlankLineAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
-        isFirstVisit(node.code) && checkForViolations(node) //this is needed because of GROOVY-8426
+        isFirstVisit(node.code) && checkForViolations(node) // This is needed because of GROOVY-8426
         super.visitConstructorOrMethod(node, isConstructor)
     }
 
     @Override
     void visitClosureExpression(ClosureExpression expression) {
-        isFirstVisit(expression.code) && checkForViolations(expression) //this is needed because line numbers are incorrect on closure block statements
+        isFirstVisit(expression.code) && checkForViolations(expression) // This is needed because line numbers are incorrect on closure block statements
         super.visitClosureExpression(expression)
     }
 
     @Override
     void visitTryCatchFinally(TryCatchStatement statement) {
-        //this is needed to avoid double violations because finally statement is a block statement that consists a single block statement
+        // This is needed to avoid double violations because finally statement is a block statement that consists a single block statement
         if (statement.finallyStatement instanceof BlockStatement) {
             BlockStatement finallyStatement = statement.finallyStatement
             finallyStatement.statements*.class == [BlockStatement] && isFirstVisit(finallyStatement)

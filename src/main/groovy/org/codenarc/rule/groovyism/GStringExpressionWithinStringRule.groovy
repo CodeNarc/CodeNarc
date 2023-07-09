@@ -54,7 +54,7 @@ class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor {
     @Override
     void visitGStringExpression(GStringExpression expression) {
         // GStrings may contain constituent "regular" strings, but we don't want to process those for this rule.
-        //super.visitGStringExpression(expression)
+        // super.visitGStringExpression(expression)
     }
 
     @Override

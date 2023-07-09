@@ -29,11 +29,11 @@ import org.codenarc.util.AstUtil
  * Example:
  *
  * <pre>
- * if (x) {     //A
+ * if (x) {         // A
  *
- * } else if (y) { //B
+ * } else if (y) {  // B
  *
- * } else {    //C
+ * } else {         // C
  *
  * }
  * </pre>
@@ -107,7 +107,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
     }
 
     void visitElseClosingBrace(BracesForIfElseRule myRule, IfStatement node, String srcLine) {
-        //only test for else closing curlies if the if statement has curlies to test for (i.e. is not one-line)
+        // Only test for else closing braces if the if statement has braces to test for (i.e. is not one-line)
         if (AstUtil.isBlock(node.ifBlock)) {
             if (myRule.elseOnSameLineAsClosingBrace && srcLine && !(srcLine?.contains('else') && srcLine?.contains('}'))) {
                 addViolation(node.elseBlock, "'else' should be on the same line as the closing brace")
@@ -118,7 +118,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
     }
 
     void visitElseOpeningBrace(BracesForIfElseRule myRule, IfStatement node, String srcLine) {
-        //only test for else opening curlies if the else statement has curlies to test for (i.e. is not one-line)
+        // only test for else opening braces if the else statement has braces to test for (i.e. is not one-line)
         if (AstUtil.isBlock(node.elseBlock)) {
             if (myRule.elseOnSameLineAsOpeningBrace && srcLine && !(srcLine?.contains('else') && srcLine?.contains('{'))) {
                 addViolation(node.elseBlock, "Opening brace should be on the same line as 'else'")

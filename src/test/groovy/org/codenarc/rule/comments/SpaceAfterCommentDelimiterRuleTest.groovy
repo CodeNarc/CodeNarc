@@ -50,7 +50,6 @@ class SpaceAfterCommentDelimiterRuleTest extends AbstractRuleTestCase<SpaceAfter
                  * @param startIndex - the starting index
                  * @return the full count
                  * @throws RuntimeException when hell freezes over
-                 *
                  */
                 int countThings(int startIndex) { // some comment
                     // Do stuff
@@ -64,6 +63,15 @@ class SpaceAfterCommentDelimiterRuleTest extends AbstractRuleTestCase<SpaceAfter
                 
                 //==================================
                 //**********************************
+                
+                /*-------------------------------------*/
+                /*================*/
+                /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+                
+                /**=======================================*/
+                /**---------------------------------
+                  * comment
+                  */
             }
             // Other comment
         '''
@@ -137,7 +145,6 @@ class SpaceAfterCommentDelimiterRuleTest extends AbstractRuleTestCase<SpaceAfter
             class MyClass {//Bad4
                 /**
                  *Return the calculated count of some stuff,
-                 *
                  */
                 int countThings(int startIndex) { //some comment
                     //Do stuff
@@ -150,12 +157,12 @@ class SpaceAfterCommentDelimiterRuleTest extends AbstractRuleTestCase<SpaceAfter
         assertViolations(SOURCE,
             [line:2, source:'/**Bad1', message: MESSAGE],
             [line:7, source:'class MyClass {//Bad4', message: MESSAGE],
-            [line:12, source:'int countThings(int startIndex) { //some comment', message: MESSAGE],
-            [line:13, source:'//Do stuff', message: MESSAGE],
-            [line:14, source:'amount = 3 + amount/*violation*/', message: MESSAGE],
-            [line:15, source:'}//comment', message: MESSAGE],
-            [line:17, source:'//Other comment', message: MESSAGE],
-            [line:18, source:'/*Single line comment*/', message: MESSAGE])
+            [line:11, source:'int countThings(int startIndex) { //some comment', message: MESSAGE],
+            [line:12, source:'//Do stuff', message: MESSAGE],
+            [line:13, source:'amount = 3 + amount/*violation*/', message: MESSAGE],
+            [line:14, source:'}//comment', message: MESSAGE],
+            [line:16, source:'//Other comment', message: MESSAGE],
+            [line:17, source:'/*Single line comment*/', message: MESSAGE])
     }
 
     @Override

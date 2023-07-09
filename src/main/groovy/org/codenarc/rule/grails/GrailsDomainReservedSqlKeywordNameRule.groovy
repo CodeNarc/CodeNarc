@@ -41,7 +41,7 @@ class GrailsDomainReservedSqlKeywordNameRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GrailsDomainReservedSqlKeywordNameAstVisitor
     String applyToFilesMatching = GrailsUtil.DOMAIN_FILES
 
-    //based on http://developer.mimer.com/validator/sql-reserved-words.tml
+    // Based on http://developer.mimer.com/validator/sql-reserved-words.tml
     private final Set reservedSqlKeywords = ['ABSOLUTE', 'ACTION', 'ADD', 'AFTER', 'ALL', 'ALLOCATE', 'ALTER', 'AND', 'ANY',
         'ARE', 'ARRAY', 'AS', 'ASC', 'ASENSITIVE', 'ASSERTION', 'ASYMMETRIC', 'AT', 'ATOMIC', 'AUTHORIZATION', 'AVG',
         'BEFORE', 'BEGIN', 'BETWEEN', 'BIGINT', 'BINARY', 'BIT', 'BIT_LENGTH', 'BLOB', 'BOOLEAN', 'BOTH', 'BREADTH',
@@ -77,7 +77,7 @@ class GrailsDomainReservedSqlKeywordNameRule extends AbstractAstVisitorRule {
         'WHEN', 'WHENEVER', 'WHERE', 'WHILE', 'WINDOW', 'WITH', 'WITHIN', 'WITHOUT', 'WORK', 'WRITE', 'YEAR', 'ZONE'
     ] as Set
 
-    //based on http://docs.jboss.org/hibernate/orm/3.6/reference/en-US/html/types.html#types-value-basic
+    // Based on http://docs.jboss.org/hibernate/orm/3.6/reference/en-US/html/types.html#types-value-basic
     private final Set hibernateBasicTypes = ['String', 'Character', 'boolean', 'Boolean', 'byte', 'Byte', 'short', 'Short',
         'int', 'Integer', 'long', 'Long', 'float', 'Float', 'double', 'Double', 'BigInteger', 'BigDecimal', 'Timestamp',
         'Time', 'Date', 'Calendar', 'Currency', 'Locale', 'TimeZone', 'URL', 'Class', 'Blob', 'Clob', '[B', 'Byte[]',

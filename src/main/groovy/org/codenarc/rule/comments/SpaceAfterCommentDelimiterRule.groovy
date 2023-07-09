@@ -27,8 +27,8 @@ import org.codenarc.source.SourceCode
 class SpaceAfterCommentDelimiterRule extends AbstractRule {
 
     private static final String SLASH_SLASH = /[^\:]\/\/\w/
-    private static final String SLASH_STAR = /\/\*[^\s\*]/
-    private static final String SLASH_STAR_STAR = /[^\/]\/\*\*\S/
+    private static final String SLASH_STAR = /\/\*\w/
+    private static final String SLASH_STAR_STAR = /[^\/]\/\*\*\w/
     private static final String REGEX = SLASH_SLASH + '|' + SLASH_STAR + '|' + SLASH_STAR_STAR
     private static final String MESSAGE = 'The comment does not begin with space or whitespace'
 

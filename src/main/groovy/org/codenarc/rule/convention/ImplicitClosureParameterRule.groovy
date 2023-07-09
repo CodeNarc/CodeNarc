@@ -85,6 +85,6 @@ class ImplicitClosureParameterCodeVisitor extends AbstractAstVisitor {
 
     @Override
     void visitClosureExpression(ClosureExpression expression) {
-        //do not visit nested closures
+        // Do not visit nested closures
     }
 }
