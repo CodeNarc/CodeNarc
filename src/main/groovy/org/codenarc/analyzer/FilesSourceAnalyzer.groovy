@@ -34,9 +34,9 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
     private static final Logger LOG = LoggerFactory.getLogger(FilesSourceAnalyzer)
 
     /**
-     * The base (root) directory. If not set, user.dir will be used
+     * The base (root) directory. If not set, the current directory ('.') will be used
      */
-    String baseDirectory = System.getProperty('user.dir')
+    String baseDirectory = '.'
 
     /**
      * List of groovy files that will be analyzed.
@@ -60,11 +60,11 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
         assert baseDirectory
         assert ruleSet
         DirectoryResults baseDirResults = new DirectoryResults('')
-        def baseDirectoryFile = new File(baseDirectory)
 
         // Get all results from unique named files
-        for (def sourceFilePath in sourceFiles) {
-            def file = new File(sourceFilePath)
+        for (String sourceFilePath in sourceFiles) {
+            File file = new File(sourceFilePath)
+            String relativePath = sourceFilePath
             if (!file.exists()) {
                 file = new File(baseDirectory + SEP + sourceFilePath)
                 if (!file.exists()) {
@@ -73,8 +73,8 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
                 }
             }
             try  {
-                FileResults fileRes = processFile(file, baseDirectoryFile, ruleSet)
-                baseDirResults.addFileResultRecursive(fileRes)
+                FileResults fileResults = processFile(file, relativePath, ruleSet)
+                baseDirResults.addFileResultRecursive(fileResults)
             }
             catch (Throwable t) {
                 LOG.warn("Error processing file: '" + sourceFilePath + "'; " + t)
@@ -96,11 +96,10 @@ class FilesSourceAnalyzer extends AbstractSourceAnalyzer {
     }
 
     // Get violations for a single file
-    private FileResults processFile(File file, File baseDirectoryFile, RuleSet ruleSet) {
+    private FileResults processFile(File file, String relativePath, RuleSet ruleSet) {
         def sourceFile = new SourceFile(file)
         List allViolations = collectViolations(sourceFile, ruleSet)
-        def fileRelativePath = baseDirectoryFile.toPath().relativize(file.toPath()).toString().replace('\\', SEP)
-        def fileResults = new FileResults(fileRelativePath, allViolations, sourceFile)
+        def fileResults = new FileResults(relativePath, allViolations, sourceFile)
         fileResults
     }
 }

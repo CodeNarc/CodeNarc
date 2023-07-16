@@ -14,6 +14,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #729: **Indentation** rule: Add optional *indentUnderLabel* property to allow indenting code underneath labels. ([Charalampos Makrylakis](https://github.com/xmac11)) 
  - #725: **ImplicitReturnStatement** rule: Fix false positive for return within a synchronized block.
  - #733: **SpaceAfterOpeningBrace** rule: Fix false positive for Groovy 4 switch expressions.
+ - #726: Fixed CodeNarc command-line `-sourcefiles` argument to work with paths relative to the current directory. Changed `FilesSourceAnalyzer` to default `baseDirectory` to  ‘.’ rather than `System.getProperty('user.dir')`.
 
 Documentation
  - codenarc-other-tools-frameworks: Added link to #630 for info on controlling the version of Groovy that CodeNarc uses for the Gradle plugin.

@@ -36,6 +36,7 @@ import org.codenarc.util.io.ResourceFactory
  *   <li>help - Display the command-line help; If present, this must be the only command-line parameter.</li>
  *   <li>basedir - The base directory for the source code to be analyzed. This is the root of the
  *          directory tree. Defaults to the current directory ('.').</li>
+ *   <li>sourcefiles - The comma-separated list of files we want to analyze. If set, -basedir, -includes and -exclude arguments are ignored.</li>
  *   <li>rulesetfiles - The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
  *          single file path, or multiple paths separated by commas. Each path may be optionally prefixed by
  *          any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
@@ -185,7 +186,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
             return
         }
         // Show version
-        else if (args == ['-version']) {
+        else if (args == ['-version'] as String[]) {
             def version = CodeNarcVersion.getVersion()
             println "CodeNarc version $version"
             return
