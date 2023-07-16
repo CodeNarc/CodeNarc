@@ -36,7 +36,7 @@ import org.codenarc.util.io.ResourceFactory
  *   <li>help - Display the command-line help; If present, this must be the only command-line parameter.</li>
  *   <li>basedir - The base directory for the source code to be analyzed. This is the root of the
  *          directory tree. Defaults to the current directory ('.').</li>
- *   <li>sourcefiles - The comma-separated list of files we want to analyze. If set, -basedir, -includes and -exclude arguments are ignored.</li>
+ *   <li>sourcefiles - The comma-separated list of files we want to analyze. If set, -includes and -exclude arguments are ignored.</li>
  *   <li>rulesetfiles - The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
  *          single file path, or multiple paths separated by commas. Each path may be optionally prefixed by
  *          any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
@@ -82,8 +82,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         The comma-separated list of Ant-style file patterns specifying files that must
         be excluded. No files are excluded when omitted.
     -sourcefiles=<FILENAMES>
-        The comma-separated list of files we want to analyze. If set, -basedir,
-        -includes and -exclude arguments are ignored.
+        The comma-separated list of files we want to analyze. If set, -includes and -exclude arguments are ignored.
     -rulesetfiles=<FILENAMES>
         The path to the Groovy or XML RuleSet definition files, relative to the classpath.
         This can be a single file path, or multiple paths separated by commas. Each path may be optionally prefixed by
@@ -232,9 +231,9 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
 
     protected void setDefaultsIfNecessary() {
         if (!sourceFiles) {
-            baseDir = baseDir ?: '.'
             includes = includes  ?: '**/*.groovy'
         }
+        baseDir = baseDir ?: '.'
         ruleSetFiles = ruleSetFiles ?: 'rulesets/basic.xml'
 
         if (reports.empty) {
@@ -258,6 +257,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         // List of files sent as argument
         if (sourceFiles) {
             return new FilesSourceAnalyzer(
+                baseDirectory: baseDir,
                 sourceFiles: sourceFiles.split(','),
                 failOnError: failOnError
             )

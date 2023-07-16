@@ -21,6 +21,7 @@ import static org.codenarc.test.TestUtil.captureSystemOut
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
+import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.*
 import org.codenarc.results.Results
 import org.codenarc.test.AbstractTestCase
@@ -44,7 +45,7 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String EXCLUDE_FILE = 'config/CodeNarcBaselineViolations.xml'
     private static final String INCLUDES = 'sourcewithdirs/**/*.groovy'
     private static final String EXCLUDES = '**/*File2.groovy'
-    private static final String SOURCEFILES = 'src/test/resources/sourcewithdirs/SourceFile1.groovy,src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy,src/test/resources/sourcewithdirs/subdir1/Subdir1File2.groovy'
+    private static final String SOURCE_FILES = 'src/test/resources/sourcewithdirs/SourceFile1.groovy,src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy,src/test/resources/sourcewithdirs/subdir1/Subdir1File2.groovy'
     private static final String PROPERTIES_FILENAME = 'some.properties'
     private static final String TITLE = 'My Title'
     private static final String HTML_REPORT_FILE = new File('CodeNarcTest-Report.html').absolutePath
@@ -258,7 +259,7 @@ class CodeNarcTest extends AbstractTestCase {
         void SourceFilesDefaults() {
             codeNarc.sourceFiles = 'a,b,c'
             codeNarc.setDefaultsIfNecessary()
-            assert codeNarc.baseDir == null
+            assert codeNarc.baseDir == '.'
             assert codeNarc.includes == null
             assert codeNarc.sourceFiles == 'a,b,c'
             assert codeNarc.ruleSetFiles == BASIC_RULESET
@@ -332,21 +333,33 @@ class CodeNarcTest extends AbstractTestCase {
 
         @Test
         void SourceFiles() {
-            final ARGS = ["-sourcefiles=$SOURCEFILES", "-rulesetfiles=$RULESET1"] as String[]
+            final ARGS = ["-sourcefiles=$SOURCE_FILES", "-rulesetfiles=$RULESET1"] as String[]
 
             codeNarc.execute(ARGS)
 
             assert codeNarc.ruleSetFiles == RULESET1
 
-            def sourceAnalyzer = codeNarcRunner.sourceAnalyzer
+            SourceAnalyzer sourceAnalyzer = codeNarcRunner.sourceAnalyzer
             assert sourceAnalyzer.class == FilesSourceAnalyzer
-            assert sourceAnalyzer.sourceFiles == SOURCEFILES.split(',')
+            assert sourceAnalyzer.sourceFiles == SOURCE_FILES.split(',')
             assert sourceAnalyzer.failOnError == false
+            assert sourceAnalyzer.baseDirectory == '.'
 
             assert codeNarcRunner.propertiesFile == null
             assert codeNarcRunner.ruleSetFiles == RULESET1
 
             assert exitCode == 0
+        }
+
+        @Test
+        void SourceFiles_BaseDir() {
+            final ARGS = ["-sourcefiles=$SOURCE_FILES", '-basedir=example'] as String[]
+
+            codeNarc.execute(ARGS)
+
+            FilesSourceAnalyzer sourceAnalyzer = codeNarcRunner.sourceAnalyzer as FilesSourceAnalyzer
+            assert sourceAnalyzer.sourceFiles == SOURCE_FILES.split(',')
+            assert sourceAnalyzer.baseDirectory == 'example'
         }
 
         @Test
