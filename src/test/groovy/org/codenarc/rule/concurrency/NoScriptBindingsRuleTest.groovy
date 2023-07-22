@@ -55,7 +55,7 @@ class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule
         final SOURCE = '''
               a = "foo"
         '''
-        assertSingleViolation(SOURCE, 2, 'a = "foo"', 'The variable [a] in class None does not have a type declaration. It will be bound to the script which could cause concurrency issues.')
+        assertSingleViolation(SOURCE, 2, 'a = "foo"', 'The script variable [a] does not have a type declaration. It will be bound to the script which could cause concurrency issues.')
     }
 
     @Test
@@ -65,7 +65,7 @@ class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule
                 a = "foo"
               }
         '''
-        assertSingleViolation(SOURCE, 3, 'a = "foo"', 'The variable [a] in class None does not have a type declaration. It will be bound to the script which could cause concurrency issues.')
+        assertSingleViolation(SOURCE, 3, 'a = "foo"', 'The script variable [a] does not have a type declaration. It will be bound to the script which could cause concurrency issues.')
     }
 
     @Test
