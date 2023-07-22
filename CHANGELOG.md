@@ -9,6 +9,7 @@ New Rules
  - #728: New **SpockMissingAssert** rule (junit) - Checks for boolean conditions intended as assertions within Spock tests that are nested within a block and are thus ignored. ([Jean André Gauthier](https://github.com/jean-andre-gauthier))
  - #730: New **SpaceAfterCommentDelimiter** rule (comments) - Checks that there is whitespace after comment characters (// and /*).
  - #737: New **SpaceBeforeCommentDelimiter** rule (comments) - Checks that there is whitespace before comment characters (// and /*).
+ - #738: New **NoScriptBindings** rule (concurrency) - Checks for global variables that are bound to a script; they can cause concurrency bugs. ([Josh Chorlton](https://github.com/jchorl))
 
 Updated/Enhanced Rules and Bug Fixes
  - #729: **Indentation** rule: Add optional *indentUnderLabel* property to allow indenting code underneath labels. ([Charalampos Makrylakis](https://github.com/xmac11)) 
