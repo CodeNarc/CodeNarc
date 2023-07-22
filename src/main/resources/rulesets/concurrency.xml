@@ -13,6 +13,7 @@
     <rule class='org.codenarc.rule.concurrency.InconsistentPropertyLockingRule'/>
     <rule class='org.codenarc.rule.concurrency.InconsistentPropertySynchronizationRule'/>
     <rule class='org.codenarc.rule.concurrency.NestedSynchronizationRule'/>
+    <rule class='org.codenarc.rule.concurrency.NoScriptBindingsRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticCalendarFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticConnectionRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticDateFormatFieldRule'/>
