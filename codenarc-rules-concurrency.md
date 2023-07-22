@@ -228,6 +228,31 @@ Here is an example of code that produces a violation:
 ```
 
 
+## NoScriptBindings Rule
+
+
+This rule reports occurrences of global variables that are bound to a script.
+
+These should be avoided as concurrent executions can modify and read the shared
+variable, leading to concurrency bugs.
+
+Examples:
+
+```
+    // Violations
+    b = 1
+    def myMethod() {
+        a = 1
+    }
+
+    // These usages are OK
+    Integer b = 1
+    def myMethod2() {
+        Integer a = 1
+    }
+```
+
+
 ## StaticCalendarField Rule
 
 *Since CodeNarc 0.13*
