@@ -47,9 +47,7 @@ After you run `codenarc create-rule`, finish up the rule implementation, includi
   1. Edit the generated rule class and associated test class to add the proper implementation.
   2. Modify the description messages for the new rule in "codenarc-base-messages.properties". Move the
      message entries under the proper ruleset/category section within the file.
-  4. Add description to "src/main/site/apt/codenarc-rules-XX.apt" document in the site folder.
-  5. Run `site` from the command-line. Make sure all of the tests pass and review
-     the new rule description on the appropriate ruleset page on the project site.
+  4. Add description to "codenarc-rules-[category].md" document in the "docs" folder.
 
 
 ## New Rule Checklist
@@ -59,10 +57,10 @@ for information on the command-line script that automates a good bit of the boil
   1. Implement the new *Rule* class. This is typically a subclass of `AbstractAstVisitorRule`. [1]
   2. Implement the associated *Rule* test class. This is typically a subclass of `AbstractRuleTestCase`. [1]
   3. Add the new rule class name to the appropriate *RuleSet* file under "src/main/resources/rulesets". [1]
-  4.Add the new rule description entries to "src/main/resources/codenarc-base-messages.properties".
+  4. Add the new rule description entries to "src/main/resources/codenarc-base-messages.properties".
      This includes both "*RuleName*.description" and "*RuleName*.description.html" property entries. [1]
   5. Run `LoadAllPredefinedRuleSetsTest`.
-  6. Add a description of the new rule to the appropriate "src/main/site/apt/codenarc-rules-XX.apt" document.
+  6. Add a description of the new rule to "codenarc-rules-[category].md" document in the "docs" folder.
 
 ###  NOTES
 
