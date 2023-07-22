@@ -43,8 +43,8 @@ class NoScriptBindingsAstVisitor extends AbstractAstVisitor {
                 !(expression instanceof DeclarationExpression) &&
                 expression.operation.text == '=' &&
                 expression.leftExpression instanceof VariableExpression) {
-                def name = expression.leftExpression.name
-                addViolation(expression, "The script variable [$name] does not have a type declaration. It will be bound to the script which could cause concurrency issues.")
+            def name = expression.leftExpression.name
+            addViolation(expression, "The script variable [$name] does not have a type declaration. It will be bound to the script which could cause concurrency issues.")
         }
         super.visitBinaryExpression(expression)
     }
