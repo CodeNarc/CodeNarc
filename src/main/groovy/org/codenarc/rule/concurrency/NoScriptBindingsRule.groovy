@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2023 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class NoScriptBindingsRule extends AbstractAstVisitorRule {
 
-    public static final String MESSAGE = 'local variables should be used instead of script bindings'
-
     String name = 'NoScriptBindings'
     int priority = 3
 
@@ -41,12 +39,12 @@ class NoScriptBindingsAstVisitor extends AbstractAstVisitor {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         if (isFirstVisit(expression) &&
-            currentClassNode.isScript() &&
-            !(expression instanceof DeclarationExpression) &&
-            expression.operation.text == '=' &&
-            expression.leftExpression instanceof VariableExpression) {
-            def name = expression.leftExpression.name
-            addViolation(expression, "The variable [$name] in class $currentClassName does not have a type declaration. It will be bound to the script which could cause concurrency issues.")
+                currentClassNode.isScript() &&
+                !(expression instanceof DeclarationExpression) &&
+                expression.operation.text == '=' &&
+                expression.leftExpression instanceof VariableExpression) {
+                def name = expression.leftExpression.name
+                addViolation(expression, "The script variable [$name] does not have a type declaration. It will be bound to the script which could cause concurrency issues.")
         }
         super.visitBinaryExpression(expression)
     }
