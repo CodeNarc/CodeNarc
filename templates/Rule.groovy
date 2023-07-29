@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitor
 class ${ruleName}Rule extends AbstractAstVisitorRule {
 
     String name = '${ruleName}'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = ${ruleName}AstVisitor
 }
 

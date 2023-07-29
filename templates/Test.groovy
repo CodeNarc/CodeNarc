@@ -27,13 +27,13 @@ import org.codenarc.rule.AbstractRuleTestCase
 class ${ruleName}RuleTest extends AbstractRuleTestCase<${ruleName}Rule> {
 
     @Test
-    void test_RuleProperties() {
-        assert rule.priority == 2
+    void RuleProperties() {
+        assert rule.priority == 3
         assert rule.name == '$ruleName'
     }
 
     @Test
-    void test_SomeCondition_NoViolations() {
+    void SomeCondition_NoViolations() {
         final SOURCE = '''
             // todo: replace with source for passing edge case(s)
         '''
@@ -41,7 +41,7 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase<${ruleName}Rule> {
     }
 
     @Test
-    void test_SomeCondition_Violations() {
+    void SomeCondition_Violations() {
         final SOURCE = '''
             // todo: replace with source that triggers 2 violations
         '''

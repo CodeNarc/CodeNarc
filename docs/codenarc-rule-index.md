@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index
 
 # Rule Index
 
-**CodeNarc** includes 393 rules.
+**CodeNarc** includes 397 rules.
     
 ## [Basic](./codenarc-rules-basic.html)
   * [AssertWithinFinallyBlock](./codenarc-rules-basic.html#assertwithinfinallyblock-rule)  
@@ -75,6 +75,8 @@ title: CodeNarc - Rule Index
   * [JavadocMissingExceptionDescription](./codenarc-rules-comments.html#javadocmissingexceptiondescription-rule)  
   * [JavadocMissingParamDescription](./codenarc-rules-comments.html#javadocmissingparamdescription-rule)  
   * [JavadocMissingThrowsDescription](./codenarc-rules-comments.html#javadocmissingthrowsdescription-rule)  
+  * [SpaceAfterCommentDelimiter](./codenarc-rules-comments.html#spaceaftercommentdelimiter-rule)  
+  * [SpaceBeforeCommentDelimiter](./codenarc-rules-comments.html#spacebeforecommentdelimiter-rule)  
 
 ## [Concurrency](./codenarc-rules-concurrency.html)
   * [BusyWait](./codenarc-rules-concurrency.html#busywait-rule)  
@@ -82,6 +84,7 @@ title: CodeNarc - Rule Index
   * [InconsistentPropertyLocking](./codenarc-rules-concurrency.html#inconsistentpropertylocking-rule)  
   * [InconsistentPropertySynchronization](./codenarc-rules-concurrency.html#inconsistentpropertysynchronization-rule)  
   * [NestedSynchronization](./codenarc-rules-concurrency.html#nestedsynchronization-rule)  
+  * [NoScriptBindings](./codenarc-rules-concurrency.html#noscriptbindings-rule)  
   * [StaticCalendarField](./codenarc-rules-concurrency.html#staticcalendarfield-rule)  
   * [StaticConnection](./codenarc-rules-concurrency.html#staticconnection-rule)  
   * [StaticDateFormatField](./codenarc-rules-concurrency.html#staticdateformatfield-rule)  
@@ -326,6 +329,7 @@ title: CodeNarc - Rule Index
   * [JUnitUnnecessaryTearDown](./codenarc-rules-junit.html#junitunnecessaryteardown-rule)  
   * [JUnitUnnecessaryThrowsException](./codenarc-rules-junit.html#junitunnecessarythrowsexception-rule)  
   * [SpockIgnoreRestUsed](./codenarc-rules-junit.html#spockignorerestused-rule)  
+  * [SpockMissingAssert](./codenarc-rules-junit.html#spockmissingassert-rule)  
   * [UnnecessaryFail](./codenarc-rules-junit.html#unnecessaryfail-rule)  
   * [UseAssertEqualsInsteadOfAssertTrue](./codenarc-rules-junit.html#useassertequalsinsteadofasserttrue-rule)  
   * [UseAssertFalseInsteadOfNegation](./codenarc-rules-junit.html#useassertfalseinsteadofnegation-rule)  
