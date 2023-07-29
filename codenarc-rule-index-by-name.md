@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index by Name
 
 # Rule Index by Name
 
-**CodeNarc** includes 393 rules.
+**CodeNarc** includes 397 rules.
 
 ## Rules
   * [AbcMetric](./codenarc-rules-size.html#abcmetric-rule)    (Requires the GMetrics jar)
@@ -242,6 +242,7 @@ title: CodeNarc - Rule Index by Name
   * [NoDouble](./codenarc-rules-convention.html#nodouble-rule)  
   * [NoFloat](./codenarc-rules-convention.html#nofloat-rule)  
   * [NoJavaUtilDate](./codenarc-rules-convention.html#nojavautildate-rule)  
+  * [NoScriptBindings](./codenarc-rules-concurrency.html#noscriptbindings-rule)  
   * [NoTabCharacter](./codenarc-rules-convention.html#notabcharacter-rule)  
   * [NoWildcardImports](./codenarc-rules-imports.html#nowildcardimports-rule)  
   * [NonFinalPublicField](./codenarc-rules-security.html#nonfinalpublicfield-rule)  
@@ -279,6 +280,7 @@ title: CodeNarc - Rule Index by Name
   * [SpaceAfterCatch](./codenarc-rules-formatting.html#spaceaftercatch-rule)  
   * [SpaceAfterClosingBrace](./codenarc-rules-formatting.html#spaceafterclosingbrace-rule)  
   * [SpaceAfterComma](./codenarc-rules-formatting.html#spaceaftercomma-rule)  
+  * [SpaceAfterCommentDelimiter](./codenarc-rules-comments.html#spaceaftercommentdelimiter-rule)  
   * [SpaceAfterFor](./codenarc-rules-formatting.html#spaceafterfor-rule)  
   * [SpaceAfterIf](./codenarc-rules-formatting.html#spaceafterif-rule)  
   * [SpaceAfterMethodCallName](./codenarc-rules-formatting.html#spaceaftermethodcallname-rule)  
@@ -292,9 +294,11 @@ title: CodeNarc - Rule Index by Name
   * [SpaceAroundMapEntryColon](./codenarc-rules-formatting.html#spacearoundmapentrycolon-rule)  
   * [SpaceAroundOperator](./codenarc-rules-formatting.html#spacearoundoperator-rule)  
   * [SpaceBeforeClosingBrace](./codenarc-rules-formatting.html#spacebeforeclosingbrace-rule)  
+  * [SpaceBeforeCommentDelimiter](./codenarc-rules-comments.html#spacebeforecommentdelimiter-rule)  
   * [SpaceBeforeOpeningBrace](./codenarc-rules-formatting.html#spacebeforeopeningbrace-rule)  
   * [SpaceInsideParentheses](./codenarc-rules-formatting.html#spaceinsideparentheses-rule)  
   * [SpockIgnoreRestUsed](./codenarc-rules-junit.html#spockignorerestused-rule)  
+  * [SpockMissingAssert](./codenarc-rules-junit.html#spockmissingassert-rule)  
   * [StatelessClass](./codenarc-rules-generic.html#statelessclass-rule)  
   * [StatelessSingleton](./codenarc-rules-design.html#statelesssingleton-rule)  
   * [StaticCalendarField](./codenarc-rules-concurrency.html#staticcalendarfield-rule)  

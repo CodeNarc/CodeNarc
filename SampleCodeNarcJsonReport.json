@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://codenarc.org",
-        "version": "3.2.0"
+        "version": "3.3.0"
     },
     "report": {
-        "timestamp": "Jan 16, 2023 11:06:47 AM"
+        "timestamp": "Jul 29, 2023 5:26:27 PM"
     },
     "project": {
         "title": "Sample Project",
@@ -13,7 +13,7 @@
         ]
     },
     "summary": {
-        "totalFiles": 415,
+        "totalFiles": 419,
         "filesWithViolations": 58,
         "priority1": 0,
         "priority2": 78,
@@ -481,7 +481,7 @@
         },
         {
             "path": "comments",
-            "totalFiles": 17,
+            "totalFiles": 19,
             "filesWithViolations": 13,
             "priority1": 0,
             "priority2": 0,
@@ -680,12 +680,24 @@
                             "message": "The return keyword is not needed and can be removed"
                         }
                     ]
+                },
+                {
+                    "name": "SpaceAfterCommentDelimiterRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpaceBeforeCommentDelimiterRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
                 }
             ]
         },
         {
             "path": "concurrency",
-            "totalFiles": 26,
+            "totalFiles": 27,
             "filesWithViolations": 0,
             "priority1": 0,
             "priority2": 0,
@@ -717,6 +729,12 @@
                 },
                 {
                     "name": "NestedSynchronizationRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NoScriptBindingsRuleTest.groovy",
                     "violations": [
                         
                     ]
@@ -1545,14 +1563,14 @@
                             "ruleName": "ClassSize",
                             "priority": 3,
                             "lineNumber": 26,
-                            "message": "Class \"IndentationRuleTest\" is 1104 lines"
+                            "message": "Class \"IndentationRuleTest\" is 1191 lines"
                         },
                         {
                             "ruleName": "MethodCount",
                             "priority": 2,
                             "lineNumber": 26,
                             "sourceLine": "class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {",
-                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 56 methods"
+                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 58 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
@@ -1564,21 +1582,21 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 931,
+                            "lineNumber": 1018,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->\n            |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')\n            |    String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +\n            |        \"FILE_PATH=${it.absolutePath}\\n\"\n            |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)\n            |    cacheDir + hash + File.separator + 'output/jars/classes.jar'\n            |}).asFileTree\n        ' contains a GString-type expression: '${it.absolutePath}'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 945,
+                            "lineNumber": 1032,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            |\"${if (true) 'content' else ''}\"\n        ' contains a GString-type expression: '${if (true) 'content' else ''}'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 953,
+                            "lineNumber": 1040,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            |package com.sample\n            |\n            |trait RegressionTest {\n            |\n            |    String callStackPath = \"src/test/resources/callstacks/\"\n            |\n            |   /**\n            |     * Checks the current callstack is the same as the reference callstack.\n            |     * The reference callstack can be updated into a txt file in the callStackPath\n            |     *\n            |     * Pattern: <RegressionTest.callStackPath>/<ClassTestSimpleName><_subname>.txt\n            |     * @param subname optional subname, used in the reference callstack filename\n            |     */\n            |    void testNonRegression(String subname = '') {\n            |        String targetFileName = \"${callStackPath}${this.class.simpleName}\"\n            |        if (subname) {\n            |            targetFileName += \"_${subname}\"\n            |        }\n            |        RegressionTestHelper.testNonRegression(helper, targetFileName)\n            |    }\n            |}\n        ' contains a GString-type expression: '${callStackPath}${this.class.simpleName}'"
                         }
@@ -1706,35 +1724,35 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 39,
+                            "lineNumber": 40,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = { }\n                    if (true) { }\n                    while(ready) { }\n                    try {\n                    } catch(Exception e) {\n                    } finally { }\n                    for(int i=0; i<10; i++) { }\n                    for(String name in names) { }\n                    for(String name: names) { }\n                    if (count > this.\"maxPriority${priority}Violations\") { }\n                    while (count > this.\"maxPriority${priority}Violations\") { }\n                }\n                MyClass() {\n                    this(classNames)\n                }\n                MyClass(String s) { }\n                MyClass(@Annotation('${prop}') String s) {\n                }\n                MyClass(Date date) { // comment\n                    this(classNames)\n                }\n                MyClass(Object object) { /* comment */ }\n            }\n            interface MyInterface { }\n            enum MyEnum { OK, BAD }\n            trait MyTrait { }\n        ' contains a GString-type expression: '${priority}Violations\") { }'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 101,
+                            "lineNumber": 102,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = {}\n                    if (true) {}\n                    while(ready) {}\n                    try {\n                    } catch(Exception e) {\n                    } finally {}\n                    for(int i=0; i<10; i++) {}\n                    for(String name in names) {}\n                    for(String name: names) {}\n                    if (count > this.\"maxPriority${priority}Violations\") {}\n                    while (count > this.\"maxPriority${priority}Violations\") {}\n                }\n                void doStuff2() {}\n                MyClass() {}\n                MyClass(@Annotation('${prop}') String s) {}\n            }\n            interface MyInterface2 {}\n        ' contains a GString-type expression: '${priority}Violations\") {}'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 195,
+                            "lineNumber": 196,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                MyClass() {int count }\n                MyClass() {s = '{\"json\": true}' }\n                MyClass(@Annotation('${prop}') String s) {println 123 }\n\n            }\n        ' contains a GString-type expression: '${prop}') String s) {println 123 }'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 206,
+                            "lineNumber": 207,
                             "sourceLine": "[line:5, source:'MyClass(@Annotation(\\'${prop}\\') String s) {println 123 }', message:'The opening brace for the method <init> in class MyClass'])",
                             "message": "The String 'MyClass(@Annotation('${prop}') String s) {println 123 }' contains a GString-type expression: '${prop}') String s) {println 123 }'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 324,
+                            "lineNumber": 325,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                String s\n                MyClass() { s = '{\"json\": true}' }\n                MyClass(@Annotation('${prop}') String s) { println 123 }\n            }\n        ' contains a GString-type expression: '${prop}') String s) { println 123 }'"
                         }
@@ -2467,7 +2485,7 @@
         },
         {
             "path": "junit",
-            "totalFiles": 25,
+            "totalFiles": 26,
             "filesWithViolations": 0,
             "priority1": 0,
             "priority2": 0,
@@ -2577,6 +2595,12 @@
                 },
                 {
                     "name": "SpockIgnoreRestUsedRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SpockMissingAssertRuleTest.groovy",
                     "violations": [
                         
                     ]

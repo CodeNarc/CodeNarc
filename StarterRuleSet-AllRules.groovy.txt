@@ -240,6 +240,7 @@ ruleset {
     NoDouble 
     NoFloat 
     NoJavaUtilDate 
+    NoScriptBindings 
     NoTabCharacter 
     NoWildcardImports 
     NonFinalPublicField 
@@ -277,6 +278,7 @@ ruleset {
     SpaceAfterCatch 
     SpaceAfterClosingBrace 
     SpaceAfterComma 
+    SpaceAfterCommentDelimiter 
     SpaceAfterFor 
     SpaceAfterIf 
     SpaceAfterMethodCallName 
@@ -290,9 +292,11 @@ ruleset {
     SpaceAroundMapEntryColon 
     SpaceAroundOperator 
     SpaceBeforeClosingBrace 
+    SpaceBeforeCommentDelimiter 
     SpaceBeforeOpeningBrace 
     SpaceInsideParentheses 
     SpockIgnoreRestUsed 
+    SpockMissingAssert 
     StatelessClass 
     StatelessSingleton 
     StaticCalendarField 
