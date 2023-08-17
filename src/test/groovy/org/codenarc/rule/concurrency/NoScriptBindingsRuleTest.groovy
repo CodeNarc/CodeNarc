@@ -46,6 +46,14 @@ class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule
             private Integer b = 6
             public static final VALUE = 1234
           }
+
+          private myFunction(configFile) {
+            def params
+            if (fileExists(configFile)) {
+              params = utils.readYamlFile(configFile)
+            }
+            params
+          }
         '''
         assertNoViolations(SOURCE)
     }
