@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test
  * Tests for NoScriptBindingsRule
  *
  * @author Josh Chorlton
+ * @author Chris Mair
  */
 class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule> {
 
@@ -78,6 +79,49 @@ class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule
                   a = 4
                 }
               }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_ReassignVariable() {
+        final SOURCE = '''
+            String getValue(boolean isActive) {
+                String value = 'abc'
+                if (isActive) {
+                    value = 'def'
+                }
+                return value
+            }
+        '''
+        //assertNoViolations(SOURCE)
+
+        // TODO: Fix this known Issue
+        assertSingleViolation(SOURCE, 5, "value = 'def'", 'The script variable [value]')
+    }
+
+    @Test
+    void test_ReassignParameter() {
+        final SOURCE = '''
+            void doStuff(boolean isActive) {
+                isActive = false
+            }
+        '''
+        //assertNoViolations(SOURCE)
+
+        // TODO: Fix this known Issue
+        assertSingleViolation(SOURCE, 3, 'isActive = false', 'The script variable [isActive]')
+    }
+
+    @Test
+    void test_ReassignField_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                int count = 99
+                void doStuff() {
+                    count = 22
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }
