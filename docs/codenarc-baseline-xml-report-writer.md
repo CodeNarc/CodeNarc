@@ -41,7 +41,7 @@ The **option** element is a child of the **report** element and defines a report
 | Attribute               | Description            | Default             |
 |-------------------------|------------------------|---------------------|
 | outputFile              | The path and filename for the output report file.              | Value of *defaultOutputFile*  |
-| defaultOtputFile        | The path and filename for the output report file if *outputFile* is not specified.      | "CodeNarcBaselineViolations.xml" |
+| defaultOutputFile       | The path and filename for the output report file if *outputFile* is not specified.      | "CodeNarcBaselineViolations.xml" |
 | title                   | The title for the output report.                               |                        |
 | writeToStandardOut      | Set to `true` to write out the report to *stdout* (`System.out`) instead of writing to a file. |  `false` |
 
@@ -90,4 +90,3 @@ from subsequent **CodeNarc** executions. Note that the *type="baseline"* report 
         </codenarc>
     </target>
 ```
-

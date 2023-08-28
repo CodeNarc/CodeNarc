@@ -13,7 +13,7 @@ The `org.codenarc.report.XmlReportWriter` class (type="xml") produces an XML rep
 **Note:** This XML format is still being refined and is subject to change.
 [Contact me](https://sourceforge.net/sendmessage.php?touser=1853503) if you have specific requirements or suggestions.
 
-See a [mrhaki](./SampleCodeNarcXmlReport.xml}Sample XML Reportyy. Also see the zzzhttp://mrhaki.blogspot.com/) blog post about
+See a [mrhaki](./SampleCodeNarcXmlReport.xml) Sample XML Report. Also see the mrhaki blog post about
 [creating custom CodeNarc HTML reports using XSLT](http://mrhaki.blogspot.com/2011/01/groovy-goodness-create-codenarc-reports.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+mrhaki+%28Messages+from+mrhaki%29).
 
 ## Option Nested Elements
@@ -25,7 +25,7 @@ The **option** element is a child of the **report** element and defines a report
 | Attribute               | Description            | Default             |
 |-------------------------|------------------------|---------------------|
 | outputFile              | The path and filename for the output report file.              | Value of *defaultOutputFile*  |
-| defaultOtputFile        | The path and filename for the output report file if *outputFile* is not specified.      | "CodeNarcXmlReport.xml"  |
+| defaultOutputFile       | The path and filename for the output report file if *outputFile* is not specified.      | "CodeNarcXmlReport.xml"  |
 | title                   | The title for the output report.                               |                        |
 | writeToStandardOut      | Set to `true` to write out the report to *stdout* (`System.out`) instead of writing to a file. |  `false` |
 
@@ -53,4 +53,3 @@ Here is an example Ant XML build file illustrating configuration of
         </codenarc>
     </target>
 ```
-

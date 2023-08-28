@@ -15,13 +15,13 @@ title: CodeNarc - Creating a RuleSet
 ## Preferred Way To Configure a RuleSet
 
 **NOTE:** The preferred way to configure the rules that **CodeNarc** will use is to create a custom
-*RuleSet* specifying the rule names (i.e., without depending on the *RuleSet* files provided with **CodeNarc**.
+*RuleSet* specifying the rule names (i.e., without depending on the *RuleSet* files provided with **CodeNarc**).
 This allows finer control over your custom RuleSet and insulates you from the provided *RuleSets* that can
 (and often do) change from release to release.
 
 ### Just Copy and Tweak One of the Starter RuleSet Files
 
-See the [Starter RuleSet - All Rules By Category](./StarterRuleSet-AllRulesByCategory.groovy.txt)). It contains
+See the [Starter RuleSet - All Rules By Category](./StarterRuleSet-AllRulesByCategory.groovy.txt). It contains
 all of the rules provided with the current version of **CodeNarc**, organized by category. Just delete or
 comment out the rules you don't want to use.
 
