@@ -288,7 +288,7 @@ If you'd like to add any method starting with 'ensure' to the ignores then you w
 
 ## JUnitUnnecessarySetUp Rule
 
-Rule that checks checks for JUnit `setUp()` methods that contain only a call to
+Rule that checks for JUnit `setUp()` methods that contain only a call to
 `super.setUp()`. The method is then unnecessary.
 
 This rule sets the default value of the *applyToClassNames* property to only match class names
@@ -307,7 +307,7 @@ Here is an example of a violation:
 
 ## JUnitUnnecessaryTearDown Rule
 
-Rule that checks checks for JUnit `tearDown()` methods that contain only a call to
+Rule that checks for JUnit `tearDown()` methods that contain only a call to
 `super.tearDown()`. The method is then unnecessary.
 
 This rule sets the default value of the *applyToClassNames* property to only match class names
@@ -544,4 +544,3 @@ is an `Object#is()` call testing for reference equality. These assertion should 
 
 This rule sets the default value of the *applyToClassNames* property to only match class names
 ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
-

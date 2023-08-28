@@ -18,7 +18,7 @@ See [CodeNarc - Docker](./codenarc-docker.html).
 ## Application Frameworks
 
   * [Grails](http://grails.org/) - See the [Grails CodeNarc Plugin](http://www.grails.org/plugin/codenarc/) for Grails 2.x.
-    Use the the [Gradle CodeNarc Plugin](http://gradle.org/docs/current/userguide/codenarc_plugin.html) for Grails 3.x and later.
+    Use the [Gradle CodeNarc Plugin](http://gradle.org/docs/current/userguide/codenarc_plugin.html) for Grails 3.x and later.
     Also see [Static code analysis in a Grails app with CodeNarc](http://guides.grails.org/grails-codenarc/guide/index.html).
 
   * [Griffon](http://griffon.codehaus.org/) - See the [Griffon CodeNarc Plugin](http://docs.codehaus.org/display/GRIFFON/Codenarc+Plugin/)

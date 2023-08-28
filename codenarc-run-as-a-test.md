@@ -7,8 +7,8 @@ title: CodeNarc - Run as a Test
 **CodeNarc** can be run as part of an automated test suite, for instance using **JUnit** or **TestNG**.
 This approach uses the `org.codenarc.ant.CodeNarcTask` class and Groovy's built-in support for **Apache Ant**.
 
-**NOTE:** This approach may not play well with having **CodeNarc** also configured to run as a 
-separate task aspart of your "regular" build, especially if you have a classpath defined for 
+**NOTE:** This approach may not play well with having **CodeNarc** also configured to run as a
+separate task as part of your "regular" build, especially if you have a classpath defined for
 your build which is different that your runtime classpath for running your tests (which is likely).
 
 ## Automated Test That Runs CodeNarc
@@ -58,4 +58,3 @@ Things to note:
 
 
 See the [CodeNarc Ant Task](./codenarc-ant-task.html) for more information on configuring the Ant task.
-
