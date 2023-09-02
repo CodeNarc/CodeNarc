@@ -3,6 +3,11 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
+TODO: Version 3.?.?    (??? 202?)
+--------------------------------------
+ - #744: Fix wording and typos. ([René Scheibe](https://github.com/darxriggs))
+
+
 Version 3.3.0    (Jul 2023)
 --------------------------------------
 New Rules
