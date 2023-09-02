@@ -585,8 +585,8 @@ out of the ternary expression.
 
 *Since CodeNarc 0.25*
 
-Check whether list and map literals contain optional trailing comma.
-Rationale: Putting this comma in make is easier
+Check whether list and map literals contain an optional trailing comma.
+Rationale: Putting this comma in makes it easier
 to change the order of the elements or add new elements on the end.
 
 | Property                    | Description            | Default Value    |
