@@ -1097,9 +1097,9 @@ public class AstUtil {
             List<AnnotationNode> annotations = ((AnnotatedNode) node).getAnnotations();
             AnnotationNode lastAnnotation = annotations.get(annotations.size() - 1);
 
-            String rawLine = getRawLine(sourceCode, lastAnnotation.getLastLineNumber()-1);
+            String rawLine = getRawLine(sourceCode, lastAnnotation.getLastLineNumber() - 1);
 
-            if(rawLine == null) {
+            if (rawLine == null) {
                 return node.getLineNumber();
             }
 
@@ -1113,7 +1113,7 @@ public class AstUtil {
                 }
 
                 if (node.getClass() == ClassNode.class) {
-                    if (rawLine.contains("class")) {
+                    if (rawLine.contains("class") || rawLine.contains("interface") || rawLine.contains("enum") || rawLine.contains("trait")) {
                         return lastAnnotation.getLastLineNumber();
                     }
                     // Otherwise, fall through to use the next line
