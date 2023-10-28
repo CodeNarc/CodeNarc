@@ -69,6 +69,50 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
+    void test_EnumWithAnnotation_BlankLineIsRequired() {
+        final String SOURCE = '''
+            import groovy.transform.CompileStatic
+            
+            @CompileStatic enum Foo {
+
+                BAR, BAZ, BLAH
+            }
+        '''
+        rule.blankLineRequired = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_InterfaceWithAnnotation_BlankLineIsRequired() {
+        final String SOURCE = '''
+            import groovy.transform.CompileStatic
+            
+            @CompileStatic interface Foo {
+
+                int getFoo()
+            }
+        '''
+        rule.blankLineRequired = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_TraitWithAnnotation_BlankLineIsRequired() {
+        final String SOURCE = '''
+            import groovy.transform.CompileStatic
+            
+            @CompileStatic trait Foo {
+
+                int getFoo() {
+                    0
+                }
+            }
+        '''
+        rule.blankLineRequired = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_BlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
