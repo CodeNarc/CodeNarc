@@ -174,6 +174,25 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
+    void test_analyze_IncludesExactRelative() {
+        analyzer.baseDirectory = BASE_DIR
+        analyzer.includes = 'subdir2/*.groovy'
+
+        def results = analyzer.analyze(ruleSet)
+        log("results=$results")
+
+        def fullPaths = results.violations*.message
+        assert fullPaths.containsAll([
+            'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
+        ])
+        assert fullPaths.size() == 1
+
+        assert testCountRule.count == 1
+        assert results.getNumberOfFilesWithViolations(1) == 1
+        assert results.totalNumberOfFiles == 1
+    }
+
+    @Test
     void test_analyze_failOnError_True_RuleThrowsException() {
         def rule = new StubRule(applyToClosure:{ sourceCode, violations -> throw new Exception() })
         ruleSet = new ListRuleSet([rule])

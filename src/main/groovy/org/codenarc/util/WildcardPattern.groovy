@@ -97,13 +97,24 @@ class WildcardPattern {
         assert stringWithWildcards != null
 
         def result = new StringBuffer()
-        def prevCharWasStar = false
-        stringWithWildcards.each { ch ->
+        def last = stringWithWildcards.size() - 1
+        for (int i = 0; i <= last; i++) {
+            def ch = stringWithWildcards[i]
             switch (ch) {
                 case '*':
-                    // Single '*' matches single dir/file; Double '*' matches sequence of zero or more dirs/files
-                    result << (prevCharWasStar ? /.*/ : /[^\/]*/)
-                    prevCharWasStar = !prevCharWasStar
+                    if (i < last && stringWithWildcards[i + 1] != '*') {
+                        // Single '*' matches single dir/file
+                        result << /[^\/]*/
+                        break
+                    }
+
+                    // Double '*' matches sequence of zero or more dirs/files
+                    result << '.*'
+                    i++
+                    if (i < last && stringWithWildcards[i + 1] == '/') {
+                        // Ignore slash after '**' as per ant / glob
+                        i++
+                    }
                     break
                 case '?':
                     // Any character except the normalized file separator ('/')
@@ -112,7 +123,9 @@ class WildcardPattern {
                 case ['$', '|', '[', ']', '(', ')', '.', ':', '{', '}', '\\', '^', '+']:
                     result << '\\' + ch
                     break
-                default: result << ch
+                default:
+                    result << ch
+                    break
             }
         }
         result
