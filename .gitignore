@@ -22,3 +22,4 @@ src/main/java/META-INF/
 /classes
 /out
 /integration-test/out/test/classes
+bin/

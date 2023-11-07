@@ -122,7 +122,7 @@ class TestUtil {
      * the two collections are the same, ignoring ordering and duplicates.
      */
     static void assertEqualSets(Collection collection1, Collection collection2) {
-        assert collection1 as Set == collection2 as Set
+        assert collection1 as Set == collection2 as Set, "sets are not equal $collection1 != $collection2"
     }
 
     /**

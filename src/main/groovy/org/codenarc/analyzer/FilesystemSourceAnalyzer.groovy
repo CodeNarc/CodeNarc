@@ -125,7 +125,8 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
     private void processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
         def file = new File(baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
-        if (matches(sourceFile)) {
+        // Match on the filePath only to allow for exact relative paths.
+        if (matches(new SourceFile(new File(filePath)))) {
             List allViolations = collectViolations(sourceFile, ruleSet)
             def fileResults = new FileResults(filePath, allViolations, sourceFile)
             dirResults.numberOfFilesInThisDirectory++
