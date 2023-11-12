@@ -57,6 +57,13 @@ class PathUtilTest extends AbstractTestCase {
     }
 
     @Test
+    void testRemoveLeadingSlash() {
+        assert PathUtil.removeLeadingSlash('abc/def') == 'abc/def'
+        assert PathUtil.removeLeadingSlash('/abc/def') == 'abc/def'
+        assert PathUtil.removeLeadingSlash('\\abc/def') == 'abc/def'
+    }
+
+    @Test
     void testNormalizePath() {
         assert PathUtil.normalizePath(null) == null
         assert PathUtil.normalizePath('') == ''
