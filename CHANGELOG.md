@@ -6,6 +6,7 @@ NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with
 TODO: Version 3.?.?    (??? 202?)
 --------------------------------------
  - #744: Fix wording and typos. ([René Scheibe](https://github.com/darxriggs))
+ - #754: Command-line (FilesystemSourceAnalyzer): Match includes and excludes against full source file path and also against path relative to the `baseDirectory`.
 
 
 Version 3.3.0    (Jul 2023)
