@@ -21,6 +21,7 @@ import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceFile
+import org.codenarc.util.PathUtil
 import org.codenarc.util.WildcardPattern
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -134,8 +135,13 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
     }
 
     protected boolean matches(SourceCode sourceFile) {
-        includesPattern.matches(sourceFile.path) &&
-            !excludesPattern.matches(sourceFile.path)
+        String path = sourceFile.path
+        String pathWithoutBaseDir = PathUtil.removeLeadingSlash(path - baseDirectory)
+        return matchesIncludesAndExcludes(path) || matchesIncludesAndExcludes(pathWithoutBaseDir)
+    }
+
+    private boolean matchesIncludesAndExcludes(String path) {
+        return includesPattern.matches(path) && !excludesPattern.matches(path)
     }
 
     protected void initializeWildcardPatterns() {

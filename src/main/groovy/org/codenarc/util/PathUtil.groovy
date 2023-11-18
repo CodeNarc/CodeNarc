@@ -57,7 +57,7 @@ class PathUtil {
         resultPath
     }
 
-    private static String removeLeadingSlash(String path) {
+    static String removeLeadingSlash(String path) {
         (path.startsWith('\\') || path.startsWith(SEP)) ? path[1 .. -1] : path
     }
 
