@@ -6,6 +6,7 @@ NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with
 TODO: Version 3.?.?    (??? 202?)
 --------------------------------------
  - #744: Fix wording and typos. ([René Scheibe](https://github.com/darxriggs))
+ - #751: **ClassStartsWithBlankLine** rule: Fix for interfaces, enums and traits with annotations on the same line. ([Sven](https://github.com/s-ven))
  - #754: Command-line (FilesystemSourceAnalyzer): Match includes and excludes against full source file path and also against path relative to the base directory.
 
 
