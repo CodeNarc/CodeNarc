@@ -62,6 +62,7 @@ class WildcardPatternTest extends AbstractTestCase {
         assert new WildcardPattern('a/*/c*.groovy').matches('a/b/cdef.groovy')
         assert new WildcardPattern('**/c*.groovy').matches('a/b/cdef.groovy')
         assert new WildcardPattern('a**/c*.groovy').matches('a/b/cdef.groovy')
+        assert new WildcardPattern('**/subdir2/**').matches('src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy')
 
         assert !new WildcardPattern('a').matches('b')
         assert !new WildcardPattern('a??cdef').matches('abcdef')

@@ -137,11 +137,10 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
     protected boolean matches(SourceCode sourceFile) {
         String path = sourceFile.path
         String pathWithoutBaseDir = PathUtil.removeLeadingSlash(path - baseDirectory)
-        return matchesIncludesAndExcludes(path) || matchesIncludesAndExcludes(pathWithoutBaseDir)
-    }
 
-    private boolean matchesIncludesAndExcludes(String path) {
-        return includesPattern.matches(path) && !excludesPattern.matches(path)
+        boolean matchesIncludes = includesPattern.matches(path) || includesPattern.matches(pathWithoutBaseDir)
+        boolean matchesExcludes = excludesPattern.matches(path) || excludesPattern.matches(pathWithoutBaseDir)
+        return matchesIncludes && !matchesExcludes
     }
 
     protected void initializeWildcardPatterns() {
