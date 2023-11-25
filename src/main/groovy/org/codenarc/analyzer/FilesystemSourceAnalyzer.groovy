@@ -83,6 +83,8 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
         assert baseDirectory
         assert ruleSet
 
+        baseDirectory = PathUtil.normalizePath(baseDirectory)
+
         initializeWildcardPatterns()
         def reportResults = new DirectoryResults()
         def dirResults = processDirectory('', ruleSet)
