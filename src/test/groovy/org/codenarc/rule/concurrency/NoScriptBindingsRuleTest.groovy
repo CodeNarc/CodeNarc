@@ -27,81 +27,84 @@ import org.junit.jupiter.api.Test
 class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule> {
 
     @Test
-    void testRuleProperties() {
+    void RuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'NoScriptBindings'
     }
 
     @Test
-    void testSuccessScenario() {
+    void NoViolations() {
         final SOURCE = '''
-          // these usages are OK
-          Integer d = 5
+            // these usages are OK
+            Integer d = 5
 
-          def myfun() {
-            def a = "foo"
-            Integer b = 6
-          }
+            def myfun() {
+                def a = "foo"
+                Integer b = 6
+            }
 
-          class MyCorrectClass {
-            private Integer b = 6
-            public static final VALUE = 1234
-          }
+            class MyCorrectClass {
+                private Integer b = 6
+                public static final VALUE = 1234
+            }
         '''
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testMainScript() {
+    void MainScript() {
         final SOURCE = '''
-              a = "foo"
+            a = "foo"
         '''
         assertSingleViolation(SOURCE, 2, 'a = "foo"', 'The script variable [a] does not have a type declaration. It will be bound to the script which could cause concurrency issues.')
     }
 
     @Test
-    void testInFunction() {
+    void WithinFunction() {
         final SOURCE = '''
-              def myfun() {
+            def myfun() {
                 a = "foo"
-              }
+            }
         '''
         assertSingleViolation(SOURCE, 3, 'a = "foo"', 'The script variable [a] does not have a type declaration. It will be bound to the script which could cause concurrency issues.')
     }
 
     @Test
-    void testInClass() {
-        final SOURCE = '''
-              class MyClass {
-                private Integer a = 3
-
-                def myfun() {
-                  a = 4
-                }
-              }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void test_ReassignVariable() {
+    void ReassignVariable() {
         final SOURCE = '''
             String getValue(boolean isActive) {
                 String value = 'abc'
                 if (isActive) {
                     value = 'def'
                 }
+                
+                for (int i=0 ;i<3; i++) {
+                    i = i + 3
+                }
+
+                // Multiple assignment
+                def (userName, email) = ['abc', 'abc@email.com']
+                def (String candyName, int count) = ['M&M', 13]
+
+                userName = 'new_user'
+                count = 99
+                
+                while (count < 1000) {
+                    if (email) {
+                        String alias
+                        alias = 'joe'
+                        count = count + 1
+                    }
+                }
+
                 return value
             }
         '''
-        //assertNoViolations(SOURCE)
-
-        // TODO: Fix this known Issue
-        assertSingleViolation(SOURCE, 5, "value = 'def'", 'The script variable [value]')
+        assertNoViolations(SOURCE)
     }
 
     @Test
-    void test_ReassignParameter() {
+    void ReassignParameter() {
         final SOURCE = '''
             void doStuff(boolean isActive) {
                 isActive = false
@@ -114,7 +117,7 @@ class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule
     }
 
     @Test
-    void test_ReassignField_NoViolations() {
+    void ReassignField_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 int count = 99

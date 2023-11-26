@@ -9,6 +9,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #751: **ClassStartsWithBlankLine** rule: Fix for interfaces, enums and traits with annotations on the same line. ([Sven](https://github.com/s-ven))
  - #754: Command-line (FilesystemSourceAnalyzer): Match includes and excludes against full source file path and also against path relative to the base directory.
  - #756: Command-line (FilesystemSourceAnalyzer): Fix relative paths on Windows. ([Steven Hartland](https://github.com/stevenh))
+ - #739: **NoScriptBindings** rule: Fix false positive when local variable is reassigned.
 
 Documentation
  - #744: Fix wording and typos. ([René Scheibe](https://github.com/darxriggs))

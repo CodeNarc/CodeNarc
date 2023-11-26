@@ -18,14 +18,16 @@ package org.codenarc.rule.concurrency
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Script bindings can cause bad concurrency bugs and can usually be replaced with local variables.
- * <p/>
  *
  * @author Josh Chorlton
+ * @author Chris Mair
  */
 class NoScriptBindingsRule extends AbstractAstVisitorRule {
 
@@ -36,6 +38,10 @@ class NoScriptBindingsRule extends AbstractAstVisitorRule {
 }
 
 class NoScriptBindingsAstVisitor extends AbstractAstVisitor {
+
+    private final Stack variableNamesByBlockScope = [] as Stack
+    private Set variableNamesInCurrentBlockScope
+
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         if (isFirstVisit(expression) &&
@@ -44,8 +50,42 @@ class NoScriptBindingsAstVisitor extends AbstractAstVisitor {
                 expression.operation.text == '=' &&
                 expression.leftExpression instanceof VariableExpression) {
             def name = expression.leftExpression.name
-            addViolation(expression, "The script variable [$name] does not have a type declaration. It will be bound to the script which could cause concurrency issues.")
+
+            if (!isVariableName(name)) {
+                addViolation(expression, "The script variable [$name] does not have a type declaration. It will be bound to the script which could cause concurrency issues.")
+            }
         }
         super.visitBinaryExpression(expression)
     }
+
+    @Override
+    void visitDeclarationExpression(DeclarationExpression declarationExpression) {
+        if (isFirstVisit(declarationExpression)) {
+            def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
+            variableNamesInCurrentBlockScope.addAll(varExpressions.name)
+        }
+        super.visitDeclarationExpression(declarationExpression)
+    }
+
+    @Override
+    void visitBlockStatement(BlockStatement block) {
+        beforeBlock()
+        super.visitBlockStatement(block)
+        afterBlock()
+    }
+
+    private void beforeBlock() {
+        variableNamesInCurrentBlockScope = []
+        variableNamesByBlockScope.push(variableNamesInCurrentBlockScope)
+    }
+
+    private void afterBlock() {
+        variableNamesByBlockScope.pop()
+        variableNamesInCurrentBlockScope = variableNamesByBlockScope.empty() ? null : variableNamesByBlockScope.peek()
+    }
+
+    private boolean isVariableName(String name) {
+        return name in variableNamesByBlockScope.flatten()
+    }
+
 }
