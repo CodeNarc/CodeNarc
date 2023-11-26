@@ -26,7 +26,7 @@ class name starts with an uppercase letter and is followed by zero or more word 
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the regular expression used to validate the class name. It is required and cannot be null or empty. | (\[A-Z\]\\w*\\$?)* |
+| regex                       | Specifies the regular expression used to validate the class name. It is required and cannot be null or empty. | (\[A-Z\]\\w\*\\$?)\* |
 
 
 ## ClassNameSameAsFilename Rule
@@ -89,7 +89,7 @@ Builder methods are slightly different than factory methods.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the default regular expression used to validate the method name. It is required and cannot be null or empty.       | (build.*\|create.*)    |
+| regex                       | Specifies the default regular expression used to validate the method name. It is required and cannot be null or empty.       | (build.\*\|create.\*)    |
 
 Example of violations:
 
@@ -148,7 +148,7 @@ see `PropertyNameRule`.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the default regular expression used to validate the field name. It is required and cannot be null or empty.        | \[a-z\]\[a-zA-Z0-9\]*  |
+| regex                       | Specifies the default regular expression used to validate the field name. It is required and cannot be null or empty.        | \[a-z\]\[a-zA-Z0-9\]\*  |
 | finalRegex                  | Specifies the regular expression used to validate `final` field names. It is optional. If not set, then `final` fields that are non-`static` are validated using **regex**. | `null` |
 | staticRegex                 | Specifies the regular expression used to validate `static` field names. It is optional. If not set, then `static` fields that are non-`final` are validated using **regex**. | `null` |
 | staticFinalRegex            | Specifies the regular expression used to validate `static final` field names. It is optional. If not set, then `static final` fields are validated using **finalRegex**, **staticRegex** or **regex**.                  |  \[A-Z\]\[A-Z0-9_\]*  |
@@ -193,7 +193,7 @@ methods automatically created for Groovy scripts).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the regular expression used to validate the method name. It is required and cannot be null or empty.              | \[a-z\]\\w* |
+| regex                       | Specifies the regular expression used to validate the method name. It is required and cannot be null or empty.              | \[a-z\]\\w\* |
 | ignoreMethodNames           | Specifies one or more (comma-separated) method names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null` |
 
 
@@ -230,8 +230,8 @@ package name consists of only lowercase letters and numbers, separated by period
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the regular expression used to validate the package name. It is required and cannot be null or empty. | \[a-z\]+\[a-z0-9\]*(\\.\[a-z0-9\]+)* |
-| packageNameRequired         | Indicates whether a package name declaration is required for all classes.  | `false`                     |
+| regex                       | Specifies the regular expression used to validate the package name. It is required and cannot be null or empty. | \[a-z\]+\[a-z0-9\]\*(\\.\[a-z0-9\]+)\* |
+| packageNameRequired         | Indicates whether a package name declaration is required for all classes.                                       | `false`                     |
 
 
 ## PackageNameMatchesFilePath Rule
@@ -257,7 +257,7 @@ lowercase letter and contains only letters or numbers.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the regular expression used to validate the parameter name. It is required and cannot be null or empty.              | \[a-z\]\[a-zA-Z0-9\]*  |
+| regex                       | Specifies the regular expression used to validate the parameter name. It is required and cannot be null or empty.              | \[a-z\]\[a-zA-Z0-9\]\*  |
 | ignoreParameterNames        | Specifies one or more (comma-separated) parameter names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null` |
 
 
@@ -274,7 +274,7 @@ For naming of regular *fields*, see `FieldNameRule`.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the default regular expression used to validate the property name. It is required and cannot be null or empty.         | \[a-z\]\[a-zA-Z0-9\]* |
+| regex                       | Specifies the default regular expression used to validate the property name. It is required and cannot be null or empty.         | \[a-z\]\[a-zA-Z0-9\]\* |
 | finalRegex                  | Specifies the regular expression used to validate `final` property names. It is optional. If not set, then `final` properties that are non-`static` are validated using **regex**. | `null` |
 | staticRegex                 | Specifies the regular expression used to validate `static` property names. It is optional. If not set, then `static` properties that are non-`final` are validated using **regex**. | `null` |
 | staticFinalRegex            | Specifies the regular expression used to validate `static final` property names. It is optional. If not set, then `static final` property are validated using **finalRegex**, **staticRegex** or **regex**.                      | \[A-Z\]\[A-Z0-9_\]*  |
@@ -295,7 +295,7 @@ Variables annotated with @Field are ignored.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the regular expression used to validate the variable name. It is required and cannot be null or empty.     | \[a-z\]\[a-zA-Z0-9\]* |
+| regex                       | Specifies the regular expression used to validate the variable name. It is required and cannot be null or empty.     | \[a-z\]\[a-zA-Z0-9\]\* |
 | finalRegex                  | Specifies the regular expression used to validate `final` variable names. It is optional. If not set, then **regex** is used to validate `final` variable names. | `null` |
 | ignoreVariableNames         | Specifies one or more (comma-separated) variable names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null` |
 
