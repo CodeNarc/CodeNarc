@@ -422,6 +422,13 @@ class AstUtilTest extends AbstractTestCase {
         assert sourceBetween2.contains('println methodCallWithinEnum')
     }
 
+    @Test
+    void test_lastSourceLine() {
+        assert AstUtil.lastSourceLine(methodNamed('someMethod'), sourceCode).contains('}')
+        assert AstUtil.lastSourceLine(methodNamed('twoAnnotationsMethod'), sourceCode).contains('twoAnnotationsMethod()')
+        assert AstUtil.lastSourceLine(methodCallForMethodNamed('multilineMethodCall'), sourceCode).contains('2, 3)')
+    }
+
     @BeforeEach
     void setUpAstUtilTest() {
         visitor = new AstUtilTestVisitor()

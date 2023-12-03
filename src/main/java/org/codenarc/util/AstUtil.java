@@ -1299,7 +1299,7 @@ public class AstUtil {
         return str.toString();
     }
 
-    private static String lastSourceLine(ASTNode node, SourceCode sourceCode) {
+    public static String lastSourceLine(ASTNode node, SourceCode sourceCode) {
         return sourceCode.getLines().get(node.getLastLineNumber() - 1);
     }
 
