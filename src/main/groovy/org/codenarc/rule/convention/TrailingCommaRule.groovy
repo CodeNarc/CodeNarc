@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.NamedArgumentListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 import org.codenarc.util.SourceCodeUtil
 
 /**
@@ -50,9 +51,12 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
         if (isOneLiner(expression) || isMethodArgument(expression) || expression.mapEntryExpressions.isEmpty()) {
             return
         }
+
+        Expression lastExpression = expression.mapEntryExpressions[-1]
         if (rule.checkMap &&
                 !isIgnoredOneElementMap(expression) &&
-                !hasTrailingComma(expression.mapEntryExpressions[-1], expression)) {
+                !hasTrailingComma(lastExpression, expression) &&
+                !expressionFollowedByBracketOrBrace(lastExpression)) {
             addViolation(expression, 'Map should contain trailing comma.')
         }
     }
@@ -62,10 +66,11 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
         if (isOneLiner(expression) || expression.expressions.isEmpty()) {
             return
         }
+        Expression lastExpression = expression.expressions[-1]
         if (rule.checkList &&
                 !isIgnoredOneElementList(expression) &&
-                !hasTrailingComma(expression.expressions[-1], expression) &&
-                !lastExpressionIsEndOfExpression(expression)
+                !hasTrailingComma(lastExpression, expression) &&
+                !lastExpressionIsOnTheLastLine(lastExpression, expression)
         ) {
             addViolation(expression, 'List should contain trailing comma.')
         }
@@ -98,9 +103,13 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
         sourceLinesBetween.any { it.contains(',') } || lastSourceLine(outerExpression).contains(',')
     }
 
-    private static boolean lastExpressionIsEndOfExpression(ListExpression expression) {
-        def lastExpression = expression.expressions[-1]
+    private boolean expressionFollowedByBracketOrBrace(Expression expression) {
+        String lastSourceLine = AstUtil.lastSourceLine(expression, sourceCode)
+        String restOfLine = lastSourceLine.substring(expression.lastColumnNumber - 1)
+        return restOfLine.matches(/\s*]/)
+    }
 
+    private static boolean lastExpressionIsOnTheLastLine(Expression lastExpression, Expression expression) {
         return lastExpression.lineNumber == expression.lastLineNumber
     }
 }
