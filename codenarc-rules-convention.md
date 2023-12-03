@@ -599,14 +599,17 @@ to change the order of the elements or add new elements on the end.
 This is valid code:
 
 ```
-  int[] array1 = [] // one line declaration
-  int[] array2 = [ // empty list
+  int[] array1 = []         // one line declaration
+  int[] array2 = [          // empty list
                  ]
-  int[] array3 = [1,2,3] // one line declaration
+  int[] array3 = [1,2,3]    // one line declaration
   int[] array4 = [1,
                   2,
-                  3, // contains trailing comma
+                  3,        // contains trailing comma
                  ]
+  int[] array5 = [1,
+                  2]        // last element followed by closing bracket on the same line
+                            // NOTE: This style actually violates the intention of this rule
 ```
 
 Example of violations:
