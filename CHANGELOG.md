@@ -11,6 +11,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #756: Command-line (FilesystemSourceAnalyzer): Fix relative paths on Windows. ([Steven Hartland](https://github.com/stevenh))
  - #739: **NoScriptBindings** rule: Fix false positive when local variable is reassigned.
  - #745: **TrailingComma** rule: Do not require trailing comma if last item is followed by closing bracket on the same line for Maps (that is consistent with Lists).
+ - #743: **SpaceAfterCommentDelimiter** and **SpaceBeforeCommentDelimiter** rules: Fix false negatives for dollar-slashy strings.
 
 Documentation
  - #744: Fix wording and typos. ([René Scheibe](https://github.com/darxriggs))

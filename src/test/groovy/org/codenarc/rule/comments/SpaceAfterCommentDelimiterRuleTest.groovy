@@ -135,6 +135,14 @@ class SpaceAfterCommentDelimiterRuleTest extends AbstractRuleTestCase<SpaceAfter
     }
 
     @Test
+    void DollarSlashyStrings_NoViolations() {
+        final SOURCE = '''
+            String excludeFilePatterns = [~$//example.+/$]
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void Comments_Violations() {
         final SOURCE = '''
             /**Bad1

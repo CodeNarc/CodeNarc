@@ -121,6 +121,14 @@ class SpaceBeforeCommentDelimiterRuleTest extends AbstractRuleTestCase<SpaceBefo
     }
 
     @Test
+    void DollarSlashyStrings_NoViolations() {
+        final SOURCE = '''
+            String excludeFilePatterns = [~$//example.+/$]
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void Comments_Violations() {
         final SOURCE = '''
             import org.acme.Stuff/**

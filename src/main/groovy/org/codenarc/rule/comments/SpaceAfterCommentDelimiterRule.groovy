@@ -26,7 +26,7 @@ import org.codenarc.source.SourceCode
  */
 class SpaceAfterCommentDelimiterRule extends AbstractRule {
 
-    private static final String SLASH_SLASH = /[^\:]\/\/\w/
+    private static final String SLASH_SLASH = /[^\:\$]\/\/\w/
     private static final String SLASH_STAR = /\/\*\w/
     private static final String SLASH_STAR_STAR = /[^\/]\/\*\*\w/
     private static final String REGEX = SLASH_SLASH + '|' + SLASH_STAR + '|' + SLASH_STAR_STAR
@@ -42,7 +42,7 @@ class SpaceAfterCommentDelimiterRule extends AbstractRule {
             int lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.end())
             String sourceLine = sourceCode.line(lineNumber - 1)
 
-            // Heuristic to avoid false positives when a string contains // or /*
+            // Heuristic to avoid false positives when a string contains single quote (') or double quote (")
             if (!sourceLine.contains("'") && !sourceLine.contains('"')) {
                 violations.add(new Violation(rule: this, lineNumber: lineNumber, sourceLine: sourceLine, message: MESSAGE))
             }

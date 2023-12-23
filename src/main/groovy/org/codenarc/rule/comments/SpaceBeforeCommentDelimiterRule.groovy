@@ -26,7 +26,7 @@ import org.codenarc.source.SourceCode
  */
 class SpaceBeforeCommentDelimiterRule extends AbstractRule {
 
-    private static final String SLASH_SLASH = /[^\s\:]\/\//
+    private static final String SLASH_SLASH = /[^\s\:\$]\/\//
     private static final String SLASH_STAR = /\S\/\*/
     private static final String SLASH_STAR_STAR = /\S\/\*\*/
     private static final String REGEX = SLASH_SLASH + '|' + SLASH_STAR + '|' + SLASH_STAR_STAR
