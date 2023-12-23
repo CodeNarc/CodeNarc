@@ -1057,7 +1057,8 @@ Known limitations:
 
 Checks for explicit calls to setter methods which can, for the most part, be replaced by assignment to property.
 A setter is defined as a method call that matches set[A-Z] but not set[A-Z][A-Z] such as setURL().
-Setters take one method argument. Setter calls within an expression are ignored.
+Setters take one method argument. Setter calls within an expression are ignored. Calls to static setter methods 
+within the same class are ignored.
 
 These bits of code produce violations:
 

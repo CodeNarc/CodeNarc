@@ -79,9 +79,15 @@ class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
     private void addUnnecessarySetterViolation(MethodCallExpression call, String propertyName, String assignment) {
         // Only add if there is not already a field with that name
         def fieldNames = currentClassNode.fields.name
-        if (!fieldNames.contains(propertyName)) {
+        if (!fieldNames.contains(propertyName) && !isCallToStaticMethodOnThisClass(call)) {
             String name = call.method.value
             addViolation call, "$name($assignment) can probably be rewritten as $propertyName = $assignment"
+        }
+    }
+
+    private boolean isCallToStaticMethodOnThisClass(MethodCallExpression call) {
+        return currentClassNode.methods.find { method ->
+            method.isStatic() && method.name == call.method.value
         }
     }
 }

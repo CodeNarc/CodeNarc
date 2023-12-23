@@ -24,13 +24,13 @@ import org.junit.jupiter.api.Test
 class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRule> {
 
     @Test
-    void test_RuleProperties() {
+    void RuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessarySetter'
     }
 
     @Test
-    void test_NoViolations() {
+    void NoViolations() {
         final SOURCE = '''
             x.set(1)
             x.setup(2)
@@ -42,27 +42,43 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
-    void test_Violations() {
+    void Violations() {
         final SOURCE = '''
             x.setProperty(1)
             x.setProperty(this.getA())
             x.setProperty([])
             x.setE(3)           // see #364
+            
+            setOther(456)
         '''
         assertViolations(SOURCE,
             [line:2, source:'x.setProperty(1)', message:'setProperty(1) can probably be rewritten as property = 1'],
             [line:3, source:'x.setProperty(this.getA())', message:'setProperty(this.getA()) can probably be rewritten as property = this.getA()'],
             [line:4, source:'x.setProperty([])', message:'setProperty([]) can probably be rewritten as property = []'],
-            [line:5, source:'x.setE(3)', message:'setE(3)'])
+            [line:5, source:'x.setE(3)', message:'setE(3)'],
+            [line:7, source:'setOther(456)', message:'setOther(456)'])
     }
 
     @Test
-    void test_WithinMethods_Violations() {
+    void StaticMethodCalls_Violations() {
+        final SOURCE = '''
+            SomeOtherClass.setStuff(789)
+            x.class.setStuff(789)
+        '''
+        assertViolations(SOURCE,
+            [line:2, source:'SomeOtherClass.setStuff(789)', message:'setStuff(789) can probably be rewritten as stuff = 789'],
+            [line:3, source:'x.class.setStuff(789)', message:'setStuff(789) can probably be rewritten as stuff = 789'])
+    }
+
+    @Test
+    void WithinMethods_Violations() {
         final SOURCE = '''
             void doStuff() {
                 x.setProperty(1)
                 x.setProperty(this.getA())
                 x.setOther(123)
+                
+                setOther(456)
             }
             
             int calculateStuff() {
@@ -72,11 +88,12 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
         assertViolations(SOURCE,
             [line:3, source:'x.setProperty(1)', message:'setProperty(1)'],
             [line:4, source:'x.setProperty(this.getA())', message:'this.getA()'],
-            [line:5, source:'x.setOther(123)', message:'setOther(123)'])
+            [line:5, source:'x.setOther(123)', message:'setOther(123)'],
+            [line:7, source:'setOther(456)', message:'setOther(456)'])
     }
 
     @Test
-    void test_WithinExpression_NoViolations() {
+    void WithinExpression_NoViolations() {
         final SOURCE = '''
             if (!file.setExecutable(true)) {
                 throw new Exception("Cannot set ${file} as executable")
@@ -87,7 +104,7 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
-    void test_WithinChainedMethodCall_NoViolations() {
+    void WithinChainedMethodCall_NoViolations() {
         final SOURCE = '''
             builder.setFirst(1).setSecond(2).build()
         '''
@@ -95,7 +112,7 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
-    void test_SetterMethodCallResultUsedInExpression_NoViolations() {
+    void SetterMethodCallResultUsedInExpression_NoViolations() {
         final SOURCE = '''
             val foo = listOfThings.collect { it.setName('foo') }
             def x = plan.setName('foo')
@@ -104,9 +121,23 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
-    void test_CallOnSuper_NoViolations() {
+    void CallOnSuper_NoViolations() {
         final SOURCE = '''
             super.setProperty(1)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void StaticMethodWithinTheSameClass_NoViolations() {
+        final SOURCE = '''
+            public static void setMyThing(String value) {
+                privateVal = value
+            }
+            
+            static doStuff() {
+                setMyThing('test')
+            }
         '''
         assertNoViolations(SOURCE)
     }
