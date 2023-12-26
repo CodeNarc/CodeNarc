@@ -11,6 +11,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #745: **TrailingComma** rule: Do not require trailing comma if last item is followed by closing bracket on the same line for Maps (that is consistent with Lists).
  - #743: **SpaceAfterCommentDelimiter** and **SpaceBeforeCommentDelimiter** rules: Fix false negatives for dollar-slashy strings.
  - #748: **UnnecessarySetter** rule: Skip calls to static methods in the same class.
+ - #749: **UnnecessaryGString** rule: Escape special chars in the violation message so it reflects the actual source.
 
 Command-line
 - #754: Command-line (FilesystemSourceAnalyzer): Match includes and excludes against full source file path and also against path relative to the base directory.

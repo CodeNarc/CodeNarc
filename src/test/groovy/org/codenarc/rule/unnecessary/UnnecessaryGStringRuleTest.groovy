@@ -108,9 +108,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase<UnnecessaryGString
 I am a string
 """     // violation
         '''
-        assertSingleViolation(SOURCE, 2, 'def a = """', """The String '
-I am a string
-' can be wrapped in single quotes instead of double quotes""")
+        assertSingleViolation(SOURCE, 2, 'def a = """', """The String '\\nI am a string\\n' can be wrapped in single quotes instead of double quotes""")
     }
 
     @Test
@@ -128,6 +126,17 @@ I am a string
             def name = "Guaraní 75%–84% Tschüß …"
             '''
         assertSingleViolation(SOURCE, 2, '"Guaraní 75%–84% Tschüß …"')
+    }
+
+    @Test
+    void testBackwardSlashes() {
+        final SOURCE = '''
+            def name = "c:\\\\data and a//b and \\n\\" quote"
+            '''
+        assertViolations(SOURCE, [
+                line: 2,
+                source: 'c:\\\\data and a//b and \\n\\" quote',
+                message: 'c:\\\\data and a//b and \\n\\" quote'])
     }
 
     @Override

@@ -40,9 +40,9 @@ abstract class AbstractJsonReportWriterTestCase extends AbstractTestCase {
     protected static final LINE2 = 222
     protected static final LINE3 = 333
     protected static final SOURCE_LINE1 = 'if (count < 23 && index <= 99 && name.contains(\'\u0000\')) {'
-    protected static final SOURCE_LINE3 = 'throw new Exception("cdata=<![CDATA[whatever]]>") // Some very long message 1234567890123456789012345678901234567890'
+    protected static final SOURCE_LINE3 = 'throw new Exception("cdata=<![CDATA[whatever]]>") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890'
     protected static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
-    protected static final MESSAGE3 = 'Other info'
+    protected static final MESSAGE3 = 'Other info c:\\\\data'
     protected static final VIOLATION1 = new Violation(rule:new UnusedImportRule(), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
     protected static final VIOLATION2 = new Violation(rule:new UnusedPrivateMethodRule(), lineNumber:LINE2, message:MESSAGE2)
     protected static final VIOLATION3 = new Violation(rule:new EmptyCatchBlockRule(), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3)

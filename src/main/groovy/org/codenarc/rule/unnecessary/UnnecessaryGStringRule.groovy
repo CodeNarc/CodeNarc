@@ -24,6 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * String objects should be created with single quotes, and GString objects created with double quotes. Creating normal String objects with double quotes is confusing to readers.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class UnnecessaryGStringRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryGString'
@@ -49,8 +50,22 @@ class UnnecessaryGStringAstVisitor extends AbstractAstVisitor {
 
         def col = line[expression.columnNumber - 1]
         if (col == '"') {
-            addViolation(expression, "The String '$expression.value' can be wrapped in single quotes instead of double quotes")
+            String escapedValue = escapeSpecialCharacters(expression.value)
+            addViolation(expression, "The String '$escapedValue' can be wrapped in single quotes instead of double quotes")
         }
+    }
+
+    // Escape special chars so the string reflects the original source code
+    // See https://groovy-lang.org/syntax.html#_escaping_special_characters
+    private String escapeSpecialCharacters(String text) {
+        return text
+                .replace('\\', '\\\\')
+                .replace('\f', '\\f')
+                .replace('\n', '\\n')
+                .replace('\r', '\\r')
+                .replace('\t', '\\t')
+                .replace('\"', '\\"')
+                .replace('\'', '\\')
     }
 
     @Override
