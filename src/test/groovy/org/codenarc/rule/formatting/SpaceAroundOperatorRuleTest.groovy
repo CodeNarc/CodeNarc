@@ -112,12 +112,23 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         assertNoViolations(SOURCE)
     }
 
-    @Test
-    void testApplyTo_IgnoreArrayOperator_NoViolations() {
-        final SOURCE = '''
-            def statement = block.statements[it]
-        '''
-        assertNoViolations(SOURCE)
+    @Nested
+    class ListArrayAndMapIndexingOperator {
+
+        @Test
+        void testApplyTo_IgnoreIndexingOperator_NoViolations() {
+            final SOURCE = '''
+                def statement = block.statements[it]
+                def maybe = someList?[7]
+                a?[b]
+                
+                def map = [a:1, b:2]
+                dev aValue = map['a']
+                dev cValue = map?['c']
+            '''
+            assertNoViolations(SOURCE)
+        }
+
     }
 
     @Nested

@@ -12,6 +12,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #743: **SpaceAfterCommentDelimiter** and **SpaceBeforeCommentDelimiter** rules: Fix false negatives for dollar-slashy strings.
  - #748: **UnnecessarySetter** rule: Skip calls to static methods in the same class.
  - #749: **UnnecessaryGString** rule: Escape special chars in the violation message so it reflects the actual source.
+ - #758: **SpaceAroundOperator** rule: Fix violation for the optional array operator `?[`.
 
 Command-line
 - #754: Command-line (FilesystemSourceAnalyzer): Match includes and excludes against full source file path and also against path relative to the base directory.

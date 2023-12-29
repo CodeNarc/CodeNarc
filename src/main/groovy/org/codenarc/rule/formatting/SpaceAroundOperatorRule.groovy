@@ -164,7 +164,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
             checkAssignmentWithinDeclaration(expression, line)
         }
 
-        boolean arrayOperator = opText == '['
+        boolean arrayOperator = opText == '[' || opText == '?['
         boolean isOperatorAtIndex = op.startColumn != -1 && (line[op.startColumn - 1] == opText[0])
         boolean ignore = assignmentWithinDeclaration || arrayOperator || !isOperatorAtIndex
         String operator = expression.operation.text
