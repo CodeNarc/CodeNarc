@@ -15,20 +15,15 @@
  */
 package org.codenarc.report
 
-import org.codenarc.AnalysisContext
-import org.codenarc.results.DirectoryResults
-import org.codenarc.results.FileResults
-import org.codenarc.rule.StubRule
-import org.codenarc.rule.Violation
-import org.codenarc.test.AbstractTestCase
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-
-import java.text.DateFormat
-
 import static org.codenarc.test.TestUtil.captureSystemOut
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 import static org.junit.Assert.assertEquals
+
+import org.codenarc.AnalysisContext
+import org.codenarc.results.DirectoryResults
+import org.codenarc.results.FileResults
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  * Abstract superclass for TestReportWriter and subclass tests

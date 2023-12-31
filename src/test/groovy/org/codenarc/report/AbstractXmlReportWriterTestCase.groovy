@@ -15,14 +15,6 @@
  */
 package org.codenarc.report
 
-import org.codenarc.rule.Violation
-import org.codenarc.rule.basic.EmptyCatchBlockRule
-import org.codenarc.rule.imports.UnusedImportRule
-import org.codenarc.rule.unused.UnusedPrivateMethodRule
-import org.codenarc.test.AbstractTestCase
-
-import java.text.DateFormat
-
 import static org.junit.Assert.assertEquals
 
 /**

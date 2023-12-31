@@ -18,14 +18,6 @@ package org.codenarc.report
 
 import static org.junit.Assert.assertEquals
 
-import org.codenarc.rule.Violation
-import org.codenarc.rule.basic.EmptyCatchBlockRule
-import org.codenarc.rule.imports.UnusedImportRule
-import org.codenarc.rule.unused.UnusedPrivateMethodRule
-import org.codenarc.test.AbstractTestCase
-
-import java.text.DateFormat
-
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 

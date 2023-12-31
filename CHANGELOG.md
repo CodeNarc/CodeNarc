@@ -18,9 +18,10 @@ Command-line
 - #754: Command-line (FilesystemSourceAnalyzer): Match includes and excludes against full source file path and also against path relative to the base directory.
 - #756: Command-line (FilesystemSourceAnalyzer): Fix relative paths on Windows. ([Steven Hartland](https://github.com/stevenh))
 
-Documentation
+Documentation and Miscellaneous
  - #744: Fix wording and typos. ([René Scheibe](https://github.com/darxriggs))
  - #740: Naming Rules: Fix asterisks not showing up when rendering Markdown.
+ - #759: Consolidate analysis results and violations for report writer tests. [Dec 31]
 
 
 Version 3.3.0    (Jul 2023)

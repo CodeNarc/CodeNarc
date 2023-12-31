@@ -23,8 +23,6 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
-import org.codenarc.rule.StubRule
-import org.codenarc.rule.Violation
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
