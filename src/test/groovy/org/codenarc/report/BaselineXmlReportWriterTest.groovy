@@ -31,40 +31,36 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
     private static final REPORT_XML = """<?xml version="1.0" encoding="UTF-8"?>
-    <CodeNarc url="${CODENARC_URL}" version="${VERSION}">
-        <Report type="baseline"/>
-
-        <Project title="My Cool Project">
-            <SourceDirectory>c:/MyProject/src/main/groovy</SourceDirectory>
-            <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
-        </Project>
-
-        <File path="src/main/MyAction.groovy">
-            <Violation ruleName="UnusedImport"/>
-            <Violation ruleName="EmptyCatchBlock">
-                <Message><![CDATA[Other info]]></Message>
-            </Violation>
-            <Violation ruleName="EmptyCatchBlock">
-                <Message><![CDATA[Other info]]></Message>
-            </Violation>
-            <Violation ruleName="UnusedImport"/>
-            <Violation ruleName="UnusedPrivateMethod">
-                <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
-            </Violation>
-        </File>
-
-        <File path="src/main/dao/MyDao.groovy">
-            <Violation ruleName="EmptyCatchBlock">
-                <Message><![CDATA[Other info]]></Message>
-            </Violation>
-        </File>
-
-        <File path="src/main/dao/MyOtherDao.groovy">
-            <Violation ruleName="UnusedPrivateMethod">
-                <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
-            </Violation>
-        </File>
-    </CodeNarc>
+        <CodeNarc url="${CODENARC_URL}" version="${VERSION}">
+            <Report type="baseline"/>
+            <Project title="My Cool Project">
+                <SourceDirectory>c:/MyProject/src/main/groovy</SourceDirectory>
+                <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
+            </Project>
+            <File path="src/main/MyAction.groovy">
+                <Violation ruleName="Rule1"/>
+                <Violation ruleName="Rule3">
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
+                </Violation>
+                <Violation ruleName="Rule3">
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
+                </Violation>
+                <Violation ruleName="Rule1"/>
+                <Violation ruleName="Rule2">
+                    <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
+                </Violation>
+            </File>
+            <File path="src/main/dao/MyDao.groovy">
+                <Violation ruleName="Rule3">
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
+                </Violation>
+            </File>
+            <File path="src/main/dao/MyOtherDao.groovy">
+                <Violation ruleName="Rule2">
+                    <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
+                </Violation>
+            </File>
+        </CodeNarc>
     """
 
     @Test

@@ -26,7 +26,6 @@ import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
-import org.codenarc.test.AbstractTestCase
 import org.junit.jupiter.api.BeforeEach
 
 import static org.junit.Assert.assertEquals
@@ -37,21 +36,11 @@ import static org.junit.Assert.assertEquals
  * @author Chris Mair
  */
 @SuppressWarnings('LineLength')
-abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
+abstract class AbstractHtmlReportWriterTestCase extends AbstractReportWriterTestCase {
 
-    protected static final LONG_LINE = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
-    protected static final MESSAGE = 'bad stuff'
-    protected static final LINE1 = 111
-    protected static final LINE2 = 222
-    protected static final LINE3 = 333
-    protected static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:'if (file) {')
-    protected static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
-    protected static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
     protected static final VIOLATION4 = new Violation(rule:new StubRule(name:'RULE4', priority:4), lineNumber:LINE1, sourceLine:'if (file) {')
     protected static final NEW_REPORT_FILE = createTemporaryReportFile().absolutePath
-    protected static final TITLE = 'My Cool Project'
     protected static final String LOGO_FILE = 'http://codenarc.github.io/CodeNarc/images/codenarc-logo.png'
-    protected static final String CODENARC_URL = 'https://codenarc.org'
 
     protected reportWriter
     protected analysisContext

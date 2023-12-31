@@ -26,35 +26,36 @@ class TextReportWriterTest extends AbstractTextReportWriterTestCase {
     private static final REPORT_TEXT = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 
-Summary: TotalFiles=4 FilesWithViolations=3 P1=3 P2=2 P3=3
+Summary: TotalFiles=4 FilesWithViolations=3 P1=3 P2=0 P3=5
 
 File: src/main/MyAction.groovy
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
-    Violation: Rule=AnotherRule P=2 Line=2 Msg=[bad stuff: !@#\$%^&*()_+<>]
-    Violation: Rule=BadStuff P=3 Line=333 Msg=[Other info] Src=[throw new Exception() // Something bad happened]
-    Violation: Rule=BadStuff P=3 Line=333 Msg=[Other info] Src=[throw new Exception() // Something bad happened]
+    Violation: Rule=Rule1 P=1 Line=111 Src=[if (count < 23 && index <= 99 && name.contains('\u0000')) {]
+    Violation: Rule=Rule1 P=1 Line=111 Src=[if (count < 23 && index <= 99 && name.contains('\u0000')) {]
+    Violation: Rule=Rule3 P=3 Line=333 Msg=[Other info c:\\\\data] Src=[throw new Exception("cdata=<![CDATA[whatever]]>") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]
+    Violation: Rule=Rule3 P=3 Line=333 Msg=[Other info c:\\\\data] Src=[throw new Exception("cdata=<![CDATA[whatever]]>") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]
+    Violation: Rule=Rule2 P=3 Line=222 Msg=[bad stuff: !@#\$%^&*()_+<>]
 
 File: src/main/dao/MyDao.groovy
-    Violation: Rule=BadStuff P=3 Line=333 Msg=[Other info] Src=[throw new Exception() // Something bad happened]
+    Violation: Rule=Rule3 P=3 Line=333 Msg=[Other info c:\\\\data] Src=[throw new Exception("cdata=<![CDATA[whatever]]>") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]
 
 File: src/main/dao/MyOtherDao.groovy
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
-    Violation: Rule=AnotherRule P=2 Line=2 Msg=[bad stuff: !@#\$%^&*()_+<>]
+    Violation: Rule=Rule1 P=1 Line=111 Src=[if (count < 23 && index <= 99 && name.contains('\u0000')) {]
+    Violation: Rule=Rule2 P=3 Line=222 Msg=[bad stuff: !@#\$%^&*()_+<>]
 
 [CodeNarc (${CODENARC_URL}) v${version()}]
 """.trim()
+
     private static final REPORT_TEXT_MAX_PRIORITY = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 
 Summary: TotalFiles=4 FilesWithViolations=2 P1=3
 
 File: src/main/MyAction.groovy
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=Rule1 P=1 Line=111 Src=[if (count < 23 && index <= 99 && name.contains('\u0000')) {]
+    Violation: Rule=Rule1 P=1 Line=111 Src=[if (count < 23 && index <= 99 && name.contains('\u0000')) {]
 
 File: src/main/dao/MyOtherDao.groovy
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=Rule1 P=1 Line=111 Src=[if (count < 23 && index <= 99 && name.contains('\u0000')) {]
 
 [CodeNarc (${CODENARC_URL}) v${version()}]
 """.trim()

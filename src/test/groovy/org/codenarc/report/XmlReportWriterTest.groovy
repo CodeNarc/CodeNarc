@@ -36,62 +36,51 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  */
 class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
-    private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
-    private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE2)
-    private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3)
     private static final NEW_REPORT_FILE = 'target/NewXmlReport.xml'
 
     @SuppressWarnings('LineLength')
     private static final REPORT_XML = """<?xml version='1.0'?>
-    <CodeNarc url='${CODENARC_URL}' version='${VERSION}'>
+        <CodeNarc url='${CODENARC_URL}' version='${VERSION}'>
         <Report timestamp='${FORMATTED_TIMESTAMP}'/>
-
         <Project title='My Cool Project'>
             <SourceDirectory>c:/MyProject/src/main/groovy</SourceDirectory>
             <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
         </Project>
-
-        <PackageSummary totalFiles='4' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
-        </PackageSummary>
-
-        <Package path='src/main' totalFiles='4' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
+        <PackageSummary totalFiles='4' filesWithViolations='3' priority1='2' priority2='0' priority3='5'></PackageSummary>
+        <Package path='src/main' totalFiles='4' filesWithViolations='3' priority1='2' priority2='0' priority3='5'>
             <File name='MyAction.groovy'>
-                <Violation ruleName='RULE1' priority='1' lineNumber='111'>
+                <Violation ruleName='Rule1' priority='1' lineNumber='111'>
                     <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine>
                 </Violation>
-                <Violation ruleName='RULE3' priority='3' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
-                    <Message><![CDATA[Other info]]></Message>
+                <Violation ruleName='Rule3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
                 </Violation>
-                <Violation ruleName='RULE3' priority='3' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
-                    <Message><![CDATA[Other info]]></Message>
+                <Violation ruleName='Rule3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
                 </Violation>
-                <Violation ruleName='RULE1' priority='1' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine></Violation>
-                <Violation ruleName='RULE2' priority='2' lineNumber='222'>
+                <Violation ruleName='Rule1' priority='1' lineNumber='111'>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine>
+                </Violation>
+                <Violation ruleName='Rule2' priority='3' lineNumber='222'>
                     <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
                 </Violation>
             </File>
         </Package>
-
-        <Package path='src/main/dao' totalFiles='2' filesWithViolations='2' priority1='0' priority2='1' priority3='1'>
+        <Package path='src/main/dao' totalFiles='2' filesWithViolations='2' priority1='0' priority2='0' priority3='2'>
             <File name='MyDao.groovy'>
-                <Violation ruleName='RULE3' priority='3' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
-                    <Message><![CDATA[Other info]]></Message>
+                <Violation ruleName='Rule3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
                 </Violation>
             </File>
             <File name='MyOtherDao.groovy'>
-                <Violation ruleName='RULE2' priority='2' lineNumber='222'>
+                <Violation ruleName='Rule2' priority='3' lineNumber='222'>
                     <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
                 </Violation>
             </File>
-        </Package>
-
-        <Package path='src/test' totalFiles='0' filesWithViolations='0' priority1='0' priority2='0' priority3='0'>
-        </Package>
-
+            </Package><Package path='src/test' totalFiles='0' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package>
         <Rules>
             <Rule name='DuplicateImport'>
                 <Description><![CDATA[Custom: Duplicate imports]]></Description>
@@ -100,7 +89,7 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
                 <Description><![CDATA[Use Boolean.valueOf() for variable values or Boolean.TRUE and Boolean.FALSE for constant values instead of calling the Boolean() constructor directly or calling Boolean.valueOf(true) or Boolean.valueOf(false).]]></Description>
             </Rule>
         </Rules>
-    </CodeNarc>
+        </CodeNarc>
     """
 
     @Test

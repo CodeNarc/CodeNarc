@@ -24,20 +24,20 @@ package org.codenarc.report
 class CompactTextReportWriterTest extends AbstractTextReportWriterTestCase {
 
     private static final REPORT_TEXT = """
-        |src/main/MyAction.groovy:11:Rule1 null
-        |src/main/MyAction.groovy:11:Rule1 null
-        |src/main/MyAction.groovy:2:AnotherRule bad stuff: !@#\$%^&*()_+<>
-        |src/main/MyAction.groovy:333:BadStuff Other info
-        |src/main/MyAction.groovy:333:BadStuff Other info
-        |src/main/dao/MyDao.groovy:333:BadStuff Other info
-        |src/main/dao/MyOtherDao.groovy:11:Rule1 null
-        |src/main/dao/MyOtherDao.groovy:2:AnotherRule bad stuff: !@#\$%^&*()_+<>
+        |src/main/MyAction.groovy:111:Rule1 null
+        |src/main/MyAction.groovy:111:Rule1 null
+        |src/main/MyAction.groovy:333:Rule3 Other info c:\\\\data
+        |src/main/MyAction.groovy:333:Rule3 Other info c:\\\\data
+        |src/main/MyAction.groovy:222:Rule2 bad stuff: !@#\$%^&*()_+<>
+        |src/main/dao/MyDao.groovy:333:Rule3 Other info c:\\\\data
+        |src/main/dao/MyOtherDao.groovy:111:Rule1 null
+        |src/main/dao/MyOtherDao.groovy:222:Rule2 bad stuff: !@#\$%^&*()_+<>
     """.trim().stripMargin()
 
     private static final REPORT_TEXT_MAX_PRIORITY = '''
-        |src/main/MyAction.groovy:11:Rule1 null
-        |src/main/MyAction.groovy:11:Rule1 null
-        |src/main/dao/MyOtherDao.groovy:11:Rule1 null
+        |src/main/MyAction.groovy:111:Rule1 null
+        |src/main/MyAction.groovy:111:Rule1 null
+        |src/main/dao/MyOtherDao.groovy:111:Rule1 null
     '''.trim().stripMargin()
 
     @Override

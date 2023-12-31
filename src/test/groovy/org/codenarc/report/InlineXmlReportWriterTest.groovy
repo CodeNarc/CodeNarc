@@ -38,55 +38,49 @@ class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
             <SourceDirectory>c:/MyProject/src/main/groovy</SourceDirectory>
             <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
         </Project>
-
-        <PackageSummary totalFiles='4' filesWithViolations='3' priority1='0' priority2='5' priority3='2'>
-        </PackageSummary>
-
-        <Package path='src/main' totalFiles='4' filesWithViolations='3' priority1='0' priority2='5' priority3='2'>
+        <PackageSummary totalFiles='4' filesWithViolations='3' priority1='2' priority2='0' priority3='5'></PackageSummary>
+        <Package path='src/main' totalFiles='4' filesWithViolations='3' priority1='2' priority2='0' priority3='5'>
             <File name='MyAction.groovy'>
-                <Violation ruleName='UnusedImport' priority='3' lineNumber='111'>
+                <Violation ruleName='Rule1' priority='1' lineNumber='111'>
                     <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine>
-                    <Description><![CDATA[Imports for a class that is never referenced within the source file is unnecessary.]]></Description>
+                    <Description><![CDATA[No description provided for rule named [Rule1]]]></Description>
                 </Violation>
-                <Violation ruleName='EmptyCatchBlock' priority='2' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
-                    <Message><![CDATA[Other info]]></Message>
-                    <Description><![CDATA[In most cases, exceptions should not be caught and ignored (swallowed).]]></Description>
+                <Violation ruleName='Rule3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
+                    <Description><![CDATA[No description provided for rule named [Rule3]]]></Description>
                 </Violation>
-                <Violation ruleName='EmptyCatchBlock' priority='2' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
-                    <Message><![CDATA[Other info]]></Message>
-                    <Description><![CDATA[In most cases, exceptions should not be caught and ignored (swallowed).]]></Description>
+                <Violation ruleName='Rule3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
+                    <Description><![CDATA[No description provided for rule named [Rule3]]]></Description>
                 </Violation>
-                <Violation ruleName='UnusedImport' priority='3' lineNumber='111'>
+                <Violation ruleName='Rule1' priority='1' lineNumber='111'>
                     <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine>
-                    <Description><![CDATA[Imports for a class that is never referenced within the source file is unnecessary.]]></Description>
+                    <Description><![CDATA[No description provided for rule named [Rule1]]]></Description>
                 </Violation>
-                <Violation ruleName='UnusedPrivateMethod' priority='2' lineNumber='222'>
+                <Violation ruleName='Rule2' priority='3' lineNumber='222'>
                     <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
-                    <Description><![CDATA[Checks for private methods that are not referenced within the same class.]]></Description>
+                    <Description><![CDATA[No description provided for rule named [Rule2]]]></Description>
                 </Violation>
             </File>
         </Package>
-
-        <Package path='src/main/dao' totalFiles='2' filesWithViolations='2' priority1='0' priority2='2' priority3='0'>
+        <Package path='src/main/dao' totalFiles='2' filesWithViolations='2' priority1='0' priority2='0' priority3='2'>
             <File name='MyDao.groovy'>
-                <Violation ruleName='EmptyCatchBlock' priority='2' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
-                    <Message><![CDATA[Other info]]></Message>
-                    <Description><![CDATA[In most cases, exceptions should not be caught and ignored (swallowed).]]></Description>
+                <Violation ruleName='Rule3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // c:\\\\data - Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info c:\\\\data]]></Message>
+                    <Description><![CDATA[No description provided for rule named [Rule3]]]></Description>
                 </Violation>
             </File>
             <File name='MyOtherDao.groovy'>
-                <Violation ruleName='UnusedPrivateMethod' priority='2' lineNumber='222'>
+                <Violation ruleName='Rule2' priority='3' lineNumber='222'>
                     <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
-                    <Description><![CDATA[Checks for private methods that are not referenced within the same class.]]></Description>
+                    <Description><![CDATA[No description provided for rule named [Rule2]]]></Description>
                 </Violation>
             </File>
         </Package>
-
-        <Package path='src/test' totalFiles='0' filesWithViolations='0' priority1='0' priority2='0' priority3='0'>
-        </Package>
+        <Package path='src/test' totalFiles='0' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package>
     </CodeNarc>
     """
 
