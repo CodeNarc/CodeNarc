@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://codenarc.org",
-        "version": "3.3.0"
+        "version": "3.4.0"
     },
     "report": {
-        "timestamp": "Jul 29, 2023 5:26:27 PM"
+        "timestamp": "Jan 13, 2024 11:01:24 AM"
     },
     "project": {
         "title": "Sample Project",
@@ -1534,7 +1534,7 @@
                             "priority": 2,
                             "lineNumber": 28,
                             "sourceLine": "class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {",
-                            "message": "Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 47 methods"
+                            "message": "Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 50 methods"
                         }
                     ]
                 },
@@ -3297,7 +3297,7 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 80,
+                            "lineNumber": 97,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            if (!file.setExecutable(true)) {\n                throw new Exception(\"Cannot set ${file} as executable\")\n            }\n            def count = x.setCount(92)\n        ' contains a GString-type expression: '${file}'"
                         }
