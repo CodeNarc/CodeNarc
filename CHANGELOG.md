@@ -3,7 +3,7 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-TODO: Version 3.4.0    (??? 202?)
+Version 3.4.0    (Jan 2024)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #751: **ClassStartsWithBlankLine** rule: Fix for interfaces, enums and traits with annotations on the same line. ([Sven](https://github.com/s-ven))
@@ -11,17 +11,17 @@ Updated/Enhanced Rules and Bug Fixes
  - #745: **TrailingComma** rule: Do not require trailing comma if last item is followed by closing bracket on the same line for Maps (that is consistent with Lists).
  - #743: **SpaceAfterCommentDelimiter** and **SpaceBeforeCommentDelimiter** rules: Fix false negatives for dollar-slashy strings.
  - #748: **UnnecessarySetter** rule: Skip calls to static methods in the same class.
- - #749: **UnnecessaryGString** rule: Escape special chars in the violation message so it reflects the actual source.
+ - #749: **UnnecessaryGString** rule: Escape special chars in the violation message to reflect the actual source.
  - #758: **SpaceAroundOperator** rule: Fix violation for the optional array operator `?[`.
 
 Command-line
 - #754: Command-line (FilesystemSourceAnalyzer): Match includes and excludes against full source file path and also against path relative to the base directory.
 - #756: Command-line (FilesystemSourceAnalyzer): Fix relative paths on Windows. ([Steven Hartland](https://github.com/stevenh))
 
-Documentation and Miscellaneous
- - #744: Fix wording and typos. ([René Scheibe](https://github.com/darxriggs))
- - #740: Naming Rules: Fix asterisks not showing up when rendering Markdown.
- - #759: Consolidate analysis results and violations for report writer tests. [Dec 31]
+Miscellaneous
+ - #744: Documentation: Fix wording and typos. ([René Scheibe](https://github.com/darxriggs))
+ - #740: Documentation: In, "Naming Rules", fix asterisks not showing up when rendering Markdown.
+ - #759: Consolidate analysis results and violations for report writer tests.
 
 
 Version 3.3.0    (Jul 2023)

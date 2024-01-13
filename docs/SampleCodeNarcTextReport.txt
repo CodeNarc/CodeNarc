@@ -1,4 +1,4 @@
-CodeNarc Report: Sample Project - Jul 29, 2023 5:26:28 PM
+CodeNarc Report: Sample Project - Jan 13, 2024 11:01:25 AM
 
 Summary: TotalFiles=419 FilesWithViolations=58 P1=0 P2=78 P3=36
 
@@ -110,7 +110,7 @@ File: formatting/ClassEndsWithBlankLineRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.ClassEndsWithBlankLineRuleTest has 33 methods] Src=[class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {]
 
 File: formatting/ClassStartsWithBlankLineRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 47 methods] Src=[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {]
+    Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 50 methods] Src=[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {]
 
 File: formatting/IndentationRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 58 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
@@ -631,7 +631,7 @@ File: unnecessary/UnnecessaryPackageReferenceRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=73 Msg=[The String 'println "isClosure=${value instanceof groovy.lang.Closure}"' contains a GString-type expression: '${value instanceof groovy.lang.Closure}'] Src=[[line:3, source:'println "isClosure=${value instanceof groovy.lang.Closure}"', message:'groovy.lang'],]
 
 File: unnecessary/UnnecessarySetterRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=80 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=97 Msg=[The String '
             if (!file.setExecutable(true)) {
                 throw new Exception("Cannot set ${file} as executable")
             }
@@ -766,4 +766,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (https://codenarc.org) v3.3.0]
+[CodeNarc (https://codenarc.org) v3.4.0]
