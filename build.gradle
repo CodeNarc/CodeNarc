@@ -22,6 +22,7 @@ targetCompatibility = '1.8'
 repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'https://repo.maven.apache.org/maven2' }
+    maven { url 'https://repo.jenkins-ci.org/public/' }
 }
 
 def groovyVersion = '3.0.9'
@@ -50,6 +51,7 @@ dependencies {
     testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
     testImplementation 'commons-cli:commons-cli:1.4'
     testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
+    testImplementation("com.cloudbees:groovy-cps:3826.v3b_5707fe44da_") // Required for @NonCPS annotation
 
     testRuntimeOnly "org.codehaus.groovy:groovy-macro:$groovyVersion"
 }

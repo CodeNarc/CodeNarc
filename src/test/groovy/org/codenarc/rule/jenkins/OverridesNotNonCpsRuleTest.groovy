@@ -1,0 +1,113 @@
+/*
+ * Copyright 2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codenarc.rule.jenkins
+
+import org.codenarc.rule.AbstractRuleTestCase
+import org.junit.jupiter.api.Test
+
+/**
+ * Tests for OverridesNotNonCpsRule
+ *
+ * @author Daniel Zänker
+ */
+class OverridesNotNonCpsRuleTest extends AbstractRuleTestCase<OverridesNotNonCpsRule> {
+
+    @Test
+    void testRuleProperties() {
+        assert rule.priority == 2
+        assert rule.name == 'OverridesNotNonCps'
+    }
+
+    @Test
+    void testObjectOverrideNotNonCps_Violation() {
+        final SOURCE = '''
+            class Test {
+             
+                @Override
+                String toString() {
+                    return ''
+                }
+                
+                @Override
+                boolean equals(Object o) {
+                    return true
+                }
+                
+                @Override
+                void wait(long timeout) {
+                }
+                
+                @Override
+                void wait(Long timeout, Integer nanos) {
+                }
+                
+                String toText() {
+                    return ''
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [line: 5, source: 'String toString() {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 10, source: 'boolean equals(Object o) {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 15, source: 'void wait(long timeout) {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 19, source: 'void wait(Long timeout, Integer nanos) {', message: 'Overridden methods from Object should not be CPS transformed']
+        )
+    }
+
+    @Test
+    void testObjectOverridesNonCps_NoViolation() {
+        final SOURCE = '''
+            import com.cloudbees.groovy.cps.NonCPS
+            class Test {
+            
+                @Override
+                @NonCPS
+                String toString() {
+                    return ''
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoObjectMethod_NoViolation() {
+        final SOURCE = '''
+            class Base {
+                String toText() {
+                    return ''
+                }
+            }
+            class Test extends Base {
+            
+                @Override
+                String toText() {
+                    return ''
+                }
+                
+                void method() {
+                
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Override
+    protected OverridesNotNonCpsRule createRule() {
+        new OverridesNotNonCpsRule()
+    }
+}

@@ -1,0 +1,19 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Jenkins rule set.
+        These rules implement best practices to avoid runtime errors
+        from the CPS Interpreter in Jenkinsfiles and Jenkins libraries.
+    </description>
+
+    <rule class='org.codenarc.rule.jenkins.ClassNotSerializableRule'/>
+    <rule class='org.codenarc.rule.jenkins.ClosureInGStringRule'/>
+    <rule class='org.codenarc.rule.jenkins.CpsCallFromNonCpsMethodRule'/>
+    <rule class='org.codenarc.rule.jenkins.ExpressionInCpsMethodNotSerializableRule'/>
+    <rule class='org.codenarc.rule.jenkins.ForbiddenCallInCpsMethodRule'/>
+    <rule class='org.codenarc.rule.jenkins.OverridesNotNonCpsRule'/>
+    <rule class='org.codenarc.rule.jenkins.ParameterOrReturnTypeNotSerializableRule'/>
+</ruleset>
