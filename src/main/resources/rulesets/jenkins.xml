@@ -9,4 +9,5 @@
         from the CPS Interpreter in Jenkinsfiles and Jenkins libraries.
     </description>
 
+    <rule class='org.codenarc.rule.jenkins.ForbiddenCallInCpsMethodRule'/>
 </ruleset>
