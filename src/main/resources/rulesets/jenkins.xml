@@ -10,4 +10,6 @@
     </description>
 
     <rule class='org.codenarc.rule.jenkins.CpsCallFromNonCpsMethodRule'/>
+    <rule class='org.codenarc.rule.jenkins.ClosureInGStringRule'/>
+    <rule class='org.codenarc.rule.jenkins.ClassNotSerializableRule'/>
 </ruleset>
