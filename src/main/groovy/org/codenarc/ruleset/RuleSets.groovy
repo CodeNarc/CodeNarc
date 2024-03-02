@@ -38,6 +38,7 @@ class RuleSets {
         'rulesets/groovyism.xml',
         'rulesets/imports.xml',
         'rulesets/jdbc.xml',
+        'rulesets/jenkins.xml',
         'rulesets/junit.xml',
         'rulesets/logging.xml',
         'rulesets/naming.xml',
