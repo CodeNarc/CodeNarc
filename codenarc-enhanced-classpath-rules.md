@@ -22,6 +22,12 @@ The "Enhanced" CodeNarc rules:
  * MissingOverrideAnnotation
  * GrailsDomainGormMethods
  * NotAllFieldsOfSerializableClassSerializable
+ * ParameterOrReturnTypeNotSerializable
+ * OverridesNotNonCps
+ * ForbiddenCallInCpsMethod
+ * ExpressionInCpsMethodNotSerializable
+ * CpsCallFromNonCpsMethod
+ * ClassNotSerializable
 
 (There are some other rules that have an *optional* "enhanced" mode, but that is not enabled by default.)
 
