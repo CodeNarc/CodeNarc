@@ -5,6 +5,27 @@ title: CodeNarc - Jenkins Rules
 
 # Jenkins Rules  ("*rulesets/jenkins.xml*")
 
+## ParameterOrReturnTypeNotSerializable Rule
+
+*Since CodeNarc 3.5.0*
+
+Every parameter and return type has to implement the Serializable interface in Jenkins CPS tranformed Code.
+
+Example
+
+```
+class SomeClass {}
+class SerializableClass implements Serializable {}
+
+SomeClass some = new SomeClass() // Violation
+SerializableClass ser = new SerializableClass() // OK 
+Map map = new HashMap<String, String>() //OK
+
+void method(int i, SomeClass s) {}                                // Violation
+SomeClass returnMethod() { return null }                          // Violation
+SerializableClass safeMethod(SerializableClass s) { return null } // OK
+```
+
 ## OverridesNotNonCps Rule
 
 *Since CodeNarc 3.5.0*
@@ -85,13 +106,6 @@ Known limitations:
 Examples:
 
 ```
-class SomeClass {}
-class SerializableClass implements Serializable {}
-
-SomeClass some = new SomeClass() // Violation
-SerializableClass ser = new SerializableClass() // OK 
-Map map = new HashMap<String, String>() //OK
-
 class SomeClass() {
     public int value = cpsMethod() // Violation
     SomeClass() {}
