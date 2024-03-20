@@ -32,7 +32,7 @@ import org.codenarc.util.AstUtil
 class ForbiddenCallInCpsMethodRule extends AbstractAstVisitorRule {
 
     String name = 'ForbiddenCallInCpsMethod'
-    int priority = 1
+    int priority = 2
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
     Class astVisitorClass = ForbiddenCallInCpsMethodAstVisitor
 }

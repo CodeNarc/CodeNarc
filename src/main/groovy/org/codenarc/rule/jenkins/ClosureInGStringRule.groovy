@@ -29,7 +29,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 class ClosureInGStringRule extends AbstractAstVisitorRule {
 
     String name = 'ClosureInGString'
-    int priority = 1
+    int priority = 2
     Class astVisitorClass = ClosureInGStringAstVisitor
 }
 
