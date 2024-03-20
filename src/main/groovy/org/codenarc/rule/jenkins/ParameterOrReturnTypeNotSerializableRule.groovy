@@ -32,6 +32,7 @@ class ParameterOrReturnTypeNotSerializableRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = ParameterOrReturnTypeNotSerializableAstVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
+    String applyToFileNames = 'Jenkinsfile'
 }
 
 class ParameterOrReturnTypeNotSerializableAstVisitor extends AbstractMethodVisitor {

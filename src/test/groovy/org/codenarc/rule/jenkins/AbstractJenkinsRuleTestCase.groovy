@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 
 /**
  * Abstract class for Jenkins rule testcases
@@ -41,6 +42,11 @@ abstract class AbstractJenkinsRuleTestCase<T extends Rule> extends AbstractRuleT
         JenkinsUtil.metaClass.static.isCpsMethod = { MethodNode methodNode, boolean isConstructor ->
             return !isConstructor && !nonCpsMethods.contains(methodNode.name)
         }
+    }
+
+    @BeforeEach
+    void setUp() {
+        this.rule.applyToFileNames = ''
     }
 
     @AfterEach

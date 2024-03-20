@@ -31,6 +31,7 @@ class ClosureInGStringRule extends AbstractAstVisitorRule {
     String name = 'ClosureInGString'
     int priority = 1
     Class astVisitorClass = ClosureInGStringAstVisitor
+    String applyToFileNames = 'Jenkinsfile'
 }
 
 class ClosureInGStringAstVisitor extends AbstractAstVisitor {

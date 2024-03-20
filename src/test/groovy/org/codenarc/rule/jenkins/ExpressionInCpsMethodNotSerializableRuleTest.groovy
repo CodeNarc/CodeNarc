@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.jenkins
 
-import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.jupiter.api.Test
 
 /**
@@ -23,7 +22,7 @@ import org.junit.jupiter.api.Test
  *
  * @author Daniel Zänker
  */
-class ExpressionInCpsMethodNotSerializableRuleTest extends AbstractRuleTestCase<ExpressionInCpsMethodNotSerializableRule> {
+class ExpressionInCpsMethodNotSerializableRuleTest extends AbstractJenkinsRuleTestCase<ExpressionInCpsMethodNotSerializableRule> {
 
     @Test
     void testRuleProperties() {
