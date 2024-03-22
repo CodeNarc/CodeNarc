@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.jenkins
 
-import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.jupiter.api.AfterEach
@@ -28,30 +27,19 @@ import org.junit.jupiter.api.BeforeEach
  */
 abstract class AbstractJenkinsRuleTestCase<T extends Rule> extends AbstractRuleTestCase<T> {
 
-    protected List<String> nonCpsMethods = []
-
-    /**
-     * Simulates a method as if its annotated with @NonCPS by overwriting the method call to {@link JenkinsUtil#isCpsMethod(org.codehaus.groovy.ast.MethodNode, boolean)}.
-     * This is necessary to avoid adding the real com.cloudbees.groovy.cps.NonCPS method annotation to the test dependencies.
-     *
-     * @param methodName The name of the method to mark with @NonCPS
-     */
-    protected void addNonCPSMethod(String methodName) {
-        nonCpsMethods.add(methodName)
-
-        JenkinsUtil.metaClass.static.isCpsMethod = { MethodNode methodNode, boolean isConstructor ->
-            return !isConstructor && !nonCpsMethods.contains(methodNode.name)
-        }
-    }
+    private String initialNonCpsAnnotationName
 
     @BeforeEach
     void setUp() {
         this.rule.applyToFileNames = ''
+
+        // replace the jenkins annotation com.cloudbees.groovy.cps.NonCPS with a placeholder for testing
+        initialNonCpsAnnotationName = JenkinsUtil.nonCpsAnnotationName
+        JenkinsUtil.nonCpsAnnotationName = 'org.codenarc.rule.jenkins.NonCPS'
     }
 
     @AfterEach
     void tearDown() {
-        nonCpsMethods = []
-        GroovySystem.metaClassRegistry.removeMetaClass(JenkinsUtil)
+        JenkinsUtil.nonCpsAnnotationName = initialNonCpsAnnotationName
     }
 }
