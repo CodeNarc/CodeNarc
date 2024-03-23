@@ -35,6 +35,7 @@ class ForbiddenCallInCpsMethodRule extends AbstractAstVisitorRule {
     int priority = 1
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
     Class astVisitorClass = ForbiddenCallInCpsMethodAstVisitor
+    String applyToFileNames = 'Jenkinsfile'
 }
 
 class ForbiddenCallInCpsMethodAstVisitor extends AbstractAstVisitor {

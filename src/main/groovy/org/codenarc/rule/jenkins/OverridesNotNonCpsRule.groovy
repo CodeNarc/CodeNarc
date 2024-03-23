@@ -33,6 +33,7 @@ class OverridesNotNonCpsRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = OverridesNotNonCpsAstVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
+    String applyToFileNames = 'Jenkinsfile'
 }
 
 class OverridesNotNonCpsAstVisitor extends AbstractMethodVisitor {

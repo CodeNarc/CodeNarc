@@ -35,9 +35,10 @@ class CpsCallFromNonCpsMethodRule extends AbstractAstVisitorRule {
     int priority = 1
     Class astVisitorClass = CpsCallFromNonCpsMethodAstVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
+    String applyToFileNames = 'Jenkinsfile'
+
     String cpsScriptVariableName = 'script'
     List<String> cpsPackages = []
-
 }
 
 class CpsCallFromNonCpsMethodAstVisitor extends AbstractAstVisitor {

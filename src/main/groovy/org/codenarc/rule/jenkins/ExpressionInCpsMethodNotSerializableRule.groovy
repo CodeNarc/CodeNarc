@@ -37,6 +37,7 @@ class ExpressionInCpsMethodNotSerializableRule extends AbstractAstVisitorRule {
     int priority = 1
     Class astVisitorClass = ExpressionInCpsMethodNotSerializableAstVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
+    String applyToFileNames = 'Jenkinsfile'
 }
 
 class ExpressionInCpsMethodNotSerializableAstVisitor extends AbstractAstVisitor {

@@ -32,6 +32,7 @@ class ClassNotSerializableRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = ClassNotSerializableAstVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
+    String applyToFileNames = 'Jenkinsfile'
 }
 
 class ClassNotSerializableAstVisitor extends AbstractAstVisitor {
