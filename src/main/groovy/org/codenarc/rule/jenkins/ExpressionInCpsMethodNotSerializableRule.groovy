@@ -34,7 +34,7 @@ import org.codenarc.rule.serialization.SerializationUtil
 class ExpressionInCpsMethodNotSerializableRule extends AbstractAstVisitorRule {
 
     String name = 'ExpressionInCpsMethodNotSerializable'
-    int priority = 1
+    int priority = 2
     Class astVisitorClass = ExpressionInCpsMethodNotSerializableAstVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
     String applyToFileNames = 'Jenkinsfile'

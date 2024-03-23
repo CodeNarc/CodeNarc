@@ -32,7 +32,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 class CpsCallFromNonCpsMethodRule extends AbstractAstVisitorRule {
 
     String name = 'CpsCallFromNonCpsMethod'
-    int priority = 1
+    int priority = 2
     Class astVisitorClass = CpsCallFromNonCpsMethodAstVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
     String applyToFileNames = 'Jenkinsfile'
