@@ -20,9 +20,6 @@ import org.junit.jupiter.api.Test
 /**
  * Tests for CpsCallFromNonCpsMethodRule.
  *
- * Note: Usage of com.cloudbees.groovy.cps.NonCPS intentionally commented out for test purposes to mark where it would be used in a real use case.
- * This is necessary because we don't want to add this to the test dependencies.
- *
  * @author Daniel Zänker
  */
 class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCallFromNonCpsMethodRule> {
@@ -35,26 +32,22 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
 
     @Test
     void testNonCpsCallFromNonCps_NoViolations() {
-        addNonCPSMethod('runSafe')
-        addNonCPSMethod('safeMethod')
-        addNonCPSMethod('staticSafeMethod')
-
         final SOURCE = '''
-            //import com.cloudbees.groovy.cps.NonCPS
+            import org.codenarc.rule.jenkins.NonCPS
             
             class SomeClass {
                 SomeClass() {}
                 
-                //@NonCPS
+                @NonCPS
                 void safeMethod() {}
                 
-                //@NonCPS
+                @NonCPS
                 static void staticSafeMethod() {}
             }
              
             class Main {
             
-                //@NonCPS
+                @NonCPS
                 void runSafe(def script) {
                     List l = [1,2,3]
                     l.get(0)
@@ -74,19 +67,16 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
 
     @Test
     void testCpsAndNonCpsCallFromCps_NoViolations() {
-        addNonCPSMethod('safeMethod')
-        addNonCPSMethod('staticSafeMethod')
-
         final SOURCE = '''
-            //import com.cloudbees.groovy.cps.NonCPS
+            import org.codenarc.rule.jenkins.NonCPS
             
             class SomeClass implements Serializable {
                 SomeClass() {}
                 
-                //@NonCPS
+                @NonCPS
                 void safeMethod() {}
                 
-                //@NonCPS
+                @NonCPS
                 static void staticSafeMethod() {}
                 
                 void unsafeMethod() {}
@@ -111,10 +101,8 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
 
     @Test
     void testCpsCallFromNonCps_Violations() {
-        addNonCPSMethod('runSafe')
-
         final SOURCE = '''
-            //import com.cloudbees.groovy.cps.NonCPS
+            import org.codenarc.rule.jenkins.NonCPS
             
             class SomeClass {
             
@@ -130,7 +118,7 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
              
             class Main {
             
-                //@NonCPS
+                @NonCPS
                 void runSafe() {
                     SomeClass s = new SomeClass()         
                     s.unsafeMethod()
@@ -150,9 +138,8 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
 
     @Test
     void testCpsCallFromNonCpsInParameters_Violations() {
-        addNonCPSMethod('runSafe')
         final SOURCE = '''
-            //import com.cloudbees.groovy.cps.NonCPS
+            import org.codenarc.rule.jenkins.NonCPS
             
             class Main {
                 Object script = new Object()
@@ -169,7 +156,7 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
                     return 42
                 }
             
-                //@NonCPS
+                @NonCPS
                 void runSafe(int i = getValue(), 
                              int j = getValueStatic(), 
                              String s = script.sh('echo hello')) {
@@ -187,11 +174,8 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
 
     @Test
     void testNonCpsCallInParameters_NoViolations() {
-        addNonCPSMethod('getValueStatic')
-        addNonCPSMethod('getValue')
-        addNonCPSMethod('runSafe')
         final SOURCE = '''
-            //import com.cloudbees.groovy.cps.NonCPS
+            import org.codenarc.rule.jenkins.NonCPS
             
             class Main {
                 Object script = new Object()
@@ -200,12 +184,12 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
                 
                 }
             
-                //@NonCPS
+                @NonCPS
                 static int getValueStatic() {
                     return 42
                 }
                 
-                //@NonCPS
+                @NonCPS
                 int getValue() {
                     return 42
                 }
@@ -214,7 +198,7 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
                     return 42
                 }
             
-                //@NonCPS
+                @NonCPS
                 void runSafe(int i = getValue(),
                              int j = getValueStatic()) {
                     
@@ -259,15 +243,14 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
 
     @Test
     void testNonCpsCallFromInitializationCode_NoViolations() {
-        addNonCPSMethod('getValueStatic')
         final SOURCE = '''
-            //import com.cloudbees.groovy.cps.NonCPS
+            import org.codenarc.rule.jenkins.NonCPS
             
             class SomeClass {
                 public int value = getValueStatic()
                 public int otherValue = Main.getValueStatic()
                 
-                //@NonCPS
+                @NonCPS
                 static int getValueStatic() {
                     return 42
                 }
@@ -276,7 +259,7 @@ class CpsCallFromNonCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<CpsCal
              
             class Main {
             
-                //@NonCPS
+                @NonCPS
                 static int getValueStatic() {
                     return 42
                 }

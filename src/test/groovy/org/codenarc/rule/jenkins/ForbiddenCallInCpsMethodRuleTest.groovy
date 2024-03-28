@@ -20,9 +20,6 @@ import org.junit.jupiter.api.Test
 /**
  * Tests for ForbiddenCallInCpsMethodRule
  *
- * Note: Usage of com.cloudbees.groovy.cps.NonCPS intentionally commented out for test purposes to mark where it would be used in a real use case.
- * This is necessary because we don't want to add this to the test dependencies.
- *
  * @author Daniel Zänker
  */
 class ForbiddenCallInCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<ForbiddenCallInCpsMethodRule> {
@@ -47,12 +44,10 @@ class ForbiddenCallInCpsMethodRuleTest extends AbstractJenkinsRuleTestCase<Forbi
 
     @Test
     void testForbiddenMethodsInNonCps_NoViolation() {
-        addNonCPSMethod('runSafe')
-
         final SOURCE = '''
-            //import com.cloudbees.groovy.cps.NonCPS
+            import org.codenarc.rule.jenkins.NonCPS
             
-            //@NonCPS
+            @NonCPS
             void runSafe() {
                 List l = [4,1,3]
                 l.sort { a, b -> a > b } 

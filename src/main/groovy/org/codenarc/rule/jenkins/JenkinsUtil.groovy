@@ -28,10 +28,10 @@ import org.codenarc.util.AstUtil
  */
 class JenkinsUtil {
 
-    public static final String NON_CPS_ANNOTATION = 'com.cloudbees.groovy.cps.NonCPS'
+    static String nonCpsAnnotationName = 'com.cloudbees.groovy.cps.NonCPS'
 
     static boolean isCpsMethod(MethodNode methodNode, boolean isConstructor) {
-        return !isConstructor && !AstUtil.hasAnnotation(methodNode, NON_CPS_ANNOTATION)
+        return !isConstructor && !AstUtil.hasAnnotation(methodNode, nonCpsAnnotationName)
     }
 
     static ClassNode getReceiverType(MethodCall call) {
