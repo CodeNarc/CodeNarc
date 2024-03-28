@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.jupiter.api.Test
 
 /**
- * Tests for NotAllFieldsOfSerializableClassSerializableRule
+ * Tests for NonSerializableFieldInSerializableClass
  *
  * @author Daniel Zänker
  */
-class NotAllFieldsOfSerializableClassSerializableRuleTest extends AbstractRuleTestCase<NotAllFieldsOfSerializableClassSerializableRule> {
+class NonSerializableFieldInSerializableClassTest extends AbstractRuleTestCase<NonSerializableFieldInSerializableClass> {
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'NotAllFieldsOfSerializableClassSerializable'
+        assert rule.name == 'NonSerializableFieldInSerializableClass'
     }
 
     @Test
@@ -98,7 +98,7 @@ class NotAllFieldsOfSerializableClassSerializableRuleTest extends AbstractRuleTe
     }
 
     @Override
-    protected NotAllFieldsOfSerializableClassSerializableRule createRule() {
-        new NotAllFieldsOfSerializableClassSerializableRule()
+    protected NonSerializableFieldInSerializableClass createRule() {
+        new NonSerializableFieldInSerializableClass()
     }
 }
