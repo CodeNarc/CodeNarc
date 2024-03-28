@@ -27,16 +27,16 @@ import org.codenarc.rule.AbstractMethodVisitor
  *
  * @author Daniel Zänker
  */
-class OverridesNotNonCpsRule extends AbstractAstVisitorRule {
+class ObjectOverrideOnlyNonCpsMethods extends AbstractAstVisitorRule {
 
-    String name = 'OverridesNotNonCps'
+    String name = 'ObjectOverrideOnlyNonCpsMethods'
     int priority = 2
-    Class astVisitorClass = OverridesNotNonCpsAstVisitor
+    Class astVisitorClass = ObjectOverrideOnlyNonCpsMethodsVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
     String applyToFileNames = 'Jenkinsfile'
 }
 
-class OverridesNotNonCpsAstVisitor extends AbstractMethodVisitor {
+class ObjectOverrideOnlyNonCpsMethodsVisitor extends AbstractMethodVisitor {
     final static List<Map> OBJECT_METHODS = [
         [name: 'clone', parameters: []],
         [name: 'equals', parameters: [ClassHelper.make(Object)]],

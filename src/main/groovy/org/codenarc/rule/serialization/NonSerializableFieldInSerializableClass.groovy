@@ -26,15 +26,15 @@ import org.codenarc.util.AstUtil
  *
  * @author Daniel Zänker
  */
-class NotAllFieldsOfSerializableClassSerializableRule extends AbstractAstVisitorRule {
+class NonSerializableFieldInSerializableClass extends AbstractAstVisitorRule {
 
-    String name = 'NotAllFieldsOfSerializableClassSerializable'
+    String name = 'NonSerializableFieldInSerializableClass'
     int priority = 2
-    Class astVisitorClass = NotAllFieldsOfSerializableClassSerializableAstVisitor
+    Class astVisitorClass = NonSerializableFieldInSerializableClassVisitor
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
 }
 
-class NotAllFieldsOfSerializableClassSerializableAstVisitor extends AbstractAstVisitor {
+class NonSerializableFieldInSerializableClassVisitor extends AbstractAstVisitor {
 
     @Override
     void visitField(FieldNode field) {
