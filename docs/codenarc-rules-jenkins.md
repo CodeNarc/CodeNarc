@@ -120,7 +120,7 @@ void cpsMethod() {
 }
 ```
 
-## OverridesNotNonCps Rule
+## ObjectOverrideOnlyNonCpsMethods Rule
 
 *Since CodeNarc 3.5.0*
 

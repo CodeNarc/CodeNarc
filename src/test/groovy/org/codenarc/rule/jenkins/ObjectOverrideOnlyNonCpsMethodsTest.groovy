@@ -18,19 +18,19 @@ package org.codenarc.rule.jenkins
 import org.junit.jupiter.api.Test
 
 /**
- * Tests for OverridesNotNonCpsRule
+ * Tests for ObjectOverrideOnlyNonCpsMethods
  *
  * Note: Usage of com.cloudbees.groovy.cps.NonCPS intentionally commented out for test purposes to mark where it would be used in a real use case.
  * This is necessary because we don't want to add this to the test dependencies.
  *
  * @author Daniel Zänker
  */
-class OverridesNotNonCpsRuleTest extends AbstractJenkinsRuleTestCase<OverridesNotNonCpsRule> {
+class ObjectOverrideOnlyNonCpsMethodsTest extends AbstractJenkinsRuleTestCase<ObjectOverrideOnlyNonCpsMethods> {
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'OverridesNotNonCps'
+        assert rule.name == 'ObjectOverrideOnlyNonCpsMethods'
     }
 
     @Test
@@ -111,7 +111,7 @@ class OverridesNotNonCpsRuleTest extends AbstractJenkinsRuleTestCase<OverridesNo
     }
 
     @Override
-    protected OverridesNotNonCpsRule createRule() {
-        new OverridesNotNonCpsRule()
+    protected ObjectOverrideOnlyNonCpsMethods createRule() {
+        new ObjectOverrideOnlyNonCpsMethods()
     }
 }
