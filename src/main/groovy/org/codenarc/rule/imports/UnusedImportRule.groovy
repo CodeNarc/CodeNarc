@@ -72,24 +72,33 @@ class UnusedImportRule extends AbstractRule {
 
     private String findReference(SourceCode sourceCode, String alias, String className = null) {
         def aliasSameAsNonQualifiedClassName = className && className.endsWith(alias)
+        // Pattern.compile is time-consuming, so we create these patterns outside of the hot loop
+        Pattern aliasPattern = mkUsagePattern(Pattern.quote(alias))
+        Pattern importPattern = mkImportPattern(Pattern.quote(alias))
         sourceCode.lines.find { line ->
-            String aliasPattern = Pattern.quote(alias)
-            if (!isImportStatementForAlias(line, aliasPattern)) {
-                def aliasCount = countUsage(line, aliasPattern)
+            if (!isImportStatementForAlias(line, importPattern)) {
+                // fast-path: if the line does not contain the alias, don't go down the regex path. The regex is
+                // the slowest when there is no match due to having several alternatives and the need to backtrack
+                def aliasCount = line.contains(alias) ? countUsage(line, aliasPattern) : 0
                 return aliasSameAsNonQualifiedClassName ?
-                    aliasCount && aliasCount > countUsage(line, Pattern.quote(className)) : aliasCount
+                    aliasCount && aliasCount > countUsage(line, mkUsagePattern(Pattern.quote(className))) : aliasCount
             }
         }
     }
 
-    private boolean isImportStatementForAlias(String line, String pattern) {
-        final IMPORT_PATTERN = /import\s+.*/ + pattern
-        line =~ IMPORT_PATTERN
+    private boolean isImportStatementForAlias(String line, Pattern regex) {
+        line =~ regex
     }
 
-    private int countUsage(String line, String pattern) {
+    private Pattern mkImportPattern(String toMatch) {
+        return ~/import\s+.*$toMatch/
+    }
+    private Pattern mkUsagePattern(String toMatch) {
         final INVALID = '[^a-zA-Z0-9_\\$]'
-        def regexp = /($INVALID|^|\$)${pattern}($INVALID|$)/
+        return ~/($INVALID|^|\$)${toMatch}($INVALID|$)/
+    }
+
+    private int countUsage(String line, Pattern regexp) {
         return (line =~ regexp).count
     }
 }
