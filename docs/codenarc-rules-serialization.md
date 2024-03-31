@@ -100,7 +100,7 @@ An example of a missing serialVersionUID:
     }
 ```
 
-## NotAllFieldsOfSerializableClassSerializable Rule
+## NonSerializableFieldInSerializableClass Rule
 
 *Since CodeNarc 3.5.0*
 
