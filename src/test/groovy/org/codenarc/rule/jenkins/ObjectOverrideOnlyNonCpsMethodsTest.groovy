@@ -20,9 +20,6 @@ import org.junit.jupiter.api.Test
 /**
  * Tests for ObjectOverrideOnlyNonCpsMethods
  *
- * Note: Usage of com.cloudbees.groovy.cps.NonCPS intentionally commented out for test purposes to mark where it would be used in a real use case.
- * This is necessary because we don't want to add this to the test dependencies.
- *
  * @author Daniel Zänker
  */
 class ObjectOverrideOnlyNonCpsMethodsTest extends AbstractJenkinsRuleTestCase<ObjectOverrideOnlyNonCpsMethods> {
@@ -49,11 +46,39 @@ class ObjectOverrideOnlyNonCpsMethodsTest extends AbstractJenkinsRuleTestCase<Ob
                 }
                 
                 @Override
+                void wait() {
+                }
+                
+                @Override
                 void wait(long timeout) {
                 }
                 
                 @Override
                 void wait(Long timeout, Integer nanos) {
+                }
+                
+                @Override
+                protected Object clone() {
+                }
+                
+                @Override
+                protected void finalize() {
+                }
+                
+                @Override
+                Class<?> getClass() {
+                }
+                
+                @Override
+                int hashCode() {
+                }
+                
+                @Override
+                void notify() {
+                }
+                
+                @Override
+                void notifyAll() {
                 }
                 
                 String toText() {
@@ -64,21 +89,26 @@ class ObjectOverrideOnlyNonCpsMethodsTest extends AbstractJenkinsRuleTestCase<Ob
         assertViolations(SOURCE,
             [line: 5, source: 'String toString() {', message: 'Overridden methods from Object should not be CPS transformed'],
             [line: 10, source: 'boolean equals(Object o) {', message: 'Overridden methods from Object should not be CPS transformed'],
-            [line: 15, source: 'void wait(long timeout) {', message: 'Overridden methods from Object should not be CPS transformed'],
-            [line: 19, source: 'void wait(Long timeout, Integer nanos) {', message: 'Overridden methods from Object should not be CPS transformed']
+            [line: 15, source: 'void wait() {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 19, source: 'void wait(long timeout) {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 23, source: 'void wait(Long timeout, Integer nanos) {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 27, source: 'protected Object clone() {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 31, source: 'protected void finalize() {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 35, source: 'Class<?> getClass() {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 39, source: 'int hashCode() {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 43, source: 'void notify() {', message: 'Overridden methods from Object should not be CPS transformed'],
+            [line: 47, source: 'void notifyAll() {', message: 'Overridden methods from Object should not be CPS transformed'],
         )
     }
 
     @Test
     void testObjectOverridesNonCps_NoViolation() {
-        addNonCPSMethod('toString')
-
         final SOURCE = '''
-            //import com.cloudbees.groovy.cps.NonCPS
+            import org.codenarc.rule.jenkins.NonCPS
             class Test {
             
                 @Override
-                //@NonCPS
+                @NonCPS
                 String toString() {
                     return ''
                 }
