@@ -3,6 +3,18 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
+TODO: Version 3.5.0  (??? 2024)
+ - New Jenkins ruleset with 7 new rules ([Daniel Zänker](https://github.com/danielzaenker)):
+    - #771: **ParameterOrReturnTypeNotSerializable** rule
+    - #770: **ObjectOverrideOnlyNonCpsMethods** rule
+    - #769: **ForbiddenCallInCpsMethod** rule
+    - #768: **ExpressionInCpsMethodNotSerializable** rule
+    - #767: **CpsCallFromNonCpsMethod** rule
+    - #766: **ClosureInGString** rule
+    - #765: **ClassNotSerializable** rule
+ - #772: New **NonSerializableFieldInSerializableClass** rule ([Daniel Zänker](https://github.com/danielzaenker)).
+ - #777: Speed up **UnusedImport** rule ([Iulian Dragos](https://github.com/dragos)).
+
 Version 3.4.0    (Jan 2024)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
