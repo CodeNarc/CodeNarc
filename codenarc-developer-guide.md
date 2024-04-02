@@ -75,6 +75,10 @@ Please do the following before submitting a pull request or patch:
   * Run the full **CodeNarc** test suite. This includes a test called `RunCodeNarcAgainstProjectSourceCodeTest`
     that runs **CodeNarc** against its own source code (including any code that you have added or changed).
 
+  * Submit small PRs (typically less than 300 lines). If you need to make more extensive/larger changes, please create an issue describing the overall changes and then create multiple smaller PRs that link to that issue. Respect your reviewers. Why small PRs:
+    - [Anatomy of a perfect pull request](https://opensource.com/article/18/6/anatomy-perfect-pull-request#:~:text=Recap-,Pull%20request%20size,of%20250%20lines%20of%20change.)
+    - [Best Practices for Code Review](https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/)
+    - [The Size of the Pull/Merge Request is More Important Than You Think](https://www.linkedin.com/pulse/size-pullmerge-request-more-important-than-you-think-rodrigo-miguel/)
 
 ## Intellij IDEA Support
 
