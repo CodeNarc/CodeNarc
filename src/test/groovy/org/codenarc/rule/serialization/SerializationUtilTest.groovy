@@ -19,10 +19,8 @@ import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.GenericsType
 import org.codenarc.test.AbstractTestCase
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-
-import static org.junit.jupiter.api.Assertions.assertFalse
-import static org.junit.jupiter.api.Assertions.assertTrue
 
 /**
  * Tests for SerializationUtil
@@ -31,46 +29,51 @@ import static org.junit.jupiter.api.Assertions.assertTrue
  */
 class SerializationUtilTest extends AbstractTestCase {
 
-    @Test
-    void testIsSerializableOrDynamicType_shouldReturnTrueForDynamicType() {
-        assertTrue(SerializationUtil.isSerializableOrDynamicType(ClassHelper.OBJECT_TYPE))
+    @Nested
+    class isSerializableOrDynamicType {
+
+        @Test
+        void ShouldReturnTrueForDynamicType() {
+            assert SerializationUtil.isSerializableOrDynamicType(ClassHelper.OBJECT_TYPE)
+        }
+
+        @Test
+        void ShouldReturnTrueForPrimitiveType() {
+            assert SerializationUtil.isSerializableOrDynamicType(ClassHelper.Integer_TYPE)
+        }
+
+        @Test
+        void ShouldReturnTrueForEffectivelySerializableTypes() {
+            assert SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(List))
+            assert SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(Map))
+            assert SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(Set))
+        }
+
+        @Test
+        void ShouldReturnTrueForSerializableTypes() {
+            assert SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(ArrayList<Integer>))
+        }
+
+        @Test
+        void ShouldReturnTrueForSerializableGenericType() {
+            ClassNode classNode = ClassHelper.make(ArrayList)
+            GenericsType[] genericsTypes = [new GenericsType(ClassHelper.make(HashMap))]
+            classNode.genericsTypes = genericsTypes
+            assert SerializationUtil.isSerializableOrDynamicType(classNode)
+        }
+
+        @Test
+        void ShouldReturnFalseForNonSerializableGenericType() {
+            ClassNode classNode = ClassHelper.make(ArrayList)
+            GenericsType[] genericsTypes = [new GenericsType(ClassHelper.make(Optional<String>))]
+            classNode.genericsTypes = genericsTypes
+            assert !SerializationUtil.isSerializableOrDynamicType(classNode)
+        }
+
+        @Test
+        void ShouldReturnFalseForNonSerializableTypes() {
+            assert !SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(Optional<String>))
+        }
     }
 
-    @Test
-    void testIsSerializableOrDynamicType_shouldReturnTrueForPrimitiveType() {
-        assertTrue(SerializationUtil.isSerializableOrDynamicType(ClassHelper.Integer_TYPE))
-    }
-
-    @Test
-    void testIsSerializableOrDynamicType_shouldReturnTrueForEffectivelySerializableTypes() {
-        assertTrue(SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(List)))
-        assertTrue(SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(Map)))
-        assertTrue(SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(Set)))
-    }
-
-    @Test
-    void testIsSerializableOrDynamicType_shouldReturnTrueForSerializableTypes() {
-        assertTrue(SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(ArrayList<Integer>)))
-    }
-
-    @Test
-    void testIsSerializableOrDynamicType_shouldReturnTrueForSerializableGenericType() {
-        ClassNode classNode = ClassHelper.make(ArrayList)
-        GenericsType[] genericsTypes = [new GenericsType(ClassHelper.make(HashMap))]
-        classNode.genericsTypes = genericsTypes
-        assertTrue(SerializationUtil.isSerializableOrDynamicType(classNode))
-    }
-
-    @Test
-    void testIsSerializableOrDynamicType_shouldReturnFalseForNonSerializableGenericType() {
-        ClassNode classNode = ClassHelper.make(ArrayList)
-        GenericsType[] genericsTypes = [new GenericsType(ClassHelper.make(Optional<String>))]
-        classNode.genericsTypes = genericsTypes
-        assertFalse(SerializationUtil.isSerializableOrDynamicType(classNode))
-    }
-
-    @Test
-    void testIsSerializableOrDynamicType_shouldReturnFalseForNonSerializableTypes() {
-        assertFalse(SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(Optional<String>)))
-    }
 }
