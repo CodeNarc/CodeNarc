@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test
 class SerializationUtilTest extends AbstractTestCase {
 
     @Nested
-    class isSerializableOrDynamicType {
+    class IsSerializableOrDynamicType {
 
         @Test
         void ShouldReturnTrueForDynamicType() {
