@@ -73,15 +73,15 @@ class UnusedImportRule extends AbstractRule {
     private String findReference(SourceCode sourceCode, String alias, String className = null) {
         def aliasSameAsNonQualifiedClassName = className && className.endsWith(alias)
         // Pattern.compile is time-consuming, so we create these patterns outside of the hot loop
-        Pattern aliasPattern = mkUsagePattern(Pattern.quote(alias))
-        Pattern importPattern = mkImportPattern(Pattern.quote(alias))
+        Pattern aliasPattern = createUsagePattern(Pattern.quote(alias))
+        Pattern importPattern = createImportPattern(Pattern.quote(alias))
         sourceCode.lines.find { line ->
             if (!isImportStatementForAlias(line, importPattern)) {
                 // fast-path: if the line does not contain the alias, don't go down the regex path. The regex is
                 // the slowest when there is no match due to having several alternatives and the need to backtrack
                 def aliasCount = line.contains(alias) ? countUsage(line, aliasPattern) : 0
                 return aliasSameAsNonQualifiedClassName ?
-                    aliasCount && aliasCount > countUsage(line, mkUsagePattern(Pattern.quote(className))) : aliasCount
+                    aliasCount && aliasCount > countUsage(line, createUsagePattern(Pattern.quote(className))) : aliasCount
             }
         }
     }
@@ -90,10 +90,11 @@ class UnusedImportRule extends AbstractRule {
         line =~ regex
     }
 
-    private Pattern mkImportPattern(String toMatch) {
+    private Pattern createImportPattern(String toMatch) {
         return ~/import\s+.*$toMatch/
     }
-    private Pattern mkUsagePattern(String toMatch) {
+
+    private Pattern createUsagePattern(String toMatch) {
         final INVALID = '[^a-zA-Z0-9_\\$]'
         return ~/($INVALID|^|\$)${toMatch}($INVALID|$)/
     }
