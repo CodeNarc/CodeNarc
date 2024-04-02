@@ -4,15 +4,18 @@
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
 TODO: Version 3.5.0  (??? 2024)
- - New Jenkins ruleset with 7 new rules ([Daniel Zänker](https://github.com/danielzaenker)):
-    - #771: **ParameterOrReturnTypeNotSerializable** rule
-    - #770: **ObjectOverrideOnlyNonCpsMethods** rule
-    - #769: **ForbiddenCallInCpsMethod** rule
-    - #768: **ExpressionInCpsMethodNotSerializable** rule
-    - #767: **CpsCallFromNonCpsMethod** rule
-    - #766: **ClosureInGString** rule
-    - #765: **ClassNotSerializable** rule
- - #772: New **NonSerializableFieldInSerializableClass** rule ([Daniel Zänker](https://github.com/danielzaenker)).
+New Rules
+ - New Jenkins ruleset with 7 new rules. By default, these apply only to 'Jenkinsfile' ([Daniel Zänker](https://github.com/danielzaenker)):
+    - #771: **ParameterOrReturnTypeNotSerializable** rule: Every parameter and return type has to implement the Serializable interface in Jenkins
+    - #770: **ObjectOverrideOnlyNonCpsMethods** rule: Overridden methods of the standard library (e.g. from java.lang.Object) are often called from there and therefore must not be CPS transformed in Jenkins.
+    - #769: **ForbiddenCallInCpsMethod** rule: Some methods from the standard library cannot be CPS transformed and therefore must not be called from CPS transformed methods in Jenkins.
+    - #768: **ExpressionInCpsMethodNotSerializable** rule: Every expression/variable in a CPS transformed method in Jenkins can potentially be serialized and should therefore implement the Serializable interface.
+    - #767: **CpsCallFromNonCpsMethod** rule: CPS transformed methods may not be called from non CPS transformed methods in Jenkins.
+    - #766: **ClosureInGString** rule: Closures are CPS transformed in Jenkins and will cause an error at runtime when used in GStrings. Typically, they can be replaced by variable interpolation.
+    - #765: **ClassNotSerializable** rule: Classes in Jenkins pipeline libraries and Jenkinsfiles should generally implement the Serializable interface because every expression/variable used in a CPS transformed method can potentially be serialized.
+ - #772: New **NonSerializableFieldInSerializableClass** rule: All fields of a class that implements Serializable should also implement it. ([Daniel Zänker](https://github.com/danielzaenker)).
+
+Updated/Enhanced Rules and Bug Fixes
  - #777: Speed up **UnusedImport** rule ([Iulian Dragos](https://github.com/dragos)).
 
 Version 3.4.0    (Jan 2024)
