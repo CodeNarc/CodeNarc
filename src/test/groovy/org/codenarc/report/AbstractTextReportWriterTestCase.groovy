@@ -124,9 +124,9 @@ abstract class AbstractTextReportWriterTestCase extends AbstractReportWriterTest
         reportWriter = createReportWriter()
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
-        def srcMainDirResults = new DirectoryResults('src/main', 2)
-        def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcTestDirResults = new DirectoryResults('src/test', 0)
+        def srcMainDirResults = new DirectoryResults('src/main')
+        def srcMainDaoDirResults = new DirectoryResults('src/main/dao')
+        def srcTestDirResults = new DirectoryResults('src/test')
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def srcMainFileResults2 = new FileResults('src/main/MyCleanAction.groovy', [])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])

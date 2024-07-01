@@ -97,9 +97,9 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
         def dirResults = new DirectoryResults()
-        def dirResultsMain = new DirectoryResults('src/main', 2)
-        def dirResultsMainDao = new DirectoryResults('src/main/dao', 2)
-        def dirResultsTest = new DirectoryResults('src/test', 0)
+        def dirResultsMain = new DirectoryResults('src/main')
+        def dirResultsMainDao = new DirectoryResults('src/main/dao')
+        def dirResultsTest = new DirectoryResults('src/test')
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
         def fileResultsMyAction = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])

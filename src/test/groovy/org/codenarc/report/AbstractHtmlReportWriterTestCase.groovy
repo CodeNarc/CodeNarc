@@ -57,10 +57,10 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractReportWriterTest
     void setUpAbstractHtmlReportWriterTest() {
         log(new File('.').absolutePath)
 
-        dirResultsMain = new DirectoryResults('src/main', 1)
-        def dirResultsCode = new DirectoryResults('src/main/code', 1)
-        def dirResultsTest = new DirectoryResults('src/main/test', 1)
-        def dirResultsTestSubdirNoViolations = new DirectoryResults('src/main/test/noviolations', 1)
+        dirResultsMain = new DirectoryResults('src/main')
+        def dirResultsCode = new DirectoryResults('src/main/code')
+        def dirResultsTest = new DirectoryResults('src/main/test')
+        def dirResultsTestSubdirNoViolations = new DirectoryResults('src/main/test/noviolations')
         def dirResultsTestSubdirEmpty = new DirectoryResults('src/main/test/empty')
         def fileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResults2 = new FileResults('src/main/code/MyAction2.groovy', [VIOLATION3])

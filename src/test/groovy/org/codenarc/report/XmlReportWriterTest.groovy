@@ -105,7 +105,7 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
             <Package path='' totalFiles='1' filesWithViolations='1' priority1='0' priority2='0' priority3='1'>
         """
-        def dirResults = new DirectoryResults('', 1)
+        def dirResults = new DirectoryResults('')
         dirResults.addChild(new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3]))
         def rootResults = new DirectoryResults()
         rootResults.addChild(dirResults)
@@ -156,9 +156,9 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
         reportWriter = new XmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
-        def srcMainDirResults = new DirectoryResults('src/main', 2)
-        def srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcTestDirResults = new DirectoryResults('src/test', 0)
+        def srcMainDirResults = new DirectoryResults('src/main')
+        def srcMainDaoDirResults = new DirectoryResults('src/main/dao')
+        def srcTestDirResults = new DirectoryResults('src/test')
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def srcMainFileResults2 = new FileResults('src/main/MyCleanAction.groovy', [])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
