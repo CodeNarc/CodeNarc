@@ -27,7 +27,6 @@ class DirectoryResults implements Results {
     private static final String SEP = '/'
     private final String path
     private final List children = []
-    int numberOfFilesInThisDirectory = 0
 
     /**
      * Create a new uninitialized instance
@@ -41,14 +40,6 @@ class DirectoryResults implements Results {
      */
     DirectoryResults(String path) {
         this.path = path
-    }
-
-    /**
-     * Create a new instance with the specified path and number of files in the directory
-     */
-    DirectoryResults(String path, int numberOfFilesInThisDirectory) {
-        this.path = path
-        this.numberOfFilesInThisDirectory = numberOfFilesInThisDirectory
     }
 
     /**
@@ -76,7 +67,6 @@ class DirectoryResults implements Results {
         if (getPath() == fileResPath || (getPath() == '' && fileResPath == null)) {
             // Same directory: Add FileResults here
             this.addChild(fileRes)
-            this.numberOfFilesInThisDirectory++
         } else {
             // Find if there is already a child directory result and use it if found
             DirectoryResults subDirResults = (DirectoryResults) findResultsForPath(fileResPath)
@@ -165,11 +155,15 @@ class DirectoryResults implements Results {
      * @return the total number of files (with or without violations)
      */
     int getTotalNumberOfFiles(boolean recursive = true) {
-        def total = numberOfFilesInThisDirectory
-        if (recursive) {
-            total += children.sum(0) { child -> child.isFile() ? 0 : child.getTotalNumberOfFiles(true) }
+        children.sum(0) { child ->
+            if (child.isFile()) {
+                return 1
+            }
+            if (recursive) {
+                return child.getTotalNumberOfFiles(recursive)
+            }
+            return 0
         }
-        total
     }
 
     /**

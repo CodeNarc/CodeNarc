@@ -99,8 +99,8 @@ class BaselineXmlReport_IntegrationTest extends AbstractTestCase {
 
     @BeforeEach
     void setUp() {
-        def srcMainDirResults = new DirectoryResults('src/main', 1)
-        srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
+        def srcMainDirResults = new DirectoryResults('src/main')
+        srcMainDaoDirResults = new DirectoryResults('src/main/dao')
         srcMainDirResults.addChild(srcMainFileResults1)
         srcMainDirResults.addChild(srcMainDaoDirResults)
         srcMainDaoDirResults.addChild(fileResultsMainDao1)

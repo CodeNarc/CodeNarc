@@ -57,7 +57,6 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.path == PATH
         def fileResults = new FileResults('path', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         results.addChild(fileResults)
-        results.numberOfFilesInThisDirectory = 7
         assert results.children == [fileResults]
         assert results.violations.findAll { v -> v.rule.priority == 1 } == [VIOLATION1, VIOLATION1]
         assert results.violations.findAll { v -> v.rule.priority == 2 } == [VIOLATION2]
@@ -71,19 +70,17 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.getNumberOfFilesWithViolations(1) == 1
         assert results.getNumberOfFilesWithViolations(1, false) == 1
 
-        assert results.getTotalNumberOfFiles() == 7
-        assert results.getTotalNumberOfFiles(false) == 7
+        assert results.getTotalNumberOfFiles() == 1
+        assert results.getTotalNumberOfFiles(false) == 1
     }
 
     @Test
     void testWithMultipleChildren() {
         def results = new DirectoryResults(PATH)
         assert results.path == PATH
-        results.numberOfFilesInThisDirectory = 3
         def fileResults1 = new FileResults('path', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION7, VIOLATION1, VIOLATION2])
         results.addChild(fileResults1)
         def subDirResults = new DirectoryResults('subdir')
-        subDirResults.numberOfFilesInThisDirectory = 2
         def fileResults2 = new FileResults('path', [VIOLATION2, VIOLATION3, VIOLATION4])
         subDirResults.addChild(fileResults2)
         results.addChild(subDirResults)
@@ -111,8 +108,8 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.getNumberOfFilesWithViolations(1, false) == 1
         assert subDirResults.getNumberOfFilesWithViolations(1, false) == 0
 
-        assert results.getTotalNumberOfFiles() == 5
-        assert results.getTotalNumberOfFiles(false) == 3
+        assert results.getTotalNumberOfFiles() == 2
+        assert results.getTotalNumberOfFiles(false) == 1
     }
 
     @Test

@@ -93,7 +93,6 @@ class SortableHtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
 
         def fileResults4 = new FileResults('src/main/MyOtherAction.groovy', [VIOLATION3])
         dirResultsMain.addChild(fileResults4)
-        dirResultsMain.numberOfFilesInThisDirectory++
     }
 
 }
