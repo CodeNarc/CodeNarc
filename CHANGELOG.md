@@ -17,6 +17,8 @@ New Rules
 
 Updated/Enhanced Rules and Bug Fixes
  - #777: Speed up **UnusedImport** rule ([Iulian Dragos](https://github.com/dragos)).
+ - #695: Refactor directory-handling in results. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+
 
 Version 3.4.0    (Jan 2024)
 --------------------------------------
