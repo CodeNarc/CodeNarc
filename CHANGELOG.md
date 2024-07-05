@@ -17,6 +17,7 @@ New Rules
 
 Updated/Enhanced Rules and Bug Fixes
  - #777: Speed up **UnusedImport** rule ([Iulian Dragos](https://github.com/dragos)).
+ - #762: **BooleanMethodReturnsNull** rule: Analyze contained closure expressions within their own context, not as part of outer method context.
  - #695: Refactor directory-handling in results. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
 
 

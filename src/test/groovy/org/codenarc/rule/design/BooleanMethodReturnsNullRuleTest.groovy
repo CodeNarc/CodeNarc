@@ -26,13 +26,13 @@ import org.junit.jupiter.api.Test
 class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMethodReturnsNullRule> {
 
     @Test
-    void testRuleProperties() {
+    void RuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BooleanMethodReturnsNull'
     }
 
     @Test
-    void testProperReturnOfTrueAndFalse_NoViolations() {
+    void ProperReturnOfTrueAndFalse_NoViolations() {
         final SOURCE = '''
             def c = {
                     if (foo()) {
@@ -92,7 +92,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testDefMethodReturnsNull() {
+    void DefMethodReturnsNull() {
         final SOURCE = '''
             def scriptMethod() {
                 if (foo()) {
@@ -106,7 +106,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testDefTernaryReturnsNull() {
+    void DefTernaryReturnsNull() {
         final SOURCE = '''
             def scriptMethod() {
                 return x ? null : true
@@ -119,7 +119,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testDefClassMethodReturnsNull() {
+    void DefClassMethodReturnsNull() {
         final SOURCE = '''
             class MyClass {
                 def scriptMethod() {
@@ -135,7 +135,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testAnonymousClassMethodReturnsNull() {
+    void AnonymousClassMethodReturnsNull() {
         final SOURCE = '''
             def x = new Object() {
                 def scriptMethod() {
@@ -151,7 +151,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testDefMethodReturnsNullAndTRUE() {
+    void DefMethodReturnsNullAndTRUE() {
         final SOURCE = '''
             def scriptMethod() {
                 if (foo()) {
@@ -165,7 +165,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testDefMethodReturnsBooleanCast() {
+    void DefMethodReturnsBooleanCast() {
         final SOURCE = '''
             def scriptMethod() {
                 if (foo()) {
@@ -179,7 +179,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testBooleanMethodReturnsNull() {
+    void BooleanMethodReturnsNull() {
         final SOURCE = '''
             boolean scriptMethod() {
                 if (foo()) {
@@ -193,7 +193,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testMethodReturnsNonBooleanTypesAndNull_NoViolations() {
+    void MethodReturnsNonBooleanTypesAndNull_NoViolations() {
         final SOURCE = '''
             def scriptMethod(clazz) {
                 if (clazz == String) {
@@ -212,7 +212,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testClosureReturnsNull() {
+    void Closure_ReturnsNullAndBoolean() {
         final SOURCE = '''
             def closure = {
                 if (foo()) {
@@ -226,7 +226,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
     }
 
     @Test
-    void testClosureReturnsNonBooleanTypesAndNull_NoViolations() {
+    void ClosureReturnsNonBooleanTypesAndNull_NoViolations() {
         final SOURCE = '''
             def closure = {
                 if (clazz == String) {
@@ -239,6 +239,24 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase<BooleanMetho
                     return true
                 }
                 return null
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void ClosureWithinMethod_ReturnsFalse_MethodReturnsNull() {
+        final SOURCE = '''
+            class MyClass {
+                void method() {
+                    if (foo()) {
+                        return
+                    }
+                    def closure = {
+                        return false
+                    }
+                    closure.call()
+                }
             }
         '''
         assertNoViolations(SOURCE)

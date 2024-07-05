@@ -50,6 +50,12 @@ class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx(node)
     }
 
+    @Override
+    void visitClosureExpression(ClosureExpression expression) {
+        // Analyze contained closure statements/expressions within their own context .. not as part of outer method context
+        handleClosure(expression)
+    }
+
     void handleClosure(ClosureExpression expression) {
         if (closureReturnsBoolean(expression)) {
             // does this closure ever return null?
@@ -88,6 +94,11 @@ class BooleanReturnTracker extends AbstractAstVisitor {
     void visitReturnStatement(ReturnStatement statement) {
         checkReturnValues(statement.expression)
         super.visitReturnStatement(statement)
+    }
+
+    @Override
+    void visitClosureExpression(ClosureExpression expression) {
+        // Don't want to analyze contained closure statements/expressions
     }
 
     private void checkReturnValues(Expression expression) {
