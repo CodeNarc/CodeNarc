@@ -28,13 +28,13 @@ import org.junit.jupiter.api.Test
 class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumberLiteralRule> {
 
     @Test
-    void testRuleProperties() {
+    void RuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DuplicateNumberLiteral'
     }
 
     @Test
-    void testSuccessScenario() {
+    void SuccessScenario() {
         final SOURCE = '''
             println 123
             println -17
@@ -64,7 +64,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testAcrossManyMethodCalls() {
+    void AcrossManyMethodCalls() {
         final SOURCE = '''
             println 123
             println 123
@@ -74,7 +74,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testMethodCall() {
+    void MethodCall() {
         final SOURCE = '''
             println 123, 123, 123
         '''
@@ -82,7 +82,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInAList() {
+    void InAList() {
         final SOURCE = '''
             def x = [3, 11.783, 3]
         '''
@@ -90,7 +90,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInAMap() {
+    void InAMap() {
         final SOURCE = '''
             def y = [x: -99, y: -99]
         '''
@@ -98,7 +98,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testDoublesAndFloatLiteralsCanBeIgnored() {
+    void DoublesAndFloatLiteralsCanBeIgnored() {
         final SOURCE = '''
             println 99.0d
             println 99.0d
@@ -116,7 +116,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInDeclarations() {
+    void InDeclarations() {
         final SOURCE = '''
             def x = 99
             def y = 99
@@ -127,7 +127,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInFields() {
+    void InFields() {
         final SOURCE = '''
             class MyClass {
                 def x = 67890
@@ -138,7 +138,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInTernary() {
+    void InTernary() {
         final SOURCE = '''
             (0.7 == 0.7) ? -5.13 : 'h'
             (0.7 == 12) ? -5.13 : -5.13
@@ -147,7 +147,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInElvis() {
+    void InElvis() {
         final SOURCE = '''
             67890 ?: 67890
         '''
@@ -155,7 +155,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInIf() {
+    void InIf() {
         final SOURCE = '''
             if (x == 67890) return x
             else if (y == 67890) return y
@@ -165,7 +165,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInReturn() {
+    void InReturn() {
         final SOURCE = '''
             if (true) return 67890
             else return 67890
@@ -174,7 +174,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInInvocation() {
+    void InInvocation() {
         final SOURCE = '''
             67890.equals(x)
             67890.equals(y)
@@ -183,7 +183,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInNamedArgumentList() {
+    void InNamedArgumentList() {
         final SOURCE = '''
             x(b: 11.783)
             y(a: 11.783)
@@ -192,7 +192,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testIgnoreNumbers_IgnoresSingleValue() {
+    void IgnoreNumbers_IgnoresSingleValue() {
         final SOURCE = '''
             def x = [23, -3.5, 23]
             def y = [37, -7, 37]
@@ -202,7 +202,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testIgnoreNumbers_IgnoresMultipleValues() {
+    void IgnoreNumbers_IgnoresMultipleValues() {
         final SOURCE = '''
             def x = [0.725, 897.452, 0.725]
             def y = [-97, 11, -97]
@@ -212,7 +212,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testIgnoreNumbers_ByDefaultIgnoresZeroAndOne() {
+    void IgnoreNumbers_ByDefaultIgnoresZeroAndOne() {
         final SOURCE = '''
             def x = [0, 12, 1, 34.567, 99, 1, 78, 0, 12.345]
         '''
@@ -220,7 +220,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testIgnoreNumbers_InvalidNumber() {
+    void IgnoreNumbers_InvalidNumber() {
         final SOURCE = '''
             def x = [0.725,0.725, 'xxx']
         '''
@@ -229,7 +229,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testDuplicateNumberMinimumValue_0_Violation() {
+    void DuplicateNumberMinimumValue_0_Violation() {
         final SOURCE = '''
             def x = [5, 5, 'xxx']
         '''
@@ -238,7 +238,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testDuplicateNumberMinimumValue_10_Success() {
+    void DuplicateNumberMinimumValue_10_Success() {
         final SOURCE = '''
             def x = [9, 9, 'xxx']
         '''
@@ -247,7 +247,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testDuplicateNumberMinimumValue_10_ViolationEquals() {
+    void DuplicateNumberMinimumValue_10_ViolationEquals() {
         final SOURCE = '''
             def x = [10, 10, 'xxx']
         '''
@@ -256,7 +256,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testDuplicateNumberMinimumValue_10_ViolationUpper() {
+    void DuplicateNumberMinimumValue_10_ViolationUpper() {
         final SOURCE = '''
             def x = [11, 11, 'xxx']
         '''
@@ -265,7 +265,38 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testEnum() {
+    void DuplicateNumberMinimumValue_LongNumbers() {
+        final SOURCE = '''
+            class Main {
+                public static final List DUPLICATE_NUMBERS = [3317862236, 3317862236]
+                public static final List UNIQUE_NUMBERS = [9876543210, 1234567890]
+                static void main(String[] args) {
+                    println(DUPLICATE_NUMBERS)
+                }
+            }
+        '''
+        rule.duplicateNumberMinimumValue = 9
+        assertSingleViolation(SOURCE, 3, 'List DUPLICATE_NUMBERS = [3317862236, 3317862236]', '3317862236')
+    }
+
+    @Test
+    void DuplicateNumberMinimumValue_BigDecimalNumbers() {
+        final SOURCE = '''
+            class Main {
+                private static final List NUMBERS = [12.34567, 999999999.12]
+                private static final List TOO_SMALL = [1.35, 8.99]
+                static void main(String[] args) {
+                    BigDecimal someOtherNumber = 12.34567
+                    println(NUMBERS)
+                }
+            }
+        '''
+        rule.duplicateNumberMinimumValue = 9
+        assertSingleViolation(SOURCE, 6, 'BigDecimal someOtherNumber = 12.34567', '12.34567')
+    }
+
+    @Test
+    void Enum() {
         final SOURCE = '''
             package com.example
 
@@ -287,7 +318,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
     }
 
     @Test
-    void testInAnnotation_NoViolation() {
+    void InAnnotation_NoViolation() {
         final SOURCE = '''
             @MyAnnotation1NumberValue(11)
             @MyAnnotation2NumberValue(11)

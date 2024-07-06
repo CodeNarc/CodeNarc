@@ -37,30 +37,18 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
     private final Closure additionalCheckClosure
     private boolean isEnum
 
-    DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet) {
+    DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet, Closure additionalCheckClosure) {
         assert constantType
         this.constantTypes = [constantType]
         this.ignoreValuesSet = ignoreValuesSet
+        this.additionalCheckClosure = additionalCheckClosure
     }
 
-    DuplicateLiteralAstVisitor(List<Class> constantTypes, Set ignoreValuesSet) {
+    DuplicateLiteralAstVisitor(List<Class> constantTypes, Set ignoreValuesSet, Closure additionalCheckClosure) {
         assert constantTypes
         this.constantTypes = constantTypes
         this.ignoreValuesSet = ignoreValuesSet
-    }
-
-    DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet, Closure addlCheckClosure) {
-        assert constantType
-        this.constantTypes = [constantType]
-        this.ignoreValuesSet = ignoreValuesSet
-        this.additionalCheckClosure = addlCheckClosure
-    }
-
-    DuplicateLiteralAstVisitor(List<Class> constantTypes, Set ignoreValuesSet, Closure addlCheckClosure) {
-        assert constantTypes
-        this.constantTypes = constantTypes
-        this.ignoreValuesSet = ignoreValuesSet
-        this.additionalCheckClosure = addlCheckClosure
+        this.additionalCheckClosure = additionalCheckClosure
     }
 
     @Override

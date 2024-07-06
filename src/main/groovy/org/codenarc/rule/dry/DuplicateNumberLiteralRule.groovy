@@ -36,7 +36,8 @@ import org.codenarc.rule.AstVisitor
  */
 class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
 
-    private static final List NUMBER_TYPES = [Number,
+    private static final List NUMBER_TYPES = [
+            Number,
             Byte.TYPE,
             Double.TYPE,
             Float.TYPE,
@@ -54,22 +55,24 @@ class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
     AstVisitor getAstVisitor() {
         def ignoreValuesSet = parseIgnoreValues()
         def additionalChecksClosure = defineAdditionalChecksClosure()
-        new DuplicateLiteralAstVisitor(NUMBER_TYPES, ignoreValuesSet, additionalChecksClosure)
+        return new DuplicateLiteralAstVisitor(NUMBER_TYPES, ignoreValuesSet, additionalChecksClosure)
     }
 
     private Set parseIgnoreValues() {
         def strings = ignoreNumbers ? ignoreNumbers.tokenize(',') : []
         def numbers = strings*.trim()
-        numbers as Set
+        return numbers as Set
     }
 
     // Define a compare closure if duplicateNumberMinimumValue is defined
     private Closure defineAdditionalChecksClosure() {
         if (duplicateNumberMinimumValue || duplicateNumberMinimumValue == 0) {
+            BigDecimal duplicateNumberMinimumBigDecimal = new BigDecimal(duplicateNumberMinimumValue.toString())
             return { node ->
-                Integer.valueOf(node.value) >= Integer.valueOf(duplicateNumberMinimumValue)
+                // Every number type can be converted to a BigDecimal
+                new BigDecimal(node.value.toString()) >= duplicateNumberMinimumBigDecimal
             }
         }
-        null
+        return null
     }
 }
