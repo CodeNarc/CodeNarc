@@ -3,7 +3,7 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-TODO: Version 3.5.0  (??? 2024)
+Version 3.5.0  (July 2024)
 New Rules
  - New Jenkins ruleset with 7 new rules. By default, these apply only to 'Jenkinsfile' ([Daniel Zänker](https://github.com/danielzaenker)):
     - #771: **ParameterOrReturnTypeNotSerializable** rule: Every parameter and return type has to implement the Serializable interface in Jenkins

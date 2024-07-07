@@ -47,12 +47,14 @@ ruleset {
     ClassName 
     ClassNameSameAsFilename 
     ClassNameSameAsSuperclass 
+    ClassNotSerializable 
     ClassSize 
     ClassStartsWithBlankLine 
     CloneWithoutCloneable 
     CloneableWithoutClone 
     CloseWithoutCloseable 
     ClosureAsLastMethodParameter 
+    ClosureInGString 
     ClosureStatementOnOpeningLineOfMultipleLineClosure 
     CollectAllIsDeprecated 
     CompareToWithoutComparable 
@@ -73,6 +75,7 @@ ruleset {
     CouldBeElvis 
     CouldBeSwitchStatement 
     CoupledTestCase 
+    CpsCallFromNonCpsMethod 
     CrapMetric   // Requires the GMetrics jar and a Cobertura coverage file
     CyclomaticComplexity   // Requires the GMetrics jar
     DeadCode 
@@ -131,6 +134,7 @@ ruleset {
     ExplicitLinkedListInstantiation 
     ExplicitStackInstantiation 
     ExplicitTreeSetInstantiation 
+    ExpressionInCpsMethodNotSerializable 
     FactoryMethodName 
     FieldName 
     FieldTypeRequired 
@@ -139,6 +143,7 @@ ruleset {
     FinalClassWithProtectedMember 
     ForLoopShouldBeWhileLoop 
     ForStatementBraces 
+    ForbiddenCallInCpsMethod 
     GStringAsMapKey 
     GStringExpressionWithinString 
     GetterMethodCouldBeProperty 
@@ -245,8 +250,10 @@ ruleset {
     NoWildcardImports 
     NonFinalPublicField 
     NonFinalSubclassOfSensitiveInterface 
+    NonSerializableFieldInSerializableClass 
     ObjectFinalize 
     ObjectOverrideMisspelledMethodName 
+    ObjectOverrideOnlyNonCpsMethods 
     OptionalCollectionReturnType 
     OptionalField 
     OptionalMethodParameter 
@@ -255,6 +262,7 @@ ruleset {
     ParameterAssignmentInFilterClosure 
     ParameterCount 
     ParameterName 
+    ParameterOrReturnTypeNotSerializable 
     ParameterReassignment 
     PrintStackTrace 
     Println 

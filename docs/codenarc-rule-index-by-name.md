@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index by Name
 
 # Rule Index by Name
 
-**CodeNarc** includes 397 rules.
+**CodeNarc** includes 405 rules.
 
 ## Rules
   * [AbcMetric](./codenarc-rules-size.html#abcmetric-rule)    (Requires the GMetrics jar)
@@ -49,12 +49,14 @@ title: CodeNarc - Rule Index by Name
   * [ClassName](./codenarc-rules-naming.html#classname-rule)  
   * [ClassNameSameAsFilename](./codenarc-rules-naming.html#classnamesameasfilename-rule)  
   * [ClassNameSameAsSuperclass](./codenarc-rules-naming.html#classnamesameassuperclass-rule)  
+  * [ClassNotSerializable](./codenarc-rules-jenkins.html#classnotserializable-rule)  
   * [ClassSize](./codenarc-rules-size.html#classsize-rule)  
   * [ClassStartsWithBlankLine](./codenarc-rules-formatting.html#classstartswithblankline-rule)  
   * [CloneWithoutCloneable](./codenarc-rules-enhanced.html#clonewithoutcloneable-rule)  
   * [CloneableWithoutClone](./codenarc-rules-design.html#cloneablewithoutclone-rule)  
   * [CloseWithoutCloseable](./codenarc-rules-design.html#closewithoutcloseable-rule)  
   * [ClosureAsLastMethodParameter](./codenarc-rules-groovyism.html#closureaslastmethodparameter-rule)  
+  * [ClosureInGString](./codenarc-rules-jenkins.html#closureingstring-rule)  
   * [ClosureStatementOnOpeningLineOfMultipleLineClosure](./codenarc-rules-formatting.html#closurestatementonopeninglineofmultiplelineclosure-rule)  
   * [CollectAllIsDeprecated](./codenarc-rules-groovyism.html#collectallisdeprecated-rule)  
   * [CompareToWithoutComparable](./codenarc-rules-design.html#comparetowithoutcomparable-rule)  
@@ -75,6 +77,7 @@ title: CodeNarc - Rule Index by Name
   * [CouldBeElvis](./codenarc-rules-convention.html#couldbeelvis-rule)  
   * [CouldBeSwitchStatement](./codenarc-rules-convention.html#couldbeswitchstatement-rule)  
   * [CoupledTestCase](./codenarc-rules-junit.html#coupledtestcase-rule)  
+  * [CpsCallFromNonCpsMethod](./codenarc-rules-jenkins.html#cpscallfromnoncpsmethod-rule)  
   * [CrapMetric](./codenarc-rules-size.html#crapmetric-rule)    (Requires the GMetrics jar and a Cobertura coverage file)
   * [CyclomaticComplexity](./codenarc-rules-size.html#cyclomaticcomplexity-rule)    (Requires the GMetrics jar)
   * [DeadCode](./codenarc-rules-basic.html#deadcode-rule)  
@@ -133,6 +136,7 @@ title: CodeNarc - Rule Index by Name
   * [ExplicitLinkedListInstantiation](./codenarc-rules-groovyism.html#explicitlinkedlistinstantiation-rule)  
   * [ExplicitStackInstantiation](./codenarc-rules-groovyism.html#explicitstackinstantiation-rule)  
   * [ExplicitTreeSetInstantiation](./codenarc-rules-groovyism.html#explicittreesetinstantiation-rule)  
+  * [ExpressionInCpsMethodNotSerializable](./codenarc-rules-jenkins.html#expressionincpsmethodnotserializable-rule)  
   * [FactoryMethodName](./codenarc-rules-naming.html#factorymethodname-rule)  
   * [FieldName](./codenarc-rules-naming.html#fieldname-rule)  
   * [FieldTypeRequired](./codenarc-rules-convention.html#fieldtyperequired-rule)  
@@ -141,6 +145,7 @@ title: CodeNarc - Rule Index by Name
   * [FinalClassWithProtectedMember](./codenarc-rules-design.html#finalclasswithprotectedmember-rule)  
   * [ForLoopShouldBeWhileLoop](./codenarc-rules-basic.html#forloopshouldbewhileloop-rule)  
   * [ForStatementBraces](./codenarc-rules-braces.html#forstatementbraces-rule)  
+  * [ForbiddenCallInCpsMethod](./codenarc-rules-jenkins.html#forbiddencallincpsmethod-rule)  
   * [GStringAsMapKey](./codenarc-rules-groovyism.html#gstringasmapkey-rule)  
   * [GStringExpressionWithinString](./codenarc-rules-groovyism.html#gstringexpressionwithinstring-rule)  
   * [GetterMethodCouldBeProperty](./codenarc-rules-groovyism.html#gettermethodcouldbeproperty-rule)  
@@ -247,8 +252,10 @@ title: CodeNarc - Rule Index by Name
   * [NoWildcardImports](./codenarc-rules-imports.html#nowildcardimports-rule)  
   * [NonFinalPublicField](./codenarc-rules-security.html#nonfinalpublicfield-rule)  
   * [NonFinalSubclassOfSensitiveInterface](./codenarc-rules-security.html#nonfinalsubclassofsensitiveinterface-rule)  
+  * [NonSerializableFieldInSerializableClass](./codenarc-rules-serialization.html#nonserializablefieldinserializableclass-rule)  
   * [ObjectFinalize](./codenarc-rules-security.html#objectfinalize-rule)  
   * [ObjectOverrideMisspelledMethodName](./codenarc-rules-naming.html#objectoverridemisspelledmethodname-rule)  
+  * [ObjectOverrideOnlyNonCpsMethods](./codenarc-rules-jenkins.html#objectoverrideonlynoncpsmethods-rule)  
   * [OptionalCollectionReturnType](./codenarc-rules-design.html#optionalcollectionreturntype-rule)  
   * [OptionalField](./codenarc-rules-design.html#optionalfield-rule)  
   * [OptionalMethodParameter](./codenarc-rules-design.html#optionalmethodparameter-rule)  
@@ -257,6 +264,7 @@ title: CodeNarc - Rule Index by Name
   * [ParameterAssignmentInFilterClosure](./codenarc-rules-basic.html#parameterassignmentinfilterclosure-rule)  
   * [ParameterCount](./codenarc-rules-size.html#parametercount-rule)  
   * [ParameterName](./codenarc-rules-naming.html#parametername-rule)  
+  * [ParameterOrReturnTypeNotSerializable](./codenarc-rules-jenkins.html#parameterorreturntypenotserializable-rule)  
   * [ParameterReassignment](./codenarc-rules-convention.html#parameterreassignment-rule)  
   * [PrintStackTrace](./codenarc-rules-logging.html#printstacktrace-rule)  
   * [Println](./codenarc-rules-logging.html#println-rule)  
