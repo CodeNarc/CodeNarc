@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index
 
 # Rule Index
 
-**CodeNarc** includes 397 rules.
+**CodeNarc** includes 405 rules.
     
 ## [Basic](./codenarc-rules-basic.html)
   * [AssertWithinFinallyBlock](./codenarc-rules-basic.html#assertwithinfinallyblock-rule)  
@@ -311,6 +311,15 @@ title: CodeNarc - Rule Index
   * [JdbcResultSetReference](./codenarc-rules-jdbc.html#jdbcresultsetreference-rule)  
   * [JdbcStatementReference](./codenarc-rules-jdbc.html#jdbcstatementreference-rule)  
 
+## [Jenkins](./codenarc-rules-jenkins.html)
+  * [ClassNotSerializable](./codenarc-rules-jenkins.html#classnotserializable-rule)  
+  * [ClosureInGString](./codenarc-rules-jenkins.html#closureingstring-rule)  
+  * [CpsCallFromNonCpsMethod](./codenarc-rules-jenkins.html#cpscallfromnoncpsmethod-rule)  
+  * [ExpressionInCpsMethodNotSerializable](./codenarc-rules-jenkins.html#expressionincpsmethodnotserializable-rule)  
+  * [ForbiddenCallInCpsMethod](./codenarc-rules-jenkins.html#forbiddencallincpsmethod-rule)  
+  * [ObjectOverrideOnlyNonCpsMethods](./codenarc-rules-jenkins.html#objectoverrideonlynoncpsmethods-rule)  
+  * [ParameterOrReturnTypeNotSerializable](./codenarc-rules-jenkins.html#parameterorreturntypenotserializable-rule)  
+
 ## [Junit](./codenarc-rules-junit.html)
   * [ChainedTest](./codenarc-rules-junit.html#chainedtest-rule)  
   * [CoupledTestCase](./codenarc-rules-junit.html#coupledtestcase-rule)  
@@ -379,6 +388,7 @@ title: CodeNarc - Rule Index
 
 ## [Serialization](./codenarc-rules-serialization.html)
   * [EnumCustomSerializationIgnored](./codenarc-rules-serialization.html#enumcustomserializationignored-rule)  
+  * [NonSerializableFieldInSerializableClass](./codenarc-rules-serialization.html#nonserializablefieldinserializableclass-rule)  
   * [SerialPersistentFields](./codenarc-rules-serialization.html#serialpersistentfields-rule)  
   * [SerialVersionUID](./codenarc-rules-serialization.html#serialversionuid-rule)  
   * [SerializableClassMustDefineSerialVersionUID](./codenarc-rules-serialization.html#serializableclassmustdefineserialversionuid-rule)  

@@ -310,6 +310,15 @@ ruleset {
     JdbcResultSetReference 
     JdbcStatementReference 
     
+    // rulesets/jenkins.xml
+    ClassNotSerializable 
+    ClosureInGString 
+    CpsCallFromNonCpsMethod 
+    ExpressionInCpsMethodNotSerializable 
+    ForbiddenCallInCpsMethod 
+    ObjectOverrideOnlyNonCpsMethods 
+    ParameterOrReturnTypeNotSerializable 
+    
     // rulesets/junit.xml
     ChainedTest 
     CoupledTestCase 
@@ -378,6 +387,7 @@ ruleset {
     
     // rulesets/serialization.xml
     EnumCustomSerializationIgnored 
+    NonSerializableFieldInSerializableClass 
     SerialPersistentFields 
     SerialVersionUID 
     SerializableClassMustDefineSerialVersionUID 
