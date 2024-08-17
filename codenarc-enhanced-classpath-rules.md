@@ -21,9 +21,9 @@ The "Enhanced" CodeNarc rules:
  * UnsafeImplementationAsMap
  * MissingOverrideAnnotation
  * GrailsDomainGormMethods
- * NotAllFieldsOfSerializableClassSerializable
+ * NonSerializableFieldInSerializableClass
  * ParameterOrReturnTypeNotSerializable
- * OverridesNotNonCps
+ * ObjectOverrideOnlyNonCpsMethods
  * ForbiddenCallInCpsMethod
  * ExpressionInCpsMethodNotSerializable
  * CpsCallFromNonCpsMethod
