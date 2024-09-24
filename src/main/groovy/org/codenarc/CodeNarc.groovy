@@ -114,7 +114,8 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         optional path) of the output report filename. If the TYPE is followed by :stdout (e.g. "html:stdout", "json:stdout"),
         then the report is written to standard out. If the report filename is  omitted, the default filename
         is used for the specified report type ("CodeNarcReport.html" for "html", "CodeNarcXmlReport.xml" for
-        "xml" and "CodeNarcJsonReport.json" for "json"). If no report option is specified, default to a
+        "xml", "CodeNarcReport.txt" for "text", "CodeNarcJsonReport.json" for "json" and
+        "CodeNarcGitlabCodeQualityReport.json" for "gitlab"). If no report option is specified, default to a
         single "html" report with the default filename.
     -plugins=<PLUGIN CLASS NAMES>
         The optional list of CodeNarcPlugin class names to register, separated by commas.
