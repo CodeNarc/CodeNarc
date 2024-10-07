@@ -31,7 +31,7 @@ class VirtualResults implements Results {
     }
 
     @Override
-    List getViolations() {
+    List<Violation> getViolations() {
         return new ArrayList(violations)
     }
 
@@ -41,7 +41,7 @@ class VirtualResults implements Results {
     }
 
     @Override
-    List getChildren() {
+    List<Results> getChildren() {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 

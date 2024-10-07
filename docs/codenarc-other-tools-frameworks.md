@@ -47,6 +47,10 @@ See [CodeNarc - Docker](./codenarc-docker.html).
 
   * [NPM Groovy Lint](https://github.com/nvuillam/npm-groovy-lint) - NPM CodeNarc wrapper to easily lint, format and fix Groovy files and Jenkinsfile via command line. Uses CodeNarc for its static analysis of Groovy source code.
 
+  * [GitLab Code Quality](https://docs.gitlab.com/ee/ci/testing/code_quality.html) -
+    Using the "gitlab" report formatter, you can export the linting results to the
+    running GitLab installation, to support in code reviews and merge requests.
+
 
 ## Customizing ClassLoader for Loading Rule Scripts
 

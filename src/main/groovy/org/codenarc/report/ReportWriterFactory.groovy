@@ -42,6 +42,7 @@ class ReportWriterFactory {
             case 'inlineXml' : return new InlineXmlReportWriter()
             case 'baseline': return new BaselineXmlReportWriter()
             case 'compact': def w = new CompactTextReportWriter(); w.writeToStandardOut = true; return w
+            case 'gitlab': return new GitlabCodeQualityReportWriter()
         }
 
         def reportClass = getClass().classLoader.loadClass(type)
