@@ -22,7 +22,7 @@ import org.codenarc.ruleset.RuleSets
 import org.codenarc.ruleset.XmlFileRuleSet
 
 /**
- * Java application (main() method) that generates the "StarterRuleSet-AllRulesByCategory.groovy.txt.template" file.
+ * Java application (main() method) that generates the "StarterRuleSet-AllRulesByCategory.groovy.txt" file.
  * This file is a valid CodeNarc ruleset file that includes ALL rules distributed with CodeNarc, grouped by the
  * category.
  *
@@ -37,7 +37,7 @@ class GenerateRuleSetAllRulesByCategory {
     protected static String ruleSetFile = RULESET_FILE
 
     /**
-     * Write out all current rules to the 'codenarc-base-rules.properties' properties file
+     * Write out all current rules to the 'StarterRuleSet-AllRulesByCategory.groovy.txt' properties file
      * @param args - command-line args (not used)
      */
     static void main(String[] args) {

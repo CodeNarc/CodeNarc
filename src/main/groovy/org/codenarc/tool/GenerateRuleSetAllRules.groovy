@@ -20,7 +20,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 /**
- * Java application (main() method) that generates the "StarterRuleSet-AllRules.groovy.txt.template" file.
+ * Java application (main() method) that generates the "StarterRuleSet-AllRules.groovy.txt" file.
  * This file is a valid CodeNarc ruleset file that includes ALL rules distributed with CodeNarc.
  *
  * @author Chris Mair
@@ -34,7 +34,7 @@ class GenerateRuleSetAllRules {
     protected static String ruleSetFile = RULESET_FILE
 
     /**
-     * Write out all current rules to the 'codenarc-base-rules.properties' properties file
+     * Write out all current rules to the 'StarterRuleSet-AllRules.groovy.txt' properties file
      * @param args - command-line args (not used)
      */
     static void main(String[] args) {
