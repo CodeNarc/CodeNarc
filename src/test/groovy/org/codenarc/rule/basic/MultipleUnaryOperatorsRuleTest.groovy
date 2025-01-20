@@ -58,13 +58,13 @@ class MultipleUnaryOperatorsRuleTest extends AbstractRuleTestCase<MultipleUnaryO
         '''
         def message = 'The expression %s in class None contains confusing multiple consecutive unary operators'
         assertViolations(SOURCE,
-            [line:2, source:'int z = ~~2', message:String.format(message, '(~~2)')],
+            [line:2, source:'int z = ~~2', message:['The expression', '(~~)', '2']],
             [line:3, source:'boolean b = !!true', message:String.format(message, '(!!true)')],
             [line:4, source:'boolean c = !!!false', message:String.format(message, '(!!false)')],
             [line:4, source:'boolean c = !!!false', message:String.format(message, '(!!false)')],
-            [line:5, source:'int j = -~7', message:String.format(message, '(-~7)')],
-            [line:6, source:'int k = +~8', message:String.format(message, '(+~8)')],
-            [line:7, source:'boolean d = !~1', message:String.format(message, '(!~1)')])
+            [line:5, source:'int j = -~7', message:['The expression', '(-~)', '7']],
+            [line:6, source:'int k = +~8', message:['The expression', '(+~)', '8']],
+            [line:7, source:'boolean d = !~1', message:['The expression', '(!~)', '1']])
     }
 
     @Override

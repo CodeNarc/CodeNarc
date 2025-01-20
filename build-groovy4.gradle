@@ -24,7 +24,7 @@ repositories {
     maven { url 'https://repo.maven.apache.org/maven2' }
 }
 
-def groovy4Version = '4.0.7'
+def groovy4Version = '4.0.24'
 def gmetricsVersion = '2.1.0'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"

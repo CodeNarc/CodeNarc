@@ -43,7 +43,7 @@ class MultipleUnaryOperatorsAstVisitor extends AbstractAstVisitor {
         (UnaryMinusExpression):'-',
         (UnaryPlusExpression):'+' ]
     private static final Set UNARY_OPERATOR_CLASSES = UNARY_OPERATORS.keySet()
-    private static final String ERROR_MESSAGE = 'The expression (%s) in class %s contains confusing multiple consecutive unary operators'
+    private static final String ERROR_MESSAGE = 'The expression (%s) in class %s contains confusing multiple consecutive unary operators (%s)'
 
     @Override
     void visitBitwiseNegationExpression(BitwiseNegationExpression expression) {
@@ -73,7 +73,7 @@ class MultipleUnaryOperatorsAstVisitor extends AbstractAstVisitor {
         if (expression.expression.class in UNARY_OPERATOR_CLASSES) {
             String operators = UNARY_OPERATORS[firstOperatorClass] + UNARY_OPERATORS[expression.expression.class]
             String expressionText = operators + expression.text
-            addViolation(expression, String.format(ERROR_MESSAGE, expressionText, currentClassName))
+            addViolation(expression, String.format(ERROR_MESSAGE, expressionText, currentClassName, operators))
         }
     }
 

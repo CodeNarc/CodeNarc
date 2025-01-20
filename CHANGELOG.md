@@ -3,6 +3,12 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
+Version 3.6.0  (July 2024)
+--------------------------------------
+ - #786: GitLab Code Quality output. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+ - #782: Upgrade to at least Groovy 4.0.24 and Groovy 3.0.23. MultipleUnaryOperatorsRule: Adjusted expected expression error message formatting.
+ - #787: Add tests for IndentationRule for multi-line method parameters and multi-line strings.
+
 Version 3.5.0  (July 2024)
 --------------------------------------
 New Rules
