@@ -1192,6 +1192,32 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void MultipleFunctionParameters() {
+        final SOURCE = '''
+            |myFunc(
+            |    foo: 1,
+            |    bar: 2,
+            |    baz: 3,
+            |)
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void MultilineString() {
+        final SOURCE = '''
+            |def myFunc() {
+            |    def multiLineText = \'\'\'
+            |        hello
+            |        line
+            |        another line
+            |    \'\'\'
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_firstNonWhitespaceColumn() {
         assert IndentationAstVisitor.firstNonWhitespaceColumn('') == -1
         assert IndentationAstVisitor.firstNonWhitespaceColumn('    ') == -1
