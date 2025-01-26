@@ -474,6 +474,10 @@ Example of violations:
 
 Enforce that all public methods are above protected and private methods.
 
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| ignoreMethodNames           | Specifies one or more (comma-separated) non-public method names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null`  |
+
 Example of violations:
 
 ```
@@ -521,6 +525,10 @@ Enforce that all static methods within each visibility level (public, protected,
 instance methods within that same visibility level. In other words, public static methods must be above
 public instance methods, protected static methods must be above protected instance methods and private
 static methods must be above private instance methods.
+
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| ignoreMethodNames           | Specifies one or more (comma-separated) instance method names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null`  |
 
 Example of violations:
 
