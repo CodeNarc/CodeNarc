@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test
  * Tests for StaticMethodsBeforeInstanceMethodsRule
  *
  * @author Chris Mair
+ * @author Peter Thomas
  */
 class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<StaticMethodsBeforeInstanceMethodsRule> {
 
@@ -29,6 +30,7 @@ class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<St
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'StaticMethodsBeforeInstanceMethods'
+        assert rule.ignoreMethodNames == null
     }
 
     @Test
@@ -101,14 +103,179 @@ class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<St
     @Test
     void test_Script_NoViolations() {
         final SOURCE = ''' #!/usr/bin/groovy
-            
+
             import acme.Utils
-            
+
             static boolean call() {
                 new Utils().isSomething()
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_StaticMethodsAboveInstanceMethodsByVisibility_IgnoreMatched_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                // Public
+                public static int staticMethod1() { }
+                static final String staticMethod2(int id) { }
+                private String getPrivateStringValue1() { }
+                private void setPrivateStringValue1(String value) { }
+                public String method1() { }
+                int method2() { }
+
+                // Protected
+                protected static staticMethod3() { }
+                protected String getStringValue2() { }
+                protected void setStringValue2(String value) { }
+                protected String method3() { }
+
+                // Private
+                private static staticMethod4() { }
+                private String getPrivateStringValue1() { }
+                private void setPrivateStringValue1(String value) { }
+                private int method4() { }
+                int method5() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'get*,set*'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_InstanceMethodsAboveStaticMethodsByVisibility_IgnoreMatched_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                // Getters and Setters
+                private String getPrivateStringValue1() { }
+                private void setPrivateStringValue1(String value) { }
+                public String getStringValue1() { }
+                public void setStringValue1(String value) { }
+                String getStringValue2() { }
+                void setStringValue2(String value) { }
+
+                // Public
+                public static int staticMethod1() { }
+                static final String staticMethod2(int id) { }
+                public String method1() { }
+                int method2() { }
+
+                // Protected
+                protected static staticMethod3() { }
+                protected String method3() { }
+
+                // Private
+                private static staticMethod4() { }
+                private int method4() { }
+                int method5() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'get*,set*'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_InstanceMethodsAboveStaticMethodsByVisibility_IgnoreNotMatched_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                // Getters and Setters
+                private String getPrivateStringValue1() { }
+                private void setPrivateStringValue1(String value) { }
+                public String getStringValue1() { }
+                public void setStringValue1(String value) { }
+                String getStringValue2() { }
+                void setStringValue2(String value) { }
+
+                // Public
+                public static int staticMethod1() { }
+                static final String staticMethod2(int id) { }
+                public String method1() { }
+                int method2() { }
+
+                // Protected
+                protected static staticMethod3() { }
+                protected String method3() { }
+
+                // Private
+                private static staticMethod4() { }
+                private int method4() { }
+                int method5() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'unmatchedGet*,unmatchedSet*'
+        assertViolations(SOURCE,
+            [line:12, source:'public static int staticMethod1() { }', message:'public static method staticMethod1 in class MyClass is declared after a public instance method'],
+            [line:13, source:'static final String staticMethod2(int id) { }', message:'public static method staticMethod2 in class MyClass is declared after a public instance method'],
+            [line:22, source:'private static staticMethod4() { }', message:'private static method staticMethod4 in class MyClass is declared after a private instance method'])
+    }
+
+    @Test
+    void test_InstanceMethodsAboveStaticMethodsByVisibility_PartialIgnoreMatch_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                // Getters and Setters
+                private String getPrivateStringValue1() { }
+                private void setPrivateStringValue1(String value) { }
+                protected String getStringValue2() { }
+                protected void setStringValue2(String value) { }
+                public String getStringValue1() { }
+                public void setStringValue1(String value) { }
+
+                // Public
+                public static int staticMethod1() { }
+                static final String staticMethod2(int id) { }
+                public String method1() { }
+                int method2() { }
+
+                // Protected
+                protected static staticMethod3() { }
+                protected String method3() { }
+
+                // Private
+                private static staticMethod4() { }
+                private int method4() { }
+                int method5() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'get*,setPrivateStringValue1'
+        assertViolations(SOURCE,
+            [line:12, source:'public static int staticMethod1() { }', message:'public static method staticMethod1 in class MyClass is declared after a public instance method'],
+            [line:13, source:'static final String staticMethod2(int id) { }', message:'public static method staticMethod2 in class MyClass is declared after a public instance method'],
+            [line:18, source:'protected static staticMethod3() { }', message:'protected static method staticMethod3 in class MyClass is declared after a protected instance method'])
+    }
+
+    @Test
+    void test_InstanceMethodsBetweenStaticMethods_IgnoreMatched_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                // Getters and Setters
+                private String getPrivateStringValue1() { }
+                private void setPrivateStringValue1(String value) { }
+                protected String getStringValue2() { }
+                protected void setStringValue2(String value) { }
+
+                // Public
+                public static int staticMethod1() { }
+                public String getStringValue1() { }
+                public void setStringValue1(String value) { }
+                static final String staticMethod2(int id) { }
+                public String method1() { }
+                int method2() { }
+
+                // Protected
+                protected static staticMethod3() { }
+                protected String method3() { }
+
+                // Private
+                private static staticMethod4() { }
+                private int method4() { }
+                int method5() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'get*,set*'
+        assertViolations(SOURCE,
+            [line:13, source:'static final String staticMethod2(int id) { }', message:'public static method staticMethod2 in class MyClass is declared after a public instance method'])
     }
 
     @Override

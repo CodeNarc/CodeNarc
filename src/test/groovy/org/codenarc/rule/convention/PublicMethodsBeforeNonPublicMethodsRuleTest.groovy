@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test
  * Tests for PublicMethodsBeforeNonPublicMethodsRule
  *
  * @author Chris Mair
+ * @author Peter Thomas
  */
 class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<PublicMethodsBeforeNonPublicMethodsRule> {
 
@@ -29,6 +30,7 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'PublicMethodsBeforeNonPublicMethods'
+        assert rule.ignoreMethodNames == null
     }
 
     @Test
@@ -121,6 +123,124 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_PublicMethodAfterPrivate_IgnoreMatched_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private String getSomething() { }
+
+                static final String staticMethod1() { }
+                public String method2() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'get*'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_PublicMethodAfterPrivate_IgnoreNotMatched_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                private String getSomething() { }
+
+                static final String staticMethod1() { }
+                public String method2() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'ignoredMethod'
+        assertViolations(SOURCE,
+            [line:5, source:'static final String staticMethod1() { }', message:'public method staticMethod1 in class MyClass is declared after a non-public method'],
+            [line:6, source:'public String method2() { }', message:'public method method2 in class MyClass is declared after a non-public method'])
+    }
+
+    @Test
+    void test_PrivateMethodBetweenPublicMethods_IgnoreMatched_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                static final String staticMethod1() { }
+
+                private String getSomething() { }
+
+                public String method2() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'getSomething'
+        assertViolations(SOURCE,
+            [line:7, source:'public String method2() { }', message:'public method method2 in class MyClass is declared after a non-public method'])
+    }
+
+    @Test
+    void test_PrivateMethodBetweenPublicMethods_IgnoreNotMatched_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                static final String staticMethod1() { }
+
+                private String getSomething() { }
+
+                public String method2() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'ignoredMethod*'
+        assertViolations(SOURCE,
+            [line:7, source:'public String method2() { }', message:'public method method2 in class MyClass is declared after a non-public method'])
+    }
+
+    @Test
+    void test_ProtectedMethodsAboveAllPublicAndNonPublicMethods_IgnoreMatched_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                protected String getSomethingPrivate() { }
+                protected void setSomethingPrivate(String value) { }
+
+                public static int staticMethod1() { }
+                static final String staticMethod2(int id) { }
+
+                public String method1() { }
+                String method2() { }
+
+                protected static String staticMethod3() { }
+
+                protected String method3() { }
+
+                private static int staticMethod4() { }
+
+                private int method4() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'get*,setSomethingPrivate'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_ProtectedMethodsAboveAllPublicAndNonPublicMethods_PartialIgnoreMatch_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                protected String getSomethingPrivate() { }
+                protected void somePrivateMethod() { }
+
+                public static int staticMethod1() { }
+                static final String staticMethod2(int id) { }
+
+                public String method1() { }
+                String method2() { }
+
+                protected static String staticMethod3() { }
+
+                protected String method3() { }
+
+                private static int staticMethod4() { }
+
+                private int method4() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'get*,setSomethingPrivate'
+        assertViolations(SOURCE,
+            [line:6, source:'public static int staticMethod1() { }', message:'public method staticMethod1 in class MyClass is declared after a non-public method'],
+            [line:7, source:'static final String staticMethod2(int id) { }', message:'public method staticMethod2 in class MyClass is declared after a non-public method'],
+            [line:9, source:'public String method1() { }', message:'public method method1 in class MyClass is declared after a non-public method'],
+            [line:10, source:'String method2() { }', message:'public method method2 in class MyClass is declared after a non-public method'])
     }
 
     @Override

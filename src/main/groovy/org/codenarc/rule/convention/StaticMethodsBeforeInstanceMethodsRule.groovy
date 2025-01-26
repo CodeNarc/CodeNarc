@@ -18,20 +18,29 @@ package org.codenarc.rule.convention
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.WildcardPattern
 
 /**
  * Enforce that all static methods within each visibility level (public, protected, private) are above
  * all instance methods within that same visibility level. In other words, public static must be above
  * public instance methods, protected static must be above protected instance methods and private static
  * must be above private instance methods.
+ * <p/>
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) instance
+ * method names that should be ignored in the visibility level ordering (i.e., that should not cause a rule
+ * violation). The name(s) may optionally include wildcard characters ('*' or '?'). A rule violation is still
+ * triggered if an ignored instance method appears after the first static method within the visibility level.
+ * In other words, all ignored instance methods must appear above all static methods within each visibility level).
  *
  * @author Chris Mair
+ * @author Peter Thomas
  */
 class StaticMethodsBeforeInstanceMethodsRule extends AbstractAstVisitorRule {
 
     String name = 'StaticMethodsBeforeInstanceMethods'
     int priority = 3
     Class astVisitorClass = StaticMethodsBeforeInstanceMethodsAstVisitor
+    String ignoreMethodNames
 }
 
 class StaticMethodsBeforeInstanceMethodsAstVisitor extends AbstractAstVisitor {
@@ -51,17 +60,22 @@ class StaticMethodsBeforeInstanceMethodsAstVisitor extends AbstractAstVisitor {
     }
 
     private final Map<Visibility, Boolean> hasDeclaredInstanceMethod = [:]
+    private final Map<Visibility, Boolean> hasDeclaredStaticMethod = [:]
 
     @Override
     protected void visitMethodComplete(MethodNode methodNode) {
         if (!methodNode.synthetic && isNotGeneratedCode(methodNode)) {
             Visibility visibility = getVisibility(methodNode)
             if (methodNode.static) {
+                hasDeclaredStaticMethod[visibility] = true
                 if (hasDeclaredInstanceMethod[visibility]) {
                     addMethodViolation(methodNode, visibility)
                 }
             } else {
-                hasDeclaredInstanceMethod[visibility] = true
+                boolean isNameIgnored = new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)
+                if (!isNameIgnored || hasDeclaredStaticMethod[visibility]) {
+                    hasDeclaredInstanceMethod[visibility] = true
+                }
             }
         }
         super.visitMethodComplete(methodNode)
