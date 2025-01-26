@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id 'idea'
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 shadowJar {
@@ -13,15 +13,16 @@ shadowJar {
 }
 
 group = 'org.codenarc'
-archivesBaseName = 'CodeNarc'
-version = '3.5.0-groovy-4.0'
+version = '3.6.0-groovy-4.0-SNAPSHOT'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+java {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    }
 
 repositories {
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    maven { url 'https://repo.maven.apache.org/maven2' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://repo.maven.apache.org/maven2' }
 }
 
 def groovy4Version = '4.0.24'
@@ -84,12 +85,12 @@ groovydoc {
 }
 
 task groovydocJar(type: Jar, dependsOn: groovydoc ) {
-    classifier 'javadoc' // must use javadoc classifier to be able to deploy to Sonatype
+    archiveClassifier = 'javadoc' // must publish javadoc to be able to deploy to Sonatype
     from groovydoc.destinationDir
 }
 
 signing {
-    required { gradle.taskGraph.hasTask(publish) }
+    required = { gradle.taskGraph.hasTask(publish) }
     sign publishing.publications
 }
 
