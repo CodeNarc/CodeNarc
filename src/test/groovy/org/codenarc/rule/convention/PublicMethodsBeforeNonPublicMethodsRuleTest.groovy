@@ -156,7 +156,7 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
     }
 
     @Test
-    void test_PrivateMethodBetweenPublicMethods_IgnoreMatched_Violations() {
+    void test_PrivateMethodBetweenPublicMethods_IgnoreMatched_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 static final String staticMethod1() { }
@@ -167,8 +167,7 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
             }
         '''
         rule.ignoreMethodNames = 'getSomething'
-        assertViolations(SOURCE,
-            [line:7, source:'public String method2() { }', message:'public method method2 in class MyClass is declared after a non-public method'])
+        assertNoViolations(SOURCE)
     }
 
     @Test

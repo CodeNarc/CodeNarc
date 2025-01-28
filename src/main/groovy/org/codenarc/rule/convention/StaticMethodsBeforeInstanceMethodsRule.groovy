@@ -28,9 +28,7 @@ import org.codenarc.util.WildcardPattern
  * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) instance
  * method names that should be ignored in the visibility level ordering (i.e., that should not cause a rule
- * violation). The name(s) may optionally include wildcard characters ('*' or '?'). A rule violation is still
- * triggered if an ignored instance method appears after the first static method within the visibility level.
- * In other words, all ignored instance methods must appear above all static methods within each visibility level).
+ * violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @author Peter Thomas
@@ -60,22 +58,19 @@ class StaticMethodsBeforeInstanceMethodsAstVisitor extends AbstractAstVisitor {
     }
 
     private final Map<Visibility, Boolean> hasDeclaredInstanceMethod = [:]
-    private final Map<Visibility, Boolean> hasDeclaredStaticMethod = [:]
 
     @Override
     protected void visitMethodComplete(MethodNode methodNode) {
-        if (!methodNode.synthetic && isNotGeneratedCode(methodNode)) {
+        boolean isIgnoredMethod = new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)
+        if (!isIgnoredMethod && !methodNode.synthetic && isNotGeneratedCode(methodNode)) {
             Visibility visibility = getVisibility(methodNode)
             if (methodNode.static) {
-                hasDeclaredStaticMethod[visibility] = true
                 if (hasDeclaredInstanceMethod[visibility]) {
                     addMethodViolation(methodNode, visibility)
                 }
-            } else {
-                boolean isNameIgnored = new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)
-                if (!isNameIgnored || hasDeclaredStaticMethod[visibility]) {
-                    hasDeclaredInstanceMethod[visibility] = true
-                }
+            }
+            else {
+                hasDeclaredInstanceMethod[visibility] = true
             }
         }
         super.visitMethodComplete(methodNode)

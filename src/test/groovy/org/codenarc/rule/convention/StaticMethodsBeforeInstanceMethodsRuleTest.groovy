@@ -246,7 +246,7 @@ class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<St
     }
 
     @Test
-    void test_InstanceMethodsBetweenStaticMethods_IgnoreMatched_Violations() {
+    void test_InstanceMethodsBetweenStaticMethods_IgnoreMatched_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 // Getters and Setters
@@ -274,8 +274,7 @@ class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<St
             }
         '''
         rule.ignoreMethodNames = 'get*,set*'
-        assertViolations(SOURCE,
-            [line:13, source:'static final String staticMethod2(int id) { }', message:'public static method staticMethod2 in class MyClass is declared after a public instance method'])
+        assertNoViolations(SOURCE)
     }
 
     @Override

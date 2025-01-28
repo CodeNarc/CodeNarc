@@ -25,8 +25,7 @@ import org.codenarc.util.WildcardPattern
  * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) non-public method
  * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally include
- * wildcard characters ('*' or '?'). A rule violation is still triggered if an ignored non-public method appears after
- * the first public method. In other words, all ignored non-public methods must appear above all public methods).
+ * wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @author Peter Thomas
@@ -42,20 +41,18 @@ class PublicMethodsBeforeNonPublicMethodsRule extends AbstractAstVisitorRule {
 class PublicMethodsBeforeNonPublicMethodsAstVisitor extends AbstractAstVisitor {
 
     private boolean hasDeclaredNonPublicMethod = false
-    private boolean hasDeclaredPublicMethod = false
 
     @Override
     protected void visitMethodComplete(MethodNode node) {
-        if (node.public) {
-            hasDeclaredPublicMethod = true
-            if (hasDeclaredNonPublicMethod) {
-                addViolation(node, "The public method $node.name in class $currentClassName is declared after a non-public method")
+        boolean isIgnoredMethod = new WildcardPattern(rule.ignoreMethodNames, false).matches(node.name)
+        if (!isIgnoredMethod) {
+            if (node.public) {
+                if (hasDeclaredNonPublicMethod) {
+                    addViolation(node, "The public method $node.name in class $currentClassName is declared after a non-public method")
+                }
             }
-        }
-        else {
-            boolean isNameIgnored = new WildcardPattern(rule.ignoreMethodNames, false).matches(node.name)
-            if (!node.synthetic) {
-                if (!isNameIgnored || hasDeclaredPublicMethod) {
+            else {
+                if (!node.synthetic) {
                     hasDeclaredNonPublicMethod = true
                 }
             }
