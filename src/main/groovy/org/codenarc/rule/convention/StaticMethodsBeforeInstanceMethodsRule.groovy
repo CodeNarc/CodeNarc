@@ -18,20 +18,27 @@ package org.codenarc.rule.convention
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.WildcardPattern
 
 /**
  * Enforce that all static methods within each visibility level (public, protected, private) are above
  * all instance methods within that same visibility level. In other words, public static must be above
  * public instance methods, protected static must be above protected instance methods and private static
  * must be above private instance methods.
+ * <p/>
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) instance
+ * method names that should be ignored in the visibility level ordering (i.e., that should not cause a rule
+ * violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
+ * @author Peter Thomas
  */
 class StaticMethodsBeforeInstanceMethodsRule extends AbstractAstVisitorRule {
 
     String name = 'StaticMethodsBeforeInstanceMethods'
     int priority = 3
     Class astVisitorClass = StaticMethodsBeforeInstanceMethodsAstVisitor
+    String ignoreMethodNames
 }
 
 class StaticMethodsBeforeInstanceMethodsAstVisitor extends AbstractAstVisitor {
@@ -54,13 +61,15 @@ class StaticMethodsBeforeInstanceMethodsAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodComplete(MethodNode methodNode) {
-        if (!methodNode.synthetic && isNotGeneratedCode(methodNode)) {
+        boolean isIgnoredMethod = new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)
+        if (!isIgnoredMethod && !methodNode.synthetic && isNotGeneratedCode(methodNode)) {
             Visibility visibility = getVisibility(methodNode)
             if (methodNode.static) {
                 if (hasDeclaredInstanceMethod[visibility]) {
                     addMethodViolation(methodNode, visibility)
                 }
-            } else {
+            }
+            else {
                 hasDeclaredInstanceMethod[visibility] = true
             }
         }
