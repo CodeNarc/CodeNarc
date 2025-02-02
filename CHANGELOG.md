@@ -3,11 +3,14 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-Version 3.6.0  (Jan 2025)
+TODO: Version 3.6.0  (Feb 2025)
 --------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+ - #790:  Add *ignoreMethodNames* property to **PublicMethodsBeforeNonPublicMethods** and **StaticMethodsBeforeInstanceMethods** rules. ([Peter Thomas](https://github.com/peter-thomas-mgd))
+
 New GitLab Report Writer
- - #786: GitLab Code Quality report. The new `GitlabCodeQualityReportWriter` produces a JSON report of the **CodeNarc** results, suitable for consumption
-   by GitLab. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
+- #786: GitLab Code Quality report. The new `GitlabCodeQualityReportWriter` produces a JSON report of the **CodeNarc** results, suitable for consumption
+  by GitLab. ([Ulrich Eckhardt](https://github.com/UlrichEckhardt))
 
 Build, Infrastructure and Tests
  - #782: Upgrade to Groovy 4.0.24 and Groovy 3.0.23. `MultipleUnaryOperatorsRule`: Adjusted expected expression error message formatting.

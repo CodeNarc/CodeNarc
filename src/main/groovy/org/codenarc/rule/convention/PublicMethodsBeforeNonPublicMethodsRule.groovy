@@ -23,9 +23,9 @@ import org.codenarc.util.WildcardPattern
 /**
  * Enforce that all public methods are above protected and private methods.
  * <p/>
- * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) non-public method
- * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally include
- * wildcard characters ('*' or '?').
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method names that
+ * should be ignored. The named methods will not cause a rule violation, and will not contribute to causing a violation
+ * on another method. The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @author Peter Thomas

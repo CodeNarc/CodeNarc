@@ -26,9 +26,9 @@ import org.codenarc.util.WildcardPattern
  * public instance methods, protected static must be above protected instance methods and private static
  * must be above private instance methods.
  * <p/>
- * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) instance
- * method names that should be ignored in the visibility level ordering (i.e., that should not cause a rule
- * violation). The name(s) may optionally include wildcard characters ('*' or '?').
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method names that
+ * should be ignored in the visibility level ordering. The named methods will not cause a rule violation, and will
+ * not contribute to causing a violation on another method. The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @author Peter Thomas

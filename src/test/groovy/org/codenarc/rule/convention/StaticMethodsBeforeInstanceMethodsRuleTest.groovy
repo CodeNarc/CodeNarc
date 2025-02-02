@@ -114,7 +114,7 @@ class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<St
     }
 
     @Test
-    void test_StaticMethodsAboveInstanceMethodsByVisibility_IgnoreMatched_NoViolations() {
+    void test_StaticMethodsAboveInstanceMethodsByVisibility_IgnoreInstanceMethodNameMatched_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 // Public
@@ -140,6 +140,36 @@ class StaticMethodsBeforeInstanceMethodsRuleTest extends AbstractRuleTestCase<St
             }
         '''
         rule.ignoreMethodNames = 'get*,set*'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_StaticMethodsAboveInstanceMethodsByVisibility_IgnoreStaticMethodNameMatched_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                // Public
+                public static int staticMethod1() { }
+                static final String staticMethod2(int id) { }
+                private String getPrivateStringValue1() { }
+                private void setPrivateStringValue1(String value) { }
+                public String method1() { }
+                int method2() { }
+
+                // Protected
+                protected String getStringValue2() { }
+                protected void setStringValue2(String value) { }
+                protected String method3() { }
+                protected static staticMethod3() { }
+
+                // Private
+                private static staticMethod4() { }
+                private String getPrivateStringValue1() { }
+                private void setPrivateStringValue1(String value) { }
+                private int method4() { }
+                int method5() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'staticMethod3,static*4'
         assertNoViolations(SOURCE)
     }
 

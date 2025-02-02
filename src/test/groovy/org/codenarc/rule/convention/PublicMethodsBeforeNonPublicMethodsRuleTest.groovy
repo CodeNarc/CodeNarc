@@ -126,7 +126,7 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
     }
 
     @Test
-    void test_PublicMethodAfterPrivate_IgnoreMatched_NoViolations() {
+    void test_PublicMethodAfterPrivate_IgnorePrivateMethodNameMatched_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 private String getSomething() { }
@@ -136,6 +136,20 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
             }
         '''
         rule.ignoreMethodNames = 'get*'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_PublicMethodAfterPrivate_IgnorePublicMethodNameMatched_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private String getSomething() { }
+
+                static final String staticMethod1() { }
+                public String method2() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'static*, method2'
         assertNoViolations(SOURCE)
     }
 
