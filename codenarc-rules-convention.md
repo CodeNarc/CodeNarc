@@ -476,7 +476,7 @@ Enforce that all public methods are above protected and private methods.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| ignoreMethodNames           | Specifies one or more (comma-separated) non-public method names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null`  |
+| ignoreMethodNames           | Specifies one or more (comma-separated) method names that should be ignored. The named methods will not cause a rule violation, and will not contribute to causing a violation on another method. The names may optionally contain wildcards (*,?).  | `null`  |
 
 Example of violations:
 
@@ -528,7 +528,7 @@ static methods must be above private instance methods.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| ignoreMethodNames           | Specifies one or more (comma-separated) instance method names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null`  |
+| ignoreMethodNames           | Specifies one or more (comma-separated) method names that should be ignored. The named methods will not cause a rule violation, and will not contribute to causing a violation on another method. The names may optionally contain wildcards (*,?).  | `null`  |
 
 Example of violations:
 
