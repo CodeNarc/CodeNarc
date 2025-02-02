@@ -18,17 +18,24 @@ package org.codenarc.rule.convention
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.WildcardPattern
 
 /**
  * Enforce that all public methods are above protected and private methods.
+ * <p/>
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) non-public method
+ * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally include
+ * wildcard characters ('*' or '?').
  *
  * @author Chris Mair
+ * @author Peter Thomas
  */
 class PublicMethodsBeforeNonPublicMethodsRule extends AbstractAstVisitorRule {
 
     String name = 'PublicMethodsBeforeNonPublicMethods'
     int priority = 3
     Class astVisitorClass = PublicMethodsBeforeNonPublicMethodsAstVisitor
+    String ignoreMethodNames
 }
 
 class PublicMethodsBeforeNonPublicMethodsAstVisitor extends AbstractAstVisitor {
@@ -37,14 +44,17 @@ class PublicMethodsBeforeNonPublicMethodsAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodComplete(MethodNode node) {
-        if (node.public) {
-            if (hasDeclaredNonPublicMethod) {
-                addViolation(node, "The public method $node.name in class $currentClassName is declared after a non-public method")
+        boolean isIgnoredMethod = new WildcardPattern(rule.ignoreMethodNames, false).matches(node.name)
+        if (!isIgnoredMethod) {
+            if (node.public) {
+                if (hasDeclaredNonPublicMethod) {
+                    addViolation(node, "The public method $node.name in class $currentClassName is declared after a non-public method")
+                }
             }
-        }
-        else {
-            if (!node.synthetic) {
-                this.hasDeclaredNonPublicMethod = true
+            else {
+                if (!node.synthetic) {
+                    hasDeclaredNonPublicMethod = true
+                }
             }
         }
         super.visitMethodComplete(node)
