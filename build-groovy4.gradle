@@ -13,7 +13,7 @@ shadowJar {
 }
 
 group = 'org.codenarc'
-version = '3.6.0-groovy-4.0-SNAPSHOT'
+version = '3.6.0-groovy-4.0'
 
 java {
     sourceCompatibility = '1.8'

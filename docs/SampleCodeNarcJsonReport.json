@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://codenarc.org",
-        "version": "3.4.0"
+        "version": "3.6.0"
     },
     "report": {
-        "timestamp": "Jan 13, 2024 11:01:24 AM"
+        "timestamp": "Feb 15, 2025 2:41:24 PM"
     },
     "project": {
         "title": "Sample Project",
@@ -13,11 +13,11 @@
         ]
     },
     "summary": {
-        "totalFiles": 419,
-        "filesWithViolations": 58,
+        "totalFiles": 431,
+        "filesWithViolations": 60,
         "priority1": 0,
-        "priority2": 78,
-        "priority3": 36
+        "priority2": 83,
+        "priority3": 39
     },
     "packages": [
         {
@@ -1563,14 +1563,14 @@
                             "ruleName": "ClassSize",
                             "priority": 3,
                             "lineNumber": 26,
-                            "message": "Class \"IndentationRuleTest\" is 1191 lines"
+                            "message": "Class \"IndentationRuleTest\" is 1217 lines"
                         },
                         {
                             "ruleName": "MethodCount",
                             "priority": 2,
                             "lineNumber": 26,
                             "sourceLine": "class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {",
-                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 58 methods"
+                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 60 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
@@ -2484,6 +2484,130 @@
             ]
         },
         {
+            "path": "jenkins",
+            "totalFiles": 10,
+            "filesWithViolations": 2,
+            "priority1": 0,
+            "priority2": 5,
+            "priority3": 3,
+            "files": [
+                {
+                    "name": "AbstractJenkinsRuleTestCase.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ClassNotSerializableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ClosureInGStringRuleTest.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 35,
+                            "sourceLine": "final SOURCE = '''",
+                            "message": "The String '\n            def x = 42\n            def s = \"some string ${x}\"\n        ' contains a GString-type expression: '${x}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 52,
+                            "sourceLine": "final SOURCE = '''",
+                            "message": "The String '\n            List<int> l = [1,2,3]\n            def s = \"some string ${l.collect { i -> i * i }.toString()}\"\n        ' contains a GString-type expression: '${l.collect { i -> i * i }.toString()}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 61,
+                            "sourceLine": "final SOURCE = '''",
+                            "message": "The String '\n            def x = 42\n            def s = \"some string ${-> x}\"\n            def s = \"some string ${x} ${-> x}\"\n        ' contains a GString-type expression: '${-> x}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 67,
+                            "sourceLine": "[line: 3, source: 'def s = \"some string ${-> x}\"', message: 'GString contains a closure. Use variable interpolation instead'],",
+                            "message": "The String 'def s = \"some string ${-> x}\"' contains a GString-type expression: '${-> x}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 68,
+                            "sourceLine": "[line: 4, source: 'def s = \"some string ${x} ${-> x}\"', message: 'GString contains a closure. Use variable interpolation instead'])",
+                            "message": "The String 'def s = \"some string ${x} ${-> x}\"' contains a GString-type expression: '${x} ${-> x}'"
+                        }
+                    ]
+                },
+                {
+                    "name": "CpsCallFromNonCpsMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ExpressionInCpsMethodNotSerializableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ForbiddenCallInCpsMethodRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "JenkinsUtilTest.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "NoWildcardImports",
+                            "priority": 3,
+                            "lineNumber": 18,
+                            "sourceLine": "import org.codehaus.groovy.ast.*",
+                            "message": "Wildcard (star) import"
+                        },
+                        {
+                            "ruleName": "MisorderedStaticImports",
+                            "priority": 3,
+                            "lineNumber": 26,
+                            "sourceLine": "import static org.junit.jupiter.api.Assertions.*",
+                            "message": "Static imports should appear before normal imports"
+                        },
+                        {
+                            "ruleName": "NoWildcardImports",
+                            "priority": 3,
+                            "lineNumber": 26,
+                            "sourceLine": "import static org.junit.jupiter.api.Assertions.*",
+                            "message": "Wildcard (star) import"
+                        }
+                    ]
+                },
+                {
+                    "name": "NonCPS.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ObjectOverrideOnlyNonCpsMethodsTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "ParameterOrReturnTypeNotSerializableRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                }
+            ]
+        },
+        {
             "path": "junit",
             "totalFiles": 26,
             "filesWithViolations": 0,
@@ -2891,7 +3015,7 @@
         },
         {
             "path": "serialization",
-            "totalFiles": 4,
+            "totalFiles": 6,
             "filesWithViolations": 0,
             "priority1": 0,
             "priority2": 0,
@@ -2899,6 +3023,12 @@
             "files": [
                 {
                     "name": "EnumCustomSerializationIgnoredRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "NonSerializableFieldInSerializableClassTest.groovy",
                     "violations": [
                         
                     ]
@@ -2917,6 +3047,12 @@
                 },
                 {
                     "name": "SerializableClassMustDefineSerialVersionUIDRuleTest.groovy",
+                    "violations": [
+                        
+                    ]
+                },
+                {
+                    "name": "SerializationUtilTest.groovy",
                     "violations": [
                         
                     ]

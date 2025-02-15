@@ -3,7 +3,7 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-TODO: Version 3.6.0  (Feb 2025)
+Version 3.6.0  (Feb 2025)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #790:  Add *ignoreMethodNames* property to **PublicMethodsBeforeNonPublicMethods** and **StaticMethodsBeforeInstanceMethods** rules. ([Peter Thomas](https://github.com/peter-thomas-mgd))
