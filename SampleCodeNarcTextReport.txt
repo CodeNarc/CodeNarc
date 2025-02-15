@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Jan 13, 2024 11:01:25 AM
+CodeNarc Report: Sample Project - Feb 15, 2025 2:41:24 PM
 
-Summary: TotalFiles=419 FilesWithViolations=58 P1=0 P2=78 P3=36
+Summary: TotalFiles=431 FilesWithViolations=60 P1=0 P2=83 P3=39
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=UnnecessaryObjectReferences P=3 Line=185 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
@@ -113,7 +113,7 @@ File: formatting/ClassStartsWithBlankLineRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 50 methods] Src=[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {]
 
 File: formatting/IndentationRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 58 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
+    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 60 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
     Violation: Rule=GStringExpressionWithinString P=2 Line=609 Msg=[The String '
             |class MyClass {
             |    private void execute() {
@@ -176,7 +176,7 @@ File: formatting/IndentationRuleTest.groovy
             |    }
             |}
         ' contains a GString-type expression: '${callStackPath}${this.class.simpleName}'] Src=[final SOURCE = ''']
-    Violation: Rule=ClassSize P=3 Line=26 Msg=[Class "IndentationRuleTest" is 1191 lines]
+    Violation: Rule=ClassSize P=3 Line=26 Msg=[Class "IndentationRuleTest" is 1217 lines]
 
 File: formatting/IndentationRule_MethodChainingTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=82 Msg=[The String '
@@ -582,6 +582,28 @@ File: imports/UnusedImportRuleTest.groovy
             def OPERATORS4 = !TestData15.VALUE
         ' contains a GString-type expression: '${TestData1.GOOD_XML}'] Src=[final SOURCE = ''']
 
+File: jenkins/ClosureInGStringRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=35 Msg=[The String '
+            def x = 42
+            def s = "some string ${x}"
+        ' contains a GString-type expression: '${x}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=52 Msg=[The String '
+            List<int> l = [1,2,3]
+            def s = "some string ${l.collect { i -> i * i }.toString()}"
+        ' contains a GString-type expression: '${l.collect { i -> i * i }.toString()}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=61 Msg=[The String '
+            def x = 42
+            def s = "some string ${-> x}"
+            def s = "some string ${x} ${-> x}"
+        ' contains a GString-type expression: '${-> x}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=67 Msg=[The String 'def s = "some string ${-> x}"' contains a GString-type expression: '${-> x}'] Src=[[line: 3, source: 'def s = "some string ${-> x}"', message: 'GString contains a closure. Use variable interpolation instead'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=68 Msg=[The String 'def s = "some string ${x} ${-> x}"' contains a GString-type expression: '${x} ${-> x}'] Src=[[line: 4, source: 'def s = "some string ${x} ${-> x}"', message: 'GString contains a closure. Use variable interpolation instead'])]
+
+File: jenkins/JenkinsUtilTest.groovy
+    Violation: Rule=NoWildcardImports P=3 Line=18 Msg=[Wildcard (star) import] Src=[import org.codehaus.groovy.ast.*]
+    Violation: Rule=MisorderedStaticImports P=3 Line=26 Msg=[Static imports should appear before normal imports] Src=[import static org.junit.jupiter.api.Assertions.*]
+    Violation: Rule=NoWildcardImports P=3 Line=26 Msg=[Wildcard (star) import] Src=[import static org.junit.jupiter.api.Assertions.*]
+
 File: naming/FieldNameRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.naming.FieldNameRuleTest has 32 methods] Src=[class FieldNameRuleTest extends AbstractRuleTestCase<FieldNameRule> {]
 
@@ -766,4 +788,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (https://codenarc.org) v3.4.0]
+[CodeNarc (https://codenarc.org) v3.6.0]
