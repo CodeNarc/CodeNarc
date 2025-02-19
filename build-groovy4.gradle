@@ -18,7 +18,11 @@ version = '3.6.0-groovy-4.0'
 java {
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
-    }
+}
+
+base {
+    archivesName = 'CodeNarc'
+}
 
 repositories {
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }

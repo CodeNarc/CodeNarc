@@ -20,6 +20,10 @@ java {
     targetCompatibility = '1.8'
 }
 
+base {
+    archivesName = 'CodeNarc'
+}
+
 repositories {
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://repo.maven.apache.org/maven2' }
