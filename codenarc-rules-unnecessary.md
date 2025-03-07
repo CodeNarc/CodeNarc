@@ -263,7 +263,7 @@ Examples of violations include:
 
 ```
     assert [1, 2, 3].collect { it.multiply(2) }
-    assert [1, 2, 3].collect { x -* x.multiply(2) }
+    assert [1, 2, 3].collect { x -> x.multiply(2) }
     ["1", "2", "3"].collect { it.bytes }
 ```
 
@@ -280,7 +280,7 @@ The following code does not produce violations:
     [1, 2, 3].collect { println it; it.multiply(5) }
 
     // OK, closure has too many arguments
-    [1, 2, 3].collect { a, b -* a.multiply(b) }
+    [1, 2, 3].collect { a, b -> a.multiply(b) }
 
     // OK, closure statement references parameter multiple times
     [1, 2, 3].collect { it.multiply(it) }
@@ -890,7 +890,7 @@ Examples of violations include:
     void init(String name, groovy.lang.Binding binding) { }     // violation
 
     // Closure parameter types
-    def writeCount = { java.io.Writer writer, int count -* }    // violation
+    def writeCount = { java.io.Writer writer, int count -> }    // violation
 
     // Extends and implements
     class MyHashMap extends java.util.HashMap { }               // violation
@@ -1105,8 +1105,8 @@ These cases can be replaced by a simple boolean expression. Examples of violatio
     x==99 ? true : false                    // can be replaced by: x==99
     x && y ? true : false                   // can be replaced by: x && y
     x||y ? false : true                     // can be replaced by: !(x||y)
-    x *= 1 ? true: false                    // can be replaced by: x *= 1
-    x * 99 ? Boolean.TRUE : Boolean.FALSE   // can be replaced by: x * 99
+    x <= 1 ? true: false                    // can be replaced by: x <= 1
+    x < 99 ? Boolean.TRUE : Boolean.FALSE   // can be replaced by: x < 99
     !x ? true : false                       // can be replaced by: !x
 ```
 

@@ -47,7 +47,7 @@ The *ABC Metric* calculation rules for Groovy:
     (prefix or postfix): ++ --
   * Add one to the *branch* count for each function call or class method call.
   * Add one to the *branch* count for each occurrence of the new operator.
-  * Add one to the *condition* count for each use of a conditional operator: == != *= *= * * *=* =~ ==~
+  * Add one to the *condition* count for each use of a conditional operator: == != <= >= < > <=> =~ ==~
   * Add one to the *condition* count for each use of the following keywords: else case default try catch ?
   * Add one to the *condition* count for each unary conditional expression.
 
