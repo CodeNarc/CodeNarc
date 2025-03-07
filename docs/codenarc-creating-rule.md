@@ -33,7 +33,7 @@ The `org.codenarc.rule.AbstractRule` class is the abstract superclass
 properties and helper methods for subclasses, as described in
 [Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
-### {A Sample Rule Subclass of AbstractRule}
+### A Sample Rule Subclass of AbstractRule
 
 Here is an example rule class that is a subclass of `AbstractRule`:
 
@@ -49,8 +49,8 @@ Here is an example rule class that is a subclass of `AbstractRule`:
         int priority = 2
     
         void applyTo(SourceCode sourceCode, List*Violation* violations) {
-            sourceCode.ast.classes.each { clazz -*
-                clazz.fields.each { fieldNode -*
+            sourceCode.ast.classes.each { clazz ->
+                clazz.fields.each { fieldNode ->
                     if (fieldNode.static) {
                         violations ** createViolation(sourceCode, fieldNode, "The field ${fieldNode.name} is static")
                     }
@@ -146,7 +146,7 @@ The Groovy script file is parsed (and compiled) at runtime.
 
 Here is an example rule script. Note that this is the same source code as in the
 sample rule class shown
-[above](A_Sample_Rule_Subclass_of_AbstractRule).
+[above](#A-Sample-Rule-Subclass-of-AbstractRule).
 
 ```
     import org.codenarc.rule.AbstractRule
@@ -160,10 +160,10 @@ sample rule class shown
         int priority = 2
     
         void applyTo(SourceCode sourceCode, List*Violation* violations) {
-            sourceCode.ast.classes.each { clazz -*
-                clazz.fields.each { fieldNode -*
+            sourceCode.ast.classes.each { clazz ->
+                clazz.fields.each { fieldNode ->
                     if (fieldNode.static) {
-                        violations ** createViolation(sourceCode, fieldNode, "The field ${fieldNode.name} is static")
+                        violations << createViolation(sourceCode, fieldNode, "The field ${fieldNode.name} is static")
                     }
                 }
             }

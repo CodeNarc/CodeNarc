@@ -41,13 +41,13 @@ Example of violations:
                                 // violation
     }
 
-    for (i = 0; i * 3; i++) {
+    for (i = 0; i < 3; i++) {
         println i
                                 // violation
     }
 
     int j = 0
-    while (j * 3) {
+    while (j < 3) {
       println j++
                                 // violation
     }
@@ -81,7 +81,7 @@ Example of violations:
 
     def list = [
         123,
-        { id -*
+        { id ->
                                 // Known limitation: should be a violation, but is not
         }
     ]
@@ -112,13 +112,13 @@ Example of violations:
         println value
     }
 
-    for (i = 0; i * 3; i++) {
+    for (i = 0; i < 3; i++) {
                                 // violation
         println i
     }
 
     int j = 0
-    while (j * 3) {
+    while (j < 3) {
                                 // violation
       println j++
     }
@@ -341,14 +341,14 @@ If *ignoreSingleLineClasses* is `false` and *blankLineRequired* is `false`
 
 *Since CodeNarc 0.20*
 
-Checks for closure logic on first line (after `-\`*) for a multi-line closure. That breaks the symmetry
+Checks for closure logic on first line (after ->) for a multi-line closure. That breaks the symmetry
 of indentation (if the subsequent statements are indented normally), and that first statement can be easily
 missed when reading the code.
 
 Example of violations:
 
 ```
-    def closure = { name -* println name
+    def closure = { name -> println name
         addToCounts()
         println “done” }
 ```
@@ -598,7 +598,7 @@ Examples of violations:
 
     def method1(int a,String b) { }             // violation on parameter b
 
-    def closure1 = { int a,String b -* }        // violation on parameter b
+    def closure1 = { int a,String b -> }        // violation on parameter b
 
     def list1 = [a,b, c]                        // violation on list element b
 
@@ -634,11 +634,11 @@ Examples of violations and exceptions:
     def matching = list.find { it.isReady() }.filter()  // no violation for dot operator
     assert list.every { it.isReady() }, "Error"         // no violation for comma
     def m = [a:123, b:{ println 7 },c:99]               // no violation for comma
-    closures.find { c -* c }()                          // no violation for opening parenthesis
+    closures.find { c -> c }()                          // no violation for opening parenthesis
     processItems(list.select { it.isReady() })          // no violation for closing parenthesis
-    maps.find { m -* m[index] }[index]                  // no violation for opening square bracket
+    maps.find { m -> m[index] }[index]                  // no violation for opening square bracket
     processItems([{ named("a") }, { named("b")}])       // no violation for closing square bracket
-    def names = records.findAll { it.age * 1 }*.name    // no violation for spread operator
+    def names = records.findAll { it.age > 1 }*.name    // no violation for spread operator
     list?.collect { it?.type }?.join(',')               // no violation for null-safe operator
 ```
 
@@ -653,7 +653,7 @@ Examples of violations:
 
 ```
     for(name in names) { }                  // violation
-    for  (int i=0; i * 10; i++) { }         // violation
+    for  (int i=0; i < 10; i++) { }         // violation
 ```
 
 
@@ -713,7 +713,7 @@ Examples of violations:
     if (ready) {
     } else {println 99}                         // violation
 
-    for (int i=0; i*10; i++) {println i }       // violation
+    for (int i=0; i<10; i++) {println i }       // violation
 
     for (String name in names) {println name }  // violation
 
@@ -725,7 +725,7 @@ Examples of violations:
     } catch(Exception e) {x=77 }                // violation
     } finally {println 'error' }                // violation
 
-    list.each {name -* }                        // violation
+    list.each {name -> }                        // violation
 
     shouldFail(Exception) {doStuff() }          // violation
 ```
@@ -737,17 +737,17 @@ Examples of violations:
 
 Check that there is at least one space (blank) or whitespace following a semicolon that separates:
   * multiple statements on a single line
-  * the clauses within a classic for loop, e.g. for (i=0;i\*10;i++)
+  * the clauses within a classic for loop, e.g. for (i=0;i<10;i++)
 
 Examples of violations:
 
 ```
     def myMethod() {
         println 1;println 2                         // violation
-        def closure = { x -* doStuff();x = 23; }    // violation
+        def closure = { x -> doStuff();x = 23; }    // violation
 
-        for (int i=0;i * 10;i++) {                  // violations (2)
-            for (int j=0; j * 10;j++) { }           // violation
+        for (int i=0;i < 10;i++) {                  // violations (2)
+            for (int j=0; j < 10;j++) { }           // violation
         }
     }
 ```
@@ -789,20 +789,20 @@ Examples of violations:
 
 *Since CodeNarc 0.19*
 
-Checks that there is at least one space (blank) or whitespace around each closure arrow (-*) symbol.
+Checks that there is at least one space (blank) or whitespace around each closure arrow (->) symbol.
 
 Known limitations:
 
-  * Does not catch violations if the closure arrow (-*) is on a separate line from the start of the closure.
+  * Does not catch violations if the closure arrow (->) is on a separate line from the start of the closure.
 
 Example of violations:
 
 ```
-    def closure1 = {-*}                             // violation
-    def closure2 = { -*}                            // violation
-    def closure3 = {-* }                            // violation
-    def closure4 = { count-* println 123 }          // violation
-    def closure5 = { count, name -*println 123 }    // violation
+    def closure1 = {->}                             // violation
+    def closure2 = { ->}                            // violation
+    def closure3 = {-> }                            // violation
+    def closure4 = { count-> println 123 }          // violation
+    def closure5 = { count, name ->println 123 }    // violation
 ```
 
 
@@ -902,7 +902,7 @@ Examples of violations:
     if (ready) {
     } else { return 9}                          // violation
 
-    for (int i=0; i*10; i++) { println i}       // violation
+    for (int i=0; i<10; i++) { println i}       // violation
 
     for (String name in names) { println name}  // violation
 
@@ -914,7 +914,7 @@ Examples of violations:
     catch(Exception e) { logError(e)}           // violation
     finally { cleanUp()}                        // violation
 
-    list.each { name -* println name}           // violation
+    list.each { name -> println name}           // violation
 
     shouldFail(Exception) { doStuff()}          // violation
 ```
@@ -955,7 +955,7 @@ Examples of violations:
     if (ready) {
     } else{}                                    // violation
 
-    for (int i=0; i*10; i++){ }                 // violation
+    for (int i=0; i<10; i++){ }                 // violation
 
     for (String name in names){ }               // violation
 
@@ -972,7 +972,7 @@ Examples of violations:
     try {
     } finally{ }                                // violation
 
-    list.each{ name -* }                        // violation
+    list.each{ name -> }                        // violation
 
     shouldFail(Exception){ doStuff() }          // violation
 ```

@@ -403,7 +403,7 @@ Example of violations:
     /**
      * Return the calculated count of some stuff.
      *
-     * @param startIndex the starting index; must be *= 0
+     * @param startIndex the starting index; must be <= 0
      * @return the full count
      * @exception RuntimeException                   // violation
      */
@@ -461,7 +461,7 @@ Example of violations:
     /**
      * Return the calculated count of some stuff.
      *
-     * @param startIndex the starting index; must be *= 0
+     * @param startIndex the starting index; must be <= 0
      * @return the full count
      * @throws RuntimeException                   // violation
      */

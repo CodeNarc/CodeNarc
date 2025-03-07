@@ -268,7 +268,7 @@ Here are examples of code that produces violations:
     }
 
     // Closure parameter
-    def closure = { PriorityQueue queue -* ... }      // violation
+    def closure = { PriorityQueue queue -> ... }      // violation
 
     // Method return type
     GregorianCalendar calculateDate(int num) {        // violation
