@@ -364,7 +364,7 @@ Example of violations:
     // these usages are OK
     class MyCorrectClass {
       private Matcher matcher1
-      static ThreadLocal*Matcher* matcher2
+      static ThreadLocal<Matcher> matcher2
     }
 ```
 
@@ -400,7 +400,7 @@ Examples:
     // These usages are OK
     class MyCorrectClass {
         private SimpleDateFormat calendar1
-        static ThreadLocal*SimpleDateFormat* calendar2
+        static ThreadLocal<SimpleDateFormat> calendar2
     }
 ```
 

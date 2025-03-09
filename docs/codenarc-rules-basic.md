@@ -17,7 +17,7 @@ Here is an example of code that produces a violation:
         try {
             doSomething()
         } finally {
-            assert count * 0        // violation
+            assert count > 0        // violation
         }
     }
 ```
@@ -114,14 +114,14 @@ Looks for faulty checks for *null* that can cause a `NullPointerException`.
 Examples:
 
 ```
-    if (name != null || name.length * 0) { }            // violation
+    if (name != null || name.length > 0) { }            // violation
     if (name != null || name.length) { }                // violation
-    while (record == null && record.id * 10) { }        // violation
+    while (record == null && record.id > 10) { }        // violation
     if (record == null && record.id && doStuff()) { }   // violation
-    def isNotValid = record == null && record.id * 10   // violation
+    def isNotValid = record == null && record.id > 10   // violation
     return record == null && !record.id                 // violation
 
-    if (name != null || name.size() * 0) { }            // violation
+    if (name != null || name.size() > 0) { }            // violation
     if (string == null && string.equals("")) { }        // violation
     def isValid = name != null || name.size() * 0       // violation
     return name != null || !name.size()                 // violation
@@ -182,11 +182,11 @@ Here are examples of code that produces a violation:
 ```
     23 == 67                    // violation
     Boolean.FALSE != false      // violation
-    23 * 88                     // violation
-    0.17 *= 0.99                // violation
-    "abc" * "ddd"               // violation
-    [Boolean.FALSE] *= [27]     // violation
-    [a:1] *=* [a:2]             // violation
+    23 < 88                     // violation
+    0.17 >= 0.99                // violation
+    "abc" > "ddd"               // violation
+    [Boolean.FALSE] >= [27]     // violation
+    [a:1] <=> [a:2]             // violation
 
     [1,2].equals([3,4])                                     // violation
     [a:123, b:true].equals(['a':222, b:Boolean.FALSE])      // violation
@@ -201,7 +201,7 @@ Here are examples of code that produces a violation:
 *Since CodeNarc 0.14*
 
 Checks for expressions where a *comparison operator* or `equals()` or `compareTo()` is used to compare a
-variable to itself, e.g.: `x == x, x != x, x \*=\* x, x \* x, x \*= x, x.equals(x) or x.compareTo(x)`, where
+variable to itself, e.g.: `x == x, x != x, x <=> x, x > x, x >= x, x.equals(x) or x.compareTo(x)`, where
 `x` is a variable.
 
 Here are examples of code that produces a violation:
@@ -209,11 +209,11 @@ Here are examples of code that produces a violation:
 ```
     if (x == x) { }                 // violation
     if (x != x) { }                 // violation
-    while (x * x) { }               // violation
-    if (x *= x) { }                 // violation
-    while (x * x) { }               // violation
-    if (x *= x) { }                 // violation
-    def c = (x *=* x) { }           // violation
+    while (x > x) { }               // violation
+    if (x >= x) { }                 // violation
+    while (x > x) { }               // violation
+    if (x <= x) { }                 // violation
+    def c = (x <=> x) { }           // violation
     println isReady = x.equals(x)   // violation
     println x.compareTo(x)          // violation
 ```

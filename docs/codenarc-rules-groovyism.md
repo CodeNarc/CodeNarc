@@ -21,7 +21,7 @@ Example of violations:
 ```
   def a = myList.sort()
   def b = myList.sort() { it }
-  def c = myList.sort().findAll { x * 1 }
+  def c = myList.sort().findAll { x > 1 }
 ```
 
 ## AssignCollectionUnique Rule
@@ -42,9 +42,9 @@ Example of violations:
   def x = myList.unique() { it }            // Single-argument: Closure
   def y = myList.unique { it % 2 }
 
-  def c = myList.unique().findAll { x * 1 } // Chained method call
+  def c = myList.unique().findAll { x > 1 } // Chained method call
 
-  def comparator = { o1, o2 -* o1 *=* o2 }
+  def comparator = { o1, o2 -> o1 <=> o2 }
   def x = myList.unique(comparator)         // Single-argument: Comparator
 
   def x = myList.unique(true)               // Single-argument: boolean true
@@ -139,16 +139,16 @@ This rule also ignores all calls to `super.and(Object)`.
 *Since CodeNarc 0.11*
 
 This rule detects when the `compareTo(Object)` method is called directly in code instead of using the
-\*\=\*, \*, \*\=, \*, and \*\= operators. A groovier way to express this: `a.compareTo(b)` is this:
-`a \*\=\* b`, or using the other operators. Here are some other ways to write groovier code:
+<=>, <, <=, >, and >= operators. A groovier way to express this: `a.compareTo(b)` is this:
+`a <=> b`, or using the other operators. Here are some other ways to write groovier code:
 
 ```
     a.compareTo(b) == 0               // can be replaced by: a == b
-    a.compareTo(b)                    // can be replaced by: a *=* b
-    a.compareTo(b) * 0                // can be replaced by: a * b
-    a.compareTo(b) *= 0               // can be replaced by: a *= b
-    a.compareTo(b) * 0                // can be replaced by: a * b
-    a.compareTo(b) *= 0               // can be replaced by: a *= b
+    a.compareTo(b)                    // can be replaced by: a <=> b
+    a.compareTo(b) < 0                // can be replaced by: a < b
+    a.compareTo(b) <= 0               // can be replaced by: a <= b
+    a.compareTo(b) > 0                // can be replaced by: a > b
+    a.compareTo(b) >= 0               // can be replaced by: a >= b
 ```
 This rule can be  configured to ignore `this.compareTo(Object)` using the *ignoreThisReference*
 property. It defaults to `false`, so even `compareTo(x)` will trigger a violation.
@@ -536,7 +536,7 @@ Example of violations:
 ```
 def list = [1, 2, [3, 4, 5, 6], [7]]
 
-println list.collect { elem -*
+println list.collect { elem ->
     if (elem instanceof List)
         elem.collect {it *2} // violation
     else elem * 2
