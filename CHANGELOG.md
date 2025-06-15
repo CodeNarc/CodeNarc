@@ -3,6 +3,12 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
+TODO Version 3.7.0  (??? 2025)
+--------------------------------------
+ - #794: Docs: Fix where <, > has been replaced by asterisk. ([Thomas Rasmussen](https://github.com/dauer))
+ - #796: **ImplicitReturnStatement** rule: Fix false positive for try-with-resources blocks.
+
+
 Version 3.6.0  (Feb 2025)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes

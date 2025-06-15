@@ -111,6 +111,24 @@ class ImplicitReturnStatementRuleTest extends AbstractRuleTestCase<ImplicitRetur
     }
 
     @Test
+    void test_TryWithResources_NoViolations() {
+        final SOURCE = '''
+            public class TestClass {
+                public InputStream getAsInputStream(byte[] data) {
+                    try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                         ZipOutputStream zos = new ZipOutputStream(baos)) {
+                        zos.putNextEntry(new ZipEntry('test.xml'));
+                        zos.write(data);
+                        zos.closeEntry();
+                        return new ByteArrayInputStream(baos.toByteArray());  // ← Explicit return here
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_Switch_NoViolations() {
         final SOURCE = '''
             class MyClass {

@@ -67,7 +67,7 @@ class ImplicitReturnStatementAstVisitor extends AbstractAstVisitor {
 
     private boolean lastStatementIsReturnOrOtherAllowed(MethodNode node) {
         def lastStatement = node.code.statements[-1]
-        return lastStatement instanceof ReturnStatement ||
+        if (lastStatement instanceof ReturnStatement ||
                 lastStatement instanceof TryCatchStatement ||
                 lastStatement instanceof IfStatement ||
                 lastStatement instanceof ForStatement ||
@@ -75,7 +75,11 @@ class ImplicitReturnStatementAstVisitor extends AbstractAstVisitor {
                 lastStatement instanceof DoWhileStatement ||
                 lastStatement instanceof SwitchStatement ||
                 lastStatement instanceof ThrowStatement ||
-                lastStatement instanceof SynchronizedStatement
-    }
+                lastStatement instanceof SynchronizedStatement) {
+            return true
+        }
 
+        return lastStatement instanceof BlockStatement &&
+                (lastStatement.statements.isEmpty() || lastStatement.statements[-1] instanceof TryCatchStatement)
+    }
 }
