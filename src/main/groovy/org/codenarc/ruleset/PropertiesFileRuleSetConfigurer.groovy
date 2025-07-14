@@ -76,7 +76,11 @@ class PropertiesFileRuleSetConfigurer implements RuleSetConfigurer {
             }
         }
         catch(IOException e) {
-            LOG.info("RuleSet configuration properties file [$actualPropertiesFilename] not found.")
+            if (LOG.debugEnabled) {
+                LOG.debug("RuleSet configuration actualPropertiesFilename [$actualPropertiesFilename] not found (propertiesFilename [$propertiesFilename]).")
+            } else {
+                LOG.info("RuleSet configuration properties file [$actualPropertiesFilename] not found.")
+            }
         }
     }
 
