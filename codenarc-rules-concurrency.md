@@ -280,7 +280,7 @@ Examples:
     // These usages are OK
     class MyCorrectClass {
         private final Calendar calendar1
-        static ThreadLocal*Calendar* calendar2
+        static ThreadLocal<Calendar> calendar2
     }
 ```
 
@@ -340,7 +340,7 @@ Examples:
     // These usages are OK
     class MyCorrectClass {
         private DateFormat calendar1
-        static ThreadLocal*DateFormat* calendar2
+        static ThreadLocal<DateFormat> calendar2
     }
 ```
 

@@ -239,7 +239,7 @@ If *ignoreSingleLineClasses* is `true` and *blankLineRequired* is `true`
 If *ignoreSingleLineClasses* is `false` and *blankLineRequired* is `true`
 
 ```
-            class Foo extends Bar*String* { }
+            class Foo extends Bar<String> { }
 ```
 
 
@@ -307,7 +307,7 @@ If *ignoreSingleLineClasses* is `true` and *blankLineRequired* is `true`
 If *ignoreSingleLineClasses* is `false` and *blankLineRequired* is `true`
 
 ```
-            class Foo extends Bar*String* { }
+            class Foo extends Bar<String> { }
 ```
 
 
@@ -871,8 +871,8 @@ Examples of violations:
 ```
     def myMethod() {
         3+ 5-x*23/ 100              // violation
-        list \*\*123                // violation
-        other\*\* writer            // violation
+        list <<123                // violation
+        other<< writer            // violation
         x=99                        // violation
         x&& y                       // violation
         x ||y                       // violation
