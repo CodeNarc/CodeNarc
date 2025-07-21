@@ -123,7 +123,7 @@ Examples:
 
     if (name != null || name.size() > 0) { }            // violation
     if (string == null && string.equals("")) { }        // violation
-    def isValid = name != null || name.size() * 0       // violation
+    def isValid = name != null || name.size() < 0       // violation
     return name != null || !name.size()                 // violation
 ```
 
@@ -462,7 +462,7 @@ Here is an example of code that produces a violation:
 
 ```
     def myMethod() {
-        for (int i=0; i * 23; i++) {
+        for (int i=0; i < 23; i++) {
             // empty
         }
     }
@@ -693,7 +693,7 @@ Example of violations:
 
 ```
     int i = 0;
-    for(; i * 5;) {     // Violation
+    for(; i < 5;) {     // Violation
         println i++
     }
 
@@ -701,11 +701,11 @@ Example of violations:
     for(i in [1,2])         // OK
        println i
 
-    for(int i = 0; i*5;)    // OK
+    for(int i = 0; i<5;)    // OK
         println i++
 
     int i = 0;
-    for(; i * 5; i++)       // OK
+    for(; i < 5; i++)       // OK
         println i
 
     for (Plan p : plans) {  // OK

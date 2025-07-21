@@ -61,7 +61,7 @@ a couple of the rules that it contains:
 ```
 
 If you have an XML *RuleSet*, then you can configure rules when you include a whole *RuleSet*
-using `\*ruleset-ref\`*, as in the following example:
+using `<ruleset-ref>`, as in the following example:
 
 ```xml
     <ruleset-ref path='rulesets/size.xml'>
@@ -71,7 +71,7 @@ using `\*ruleset-ref\`*, as in the following example:
     </ruleset-ref>
 ```
 
-Or you can configure *Rules* that you include individually using `\*rule\`*, as in the following example:
+Or you can configure *Rules* that you include individually using `<rule>`, as in the following example:
 
 ```xml
     <rule class='org.codenarc.rule.naming.VariableNameRule'>

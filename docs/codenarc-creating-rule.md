@@ -48,11 +48,11 @@ Here is an example rule class that is a subclass of `AbstractRule`:
         String name = 'MyStaticField'
         int priority = 2
     
-        void applyTo(SourceCode sourceCode, List*Violation* violations) {
+        void applyTo(SourceCode sourceCode, List<Violation> violations) {
             sourceCode.ast.classes.each { clazz ->
                 clazz.fields.each { fieldNode ->
                     if (fieldNode.static) {
-                        violations ** createViolation(sourceCode, fieldNode, "The field ${fieldNode.name} is static")
+                        violations << createViolation(sourceCode, fieldNode, "The field ${fieldNode.name} is static")
                     }
                 }
             }
@@ -66,7 +66,7 @@ Things to note about `MyStaticFieldRule` class:
 
   * It provides *name* and *priority* properties as mandated by the `Rule` interface.
 
-  * It implements the `void applyTo(SourceCode sourceCode, List*Violation* violations)` method
+  * It implements the `void applyTo(SourceCode sourceCode, List<Violation> violations)` method
     which is declared *abstract* in the `AbstractRule` superclass.
 
   * It accesses the AST for the source code, which is an instance of the
@@ -159,7 +159,7 @@ sample rule class shown
         String name = 'MyStaticField'
         int priority = 2
     
-        void applyTo(SourceCode sourceCode, List*Violation* violations) {
+        void applyTo(SourceCode sourceCode, List<Violation> violations) {
             sourceCode.ast.classes.each { clazz ->
                 clazz.fields.each { fieldNode ->
                     if (fieldNode.static) {
