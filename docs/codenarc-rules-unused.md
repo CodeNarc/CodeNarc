@@ -38,10 +38,10 @@ include:
 This rule finds instances of method (or constructor) parameters not being used. It does not analyze private methods (that is done by
 the UnusedPrivateMethodParameter rule) or methods marked @Override.
 
-  * This rule ignores `main()` methods. In Groovy, the `main()** method can either specify a `void`
-    return type or else omit a return type (be dynamically typed). The `main()** method must have exactly one
+  * This rule ignores `main()` methods. In Groovy, the `main()` method can either specify a `void`
+    return type or else omit a return type (be dynamically typed). The `main()` method must have exactly one
     parameter. That parameter can either be typed as `String[]` or else the type can be omitted
-    (be dynamically typed). And the `main()** method must be `static`.
+    (be dynamically typed). And the `main()` method must be `static`.
 
   * You can specify an ignore list of parameter names using the 'ignoreRegex' property. By default, a parameter
     named 'ignore' or 'ignored'  does not trigger a violation (the regex value is 'ignore|ignored').
