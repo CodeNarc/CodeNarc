@@ -452,7 +452,7 @@ class MyClassSpec extends Specification {
 
     void "Test"() {
         when:
-        int x = 2+2     // CORRECT (default) or if `indentUnderLabel:false`
+        int x = 2 + 2   // CORRECT (default) or if `indentUnderLabel:false`
 
         then:
             x == 4      // violation unless `indentUnderLabel:true`
