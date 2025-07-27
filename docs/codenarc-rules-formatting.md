@@ -239,7 +239,7 @@ If *ignoreSingleLineClasses* is `true` and *blankLineRequired* is `true`
 If *ignoreSingleLineClasses* is `false` and *blankLineRequired* is `true`
 
 ```
-            class Foo extends Bar*String* { }
+            class Foo extends Bar<String> { }
 ```
 
 
@@ -307,7 +307,7 @@ If *ignoreSingleLineClasses* is `true` and *blankLineRequired* is `true`
 If *ignoreSingleLineClasses* is `false` and *blankLineRequired* is `true`
 
 ```
-            class Foo extends Bar*String* { }
+            class Foo extends Bar<String> { }
 ```
 
 
@@ -407,6 +407,7 @@ This rule is limited, and somewhat opinionated. The default is 4 spaces per inde
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
 | spacesPerIndentLevel        | The number of spaces that make up a single level of indentation. | 4 |
+| indentUnderLabel            | Indent code under labels (fx. Spock labels 'given:', 'when:', 'then:', ...) | false |
 
 Known Limitations include:
 
@@ -445,6 +446,18 @@ class MyClass {                                 // CORRECT
                 closeResources()                // violation
         }
     }
+}
+
+class MyClassSpec extends Specification {
+
+    void "Test"() {
+        when:
+        int x = 2 + 2   // CORRECT (default) or if `indentUnderLabel:false`
+
+        then:
+            x == 4      // violation unless `indentUnderLabel:true`
+    }
+
 }
 ```
 
@@ -858,8 +871,8 @@ Examples of violations:
 ```
     def myMethod() {
         3+ 5-x*23/ 100              // violation
-        list \*\*123                // violation
-        other\*\* writer            // violation
+        list <<123                // violation
+        other<< writer            // violation
         x=99                        // violation
         x&& y                       // violation
         x ||y                       // violation

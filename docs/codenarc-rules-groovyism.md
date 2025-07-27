@@ -198,7 +198,7 @@ This rule also ignores all calls to `super.getAt(Object)`.
 *Since CodeNarc 0.11*
 
 This rule detects when the `leftShift(Object)` method is called directly in code instead of using the
-\*\* operator. A groovier way to express this: `a.leftShift(b)` is this: `a \*\* b`. This rule can be
+<< operator. A groovier way to express this: `a.leftShift(b)` is this: `a << b`. This rule can be
 configured to ignore `this.leftShift(Object)` using the *ignoreThisReference* property. It defaults to
 *false*, so even `leftShift(x)` will trigger a violation.
 
@@ -300,7 +300,7 @@ Example of violations:
 *Since CodeNarc 0.11*
 
 This rule detects when the `rightShift(Object)` method is called directly in code instead of using the
-\*\* operator. A groovier way to express this: `a.rightShift(b)` is this: `a \*\* b`. This rule can be
+>> operator. A groovier way to express this: `a.rightShift(b)` is this: `a >> b`. This rule can be
 configured to ignore `this.rightShift(Object)` using the *ignoreThisReference* property. It defaults to
 *false*, so even `rightShift(x)` will trigger a violation.
 
