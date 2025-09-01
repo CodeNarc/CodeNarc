@@ -96,7 +96,7 @@ class UnusedImportRule extends AbstractRule {
 
     private Pattern createUsagePattern(String toMatch) {
         final INVALID = '[^a-zA-Z0-9_\\$]'
-        return ~/($INVALID|^|\$)${toMatch}($INVALID|$)/
+        return ~/($INVALID|^|\$)${toMatch}/
     }
 
     private int countUsage(String line, Pattern regexp) {

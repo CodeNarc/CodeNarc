@@ -5,8 +5,13 @@ NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with
 
 TODO Version 3.7.0  (??? 2025)
 --------------------------------------
- - #794: Docs: Fix where <, > has been replaced by asterisk. ([Thomas Rasmussen](https://github.com/dauer))
  - #796: **ImplicitReturnStatement** rule: Fix false positive for try-with-resources blocks.
+ - #799: **UnusedImport** rule: Fix false-positive for a statically imported constant used in a GString.
+ - #797: Additional `PropertiesFileRuleSetConfigurer.configure(..)` logging to aid in debugging. ([Daniel Hammer](https://github.com/dlehammer)).
+
+Documentation
+ - #794: Docs: Fix where <, > has been replaced by asterisk. ([Thomas Rasmussen](https://github.com/dauer))
+ - #798: Add doc for Indentation rule "indentUnderLabel" property. Fix incorrect escaping in other docs. ([Thomas Rasmussen](https://github.com/dauer))
 
 
 Version 3.6.0  (Feb 2025)
