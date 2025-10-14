@@ -158,9 +158,9 @@ same problem.
 
 For more information see these links:
 
-  * <http://blog.bjhargrave.com/2007/09/classforname-caches-defined-class-in.html>
+  * <https://blog.hargrave.dev/2007/09/classforname-caches-defined-class-in.html>
 
-  * <http://www.osgi.org/blog/2011/05/what-you-should-know-about-class.html>
+  * <https://blog.osgi.org/2011/05/what-you-should-know-about-class.html>
 
 Example of violations:
 
