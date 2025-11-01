@@ -303,7 +303,7 @@ that they should be stateless.
 This rule ignores (i.e., does not cause violations for) the following:
   * All `final` fields (either instance or static). Note that fields that are `static` and non-`final`, however, do cause a violation.
   * Non-`static` properties (i.e., no visibility modifier specified) declared with `def`.
-  * All classes annotated with the `@Immutable` transformation. See [http://groovy.codehaus.org/Immutable+transformation](http://groovy.codehaus.org/Immutable+transformation).
+  * All classes annotated with the `@Immutable` transformation. See [Immutable transformation](https://groovy-lang.org/releasenotes/groovy-1.6.html#Groovy16releasenotes-Immutable).
   * All fields annotated with the `@Inject` annotation.
   * All fields with names matching the *ignoreFieldNames* property.
   * All fields with types matching the *ignoreFieldTypes* property.
