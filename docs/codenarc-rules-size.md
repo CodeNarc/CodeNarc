@@ -130,8 +130,7 @@ by automated tests.
 
   * **[5]** [Cobertura Ant Task Reference](http://cobertura.sourceforge.net/anttaskreference.html)
 
-  * **[6]** [Cobertura Maven Plugin](http://mojo.codehaus.org/cobertura-maven-plugin/index.html)
-
+  * **[6]** [Cobertura Maven Plugin](https://www.mojohaus.org/cobertura-maven-plugin/)
 
 ## CyclomaticComplexity Rule
 
