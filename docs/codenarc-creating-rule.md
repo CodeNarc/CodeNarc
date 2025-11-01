@@ -83,7 +83,7 @@ direct subclasses of `AbstractRule`).
 Many of the rules included with **CodeNarc** are implemented using the *Visitor*
 pattern, as supported by the Groovy AST (Abstract Syntax Tree).
 See the `ClassCodeVisitorSupport` class within the Groovy distribution
-([Javadocs](http://groovy.codehaus.org/api/index.html)).
+([Javadocs](https://groovy-lang.org/api.html)).
 
 ### A Sample Rule Using AbstractAstVisitorRule and AbstractAstVisitor
 
