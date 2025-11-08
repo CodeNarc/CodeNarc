@@ -263,7 +263,7 @@ This rule ignores `final` fields (either instance or static). Fields that are
 `static` and non-`final`, however, do cause a violation.
 
 This rule also ignores all classes annotated with the `@Immutable` transformation.
-See [http://groovy.codehaus.org/Immutable+transformation](http://groovy.codehaus.org/Immutable+transformation).
+See [Immutable transform](https://groovy-lang.org/releasenotes/groovy-1.6.html#Groovy16releasenotes-Immutable).
 
 This rule also ignores all fields annotated with the `@Inject` or `@Value` annotations.
 

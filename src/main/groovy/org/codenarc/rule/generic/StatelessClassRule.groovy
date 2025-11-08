@@ -32,7 +32,7 @@ import org.codenarc.util.WildcardPattern
  * <code>static</code> and non-<code>final</code>, however, do cause a violation.
  * <p/>
  * This rule also ignores all classes annotated with the <code>@Immutable</code> transformation.
- * See http://groovy.codehaus.org/Immutable+transformation.
+ * See https://groovy-lang.org/releasenotes/groovy-1.6.html#Groovy16releasenotes-Immutable.
  * <p/>
  * This rule also ignores fields annotated with the <code>@Inject</code> and <code>@Value</code> annotation.
  * <p/>

@@ -617,8 +617,6 @@ Synchronization on a String field can lead to deadlock. Constant Strings are int
 classes loaded by the JVM. Thus, this could is locking on something that other code might also be locking. This could
 result in very strange and hard to diagnose blocking and deadlock behavior.
 
-See [JETTY-352](http://www.javalobby.org/java/forums/t96352.html) and <http://jira.codehaus.org/browse/JETTY-352>.
-
 Examples:
 
 ```
