@@ -12,6 +12,8 @@ TODO Version 3.7.0  (??? 2025)
 Documentation
  - #794: Docs: Fix where <, > has been replaced by asterisk. ([Thomas Rasmussen](https://github.com/dauer))
  - #798: Add doc for Indentation rule "indentUnderLabel" property. Fix incorrect escaping in other docs. ([Thomas Rasmussen](https://github.com/dauer))
+ - #802: Docs: Fix some broken link URLs for the "Basic" ruleset.  ([Thomas Rasmussen](https://github.com/dauer))
+ - #803: Fix more broken links in the docs, e.g., Groovy, Codehause, Grails.  ([Thomas Rasmussen](https://github.com/dauer))
 
 
 Version 3.6.0  (Feb 2025)
