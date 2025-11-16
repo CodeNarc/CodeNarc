@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Feb 15, 2025 2:41:24 PM
+CodeNarc Report: Sample Project - Nov 16, 2025 9:37:42 AM
 
-Summary: TotalFiles=431 FilesWithViolations=60 P1=0 P2=83 P3=39
+Summary: TotalFiles=431 FilesWithViolations=60 P1=0 P2=84 P3=39
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=UnnecessaryObjectReferences P=3 Line=185 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
@@ -581,6 +581,20 @@ File: imports/UnusedImportRuleTest.groovy
             def OPERATORS3 = 64&TestData12.VALUE|TestData13.VALUE^TestData14.VALUE
             def OPERATORS4 = !TestData15.VALUE
         ' contains a GString-type expression: '${TestData1.GOOD_XML}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=264 Msg=[The String '
+            import static Constants.CONSTANT1
+            import static Constants.CONSTANT2
+            import static Constants.CONSTANT3
+            import static Constants.CONSTANT4
+            import static Constants.CONSTANT5
+            import static Constants.CONSTANT6
+        
+            void doSomething() {
+                def stringA = "$CONSTANT1$CONSTANT2"
+                def stringB = "$CONSTANT3${CONSTANT4}"
+                def stringC = "${CONSTANT5}$CONSTANT6"
+            }        
+        ' contains a GString-type expression: '${CONSTANT4}'] Src=[final SOURCE = ''']
 
 File: jenkins/ClosureInGStringRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=35 Msg=[The String '
@@ -788,4 +802,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (https://codenarc.org) v3.6.0]
+[CodeNarc (https://codenarc.org) v3.7.0]

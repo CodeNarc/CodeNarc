@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://codenarc.org",
-        "version": "3.6.0"
+        "version": "3.7.0"
     },
     "report": {
-        "timestamp": "Feb 15, 2025 2:41:24 PM"
+        "timestamp": "Nov 16, 2025 9:37:41 AM"
     },
     "project": {
         "title": "Sample Project",
@@ -16,7 +16,7 @@
         "totalFiles": 431,
         "filesWithViolations": 60,
         "priority1": 0,
-        "priority2": 83,
+        "priority2": 84,
         "priority3": 39
     },
     "packages": [
@@ -2384,7 +2384,7 @@
             "totalFiles": 7,
             "filesWithViolations": 1,
             "priority1": 0,
-            "priority2": 1,
+            "priority2": 2,
             "priority3": 0,
             "files": [
                 {
@@ -2432,6 +2432,13 @@
                             "lineNumber": 215,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            import test.TestData1\n            import test.TestData2\n            import test.TestData3\n            import test.TestData4\n            import test.TestData5\n            import test.TestData6\n            import test.TestData7\n            import test.TestData8\n            import test.TestData9\n            import test.TestData10\n            import test.TestData11\n            import test.TestData12\n            import test.TestData13\n            import test.TestData14\n            import test.TestData15\n\n            def GSTRING1 = \" ${TestData1.GOOD_XML}\"\n            def GSTRING2 = \" $TestData2.XML\"\n            def MAP1 = [(TestData3):123]\n            def MAP2 = [abc:TestData4]\n            def MAP3 = [abc:TestData5, ddd:123]\n            def LIST = [TestData6,TestData7]\n            def OPERATORS1 = 0+TestData8.VALUE-TestData9.VALUE\n            def OPERATORS2 = 9*TestData10.VALUE/TestData11.VALUE\n            def OPERATORS3 = 64&TestData12.VALUE|TestData13.VALUE^TestData14.VALUE\n            def OPERATORS4 = !TestData15.VALUE\n        ' contains a GString-type expression: '${TestData1.GOOD_XML}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 264,
+                            "sourceLine": "final SOURCE = '''",
+                            "message": "The String '\n            import static Constants.CONSTANT1\n            import static Constants.CONSTANT2\n            import static Constants.CONSTANT3\n            import static Constants.CONSTANT4\n            import static Constants.CONSTANT5\n            import static Constants.CONSTANT6\n        \n            void doSomething() {\n                def stringA = \"$CONSTANT1$CONSTANT2\"\n                def stringB = \"$CONSTANT3${CONSTANT4}\"\n                def stringC = \"${CONSTANT5}$CONSTANT6\"\n            }        \n        ' contains a GString-type expression: '${CONSTANT4}'"
                         }
                     ]
                 }
