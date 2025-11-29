@@ -128,7 +128,7 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase<BracesForIfElseRule> 
                 [line: 47, source: '{',                        message: "Opening brace should be on the same line as 'else'"],
                 [line: 50, source: 'if (3==3)',                message: "Opening brace should be on the same line as 'if'"],
                 [line: 74, source: 'if (list.any { it > 1 })', message: "Opening brace should be on the same line as 'if'"],
-                [line: 83, source: 'if (list.size > 5',        message: "Opening brace should be on the same line as 'if'"])
+                [line: 83, source: 'if (list.size() > 5',       message: "Opening brace should be on the same line as 'if'"])
     }
 
     @Test
@@ -144,7 +144,7 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase<BracesForIfElseRule> 
                 [line: 30, source: '} else{',                    message: "Opening brace should not be on the same line as 'else'"],
                 [line: 33, source: 'if (3==3){',                 message: "Opening brace should not be on the same line as 'if'"],
                 [line: 52, source: 'if (list.any { it > 1 }) {', message: "Opening brace should not be on the same line as 'if'"],
-                [line: 58, source: 'if (list.size > 5',          message: "Opening brace should not be on the same line as 'if'"])
+                [line: 58, source: 'if (list.size() > 5',          message: "Opening brace should not be on the same line as 'if'"])
     }
 
     @Test

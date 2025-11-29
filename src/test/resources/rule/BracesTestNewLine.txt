@@ -80,7 +80,7 @@ private class Forth
     def multiLine()
     {
         def list = [1, 2, 3]
-        if (list.size > 5
+        if (list.size() > 5
             || list.any { it > 1 })
         {
             println it

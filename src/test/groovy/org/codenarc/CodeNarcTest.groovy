@@ -325,7 +325,7 @@ class CodeNarcTest extends AbstractTestCase {
             assert codeNarcRunner.propertiesFile == null
             assert codeNarcRunner.ruleSetFiles == RULESET1
 
-            assert codeNarcRunner.reportWriters.size == 1
+            assert codeNarcRunner.reportWriters.size() == 1
             def reportWriter = codeNarcRunner.reportWriters[0]
             assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
             assert exitCode == 0
@@ -378,7 +378,7 @@ class CodeNarcTest extends AbstractTestCase {
             assert codeNarcRunner.ruleSetFiles == BASIC_RULESET
             assert codeNarcRunner.propertiesFile == null
 
-            assert codeNarcRunner.reportWriters.size == 1
+            assert codeNarcRunner.reportWriters.size() == 1
             def reportWriter = codeNarcRunner.reportWriters[0]
             assertReport(reportWriter, HtmlReportWriter, null, null)
             assert exitCode == 0
@@ -404,7 +404,7 @@ class CodeNarcTest extends AbstractTestCase {
 
             assert codeNarcRunner.ruleSetString == URLDecoder.decode(RULESET_AS_JSON, 'UTF-8')
 
-            assert codeNarcRunner.reportWriters.size == 1
+            assert codeNarcRunner.reportWriters.size() == 1
             def reportWriter = codeNarcRunner.reportWriters[0]
             assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
             assert exitCode == 0
@@ -432,7 +432,7 @@ class CodeNarcTest extends AbstractTestCase {
 
             assert codeNarcRunner.ruleSetString == URLDecoder.decode(RULESET_AS_JSON, 'UTF-8')
 
-            assert codeNarcRunner.reportWriters.size == 1
+            assert codeNarcRunner.reportWriters.size() == 1
             def reportWriter = codeNarcRunner.reportWriters[0]
             assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
             assert exitCode == 0
@@ -498,7 +498,7 @@ class CodeNarcTest extends AbstractTestCase {
 
             codeNarc.execute(ARGS)
 
-            assert codeNarcRunner.reportWriters.size == 1
+            assert codeNarcRunner.reportWriters.size() == 1
             def reportWriter = codeNarcRunner.reportWriters[0]
             assert reportWriter.class == NoTitleReportWriter
             assert exitCode == 0
@@ -510,7 +510,7 @@ class CodeNarcTest extends AbstractTestCase {
 
             codeNarc.execute(ARGS)
 
-            assert codeNarcRunner.reportWriters.size == 1
+            assert codeNarcRunner.reportWriters.size() == 1
             def reportWriter = codeNarcRunner.reportWriters[0]
             assert reportWriter.class == XmlReportWriter
             assert reportWriter.writeToStandardOut

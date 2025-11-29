@@ -291,7 +291,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
     }
 
     private void assertStandardHtmlReportWriter(Map codeNarcRunner) {
-        assert codeNarcRunner.reportWriters.size == 1
+        assert codeNarcRunner.reportWriters.size() == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
         assert reportWriter.class == HtmlReportWriter
     }
