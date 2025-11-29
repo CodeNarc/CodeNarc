@@ -3,11 +3,12 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-TODO Version 3.7.0  (Nov 2025)
+TODO: Version 3.7.0  (??? 2025)
 --------------------------------------
  - #796: **ImplicitReturnStatement** rule: Fix false positive for try-with-resources blocks.
  - #799: **UnusedImport** rule: Fix false-positive for a statically imported constant used in a GString.
  - #797: Additional `PropertiesFileRuleSetConfigurer.configure(..)` logging to aid in debugging. ([Daniel Hammer](https://github.com/dlehammer)).
+ - #805: Changes to support running in Java 11 and later.
 
 Documentation
  - #794: Docs: Fix where <, > has been replaced by asterisk. ([Thomas Rasmussen](https://github.com/dauer))

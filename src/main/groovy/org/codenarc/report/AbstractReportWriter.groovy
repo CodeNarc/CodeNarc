@@ -47,6 +47,7 @@ abstract class AbstractReportWriter implements ReportWriter {
     protected Closure getTimestamp = { new Date() }
     protected String customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
     protected ResourceBundle resourceBundle
+    private ResourceBundle customMessagesResourceBundle
     private final TemplateEngine templateEngine = new SimpleTemplateEngine()
 
     // Allow tests to override this
@@ -94,10 +95,10 @@ abstract class AbstractReportWriter implements ReportWriter {
     protected void initializeDefaultResourceBundle() {
         def baseBundle = ResourceBundle.getBundle(BASE_MESSAGES_BUNDLE)
         resourceBundle = baseBundle
+
         try {
-            resourceBundle = ResourceBundle.getBundle(customMessagesBundleName)
+            customMessagesResourceBundle = ResourceBundle.getBundle(customMessagesBundleName)
             LOG.info("Using custom message bundle [$customMessagesBundleName]")
-            resourceBundle.parent = baseBundle
         }
         catch (MissingResourceException) {
             LOG.debug("No custom message bundle found for [$customMessagesBundleName]. Using default messages.")
@@ -139,14 +140,23 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     protected String getResourceBundleString(String resourceKey, String defaultString='?', boolean logWarning=true) {
         def string = defaultString
+
+        if (customMessagesResourceBundle) {
+            try {
+                return customMessagesResourceBundle.getString(resourceKey)
+            } catch (MissingResourceException ignore) {
+                // Not present in custom messages
+            }
+        }
+
         try {
             string = resourceBundle.getString(resourceKey)
-        } catch (MissingResourceException e) {
+        } catch (MissingResourceException ignore) {
             if (logWarning) {
                 LOG.warn("No string found for resourceKey=[$resourceKey]")
             }
         }
-        string
+        return string
     }
 
     protected String getFormattedTimestamp() {
