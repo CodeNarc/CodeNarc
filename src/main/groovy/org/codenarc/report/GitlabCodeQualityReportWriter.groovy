@@ -18,37 +18,26 @@
 package org.codenarc.report
 
 import org.codenarc.AnalysisContext
-import org.codenarc.results.FileResults
 import org.codenarc.results.Results
-
-import groovy.json.JsonOutput
 
 /**
  * ReportWriter that generates a JSON report in the format expected by GitLab's Code Quality service.
  *
  * See https://docs.gitlab.com/ee/ci/testing/code_quality.html#implement-a-custom-tool
  */
-class GitlabCodeQualityReportWriter extends AbstractReportWriter {
+class GitlabCodeQualityReportWriter extends AbstractJsonReportWriter {
+
+    // mapping between CodeNarc priorities and output severities
+    private static final Map<int, String> PRIORITY_TO_SEVERITY_MAPPING = [
+        1: 'info',
+        2: 'major',
+        3: 'blocker',
+    ]
+
     String defaultOutputFile = 'CodeNarcGitlabCodeQualityReport.json'
 
-    Boolean writeAsSingleLine = false
-
     @Override
-    void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
-        assert analysisContext
-        assert results
-
-        initializeResourceBundle()
-
-        // mapping between CodeNarc priorities and output severities
-        // TODO: Verify that these are good defaults.
-        // TODO: Optionally make this configurable.
-        def priorityMap = [
-            1: 'info',
-            2: 'major',
-            3: 'blocker',
-        ]
-
+    Object buildJsonStructure(AnalysisContext analysisContext, Results results) {
         // generate report from results
         def fileResults = getFileResults(results)
         def resultsObj = []
@@ -63,7 +52,7 @@ class GitlabCodeQualityReportWriter extends AbstractReportWriter {
                     // that even when indenting the line differently, it
                     // will still be recognized.
                     fingerprint: violation.sourceLine.trim().digest('SHA-1'),
-                    severity: priorityMap[violation.rule.priority],
+                    severity: PRIORITY_TO_SEVERITY_MAPPING[violation.rule.priority],
                     location: [
                         path: fileResult.getPath(),
                         lines: [
@@ -73,39 +62,7 @@ class GitlabCodeQualityReportWriter extends AbstractReportWriter {
                 ]
             }
         }
-
-        /*
-           Append JSON to writer
-           - isWriteAsSingleLine == true: writes result in a stdout single line
-           - isWriteAsSingleLine == false: pretty print it for easier reading
-        */
-        def json = JsonOutput.toJson(resultsObj)
-        if (!isWriteAsSingleLine()) {
-            json = JsonOutput.prettyPrint(json)
-        }
-        if (isWriteToStandardOut()) {
-            def printWriter = new PrintWriter(writer)
-            printWriter.println(json)
-            printWriter.flush()
-        }
-        else {
-            writer << json
-        }
+        return resultsObj
     }
 
-    private List<FileResults> getFileResults(Results results, List<FileResults> fileResults = []) {
-        if (results.isFile()) {
-            fileResults << results
-        }
-        else {
-            results.children.each { child ->
-                getFileResults(child, fileResults)
-            }
-        }
-        return fileResults
-    }
-
-    boolean isWriteAsSingleLine() {
-        writeAsSingleLine == true
-    }
 }

@@ -23,27 +23,17 @@ import org.codenarc.results.Results
 import org.codenarc.rule.Violation
 import org.codenarc.util.PathUtil
 
-import groovy.json.JsonOutput
-
 /**
  * ReportWriter that generates an JSON report.
  */
-class JsonReportWriter extends AbstractReportWriter {
+class JsonReportWriter extends AbstractJsonReportWriter {
 
     String title
     String defaultOutputFile = 'CodeNarcJsonReport.json'
 
-    Boolean writeAsSingleLine = false
-
     @Override
-    void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
-        assert analysisContext
-        assert results
-
-        initializeResourceBundle()
-
-        // Build results object
-        def resultsObj = [
+    Object buildJsonStructure(AnalysisContext analysisContext, Results results) {
+        return [
             'codeNarc': [url: CODENARC_URL, version: getCodeNarcVersion()],
             'report': buildReportElement(),
             'project': buildProjectElement(analysisContext),
@@ -51,28 +41,6 @@ class JsonReportWriter extends AbstractReportWriter {
             'packages': buildPackageElements(results),
             'rules': buildRulesElement(analysisContext)
         ]
-
-        /*
-           Append JSON to writer
-           - isWriteAsSingleLine == true: writes result in a stdout single line
-           - isWriteAsSingleLine == false: pretty print it for easier reading
-        */
-        def json = JsonOutput.toJson(resultsObj)
-        if (!isWriteAsSingleLine()) {
-            json = JsonOutput.prettyPrint(json)
-        }
-        if (isWriteToStandardOut()) {
-            def printWriter = new PrintWriter(writer)
-            printWriter.println(json)
-            printWriter.flush()
-        }
-        else {
-            writer << json
-        }
-    }
-
-    boolean isWriteAsSingleLine() {
-        writeAsSingleLine == true
     }
 
     //--------------------------------------------------------------------------
