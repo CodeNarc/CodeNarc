@@ -28,18 +28,11 @@ import groovy.json.JsonOutput
  *
  * See https://docs.gitlab.com/ee/ci/testing/code_quality.html#implement-a-custom-tool
  */
-class GitlabCodeQualityReportWriter extends AbstractReportWriter {
+class GitlabCodeQualityReportWriter extends AbstractJsonReportWriter {
     String defaultOutputFile = 'CodeNarcGitlabCodeQualityReport.json'
 
-    Boolean writeAsSingleLine = false
-
     @Override
-    void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
-        assert analysisContext
-        assert results
-
-        initializeResourceBundle()
-
+    Object buildJsonStructure(AnalysisContext analysisContext, Results results) {
         // mapping between CodeNarc priorities and output severities
         // TODO: Verify that these are good defaults.
         // TODO: Optionally make this configurable.
@@ -73,24 +66,7 @@ class GitlabCodeQualityReportWriter extends AbstractReportWriter {
                 ]
             }
         }
-
-        /*
-           Append JSON to writer
-           - isWriteAsSingleLine == true: writes result in a stdout single line
-           - isWriteAsSingleLine == false: pretty print it for easier reading
-        */
-        def json = JsonOutput.toJson(resultsObj)
-        if (!isWriteAsSingleLine()) {
-            json = JsonOutput.prettyPrint(json)
-        }
-        if (isWriteToStandardOut()) {
-            def printWriter = new PrintWriter(writer)
-            printWriter.println(json)
-            printWriter.flush()
-        }
-        else {
-            writer << json
-        }
+        return resultsObj
     }
 
     private List<FileResults> getFileResults(Results results, List<FileResults> fileResults = []) {
@@ -105,7 +81,4 @@ class GitlabCodeQualityReportWriter extends AbstractReportWriter {
         return fileResults
     }
 
-    boolean isWriteAsSingleLine() {
-        writeAsSingleLine == true
-    }
 }
