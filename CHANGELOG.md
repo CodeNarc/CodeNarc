@@ -3,7 +3,7 @@
 
 NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
 
-TODO: Version 3.7.0  (??? 2025)
+Version 3.7.0  (Nov 2025)
 --------------------------------------
  - #796: **ImplicitReturnStatement** rule: Fix false positive for try-with-resources blocks.
  - #799: **UnusedImport** rule: Fix false-positive for a statically imported constant used in a GString.
