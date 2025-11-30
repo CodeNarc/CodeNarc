@@ -14,7 +14,7 @@ shadowJar {
 }
 
 group = 'org.codenarc'
-version = '3.7.0-groovy-4.0'
+version = '3.7.0'
 
 java {
     sourceCompatibility = '1.8'
@@ -30,24 +30,21 @@ repositories {
     maven { url = 'https://repo.maven.apache.org/maven2' }
 }
 
-def groovy4Version = '4.0.24'
+def groovyVersion = '3.0.23'
 def gmetricsVersion = '2.1.0'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"
 
-println "NOTE: Using build-groovy4.gradle"
-
 dependencies {
-
-    implementation "org.apache.groovy:groovy:$groovy4Version"
-    implementation "org.apache.groovy:groovy-xml:$groovy4Version"
-    implementation "org.apache.groovy:groovy-groovydoc:$groovy4Version"
-    implementation "org.apache.groovy:groovy-json:$groovy4Version"
-    implementation "org.apache.groovy:groovy-ant:$groovy4Version"
-    implementation "org.apache.groovy:groovy-templates:$groovy4Version"
+    implementation "org.codehaus.groovy:groovy:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-groovydoc:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
 
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
-    implementation("org.gmetrics:GMetrics-Groovy4:$gmetricsVersion") {
+    implementation("org.gmetrics:GMetrics:$gmetricsVersion") {
         transitive = false
     }
 
@@ -59,6 +56,8 @@ dependencies {
     testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
     testImplementation 'commons-cli:commons-cli:1.4'
     testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
+
+    testRuntimeOnly "org.codehaus.groovy:groovy-macro:$groovyVersion"
 }
 
 sourceSets {
@@ -137,7 +136,6 @@ mavenPublishing {
 }
 
 
-// OLD
 // Publish to Sonatype (OSSRH) Maven Repository
 // See http://central.sonatype.org/pages/gradle.html
 //publishing {
@@ -145,14 +143,12 @@ mavenPublishing {
 //        maven(MavenPublication) {
 //            from components.java
 //
-//            artifactId = 'CodeNarc'
-//
 //            artifact(groovydocJar) {
 //                classifier = 'javadoc'
 //            }
 //
 //            pom {
-//                name = 'CodeNarc-Groovy4'
+//                name = 'CodeNarc'
 //                description = 'The CodeNarc project provides a static analysis tool for Groovy code.'
 //                url = 'https://codenarc.org'
 //
