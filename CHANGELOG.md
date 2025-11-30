@@ -17,6 +17,7 @@ Documentation
  - #803: Fix more broken links in the docs, e.g., Groovy, Codehause, Grails.  ([Thomas Rasmussen](https://github.com/dauer))
 
 Build, Infrastructure and Tests
+ - #806: Migrate publishing to Central Publisher Portal. Publish using vanniktech / gradle-maven-publish-plugin.
  - Upgrade to Shadow Gradle plugin 8.3.9.
 
 
