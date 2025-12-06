@@ -1,0 +1,194 @@
+plugins {
+    id 'groovy'
+//    id 'maven-publish'
+    id 'signing'
+    id 'idea'
+    id 'com.gradleup.shadow' version '8.3.9'
+    id "com.vanniktech.maven.publish" version "0.35.0"
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'org.codenarc.CodeNarc'
+    }
+}
+
+group = 'org.codenarc'
+version = '3.7.0-groovy-4.0'
+
+java {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+base {
+    archivesName = 'CodeNarc'
+}
+
+repositories {
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://repo.maven.apache.org/maven2' }
+}
+
+def groovy4Version = '4.0.24'
+def gmetricsVersion = '2.1.0'
+def slf4jVersion = '1.7.35'
+def junitVersion = "5.8.2"
+
+println "NOTE: Using build-groovy4.gradle"
+
+dependencies {
+
+    implementation "org.apache.groovy:groovy:$groovy4Version"
+    implementation "org.apache.groovy:groovy-xml:$groovy4Version"
+    implementation "org.apache.groovy:groovy-groovydoc:$groovy4Version"
+    implementation "org.apache.groovy:groovy-json:$groovy4Version"
+    implementation "org.apache.groovy:groovy-ant:$groovy4Version"
+    implementation "org.apache.groovy:groovy-templates:$groovy4Version"
+
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    implementation("org.gmetrics:GMetrics-Groovy4:$gmetricsVersion") {
+        transitive = false
+    }
+
+    // JUnit is only required if you are using the CodeNarc testing framework, e.g. AbstractRuleTestCase
+    compileOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
+    testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
+    testImplementation 'commons-cli:commons-cli:1.4'
+    testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
+}
+
+sourceSets {
+    main {
+        java { srcDirs = [] }
+        groovy { srcDirs = ['src/main/groovy', 'src/main/java'] }
+    }
+}
+
+test {
+    useJUnitPlatform()
+    maxParallelForks = 2
+    jvmArgs '-Duser.language=en -Duser.country=US'
+}
+
+java {
+    //withJavadocJar()
+    withSourcesJar()
+}
+
+javadoc {
+    if (JavaVersion.current().java8Compatible) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+}
+
+groovydoc {
+    use = true
+}
+
+task groovydocJar(type: Jar, dependsOn: groovydoc ) {
+    archiveClassifier = 'javadoc' // must publish javadoc to be able to deploy to Sonatype
+    from groovydoc.destinationDir
+}
+
+signing {
+    required = { gradle.taskGraph.hasTask(publish) }
+    sign publishing.publications
+}
+
+// Publish
+mavenPublishing {
+    publishToMavenCentral()
+
+    signAllPublications()
+}
+
+mavenPublishing {
+    coordinates("org.codenarc", "CodeNarc", version)
+
+    pom {
+        name = "CodeNarc"
+        description = "The CodeNarc project provides a static analysis tool for Groovy code."
+        inceptionYear = "2010"
+        url = "https://codenarc.org"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = 'chrismair'
+                name = 'Chris Mair'
+                email = 'chrismair@users.sourceforge.net'
+            }
+        }
+        scm {
+            url = "https://github.com/CodeNarc/CodeNarc/"
+            connection = "scm:git:git@github.com:CodeNarc/CodeNarc.git"
+            developerConnection = "scm:git:git@github.com:CodeNarc/CodeNarc.git"
+        }
+    }
+}
+
+
+// OLD
+// Publish to Sonatype (OSSRH) Maven Repository
+// See http://central.sonatype.org/pages/gradle.html
+//publishing {
+//    publications {
+//        maven(MavenPublication) {
+//            from components.java
+//
+//            artifactId = 'CodeNarc'
+//
+//            artifact(groovydocJar) {
+//                classifier = 'javadoc'
+//            }
+//
+//            pom {
+//                name = 'CodeNarc-Groovy4'
+//                description = 'The CodeNarc project provides a static analysis tool for Groovy code.'
+//                url = 'https://codenarc.org'
+//
+//                scm {
+//                    connection = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
+//                    developerConnection = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
+//                    url = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
+//                }
+//
+//                licenses {
+//                    license {
+//                        name = 'The Apache License, Version 2.0'
+//                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    }
+//                }
+//
+//                developers {
+//                    developer {
+//                        id = 'chrismair'
+//                        name = 'Chris Mair'
+//                        email = 'chrismair@users.sourceforge.net'
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    repositories {
+//        maven {
+//            def releasesUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+//            def snapshotsUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+//            url = version.endsWith('SNAPSHOT') ? snapshotsUrl : releasesUrl
+//            credentials {
+//                username = ossrhUsername
+//                password = ossrhPassword
+//            }
+//        }
+//    }
+//}
