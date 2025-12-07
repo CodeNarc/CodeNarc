@@ -16,7 +16,6 @@
 package org.codenarc.report
 
 import org.codenarc.AnalysisContext
-import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.Violation
 import org.codenarc.util.io.ClassPathResource
@@ -116,18 +115,6 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
                 }
             }
         }
-    }
-
-    private List<FileResults> getFileResults(Results results, List<FileResults> fileResults = []) {
-        if (results.isFile()) {
-            fileResults << results
-        }
-        else {
-            results.children.each { child ->
-                getFileResults(child, fileResults)
-            }
-        }
-        return fileResults
     }
 
     private Closure buildAllViolationsSection(Results results) {

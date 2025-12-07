@@ -18,6 +18,7 @@ package org.codenarc.report
 import groovy.text.SimpleTemplateEngine
 import groovy.text.TemplateEngine
 import org.codenarc.AnalysisContext
+import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
 import org.codenarc.util.AstUtil
@@ -162,6 +163,10 @@ abstract class AbstractReportWriter implements ReportWriter {
     protected String getFormattedTimestamp() {
         def dateFormat = java.text.DateFormat.getDateTimeInstance()
         dateFormat.format(getTimestamp())
+    }
+
+    protected List<FileResults> getFileResults(Results results) {
+        results.isFile() ? [results] : results.children.collectMany { getFileResults(it) }
     }
 
     protected List getSortedRules(AnalysisContext analysisContext) {
