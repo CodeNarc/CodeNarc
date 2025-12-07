@@ -51,7 +51,8 @@ class GitlabCodeQualityReportWriter extends AbstractJsonReportWriter {
                     // trailing whitespace trimmed. Trimming first ensures
                     // that even when indenting the line differently, it
                     // will still be recognized.
-                    fingerprint: violation.sourceLine.trim().digest('SHA-1'),
+                    // Fallback to hash of 'filepath:lineNumber:rule' if no source line.
+                    fingerprint: (violation.sourceLine?.trim() ?: "${fileResult.getPath()}:${violation.lineNumber}:${violation.rule.name}").digest('SHA-1'),
                     severity: PRIORITY_TO_SEVERITY_MAPPING[violation.rule.priority],
                     location: [
                         path: fileResult.getPath(),

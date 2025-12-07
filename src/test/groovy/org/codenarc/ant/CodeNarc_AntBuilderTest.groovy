@@ -84,6 +84,11 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
                 assertContainsAll(reportFile.text, ['"$schema": "https://json.schemastore.org/sarif-', '"runs": [', '"tool": {', '"informationUri": "https://codenarc.org"', '"results": ['])
             },
         ],
+        gitlab: [
+            options: [
+                outputFile: 'target/AntBuilderTestGitlabCodeQualityReport.json',
+            ],
+        ]
     ]
     private static final RULESET_FILES = [
             'rulesets/basic.xml',
