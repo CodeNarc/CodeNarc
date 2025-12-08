@@ -1,0 +1,1478 @@
+[
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "e180555e0c53c48b804729b279202796587d478f",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractAstVisitorRuleTest.groovy",
+            "lines": {
+                "begin": 185
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "6eef7800ea8baf30cbcf5136ed738244d2a74c6e",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractAstVisitorRuleTest.groovy",
+            "lines": {
+                "begin": 188
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "e180555e0c53c48b804729b279202796587d478f",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractAstVisitorRuleTest.groovy",
+            "lines": {
+                "begin": 189
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "1a10da72dce4aa311316c99ea620413d6b1cdad0",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractRuleTest.groovy",
+            "lines": {
+                "begin": 137
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "e5220cd84851ecc27cd3da53f4c214a276945b05",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractRuleTest.groovy",
+            "lines": {
+                "begin": 140
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "1a10da72dce4aa311316c99ea620413d6b1cdad0",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractRuleTest.groovy",
+            "lines": {
+                "begin": 141
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "594a9cf121b6e4b80f61c64885b3c09afd6d014f",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractRuleTest.groovy",
+            "lines": {
+                "begin": 177
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "9d0c9a9a8e7d11f201b05b8fa9d1ff8cb21f56db",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractRuleTest.groovy",
+            "lines": {
+                "begin": 225
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "47c7ae61baa1ea88fca98e724110770f0b7c6e93",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractRuleTest.groovy",
+            "lines": {
+                "begin": 228
+            }
+        }
+    },
+    {
+        "description": "The code could be more concise by using a with() or identity() block",
+        "check_name": "UnnecessaryObjectReferences",
+        "fingerprint": "9d0c9a9a8e7d11f201b05b8fa9d1ff8cb21f56db",
+        "severity": "blocker",
+        "location": {
+            "path": "AbstractRuleTest.groovy",
+            "lines": {
+                "begin": 229
+            }
+        }
+    },
+    {
+        "description": "Static imports should appear before normal imports",
+        "check_name": "MisorderedStaticImports",
+        "fingerprint": "2561a4e1270b26202cf2f9254ebcb6b26c59e102",
+        "severity": "blocker",
+        "location": {
+            "path": "InlineViolationsParserTest.groovy",
+            "lines": {
+                "begin": 20
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "f5ad960b58d24b40a6733283486e6f9f4305a074",
+        "severity": "blocker",
+        "location": {
+            "path": "InlineViolationsParserTest.groovy",
+            "lines": {
+                "begin": 199
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "f8dd73e73a44863ce0051c457b47f250d9ef4871",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/AbstractJavadocEmptyTagRuleTestCase.groovy",
+            "lines": {
+                "begin": 53
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "808c4f701c4772c7692fe15cf452f357caae2460",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/AbstractJavadocEmptyTagRuleTestCase.groovy",
+            "lines": {
+                "begin": 56
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "f8dd73e73a44863ce0051c457b47f250d9ef4871",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/AbstractJavadocMissingDescriptionRuleTestCase.groovy",
+            "lines": {
+                "begin": 51
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "43bfe978cd45e90255acfc5782fe8bf534decfd1",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/AbstractJavadocMissingDescriptionRuleTestCase.groovy",
+            "lines": {
+                "begin": 54
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "461821db6da6704561b963d82e0e80464140e17b",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocEmptyAuthorTagRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "6dc0c6d27aa62517149be02c439e6ca6822103e2",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocEmptyExceptionTagRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "542b18c36288f46bc9067366535697d8758d1f1b",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocEmptyParamTagRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "327e4e07c2d987856f820752ae5801344388cbfa",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocEmptyReturnTagRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "b82bb2d06be2acab3c71de4813a87ca652d481ee",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocEmptySeeTagRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "ea2ba7dc2724723d5cd4c1f33f01b6bafadfa8ec",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocEmptySinceTagRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "5d0516a9311ef629fb5b6f30215d1ac649c5cfe2",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocEmptyThrowsTagRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "5ebe2bd2f2f0394fd07f7d7a595812bad876ebb5",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocEmptyVersionTagRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "6dc0c6d27aa62517149be02c439e6ca6822103e2",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocMissingExceptionDescriptionRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "542b18c36288f46bc9067366535697d8758d1f1b",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocMissingParamDescriptionRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "5d0516a9311ef629fb5b6f30215d1ac649c5cfe2",
+        "severity": "blocker",
+        "location": {
+            "path": "comments/JavadocMissingThrowsDescriptionRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "9ada53de42377c99748880c60c4edbe01ec095aa",
+        "severity": "blocker",
+        "location": {
+            "path": "convention/CompileStaticRuleTest.groovy",
+            "lines": {
+                "begin": 34
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "40cdd8ddbaf696bcb60f98f20a2a4a542200108c",
+        "severity": "blocker",
+        "location": {
+            "path": "design/NestedForLoopRuleTest.groovy",
+            "lines": {
+                "begin": 106
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "f000613978e043ca87172d020fef96bf1e51802f",
+        "severity": "blocker",
+        "location": {
+            "path": "design/OptionalCollectionReturnTypeRuleTest.groovy",
+            "lines": {
+                "begin": 128
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.design.PrivateFieldCouldBeFinalRuleTest has 34 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "88c3a487d6502a2eb144adadfee0fb1de4491e5e",
+        "severity": "major",
+        "location": {
+            "path": "design/PrivateFieldCouldBeFinalRuleTest.groovy",
+            "lines": {
+                "begin": 26
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "17a1716cb5dd47c195ad911ca6e0c793696aa3cd",
+        "severity": "blocker",
+        "location": {
+            "path": "enhanced/MissingOverrideAnnotationRuleTest.groovy",
+            "lines": {
+                "begin": 261
+            }
+        }
+    },
+    {
+        "description": "The String '\n            for(String name=${SomeClass.SOME_CONSTANT}; name==null;)  // And what about {}\n            {\n                doStuff()\n            }\n        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}; name==null;)  // And what about {}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/BracesForForLoopRuleTest.groovy",
+            "lines": {
+                "begin": 101
+            }
+        }
+    },
+    {
+        "description": "The String '\n            if (someContainer.\"${SomeClass.SOME_CONSTANT}\" != null)  // And what about {}\n            {\n                doStuff()\n            }\n        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}\" != null)  // And what about {}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/BracesForIfElseRuleTest.groovy",
+            "lines": {
+                "begin": 59
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.formatting.BracesForMethodRuleTest has 38 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "010b12d7298ad38c38c559d2a5c4a62edc747677",
+        "severity": "major",
+        "location": {
+            "path": "formatting/BracesForMethodRuleTest.groovy",
+            "lines": {
+                "begin": 28
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                int size(String name = \"${SomeClass.SOME_CONSTANT}\")\n                {\n                    return 99\n                }\n            }\n        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/BracesForMethodRuleTest.groovy",
+            "lines": {
+                "begin": 356
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "658fde1fdba8629b28ecad9a64270b3abea7fc2c",
+        "severity": "blocker",
+        "location": {
+            "path": "formatting/BracesForTryCatchFinallyRuleTest.groovy",
+            "lines": {
+                "begin": 181
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.formatting.ClassEndsWithBlankLineRuleTest has 33 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "89d09a8178377dcd6fbfc1f4814fdd145660afb7",
+        "severity": "major",
+        "location": {
+            "path": "formatting/ClassEndsWithBlankLineRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 50 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "99e6673c9d09b4955e8cf1d36a8902ebd6093d19",
+        "severity": "major",
+        "location": {
+            "path": "formatting/ClassStartsWithBlankLineRuleTest.groovy",
+            "lines": {
+                "begin": 28
+            }
+        }
+    },
+    {
+        "description": "Class \"IndentationRuleTest\" is 1217 lines",
+        "check_name": "ClassSize",
+        "fingerprint": "3d3ffeb52bea9b986842089d86e4add87f510369",
+        "severity": "blocker",
+        "location": {
+            "path": "formatting/IndentationRuleTest.groovy",
+            "lines": {
+                "begin": 26
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.formatting.IndentationRuleTest has 60 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "083297a88c738a31248719f5b43abda9d007a356",
+        "severity": "major",
+        "location": {
+            "path": "formatting/IndentationRuleTest.groovy",
+            "lines": {
+                "begin": 26
+            }
+        }
+    },
+    {
+        "description": "The String '\n            |class MyClass {\n            |    private void execute() {\n            |        try {\n            |            executeWithArgs(args)\n            |        }\n            |        catch(Throwable t) {\n            |            println \"ERROR: ${t.message}\"\n            |                 t.printStackTrace()        // wrong column\n            |        }\n            |        finally {\n            |            closeResources()\n            |        }\n            |    }\n            |    private void executeOtherOne() {\n            |        try {\n            |      println 999                          // wrong column \n            |            executeWithArgs(args)\n            |        } catch(Throwable t) {\n            |            t.printStackTrace()\n            |        } finally {\n            |            closeResources()\n            |             notifyUser()                  // wrong column\n            |        }\n            |    }\n            |}\n        ' contains a GString-type expression: '${t.message}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/IndentationRuleTest.groovy",
+            "lines": {
+                "begin": 609
+            }
+        }
+    },
+    {
+        "description": "The String '\n            |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->\n            |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')\n            |    String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +\n            |        \"FILE_PATH=${it.absolutePath}\\n\"\n            |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)\n            |    cacheDir + hash + File.separator + 'output/jars/classes.jar'\n            |}).asFileTree\n        ' contains a GString-type expression: '${it.absolutePath}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/IndentationRuleTest.groovy",
+            "lines": {
+                "begin": 1018
+            }
+        }
+    },
+    {
+        "description": "The String '\n            |\"${if (true) 'content' else ''}\"\n        ' contains a GString-type expression: '${if (true) 'content' else ''}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/IndentationRuleTest.groovy",
+            "lines": {
+                "begin": 1032
+            }
+        }
+    },
+    {
+        "description": "The String '\n            |package com.sample\n            |\n            |trait RegressionTest {\n            |\n            |    String callStackPath = \"src/test/resources/callstacks/\"\n            |\n            |   /**\n            |     * Checks the current callstack is the same as the reference callstack.\n            |     * The reference callstack can be updated into a txt file in the callStackPath\n            |     *\n            |     * Pattern: <RegressionTest.callStackPath>/<ClassTestSimpleName><_subname>.txt\n            |     * @param subname optional subname, used in the reference callstack filename\n            |     */\n            |    void testNonRegression(String subname = '') {\n            |        String targetFileName = \"${callStackPath}${this.class.simpleName}\"\n            |        if (subname) {\n            |            targetFileName += \"_${subname}\"\n            |        }\n            |        RegressionTestHelper.testNonRegression(helper, targetFileName)\n            |    }\n            |}\n        ' contains a GString-type expression: '${callStackPath}${this.class.simpleName}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/IndentationRuleTest.groovy",
+            "lines": {
+                "begin": 1040
+            }
+        }
+    },
+    {
+        "description": "The String '\n            |buildFileList()\n            |    .collect { File it ->\n            |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')\n            |        String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +\n            |            \"FILE_PATH=${it.absolutePath}\\n\"\n            |        cacheDir + File.separator + inputFile + sha1\n            |    }\n            |    .each { name ->\n            |        println name\n            |    }\n            |println \"done\"\n            |\n            |list2.collect { item ->\n            |    item.name\n            |}.each { name -> println name }\n            |\n            |otherList.collect { item -> item.name }.each { name -> println name }\n            |\n            |if (expr instanceof ConstructorCallExpression || expr instanceof CastExpression) {\n            |    [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {\n            |        AstUtil.classNodeImplementsType(expr.type, it)\n            |    }.each {\n            |        callbackFunction()\n            |    }\n            |}\n        ' contains a GString-type expression: '${it.absolutePath}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/IndentationRule_MethodChainingTest.groovy",
+            "lines": {
+                "begin": 82
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                private @Autowired DataSource dataSource\n                private @Value('${name}') String name\n            }\n        ' contains a GString-type expression: '${name}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/MissingBlankLineBeforeAnnotatedFieldRuleTest.groovy",
+            "lines": {
+                "begin": 98
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = { }\n                    if (true) { }\n                    while(ready) { }\n                    try {\n                    } catch(Exception e) {\n                    } finally { }\n                    for(int i=0; i<10; i++) { }\n                    for(String name in names) { }\n                    for(String name: names) { }\n                    if (count > this.\"maxPriority${priority}Violations\") { }\n                    while (count > this.\"maxPriority${priority}Violations\") { }\n                }\n                MyClass() {\n                    this(classNames)\n                } // ok\n                static void reset() { violationCounts = [1:0, 2:0, 3:0] }\n                void doStuff() { println 9 }\n            }\n            interface MyInterface { }\n            enum MyEnum { OK, BAD }\n        ' contains a GString-type expression: '${priority}Violations\") { }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterClosingBraceRuleTest.groovy",
+            "lines": {
+                "begin": 38
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def foo = 1\n            \"I am a ${ -> foo }\"\n        ' contains a GString-type expression: '${ -> foo }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "8b5040c9892387ff94b5d014370f69ad7fa4f4f2",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterClosingBraceRuleTest.groovy",
+            "lines": {
+                "begin": 304
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def foo = 1\n            \"I am a ${ -> foo }0\"\n        ' contains a GString-type expression: '${ -> foo }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "8b5040c9892387ff94b5d014370f69ad7fa4f4f2",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterClosingBraceRuleTest.groovy",
+            "lines": {
+                "begin": 312
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def template() {\n                    return {\n                        td(getResourceBundleString('htmlReport.summary.allPackages'), class:'allPackages')\n                        td {\n                            a(pathName, href:\"#${pathName}\")\n                        }\n                    }\n                }\n            }\n        ' contains a GString-type expression: '${pathName}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterCommaRuleTest.groovy",
+            "lines": {
+                "begin": 53
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = { }\n                    if (true) { }\n                    while(ready) { }\n                    try {\n                    } catch(Exception e) {\n                    } finally { }\n                    for(int i=0; i<10; i++) { }\n                    for(String name in names) { }\n                    for(String name: names) { }\n                    if (count > this.\"maxPriority${priority}Violations\") { }\n                    while (count > this.\"maxPriority${priority}Violations\") { }\n                }\n                MyClass() {\n                    this(classNames)\n                }\n                MyClass(String s) { }\n                MyClass(@Annotation('${prop}') String s) {\n                }\n                MyClass(Date date) { // comment\n                    this(classNames)\n                }\n                MyClass(Object object) { /* comment */ }\n            }\n            interface MyInterface { }\n            enum MyEnum { OK, BAD }\n            trait MyTrait { }\n        ' contains a GString-type expression: '${priority}Violations\") { }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterOpeningBraceRuleTest.groovy",
+            "lines": {
+                "begin": 40
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = {}\n                    if (true) {}\n                    while(ready) {}\n                    try {\n                    } catch(Exception e) {\n                    } finally {}\n                    for(int i=0; i<10; i++) {}\n                    for(String name in names) {}\n                    for(String name: names) {}\n                    if (count > this.\"maxPriority${priority}Violations\") {}\n                    while (count > this.\"maxPriority${priority}Violations\") {}\n                }\n                void doStuff2() {}\n                MyClass() {}\n                MyClass(@Annotation('${prop}') String s) {}\n            }\n            interface MyInterface2 {}\n        ' contains a GString-type expression: '${priority}Violations\") {}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterOpeningBraceRuleTest.groovy",
+            "lines": {
+                "begin": 102
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                MyClass() {int count }\n                MyClass() {s = '{\"json\": true}' }\n                MyClass(@Annotation('${prop}') String s) {println 123 }\n\n            }\n        ' contains a GString-type expression: '${prop}') String s) {println 123 }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterOpeningBraceRuleTest.groovy",
+            "lines": {
+                "begin": 196
+            }
+        }
+    },
+    {
+        "description": "The String 'MyClass(@Annotation('${prop}') String s) {println 123 }' contains a GString-type expression: '${prop}') String s) {println 123 }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "e563b6f4b2a515f57da46ff6d3d1cdb2701e5b99",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterOpeningBraceRuleTest.groovy",
+            "lines": {
+                "begin": 207
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                String s\n                MyClass() { s = '{\"json\": true}' }\n                MyClass(@Annotation('${prop}') String s) { println 123 }\n            }\n        ' contains a GString-type expression: '${prop}') String s) { println 123 }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceAfterOpeningBraceRuleTest.groovy",
+            "lines": {
+                "begin": 325
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "feba34fb33918104bd79817864a33c1851425ea9",
+        "severity": "blocker",
+        "location": {
+            "path": "formatting/SpaceAroundMapEntryColonRuleTest.groovy",
+            "lines": {
+                "begin": 167
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = { }\n                    if (true) { }\n                    while(ready) { }\n                    try {\n                    } catch(Exception e) {\n                    } finally { }\n                    for(int i=0; i<10; i++) { }\n                    for(String name in names) { }\n                    for(String name: names) { }\n                    if (count > this.\"maxPriority${priority}Violations\") { }\n                    while (count > this.\"maxPriority${priority}Violations\") { }\n                }\n                MyClass() {\n                    this(classNames)\n                }\n                static void reset() { violationCounts = [1:0, 2:0, 3:0] }\n                void doStuff() { println 9 }\n            }\n            interface MyInterface { }\n            enum MyEnum { OK, BAD }\n        ' contains a GString-type expression: '${priority}Violations\") { }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceBeforeClosingBraceRuleTest.groovy",
+            "lines": {
+                "begin": 39
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = {}\n                    if (true) {}\n                    while(ready) {}\n                    try {\n                    } catch(Exception e) {\n                    } finally {}\n                    for(int i=0; i<10; i++) {}\n                    for(String name in names) {}\n                    for(String name: names) {}\n                    if (count > this.\"maxPriority${priority}Violations\") {}\n                    while (count > this.\"maxPriority${priority}Violations\") {}\n                }\n                void doStuff2() {}\n            }\n            interface MyInterface2 {}\n        ' contains a GString-type expression: '${priority}Violations\") {}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceBeforeClosingBraceRuleTest.groovy",
+            "lines": {
+                "begin": 80
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def myMethod() {\n                    def closure = { }\n                    if (true) { }\n                    while(ready) { }\n                    try {\n                    } catch(Exception e) {\n                    } finally { }\n                    for(int i=0; i<10; i++) { }\n                    for(String name in names) { }\n                    for(String name: names) { }\n                    if (count > this.\"maxPriority${priority}Violations\") { }\n                    while (count > this.\"maxPriority${priority}Violations\") { }\n                }\n                MyClass() {\n                    this(classNames)\n                }\n            }\n            interface MyInterface { }\n            enum MyEnum { OK, BAD }\n            trait MyTrait { }\n        ' contains a GString-type expression: '${priority}Violations\") { }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceBeforeOpeningBraceRuleTest.groovy",
+            "lines": {
+                "begin": 38
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def foo = 1\n            \"I am a ${ -> foo }\"\n        ' contains a GString-type expression: '${ -> foo }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "8b5040c9892387ff94b5d014370f69ad7fa4f4f2",
+        "severity": "major",
+        "location": {
+            "path": "formatting/SpaceBeforeOpeningBraceRuleTest.groovy",
+            "lines": {
+                "begin": 277
+            }
+        }
+    },
+    {
+        "description": "The String '\n            if (value.class == org.bad.BadClass) { }\n            println \"isClosure=${value instanceof org.bad.OtherClass}\"\n            def count = org.bad.Helper.getCount()\n        ' contains a GString-type expression: '${value instanceof org.bad.OtherClass}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "generic/IllegalPackageReferenceRuleTest.groovy",
+            "lines": {
+                "begin": 64
+            }
+        }
+    },
+    {
+        "description": "The String 'println \"isClosure=${value instanceof org.bad.OtherClass}\"' contains a GString-type expression: '${value instanceof org.bad.OtherClass}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "fa7a9e995623ae72cb603bff1c2edf513d11ec60",
+        "severity": "major",
+        "location": {
+            "path": "generic/IllegalPackageReferenceRuleTest.groovy",
+            "lines": {
+                "begin": 72
+            }
+        }
+    },
+    {
+        "description": "The String '\n          class MyClass {\n            @Value('${org.codenarc.test}')\n            BigDecimal depositAmount\n          }\n        ' contains a GString-type expression: '${org.codenarc.test}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "generic/StatelessClassRuleTest.groovy",
+            "lines": {
+                "begin": 84
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class Person {\n                String name\n                Boolean isAdmin\n            }\n            def bindingMap = [name: 'John', isAdmin: true]\n            def person = new Person()\n            def p2 = new Person(\"It is currently ${ new Date() }\")\n            def p3 = new Person(bindingMap)\n            person.name = bindingMap['name']\n            person.isAdmin = bindingMap.isAdmin\n            person.properties = \"It is currently ${ new Date() }\"\n        ' contains a GString-type expression: '${ new Date() }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "grails/GrailsMassAssignmentRuleTest.groovy",
+            "lines": {
+                "begin": 36
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def mySession = servletContext\n\n                def edit = {\n                    println \"amount=${servletContext.amount}\"\n                }\n            }\n        ' contains a GString-type expression: '${servletContext.amount}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "grails/GrailsServletContextReferenceRuleTest.groovy",
+            "lines": {
+                "begin": 78
+            }
+        }
+    },
+    {
+        "description": "The String 'println \"amount=${servletContext.amount}\"' contains a GString-type expression: '${servletContext.amount}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "2453419ff03796bc8713568676fe0185120d952d",
+        "severity": "major",
+        "location": {
+            "path": "grails/GrailsServletContextReferenceRuleTest.groovy",
+            "lines": {
+                "begin": 87
+            }
+        }
+    },
+    {
+        "description": "The String '\n            new Exception(\"${it.orElseThrow { new AssertionError() }}\")\n        ' contains a GString-type expression: '${it.orElseThrow { new AssertionError() }}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/ClosureAsLastMethodParameterRuleTest.groovy",
+            "lines": {
+                "begin": 242
+            }
+        }
+    },
+    {
+        "description": "The String '\n            Map map = [\"${ someRef }\" : 'invalid' ]\n        ' contains a GString-type expression: '${ someRef }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringAsMapKeyRuleTest.groovy",
+            "lines": {
+                "begin": 44
+            }
+        }
+    },
+    {
+        "description": "The String '[\"${ someRef }\" :' contains a GString-type expression: '${ someRef }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "05a9db4437cb626fd19be81e677000c75c1d3515",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringAsMapKeyRuleTest.groovy",
+            "lines": {
+                "begin": 48
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class SomeClass {\n                @SomeAnnotationOnField('${sample.property1}')\n                String sampleProperty\n\n                @SomeAnnotationOnMethod('${sample.property2}')\n                void method() {\n                }\n            }\n        ' contains a GString-type expression: '${sample.property1}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 49
+            }
+        }
+    },
+    {
+        "description": "The String '\n            @SomeAnnotationOnClass('${sample.property1}')\n            class SomeClass {\n                @SomeAnnotationOnField('${sample.property2}')\n                String sampleProperty\n\n                @SomeAnnotationOnMethod('${sample.property3}')\n                void method() {\n                }\n            }\n        ' contains a GString-type expression: '${sample.property1}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 64
+            }
+        }
+    },
+    {
+        "description": "The String '\n            @SomeAnnotationOnClass(attribute='${sample.property1}',\n                            nested=[@NestedAnnotation('${sample.property2}'),\n                                    @NestedAnnotation('${sample.property3}')],\n                             someOtherAttribute='${sample.property4}')\n            class SomeClass {\n            }\n        ' contains a GString-type expression: '${sample.property1}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 80
+            }
+        }
+    },
+    {
+        "description": "The String '\n            @SomeAnnotationOnClass(attribute=['${sample.property1}', '${sample.property2}'])\n            class SomeClass {\n            }\n        ' contains a GString-type expression: '${sample.property1}', '${sample.property2}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 93
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def valueToBeReplaced = '123'\n            def str1 = \"123\"\n            def str2 = \"abc def ghi\"\n            def str3 = \"abc ${count}\"\n            def str4 = \"abc $count    }\"\n            def str5 = \"abc {123}\"\n            def str6 = \"abc ${}\"\n            def str7 = \"total: ${count * 25}\"\n            def str8 = \"$valueToBeReplaced $valueNotToBeReplaced\"\n        ' contains a GString-type expression: '${count}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 103
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def \"plugin does not apply idea plugin\"() {\n                given:\n                buildScript << \"\"\"\n                    task $testTaskName {\n                        doLast {\n                            println \"Has idea plugin: \\${project.plugins.hasPlugin(IdeaPlugin)}\"\n                        }\n                    }\n                \"\"\"\n\n                expect:\n                runTask(testTaskName).output.contains('Has idea plugin: false')\n\n                where:\n                testTaskName = 'hasIdeaPlugin'\n            }\n            ' contains a GString-type expression: '${project.plugins.hasPlugin(IdeaPlugin)}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 119
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def str1 = 'total: ${count}'\n            def str2 = 'average: ${total / count}'\n        ' contains a GString-type expression: '${count}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 142
+            }
+        }
+    },
+    {
+        "description": "The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "4d56ac80f197dcad8bfdfa1f409ed8b17e0f7580",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 147
+            }
+        }
+    },
+    {
+        "description": "The String ''${count}'' contains a GString-type expression: '${count}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "4d56ac80f197dcad8bfdfa1f409ed8b17e0f7580",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 147
+            }
+        }
+    },
+    {
+        "description": "The String 'def str2 = 'average: ${total / count}'' contains a GString-type expression: '${total / count}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "7ac4bc8c1983efd1c30566962b5ca0577e1f5e7d",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 148
+            }
+        }
+    },
+    {
+        "description": "The String ''${total / count}'' contains a GString-type expression: '${total / count}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "7ac4bc8c1983efd1c30566962b5ca0577e1f5e7d",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 148
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class SomeClass {\n                @SomeAnnotationOnMethod('${sample.property}')\n                void method() {\n                    def str1 = 'total: ${count}'\n                }\n            }\n        ' contains a GString-type expression: '${sample.property}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 153
+            }
+        }
+    },
+    {
+        "description": "The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "22310ec7738d26e3ad36888b55008f5b49b85d13",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 161
+            }
+        }
+    },
+    {
+        "description": "The String ''${count}'' contains a GString-type expression: '${count}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "22310ec7738d26e3ad36888b55008f5b49b85d13",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 161
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class SomeClass {\n                @SomeAnnotationOnField(someClass = SomeOtherClass, message = 'Some message ${sample.property1}')\n                String sampleProperty\n            }\n        ' contains a GString-type expression: '${sample.property1}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "groovyism/GStringExpressionWithinStringRuleTest.groovy",
+            "lines": {
+                "begin": 166
+            }
+        }
+    },
+    {
+        "description": "The String '\n            import test.TestData1\n            import test.TestData2\n            import test.TestData3\n            import test.TestData4\n            import test.TestData5\n            import test.TestData6\n            import test.TestData7\n            import test.TestData8\n            import test.TestData9\n            import test.TestData10\n            import test.TestData11\n            import test.TestData12\n            import test.TestData13\n            import test.TestData14\n            import test.TestData15\n\n            def GSTRING1 = \" ${TestData1.GOOD_XML}\"\n            def GSTRING2 = \" $TestData2.XML\"\n            def MAP1 = [(TestData3):123]\n            def MAP2 = [abc:TestData4]\n            def MAP3 = [abc:TestData5, ddd:123]\n            def LIST = [TestData6,TestData7]\n            def OPERATORS1 = 0+TestData8.VALUE-TestData9.VALUE\n            def OPERATORS2 = 9*TestData10.VALUE/TestData11.VALUE\n            def OPERATORS3 = 64&TestData12.VALUE|TestData13.VALUE^TestData14.VALUE\n            def OPERATORS4 = !TestData15.VALUE\n        ' contains a GString-type expression: '${TestData1.GOOD_XML}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "imports/UnusedImportRuleTest.groovy",
+            "lines": {
+                "begin": 215
+            }
+        }
+    },
+    {
+        "description": "The String '\n            import static Constants.CONSTANT1\n            import static Constants.CONSTANT2\n            import static Constants.CONSTANT3\n            import static Constants.CONSTANT4\n            import static Constants.CONSTANT5\n            import static Constants.CONSTANT6\n        \n            void doSomething() {\n                def stringA = \"$CONSTANT1$CONSTANT2\"\n                def stringB = \"$CONSTANT3${CONSTANT4}\"\n                def stringC = \"${CONSTANT5}$CONSTANT6\"\n            }        \n        ' contains a GString-type expression: '${CONSTANT4}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "imports/UnusedImportRuleTest.groovy",
+            "lines": {
+                "begin": 264
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def x = 42\n            def s = \"some string ${x}\"\n        ' contains a GString-type expression: '${x}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "jenkins/ClosureInGStringRuleTest.groovy",
+            "lines": {
+                "begin": 35
+            }
+        }
+    },
+    {
+        "description": "The String '\n            List<int> l = [1,2,3]\n            def s = \"some string ${l.collect { i -> i * i }.toString()}\"\n        ' contains a GString-type expression: '${l.collect { i -> i * i }.toString()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "jenkins/ClosureInGStringRuleTest.groovy",
+            "lines": {
+                "begin": 52
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def x = 42\n            def s = \"some string ${-> x}\"\n            def s = \"some string ${x} ${-> x}\"\n        ' contains a GString-type expression: '${-> x}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "jenkins/ClosureInGStringRuleTest.groovy",
+            "lines": {
+                "begin": 61
+            }
+        }
+    },
+    {
+        "description": "The String 'def s = \"some string ${-> x}\"' contains a GString-type expression: '${-> x}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "126c045e5d53cea625aeb3f1f08f957d40932186",
+        "severity": "major",
+        "location": {
+            "path": "jenkins/ClosureInGStringRuleTest.groovy",
+            "lines": {
+                "begin": 67
+            }
+        }
+    },
+    {
+        "description": "The String 'def s = \"some string ${x} ${-> x}\"' contains a GString-type expression: '${x} ${-> x}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "c8df9391e5491297051e828147de079866d74f84",
+        "severity": "major",
+        "location": {
+            "path": "jenkins/ClosureInGStringRuleTest.groovy",
+            "lines": {
+                "begin": 68
+            }
+        }
+    },
+    {
+        "description": "Wildcard (star) import",
+        "check_name": "NoWildcardImports",
+        "fingerprint": "3f1c9815d969d0fb41b88bae869c5560c26bd5ae",
+        "severity": "blocker",
+        "location": {
+            "path": "jenkins/JenkinsUtilTest.groovy",
+            "lines": {
+                "begin": 18
+            }
+        }
+    },
+    {
+        "description": "Static imports should appear before normal imports",
+        "check_name": "MisorderedStaticImports",
+        "fingerprint": "b62eba85863a02f1a9d9fa4e7c25d9ed4e931346",
+        "severity": "blocker",
+        "location": {
+            "path": "jenkins/JenkinsUtilTest.groovy",
+            "lines": {
+                "begin": 26
+            }
+        }
+    },
+    {
+        "description": "Wildcard (star) import",
+        "check_name": "NoWildcardImports",
+        "fingerprint": "b62eba85863a02f1a9d9fa4e7c25d9ed4e931346",
+        "severity": "blocker",
+        "location": {
+            "path": "jenkins/JenkinsUtilTest.groovy",
+            "lines": {
+                "begin": 26
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.naming.FieldNameRuleTest has 32 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "a8811902c4d55806afd82d6ac4e1390b46745a44",
+        "severity": "major",
+        "location": {
+            "path": "naming/FieldNameRuleTest.groovy",
+            "lines": {
+                "begin": 28
+            }
+        }
+    },
+    {
+        "description": "Static imports should appear before normal imports",
+        "check_name": "MisorderedStaticImports",
+        "fingerprint": "511ecdb92c6f4e24a1e4d3b27bfd8ec8cebbc073",
+        "severity": "blocker",
+        "location": {
+            "path": "size/GMetricsSourceCodeAdapterTest.groovy",
+            "lines": {
+                "begin": 22
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "bcfac95849e208848f72591f50362b491e33d1db",
+        "severity": "blocker",
+        "location": {
+            "path": "size/ParameterCountRuleTest.groovy",
+            "lines": {
+                "begin": 252
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def b = \"$Hello\" + 'World'  // should be \"${Hello}World\"\n        ' contains a GString-type expression: '${Hello}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/ConsecutiveStringConcatenationRuleTest.groovy",
+            "lines": {
+                "begin": 65
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def c = 'Hello' + \"$World\"  // should be \"Hello${World}\"\n        ' contains a GString-type expression: '${World}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/ConsecutiveStringConcatenationRuleTest.groovy",
+            "lines": {
+                "begin": 73
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def docFile = \"docs/codenarc-rules-${ruleSetName}.apt\"\n        ' contains a GString-type expression: '${ruleSetName}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryGStringRuleTest.groovy",
+            "lines": {
+                "begin": 36
+            }
+        }
+    },
+    {
+        "description": "The String '\n            Mock {\n                getSomeData()\n            }\n            Stub(1,2,3) {\n                getData2()\n            }\n            \"${'Stub'}\"(MyClass) {\n                getData3()\n            }\n            def closure = { getData4() }\n            Mock({ getData5() }, 1234)      // 2nd param is not a Closure\n            Spy {\n                getMoreData()\n            }\n        ' contains a GString-type expression: '${'Stub'}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryGetterRuleTest.groovy",
+            "lines": {
+                "begin": 180
+            }
+        }
+    },
+    {
+        "description": "The String '\n            if (value.class == java.math.BigDecimal) { }\n            println \"isClosure=${value instanceof groovy.lang.Closure}\"\n            def processors = java.lang.Runtime.availableProcessors()\n        ' contains a GString-type expression: '${value instanceof groovy.lang.Closure}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryPackageReferenceRuleTest.groovy",
+            "lines": {
+                "begin": 66
+            }
+        }
+    },
+    {
+        "description": "The String 'println \"isClosure=${value instanceof groovy.lang.Closure}\"' contains a GString-type expression: '${value instanceof groovy.lang.Closure}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "78d0ea9c3a346609996f54825a0b26cca58dbc59",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryPackageReferenceRuleTest.groovy",
+            "lines": {
+                "begin": 73
+            }
+        }
+    },
+    {
+        "description": "The String '\n            if (!file.setExecutable(true)) {\n                throw new Exception(\"Cannot set ${file} as executable\")\n            }\n            def count = x.setCount(92)\n        ' contains a GString-type expression: '${file}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessarySetterRuleTest.groovy",
+            "lines": {
+                "begin": 97
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                def name = \"Joe\" + new Date().toString()\n\n                void run() {\n                    Object object = 1\n                    def string = 'some string' + object.toString()\n                    def withinGString = \"processing: ${'prefix' + object.toString()}\"\n\n                    def bigString = 'some string' + new Date() + object.toString()      // not a violation; known limitation\n                    def other = 123 + object.toString().toInteger()     // not a violation\n                }\n            }\n        ' contains a GString-type expression: '${'prefix' + object.toString()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryToStringRuleTest.groovy",
+            "lines": {
+                "begin": 67
+            }
+        }
+    },
+    {
+        "description": "The String 'def withinGString = \"processing: ${'prefix' + object.toString()}\"' contains a GString-type expression: '${'prefix' + object.toString()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "d3e0dd1c1ac279fda10b640d452abb254b92cff6",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryToStringRuleTest.groovy",
+            "lines": {
+                "begin": 84
+            }
+        }
+    },
+    {
+        "description": "The String '\n            def string = \"some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}\"\n            def string2 = \"\"\"\n                 processing: ${123L.toString()}\n                 processing: ${new Date().toString()}\n                \"\"\"\n        ' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryToStringRuleTest.groovy",
+            "lines": {
+                "begin": 89
+            }
+        }
+    },
+    {
+        "description": "The String 'def string = \"some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}\"' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "41445501b57ea3a773d99670eab0d92e6e0a8f36",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryToStringRuleTest.groovy",
+            "lines": {
+                "begin": 97
+            }
+        }
+    },
+    {
+        "description": "The String 'def string = \"some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}\"' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "bae1b584999d16e7f30940a0c6f6891229427614",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryToStringRuleTest.groovy",
+            "lines": {
+                "begin": 98
+            }
+        }
+    },
+    {
+        "description": "The String 'processing: ${123L.toString()}' contains a GString-type expression: '${123L.toString()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "db99ceff77b69c3f9528d71f64f431f583ff3458",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryToStringRuleTest.groovy",
+            "lines": {
+                "begin": 99
+            }
+        }
+    },
+    {
+        "description": "The String 'processing: ${new Date().toString()}' contains a GString-type expression: '${new Date().toString()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "efcc17b1b104a5284ca0893d983ec5a98127faac",
+        "severity": "major",
+        "location": {
+            "path": "unnecessary/UnnecessaryToStringRuleTest.groovy",
+            "lines": {
+                "begin": 100
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.unused.AbstractUnusedPrivateFieldRuleTest has 32 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "1551d7debc380e5bbee8171b37ddeb0b1190566e",
+        "severity": "major",
+        "location": {
+            "path": "unused/AbstractUnusedPrivateFieldRuleTest.groovy",
+            "lines": {
+                "begin": 27
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                private int count\n                def other = this.\"${'count'}\"\n            }\n        ' contains a GString-type expression: '${'count'}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unused/AbstractUnusedPrivateFieldRuleTest.groovy",
+            "lines": {
+                "begin": 172
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                private int count\n                def varName = \"count\"\n                def other = this.\"${varName}\"     // can't see this\n            }\n        ' contains a GString-type expression: '${varName}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unused/AbstractUnusedPrivateFieldRuleTest.groovy",
+            "lines": {
+                "begin": 183
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                MyClass() { }\n                MyClass(String id) { println id }\n\n                String myMethod1(String id, int value) { doSomething(value); return id }\n                void myMethod2(int value) { def x = value }\n                def myMethod3(Date startDate) { return \"${startDate}\" }\n                def myMethod4(Date startDate) {\n                    return new Object() {\n                        def x = startDate\n                    }\n                }\n                def myMethod5(Date startDate) {\n                    return new Object() {\n                        String toString() { return startDate }\n                    }\n                }\n            }\n        ' contains a GString-type expression: '${startDate}\" }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unused/UnusedMethodParameterRuleTest.groovy",
+            "lines": {
+                "begin": 150
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                private String myMethod1(String id, int value) { doSomething(value); return id }\n                private void myMethod2(int value) { def x = value }\n                private def myMethod3(Date startDate) { return \"${startDate}\" }\n                private def myMethod4(Date startDate) {\n                    return new Object() {\n                        def x = startDate\n                    }\n                }\n                private def myMethod5(Date startDate) {\n                    return new Object() {\n                        String toString() { return startDate }\n                    }\n                }\n            }\n        ' contains a GString-type expression: '${startDate}\" }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unused/UnusedPrivateMethodParameterRuleTest.groovy",
+            "lines": {
+                "begin": 126
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.unused.UnusedPrivateMethodRuleTest has 37 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "9c8d6eae841d166646e0c288295350b14a733a4f",
+        "severity": "major",
+        "location": {
+            "path": "unused/UnusedPrivateMethodRuleTest.groovy",
+            "lines": {
+                "begin": 26
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                private int countStuff() { return 99 }\n                int somePublicMethod() { }\n                def abc = 'abc'\n                private String getName() { 'abc' }\n                private getPrice() { 0.0 }\n\n                def doStuff() {\n                    def count = countStuff()\n                    def newName = this.getName()\n                }\n\n                def myClosure = { println \"price is ${getPrice()}\" }\n            }\n        ' contains a GString-type expression: '${getPrice()}\" }'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unused/UnusedPrivateMethodRuleTest.groovy",
+            "lines": {
+                "begin": 354
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                static int getTotal() {\n                    println \"total=${MyClass.countStuff()}\"\n                }\n                private static int countStuff() { }\n            }\n        ' contains a GString-type expression: '${MyClass.countStuff()}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unused/UnusedPrivateMethodRuleTest.groovy",
+            "lines": {
+                "begin": 423
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                private int countStuff() { }\n                def other = this.\"${countStuff}\"()\n            }\n        ' contains a GString-type expression: '${countStuff}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unused/UnusedPrivateMethodRuleTest.groovy",
+            "lines": {
+                "begin": 436
+            }
+        }
+    },
+    {
+        "description": "The String '\n            class MyClass {\n                private int countStuff() { }\n                def varName = \"countStuff\"\n                def other = this.\"${varName}\"()     // can't see this\n            }\n        ' contains a GString-type expression: '${varName}'",
+        "check_name": "GStringExpressionWithinString",
+        "fingerprint": "a8dbd504a1153de754f6cb5a15788d0589edc775",
+        "severity": "major",
+        "location": {
+            "path": "unused/UnusedPrivateMethodRuleTest.groovy",
+            "lines": {
+                "begin": 458
+            }
+        }
+    },
+    {
+        "description": "Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods",
+        "check_name": "MethodCount",
+        "fingerprint": "d819cddd49e1ff579f9db3a783124f5011dea153",
+        "severity": "major",
+        "location": {
+            "path": "unused/UnusedVariableRuleTest.groovy",
+            "lines": {
+                "begin": 26
+            }
+        }
+    }
+]
