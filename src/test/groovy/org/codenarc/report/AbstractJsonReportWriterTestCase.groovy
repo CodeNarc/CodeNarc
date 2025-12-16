@@ -16,23 +16,32 @@
  */
 package org.codenarc.report
 
-import static org.junit.Assert.assertEquals
+import static org.junit.Assert.*
 
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import org.codenarc.AnalysisContext
+import org.codenarc.results.DirectoryResults
+import org.codenarc.results.FileResults
+import org.codenarc.rule.imports.DuplicateImportRule
+import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
+import org.codenarc.ruleset.ListRuleSet
+import org.junit.jupiter.api.BeforeEach
 
 /**
  * Abstract superclass for tests for JSON Report Writers
  *
  * @author Nicolas Vuillamy
  */
-abstract class AbstractJsonReportWriterTestCase extends AbstractReportWriterTestCase {
+abstract class AbstractJsonReportWriterTestCase<T extends AbstractReportWriter> extends AbstractReportWriterTestCase {
 
     protected reportWriter
     protected analysisContext
     protected results
     protected ruleSet
     protected stringWriter
+
+    protected abstract T createReportWriter();
 
     @SuppressWarnings('JUnitStyleAssertions')
     protected void assertJson(String actualJson, String expectedJson) {
@@ -62,6 +71,37 @@ abstract class AbstractJsonReportWriterTestCase extends AbstractReportWriterTest
         def jsonMap = new JsonSlurper().parseText(json)
         jsonMap = jsonMap.sort()*.key // Sort by key name
         return JsonOutput.toJson(jsonMap).replaceAll('\\n|\\r\\n', System.getProperty('line.separator'))
+    }
+
+    @BeforeEach
+    void setupAbstractJsonReportWriterTestCase() {
+        reportWriter = createReportWriter()
+        reportWriter.getTimestamp = { TIMESTAMP_DATE }
+
+        def srcMainDirResults = new DirectoryResults('src/main')
+        def srcMainDaoDirResults = new DirectoryResults('src/main/dao')
+        def srcTestDirResults = new DirectoryResults('src/test')
+        def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def srcMainFileResults2 = new FileResults('src/main/MyCleanAction.groovy', [])
+        def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
+        def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
+
+        srcMainDirResults.addChild(srcMainFileResults1)
+        srcMainDirResults.addChild(srcMainFileResults2)
+        srcMainDirResults.addChild(srcMainDaoDirResults)
+        srcMainDaoDirResults.addChild(fileResultsMainDao1)
+        srcMainDaoDirResults.addChild(fileResultsMainDao2)
+
+        results = new DirectoryResults()
+        results.addChild(srcMainDirResults)
+        results.addChild(srcTestDirResults)
+
+        ruleSet = new ListRuleSet([     // NOT in alphabetical order
+                                        new DuplicateImportRule(description:'Custom: Duplicate imports'),
+                                        new UnnecessaryBooleanInstantiationRule()
+        ])
+        analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:ruleSet)
+        stringWriter = new StringWriter()
     }
 
 }

@@ -15,22 +15,12 @@
  */
 package org.codenarc.report
 
-import static org.codenarc.test.TestUtil.captureSystemOut
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import static org.codenarc.test.TestUtil.*
 
-import org.codenarc.AnalysisContext
-import org.codenarc.results.DirectoryResults
-import org.codenarc.results.FileResults
-import org.codenarc.rule.imports.DuplicateImportRule
-import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
-import org.codenarc.ruleset.ListRuleSet
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 /**
  * Tests for SarifReportWriter
- *
- * @author Your Name
  */
 class SarifReportWriterTest extends AbstractJsonReportWriterTestCase {
 
@@ -123,35 +113,9 @@ class SarifReportWriterTest extends AbstractJsonReportWriterTestCase {
         assert reportWriter.defaultOutputFile == 'CodeNarcSarifReport.sarif.json'
     }
 
-    @BeforeEach
-    void setUpSarifReportWriterTest() {
-        reportWriter = new SarifReportWriter()
-        reportWriter.getTimestamp = { TIMESTAMP_DATE }
-
-        def srcMainDirResults = new DirectoryResults('src/main')
-        def srcMainDaoDirResults = new DirectoryResults('src/main/dao')
-        def srcTestDirResults = new DirectoryResults('src/test')
-        def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
-        def srcMainFileResults2 = new FileResults('src/main/MyCleanAction.groovy', [])
-        def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
-        def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2, VIOLATION1])
-
-        srcMainDirResults.addChild(srcMainFileResults1)
-        srcMainDirResults.addChild(srcMainFileResults2)
-        srcMainDirResults.addChild(srcMainDaoDirResults)
-        srcMainDaoDirResults.addChild(fileResultsMainDao1)
-        srcMainDaoDirResults.addChild(fileResultsMainDao2)
-
-        results = new DirectoryResults()
-        results.addChild(srcMainDirResults)
-        results.addChild(srcTestDirResults)
-
-        ruleSet = new ListRuleSet([
-            new DuplicateImportRule(description:'Custom: Duplicate imports'),
-            new UnnecessaryBooleanInstantiationRule(),
-            VIOLATION1.rule, VIOLATION2.rule, VIOLATION3.rule
-        ])
-        analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:ruleSet)
-        stringWriter = new StringWriter()
+    @Override
+    protected AbstractReportWriter createReportWriter() {
+        return new SarifReportWriter()
     }
+
 }
