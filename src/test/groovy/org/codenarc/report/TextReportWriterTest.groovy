@@ -21,7 +21,7 @@ package org.codenarc.report
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-class TextReportWriterTest extends AbstractTextReportWriterTestCase {
+class TextReportWriterTest extends AbstractTextReportWriterTestCase<TextReportWriter> {
 
     private static final REPORT_TEXT = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}

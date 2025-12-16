@@ -32,16 +32,14 @@ import org.junit.jupiter.api.BeforeEach
  * Abstract superclass for tests for JSON Report Writers
  *
  * @author Nicolas Vuillamy
+ * @author Chris Mair
  */
 abstract class AbstractJsonReportWriterTestCase<T extends AbstractReportWriter> extends AbstractReportWriterTestCase {
 
-    protected reportWriter
     protected analysisContext
     protected results
     protected ruleSet
     protected stringWriter
-
-    protected abstract T createReportWriter();
 
     @SuppressWarnings('JUnitStyleAssertions')
     protected void assertJson(String actualJson, String expectedJson) {
@@ -75,9 +73,6 @@ abstract class AbstractJsonReportWriterTestCase<T extends AbstractReportWriter> 
 
     @BeforeEach
     void setupAbstractJsonReportWriterTestCase() {
-        reportWriter = createReportWriter()
-        reportWriter.getTimestamp = { TIMESTAMP_DATE }
-
         def srcMainDirResults = new DirectoryResults('src/main')
         def srcMainDaoDirResults = new DirectoryResults('src/main/dao')
         def srcTestDirResults = new DirectoryResults('src/test')
@@ -96,9 +91,10 @@ abstract class AbstractJsonReportWriterTestCase<T extends AbstractReportWriter> 
         results.addChild(srcMainDirResults)
         results.addChild(srcTestDirResults)
 
-        ruleSet = new ListRuleSet([     // NOT in alphabetical order
-                                        new DuplicateImportRule(description:'Custom: Duplicate imports'),
-                                        new UnnecessaryBooleanInstantiationRule()
+        ruleSet = new ListRuleSet([
+                // NOT in alphabetical order
+                new UnnecessaryBooleanInstantiationRule(),
+                new DuplicateImportRule(description:'Custom: Duplicate imports')
         ])
         analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:ruleSet)
         stringWriter = new StringWriter()

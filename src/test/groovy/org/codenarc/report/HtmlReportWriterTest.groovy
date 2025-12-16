@@ -15,15 +15,14 @@
  */
 package org.codenarc.report
 
+import static org.codenarc.test.TestUtil.*
+
 import org.codenarc.results.FileResults
 import org.codenarc.rule.Rule
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-
-import static org.codenarc.test.TestUtil.assertContainsAllInOrder
 
 /**
  * Tests for HtmlReportWriter
@@ -31,7 +30,7 @@ import static org.codenarc.test.TestUtil.assertContainsAllInOrder
  * @author Chris Mair
  */
 @SuppressWarnings('LineLength')
-class HtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
+class HtmlReportWriterTest extends AbstractHtmlReportWriterTestCase<HtmlReportWriter> {
 
     @Test
     void testDefaultProperties() {
@@ -149,15 +148,12 @@ class HtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
         assertReportContents(EXPECTED)
     }
 
-    //------------------------------------------------------------------------------------
-    // Setup and helper methods
-    //------------------------------------------------------------------------------------
-
-    @BeforeEach
-    void setUpHtmlReportWriterTest() {
+    @Override
+    protected ReportWriter createReportWriter() {
         reportWriter = new HtmlReportWriter(outputFile:NEW_REPORT_FILE)
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
         reportWriter.metaClass.getCodeNarcVersion << { '0.12' }
+        return reportWriter
     }
 
 }

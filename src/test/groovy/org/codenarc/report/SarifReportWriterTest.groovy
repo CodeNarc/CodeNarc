@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test
 /**
  * Tests for SarifReportWriter
  */
-class SarifReportWriterTest extends AbstractJsonReportWriterTestCase {
+class SarifReportWriterTest extends AbstractJsonReportWriterTestCase<SarifReportWriter> {
 
     private static final NEW_REPORT_FILE = 'target/NewSarifReport.sarif.json'
 
@@ -114,7 +114,7 @@ class SarifReportWriterTest extends AbstractJsonReportWriterTestCase {
     }
 
     @Override
-    protected AbstractReportWriter createReportWriter() {
+    protected SarifReportWriter createReportWriter() {
         return new SarifReportWriter()
     }
 

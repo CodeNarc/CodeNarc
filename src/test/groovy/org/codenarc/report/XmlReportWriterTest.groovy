@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
+class XmlReportWriterTest extends AbstractXmlReportWriterTestCase<XmlReportWriter> {
 
     private static final NEW_REPORT_FILE = 'target/NewXmlReport.xml'
 
@@ -150,12 +150,15 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
     //--------------------------------------------------------------------------
     // Setup and helper methods
     //--------------------------------------------------------------------------
+    @Override
+    protected XmlReportWriter createReportWriter() {
+        reportWriter = new XmlReportWriter(title:TITLE)
+        reportWriter.getTimestamp = { TIMESTAMP_DATE }
+        return reportWriter
+    }
 
     @BeforeEach
     void setUpXmlReportWriterTest() {
-        reportWriter = new XmlReportWriter(title:TITLE)
-        reportWriter.getTimestamp = { TIMESTAMP_DATE }
-
         def srcMainDirResults = new DirectoryResults('src/main')
         def srcMainDaoDirResults = new DirectoryResults('src/main/dao')
         def srcTestDirResults = new DirectoryResults('src/test')

@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test
  * @author Chris Mair
  */
 @SuppressWarnings('LineLength')
-class SortableHtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
+class SortableHtmlReportWriterTest extends AbstractHtmlReportWriterTestCase<SortableHtmlReportWriter> {
 
     private static final TOP_HTML = "<img class='logo' src='$LOGO_FILE' alt='CodeNarc' align='right'/><h1>CodeNarc Report</h1><div class='metadata'><table><tr><td class='em'>Report title:</td><td/></tr><tr><td class='em'>Date:</td><td>Feb 24, 2011 9:32:38 PM</td></tr><tr><td class='em'>Generated with:</td><td><a href='${CODENARC_URL}'>CodeNarc v0.12</a></td></tr></table></div>"
     private static final SUMMARY_HTML = "<div class='summary'><h2>Summary</h2><table><thead><tr class='tableHeader'><th>Total Files</th><th>Files with Violations</th><th>Priority 1</th><th>Priority 2</th><th>Priority 3</th></tr></thead><tbody><tr><td class='number'>5</td><td class='number'>4</td><td class='priority1'>3</td><td class='priority2'>-</td><td class='priority3'>6</td></tr></tbody></table></div>"
@@ -80,6 +80,11 @@ class SortableHtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
     // Setup and helper methods
     //------------------------------------------------------------------------------------
 
+    @Override
+    protected SortableHtmlReportWriter createReportWriter() {
+        return new SortableHtmlReportWriter(outputFile:NEW_REPORT_FILE)
+    }
+
     @BeforeAll
     static void initializeJavascript() {
         jsFileContents = new File('src/main/resources/js/sort-table.js').text
@@ -87,7 +92,6 @@ class SortableHtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
 
     @BeforeEach
     void setUpHtmlReportWriterTest() {
-        reportWriter = new SortableHtmlReportWriter(outputFile:NEW_REPORT_FILE)
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
         reportWriter.metaClass.getCodeNarcVersion << { '0.12' }
 

@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test
  *
  * @author Chris Mair
  */
-class IdeTextReportWriterTest extends AbstractTextReportWriterTestCase {
+class IdeTextReportWriterTest extends AbstractTextReportWriterTestCase<IdeTextReportWriter> {
 
     private static final REPORT_TEXT = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}

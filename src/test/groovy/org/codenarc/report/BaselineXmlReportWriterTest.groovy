@@ -28,7 +28,7 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  *
  * @author Chris Mair
  */
-class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
+class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase<BaselineXmlReportWriter> {
 
     private static final REPORT_XML = """<?xml version="1.0" encoding="UTF-8"?>
         <CodeNarc url="${CODENARC_URL}" version="${VERSION}">
@@ -90,12 +90,13 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
     //------------------------------------------------------------------------------------
     // Setup and helper methods
     //------------------------------------------------------------------------------------
+    @Override
+    protected BaselineXmlReportWriter createReportWriter() {
+        return new BaselineXmlReportWriter(title:TITLE)
+    }
 
     @BeforeEach
     void setUpBaselineXmlReportWriterTest() {
-        reportWriter = new BaselineXmlReportWriter(title:TITLE)
-        reportWriter.getTimestamp = { TIMESTAMP_DATE }
-
         def dirResults = new DirectoryResults()
         def dirResultsMain = new DirectoryResults('src/main')
         def dirResultsMainDao = new DirectoryResults('src/main/dao')

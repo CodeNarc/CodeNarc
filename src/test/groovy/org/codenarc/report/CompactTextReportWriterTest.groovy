@@ -21,7 +21,7 @@ package org.codenarc.report
  * @author Luis Zimmermann
  * @author Chris Mair
  */
-class CompactTextReportWriterTest extends AbstractTextReportWriterTestCase {
+class CompactTextReportWriterTest extends AbstractTextReportWriterTestCase<CompactTextReportWriter> {
 
     private static final REPORT_TEXT = """
         |src/main/MyAction.groovy:111:Rule1 null

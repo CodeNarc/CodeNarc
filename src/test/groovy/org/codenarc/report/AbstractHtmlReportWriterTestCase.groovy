@@ -36,13 +36,12 @@ import static org.junit.Assert.assertEquals
  * @author Chris Mair
  */
 @SuppressWarnings('LineLength')
-abstract class AbstractHtmlReportWriterTestCase extends AbstractReportWriterTestCase {
+abstract class AbstractHtmlReportWriterTestCase<T extends ReportWriter> extends AbstractReportWriterTestCase {
 
     protected static final VIOLATION4 = new Violation(rule:new StubRule(name:'RULE4', priority:4), lineNumber:LINE1, sourceLine:'if (file) {')
     protected static final NEW_REPORT_FILE = createTemporaryReportFile().absolutePath
     protected static final String LOGO_FILE = 'http://codenarc.github.io/CodeNarc/images/codenarc-logo.png'
 
-    protected reportWriter
     protected analysisContext
     protected results
     protected dirResultsMain

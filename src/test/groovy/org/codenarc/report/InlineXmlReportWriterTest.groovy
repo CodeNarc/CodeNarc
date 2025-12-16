@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
  */
-class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
+class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase<InlineXmlReportWriter> {
 
     private static final REPORT_XML = """<?xml version='1.0'?>
     <CodeNarc url='${CODENARC_URL}' version='${VERSION}'>
@@ -91,11 +91,13 @@ class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
         assertXml(xmlAsString, REPORT_XML)
     }
 
+    @Override
+    protected InlineXmlReportWriter createReportWriter() {
+        return new InlineXmlReportWriter(title:TITLE)
+    }
+
     @BeforeEach
     void setUpInlineXmlReportWriterTest() {
-        reportWriter = new InlineXmlReportWriter(title:TITLE)
-        reportWriter.getTimestamp = { TIMESTAMP_DATE }
-
         def srcMainDirResults = new DirectoryResults('src/main')
         def srcMainDaoDirResults = new DirectoryResults('src/main/dao')
         def srcTestDirResults = new DirectoryResults('src/test')

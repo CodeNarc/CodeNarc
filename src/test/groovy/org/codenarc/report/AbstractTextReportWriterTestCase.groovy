@@ -31,11 +31,10 @@ import org.junit.jupiter.api.Test
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-abstract class AbstractTextReportWriterTestCase extends AbstractReportWriterTestCase {
+abstract class AbstractTextReportWriterTestCase<T extends ReportWriter> extends AbstractReportWriterTestCase {
 
     protected static final String NEW_REPORT_FILE = 'target/NewTextReport.txt'
 
-    protected reportWriter
     protected analysisContext
     protected results, srcMainDaoDirResults
     protected stringWriter
@@ -44,7 +43,6 @@ abstract class AbstractTextReportWriterTestCase extends AbstractReportWriterTest
     // Abstract declarations
     //------------------------------------------------------------------------------------
 
-    protected abstract TextReportWriter createReportWriter()
     protected abstract String getReportTextMaxPriority()
     protected abstract String getReportText()
 
@@ -121,9 +119,6 @@ abstract class AbstractTextReportWriterTestCase extends AbstractReportWriterTest
 
     @BeforeEach
     void setUpAbstractTextReportWriterTestCase() {
-        reportWriter = createReportWriter()
-        reportWriter.getTimestamp = { TIMESTAMP_DATE }
-
         def srcMainDirResults = new DirectoryResults('src/main')
         def srcMainDaoDirResults = new DirectoryResults('src/main/dao')
         def srcTestDirResults = new DirectoryResults('src/test')

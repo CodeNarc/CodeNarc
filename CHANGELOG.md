@@ -13,6 +13,7 @@ Build, Infrastructure and Tests
  - #810: Upgrade Gradle wrapper to 9.2.1.
  - #810: gradle.yml: Upgrade to actions/checkout@v4, JDK 17 and gradle/actions/setup-gradle@v3.
  - #810: build.gradle: Switch dependencies to using junit-bom, and add junit-platform-launcher.
+ - #812: Streamline report writer tests.
 
 
 Version 3.7.0  (Nov 2025)

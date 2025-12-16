@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test
 /**
  * Tests for JsonReportWriter
  */
-class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
+class JsonReportWriterTest extends AbstractJsonReportWriterTestCase<JsonReportWriter> {
 
     private static final NEW_REPORT_FILE = 'target/NewJsonReport.json'
 
@@ -108,7 +108,7 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
     }
 
     @Override
-    protected AbstractReportWriter createReportWriter() {
+    protected JsonReportWriter createReportWriter() {
         return new JsonReportWriter(title:TITLE)
     }
 

@@ -18,6 +18,7 @@ package org.codenarc.report
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
+import org.junit.jupiter.api.BeforeEach
 
 import java.text.DateFormat
 
@@ -26,7 +27,7 @@ import java.text.DateFormat
  *
  * @author Chris Mair
  */
-abstract class AbstractReportWriterTestCase extends AbstractTestCase {
+abstract class AbstractReportWriterTestCase<T extends ReportWriter> extends AbstractTestCase {
 
     // NOTE: These values are used across multiple tests
 
@@ -52,4 +53,16 @@ abstract class AbstractReportWriterTestCase extends AbstractTestCase {
 
     protected static final String CODENARC_URL = 'https://codenarc.org'
 
+    //------------------------------------------------------------------------------------
+    // Abstract declarations
+    //------------------------------------------------------------------------------------
+    protected abstract T createReportWriter();
+
+    protected reportWriter
+
+    @BeforeEach
+    void setupAbstractReportWriterTestCase() {
+        reportWriter = createReportWriter()
+        reportWriter.getTimestamp = { TIMESTAMP_DATE }
+    }
 }

@@ -22,9 +22,8 @@ import static org.junit.Assert.assertEquals
  *
  * @author Chris Mair
  */
-abstract class AbstractXmlReportWriterTestCase extends AbstractReportWriterTestCase {
+abstract class AbstractXmlReportWriterTestCase<T extends ReportWriter> extends AbstractReportWriterTestCase {
 
-    protected reportWriter
     protected analysisContext
     protected results
     protected ruleSet
