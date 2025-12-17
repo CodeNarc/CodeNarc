@@ -1,8 +1,6 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-NOTE: CodeNarc now provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
-
 TODO Version 4.0.x  (??? 2026)
 --------------------------------------
 Reports
@@ -13,11 +11,13 @@ Build, Infrastructure and Tests
  - #810: Upgrade Gradle wrapper to 9.2.1.
  - #810: gradle.yml: Upgrade to actions/checkout@v4, JDK 17 and gradle/actions/setup-gradle@v3.
  - #810: build.gradle: Switch dependencies to using junit-bom, and add junit-platform-launcher.
- - #812: Streamline report writer tests.
+ - #812: Streamline report writer tests. Add test for `GitlabCodeQualityReportWriter`.
+ - #813: Upgrade to Shadow Gradle plugin 9.3.0. Do NOT publish the codenarc-all jar.
 
 
 Version 3.7.0  (Nov 2025)
 --------------------------------------
+ - NOTE: For the versions 3.1.0 through 3.7.0, CodeNarc provides a separate **3.x.x-groovy-4.x** version for use with Groovy 4.x.
  - #796: **ImplicitReturnStatement** rule: Fix false positive for try-with-resources blocks.
  - #799: **UnusedImport** rule: Fix false-positive for a statically imported constant used in a GString.
  - #797: Additional `PropertiesFileRuleSetConfigurer.configure(..)` logging to aid in debugging. ([Daniel Hammer](https://github.com/dlehammer)).

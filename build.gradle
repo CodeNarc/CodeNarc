@@ -3,18 +3,13 @@ plugins {
 //    id 'maven-publish'
     id 'signing'
     id 'idea'
-    id 'com.gradleup.shadow' version '8.3.9'
+    id 'com.gradleup.shadow' version '9.3.0'
     id "com.vanniktech.maven.publish" version "0.35.0"
 }
 
-shadowJar {
-    manifest {
-        attributes 'Main-Class': 'org.codenarc.CodeNarc'
-    }
-}
-
 group = 'org.codenarc'
-version = '3.7.0-groovy-4.0'
+//version = '4.0.0-SNAPSHOT'
+version = '4.0.0-alpha17Dec2025'
 
 java {
     sourceCompatibility = '1.8'
@@ -26,16 +21,14 @@ base {
 }
 
 repositories {
-    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://repo.maven.apache.org/maven2' }
+    maven { url = 'oss.sonatype.org' }
 }
 
 def groovy4Version = '4.0.24'
 def gmetricsVersion = '2.1.0'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"
-
-println "NOTE: Using build-groovy4.gradle"
 
 dependencies {
 
@@ -99,6 +92,16 @@ task groovydocJar(type: Jar, dependsOn: groovydoc ) {
 signing {
     required = { gradle.taskGraph.hasTask(publish) }
     sign publishing.publications
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'org.codenarc.CodeNarc'
+    }
+}
+
+shadow {
+    addShadowVariantIntoJavaComponent = false
 }
 
 // Publish
