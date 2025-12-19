@@ -17,7 +17,7 @@ The File.createTempFile() method is insecure, and has been deprecated by the ESA
 It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
 
 For more information see the ESAPI website: http://code.google.com/p/owasp-esapi-java/
-and the Randomizer Javadoc: <http://owasp-esapi-java.googlecode.com/svn/trunk_doc/latest/org/owasp/esapi/Randomizer.html>
+and the Randomizer Javadoc: <https://javadoc.io/doc/org.owasp.esapi/esapi/2.2.0.0/org/owasp/esapi/Randomizer.html>
 
 
 ## InsecureRandom Rule
@@ -109,7 +109,7 @@ Classes that derive from these permissions classes, however, must prohibit exten
 malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces
 such as `java.security.PrivilegedAction` and `java.security.PrivilegedActionException` must also be declared `final` for analogous reasons.
 
-For more information see: <https://www.securecoding.cert.org/confluence/display/java/SEC07-J.+Classes+that+derive+from+a+sensitive+class+or+implement+a+sensitive+interface+must+be+declared+final>
+See the Java Permission class documentation for more information: <https://docs.oracle.com/javase/8/docs/api/java/security/Permission.html>.
 
 Example of violations:
 
