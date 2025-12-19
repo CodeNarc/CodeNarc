@@ -26,7 +26,7 @@ own *RuleSet* file and/or a "codenarc.properties" file, customizing the rules fr
 
 ## Configuring Rules Within a RuleSet File
 
-[Creating a RuleSet](./codenarc-custom-ruleset.html) describes how to create a new *RuleSet* and
+[Creating a RuleSet](./codenarc-creating-ruleset.html) describes how to create a new *RuleSet* and
 configure the rules within it.
 
 Here is an example of a Groovy *RuleSet* file that configures all three rules that it contains:
