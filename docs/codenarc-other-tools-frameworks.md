@@ -55,6 +55,5 @@ See [CodeNarc - Docker](./codenarc-docker.html).
   `ClassLoader` for loading rule script files, rather than the default base `ClassLoader`. Setting the
   *"codenarc.useCurrentThreadContextClassLoader"* system property to "true" uses the current thread context
   `ClassLoader` for loading rule script files. That enables **Grails** to load rule script files from within
-  the **Grails** project, and allows those rule scripts to reference local classes. See
-  [GPCODENARC-32](https://grails.atlassian.net/browse/GPCODENARC-32). The
+  the **Grails** project, and allows those rule scripts to reference local classes. The
   [Grails CodeNarc Plugin](https://github.com/chrismair/GrailsCodeNarcPlugin)  automatically sets that system property.

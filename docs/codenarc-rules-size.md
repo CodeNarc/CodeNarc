@@ -53,13 +53,11 @@ The *ABC Metric* calculation rules for Groovy:
 
 ### Notes
 
-  * See the [ABC Metric specification](http://www.softwarerenovation.com/ABCMetric.pdf)
+  * See the [ABC Metric specification](https://wstomv.win.tue.nl/edu/2ip30/references/ABCmetric.pdf)
   * See the [Blog post](http://jakescruggs.blogspot.com/2008/08/whats-good-flog-score.html) describing guidelines for interpreting an ABC score
-  * This [(Spanish) blog post](https://servicios.excentia.es/confluence/display/QAX/SONAR+ABC+Metric+Plugin) about the
-    eXcentia Sonar ABC Metric Plugin (for Java) includes a table of risk classifications for ABC scores for both methods and classes.
-  * See the [GMetrics ABC metric](http://gmetrics.sourceforge.net/gmetrics-AbcMetric.html).
+  * See the [GMetrics ABC metric](https://dx42.github.io/gmetrics/metrics/AbcMetric).
     This includes a discussion of guidelines for interpreting *ABC* scores.
-  * This rule requires the GMetrics jar on the classpath. See [GMetrics](http://gmetrics.sourceforge.net/).
+  * This rule requires the GMetrics jar on the classpath. See [GMetrics](https://dx42.github.io/gmetrics/).
 
 
 ## ClassSize Rule
@@ -123,12 +121,12 @@ by automated tests.
    (the co-creator of the **CRAP** metric with Bob Evans), describing the formula, the motivation, and the **CRAP4J**
    tool for calculating **CRAP** score for Java code.
 
-  * **[3]** The [GMetrics CRAP Metric](http://gmetrics.sourceforge.net/gmetrics-CrapMetric.html).
+  * **[3]** The [GMetrics CRAP Metric](https://dx42.github.io/gmetrics/metrics/CrapMetric).
 
   * **[4]** [Cobertura](http://cobertura.sourceforge.net/) -- *Cobertura is a free Java tool that calculates the percentage
  of code accessed by tests. It can be used to identify which parts of your Java program are lacking test coverage.*
 
-  * **[5]** [Cobertura Ant Task Reference](http://cobertura.sourceforge.net/anttaskreference.html)
+  * **[5]** [Cobertura Ant Task Reference](https://github.com/cobertura/cobertura/wiki/Ant-Task-Reference/)
 
   * **[6]** [Cobertura Maven Plugin](https://www.mojohaus.org/cobertura-maven-plugin/)
 
@@ -181,9 +179,9 @@ Add one (1) for each occurrence of each of the following:*
 
   * See the [Cyclomatic Complexity Wikipedia entry](http://en.wikipedia.org/wiki/Cyclomatic_complexity)
   * See the [original paper describing Cyclomatic Complexity](http://www.literateprogramming.com/mccabe.pdf)
-  * See the [GMetrics Cyclomatic Complexity metric](http://gmetrics.sourceforge.net/gmetrics-CyclomaticComplexityMetric.html).
+  * See the [GMetrics Cyclomatic Complexity metric](https://dx42.github.io/gmetrics/metrics/CyclomaticComplexityMetric).
     This includes a discussion of guidelines for interpreting *cyclomatic complexity* values.
-  * This rule requires the GMetrics jar on the classpath. See [GMetrics](http://gmetrics.sourceforge.net/).
+  * This rule requires the GMetrics jar on the classpath. See [GMetrics](https://dx42.github.io/gmetrics/).
 
 
 ## MethodCount Rule
