@@ -123,7 +123,7 @@ by automated tests.
 
   * **[3]** The [GMetrics CRAP Metric](https://dx42.github.io/gmetrics/metrics/CrapMetric).
 
-  * **[4]** [Cobertura](http://cobertura.sourceforge.net/) -- *Cobertura is a free Java tool that calculates the percentage
+  * **[4]** [Cobertura](https://github.com/cobertura/cobertura) -- *Cobertura is a free Java tool that calculates the percentage
  of code accessed by tests. It can be used to identify which parts of your Java program are lacking test coverage.*
 
   * **[5]** [Cobertura Ant Task Reference](https://github.com/cobertura/cobertura/wiki/Ant-Task-Reference/)
