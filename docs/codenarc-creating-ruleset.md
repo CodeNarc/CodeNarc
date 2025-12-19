@@ -31,11 +31,11 @@ comment out the rules you don't want to use.
 
 ### The Other RuleSet Options Still Work
 
-You can still create your own custom [Groovy](A_Sample_Groovy_RuleSet_Using_the_Old_Syntax) *RuleSet* using the
+You can still create your own custom [Groovy](#a-sample-groovy-ruleset-using-the-old-syntax) *RuleSet* using the
 older syntax. You can even mix the new rule-name-only syntax with the older Groovy DSL syntax. It's all good!
 
 You can also continue to use the predefined *RuleSets* distributed with **CodeNarc** or you can create your own
-[XML](Creating_an_XML_RuleSet_File) *RuleSet*. See the site navigation menu for a list of the *RuleSets*
+[XML](#creating-an-xml-ruleset-file) *RuleSet*. See the site navigation menu for a list of the *RuleSets*
 provided out of the box by **CodeNarc**.
 
 ## Creating a Groovy RuleSet File
