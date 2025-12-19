@@ -33,7 +33,7 @@ The "Enhanced" CodeNarc rules:
 
 ## Grails-CodeNarc Plugin
 
-The [Grails CodeNarc Plugin](http://www.grails.org/plugin/codenarc/) supports the new *enhanced classpath*
+The [Grails CodeNarc Plugin for Grails 2.x](https://github.com/chrismair/GrailsCodeNarcPlugin) supports the new *enhanced classpath*
 rules out of the box. You are free to include these rules in your **CodeNarc** ruleset when you use the
 Grails CodeNarc plugin.
 
