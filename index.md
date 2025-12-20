@@ -41,7 +41,6 @@ to fit into your project. Build tool, framework support, and report generation a
          <a href="codenarc-run-as-a-test.html">as part of your test suite</a>.
             Also,  plugins exist for <a href="codenarc-other-tools-frameworks.html">Maven</a>,
            <a href="codenarc-other-tools-frameworks.html">Gradle</a>, <a href="codenarc-other-tools-frameworks.html">Grails</a>,
-           <a href="codenarc-other-tools-frameworks.html">Griffon</a>,
            <a href="codenarc-other-tools-frameworks.html">SonarQube</a>,
            <a href="codenarc-other-tools-frameworks.html">Visual Studio Code</a>,
            and <a href="codenarc-other-tools-frameworks.html">Jenkins</a>. See our
