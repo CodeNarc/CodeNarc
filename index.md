@@ -76,7 +76,7 @@ to fit into your project. Build tool, framework support, and report generation a
      <td class="section">
          <h2>Inspirations</h2>
          We're inspired by the wonderful <a href="https://pmd.github.io/">PMD</a>
-        and <a href="http://checkstyle.sourceforge.net/">Checkstyle</a> Java static analysis tools, as well
+        and <a href="https://github.com/checkstyle/checkstyle">Checkstyle</a> Java static analysis tools, as well
         as the extensive Groovy inspections performed by <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>.
      </td>
 </tr>
