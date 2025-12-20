@@ -10,10 +10,7 @@ title: CodeNarc XmlReportWriter
 The `org.codenarc.report.XmlReportWriter` class (type="xml") produces an XML report of the
 **CodeNarc** results.
 
-**Note:** This XML format is still being refined and is subject to change.
-[Contact me](https://sourceforge.net/sendmessage.php?touser=1853503) if you have specific requirements or suggestions.
-
-See a [mrhaki](./samples/SampleCodeNarcXmlReport.xml) Sample XML Report. Also see the mrhaki blog post about
+See a [Sample XML Report](./samples/SampleCodeNarcXmlReport.xml). Also see the mrhaki blog post about
 [creating custom CodeNarc HTML reports using XSLT](http://mrhaki.blogspot.com/2011/01/groovy-goodness-create-codenarc-reports.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+mrhaki+%28Messages+from+mrhaki%29).
 
 ## Option Nested Elements
