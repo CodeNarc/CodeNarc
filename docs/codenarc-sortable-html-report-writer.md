@@ -16,7 +16,7 @@ containing a summary results table and a single table for all violations, which 
 
 It also includes an optional table of the rules applied, along with their descriptions.
 
-See a [Sample Report](./SampleCodeNarcSortableHtmlReport.html).
+See a [Sample Report](./.samples/SampleCodeNarcSortableHtmlReport.html).
 
 
 ## Option Nested Elements

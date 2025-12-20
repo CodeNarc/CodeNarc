@@ -12,7 +12,7 @@ containing a table with summary results by package and a separate section for
 each package containing violations, and then a table of the rules applied, along
 with their descriptions.
 
-See a [Sample Report](./SampleCodeNarcHtmlReport.html).
+See a [Sample Report](./samples/SampleCodeNarcHtmlReport.html).
 
 Alternatively, see the [mrhaki](http://mrhaki.blogspot.com/) blog post about
 [creating custom CodeNarc HTML reports using XSLT](http://mrhaki.blogspot.com/2011/01/groovy-goodness-create-codenarc-reports.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+mrhaki+%28Messages+from+mrhaki%29).

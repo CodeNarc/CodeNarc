@@ -47,8 +47,8 @@ to fit into your project. Build tool, framework support, and report generation a
            and <a href="codenarc-other-tools-frameworks.html">Jenkins</a>. See our
             <a href="codenarc-other-tools-frameworks.html">Integration</a> page for more details.
            Reports come in HTML, XML, or text format.  Take a look at a
-           <a href="SampleCodeNarcHtmlReport.html">Sample CodeNarc HTML Report</a>,
-           or a <a href="./SampleCodeNarcXmlReport.xml">Sample CodeNarc XML Report</a>.
+           <a href="./samples/SampleCodeNarcHtmlReport.html">Sample CodeNarc HTML Report</a>,
+           or a <a href="./samples/SampleCodeNarcXmlReport.xml">Sample CodeNarc XML Report</a>.
      </td>
      <td class="section">
          <h2>Requirements</h2>
