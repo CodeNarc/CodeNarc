@@ -10,7 +10,7 @@ title: CodeNarc Text / IDE / Compact ReportWriters
 ### Description
 
 The `org.codenarc.report.TextReportWriter` class (type="text") produces a simple text report of the
-**CodeNarc** results. See a [Sample Report](./SampleCodeNarcTextReport.txt).
+**CodeNarc** results. See a [Sample Report](./samples/SampleCodeNarcTextReport.txt).
 
 ### Option Nested Elements
 
