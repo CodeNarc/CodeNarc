@@ -12,6 +12,9 @@ title: CodeNarc - Jenkins Rules
 Classes in Jenkins libraries should generally implement the Serializable interface because every expression/variable used in a CPS transformed method can potentially be serialized.
 Generally all user defined classes (not from external libraries) in pipeline libraries or Jenkinsfiles are already implicitly Serializable in Jenkins but it makes static analysis easier later on if all classes are marked Serializable explicitly.
 
+NOTE: This is a [CodeNarc Enhanced Classpath Rule](./codenarc-enhanced-classpath-rules.html).
+It requires **CodeNarc** to have the application classes being analyzed, as well as any referenced classes, on the classpath.
+
 Example of violation:
 
 ```
@@ -55,6 +58,9 @@ Known limitations:
 * Because of their dynamic nature, pipeline steps can only be recognized if they are called on a predefined script variable (default is `script`).
 * Method calls on dynamic types (Object) can't be resolved.
 
+NOTE: This is a [CodeNarc Enhanced Classpath Rule](./codenarc-enhanced-classpath-rules.html).
+It requires **CodeNarc** to have the application classes being analyzed, as well as any referenced classes, on the classpath.
+
 Examples:
 
 ```
@@ -90,6 +96,9 @@ Known limitations:
 
 * Dynamically typed variables can't be resolved
 
+NOTE: This is a [CodeNarc Enhanced Classpath Rule](./codenarc-enhanced-classpath-rules.html).
+It requires **CodeNarc** to have the application classes being analyzed, as well as any referenced classes, on the classpath.
+
 Examples:
 
 ```
@@ -107,6 +116,9 @@ Map map = new HashMap<String, String>() //OK
 
 Some methods from the standard library cannot be CPS transformed and therefore must not be called with CPS transformed closure arguments.
 See also the Jenkins docs on [Calling non-CPS-transformed methods with CPS-transformed arguments](https://www.jenkins.io/doc/book/pipeline/cps-method-mismatches/#calling-non-cps-transformed-methods-with-cps-transformed-arguments)
+
+NOTE: This is a [CodeNarc Enhanced Classpath Rule](./codenarc-enhanced-classpath-rules.html).
+It requires **CodeNarc** to have the application classes being analyzed, as well as any referenced classes, on the classpath.
 
 Examples:
 
@@ -126,6 +138,9 @@ void cpsMethod() {
 
 Overridden methods of the standard library (e.g. from java.lang.Object) are often called from there and therefore must not be CPS transformed in Jenkins.
 See also the Jenkins docs on [Overrides of non-CPS-transformed methods](https://www.jenkins.io/doc/book/pipeline/cps-method-mismatches/#overrides-of-non-cps-transformed-methods).
+
+NOTE: This is a [CodeNarc Enhanced Classpath Rule](./codenarc-enhanced-classpath-rules.html).
+It requires **CodeNarc** to have the application classes being analyzed, as well as any referenced classes, on the classpath.
 
 Examples:
 
@@ -150,6 +165,9 @@ class SomeClass {
 *Since CodeNarc 3.5.0*
 
 Every parameter and return type has to implement the Serializable interface in Jenkins CPS tranformed Code.
+
+NOTE: This is a [CodeNarc Enhanced Classpath Rule](./codenarc-enhanced-classpath-rules.html).
+It requires **CodeNarc** to have the application classes being analyzed, as well as any referenced classes, on the classpath.
 
 Examples:
 
