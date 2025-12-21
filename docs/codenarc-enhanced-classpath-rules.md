@@ -16,18 +16,18 @@ log a WARN message for each source file that contains the missing references, an
 be able to process that file. 
 
 The "Enhanced" CodeNarc rules:
- * CloneWithoutCloneable (in the "enhanced" ruleset)
- * JUnitAssertEqualsConstantActualValue (in the "enhanced" ruleset)
- * UnsafeImplementationAsMap (in the "enhanced" ruleset)
- * MissingOverrideAnnotation (in the "enhanced" ruleset)
- * GrailsDomainGormMethods (in the "grails" ruleset)
- * NonSerializableFieldInSerializableClass (in the "serialization" ruleset)
- * ParameterOrReturnTypeNotSerializable (in the "jenkins" ruleset)
- * ObjectOverrideOnlyNonCpsMethods (in the "jenkins" ruleset)
- * ForbiddenCallInCpsMethod (in the "jenkins" ruleset)
- * ExpressionInCpsMethodNotSerializable (in the "jenkins" ruleset)
- * CpsCallFromNonCpsMethod (in the "jenkins" ruleset)
- * ClassNotSerializable (in the "jenkins" ruleset)
+ * **CloneWithoutCloneable** (in the "enhanced" ruleset)
+ * **JUnitAssertEqualsConstantActualValue** (in the "enhanced" ruleset)
+ * **UnsafeImplementationAsMap** (in the "enhanced" ruleset)
+ * **MissingOverrideAnnotation** (in the "enhanced" ruleset)
+ * **GrailsDomainGormMethods** (in the "grails" ruleset)
+ * **NonSerializableFieldInSerializableClass** (in the "serialization" ruleset)
+ * **ParameterOrReturnTypeNotSerializable** (in the "jenkins" ruleset)
+ * **ObjectOverrideOnlyNonCpsMethods** (in the "jenkins" ruleset)
+ * **ForbiddenCallInCpsMethod** (in the "jenkins" ruleset)
+ * **ExpressionInCpsMethodNotSerializable** (in the "jenkins" ruleset)
+ * **CpsCallFromNonCpsMethod** (in the "jenkins" ruleset)
+ * **ClassNotSerializable** (in the "jenkins" ruleset)
 
 (There are some other rules that have an *optional* "enhanced" mode, but that is not enabled by default.)
 
