@@ -14,6 +14,7 @@ Build, Infrastructure and Tests
  - #812: Streamline report writer tests. Add test for `GitlabCodeQualityReportWriter`.
  - #813: Upgrade to Shadow Gradle plugin 9.3.0. Do NOT publish the codenarc-all jar.
  - #809: Fix broken links in CodeNarc documentation. 
+ - #814: Add GitHub Action to check for broken links in the documentation.
 
 
 Version 3.7.0  (Nov 2025)
