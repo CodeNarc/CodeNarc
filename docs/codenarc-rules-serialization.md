@@ -49,9 +49,9 @@ Examples:
 
 ```
 class SerializableClass implements Serializable {
-private SerializableClass field     // OK
-private String field                // OK
-private OtherClass otherField       // Violation
+    private SerializableClass field     // OK
+    private String field                // OK
+    private OtherClass otherField       // Violation
 }
 ```
 
