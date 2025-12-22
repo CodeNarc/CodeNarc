@@ -274,7 +274,7 @@ actual:               $violation.sourceLine
         if (messageText) {
             assert violation.message, 'The violation message was null'
             if (messageText instanceof Collection) {
-                messageText.each { assert violation.message.contains(it.toString()), "text does not contain [$it]" }
+                messageText.each { assert violation.message.contains(it.toString()), "text does not contain [$it]; text=${violation.message}" }
             }
             else {
                 assert violation.message.contains(messageText), "Violation on line $lineNumber\nExpected message text: [$messageText]\nFound message text:    [$violation.message]\n"

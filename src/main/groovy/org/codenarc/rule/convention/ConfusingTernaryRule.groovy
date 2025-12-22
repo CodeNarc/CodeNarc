@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codenarc.util.GroovyVersion
 
 /**
  * In an "if" expression with an "else" clause, avoid negation in the test. For example, rephrase:
@@ -52,7 +53,8 @@ class ConfusingTernaryAstVisitor extends AbstractAstVisitor {
     }
 
     private void addViolationForNotExpression(TernaryExpression expression, NotExpression exp) {
-        addViolation(expression, "(!$exp.text) is a confusing negation in a ternary expression. Rewrite as ($exp.expression.text) and invert the conditions.")
+        String actualExpressionText = GroovyVersion.isGroovyVersion4() ? "!${exp.text}" : exp.text
+        addViolation(expression, "($actualExpressionText) is a confusing negation in a ternary expression. Rewrite as ($exp.expression.text) and invert the conditions.")
     }
 
     private void addViolationForBinaryExpression(BinaryExpression exp, TernaryExpression expression) {

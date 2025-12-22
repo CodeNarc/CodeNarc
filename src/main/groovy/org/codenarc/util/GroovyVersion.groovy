@@ -16,12 +16,16 @@
 package org.codenarc.util
 
 /**
- * Utility class to provide Groovy system information
+ * Utility class to provide Groovy version information
  */
 class GroovyVersion {
 
-    static boolean isGroovyVersion2() {
-        return GroovySystem.getVersion().startsWith('2')
+    static boolean isGroovyVersion4() {
+        return GroovySystem.getVersion().startsWith('4.')
+    }
+
+    static boolean isGroovyVersion5() {
+        return GroovySystem.getVersion().startsWith('5.')
     }
 
 }

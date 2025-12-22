@@ -16,6 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.util.GroovyVersion
 import org.junit.jupiter.api.Test
 
 /**
@@ -59,12 +60,16 @@ class MultipleUnaryOperatorsRuleTest extends AbstractRuleTestCase<MultipleUnaryO
         def message = 'The expression %s in class None contains confusing multiple consecutive unary operators'
         assertViolations(SOURCE,
             [line:2, source:'int z = ~~2', message:['The expression', '(~~)', '2']],
-            [line:3, source:'boolean b = !!true', message:String.format(message, '(!!true)')],
-            [line:4, source:'boolean c = !!!false', message:String.format(message, '(!!false)')],
-            [line:4, source:'boolean c = !!!false', message:String.format(message, '(!!false)')],
+            [line:3, source:'boolean b = !!true', message:String.format(message, expressionWith('!', '!', 'true'))],
+            [line:4, source:'boolean c = !!!false', message:['The expression', expressionWith('!', '!', 'false')]],
+            [line:4, source:'boolean c = !!!false', message:['The expression', expressionWith('!', '!', 'false')]],
             [line:5, source:'int j = -~7', message:['The expression', '(-~)', '7']],
             [line:6, source:'int k = +~8', message:['The expression', '(+~)', '8']],
             [line:7, source:'boolean d = !~1', message:['The expression', '(!~)', '1']])
+    }
+
+    private static String expressionWith(String operator1, String operator2, String operand) {
+        return GroovyVersion.isGroovyVersion4() ? "(${operator1}${operator2}$operand)" : "(${operator1}(${operator2}($operand)))"
     }
 
     @Override

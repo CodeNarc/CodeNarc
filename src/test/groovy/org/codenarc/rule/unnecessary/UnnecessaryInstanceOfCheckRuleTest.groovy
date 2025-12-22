@@ -22,7 +22,8 @@ import org.junit.jupiter.api.Test
  * Tests for UnnecessaryInstanceOfCheckRule
  *
  * @author Hamlet D'Arcy
-  */
+ * @author Chris Mair
+ */
 class UnnecessaryInstanceOfCheckRuleTest extends AbstractRuleTestCase<UnnecessaryInstanceOfCheckRule> {
 
     @Test
@@ -32,7 +33,7 @@ class UnnecessaryInstanceOfCheckRuleTest extends AbstractRuleTestCase<Unnecessar
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
             if (!(variable instanceof String)) { /* */ }
             def x = !(variable instanceof String)

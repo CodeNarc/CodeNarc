@@ -16,12 +16,14 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.util.GroovyVersion
 import org.junit.jupiter.api.Test
 
 /**
  * Tests for ConfusingTernaryRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class ConfusingTernaryRuleTest extends AbstractRuleTestCase<ConfusingTernaryRule> {
 
@@ -32,7 +34,7 @@ class ConfusingTernaryRuleTest extends AbstractRuleTestCase<ConfusingTernaryRule
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
             (x == y) ? same : diff
             (x) ? same : diff
@@ -67,9 +69,10 @@ class ConfusingTernaryRuleTest extends AbstractRuleTestCase<ConfusingTernaryRule
         final SOURCE = '''
             (!x) ? diff : same
         '''
+        String expression = GroovyVersion.isGroovyVersion4() ? '!x' : '!(x)'
         assertSingleViolation(SOURCE, 2,
                 '(!x) ? diff : same',
-                '(!x) is a confusing negation in a ternary expression. Rewrite as (x) and invert the conditions.')
+                "($expression) is a confusing negation in a ternary expression. Rewrite as (x) and invert the conditions.")
     }
 
     @Override

@@ -16,12 +16,14 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.util.GroovyVersion
 import org.junit.jupiter.api.Test
 
 /**
  * Tests for DoubleNegativeRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class DoubleNegativeRuleTest extends AbstractRuleTestCase<DoubleNegativeRule> {
 
@@ -32,7 +34,7 @@ class DoubleNegativeRuleTest extends AbstractRuleTestCase<DoubleNegativeRule> {
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
             !true
         '''
@@ -45,9 +47,11 @@ class DoubleNegativeRuleTest extends AbstractRuleTestCase<DoubleNegativeRule> {
             def x = !!true
             def y = !(!true)
         '''
-        assertTwoViolations(SOURCE,
-                2, 'def x = !!true', 'The expression (!!true) is a confusing double negative',
-                3, 'def y = !(!true)', 'The expression (!!true) is a confusing double negative')
+        String expression = GroovyVersion.isGroovyVersion4() ? '(!!true)' : '!(!(true))'
+        String expectedMessage = "The expression $expression is a confusing double negative"
+        assertViolations(SOURCE,
+                [line:2, source:'def x = !!true', message:expectedMessage],
+                [line:3, source:'def y = !(!true)', message:expectedMessage])
     }
 
     @Override

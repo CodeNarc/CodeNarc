@@ -20,12 +20,14 @@ import org.codehaus.groovy.ast.expr.NotExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codenarc.util.GroovyVersion
 
 /**
  * This rule finds instanceof checks that cannot possibly evaluate to true. For instance, checking that (!variable instanceof String) will never be true because the result of a not expression is always a boolean.
  *
  * @author Hamlet D'Arcy
-  */
+ * @author Chris Mair
+ */
 class UnnecessaryInstanceOfCheckRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryInstanceOfCheck'
     int priority = 3
@@ -37,10 +39,11 @@ class UnnecessaryInstanceOfCheckAstVisitor extends AbstractAstVisitor {
     void visitBinaryExpression(BinaryExpression expression) {
         if (isFirstVisit(expression)) {
             if (AstUtil.isBinaryExpressionType(expression, 'instanceof') && expression.leftExpression instanceof NotExpression) {
+                String expressionText = GroovyVersion.isGroovyVersion4() ? "!($expression.leftExpression.text)" : expression.leftExpression.text
                 if (expression.rightExpression.text == 'Boolean') {
-                    addViolation(expression, "The result of '!($expression.leftExpression.text)' will always be a Boolean")
+                    addViolation(expression, "The result of '${expressionText}' will always be a Boolean")
                 } else {
-                    addViolation(expression, "The result of '!($expression.leftExpression.text)' will never be a $expression.rightExpression.text")
+                    addViolation(expression, "The result of '${expressionText}' will never be a $expression.rightExpression.text")
                 }
             }
             super.visitBinaryExpression(expression)

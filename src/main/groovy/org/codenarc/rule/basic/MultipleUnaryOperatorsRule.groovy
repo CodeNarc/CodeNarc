@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.expr.UnaryMinusExpression
 import org.codehaus.groovy.ast.expr.UnaryPlusExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.util.GroovyVersion
 
 /**
  * Checks for multiple consecutive unary operators. These are confusing, and are likely typos and bugs.
@@ -72,7 +73,7 @@ class MultipleUnaryOperatorsAstVisitor extends AbstractAstVisitor {
     private void checkForSecondUnaryOperator(Expression expression, Class<Expression> firstOperatorClass) {
         if (expression.expression.class in UNARY_OPERATOR_CLASSES) {
             String operators = UNARY_OPERATORS[firstOperatorClass] + UNARY_OPERATORS[expression.expression.class]
-            String expressionText = operators + expression.text
+            String expressionText = GroovyVersion.isGroovyVersion4() ? operators + expression.text : expression.text
             addViolation(expression, String.format(ERROR_MESSAGE, expressionText, currentClassName, operators))
         }
     }

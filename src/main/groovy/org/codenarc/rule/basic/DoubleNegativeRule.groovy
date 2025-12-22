@@ -18,11 +18,13 @@ package org.codenarc.rule.basic
 import org.codehaus.groovy.ast.expr.NotExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.GroovyVersion
 
 /**
  * There is no point in using a double negative, it is always positive. For instance !!x can always be simplified to x. And !(!x) can as well.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class DoubleNegativeRule extends AbstractAstVisitorRule {
     String name = 'DoubleNegative'
@@ -35,7 +37,8 @@ class DoubleNegativeAstVisitor extends AbstractAstVisitor {
     @Override
     void visitNotExpression(NotExpression expression) {
         if (expression.expression instanceof NotExpression) {
-            addViolation expression, "The expression (!!$expression.text) is a confusing double negative"
+            String expressionText = GroovyVersion.isGroovyVersion4() ? "(!!${expression.text})" : expression.text
+            addViolation expression, "The expression $expressionText is a confusing double negative"
         }
         super.visitNotExpression expression
     }
