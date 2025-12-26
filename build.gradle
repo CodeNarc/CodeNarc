@@ -12,9 +12,15 @@ group = 'org.codenarc'
 version = '4.0.0-alpha17Dec2025'
 
 java {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
+
+//java {
+//    sourceCompatibility = '1.8'
+//    targetCompatibility = '1.8'
+//}
 
 base {
     archivesName = 'CodeNarc'
@@ -25,19 +31,20 @@ repositories {
     maven { url = 'oss.sonatype.org' }
 }
 
-def groovy4Version = '4.0.24'
+def groovyVersion = '5.0.3'
+//def groovyVersion = '4.0.24'
 def gmetricsVersion = '2.1.0'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"
 
 dependencies {
 
-    implementation "org.apache.groovy:groovy:$groovy4Version"
-    implementation "org.apache.groovy:groovy-xml:$groovy4Version"
-    implementation "org.apache.groovy:groovy-groovydoc:$groovy4Version"
-    implementation "org.apache.groovy:groovy-json:$groovy4Version"
-    implementation "org.apache.groovy:groovy-ant:$groovy4Version"
-    implementation "org.apache.groovy:groovy-templates:$groovy4Version"
+    implementation "org.apache.groovy:groovy:$groovyVersion"
+    implementation "org.apache.groovy:groovy-xml:$groovyVersion"
+    implementation "org.apache.groovy:groovy-groovydoc:$groovyVersion"
+    implementation "org.apache.groovy:groovy-json:$groovyVersion"
+    implementation "org.apache.groovy:groovy-ant:$groovyVersion"
+    implementation "org.apache.groovy:groovy-templates:$groovyVersion"
 
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
     implementation("org.gmetrics:GMetrics-Groovy4:$gmetricsVersion") {
