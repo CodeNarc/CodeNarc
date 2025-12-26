@@ -8,6 +8,7 @@ Reports
  - #808: `CodeNarc_AntBuilderTest`: Consolidate sample report generation. Add report sample for Gitlab Code Quality. ([Alexandre Garnier](https://github.com/zigarn))
 
 Build, Infrastructure and Tests
+ - #804: Support Groovy 5.x.
  - #810: Upgrade Gradle wrapper to 9.2.1.
  - #810: gradle.yml: Upgrade to actions/checkout@v4, JDK 17 and gradle/actions/setup-gradle@v3.
  - #810: build.gradle: Switch dependencies to using junit-bom, and add junit-platform-launcher.

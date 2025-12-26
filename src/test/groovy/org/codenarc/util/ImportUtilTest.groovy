@@ -89,7 +89,7 @@ class ImportUtilTest extends AbstractTestCase {
 
         // Not found in source code; AST still contains import nodes
         def otherSourceCode = new SourceString('def v = 1')
-        assertImport(otherSourceCode, ast, [sourceLine:'import a.b.MyClass as MyClass', lineNumber:2])
+        assertImport(otherSourceCode, ast, [sourceLine:'import a.b.MyClass', lineNumber:2])
     }
 
     @Test
