@@ -44,13 +44,13 @@ class ImportFromSunPackagesRuleTest extends AbstractRuleTestCase<ImportFromSunPa
     void testSingleViolation() {
         final SOURCE = '''
             import sun.misc.foo
-            import sun.misc.foo as Foo
+            import sun.crypto.provider.SunJCE as JCE
 
             public class Foo {}
         '''
         assertViolations(SOURCE,
                 [line: 2, source: 'import sun.misc.foo', message: 'The file imports sun.misc.foo, which is not portable and likely to change'],
-                [line: 3, source: 'import sun.misc.foo as Foo', message: 'The file imports sun.misc.foo, which is not portable and likely to change'])
+                [line: 3, source: 'import sun.crypto.provider.SunJCE as JCE', message: 'The file imports sun.crypto.provider.SunJCE, which is not portable and likely to change'])
     }
 
     @Test
