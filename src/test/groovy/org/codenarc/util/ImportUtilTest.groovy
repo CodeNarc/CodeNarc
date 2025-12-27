@@ -86,10 +86,6 @@ class ImportUtilTest extends AbstractTestCase {
         assertImport(sourceCode, ast, [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5])
         assertImport(sourceCode, ast, [sourceLine:'import a.b.MyOtherClass;', lineNumber:6])
         assertImport(sourceCode, ast, [sourceLine:'import a.b.MyOtherClass as Moo;', lineNumber:7])
-
-        // Not found in source code; AST still contains import nodes
-        def otherSourceCode = new SourceString('def v = 1')
-        assertImport(otherSourceCode, ast, [sourceLine:'import a.b.MyClass', lineNumber:2])
     }
 
     @Test

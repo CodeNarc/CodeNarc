@@ -8,19 +8,18 @@ plugins {
 }
 
 group = 'org.codenarc'
-//version = '4.0.0-SNAPSHOT'
-version = '4.0.0-alpha17Dec2025'
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
+version = '4.0.0-SNAPSHOT'
 
 //java {
-//    sourceCompatibility = '1.8'
-//    targetCompatibility = '1.8'
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(17)
+//    }
 //}
+
+java {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
 
 base {
     archivesName = 'CodeNarc'
@@ -31,8 +30,8 @@ repositories {
     maven { url = 'oss.sonatype.org' }
 }
 
-def groovyVersion = '5.0.3'
-//def groovyVersion = '4.0.24'
+//def groovyVersion = '5.0.3'
+def groovyVersion = '4.0.24'
 def gmetricsVersion = '2.1.0'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"

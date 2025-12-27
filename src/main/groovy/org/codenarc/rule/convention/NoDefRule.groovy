@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.Parameter
 import org.codehaus.groovy.ast.Variable
 import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codehaus.groovy.ast.expr.TupleExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -60,7 +61,9 @@ class NoDefAstVisitor extends AbstractAstVisitor {
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
         def leftExpression = expression.getLeftExpression()
-        if (leftExpression instanceof ArgumentListExpression) {
+        boolean isMultipleAssignment = leftExpression instanceof ArgumentListExpression     // Groovy 4
+                || leftExpression instanceof TupleExpression                                // Groovy 5+
+        if (isMultipleAssignment) {
             boolean hasNonExcluded = leftExpression.expressions.find { expr ->  dynamicTypedAndNotExcludedVariable(expr) }
             if (hasNonExcluded) {
                 addViolation(expression, NoDefRule.MESSAGE)
@@ -109,7 +112,7 @@ class NoDefAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean dynamicTypedAndNotExcludedVariable(Variable variableExpression) {
-        return variableExpression.isDynamicTyped() && !nameExcluded(variableExpression.name)
+        return variableExpression && variableExpression.isDynamicTyped() && !nameExcluded(variableExpression.name)
     }
 
     private boolean nameExcluded(String text) {
