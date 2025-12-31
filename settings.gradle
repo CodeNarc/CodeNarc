@@ -1,3 +1,1 @@
-include 'integration-test'
-
 rootProject.name = 'CodeNarc'
