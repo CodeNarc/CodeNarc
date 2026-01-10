@@ -32,7 +32,7 @@ repositories {
 
 //def groovyVersion = '5.0.3'
 def groovyVersion = '4.0.24'
-def gmetricsVersion = '2.1.0'
+def gmetricsVersion = '3.0.0'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"
 
@@ -46,7 +46,7 @@ dependencies {
     implementation "org.apache.groovy:groovy-templates:$groovyVersion"
 
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
-    implementation("org.gmetrics:GMetrics-Groovy4:$gmetricsVersion") {
+    implementation("org.gmetrics:GMetrics:$gmetricsVersion") {
         transitive = false
     }
 
