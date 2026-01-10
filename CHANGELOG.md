@@ -9,6 +9,7 @@ Reports
 
 Build, Infrastructure and Tests
  - #804: Support Groovy 5.x.
+ - #804: `AbstractReportWriter`: Fix custom ResourceBundle loading on Groovy 5.x.
  - #810: Upgrade Gradle wrapper to 9.2.1.
  - #810: gradle.yml: Upgrade to actions/checkout@v4, JDK 17 and gradle/actions/setup-gradle@v3.
  - #810: build.gradle: Switch dependencies to using junit-bom, and add junit-platform-launcher.
