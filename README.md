@@ -50,3 +50,6 @@ When contributing to CodeNarc, run the following command to test on your local m
 ```
 
 It is recommended to use Java 8-11.
+
+### Powered by
+[![JetBrains logo.](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)](https://jb.gg/OpenSource)
