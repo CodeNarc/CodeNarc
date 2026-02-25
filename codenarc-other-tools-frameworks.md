@@ -28,8 +28,8 @@ See [CodeNarc - Docker](./codenarc-docker.html).
         e.g. 
         ```groovy
             dependencies {
-                codenarc('org.codenarc:CodeNarc:3.2.0')
-                codenarc('org.codehaus.groovy:groovy-all:3.0.9')
+                codenarc('org.codenarc:CodeNarc:4.0.0')
+                codenarc('org.apache.groovy:groovy-all:5.0.3')
             }
         ```
 
