@@ -1048,7 +1048,7 @@ Example of violations:
 ```
 
 Known limitations:
- - Will not flag a semicolon on a field declaration with no initial value specified when running on Groovy 3.x.
+ - Will not flag a semicolon on a field declaration with no initial value specified when running on Groovy 4.x or earlier.
 
 
 ## UnnecessarySetter Rule

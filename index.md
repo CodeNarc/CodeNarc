@@ -69,7 +69,7 @@ to fit into your project. Build tool, framework support, and report generation a
                 <ul>
                      <li>groupId = org.codenarc</li>
                      <li>artifactId = CodeNarc</li>
-                     <li>version = 3.x.x for Groovy 3; 3.x.x-groovy-4.x for Groovy 4</li>
+                     <li>version = 3.x.x-groovy-4.x for Groovy 4; 4.x.x for Groovy 5</li>
                 </ul>
      </td>
      <td class="section">

@@ -45,7 +45,7 @@ current directory with reasonable defaults, as described below.
 
 Make sure that the following are included your CLASSPATH:
 
-  1. The Groovy-all jar, e.g. https://repo1.maven.org/maven2/org/codehaus/groovy/groovy-all/ (for Groovy 3.0.x).
+  1. The Groovy jar, e.g. https://repo1.maven.org/maven2/org/apache/groovy/groovy/ (for Groovy 4.x or later).
 
   2. The CodeNarc jar. Use a published [CodeNarc release](https://github.com/CodeNarc/CodeNarc/releases) or else build the jar from source (see below).
 
