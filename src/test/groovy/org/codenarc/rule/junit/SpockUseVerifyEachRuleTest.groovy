@@ -62,6 +62,95 @@ class SpockUseVerifyEachRuleTest extends AbstractRuleTestCase<SpockUseVerifyEach
         )
     }
 
+    @Test
+    void each_InThenAndExpect_TwoViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test each"() {
+                    given:
+                    def list = []
+
+                    expect:
+                    list.each { assert it.field == value }
+
+                    when:
+                    "nothing"
+
+                    then:
+                    list.each { assert it.field == value }
+                }
+            }
+        '''.stripIndent()
+        assertViolations(SOURCE,
+            [line: 8, source: 'list.each { assert it.field == value }', message: VIOLATION_MESSAGE_EACH],
+            [line: 14, source: 'list.each { assert it.field == value }', message: VIOLATION_MESSAGE_EACH],
+        )
+    }
+
+    @Test
+    void eachWithIndex_InThenAndExpect_TwoViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test eachWithIndex"() {
+                    given:
+                    def list = []
+                    def names = []
+
+                    expect:
+                    list.eachWithIndex { item, idx -> assert item.name == names[idx] }
+
+                    when:
+                    "nothing"
+
+                    then:
+                    list.eachWithIndex { item, idx -> assert item.name == names[idx] }
+                }
+            }
+        '''.stripIndent()
+        assertViolations(SOURCE,
+            [line: 9, source: 'list.eachWithIndex { item, idx -> assert item.name == names[idx] }', message: VIOLATION_MESSAGE_EACH_WITH_INDEX],
+            [line: 15, source: 'list.eachWithIndex { item, idx -> assert item.name == names[idx] }', message: VIOLATION_MESSAGE_EACH_WITH_INDEX],
+        )
+    }
+
+    @Test
+    void forEach_InThenAndExpect_TwoViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test forEach"() {
+                    given:
+                    def list = []
+
+                    expect:
+                    list.forEach { assert it.isValid() }
+
+                    when:
+                    "nothing"
+
+                    then:
+                    list.forEach { assert it.isValid() }
+                }
+            }
+        '''.stripIndent()
+        assertViolations(SOURCE,
+            [line: 8, source: 'list.forEach { assert it.isValid() }', message: VIOLATION_MESSAGE_FOR_EACH],
+            [line: 14, source: 'list.forEach { assert it.isValid() }', message: VIOLATION_MESSAGE_FOR_EACH],
+        )
+    }
+
+    @Test
+    void each_BooleanExpressionInExpectBlock_SingleViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test each with boolean"() {
+                    expect:
+                    list.each { it.name == 'foo' }
+                }
+            }
+        '''.stripIndent()
+        assertSingleViolation(SOURCE, 5, "list.each { it.name == 'foo' }", VIOLATION_MESSAGE_EACH)
+    }
+
     @Override
     protected SpockUseVerifyEachRule createRule() {
         new SpockUseVerifyEachRule()
