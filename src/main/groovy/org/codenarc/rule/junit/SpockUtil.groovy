@@ -56,15 +56,13 @@ class SpockUtil {
         ~/^equals(\p{Lu}.*)?/,
     ]
 
-    private static final List<String> RELATIONAL_OPERATORS = ['==', '!=', '<', '<=', '>', '>=', '===', '!==']
-
-    private static final List<String> LOGICAL_OPERATORS = ['&&', '||']
-
-    private static final List<String> REGEX_OPERATORS = ['==~']
-
-    private static final List<String> INSTANCEOF_OPERATORS = ['instanceof']
-
-    private static final List<String> MEMBERSHIP_OPERATORS = ['in']
+    private static final Set<String> BOOLEAN_OPERATORS = [
+        '==', '!=', '<', '<=', '>', '>=', '===', '!==',  // relational
+        '&&', '||',                                      // logical
+        '==~',                                           // regex
+        'instanceof',                                    // type check
+        'in',                                            // membership
+    ] as Set
 
     static boolean isSpockSpecification(ClassNode classNode, String specificationSuperclassNames, String specificationClassNames) {
         def superClassPattern = new WildcardPattern(specificationSuperclassNames)
@@ -78,12 +76,7 @@ class SpockUtil {
         }
         if (statement.expression instanceof BinaryExpression) {
             BinaryExpression binaryExpression = statement.expression as BinaryExpression
-            if (binaryExpression.operation.text in RELATIONAL_OPERATORS
-                || binaryExpression.operation.text in LOGICAL_OPERATORS
-                || binaryExpression.operation.text in REGEX_OPERATORS
-                || binaryExpression.operation.text in INSTANCEOF_OPERATORS
-                || binaryExpression.operation.text in MEMBERSHIP_OPERATORS
-            ) {
+            if (binaryExpression.operation.text in BOOLEAN_OPERATORS) {
                 return true
             }
         }

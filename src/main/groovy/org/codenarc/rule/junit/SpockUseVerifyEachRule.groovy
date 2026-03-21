@@ -18,8 +18,6 @@ package org.codenarc.rule.junit
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.stmt.AssertStatement
-import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
@@ -83,21 +81,25 @@ class SpockUseVerifyEachAstVisitor extends AbstractAstVisitor {
         }
         boolean inImplicitAssertBlock = SpockUtil.isImplicitAssertBlock(currentLabel)
 
-        if (inImplicitAssertBlock) {
-            if (methodName == 'every') {
-                addViolation(statement, "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics")
-                return
-            }
-            if (SpockUtil.closureContainsAssertions(closureArg, true)) {
-                addViolation(statement, "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics")
-            }
-        } else if (rule.checkAllBlocks) {
-            if (methodName != 'every' && SpockUtil.closureContainsAssertions(closureArg, false)) {
-                addViolation(statement, "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics")
-            }
+        boolean shouldReport = inImplicitAssertBlock
+            ? isImplicitAssertionOverIteration(methodName, closureArg)
+            : isExplicitAssertionOverIteration(methodName, closureArg)
+
+        if (shouldReport) {
+            addViolation(statement, "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics")
         }
     }
 
+
+    private static boolean isImplicitAssertionOverIteration(String methodName, ClosureExpression closureArg) {
+        methodName == 'every' || SpockUtil.closureContainsAssertions(closureArg, true)
+    }
+
+    private boolean isExplicitAssertionOverIteration(String methodName, ClosureExpression closureArg) {
+        rule.checkAllBlocks
+            && methodName != 'every'
+            && SpockUtil.closureContainsAssertions(closureArg, false)
+    }
 
     private void updateCurrentLabel(Statement statement) {
         List<String> labels = statement.statementLabels
