@@ -304,7 +304,8 @@ ruleset {
     SpaceBeforeOpeningBrace 
     SpaceInsideParentheses 
     SpockIgnoreRestUsed 
-    SpockMissingAssert 
+    SpockMissingAssert
+    SpockUseVerifyEach
     StatelessClass 
     StatelessSingleton 
     StaticCalendarField 
