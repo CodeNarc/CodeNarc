@@ -227,6 +227,67 @@ class SpockUseVerifyEachRuleTest extends AbstractRuleTestCase<SpockUseVerifyEach
     }
 
     @Test
+    void assignmentWithEvery_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test assignment with every"() {
+                    given:
+                    def allValid = list.every { it.field == value }
+
+                    expect:
+                    def result = list.every { it.field == value }
+
+                    when:
+                    "nothing"
+
+                    then:
+                    def check = list.every { it.field == value }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void conditionWithEvery_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test condition with every"() {
+                    expect:
+                    if (list.every { it.field == value }) {
+                        assert something
+                    }
+
+                    when:
+                    "nothing"
+
+                    then:
+                    if (list.every { it.field == value }) {
+                        assert something
+                    }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void assignmentWithEach_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test assignment with each"() {
+                    given:
+                    def result = list.each { assert it.field == value }
+
+                    expect:
+                    def x = list.each { assert it.field == value }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void every_InFilterBlock_NoViolation() {
         final SOURCE = '''
             class MySpec extends spock.lang.Specification {
