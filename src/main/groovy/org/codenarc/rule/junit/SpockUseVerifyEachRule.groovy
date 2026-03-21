@@ -79,7 +79,7 @@ class SpockUseVerifyEachAstVisitor extends AbstractAstVisitor {
         if (closureArg == null) {
             return
         }
-        boolean inImplicitAssertBlock = SpockUtil.isImplicitAssertBlock(currentLabel)
+        boolean inImplicitAssertBlock = SpockUtil.isImplicitAssertBlock(currentLabel) && currentLabel != 'filter'
 
         boolean shouldReport = inImplicitAssertBlock
             ? isImplicitAssertionOverIteration(methodName, closureArg)

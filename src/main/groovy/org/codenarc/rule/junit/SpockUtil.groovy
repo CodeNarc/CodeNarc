@@ -38,9 +38,9 @@ import java.util.regex.Pattern
 class SpockUtil {
 
     // Intentionally omitting 'and', as it doesn't have any semantic impact
-    static final List<String> SPOCK_LABELS = ['given', 'when', 'then', 'expect', 'where', 'cleanup', 'setup']
+    static final List<String> SPOCK_LABELS = ['given', 'when', 'then', 'expect', 'where', 'cleanup', 'setup', 'combined', 'filter']
 
-    static final List<String> LABELS_WITH_IMPLICIT_ASSERTIONS = ['then', 'expect']
+    static final List<String> LABELS_WITH_IMPLICIT_ASSERTIONS = ['then', 'expect', 'filter']
 
     static final List<String> METHODS_WITH_IMPLICIT_ASSERTIONS = ['with', 'verifyAll']
 

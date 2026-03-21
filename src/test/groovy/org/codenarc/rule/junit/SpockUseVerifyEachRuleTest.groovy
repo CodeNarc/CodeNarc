@@ -319,6 +319,31 @@ class SpockUseVerifyEachRuleTest extends AbstractRuleTestCase<SpockUseVerifyEach
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void every_InFilterBlock_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "filter block"() {
+                    expect:
+                    i == 1
+                    c == 2
+
+                    where:
+                    i << (1..6)
+
+                    combined:
+                    c << (1..3)
+
+                    list = [i, c]
+
+                    filter:
+                    list.every { it > 0 }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected SpockUseVerifyEachRule createRule() {
         new SpockUseVerifyEachRule()
