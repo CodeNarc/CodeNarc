@@ -48,6 +48,11 @@ class SpockUseVerifyEachAstVisitor extends AbstractAstVisitor {
     private String currentLabel = null
 
     @Override
+    SpockUseVerifyEachRule getRule() {
+        super.rule as SpockUseVerifyEachRule
+    }
+
+    @Override
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         visitIfInSpockClass {
             currentLabel = null
@@ -72,7 +77,7 @@ class SpockUseVerifyEachAstVisitor extends AbstractAstVisitor {
         if (!(methodName in TARGET_METHODS)) {
             return
         }
-        def closureArg = getClosureArgument(methodCall)
+        def closureArg = SpockUtil.getClosureArgument(methodCall)
         if (closureArg == null) {
             return
         }
@@ -83,42 +88,16 @@ class SpockUseVerifyEachAstVisitor extends AbstractAstVisitor {
                 addViolation(statement, "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics")
                 return
             }
-            if (closureContainsAssertions(closureArg, true)) {
+            if (SpockUtil.closureContainsAssertions(closureArg, true)) {
                 addViolation(statement, "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics")
             }
         } else if (rule.checkAllBlocks) {
-            if (methodName != 'every' && closureContainsAssertions(closureArg, false)) {
+            if (methodName != 'every' && SpockUtil.closureContainsAssertions(closureArg, false)) {
                 addViolation(statement, "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics")
             }
         }
     }
 
-    private static ClosureExpression getClosureArgument(MethodCallExpression methodCall) {
-        def args = methodCall.arguments
-        if (args.expressions) {
-            def lastArg = args.expressions.last()
-            if (lastArg instanceof ClosureExpression) {
-                return lastArg as ClosureExpression
-            }
-        }
-        return null
-    }
-
-    private static boolean closureContainsAssertions(ClosureExpression closure, boolean checkBooleanExpressions) {
-        if (!(closure.code instanceof BlockStatement)) {
-            return false
-        }
-        BlockStatement block = closure.code as BlockStatement
-        return block.statements.any { Statement stmt ->
-            if (stmt instanceof AssertStatement) {
-                return true
-            }
-            if (checkBooleanExpressions && stmt instanceof ExpressionStatement) {
-                return SpockUtil.isBooleanExpression(stmt as ExpressionStatement)
-            }
-            return false
-        }
-    }
 
     private void updateCurrentLabel(Statement statement) {
         List<String> labels = statement.statementLabels

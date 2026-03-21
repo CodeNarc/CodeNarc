@@ -18,11 +18,14 @@ package org.codenarc.rule.junit
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.stmt.AssertStatement
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.util.WildcardPattern
 
 import java.util.regex.Pattern
@@ -121,6 +124,33 @@ class SpockUtil {
             return (methodCall.method as ConstantExpression).value?.toString()
         }
         return null
+    }
+
+    static ClosureExpression getClosureArgument(MethodCallExpression methodCall) {
+        def args = methodCall.arguments
+        if (args.expressions) {
+            def lastArg = args.expressions.last()
+            if (lastArg instanceof ClosureExpression) {
+                return lastArg as ClosureExpression
+            }
+        }
+        return null
+    }
+
+    static boolean closureContainsAssertions(ClosureExpression closure, boolean checkBooleanExpressions) {
+        if (!(closure.code instanceof BlockStatement)) {
+            return false
+        }
+        BlockStatement block = closure.code as BlockStatement
+        return block.statements.any { Statement stmt ->
+            if (stmt instanceof AssertStatement) {
+                return true
+            }
+            if (checkBooleanExpressions && stmt instanceof ExpressionStatement) {
+                return isBooleanExpression(stmt as ExpressionStatement)
+            }
+            return false
+        }
     }
 
     private SpockUtil() { }

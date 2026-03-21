@@ -34,7 +34,7 @@ class SpockUseVerifyEachRuleTest extends AbstractRuleTestCase<SpockUseVerifyEach
     void ruleProperties_AreValid() {
         assert rule.priority == 2
         assert rule.name == 'SpockUseVerifyEach'
-        assert rule.checkAllBlocks == true
+        assert rule.checkAllBlocks
     }
 
     @Test
