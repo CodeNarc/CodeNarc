@@ -151,6 +151,72 @@ class SpockUseVerifyEachRuleTest extends AbstractRuleTestCase<SpockUseVerifyEach
         assertSingleViolation(SOURCE, 5, "list.each { it.name == 'foo' }", VIOLATION_MESSAGE_EACH)
     }
 
+    @Test
+    void allBlocks_GivenBlock_ThreeViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test all blocks given"() {
+                    given:
+                    list.each { assert it.field == value }
+                    list.eachWithIndex { item, idx -> assert item.name == names[idx] }
+                    list.forEach { assert it.isValid() }
+                    list.every { it.field == value }
+
+                    expect:
+                    true
+                }
+            }
+        '''.stripIndent()
+        rule.checkAllBlocks = true
+        assertViolations(SOURCE,
+            [line: 5, source: 'list.each { assert it.field == value }', message: VIOLATION_MESSAGE_EACH],
+            [line: 6, source: 'list.eachWithIndex { item, idx -> assert item.name == names[idx] }', message: VIOLATION_MESSAGE_EACH_WITH_INDEX],
+            [line: 7, source: 'list.forEach { assert it.isValid() }', message: VIOLATION_MESSAGE_FOR_EACH],
+        )
+    }
+
+    @Test
+    void allBlocks_WhenBlock_ThreeViolations() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test all blocks when"() {
+                    when:
+                    list.each { assert it.field == value }
+                    list.eachWithIndex { item, idx -> assert item.name == names[idx] }
+                    list.forEach { assert it.isValid() }
+                    list.every { it.field == value }
+
+                    then:
+                    true
+                }
+            }
+        '''.stripIndent()
+        rule.checkAllBlocks = true
+        assertViolations(SOURCE,
+            [line: 5, source: 'list.each { assert it.field == value }', message: VIOLATION_MESSAGE_EACH],
+            [line: 6, source: 'list.eachWithIndex { item, idx -> assert item.name == names[idx] }', message: VIOLATION_MESSAGE_EACH_WITH_INDEX],
+            [line: 7, source: 'list.forEach { assert it.isValid() }', message: VIOLATION_MESSAGE_FOR_EACH],
+        )
+    }
+
+    @Test
+    void helperMethod_SingleViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test"() {
+                    expect:
+                    true
+                }
+
+                void assertItems(list) {
+                    list.each { assert it.field == value }
+                }
+            }
+        '''.stripIndent()
+        rule.checkAllBlocks = true
+        assertSingleViolation(SOURCE, 9, 'list.each { assert it.field == value }', VIOLATION_MESSAGE_EACH)
+    }
+
     @Override
     protected SpockUseVerifyEachRule createRule() {
         new SpockUseVerifyEachRule()
