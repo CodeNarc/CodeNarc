@@ -42,7 +42,7 @@ class SpockUtil {
 
     static final List<String> LABELS_WITH_IMPLICIT_ASSERTIONS = ['then', 'expect', 'filter']
 
-    static final List<String> METHODS_WITH_IMPLICIT_ASSERTIONS = ['with', 'verifyAll']
+    static final List<String> METHODS_WITH_IMPLICIT_ASSERTIONS = ['with', 'verifyAll', 'verifyEach']
 
     static final List<String> METHODS_FOR_COLLECTION_ITERATION = ['each', 'eachWithIndex', 'times']
 

@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Violation
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 import java.util.stream.Stream
@@ -126,14 +127,14 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
     }
 
     @ParameterizedTest
-    @MethodSource('statementsToTest')
-    void statementInWith_NoViolation(Closure<GString> statement) {
+    @MethodSource('statementAndMethodsToTest')
+    void statementInMethodWithImplicitAssert_NoViolation(Closure<GString> statement, String methodWithImplicitAssert) {
         final SOURCES = labelsToTest.collect { label ->
             """
             public class MySpec extends spock.lang.Specification {
                 def "statementInWith_NoViolation"() {
                     ${label}:
-                    with(new Object()) {
+                    ${methodWithImplicitAssert}(new Object()) {
                         ${statement("""
                             "123"
                             123
@@ -725,6 +726,13 @@ class SpockMissingAssertRuleTest extends AbstractRuleTestCase<SpockMissingAssert
             }
             """,
         )
+    }
+
+    @SuppressWarnings('UnusedPrivateMethod')
+    private static Stream<Arguments> statementAndMethodsToTest() {
+        def statements = statementsToTest().toList()
+        def combinations = [statements, SpockUtil.METHODS_WITH_IMPLICIT_ASSERTIONS].combinations()
+        return combinations.stream().map { Arguments.of(it[0], it[1]) }
     }
 
     private static String violationMessage(String label) {
