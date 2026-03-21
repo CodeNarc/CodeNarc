@@ -217,6 +217,108 @@ class SpockUseVerifyEachRuleTest extends AbstractRuleTestCase<SpockUseVerifyEach
         assertSingleViolation(SOURCE, 9, 'list.each { assert it.field == value }', VIOLATION_MESSAGE_EACH)
     }
 
+    @Test
+    void verifyEach_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test verifyEach"() {
+                    expect:
+                    verifyEach(list) { it.field == value }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void assignment_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test assignment"() {
+                    given:
+                    list.each { it.field = 'setup' }
+
+                    expect:
+                    true
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void every_InGivenBlock_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test every in given"() {
+                    given:
+                    list.every { it.field == value }
+
+                    expect:
+                    true
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void nonTargetMethod_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test non-target methods"() {
+                    expect:
+                    list.collect { it.name }
+                    list.findAll { it.isValid() }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void nonSpockClass_NoViolation() {
+        final SOURCE = '''
+            class MyTest extends Foo {
+                def "test"() {
+                    expect:
+                    list.each { assert it.field == value }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void checkAllBlocksFalse_GivenBlock_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test checkAllBlocks false"() {
+                    given:
+                    list.each { assert it.field == value }
+
+                    expect:
+                    true
+                }
+            }
+        '''.stripIndent()
+        rule.checkAllBlocks = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void noAssertionInClosure_NoViolation() {
+        final SOURCE = '''
+            class MySpec extends spock.lang.Specification {
+                def "test no assertion"() {
+                    expect:
+                    list.each { println it }
+                }
+            }
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected SpockUseVerifyEachRule createRule() {
         new SpockUseVerifyEachRule()
