@@ -2,7 +2,7 @@
 [![CodeNarc Logo](https://codenarc.github.io/CodeNarc/images/codenarc-logo.png)](https://codenarc.org/)
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.codenarc/CodeNarc.svg)](https://mvnrepository.com/artifact/org.codenarc/CodeNarc)
-[![Build Status](https://travis-ci.org/CodeNarc/CodeNarc.svg?branch=master)](https://travis-ci.org/CodeNarc/CodeNarc)
+[![CI](https://github.com/CodeNarc/CodeNarc/actions/workflows/gradle.yml/badge.svg?event=push)](https://github.com/CodeNarc/CodeNarc/actions/workflows/gradle.yml)
 [![GitHub contributors](https://img.shields.io/github/contributors/CodeNarc/CodeNarc.svg)](https://gitHub.com/CodeNarc/CodeNarc/graphs/contributors/)
 [![GitHub stars](https://img.shields.io/github/stars/CodeNarc/CodeNarc?label=Star&maxAge=2592000)](https://GitHub.com/CodeNarc/CodeNarc/stargazers/)
 [![License](https://img.shields.io/github/license/CodeNarc/CodeNarc.svg)](https://github.com/CodeNarc/CodeNarc/blob/master/LICENSE.txt)
