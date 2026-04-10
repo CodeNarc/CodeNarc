@@ -38,7 +38,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * This rule finds such expressions, where an explicit call to assert would be required. Please note that the rule might
  * produce false positives, as it relies on method names to determine whether an expression has a boolean type or not.
  *
- * @author Jean Andre Gauthier
+ * @author Jean André Gauthier
  * @author Daniel Clausen
   */
 class SpockMissingAssertRule extends AbstractAstVisitorRule {

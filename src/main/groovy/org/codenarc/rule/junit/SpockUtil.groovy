@@ -71,9 +71,11 @@ class SpockUtil {
     }
 
     static boolean isBooleanExpression(ExpressionStatement statement) {
+        // Handles literals & casts / coercion operators
         if (statement.expression.type.name == 'boolean' || statement.expression.type.name == 'Boolean') {
             return true
         }
+        // Handles binary expressions
         if (statement.expression instanceof BinaryExpression) {
             BinaryExpression binaryExpression = statement.expression as BinaryExpression
             if (binaryExpression.operation.text in BOOLEAN_OPERATORS) {
@@ -82,6 +84,7 @@ class SpockUtil {
         }
         var variableAndMethod = getVariableAndMethod(statement)
         var method = variableAndMethod.v2
+        // Heuristic: assume that methods whose name matches BOOLEAN_METHOD_PATTERNS return a boolean
         return method != null && BOOLEAN_METHOD_PATTERNS.any { it -> method.value.toString().matches(it) }
     }
 
@@ -92,6 +95,9 @@ class SpockUtil {
     static boolean isSpockFeatureMethod(MethodNode node) {
         if (node.code instanceof BlockStatement) {
             BlockStatement block = (BlockStatement) node.code
+            // To be considered as a feature method by Spock, the method must have at least one statement label.
+            // More details can be found in org.spockframework.compiler.SpecParser.isFeatureMethod() at
+            // https://github.com/spockframework/spock/blob/52e7688b3f89533857006539e5905c9b4121f32b/spock-core/src/main/java/org/spockframework/compiler/SpecParser.java#LL153C5-L153C5
             return block.statements.any(s -> s.statementLabels != null && !s.statementLabels.intersect(SPOCK_LABELS).isEmpty())
         }
         return false

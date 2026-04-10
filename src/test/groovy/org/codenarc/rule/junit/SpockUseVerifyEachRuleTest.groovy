@@ -30,13 +30,9 @@ import java.util.stream.Stream
  */
 class SpockUseVerifyEachRuleTest extends AbstractRuleTestCase<SpockUseVerifyEachRule> {
 
-    private static String violationMessage(String methodName) {
-        "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics"
-    }
-
     @Test
     void ruleProperties_AreValid() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == 'SpockUseVerifyEach'
         assert rule.checkAllBlocks
     }
@@ -330,5 +326,9 @@ class SpockUseVerifyEachRuleTest extends AbstractRuleTestCase<SpockUseVerifyEach
     @SuppressWarnings('UnusedPrivateMethod')
     private static Stream<String> nonImplicitAssertBlocks() {
         Stream.of('given', 'when')
+    }
+
+    private static String violationMessage(String methodName) {
+        "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics"
     }
 }

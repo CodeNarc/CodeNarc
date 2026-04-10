@@ -32,7 +32,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 class SpockUseVerifyEachRule extends AbstractAstVisitorRule {
 
     String name = 'SpockUseVerifyEach'
-    int priority = 2
+    int priority = 3
     String specificationSuperclassNames = '*Specification'
     String specificationClassNames = null
     boolean checkAllBlocks = true
@@ -89,7 +89,6 @@ class SpockUseVerifyEachAstVisitor extends AbstractAstVisitor {
             addViolation(statement, "Replace '${methodName}' with Spock's 'verifyEach' for better per-item failure diagnostics")
         }
     }
-
 
     private static boolean isImplicitAssertionOverIteration(String methodName, ClosureExpression closureArg) {
         methodName == 'every' || SpockUtil.closureContainsAssertions(closureArg, true)
