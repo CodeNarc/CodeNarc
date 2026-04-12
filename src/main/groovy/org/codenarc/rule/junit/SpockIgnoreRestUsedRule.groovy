@@ -19,7 +19,6 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
-import org.codenarc.util.WildcardPattern
 
 /**
  * If Spock's @IgnoreRest on any method, all non-annotated test methods are not executed. This behaviour is almost always
@@ -42,9 +41,7 @@ class SpockIgnoreRestUsedAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitClass(ClassNode node) {
-        def superClassPattern = new WildcardPattern(rule.specificationSuperclassNames)
-        def classNamePattern = new WildcardPattern(rule.specificationClassNames, false)
-        if (superClassPattern.matches(node.superClass.name) || classNamePattern.matches(node.name)) {
+        if (SpockUtil.isSpockSpecification(node, rule.specificationSuperclassNames, rule.specificationClassNames)) {
             super.visitClass(node)
         }
     }
