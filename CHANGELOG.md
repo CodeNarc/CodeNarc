@@ -3,6 +3,12 @@
 
 TODO Version 4.0.x  (??? 2026)
 --------------------------------------
+Breaking Changes
+ - The default (Groovy 5-compatible) CodeNarc artifact requires Java 17. The Groovy 4 version of CodeNarc is available for use with Java 8+ and Groovy 4.
+
+New / Updated Rules
+ - #820: Add **SpockUseVerifyEach** rule, [Leonard Brünings](https://github.com/leonard84)) 
+
 Reports
  - #807: `SarifReportWriter`: New report writer for SARIF. ([Alexandre Garnier](https://github.com/zigarn))
  - #808: `CodeNarc_AntBuilderTest`: Consolidate sample report generation. Add report sample for Gitlab Code Quality. ([Alexandre Garnier](https://github.com/zigarn))
@@ -20,6 +26,7 @@ Build, Infrastructure and Tests
  - #809: Fix broken links in CodeNarc documentation. 
  - #814: Add GitHub Action to check for broken links in the documentation.
  - #815: Delete integration-test folder and its tests.
+ - #822: Fix build status badge from Travis to GitHub. [Thomas Rasmussen](https://github.com/dauer)
 
 
 Version 3.7.0  (Nov 2025)
