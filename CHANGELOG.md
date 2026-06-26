@@ -27,6 +27,7 @@ Build, Infrastructure and Tests
  - #814: Add GitHub Action to check for broken links in the documentation.
  - #815: Delete integration-test folder and its tests.
  - #822: Fix build status badge from Travis to GitHub. [Thomas Rasmussen](https://github.com/dauer)
+ - #826: Add comment to top of each rule index file indicating it is generated and should not be edited.
 
 
 Version 3.7.0  (Nov 2025)
