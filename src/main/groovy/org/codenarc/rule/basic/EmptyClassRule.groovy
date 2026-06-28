@@ -36,7 +36,7 @@ class EmptyClassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyClassAstVisitor
 }
 
-class EmptyClassAstVisitor extends AbstractAstVisitor  {
+class EmptyClassAstVisitor extends AbstractAstVisitor<EmptyClassRule> {
     @Override
     protected void visitClassEx(ClassNode classNode) {
         if (
