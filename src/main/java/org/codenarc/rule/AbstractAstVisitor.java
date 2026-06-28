@@ -31,10 +31,10 @@ import java.util.Set;
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
+public class AbstractAstVisitor<R extends Rule> extends ClassCodeVisitorSupport implements AstVisitor {
 
     private final List<Violation> violations = new ArrayList<Violation>();
-    private Rule rule;
+    private R rule;
     private SourceCode sourceCode;
     private Set<Object> visited = new HashSet<Object>();
     private ClassNode currentClassNode = null;
@@ -170,7 +170,7 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
     }
 
     public void setRule(Rule rule) {
-        this.rule = rule;
+        this.rule = (R) rule;
     }
 
     public void setSourceCode(SourceCode sourceCode) {
@@ -185,7 +185,7 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
         return visited;
     }
 
-    public Rule getRule() {
+    public R getRule() {
         return rule;
     }
 
