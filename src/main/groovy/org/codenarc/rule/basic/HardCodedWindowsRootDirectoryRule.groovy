@@ -31,7 +31,7 @@ class HardCodedWindowsRootDirectoryRule extends AbstractAstVisitorRule {
     Class astVisitorClass = HardcodedWindowsRootDirectoryAstVisitor
 }
 
-class HardcodedWindowsRootDirectoryAstVisitor extends AbstractAstVisitor {
+class HardcodedWindowsRootDirectoryAstVisitor extends AbstractAstVisitor<HardCodedWindowsRootDirectoryRule> {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (isFirstVisit(call)) {

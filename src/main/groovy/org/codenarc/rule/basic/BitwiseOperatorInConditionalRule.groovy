@@ -36,7 +36,7 @@ class BitwiseOperatorInConditionalRule extends AbstractAstVisitorRule {
     Class astVisitorClass = BitwiseOperatorInConditionalAstVisitor
 }
 
-class BitwiseOperatorInConditionalAstVisitor extends AbstractAstVisitor {
+class BitwiseOperatorInConditionalAstVisitor extends AbstractAstVisitor<BitwiseOperatorInConditionalRule> {
 
     private void addViolationBitwiseConditional(Expression expression) {
         if (!isFirstVisit(expression)) {

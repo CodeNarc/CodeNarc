@@ -35,7 +35,7 @@ class ForLoopShouldBeWhileLoopRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ForLoopShouldBeWhileLoopAstVisitor
 }
 
-class ForLoopShouldBeWhileLoopAstVisitor extends AbstractAstVisitor {
+class ForLoopShouldBeWhileLoopAstVisitor extends AbstractAstVisitor<ForLoopShouldBeWhileLoopRule> {
 
     @Override
     void visitForLoop(ForStatement node) {

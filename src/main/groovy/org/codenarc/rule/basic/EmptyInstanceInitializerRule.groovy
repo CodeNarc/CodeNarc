@@ -31,7 +31,7 @@ class EmptyInstanceInitializerRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyInstanceInitializerAstVisitor
 }
 
-class EmptyInstanceInitializerAstVisitor extends AbstractAstVisitor {
+class EmptyInstanceInitializerAstVisitor extends AbstractAstVisitor<EmptyInstanceInitializerRule> {
     @Override
     protected void visitObjectInitializerStatements(ClassNode node) {
         if (node.objectInitializerStatements.size() == 1 && AstUtil.isEmptyBlock(node.objectInitializerStatements[0])) {

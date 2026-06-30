@@ -31,7 +31,7 @@ class DeadCodeRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DeadCodeAstVisitor
 }
 
-class DeadCodeAstVisitor extends AbstractAstVisitor {
+class DeadCodeAstVisitor extends AbstractAstVisitor<DeadCodeRule> {
 
     @Override
     void visitBlockStatement(BlockStatement block) {

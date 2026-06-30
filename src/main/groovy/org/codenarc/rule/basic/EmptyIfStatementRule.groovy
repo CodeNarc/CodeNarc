@@ -31,7 +31,7 @@ class EmptyIfStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyIfStatementAstVisitor
 }
 
-class EmptyIfStatementAstVisitor extends AbstractAstVisitor  {
+class EmptyIfStatementAstVisitor extends AbstractAstVisitor<EmptyIfStatementRule> {
     @Override
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && AstUtil.isEmptyBlock(ifStatement.ifBlock)) {

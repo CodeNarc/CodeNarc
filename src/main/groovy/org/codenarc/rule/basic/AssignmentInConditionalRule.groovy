@@ -36,7 +36,7 @@ class AssignmentInConditionalRule extends AbstractAstVisitorRule {
     Class astVisitorClass = AssignmentInConditionalAstVisitor
 }
 
-class AssignmentInConditionalAstVisitor extends AbstractAstVisitor {
+class AssignmentInConditionalAstVisitor extends AbstractAstVisitor<AssignmentInConditionalRule> {
     @Override
     void visitIfElse(IfStatement node) {
         addViolationIfAssignment(node.booleanExpression.expression)

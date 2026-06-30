@@ -32,7 +32,7 @@ class DoubleNegativeRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DoubleNegativeAstVisitor
 }
 
-class DoubleNegativeAstVisitor extends AbstractAstVisitor {
+class DoubleNegativeAstVisitor extends AbstractAstVisitor<DoubleNegativeRule> {
 
     @Override
     void visitNotExpression(NotExpression expression) {

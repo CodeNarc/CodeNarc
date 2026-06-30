@@ -31,7 +31,7 @@ class EmptySynchronizedStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptySynchronizedStatementAstVisitor
 }
 
-class EmptySynchronizedStatementAstVisitor extends AbstractAstVisitor  {
+class EmptySynchronizedStatementAstVisitor extends AbstractAstVisitor<EmptySynchronizedStatementRule> {
     @Override
     void visitSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
         if (isFirstVisit(synchronizedStatement) && AstUtil.isEmptyBlock(synchronizedStatement.code)) {

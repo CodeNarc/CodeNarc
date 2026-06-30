@@ -29,7 +29,7 @@ class ReturnFromFinallyBlockRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ReturnFromFinallyBlockAstVisitor
 }
 
-class ReturnFromFinallyBlockAstVisitor extends AbstractFinallyAstVisitor  {
+class ReturnFromFinallyBlockAstVisitor extends AbstractFinallyAstVisitor<ReturnFromFinallyBlockRule> {
     @Override
     void visitReturnStatement(ReturnStatement returnStatement) {
         if (isFirstVisit(returnStatement) && isStatementWithinFinally(returnStatement)) {

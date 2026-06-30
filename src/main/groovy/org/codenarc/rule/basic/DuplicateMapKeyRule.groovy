@@ -31,7 +31,7 @@ class DuplicateMapKeyRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DuplicateMapKeyAstVisitor
 }
 
-class DuplicateMapKeyAstVisitor extends AbstractAstVisitor {
+class DuplicateMapKeyAstVisitor extends AbstractAstVisitor<DuplicateMapKeyRule> {
     @Override
     void visitMapExpression(MapExpression expression) {
         if(isFirstVisit(expression)) {

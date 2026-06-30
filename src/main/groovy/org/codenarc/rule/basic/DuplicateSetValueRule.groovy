@@ -33,7 +33,7 @@ class DuplicateSetValueRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DuplicateSetValueAstVisitor
 }
 
-class DuplicateSetValueAstVisitor extends AbstractAstVisitor {
+class DuplicateSetValueAstVisitor extends AbstractAstVisitor<DuplicateSetValueRule> {
     @Override
     void visitCastExpression(CastExpression expression) {
         if (isSetLiteral(expression)) {

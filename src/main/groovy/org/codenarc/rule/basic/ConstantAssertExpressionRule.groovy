@@ -46,7 +46,7 @@ class ConstantAssertExpressionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConstantAssertExpressionAstVisitor
 }
 
-class ConstantAssertExpressionAstVisitor extends AbstractAstVisitor  {
+class ConstantAssertExpressionAstVisitor extends AbstractAstVisitor<ConstantAssertExpressionRule> {
 
     @Override
     void visitAssertStatement(AssertStatement statement) {

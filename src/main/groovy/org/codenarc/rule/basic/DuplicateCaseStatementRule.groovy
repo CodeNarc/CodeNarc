@@ -33,7 +33,7 @@ class DuplicateCaseStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DuplicateCaseStatementAstVisitor
 }
 
-class DuplicateCaseStatementAstVisitor extends AbstractAstVisitor {
+class DuplicateCaseStatementAstVisitor extends AbstractAstVisitor<DuplicateCaseStatementRule> {
 
     @Override
     void visitSwitch(SwitchStatement statement) {

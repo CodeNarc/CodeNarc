@@ -40,7 +40,7 @@ class ComparisonWithSelfRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ComparisonWithSelfAstVisitor
 }
 
-class ComparisonWithSelfAstVisitor extends AbstractAstVisitor {
+class ComparisonWithSelfAstVisitor extends AbstractAstVisitor<ComparisonWithSelfRule> {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {

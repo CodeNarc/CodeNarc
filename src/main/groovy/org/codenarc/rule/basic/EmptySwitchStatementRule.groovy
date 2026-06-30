@@ -30,7 +30,7 @@ class EmptySwitchStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptySwitchStatementAstVisitor
 }
 
-class EmptySwitchStatementAstVisitor extends AbstractAstVisitor  {
+class EmptySwitchStatementAstVisitor extends AbstractAstVisitor<EmptySwitchStatementRule> {
     @Override
     void visitSwitch(SwitchStatement switchStatement) {
         if (isFirstVisit(switchStatement) && switchStatement.caseStatements.empty) {

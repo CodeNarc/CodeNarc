@@ -31,7 +31,7 @@ class HardCodedWindowsFileSeparatorRule extends AbstractAstVisitorRule {
     Class astVisitorClass = HardCodedWindowsFileSeparatorAstVisitor
 }
 
-class HardCodedWindowsFileSeparatorAstVisitor extends AbstractAstVisitor {
+class HardCodedWindowsFileSeparatorAstVisitor extends AbstractAstVisitor<HardCodedWindowsFileSeparatorRule> {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {

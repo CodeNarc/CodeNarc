@@ -44,7 +44,7 @@ class ConstantIfExpressionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConstantIfExpressionAstVisitor
 }
 
-class ConstantIfExpressionAstVisitor extends AbstractAstVisitor  {
+class ConstantIfExpressionAstVisitor extends AbstractAstVisitor<ConstantIfExpressionRule> {
 
     @Override
     void visitIfElse(IfStatement ifStatement) {

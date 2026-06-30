@@ -32,7 +32,7 @@ class EmptyTryBlockRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyTryBlockAstVisitor
 }
 
-class EmptyTryBlockAstVisitor extends AbstractAstVisitor  {
+class EmptyTryBlockAstVisitor extends AbstractAstVisitor<EmptyTryBlockRule> {
     @Override
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
         if (isFirstVisit(tryCatchStatement) && (AstUtil.isEmptyBlock(tryCatchStatement.tryStatement) && !tryCatchStatement.resourceStatements)) {

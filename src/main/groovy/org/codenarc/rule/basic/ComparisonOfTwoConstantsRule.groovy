@@ -41,7 +41,7 @@ class ComparisonOfTwoConstantsRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ComparisonOfTwoConstantsAstVisitor
 }
 
-class ComparisonOfTwoConstantsAstVisitor extends AbstractAstVisitor {
+class ComparisonOfTwoConstantsAstVisitor extends AbstractAstVisitor<ComparisonOfTwoConstantsRule> {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {

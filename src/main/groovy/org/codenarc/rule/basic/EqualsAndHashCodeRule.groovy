@@ -32,7 +32,7 @@ class EqualsAndHashCodeRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EqualsAndHashCodeAstVisitor
 }
 
-class EqualsAndHashCodeAstVisitor extends AbstractAstVisitor {
+class EqualsAndHashCodeAstVisitor extends AbstractAstVisitor<EqualsAndHashCodeRule> {
 
     @Override
     void visitClassEx(ClassNode classNode) {

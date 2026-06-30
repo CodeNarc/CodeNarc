@@ -30,7 +30,7 @@ class AssertWithinFinallyBlockRule extends AbstractAstVisitorRule {
     Class astVisitorClass = AssertWithinFinallyBlockAstVisitor
 }
 
-class AssertWithinFinallyBlockAstVisitor extends AbstractFinallyAstVisitor  {
+class AssertWithinFinallyBlockAstVisitor extends AbstractFinallyAstVisitor<AssertWithinFinallyBlockRule> {
 
     @Override
     void visitAssertStatement(AssertStatement statement) {

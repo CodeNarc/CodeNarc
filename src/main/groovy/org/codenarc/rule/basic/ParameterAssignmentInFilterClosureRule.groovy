@@ -37,7 +37,7 @@ class ParameterAssignmentInFilterClosureRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ParameterAssignmentInFilterClosureAstVisitor
 }
 
-class ParameterAssignmentInFilterClosureAstVisitor extends AbstractAstVisitor {
+class ParameterAssignmentInFilterClosureAstVisitor extends AbstractAstVisitor<ParameterAssignmentInFilterClosureRule> {
 
     private static final String FILTER_METHOD_NAMES_MATCHER = [
             'find', 'findAll', 'findIndexOf', 'every', 'any', 'filter', 'grep', 'dropWhile', 'takeWhile'

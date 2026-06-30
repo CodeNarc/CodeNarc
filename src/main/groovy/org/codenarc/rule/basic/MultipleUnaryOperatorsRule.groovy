@@ -36,7 +36,7 @@ class MultipleUnaryOperatorsRule extends AbstractAstVisitorRule {
     Class astVisitorClass = MultipleUnaryOperatorsAstVisitor
 }
 
-class MultipleUnaryOperatorsAstVisitor extends AbstractAstVisitor {
+class MultipleUnaryOperatorsAstVisitor extends AbstractAstVisitor<MultipleUnaryOperatorsRule> {
 
     private static final Map UNARY_OPERATORS = [
         (BitwiseNegationExpression):'~',

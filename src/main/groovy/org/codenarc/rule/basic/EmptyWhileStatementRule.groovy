@@ -31,7 +31,7 @@ class EmptyWhileStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyWhileStatementAstVisitor
 }
 
-class EmptyWhileStatementAstVisitor extends AbstractAstVisitor  {
+class EmptyWhileStatementAstVisitor extends AbstractAstVisitor<EmptyWhileStatementRule> {
     @Override
     void visitWhileLoop(WhileStatement whileStatement) {
         if (isFirstVisit(whileStatement) && AstUtil.isEmptyBlock(whileStatement.loopBlock)) {

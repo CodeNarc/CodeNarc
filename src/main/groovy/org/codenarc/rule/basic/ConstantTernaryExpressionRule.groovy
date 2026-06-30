@@ -55,7 +55,7 @@ class ConstantTernaryExpressionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConstantTernaryExpressionAstVisitor
 }
 
-class ConstantTernaryExpressionAstVisitor extends AbstractAstVisitor  {
+class ConstantTernaryExpressionAstVisitor extends AbstractAstVisitor<ConstantTernaryExpressionRule> {
 
     @Override
     void visitTernaryExpression(TernaryExpression ternaryExpression) {

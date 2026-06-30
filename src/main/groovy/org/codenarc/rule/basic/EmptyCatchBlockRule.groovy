@@ -32,7 +32,7 @@ class EmptyCatchBlockRule extends AbstractAstVisitorRule {
     String ignoreRegex = 'ignore|ignored'
 }
 
-class EmptyCatchBlockAstVisitor extends AbstractAstVisitor {
+class EmptyCatchBlockAstVisitor extends AbstractAstVisitor<EmptyCatchBlockRule> {
     @Override
     void visitCatchStatement(CatchStatement catchStatement) {
         if (isFirstVisit(catchStatement) && isExceptionIgnored(catchStatement)) {

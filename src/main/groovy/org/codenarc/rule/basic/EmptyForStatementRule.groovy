@@ -31,7 +31,7 @@ class EmptyForStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyForStatementAstVisitor
 }
 
-class EmptyForStatementAstVisitor extends AbstractAstVisitor  {
+class EmptyForStatementAstVisitor extends AbstractAstVisitor<EmptyForStatementRule> {
     @Override
     void visitForLoop(ForStatement forStatement) {
         if (isFirstVisit(forStatement) && AstUtil.isEmptyBlock(forStatement.loopBlock)) {

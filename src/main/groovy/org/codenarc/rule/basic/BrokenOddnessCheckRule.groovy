@@ -32,7 +32,7 @@ class BrokenOddnessCheckRule extends AbstractAstVisitorRule {
     Class astVisitorClass = BrokenOddnessCheckAstVisitor
 }
 
-class BrokenOddnessCheckAstVisitor extends AbstractAstVisitor {
+class BrokenOddnessCheckAstVisitor extends AbstractAstVisitor<BrokenOddnessCheckRule> {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {

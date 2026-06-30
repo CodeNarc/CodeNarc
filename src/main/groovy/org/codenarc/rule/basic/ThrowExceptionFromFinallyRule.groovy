@@ -29,7 +29,7 @@ class ThrowExceptionFromFinallyBlockRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ThrowExceptionFromFinallyBlockAstVisitor
 }
 
-class ThrowExceptionFromFinallyBlockAstVisitor extends AbstractFinallyAstVisitor  {
+class ThrowExceptionFromFinallyBlockAstVisitor extends AbstractFinallyAstVisitor<ThrowExceptionFromFinallyBlockRule> {
     @Override
     void visitThrowStatement(ThrowStatement throwStatement) {
         if (isFirstVisit(throwStatement) && isStatementWithinFinally(throwStatement)) {

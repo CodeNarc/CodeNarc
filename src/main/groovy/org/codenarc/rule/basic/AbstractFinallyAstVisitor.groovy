@@ -18,13 +18,14 @@ package org.codenarc.rule.basic
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.Rule
 
 /**
  * Abstract superclass for AST Visitor classes that check for conditions within a finally block
  *
  * @author Chris Mair
  */
-abstract class AbstractFinallyAstVisitor extends AbstractAstVisitor {
+abstract class AbstractFinallyAstVisitor<R extends Rule> extends AbstractAstVisitor<R> {
 
     private final List finallyLineRanges = []
 

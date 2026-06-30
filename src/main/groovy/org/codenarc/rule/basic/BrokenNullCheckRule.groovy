@@ -35,7 +35,7 @@ class BrokenNullCheckRule extends AbstractAstVisitorRule {
     Class astVisitorClass = BrokenNullCheckAstVisitor
 }
 
-class BrokenNullCheckAstVisitor extends AbstractAstVisitor {
+class BrokenNullCheckAstVisitor extends AbstractAstVisitor<BrokenNullCheckRule> {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {

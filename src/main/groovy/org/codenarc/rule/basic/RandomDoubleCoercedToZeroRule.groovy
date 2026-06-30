@@ -38,7 +38,7 @@ class RandomDoubleCoercedToZeroRule extends AbstractAstVisitorRule {
     Class astVisitorClass = RandomDoubleCoercedToZeroAstVisitor
 }
 
-class RandomDoubleCoercedToZeroAstVisitor extends AbstractAstVisitor {
+class RandomDoubleCoercedToZeroAstVisitor extends AbstractAstVisitor<RandomDoubleCoercedToZeroRule> {
     @Override
     void visitCastExpression(CastExpression expression) {
         if (isFirstVisit(expression)) {
