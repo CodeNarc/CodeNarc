@@ -22,7 +22,7 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  *
  * @author Chris Mair
  */
-abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
+abstract class AbstractConstructorCallAstVisitor<R extends Rule> extends AbstractAstVisitor<R> {
     /**
      * Subclasses must implement to return true if the visited constructor call causes a rule violation
      */

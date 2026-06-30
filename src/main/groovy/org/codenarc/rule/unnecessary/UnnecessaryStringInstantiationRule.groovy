@@ -34,7 +34,7 @@ class UnnecessaryStringInstantiationRule extends AbstractAstVisitorRule {
 
 }
 
-class UnnecessaryStringInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
+class UnnecessaryStringInstantiationAstVisitor extends AbstractConstructorCallAstVisitor<UnnecessaryStringInstantiationRule> {
 
     static final String NEW_STRING = /new +(java\.lang\.)?String\(/
 

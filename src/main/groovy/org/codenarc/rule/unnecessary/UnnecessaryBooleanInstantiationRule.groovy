@@ -37,7 +37,7 @@ class UnnecessaryBooleanInstantiationRule extends AbstractAstVisitorRule {
 
 }
 
-class UnnecessaryBooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
+class UnnecessaryBooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor<UnnecessaryBooleanInstantiationRule> {
 
     private static final String NEW_BOOLEAN = /new +(java\.lang\.)?Boolean\(/
 

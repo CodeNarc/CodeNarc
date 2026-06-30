@@ -34,7 +34,7 @@ class BigDecimalInstantiationRule extends AbstractAstVisitorRule {
 
 }
 
-class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
+class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisitor<BigDecimalInstantiationRule> {
 
     static final String NEW_BIG_DECIMAL = /new +(java\.math\.)?BigDecimal\(/
 
