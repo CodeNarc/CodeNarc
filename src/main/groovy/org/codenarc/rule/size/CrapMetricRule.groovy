@@ -137,7 +137,7 @@ class CrapMetricRule extends AbstractAstVisitorRule {
     }
 }
 
-class CrapMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
+class CrapMetricAstVisitor extends AbstractMethodMetricAstVisitor<CrapMetricRule> {
 
     final String metricShortDescription = 'CRAP score'
 

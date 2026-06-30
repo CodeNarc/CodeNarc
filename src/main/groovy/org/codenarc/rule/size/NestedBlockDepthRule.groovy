@@ -44,7 +44,7 @@ class NestedBlockDepthRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NestedBlockDepthAstVisitor
 }
 
-class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
+class NestedBlockDepthAstVisitor extends AbstractAstVisitor<NestedBlockDepthRule> {
 
     private final Set blocksToProcess = []
     private Set closureFieldExpressions

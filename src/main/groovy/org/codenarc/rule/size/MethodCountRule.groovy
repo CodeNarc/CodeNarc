@@ -33,7 +33,7 @@ class MethodCountRule extends AbstractAstVisitorRule {
     int maxMethods = 30
 }
 
-class MethodCountAstVisitor extends AbstractAstVisitor {
+class MethodCountAstVisitor extends AbstractAstVisitor<MethodCountRule> {
 
     @Override
     void visitClassEx(ClassNode node) {

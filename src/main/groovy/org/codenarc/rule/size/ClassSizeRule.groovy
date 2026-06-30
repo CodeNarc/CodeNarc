@@ -37,7 +37,7 @@ class ClassSizeRule extends AbstractAstVisitorRule {
     int maxLines = 1000
 }
 
-class ClassSizeAstVisitor extends AbstractAstVisitor  {
+class ClassSizeAstVisitor extends AbstractAstVisitor<ClassSizeRule> {
     @Override
     void visitClassEx(ClassNode classNode) {
         if (isNotGeneratedCode(classNode)) {

@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
@@ -39,7 +40,7 @@ import org.gmetrics.result.MetricResult
  * @author Chris Mair
  * @author Hamlet D'Arcy
   */
-abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
+abstract class AbstractMethodMetricAstVisitor<R extends Rule> extends AbstractAstVisitor<R> {
 
     protected Metric metric
     private final Object metricLock = new Object()

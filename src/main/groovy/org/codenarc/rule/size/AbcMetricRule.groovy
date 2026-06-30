@@ -63,7 +63,7 @@ class AbcMetricRule extends AbstractAstVisitorRule {
     String ignoreMethodNames
 }
 
-class AbcMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
+class AbcMetricAstVisitor extends AbstractMethodMetricAstVisitor<AbcMetricRule> {
 
     final String metricShortDescription = 'ABC score'
 

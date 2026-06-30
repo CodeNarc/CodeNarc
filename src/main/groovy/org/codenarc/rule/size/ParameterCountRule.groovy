@@ -44,7 +44,7 @@ class ParameterCountRule extends AbstractAstVisitorRule {
     }
 }
 
-class ParameterCountAstVisitor extends AbstractAstVisitor {
+class ParameterCountAstVisitor extends AbstractAstVisitor<ParameterCountRule> {
     private static final Set<String> OVERRIDE_ANNOTATIONS = [Override.name, Override.simpleName]
 
     @Override

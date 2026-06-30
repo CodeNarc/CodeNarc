@@ -61,7 +61,7 @@ class CyclomaticComplexityRule extends AbstractAstVisitorRule {
     String ignoreMethodNames
 }
 
-class CyclomaticComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
+class CyclomaticComplexityAstVisitor extends AbstractMethodMetricAstVisitor<CyclomaticComplexityRule> {
 
     final String metricShortDescription = 'cyclomatic complexity'
 

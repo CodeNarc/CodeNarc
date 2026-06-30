@@ -43,7 +43,7 @@ class MethodSizeRule extends AbstractAstVisitorRule {
     String ignoreMethodNames
 }
 
-class MethodSizeAstVisitor extends AbstractAstVisitor  {
+class MethodSizeAstVisitor extends AbstractAstVisitor<MethodSizeRule> {
     @Override
     void visitConstructorOrMethod(MethodNode methodNode, boolean isConstructor) {
         if (methodNode.lineNumber >= 0) {
