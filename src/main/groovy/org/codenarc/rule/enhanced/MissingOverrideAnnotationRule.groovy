@@ -36,7 +36,7 @@ class MissingOverrideAnnotationRule extends AbstractAstVisitorRule {
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
 }
 
-class MissingOverrideAnnotationAstVisitor extends AbstractAstVisitor {
+class MissingOverrideAnnotationAstVisitor extends AbstractAstVisitor<MissingOverrideAnnotationRule> {
 
     private static final ClassNode OVERRIDE = ClassHelper.make(Override)
 
