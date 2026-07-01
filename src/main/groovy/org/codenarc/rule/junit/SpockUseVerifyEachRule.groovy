@@ -39,7 +39,7 @@ class SpockUseVerifyEachRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpockUseVerifyEachAstVisitor
 }
 
-class SpockUseVerifyEachAstVisitor extends AbstractAstVisitor {
+class SpockUseVerifyEachAstVisitor extends AbstractAstVisitor<SpockUseVerifyEachRule> {
 
     private static final List<String> TARGET_METHODS = ['every', 'each', 'eachWithIndex', 'forEach']
 

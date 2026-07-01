@@ -36,7 +36,7 @@ class CoupledTestCaseRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class CoupledTestCaseAstVisitor extends AbstractAstVisitor {
+class CoupledTestCaseAstVisitor extends AbstractAstVisitor<CoupledTestCaseRule> {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {

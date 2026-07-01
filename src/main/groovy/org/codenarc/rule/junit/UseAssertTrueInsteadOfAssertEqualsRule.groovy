@@ -38,7 +38,7 @@ class UseAssertTrueInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UseAssertTrueInsteadOfAssertEqualsAstVisitor
 }
 
-class UseAssertTrueInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
+class UseAssertTrueInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor<UseAssertTrueInsteadOfAssertEqualsRule> {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {

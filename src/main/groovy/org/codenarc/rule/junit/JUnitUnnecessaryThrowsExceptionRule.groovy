@@ -36,7 +36,7 @@ class JUnitUnnecessaryThrowsExceptionRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitUnnecessaryThrowsExceptionAstVisitor extends AbstractAstVisitor {
+class JUnitUnnecessaryThrowsExceptionAstVisitor extends AbstractAstVisitor<JUnitUnnecessaryThrowsExceptionRule> {
 
     private static final List JUNIT4_ANNOTATIONS = ['Test', 'Before', 'BeforeClass', 'AfterClass', 'After', 'Ignore']
 

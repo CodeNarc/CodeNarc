@@ -36,7 +36,7 @@ class UnnecessaryFailRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class UnnecessaryFailAstVisitor extends AbstractAstVisitor {
+class UnnecessaryFailAstVisitor extends AbstractAstVisitor<UnnecessaryFailRule> {
 
     @Override
     void visitCatchStatement(CatchStatement statement) {

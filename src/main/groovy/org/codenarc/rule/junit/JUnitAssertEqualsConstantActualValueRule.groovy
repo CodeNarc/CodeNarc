@@ -41,7 +41,7 @@ class JUnitAssertEqualsConstantActualValueRule extends AbstractAstVisitorRule {
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
 }
 
-class JUnitAssertEqualsConstantActualValueAstVisitor extends AbstractAstVisitor {
+class JUnitAssertEqualsConstantActualValueAstVisitor extends AbstractAstVisitor<JUnitAssertEqualsConstantActualValueRule> {
 
     private static final String ASSERT_EQUALS = 'assertEquals'
 

@@ -35,7 +35,7 @@ class JUnitPublicPropertyRule extends AbstractAstVisitorRule {
     String ignorePropertyNames
 }
 
-class JUnitPublicPropertyAstVisitor extends AbstractAstVisitor {
+class JUnitPublicPropertyAstVisitor extends AbstractAstVisitor<JUnitPublicPropertyRule> {
 
     @Override
     void visitProperty(PropertyNode node) {

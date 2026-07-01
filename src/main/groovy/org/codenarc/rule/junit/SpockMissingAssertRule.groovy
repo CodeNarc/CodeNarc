@@ -50,7 +50,7 @@ class SpockMissingAssertRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpockMissingAssertAstVisitor
 }
 
-class SpockMissingAssertAstVisitor extends AbstractAstVisitor {
+class SpockMissingAssertAstVisitor extends AbstractAstVisitor<SpockMissingAssertRule> {
 
     private String currentLabel = null
 
