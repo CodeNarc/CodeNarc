@@ -37,7 +37,7 @@ class LoggingSwallowsStacktraceRule extends AbstractAstVisitorRule {
     Class astVisitorClass = LoggingSwallowsStacktraceAstVisitor
 }
 
-class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor {
+class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor<LoggingSwallowsStacktraceRule> {
     Map<ClassNode, List<String>> classNodeToLoggerNames = [:]
 
     @Override

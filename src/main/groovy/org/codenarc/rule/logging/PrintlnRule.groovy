@@ -36,7 +36,7 @@ class PrintlnRule extends AbstractAstVisitorRule {
     Class astVisitorClass = PrintlnAstVisitor
 }
 
-class PrintlnAstVisitor extends AbstractAstVisitor  {
+class PrintlnAstVisitor extends AbstractAstVisitor<PrintlnRule> {
 
     boolean printlnMethodDefined = false
     boolean printlnClosureDefined = false
