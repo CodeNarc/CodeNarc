@@ -28,7 +28,7 @@ class UnnecessaryFloatInstantiationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryFloatInstantiationAstVisitor
 }
 
-class UnnecessaryFloatInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
+class UnnecessaryFloatInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor<UnnecessaryFloatInstantiationRule> {
 
     UnnecessaryFloatInstantiationAstVisitor() {
         super(Float, [String, Double, Float], 'f')

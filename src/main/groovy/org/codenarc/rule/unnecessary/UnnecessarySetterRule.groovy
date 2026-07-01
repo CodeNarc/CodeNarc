@@ -35,7 +35,7 @@ class UnnecessarySetterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessarySetterAstVisitor
 }
 
-class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
+class UnnecessarySetterAstVisitor extends AbstractAstVisitor<UnnecessarySetterRule> {
 
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {

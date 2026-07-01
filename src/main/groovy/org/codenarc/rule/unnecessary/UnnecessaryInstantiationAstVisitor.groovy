@@ -20,13 +20,14 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.TupleExpression
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.Rule
 import org.codenarc.util.AstUtil
 
 /**
  * Base visitor for unnecessary constructor calls.
  * @author Hamlet D'Arcy
  */
-class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
+class UnnecessaryInstantiationAstVisitor<R extends Rule> extends AbstractAstVisitor<R> {
 
     Class targetType
     List<Class> parameterTypes

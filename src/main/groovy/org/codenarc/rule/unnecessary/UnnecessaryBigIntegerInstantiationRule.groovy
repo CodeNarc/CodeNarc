@@ -28,7 +28,7 @@ class UnnecessaryBigIntegerInstantiationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryBigIntegerInstantiationAstVisitor
 }
 
-class UnnecessaryBigIntegerInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
+class UnnecessaryBigIntegerInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor<UnnecessaryBigIntegerInstantiationRule> {
 
     UnnecessaryBigIntegerInstantiationAstVisitor() {
         super(BigInteger, [String], 'G')

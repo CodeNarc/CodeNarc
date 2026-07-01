@@ -32,7 +32,7 @@ class UnnecessaryNullCheckRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryNullCheckAstVisitor
 }
 
-class UnnecessaryNullCheckAstVisitor extends AbstractAstVisitor {
+class UnnecessaryNullCheckAstVisitor extends AbstractAstVisitor<UnnecessaryNullCheckRule> {
 
     @SuppressWarnings('NestedBlockDepth')
     @Override

@@ -34,7 +34,7 @@ class UnnecessaryCallForLastElementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryCallForLastElementAstVisitor
 }
 
-class UnnecessaryCallForLastElementAstVisitor extends AbstractAstVisitor {
+class UnnecessaryCallForLastElementAstVisitor extends AbstractAstVisitor<UnnecessaryCallForLastElementRule> {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (AstUtil.isMethodNamed(call, 'get', 1) || AstUtil.isMethodNamed(call, 'getAt', 1)) {

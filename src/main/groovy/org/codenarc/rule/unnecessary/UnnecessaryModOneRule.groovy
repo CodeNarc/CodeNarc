@@ -33,7 +33,7 @@ class UnnecessaryModOneRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryModOneAstVisitor
 }
 
-class UnnecessaryModOneAstVisitor extends AbstractAstVisitor {
+class UnnecessaryModOneAstVisitor extends AbstractAstVisitor<UnnecessaryModOneRule> {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         if (AstUtil.isBinaryExpressionType(expression, '%')) {

@@ -32,7 +32,7 @@ class AddEmptyStringRule extends AbstractAstVisitorRule {
     Class astVisitorClass = AddEmptyStringAstVisitor
 }
 
-class AddEmptyStringAstVisitor extends AbstractAstVisitor {
+class AddEmptyStringAstVisitor extends AbstractAstVisitor<AddEmptyStringRule> {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         if (isFirstVisit(expression) && AstUtil.isBinaryExpressionType(expression, '+')) {

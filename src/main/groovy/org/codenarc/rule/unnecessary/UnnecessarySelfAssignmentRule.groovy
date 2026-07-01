@@ -34,7 +34,7 @@ class UnnecessarySelfAssignmentRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessarySelfAssignmentAstVisitor
 }
 
-class UnnecessarySelfAssignmentAstVisitor extends AbstractAstVisitor {
+class UnnecessarySelfAssignmentAstVisitor extends AbstractAstVisitor<UnnecessarySelfAssignmentRule> {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         if (AstUtil.isBinaryExpressionType(expression, '=')) {

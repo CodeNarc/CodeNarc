@@ -28,7 +28,7 @@ class UnnecessaryDoubleInstantiationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryDoubleInstantiationAstVisitor
 }
 
-class UnnecessaryDoubleInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
+class UnnecessaryDoubleInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor<UnnecessaryDoubleInstantiationRule> {
 
     UnnecessaryDoubleInstantiationAstVisitor() {
         super(Double, [String, Double], 'd')

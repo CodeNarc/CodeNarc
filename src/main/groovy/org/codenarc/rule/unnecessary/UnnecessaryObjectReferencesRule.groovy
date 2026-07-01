@@ -37,7 +37,7 @@ class UnnecessaryObjectReferencesRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryObjectReferencesAstVisitor
 }
 
-class UnnecessaryObjectReferencesAstVisitor extends AbstractAstVisitor {
+class UnnecessaryObjectReferencesAstVisitor extends AbstractAstVisitor<UnnecessaryObjectReferencesRule> {
 
     private final Map runCollector = [variable: null, count: 0, clear: { this.variable = null; this.count = 0 }]
 

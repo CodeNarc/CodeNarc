@@ -33,7 +33,7 @@ class UnnecessaryDefInMethodDeclarationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryDefInMethodDeclarationAstVisitor
 }
 
-class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
+class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor<UnnecessaryDefInMethodDeclarationRule> {
 
     private static final List PATTERNS_OF_DISTRACTING_DECLARATION_PARTS = [
         "'", // method name with single quotes, e.g.: def 'some method'() { ... }

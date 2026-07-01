@@ -56,7 +56,7 @@ class UnnecessaryBooleanExpressionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryBooleanExpressionAstVisitor
 }
 
-class UnnecessaryBooleanExpressionAstVisitor extends AbstractAstVisitor  {
+class UnnecessaryBooleanExpressionAstVisitor extends AbstractAstVisitor<UnnecessaryBooleanExpressionRule> {
 
     private static final List BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
 

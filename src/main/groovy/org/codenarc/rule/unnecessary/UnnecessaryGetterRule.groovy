@@ -47,7 +47,7 @@ class UnnecessaryGetterRule extends AbstractAstVisitorRule {
 
 }
 
-class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
+class UnnecessaryGetterAstVisitor extends AbstractAstVisitor<UnnecessaryGetterRule> {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {

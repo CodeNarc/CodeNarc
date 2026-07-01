@@ -32,7 +32,7 @@ class UnnecessaryGStringRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryGStringAstVisitor
 }
 
-class UnnecessaryGStringAstVisitor extends AbstractAstVisitor {
+class UnnecessaryGStringAstVisitor extends AbstractAstVisitor<UnnecessaryGStringRule> {
     @Override
     void visitConstantExpression(ConstantExpression expression) {
         if (isFirstVisit(expression) && expression.value instanceof String && expression.lineNumber > -1) {

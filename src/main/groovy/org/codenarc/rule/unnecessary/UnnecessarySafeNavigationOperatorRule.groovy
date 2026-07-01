@@ -38,7 +38,7 @@ class UnnecessarySafeNavigationOperatorRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessarySafeNavigationOperatorAstVisitor
 }
 
-class UnnecessarySafeNavigationOperatorAstVisitor extends AbstractAstVisitor {
+class UnnecessarySafeNavigationOperatorAstVisitor extends AbstractAstVisitor<UnnecessarySafeNavigationOperatorRule> {
 
     @Override
     void visitPropertyExpression(PropertyExpression expression) {

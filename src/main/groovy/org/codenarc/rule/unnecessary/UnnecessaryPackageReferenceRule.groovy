@@ -44,7 +44,7 @@ class UnnecessaryPackageReferenceRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryPackageReferenceAstVisitor
 }
 
-class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
+class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor<UnnecessaryPackageReferenceRule> {
 
     private static final List IGNORE_SUPERCLASS_NAMES = ['java.lang.Object', 'java.lang.Enum', 'groovy.lang.Script']
     private final List<String> importedClassNames = []

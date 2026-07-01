@@ -28,7 +28,7 @@ class UnnecessaryLongInstantiationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryLongInstantiationAstVisitor
 }
 
-class UnnecessaryLongInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
+class UnnecessaryLongInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor<UnnecessaryLongInstantiationRule> {
 
     UnnecessaryLongInstantiationAstVisitor() {
         super(Long, [String, Long], 'L')

@@ -28,7 +28,7 @@ class UnnecessaryBigDecimalInstantiationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryBigDecimalInstantiationAstVisitor
 }
 
-class UnnecessaryBigDecimalInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
+class UnnecessaryBigDecimalInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor<UnnecessaryBigDecimalInstantiationRule> {
 
     UnnecessaryBigDecimalInstantiationAstVisitor() {
         super(BigDecimal, [String, Double], 'G')

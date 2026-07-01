@@ -32,7 +32,7 @@ class UnnecessaryNullCheckBeforeInstanceOfRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryNullCheckBeforeInstanceOfAstVisitor
 }
 
-class UnnecessaryNullCheckBeforeInstanceOfAstVisitor extends AbstractAstVisitor {
+class UnnecessaryNullCheckBeforeInstanceOfAstVisitor extends AbstractAstVisitor<UnnecessaryNullCheckBeforeInstanceOfRule> {
     @Override
     void visitBinaryExpression(BinaryExpression exp) {
         if (exp.operation.text == '&&') {

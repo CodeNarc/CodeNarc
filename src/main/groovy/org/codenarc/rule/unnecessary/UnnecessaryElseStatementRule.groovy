@@ -33,7 +33,7 @@ class UnnecessaryElseStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryElseStatementAstVisitor
 }
 
-class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
+class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor<UnnecessaryElseStatementRule> {
 
     @Override
     void visitIfElse(IfStatement node) {

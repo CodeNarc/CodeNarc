@@ -51,7 +51,7 @@ class UnnecessaryTernaryExpressionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryTernaryExpressionAstVisitor
 }
 
-class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
+class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor<UnnecessaryTernaryExpressionRule> {
 
     private static final List BOOLEAN_COMPARISON_OPERATIONS = ['<', '>', '>=', '<=', '==', '!=', '==~']
     private static final List BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']

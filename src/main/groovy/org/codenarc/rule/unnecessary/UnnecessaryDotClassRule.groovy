@@ -33,7 +33,7 @@ class UnnecessaryDotClassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryDotClassAstVisitor
 }
 
-class UnnecessaryDotClassAstVisitor extends AbstractAstVisitor {
+class UnnecessaryDotClassAstVisitor extends AbstractAstVisitor<UnnecessaryDotClassRule> {
 
     @Override
     void visitPropertyExpression(PropertyExpression expression) {

@@ -34,7 +34,7 @@ class UnnecessaryInstanceOfCheckRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryInstanceOfCheckAstVisitor
 }
 
-class UnnecessaryInstanceOfCheckAstVisitor extends AbstractAstVisitor {
+class UnnecessaryInstanceOfCheckAstVisitor extends AbstractAstVisitor<UnnecessaryInstanceOfCheckRule> {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         if (isFirstVisit(expression)) {

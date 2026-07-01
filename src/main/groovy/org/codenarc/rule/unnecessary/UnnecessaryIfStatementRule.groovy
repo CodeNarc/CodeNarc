@@ -74,7 +74,7 @@ class UnnecessaryIfStatementRule extends AbstractAstVisitorRule {
     boolean checkLastStatementImplicitElse = true
 }
 
-class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
+class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor<UnnecessaryIfStatementRule> {
 
     @Override
     void visitIfElse(IfStatement ifStatement) {

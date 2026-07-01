@@ -35,7 +35,7 @@ class UnnecessaryDefInVariableDeclarationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryDefInVariableDeclarationAstVisitor
 }
 
-class UnnecessaryDefInVariableDeclarationAstVisitor extends AbstractAstVisitor {
+class UnnecessaryDefInVariableDeclarationAstVisitor extends AbstractAstVisitor<UnnecessaryDefInVariableDeclarationRule> {
 
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {

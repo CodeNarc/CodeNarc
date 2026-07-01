@@ -31,7 +31,7 @@ class UnnecessaryCastRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryCastAstVisitor
 }
 
-class UnnecessaryCastAstVisitor extends AbstractAstVisitor {
+class UnnecessaryCastAstVisitor extends AbstractAstVisitor<UnnecessaryCastRule> {
 
     // Map of Cast type -> Cast expression type (both as Strings)
     private static final Map CAST_TYPE_MAP = [

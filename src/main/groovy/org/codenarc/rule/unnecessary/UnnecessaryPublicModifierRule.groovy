@@ -34,7 +34,7 @@ class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryPublicModifierAstVisitor
 }
 
-class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
+class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor<UnnecessaryPublicModifierRule> {
 
     private static final String REQUIRED_WHITESPACE = '\\s+'
     private static final String OPTIONAL_WHITESPACE = '\\s*'

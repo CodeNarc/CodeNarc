@@ -45,7 +45,7 @@ class UnnecessaryToStringRule extends AbstractAstVisitorRule {
     boolean checkAssignments = true
 }
 
-class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
+class UnnecessaryToStringAstVisitor extends AbstractAstVisitor<UnnecessaryToStringRule> {
 
     private static final String TO_STRING = 'toString'
 

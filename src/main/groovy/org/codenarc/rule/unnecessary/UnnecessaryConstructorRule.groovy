@@ -42,7 +42,7 @@ class UnnecessaryConstructorRule extends AbstractAstVisitorRule {
     boolean ignoreAnnotations = false
 }
 
-class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
+class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor<UnnecessaryConstructorRule> {
 
     @Override
     void visitClassEx(ClassNode node) {

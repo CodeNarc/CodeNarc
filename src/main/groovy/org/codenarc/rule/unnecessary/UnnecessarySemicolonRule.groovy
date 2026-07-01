@@ -81,7 +81,7 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     }
 }
 
-class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
+class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor<UnnecessarySemicolonRule> {
 
     @Override
     protected void visitStatement(Statement statement) {

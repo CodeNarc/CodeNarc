@@ -35,7 +35,7 @@ class UnnecessaryReturnKeywordRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryReturnKeywordAstVisitor
 }
 
-class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
+class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor<UnnecessaryReturnKeywordRule> {
 
     @Override
     void visitMethodEx(MethodNode node) {

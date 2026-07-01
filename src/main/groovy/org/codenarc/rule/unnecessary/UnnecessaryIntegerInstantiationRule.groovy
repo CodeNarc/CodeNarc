@@ -28,7 +28,7 @@ class UnnecessaryIntegerInstantiationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryIntegerInstantiationAstVisitor
 }
 
-class UnnecessaryIntegerInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
+class UnnecessaryIntegerInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor<UnnecessaryIntegerInstantiationRule> {
 
     UnnecessaryIntegerInstantiationAstVisitor() {
         super(Integer, [String, Integer], 'i')
