@@ -34,7 +34,7 @@ class ClosureInGStringRule extends AbstractAstVisitorRule {
     String applyToFileNames = 'Jenkinsfile'
 }
 
-class ClosureInGStringAstVisitor extends AbstractAstVisitor {
+class ClosureInGStringAstVisitor extends AbstractAstVisitor<ClosureInGStringRule> {
 
     @Override
     void visitGStringExpression(GStringExpression gString) {

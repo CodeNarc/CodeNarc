@@ -35,7 +35,7 @@ class ClassNotSerializableRule extends AbstractAstVisitorRule {
     String applyToFileNames = 'Jenkinsfile'
 }
 
-class ClassNotSerializableAstVisitor extends AbstractAstVisitor {
+class ClassNotSerializableAstVisitor extends AbstractAstVisitor<ClassNotSerializableRule> {
     @Override
     protected void visitClassEx(ClassNode classNode) {
         if (classNode.script || classNode.interface) {

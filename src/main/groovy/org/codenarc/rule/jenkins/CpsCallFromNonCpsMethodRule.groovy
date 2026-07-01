@@ -41,7 +41,7 @@ class CpsCallFromNonCpsMethodRule extends AbstractAstVisitorRule {
     List<String> cpsPackages = []
 }
 
-class CpsCallFromNonCpsMethodAstVisitor extends AbstractAstVisitor {
+class CpsCallFromNonCpsMethodAstVisitor extends AbstractAstVisitor<CpsCallFromNonCpsMethodRule> {
 
     private final static List<String> PIPELINE_STEP_CPS_EXCEPTIONS = ['echo', 'properties', 'getContext']
 

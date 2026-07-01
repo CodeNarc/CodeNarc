@@ -38,7 +38,7 @@ class ForbiddenCallInCpsMethodRule extends AbstractAstVisitorRule {
     String applyToFileNames = 'Jenkinsfile'
 }
 
-class ForbiddenCallInCpsMethodAstVisitor extends AbstractAstVisitor {
+class ForbiddenCallInCpsMethodAstVisitor extends AbstractAstVisitor<ForbiddenCallInCpsMethodRule> {
     protected List<Map> forbiddenMethods = [
         [type: 'java.lang.Iterable', name: 'sort', parameters: ['groovy.lang.Closure']],
         [type: 'java.lang.Iterable', name: 'toSorted', parameters: ['groovy.lang.Closure']],

@@ -40,7 +40,7 @@ class ExpressionInCpsMethodNotSerializableRule extends AbstractAstVisitorRule {
     String applyToFileNames = 'Jenkinsfile'
 }
 
-class ExpressionInCpsMethodNotSerializableAstVisitor extends AbstractAstVisitor {
+class ExpressionInCpsMethodNotSerializableAstVisitor extends AbstractAstVisitor<ExpressionInCpsMethodNotSerializableRule> {
 
     @Override
     protected void visitConstructorOrMethod(MethodNode method, boolean isConstructor) {
