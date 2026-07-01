@@ -47,7 +47,7 @@ class GrailsServletContextReferenceRule extends AbstractAstVisitorRule {
     String applyToFilesMatching = GrailsUtil.CONTROLLERS_AND_TAGLIB_FILES
 }
 
-class GrailsServletContextReferenceAstVisitor extends AbstractAstVisitor  {
+class GrailsServletContextReferenceAstVisitor extends AbstractAstVisitor<GrailsServletContextReferenceRule> {
     @Override
     void visitVariableExpression(VariableExpression expression) {
         if (isFirstVisit(expression) && expression.variable == 'servletContext') {

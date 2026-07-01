@@ -33,7 +33,7 @@ class GrailsDuplicateMappingRule extends AbstractAstVisitorRule {
     String applyToFilesMatching = GrailsUtil.DOMAIN_FILES
 }
 
-class GrailsDuplicateMappingAstVisitor extends AbstractAstVisitor {
+class GrailsDuplicateMappingAstVisitor extends AbstractAstVisitor<GrailsDuplicateMappingRule> {
 
     private final Set<String> mappingNames = []
     private boolean withinMapping

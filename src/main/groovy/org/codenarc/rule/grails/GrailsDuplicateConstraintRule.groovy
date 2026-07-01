@@ -33,7 +33,7 @@ class GrailsDuplicateConstraintRule extends AbstractAstVisitorRule {
     String applyToFilesMatching = GrailsUtil.DOMAIN_FILES
 }
 
-class GrailsDuplicateConstraintAstVisitor extends AbstractAstVisitor {
+class GrailsDuplicateConstraintAstVisitor extends AbstractAstVisitor<GrailsDuplicateConstraintRule> {
 
     private final Set<String> constraintNames = []
     private boolean withinConstraint

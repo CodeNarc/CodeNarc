@@ -36,7 +36,7 @@ class GrailsDomainHasToStringRule extends AbstractAstVisitorRule {
     String applyToFilesMatching = GrailsUtil.DOMAIN_FILES
 }
 
-class GrailsDomainHasToStringAstVisitor extends AbstractAstVisitor {
+class GrailsDomainHasToStringAstVisitor extends AbstractAstVisitor<GrailsDomainHasToStringRule> {
 
     @Override
     void visitClassComplete(ClassNode classNode) {

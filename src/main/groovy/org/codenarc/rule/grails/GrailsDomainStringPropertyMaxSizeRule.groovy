@@ -48,7 +48,7 @@ class GrailsDomainStringPropertyMaxSizeRule extends AbstractAstVisitorRule {
     String applyToFilesMatching = GrailsUtil.DOMAIN_FILES
 }
 
-class GrailsDomainStringPropertyMaxSizeAstVisitor extends AbstractAstVisitor {
+class GrailsDomainStringPropertyMaxSizeAstVisitor extends AbstractAstVisitor<GrailsDomainStringPropertyMaxSizeRule> {
     private final Map<String, ClassConstraintsAndMapping> constraintsAndMappings = [:]
             .withDefault { new ClassConstraintsAndMapping() }
 

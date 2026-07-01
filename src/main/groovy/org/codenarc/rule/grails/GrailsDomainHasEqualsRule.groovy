@@ -36,7 +36,7 @@ class GrailsDomainHasEqualsRule extends AbstractAstVisitorRule {
     String applyToFilesMatching = GrailsUtil.DOMAIN_FILES
 }
 
-class GrailsDomainHasEqualsAstVisitor extends AbstractAstVisitor {
+class GrailsDomainHasEqualsAstVisitor extends AbstractAstVisitor<GrailsDomainHasEqualsRule> {
     @Override
     void visitClassComplete(ClassNode classNode) {
         if (isFirstVisit(classNode) && !hasAnnotation(classNode, 'EqualsAndHashCode') && !hasAnnotation(classNode, 'Canonical') && isNotInnerEnum(classNode)) {

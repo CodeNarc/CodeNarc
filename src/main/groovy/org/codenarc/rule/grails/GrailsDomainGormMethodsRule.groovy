@@ -100,7 +100,7 @@ class GrailsDomainGormMethodsRule extends AbstractAstVisitorRule {
 
 }
 
-class GrailsDomainGormMethodsAstVisitor extends AbstractAstVisitor {
+class GrailsDomainGormMethodsAstVisitor extends AbstractAstVisitor<GrailsDomainGormMethodsRule> {
 
     @Override
     @SuppressWarnings('Instanceof')

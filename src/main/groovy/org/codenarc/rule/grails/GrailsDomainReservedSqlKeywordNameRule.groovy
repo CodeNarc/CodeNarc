@@ -100,7 +100,7 @@ class GrailsDomainReservedSqlKeywordNameRule extends AbstractAstVisitorRule {
     }
 }
 
-class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractAstVisitor {
+class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractAstVisitor<GrailsDomainReservedSqlKeywordNameRule> {
 
     private final Set<String> reservedSqlKeywords
     private final Set<String> hibernateBasicTypes

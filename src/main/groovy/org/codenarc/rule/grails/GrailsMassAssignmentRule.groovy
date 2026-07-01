@@ -35,7 +35,7 @@ class GrailsMassAssignmentRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GrailsMassAssignmentAstVisitor
 }
 
-class GrailsMassAssignmentAstVisitor extends AbstractAstVisitor {
+class GrailsMassAssignmentAstVisitor extends AbstractAstVisitor<GrailsMassAssignmentRule> {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
