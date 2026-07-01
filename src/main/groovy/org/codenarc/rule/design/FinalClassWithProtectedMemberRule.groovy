@@ -36,7 +36,7 @@ class FinalClassWithProtectedMemberRule extends AbstractAstVisitorRule {
     Class astVisitorClass = FinalClassWithProtectedMemberAstVisitor
 }
 
-class FinalClassWithProtectedMemberAstVisitor extends AbstractAstVisitor {
+class FinalClassWithProtectedMemberAstVisitor extends AbstractAstVisitor<FinalClassWithProtectedMemberRule> {
     @Override
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         if (node.isProtected()) {

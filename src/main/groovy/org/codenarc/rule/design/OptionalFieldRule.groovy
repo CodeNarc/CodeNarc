@@ -31,7 +31,7 @@ class OptionalFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = OptionalFieldAstVisitor
 }
 
-class OptionalFieldAstVisitor extends AbstractAstVisitor {
+class OptionalFieldAstVisitor extends AbstractAstVisitor<OptionalFieldRule> {
 
     @Override
     void visitField(FieldNode node) {

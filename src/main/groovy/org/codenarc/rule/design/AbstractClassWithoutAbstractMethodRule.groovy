@@ -34,7 +34,7 @@ class AbstractClassWithoutAbstractMethodRule extends AbstractEnhanceableAstVisit
     Class astVisitorClass = AbstractClassWithoutAbstractMethodAstVisitor
 }
 
-class AbstractClassWithoutAbstractMethodAstVisitor extends AbstractAstVisitor {
+class AbstractClassWithoutAbstractMethodAstVisitor extends AbstractAstVisitor<AbstractClassWithoutAbstractMethodRule> {
     @Override protected void visitClassEx(ClassNode node) {
         if (!node.isInterface() && Modifier.isAbstract(node.modifiers) && !skipSuperClass(node)) {
             if (!node.methods.any {  Modifier.isAbstract(it.modifiers)  }) {

@@ -35,7 +35,7 @@ class ToStringReturnsNullRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ToStringReturnsNullAstVisitor
 }
 
-class ToStringReturnsNullAstVisitor extends AbstractAstVisitor {
+class ToStringReturnsNullAstVisitor extends AbstractAstVisitor<ToStringReturnsNullRule> {
 
     private static final String ERROR_MESSAGE = 'The toString() method within class %s returns null'
 

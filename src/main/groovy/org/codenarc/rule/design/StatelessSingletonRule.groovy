@@ -31,7 +31,7 @@ class StatelessSingletonRule extends AbstractAstVisitorRule {
     String instanceRegex = 'instance|_instance'
 }
 
-class StatelessSingletonAstVisitor extends AbstractAstVisitor {
+class StatelessSingletonAstVisitor extends AbstractAstVisitor<StatelessSingletonRule> {
 
     @Override
     protected void visitClassComplete(ClassNode node) {

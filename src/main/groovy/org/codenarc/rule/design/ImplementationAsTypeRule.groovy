@@ -64,7 +64,7 @@ class ImplementationAsTypeRule extends AbstractAstVisitorRule {
 
 }
 
-class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
+class ImplementationAsTypeAstVisitor extends AbstractAstVisitor<ImplementationAsTypeRule> {
 
     private static final List TYPES = [
         'ArrayList', 'java.util.ArrayList',

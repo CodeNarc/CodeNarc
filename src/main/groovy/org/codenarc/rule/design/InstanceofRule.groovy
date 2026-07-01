@@ -35,7 +35,7 @@ class InstanceofRule extends AbstractAstVisitorRule {
     Class astVisitorClass = InstanceofAstVisitor
 }
 
-class InstanceofAstVisitor extends AbstractAstVisitor {
+class InstanceofAstVisitor extends AbstractAstVisitor<InstanceofRule> {
 
     private WildcardPattern wildcardPattern
 

@@ -37,7 +37,7 @@ class ReturnsNullInsteadOfEmptyCollectionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor
 }
 
-class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisitor {
+class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisitor<ReturnsNullInsteadOfEmptyCollectionRule> {
 
     private static final String ERROR_MSG = 'Returning null from a method that might return a Collection or Map'
 

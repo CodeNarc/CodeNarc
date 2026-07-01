@@ -31,7 +31,7 @@ class NestedForLoopRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NestedForLoopAstVisitor
 }
 
-class NestedForLoopAstVisitor extends AbstractAstVisitor {
+class NestedForLoopAstVisitor extends AbstractAstVisitor<NestedForLoopRule> {
 
     private final Stack forStatementsStack = [] as Stack
 

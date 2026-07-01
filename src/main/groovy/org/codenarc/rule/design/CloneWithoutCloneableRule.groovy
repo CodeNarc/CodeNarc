@@ -35,7 +35,7 @@ class CloneWithoutCloneableRule extends AbstractAstVisitorRule {
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
 }
 
-class CloneWithoutCloneableAstVisitor extends AbstractAstVisitor {
+class CloneWithoutCloneableAstVisitor extends AbstractAstVisitor<CloneWithoutCloneableRule> {
 
     @Override
     protected void visitClassEx(ClassNode node) {

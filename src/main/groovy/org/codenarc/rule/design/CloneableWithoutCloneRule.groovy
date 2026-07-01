@@ -33,7 +33,7 @@ class CloneableWithoutCloneRule extends AbstractAstVisitorRule {
     Class astVisitorClass = CloneableWithoutCloneAstVisitor
 }
 
-class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
+class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor<CloneableWithoutCloneRule> {
 
     @Override
     void visitClassEx(ClassNode node) {

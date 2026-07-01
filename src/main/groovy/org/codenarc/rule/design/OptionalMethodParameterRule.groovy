@@ -33,7 +33,7 @@ class OptionalMethodParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = OptionalMethodParameterAstVisitor
 }
 
-class OptionalMethodParameterAstVisitor extends AbstractAstVisitor {
+class OptionalMethodParameterAstVisitor extends AbstractAstVisitor<OptionalMethodParameterRule> {
 
     @Override
     void visitMethodEx(MethodNode methodNode) {

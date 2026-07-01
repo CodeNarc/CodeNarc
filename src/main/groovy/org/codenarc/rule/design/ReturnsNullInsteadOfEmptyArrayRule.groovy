@@ -37,7 +37,7 @@ class ReturnsNullInsteadOfEmptyArrayRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ReturnsNullInsteadOfEmptyArrayAstVisitor
 }
 
-class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
+class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor<ReturnsNullInsteadOfEmptyArrayRule> {
 
     private static final String ERROR_MSG = 'Returning null from a method that might return an Array'
 

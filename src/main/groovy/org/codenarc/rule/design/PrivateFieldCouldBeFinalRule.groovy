@@ -67,7 +67,7 @@ class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
     }
 }
 
-class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
+class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor<PrivateFieldCouldBeFinalRule> {
 
     private final Collection<FieldNode> initializedFields = []
     private final Collection<FieldNode> allFields = []

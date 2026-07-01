@@ -31,7 +31,7 @@ class OptionalCollectionReturnTypeRule extends AbstractAstVisitorRule {
     Class astVisitorClass = OptionalCollectionReturnTypeAstVisitor
 }
 
-class OptionalCollectionReturnTypeAstVisitor extends AbstractAstVisitor {
+class OptionalCollectionReturnTypeAstVisitor extends AbstractAstVisitor<OptionalCollectionReturnTypeRule> {
 
     private static final List<String> COLLECTION_TYPE_NAMES = [
             'Collection',

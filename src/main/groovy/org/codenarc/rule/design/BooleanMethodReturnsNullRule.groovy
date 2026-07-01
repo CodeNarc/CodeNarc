@@ -38,7 +38,7 @@ class BooleanMethodReturnsNullRule extends AbstractAstVisitorRule {
     Class astVisitorClass = BooleanMethodReturnsNullAstVisitor
 }
 
-class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
+class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor<BooleanMethodReturnsNullRule> {
     private static final String ERROR_MSG = 'Returning null from a method that might return a Boolean'
 
     @Override

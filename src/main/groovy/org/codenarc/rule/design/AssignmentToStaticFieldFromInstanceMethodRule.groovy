@@ -35,7 +35,7 @@ class AssignmentToStaticFieldFromInstanceMethodRule extends AbstractAstVisitorRu
     Class astVisitorClass = AssignmentToStaticFieldFromInstanceMethodAstVisitor
 }
 
-class AssignmentToStaticFieldFromInstanceMethodAstVisitor extends AbstractAstVisitor {
+class AssignmentToStaticFieldFromInstanceMethodAstVisitor extends AbstractAstVisitor<AssignmentToStaticFieldFromInstanceMethodRule> {
 
     private Collection<String> fieldNames
     private String withinInstanceMethodName = null

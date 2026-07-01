@@ -34,7 +34,7 @@ class SimpleDateFormatMissingLocaleRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SimpleDateFormatMissingLocaleAstVisitor
 }
 
-class SimpleDateFormatMissingLocaleAstVisitor extends AbstractAstVisitor {
+class SimpleDateFormatMissingLocaleAstVisitor extends AbstractAstVisitor<SimpleDateFormatMissingLocaleRule> {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (isFirstVisit(call) && call.type.name in ['SimpleDateFormat', 'java.text.SimpleDateFormat']) {

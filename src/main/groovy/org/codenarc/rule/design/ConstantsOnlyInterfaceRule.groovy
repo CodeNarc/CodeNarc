@@ -30,7 +30,7 @@ class ConstantsOnlyInterfaceRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConstantsOnlyInterfaceAstVisitor
 }
 
-class ConstantsOnlyInterfaceAstVisitor extends AbstractAstVisitor {
+class ConstantsOnlyInterfaceAstVisitor extends AbstractAstVisitor<ConstantsOnlyInterfaceRule> {
     @Override
     protected void visitClassEx(ClassNode node) {
         if (node.isInterface() && node.fields && !node.methods) {

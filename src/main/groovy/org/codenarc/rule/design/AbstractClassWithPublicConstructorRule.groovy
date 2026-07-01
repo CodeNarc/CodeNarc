@@ -32,7 +32,7 @@ class AbstractClassWithPublicConstructorRule extends AbstractAstVisitorRule {
     Class astVisitorClass = AbstractClassWithPublicConstructorAstVisitor
 }
 
-class AbstractClassWithPublicConstructorAstVisitor extends AbstractAstVisitor {
+class AbstractClassWithPublicConstructorAstVisitor extends AbstractAstVisitor<AbstractClassWithPublicConstructorRule> {
 
     @Override
     protected void visitClassEx(ClassNode node) {

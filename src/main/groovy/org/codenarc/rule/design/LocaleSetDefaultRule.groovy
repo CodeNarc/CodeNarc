@@ -34,7 +34,7 @@ class LocaleSetDefaultRule extends AbstractAstVisitorRule {
     Class astVisitorClass = LocaleSetDefaultAstVisitor
 }
 
-class LocaleSetDefaultAstVisitor extends AbstractAstVisitor {
+class LocaleSetDefaultAstVisitor extends AbstractAstVisitor<LocaleSetDefaultRule> {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
