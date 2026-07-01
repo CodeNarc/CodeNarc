@@ -35,7 +35,7 @@ class CollectAllIsDeprecatedRule extends AbstractAstVisitorRule {
 
 }
 
-class CollectAllIsDeprecatedAstVisitor extends AbstractAstVisitor {
+class CollectAllIsDeprecatedAstVisitor extends AbstractAstVisitor<CollectAllIsDeprecatedRule> {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         /*

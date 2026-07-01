@@ -42,7 +42,7 @@ class GetterMethodCouldBePropertyRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GetterMethodCouldBePropertyAstVisitor
 }
 
-class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
+class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor<GetterMethodCouldBePropertyRule> {
 
     private static final String CONSTANT_NAME_REGEX = /[A-Z].*/
 

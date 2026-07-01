@@ -36,7 +36,7 @@ class AssignCollectionSortRule extends AbstractAstVisitorRule {
     Class astVisitorClass = AssignCollectionSortAstVisitor
 }
 
-class AssignCollectionSortAstVisitor extends AbstractAstVisitor {
+class AssignCollectionSortAstVisitor extends AbstractAstVisitor<AssignCollectionSortRule> {
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
         Expression right = expression.rightExpression

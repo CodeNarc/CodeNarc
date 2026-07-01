@@ -34,7 +34,7 @@ class GStringExpressionWithinStringRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GStringExpressionWithinStringAstVisitor
 }
 
-class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor {
+class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor<GStringExpressionWithinStringRule> {
 
     private static final String GSTRING_EXPRESSION_REGEX = /\$\{.*\}/
     private AnnotatedNode currentAnnotatedNode

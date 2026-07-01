@@ -33,7 +33,7 @@ class GStringAsMapKeyRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GStringAsMapKeyAstVisitor
 }
 
-class GStringAsMapKeyAstVisitor extends AbstractAstVisitor {
+class GStringAsMapKeyAstVisitor extends AbstractAstVisitor<GStringAsMapKeyRule> {
 
     @Override
     void visitMapEntryExpression(MapEntryExpression expression) {

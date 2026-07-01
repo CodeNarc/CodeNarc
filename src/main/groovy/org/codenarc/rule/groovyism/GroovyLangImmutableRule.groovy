@@ -33,7 +33,7 @@ class GroovyLangImmutableRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GroovyLangImmutableAstVisitor
 }
 
-class GroovyLangImmutableAstVisitor extends AbstractAstVisitor {
+class GroovyLangImmutableAstVisitor extends AbstractAstVisitor<GroovyLangImmutableRule> {
     boolean groovyTransformIsStarImported = false
     boolean groovyTransformIsImported = false
     boolean javaxImmutableAnnotationIsImported = false

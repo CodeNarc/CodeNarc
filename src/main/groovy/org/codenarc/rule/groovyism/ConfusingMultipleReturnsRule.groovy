@@ -35,7 +35,7 @@ class ConfusingMultipleReturnsRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConfusingMultipleReturnsAstVisitor
 }
 
-class ConfusingMultipleReturnsAstVisitor extends AbstractAstVisitor {
+class ConfusingMultipleReturnsAstVisitor extends AbstractAstVisitor<ConfusingMultipleReturnsRule> {
 
     Set<DeclarationExpression> declarations = [] as Set
 

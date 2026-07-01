@@ -41,7 +41,7 @@ class AssignCollectionUniqueRule extends AbstractAstVisitorRule {
 
 }
 
-class AssignCollectionUniqueAstVisitor extends AbstractAstVisitor {
+class AssignCollectionUniqueAstVisitor extends AbstractAstVisitor<AssignCollectionUniqueRule> {
 
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {

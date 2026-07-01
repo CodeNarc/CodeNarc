@@ -45,7 +45,7 @@ class UseCollectNestedRule extends AbstractAstVisitorRule {
 
 }
 
-class UseCollectNestedAstVisitor extends AbstractAstVisitor {
+class UseCollectNestedAstVisitor extends AbstractAstVisitor<UseCollectNestedRule> {
 
     private static final Logger LOG = LoggerFactory.getLogger(UseCollectNestedAstVisitor)
 

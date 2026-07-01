@@ -36,7 +36,7 @@ class UseCollectManyRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UseCollectManyAstVisitor
 }
 
-class UseCollectManyAstVisitor extends AbstractAstVisitor {
+class UseCollectManyAstVisitor extends AbstractAstVisitor<UseCollectManyRule> {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         /*
