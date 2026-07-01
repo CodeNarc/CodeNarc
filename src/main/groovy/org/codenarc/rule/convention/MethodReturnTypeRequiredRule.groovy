@@ -34,7 +34,7 @@ class MethodReturnTypeRequiredRule extends AbstractAstVisitorRule {
     String ignoreMethodNames = ''
 }
 
-class MethodReturnTypeRequiredAstVisitor extends AbstractAstVisitor {
+class MethodReturnTypeRequiredAstVisitor extends AbstractAstVisitor<MethodReturnTypeRequiredRule> {
 
     @Override
     protected void visitMethodEx(MethodNode node) {

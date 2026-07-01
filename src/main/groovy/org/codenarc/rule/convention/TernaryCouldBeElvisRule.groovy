@@ -32,7 +32,7 @@ class TernaryCouldBeElvisRule extends AbstractAstVisitorRule {
     Class astVisitorClass = TernaryCouldBeElvisAstVisitor
 }
 
-class TernaryCouldBeElvisAstVisitor extends AbstractAstVisitor {
+class TernaryCouldBeElvisAstVisitor extends AbstractAstVisitor<TernaryCouldBeElvisRule> {
 
     @Override
     void visitTernaryExpression(TernaryExpression expression) {

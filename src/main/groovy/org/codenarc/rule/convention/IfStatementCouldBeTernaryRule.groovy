@@ -44,7 +44,7 @@ class IfStatementCouldBeTernaryRule extends AbstractAstVisitorRule {
     boolean checkLastStatementImplicitElse = true
 }
 
-class IfStatementCouldBeTernaryAstVisitor extends AbstractAstVisitor {
+class IfStatementCouldBeTernaryAstVisitor extends AbstractAstVisitor<IfStatementCouldBeTernaryRule> {
 
     @Override
     void visitIfElse(IfStatement ifElse) {

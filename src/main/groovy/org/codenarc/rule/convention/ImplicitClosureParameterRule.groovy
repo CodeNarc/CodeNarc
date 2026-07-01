@@ -36,7 +36,7 @@ class ImplicitClosureParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ImplicitClosureParameterAstVisitor
 }
 
-class ImplicitClosureParameterAstVisitor extends AbstractAstVisitor {
+class ImplicitClosureParameterAstVisitor extends AbstractAstVisitor<ImplicitClosureParameterRule> {
     private final ImplicitClosureParameterCodeVisitor closureCodeVisitor = new ImplicitClosureParameterCodeVisitor()
 
     @Override
@@ -73,7 +73,7 @@ class ImplicitClosureParameterAstVisitor extends AbstractAstVisitor {
     }
 }
 
-class ImplicitClosureParameterCodeVisitor extends AbstractAstVisitor {
+class ImplicitClosureParameterCodeVisitor extends AbstractAstVisitor<ImplicitClosureParameterRule> {
 
     @Override
     void visitVariableExpression(VariableExpression expression) {

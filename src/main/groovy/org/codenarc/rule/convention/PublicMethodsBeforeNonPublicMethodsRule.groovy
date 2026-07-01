@@ -38,7 +38,7 @@ class PublicMethodsBeforeNonPublicMethodsRule extends AbstractAstVisitorRule {
     String ignoreMethodNames
 }
 
-class PublicMethodsBeforeNonPublicMethodsAstVisitor extends AbstractAstVisitor {
+class PublicMethodsBeforeNonPublicMethodsAstVisitor extends AbstractAstVisitor<PublicMethodsBeforeNonPublicMethodsRule> {
 
     private boolean hasDeclaredNonPublicMethod = false
 

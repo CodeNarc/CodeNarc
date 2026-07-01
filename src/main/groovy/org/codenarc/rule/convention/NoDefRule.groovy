@@ -54,7 +54,7 @@ class NoDefRule extends AbstractAstVisitorRule {
     }
 }
 
-class NoDefAstVisitor extends AbstractAstVisitor {
+class NoDefAstVisitor extends AbstractAstVisitor<NoDefRule> {
 
     private static final Pattern CONTAINS_WHITESPACE_PATTERN = ~/.*\s+.*/
 

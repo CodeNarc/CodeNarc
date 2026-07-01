@@ -36,7 +36,7 @@ class MethodParameterTypeRequired extends AbstractAstVisitorRule {
 
 }
 
-class MethodParameterTypeRequiredAstVisitor extends AbstractAstVisitor {
+class MethodParameterTypeRequiredAstVisitor extends AbstractAstVisitor<MethodParameterTypeRequired> {
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         def dynamicallyTypedParameters = node.parameters.findAll { it.dynamicTyped && isNotIgnoredMethodParameterName(it) }

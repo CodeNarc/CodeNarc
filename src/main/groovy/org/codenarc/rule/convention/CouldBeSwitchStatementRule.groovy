@@ -41,7 +41,7 @@ class CouldBeSwitchStatementRule extends AbstractAstVisitorRule {
     String errorMessage = 'Code could use switch statement'
 }
 
-class CouldBeSwitchStatementAstVisitor extends AbstractAstVisitor {
+class CouldBeSwitchStatementAstVisitor extends AbstractAstVisitor<CouldBeSwitchStatementRule> {
 
     private BinaryExpression prev = null
     private Integer ifCounter = 0

@@ -34,7 +34,7 @@ class ParameterReassignmentRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ParameterReassignmentAstVisitor
 }
 
-class ParameterReassignmentAstVisitor extends AbstractAstVisitor {
+class ParameterReassignmentAstVisitor extends AbstractAstVisitor<ParameterReassignmentRule> {
 
     private List currentMethodParameterNames
     private final List currentClosureParameterNames = []

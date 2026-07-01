@@ -35,7 +35,7 @@ class NoFloatRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NoFloatAstVisitor
 }
 
-class NoFloatAstVisitor extends AbstractAstVisitor {
+class NoFloatAstVisitor extends AbstractAstVisitor<NoFloatRule> {
 
     private static final List FLOAT_TYPE_NAMES = ['float', 'Float', 'java.lang.Float']
 

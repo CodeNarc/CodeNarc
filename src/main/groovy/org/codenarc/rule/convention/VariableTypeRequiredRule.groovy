@@ -35,7 +35,7 @@ class VariableTypeRequiredRule extends AbstractAstVisitorRule {
     String ignoreVariableNames
 }
 
-class VariableTypeRequiredAstVisitor extends AbstractAstVisitor {
+class VariableTypeRequiredAstVisitor extends AbstractAstVisitor<VariableTypeRequiredRule> {
 
     @Override
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {

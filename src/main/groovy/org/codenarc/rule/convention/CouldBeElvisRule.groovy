@@ -37,7 +37,7 @@ class CouldBeElvisRule extends AbstractAstVisitorRule {
     Class astVisitorClass = CouldBeElvisAstVisitor
 }
 
-class CouldBeElvisAstVisitor extends AbstractAstVisitor {
+class CouldBeElvisAstVisitor extends AbstractAstVisitor<CouldBeElvisRule> {
     @Override
     void visitIfElse(IfStatement node) {
         addViolationCouldBeElvis(node)

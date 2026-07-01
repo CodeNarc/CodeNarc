@@ -41,7 +41,7 @@ class ConfusingTernaryRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConfusingTernaryAstVisitor
 }
 
-class ConfusingTernaryAstVisitor extends AbstractAstVisitor {
+class ConfusingTernaryAstVisitor extends AbstractAstVisitor<ConfusingTernaryRule> {
     @Override
     void visitTernaryExpression(TernaryExpression expression) {
         if (expression.booleanExpression.expression instanceof BinaryExpression) {

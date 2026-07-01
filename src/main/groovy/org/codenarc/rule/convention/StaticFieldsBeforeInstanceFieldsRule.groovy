@@ -32,7 +32,7 @@ class StaticFieldsBeforeInstanceFieldsRule extends AbstractAstVisitorRule {
     Class astVisitorClass = StaticFieldsBeforeInstanceFieldsAstVisitor
 }
 
-class StaticFieldsBeforeInstanceFieldsAstVisitor extends AbstractAstVisitor {
+class StaticFieldsBeforeInstanceFieldsAstVisitor extends AbstractAstVisitor<StaticFieldsBeforeInstanceFieldsRule> {
 
     @Override
     protected void visitClassComplete(ClassNode node) {

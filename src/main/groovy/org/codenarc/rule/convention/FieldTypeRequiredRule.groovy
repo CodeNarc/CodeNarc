@@ -34,7 +34,7 @@ class FieldTypeRequiredRule extends AbstractAstVisitorRule {
 
 }
 
-class FieldTypeRequiredAstVisitor extends AbstractAstVisitor {
+class FieldTypeRequiredAstVisitor extends AbstractAstVisitor<FieldTypeRequiredRule> {
 
     @Override
     void visitField(FieldNode node) {

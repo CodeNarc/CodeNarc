@@ -41,7 +41,7 @@ class StaticMethodsBeforeInstanceMethodsRule extends AbstractAstVisitorRule {
     String ignoreMethodNames
 }
 
-class StaticMethodsBeforeInstanceMethodsAstVisitor extends AbstractAstVisitor {
+class StaticMethodsBeforeInstanceMethodsAstVisitor extends AbstractAstVisitor<StaticMethodsBeforeInstanceMethodsRule> {
 
     private static enum Visibility {
         PUBLIC('public'), PROTECTED('protected'), PRIVATE('private')

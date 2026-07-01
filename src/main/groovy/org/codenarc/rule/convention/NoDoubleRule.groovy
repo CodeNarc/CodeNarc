@@ -35,7 +35,7 @@ class NoDoubleRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NoDoubleAstVisitor
 }
 
-class NoDoubleAstVisitor extends AbstractAstVisitor {
+class NoDoubleAstVisitor extends AbstractAstVisitor<NoDoubleRule> {
 
     private static final List FLOAT_TYPE_NAMES = ['double', 'Double', 'java.lang.Double']
 

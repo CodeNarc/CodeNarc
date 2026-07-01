@@ -34,7 +34,7 @@ class CompileStaticRule extends AbstractAstVisitorRule {
     Class astVisitorClass = CompileStaticlVisitor
 }
 
-class CompileStaticlVisitor extends AbstractAstVisitor {
+class CompileStaticlVisitor extends AbstractAstVisitor<CompileStaticRule> {
 
     private static final String GRAILS_COMPILE_STATIC = 'GrailsCompileStatic'
     private static final String COMPILE_STATIC = 'CompileStatic'

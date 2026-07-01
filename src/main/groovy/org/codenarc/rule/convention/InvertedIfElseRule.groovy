@@ -36,7 +36,7 @@ class InvertedIfElseRule extends AbstractAstVisitorRule {
     Class astVisitorClass = InvertedIfElseAstVisitor
 }
 
-class InvertedIfElseAstVisitor extends AbstractAstVisitor {
+class InvertedIfElseAstVisitor extends AbstractAstVisitor<InvertedIfElseRule> {
 
     @Override
     void visitIfElse(IfStatement ifElse) {

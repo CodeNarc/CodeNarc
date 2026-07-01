@@ -37,7 +37,7 @@ class NoJavaUtilDateRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NoJavaUtilDateAstVisitor
 }
 
-class NoJavaUtilDateAstVisitor extends AbstractAstVisitor {
+class NoJavaUtilDateAstVisitor extends AbstractAstVisitor<NoJavaUtilDateRule> {
 
     protected static final String VIOLATION_MESSAGE = 'Do not use java.util.Date. Prefer the classes in the java.time.* packages.'
 

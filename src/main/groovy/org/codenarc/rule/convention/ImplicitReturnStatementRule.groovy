@@ -42,7 +42,7 @@ class ImplicitReturnStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ImplicitReturnStatementAstVisitor
 }
 
-class ImplicitReturnStatementAstVisitor extends AbstractAstVisitor {
+class ImplicitReturnStatementAstVisitor extends AbstractAstVisitor<ImplicitReturnStatementRule> {
 
     @Override
     protected void visitMethodEx(MethodNode node) {

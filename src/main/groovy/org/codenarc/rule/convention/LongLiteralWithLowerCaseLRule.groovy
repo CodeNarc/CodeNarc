@@ -32,7 +32,7 @@ class LongLiteralWithLowerCaseLRule extends AbstractAstVisitorRule {
     Class astVisitorClass = LongLiteralWithLowerCaseLAstVisitor
 }
 
-class LongLiteralWithLowerCaseLAstVisitor extends AbstractAstVisitor {
+class LongLiteralWithLowerCaseLAstVisitor extends AbstractAstVisitor<LongLiteralWithLowerCaseLRule> {
     @Override
     void visitConstantExpression(ConstantExpression expression) {
         if (!isFirstVisit(expression)) {

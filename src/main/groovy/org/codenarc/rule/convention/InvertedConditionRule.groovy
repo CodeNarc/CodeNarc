@@ -36,7 +36,7 @@ class InvertedConditionRule extends AbstractAstVisitorRule {
 
 }
 
-class InvertedConditionAstVisitor extends AbstractAstVisitor {
+class InvertedConditionAstVisitor extends AbstractAstVisitor<InvertedConditionRule> {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {

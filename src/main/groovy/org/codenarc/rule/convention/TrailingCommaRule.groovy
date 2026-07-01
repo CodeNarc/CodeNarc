@@ -44,7 +44,7 @@ class TrailingCommaRule extends AbstractAstVisitorRule {
     boolean ignoreSingleElementMap = true
 }
 
-class TrailingCommaAstVisitor extends AbstractAstVisitor {
+class TrailingCommaAstVisitor extends AbstractAstVisitor<TrailingCommaRule> {
 
     @Override
     void visitMapExpression(MapExpression expression) {
