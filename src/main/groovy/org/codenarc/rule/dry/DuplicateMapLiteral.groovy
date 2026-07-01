@@ -33,7 +33,7 @@ class DuplicateMapLiteralRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DuplicateMapLiteralAstVisitor
 }
 
-class DuplicateMapLiteralAstVisitor extends AbstractAstVisitor {
+class DuplicateMapLiteralAstVisitor extends AbstractAstVisitor<DuplicateMapLiteralRule> {
 
     private final Collection<Map> mapLiterals = []
 

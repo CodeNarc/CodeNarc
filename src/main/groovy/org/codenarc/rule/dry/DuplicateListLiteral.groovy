@@ -34,7 +34,7 @@ class DuplicateListLiteralRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DuplicateListLiteralAstVisitor
 }
 
-class DuplicateListLiteralAstVisitor extends AbstractAstVisitor {
+class DuplicateListLiteralAstVisitor extends AbstractAstVisitor<DuplicateListLiteralRule> {
 
     private final Collection<Map> listLiterals = []
 
