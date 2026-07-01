@@ -36,7 +36,7 @@ class BusyWaitRule extends AbstractAstVisitorRule {
     Class astVisitorClass = BusyWaitAstVisitor
 }
 
-class BusyWaitAstVisitor extends AbstractAstVisitor {
+class BusyWaitAstVisitor extends AbstractAstVisitor<BusyWaitRule> {
     @Override
     void visitWhileLoop(WhileStatement node) {
         addViolationIfBusyWait(node)

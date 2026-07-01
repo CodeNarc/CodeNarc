@@ -40,7 +40,7 @@ class ThisReferenceEscapesConstructorRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ThisReferenceEscapesConstructorAstVisitor
 }
 
-class ThisReferenceEscapesConstructorAstVisitor extends AbstractAstVisitor {
+class ThisReferenceEscapesConstructorAstVisitor extends AbstractAstVisitor<ThisReferenceEscapesConstructorRule> {
 
     private boolean withinConstructor = false
 

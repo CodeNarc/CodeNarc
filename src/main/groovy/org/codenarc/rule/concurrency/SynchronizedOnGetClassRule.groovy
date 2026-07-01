@@ -33,7 +33,7 @@ class SynchronizedOnGetClassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SynchronizedOnGetClassAstVisitor
 }
 
-class SynchronizedOnGetClassAstVisitor extends AbstractAstVisitor {
+class SynchronizedOnGetClassAstVisitor extends AbstractAstVisitor<SynchronizedOnGetClassRule> {
 
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {

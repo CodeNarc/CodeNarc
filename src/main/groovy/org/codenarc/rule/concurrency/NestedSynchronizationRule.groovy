@@ -33,7 +33,7 @@ class NestedSynchronizationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NestedSynchronizationAstVisitor
 }
 
-class NestedSynchronizationAstVisitor extends AbstractAstVisitor  {
+class NestedSynchronizationAstVisitor extends AbstractAstVisitor<NestedSynchronizationRule> {
 
     private int visitCount = 0
 

@@ -37,7 +37,7 @@ class DoubleCheckedLockingRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DoubleCheckedLockingAstVisitor
 }
 
-class DoubleCheckedLockingAstVisitor extends AbstractAstVisitor {
+class DoubleCheckedLockingAstVisitor extends AbstractAstVisitor<DoubleCheckedLockingRule> {
     @Override
     void visitIfElse(IfStatement node) {
         addViolationOnDoubleLocking(node)

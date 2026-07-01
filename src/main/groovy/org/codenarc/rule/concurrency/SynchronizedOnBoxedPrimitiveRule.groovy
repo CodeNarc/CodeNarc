@@ -34,7 +34,7 @@ class SynchronizedOnBoxedPrimitiveRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SynchronizedOnBoxedPrimitiveAstVisitor
 }
 
-class SynchronizedOnBoxedPrimitiveAstVisitor extends AbstractAstVisitor {
+class SynchronizedOnBoxedPrimitiveAstVisitor extends AbstractAstVisitor<SynchronizedOnBoxedPrimitiveRule> {
 
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {

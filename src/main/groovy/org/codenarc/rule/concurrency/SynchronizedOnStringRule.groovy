@@ -32,7 +32,7 @@ class SynchronizedOnStringRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SynchronizedOnStringAstVisitor
 }
 
-class SynchronizedOnStringAstVisitor extends AbstractAstVisitor {
+class SynchronizedOnStringAstVisitor extends AbstractAstVisitor<SynchronizedOnStringRule> {
 
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {

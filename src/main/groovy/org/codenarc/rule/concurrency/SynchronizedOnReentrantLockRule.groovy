@@ -34,7 +34,7 @@ class SynchronizedOnReentrantLockRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SynchronizedOnReentrantLockAstVisitor
 }
 
-class SynchronizedOnReentrantLockAstVisitor extends AbstractAstVisitor {
+class SynchronizedOnReentrantLockAstVisitor extends AbstractAstVisitor<SynchronizedOnReentrantLockRule> {
 
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {

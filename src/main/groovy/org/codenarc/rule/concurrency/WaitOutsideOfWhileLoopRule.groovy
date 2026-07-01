@@ -35,7 +35,7 @@ class WaitOutsideOfWhileLoopRule extends AbstractAstVisitorRule {
     Class astVisitorClass = WaitOutsideOfWhileLoopAstVisitor
 }
 
-class WaitOutsideOfWhileLoopAstVisitor extends AbstractAstVisitor {
+class WaitOutsideOfWhileLoopAstVisitor extends AbstractAstVisitor<WaitOutsideOfWhileLoopRule> {
 
     private boolean withinWhileLoop = false
 

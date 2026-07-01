@@ -32,7 +32,7 @@ class ThreadGroupRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ThreadGroupAstVisitor
 }
 
-class ThreadGroupAstVisitor extends AbstractAstVisitor {
+class ThreadGroupAstVisitor extends AbstractAstVisitor<ThreadGroupRule> {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (isConstructorNamed(call, ThreadGroup)) {

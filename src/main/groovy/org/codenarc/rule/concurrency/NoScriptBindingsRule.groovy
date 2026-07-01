@@ -37,7 +37,7 @@ class NoScriptBindingsRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NoScriptBindingsAstVisitor
 }
 
-class NoScriptBindingsAstVisitor extends AbstractAstVisitor {
+class NoScriptBindingsAstVisitor extends AbstractAstVisitor<NoScriptBindingsRule> {
 
     private final Stack variableNamesByBlockScope = [] as Stack
     private Set variableNamesInCurrentBlockScope
