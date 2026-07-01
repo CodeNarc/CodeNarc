@@ -35,7 +35,7 @@ class EnumCustomSerializationIgnoredRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EnumCustomSerializationIgnoredAstVisitor
 }
 
-class EnumCustomSerializationIgnoredAstVisitor extends AbstractAstVisitor {
+class EnumCustomSerializationIgnoredAstVisitor extends AbstractAstVisitor<EnumCustomSerializationIgnoredRule> {
 
     @Override
     void visitField(FieldNode node) {

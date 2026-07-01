@@ -33,7 +33,7 @@ class SerialVersionUIDRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SerialVersionUIDAstVisitor
 }
 
-class SerialVersionUIDAstVisitor extends AbstractAstVisitor {
+class SerialVersionUIDAstVisitor extends AbstractAstVisitor<SerialVersionUIDRule> {
 
     private final static String SERIAL_ID = 'serialVersionUID'
 

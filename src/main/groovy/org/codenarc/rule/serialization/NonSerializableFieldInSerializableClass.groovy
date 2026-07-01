@@ -34,7 +34,7 @@ class NonSerializableFieldInSerializableClass extends AbstractAstVisitorRule {
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
 }
 
-class NonSerializableFieldInSerializableClassVisitor extends AbstractAstVisitor {
+class NonSerializableFieldInSerializableClassVisitor extends AbstractAstVisitor<NonSerializableFieldInSerializableClass> {
 
     @Override
     void visitField(FieldNode field) {

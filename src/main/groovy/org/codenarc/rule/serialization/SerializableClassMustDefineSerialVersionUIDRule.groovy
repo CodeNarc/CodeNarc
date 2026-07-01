@@ -31,7 +31,7 @@ class SerializableClassMustDefineSerialVersionUIDRule extends AbstractAstVisitor
     Class astVisitorClass = SerializableClassMustDefineSerialVersionUIDAstVisitor
 }
 
-class SerializableClassMustDefineSerialVersionUIDAstVisitor extends AbstractAstVisitor {
+class SerializableClassMustDefineSerialVersionUIDAstVisitor extends AbstractAstVisitor<SerializableClassMustDefineSerialVersionUIDRule> {
     @Override
     protected void visitClassEx(ClassNode node) {
         if (AstUtil.classNodeImplementsType(node, Serializable) && !node.isEnum() && !node.isInterface()) {
