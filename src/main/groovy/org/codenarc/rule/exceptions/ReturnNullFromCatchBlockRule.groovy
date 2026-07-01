@@ -37,7 +37,7 @@ class ReturnNullFromCatchBlockRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ReturnNullFromCatchBlockAstVisitor
 }
 
-class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
+class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor<ReturnNullFromCatchBlockRule> {
 
     @Override
     protected boolean shouldVisitMethod(MethodNode node) {

@@ -35,7 +35,7 @@ class MissingNewInThrowStatementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = MissingNewInThrowStatementAstVisitor
 }
 
-class MissingNewInThrowStatementAstVisitor extends AbstractAstVisitor {
+class MissingNewInThrowStatementAstVisitor extends AbstractAstVisitor<MissingNewInThrowStatementRule> {
     @Override
     void visitThrowStatement(ThrowStatement statement) {
         if (statement.expression instanceof MethodCallExpression) {

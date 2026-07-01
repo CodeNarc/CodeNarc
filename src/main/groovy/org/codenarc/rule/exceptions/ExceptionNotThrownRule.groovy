@@ -35,7 +35,7 @@ class ExceptionNotThrownRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ExceptionNotThrownAstVisitor
 }
 
-class ExceptionNotThrownAstVisitor extends AbstractAstVisitor {
+class ExceptionNotThrownAstVisitor extends AbstractAstVisitor<ExceptionNotThrownRule> {
 
     @Override
     void visitCatchStatement(CatchStatement statement) {

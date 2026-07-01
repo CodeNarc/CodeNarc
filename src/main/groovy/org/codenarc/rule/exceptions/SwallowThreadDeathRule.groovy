@@ -34,7 +34,7 @@ class SwallowThreadDeathRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SwallowThreadDeathAstVisitor
 }
 
-class SwallowThreadDeathAstVisitor extends AbstractAstVisitor {
+class SwallowThreadDeathAstVisitor extends AbstractAstVisitor<SwallowThreadDeathRule> {
 
     private boolean withinCatchThreadDeath = false
     private String caughtVariableName = null

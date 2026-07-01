@@ -32,7 +32,7 @@ class ExceptionExtendsThrowableRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ExceptionExtendsThrowableAstVisitor
 }
 
-class ExceptionExtendsThrowableAstVisitor extends AbstractAstVisitor {
+class ExceptionExtendsThrowableAstVisitor extends AbstractAstVisitor<ExceptionExtendsThrowableRule> {
 
     private final ClassNode throwableClassNode = ClassHelper.make(Throwable)
 

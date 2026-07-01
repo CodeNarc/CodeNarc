@@ -31,7 +31,7 @@ class ConfusingClassNamedExceptionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConfusingClassNamedExceptionAstVisitor
 }
 
-class ConfusingClassNamedExceptionAstVisitor extends AbstractAstVisitor {
+class ConfusingClassNamedExceptionAstVisitor extends AbstractAstVisitor<ConfusingClassNamedExceptionRule> {
 
     @Override
     void visitClassEx(ClassNode node) {

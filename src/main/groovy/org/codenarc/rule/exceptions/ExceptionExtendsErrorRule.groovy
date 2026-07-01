@@ -33,7 +33,7 @@ class ExceptionExtendsErrorRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ExceptionExtendsErrorAstVisitor
 }
 
-class ExceptionExtendsErrorAstVisitor extends AbstractAstVisitor {
+class ExceptionExtendsErrorAstVisitor extends AbstractAstVisitor<ExceptionExtendsErrorRule> {
 
     private final ClassNode errorClassNode = ClassHelper.make(Error)
 
