@@ -37,7 +37,7 @@ class ElseBlockBracesRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ElseBlockBracesAstVisitor
 }
 
-class ElseBlockBracesAstVisitor extends AbstractAstVisitor  {
+class ElseBlockBracesAstVisitor extends AbstractAstVisitor<ElseBlockBracesRule> {
     @Override
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && !(ifStatement.elseBlock instanceof EmptyStatement) &&

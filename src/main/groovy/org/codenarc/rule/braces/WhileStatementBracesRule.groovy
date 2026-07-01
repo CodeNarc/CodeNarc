@@ -31,7 +31,7 @@ class WhileStatementBracesRule extends AbstractAstVisitorRule {
     Class astVisitorClass = WhileStatementBracesAstVisitor
 }
 
-class WhileStatementBracesAstVisitor extends AbstractAstVisitor  {
+class WhileStatementBracesAstVisitor extends AbstractAstVisitor<WhileStatementBracesRule> {
     @Override
     void visitWhileLoop(WhileStatement whileStatement) {
         if (isFirstVisit(whileStatement) && !AstUtil.isBlock(whileStatement.loopBlock)) {

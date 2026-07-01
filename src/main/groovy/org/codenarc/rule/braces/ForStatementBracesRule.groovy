@@ -31,7 +31,7 @@ class ForStatementBracesRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ForStatementBracesAstVisitor
 }
 
-class ForStatementBracesAstVisitor extends AbstractAstVisitor  {
+class ForStatementBracesAstVisitor extends AbstractAstVisitor<ForStatementBracesRule> {
     @Override
     void visitForLoop(ForStatement forStatement) {
         if (isFirstVisit(forStatement) && !AstUtil.isBlock(forStatement.loopBlock)) {

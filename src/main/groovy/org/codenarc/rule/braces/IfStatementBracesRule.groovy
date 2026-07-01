@@ -31,7 +31,7 @@ class IfStatementBracesRule extends AbstractAstVisitorRule {
     Class astVisitorClass = IfStatementBracesAstVisitor
 }
 
-class IfStatementBracesAstVisitor extends AbstractAstVisitor  {
+class IfStatementBracesAstVisitor extends AbstractAstVisitor<IfStatementBracesRule> {
     @Override
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && !AstUtil.isBlock(ifStatement.ifBlock)) {
