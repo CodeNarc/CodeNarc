@@ -41,7 +41,7 @@ class NonFinalSubclassOfSensitiveInterfaceRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NonFinalSubclassOfSensitiveInterfaceAstVisitor
 }
 
-class NonFinalSubclassOfSensitiveInterfaceAstVisitor extends AbstractAstVisitor {
+class NonFinalSubclassOfSensitiveInterfaceAstVisitor extends AbstractAstVisitor<NonFinalSubclassOfSensitiveInterfaceRule> {
     @Override
     protected void visitClassEx(ClassNode node) {
         if (!Modifier.isFinal(node.modifiers)) {

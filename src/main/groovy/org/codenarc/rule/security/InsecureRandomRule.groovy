@@ -39,7 +39,7 @@ class InsecureRandomRule extends AbstractAstVisitorRule {
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 
-class InsecureRandomAstVisitor extends AbstractAstVisitor {
+class InsecureRandomAstVisitor extends AbstractAstVisitor<InsecureRandomRule> {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (AstUtil.classNodeImplementsType(call.type, Random)) {

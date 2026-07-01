@@ -35,7 +35,7 @@ class JavaIoPackageAccessRule extends AbstractAstVisitorRule {
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 
-class JavaIoPackageAccessAstVisitor extends AbstractAstVisitor {
+class JavaIoPackageAccessAstVisitor extends AbstractAstVisitor<JavaIoPackageAccessRule> {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (AstUtil.classNodeImplementsType(call.type, File)) {

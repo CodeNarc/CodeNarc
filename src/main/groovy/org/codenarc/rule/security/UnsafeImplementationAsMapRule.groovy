@@ -41,7 +41,7 @@ class UnsafeImplementationAsMapRule extends AbstractAstVisitorRule {
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 
-class UnsafeImplementationAsMapAstVisitor extends AbstractAstVisitor {
+class UnsafeImplementationAsMapAstVisitor extends AbstractAstVisitor<UnsafeImplementationAsMapRule> {
 
     @Override
     void visitCastExpression(CastExpression cast) {
