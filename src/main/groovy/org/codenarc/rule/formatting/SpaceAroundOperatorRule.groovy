@@ -41,7 +41,7 @@ class SpaceAroundOperatorRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAroundOperatorAstVisitor
 }
 
-class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
+class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor<SpaceAroundOperatorRule> {
 
     private static final String QUOTE = '"'
     private static final String PRECEDED = 'preceded'

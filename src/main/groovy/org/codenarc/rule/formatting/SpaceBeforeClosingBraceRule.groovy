@@ -39,7 +39,7 @@ class SpaceBeforeClosingBraceRule extends AbstractAstVisitorRule {
     boolean ignoreEmptyBlock = false
 }
 
-class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
+class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor<SpaceBeforeClosingBraceRule> {
 
     @Override
     protected void visitClassEx(ClassNode node) {

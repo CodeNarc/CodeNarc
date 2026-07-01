@@ -35,7 +35,7 @@ class BracesForMethodRule extends AbstractAstVisitorRule {
     boolean allowBraceOnNextLineForMultilineDeclarations = false
 }
 
-class BracesForMethodAstVisitor extends AbstractAstVisitor {
+class BracesForMethodAstVisitor extends AbstractAstVisitor<BracesForMethodRule> {
 
     @Override
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {

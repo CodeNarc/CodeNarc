@@ -59,7 +59,7 @@ class BracesForIfElseRule extends AbstractAstVisitorRule {
 
 }
 
-class BracesForIfElseAstVisitor extends AbstractAstVisitor {
+class BracesForIfElseAstVisitor extends AbstractAstVisitor<BracesForIfElseRule> {
 
     @Override
     void visitIfElse(IfStatement node) {

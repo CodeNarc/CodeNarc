@@ -36,7 +36,7 @@ class BracesForForLoopRule extends AbstractAstVisitorRule {
 
 }
 
-class BracesForForLoopAstVisitor extends AbstractAstVisitor {
+class BracesForForLoopAstVisitor extends AbstractAstVisitor<BracesForForLoopRule> {
 
     @Override
     void visitForLoop(ForStatement node) {

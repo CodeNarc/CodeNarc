@@ -40,7 +40,7 @@ class BlockStartsWithBlankLineRule extends AbstractAstVisitorRule {
 
 }
 
-class BlockStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
+class BlockStartsWithBlankLineAstVisitor extends AbstractAstVisitor<BlockStartsWithBlankLineRule> {
     @Override
     void visitBlockStatement(BlockStatement block) {
         if (isFirstVisit(block)) {

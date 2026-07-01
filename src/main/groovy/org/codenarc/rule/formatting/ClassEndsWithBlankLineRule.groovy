@@ -57,7 +57,7 @@ class ClassEndsWithBlankLineRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ClassEndsWithBlankLineAstVisitor
 }
 
-class ClassEndsWithBlankLineAstVisitor extends AbstractAstVisitor {
+class ClassEndsWithBlankLineAstVisitor extends AbstractAstVisitor<ClassEndsWithBlankLineRule> {
 
     private static final int PENULTIMATE_LINE_OFFSET = 2
     private static final char CLOSE_BRACE_CHARACTER = '}'

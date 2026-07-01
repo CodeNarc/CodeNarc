@@ -30,7 +30,7 @@ class SpaceAfterSwitchRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterSwitchAstVisitor
 }
 
-class SpaceAfterSwitchAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor {
+class SpaceAfterSwitchAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor<SpaceAfterSwitchRule> {
 
     @Override
     void visitSwitch(SwitchStatement statement) {

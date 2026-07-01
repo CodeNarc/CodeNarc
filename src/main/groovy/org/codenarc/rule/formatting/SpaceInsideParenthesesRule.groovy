@@ -32,7 +32,7 @@ class SpaceInsideParenthesesRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceInsideParenthesesAstVisitor
 }
 
-class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
+class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor<SpaceInsideParenthesesRule> {
 
     private static final String MESSAGE_SPACE_AFTER_OPENING_PARENTHESIS = 'The opening parenthesis is followed by whitespace'
     private static final String MESSAGE_SPACE_BEFORE_CLOSING_PARENTHESIS = 'The closing parenthesis is preceded by whitespace'

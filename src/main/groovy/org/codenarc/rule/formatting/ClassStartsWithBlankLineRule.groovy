@@ -57,7 +57,7 @@ class ClassStartsWithBlankLineRule extends AbstractAstVisitorRule {
     boolean blankLineRequired = true
 }
 
-class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
+class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor<ClassStartsWithBlankLineRule> {
 
     @Override
     protected void visitClassComplete(ClassNode classNode) {

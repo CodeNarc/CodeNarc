@@ -30,7 +30,7 @@ class SpaceAroundClosureArrowRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAroundClosureArrowAstVisitor
 }
 
-class SpaceAroundClosureArrowAstVisitor extends AbstractAstVisitor {
+class SpaceAroundClosureArrowAstVisitor extends AbstractAstVisitor<SpaceAroundClosureArrowRule> {
 
     @Override
     void visitClosureExpression(ClosureExpression expression) {

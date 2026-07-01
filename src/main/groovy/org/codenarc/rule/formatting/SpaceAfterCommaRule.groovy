@@ -39,7 +39,7 @@ class SpaceAfterCommaRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterCommaAstVisitor
 }
 
-class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
+class SpaceAfterCommaAstVisitor extends AbstractAstVisitor<SpaceAfterCommaRule> {
 
     private static final char COMMA = ','
 

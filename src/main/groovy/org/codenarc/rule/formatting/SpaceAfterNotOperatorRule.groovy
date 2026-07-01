@@ -29,7 +29,7 @@ class SpaceAfterNotOperatorRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterNotOperatorRuleAstVisitor
 }
 
-class SpaceAfterNotOperatorRuleAstVisitor extends AbstractAstVisitor {
+class SpaceAfterNotOperatorRuleAstVisitor extends AbstractAstVisitor<SpaceAfterNotOperatorRule> {
 
     @Override
     void visitNotExpression(NotExpression expression) {

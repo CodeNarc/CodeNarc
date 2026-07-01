@@ -42,7 +42,7 @@ class SpaceBeforeOpeningBraceRule extends AbstractAstVisitorRule {
     boolean checkClosureMapEntryValue = true
 }
 
-class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
+class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor<SpaceBeforeOpeningBraceRule> {
 
     @Override
     protected void visitClassEx(ClassNode node) {

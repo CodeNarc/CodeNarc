@@ -32,7 +32,7 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureRule extends AbstractAst
     Class astVisitorClass = ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor
 }
 
-class ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor extends AbstractAstVisitor {
+class ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor extends AbstractAstVisitor<ClosureStatementOnOpeningLineOfMultipleLineClosureRule> {
 
     @Override
     void visitClosureExpression(ClosureExpression expression) {

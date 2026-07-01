@@ -54,7 +54,7 @@ class IndentationRule extends AbstractAstVisitorRule {
     }
 }
 
-class IndentationAstVisitor extends AbstractAstVisitor {
+class IndentationAstVisitor extends AbstractAstVisitor<IndentationRule> {
 
     // Limitations:
     //  - Checks spaces only (not tabs)

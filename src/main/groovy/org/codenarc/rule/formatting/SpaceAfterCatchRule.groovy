@@ -30,7 +30,7 @@ class SpaceAfterCatchRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterElseAstVisitor
 }
 
-class SpaceAfterElseAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor {
+class SpaceAfterElseAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor<SpaceAfterCatchRule> {
 
     @Override
     void visitCatchStatement(CatchStatement statement) {

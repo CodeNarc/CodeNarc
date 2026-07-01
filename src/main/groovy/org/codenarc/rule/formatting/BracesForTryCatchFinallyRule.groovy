@@ -54,7 +54,7 @@ class BracesForTryCatchFinallyRule extends AbstractAstVisitorRule {
     Boolean finallyOnSameLineAsOpeningBrace
 }
 
-class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
+class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor<BracesForTryCatchFinallyRule> {
 
     @Override
     protected void visitClassEx(ClassNode node) {

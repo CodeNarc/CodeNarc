@@ -30,7 +30,7 @@ class SpaceAfterForRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterForAstVisitor
 }
 
-class SpaceAfterForAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor {
+class SpaceAfterForAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor<SpaceAfterForRule> {
 
     @Override
     void visitForLoop(ForStatement forLoop) {

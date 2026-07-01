@@ -30,7 +30,7 @@ class SpaceAfterIfRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterIfAstVisitor
 }
 
-class SpaceAfterIfAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor {
+class SpaceAfterIfAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor<SpaceAfterIfRule> {
 
     @Override
     void visitIfElse(IfStatement ifElse) {

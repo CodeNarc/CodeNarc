@@ -30,7 +30,7 @@ class SpaceAfterWhileRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterWhileAstVisitor
 }
 
-class SpaceAfterWhileAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor {
+class SpaceAfterWhileAstVisitor extends AbstractSingleSpaceAfterKeywordAstVisitor<SpaceAfterWhileRule> {
 
     @Override
     void visitWhileLoop(WhileStatement loop) {

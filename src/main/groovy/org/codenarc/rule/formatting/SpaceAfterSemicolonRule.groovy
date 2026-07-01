@@ -37,7 +37,7 @@ class SpaceAfterSemicolonRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterSemicolonAstVisitor
 }
 
-class SpaceAfterSemicolonAstVisitor extends AbstractAstVisitor {
+class SpaceAfterSemicolonAstVisitor extends AbstractAstVisitor<SpaceAfterSemicolonRule> {
     @Override
     void visitBlockStatement(BlockStatement block) {
         def lastLine

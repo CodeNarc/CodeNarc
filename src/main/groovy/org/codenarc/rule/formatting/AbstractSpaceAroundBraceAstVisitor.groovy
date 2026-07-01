@@ -19,13 +19,14 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.Rule
 
 /**
  * Abstract superclass for AstVisitor classes dealing with space around braces
  *
  * @author Chris Mair
  */
-abstract class AbstractSpaceAroundBraceAstVisitor extends AbstractAstVisitor {
+abstract class AbstractSpaceAroundBraceAstVisitor<R extends Rule> extends AbstractAstVisitor<R> {
 
     private final Stack<GStringExpression> gStringExpressionsStack = [] as Stack
 

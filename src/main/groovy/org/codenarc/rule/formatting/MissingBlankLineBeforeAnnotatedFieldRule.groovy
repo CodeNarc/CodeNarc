@@ -30,7 +30,7 @@ class MissingBlankLineBeforeAnnotatedFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = MissingBlankLineBeforeAnnotatedFieldRuleAstVisitor
 }
 
-class MissingBlankLineBeforeAnnotatedFieldRuleAstVisitor extends AbstractAstVisitor {
+class MissingBlankLineBeforeAnnotatedFieldRuleAstVisitor extends AbstractAstVisitor<MissingBlankLineBeforeAnnotatedFieldRule> {
 
     @Override
     void visitField(FieldNode node) {

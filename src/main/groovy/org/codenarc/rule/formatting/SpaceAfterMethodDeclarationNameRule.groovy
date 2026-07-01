@@ -30,7 +30,7 @@ class SpaceAfterMethodDeclarationNameRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterMethodDeclarationNameRuleAstVisitor
 }
 
-class SpaceAfterMethodDeclarationNameRuleAstVisitor extends AbstractAstVisitor {
+class SpaceAfterMethodDeclarationNameRuleAstVisitor extends AbstractAstVisitor<SpaceAfterMethodDeclarationNameRule> {
 
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {

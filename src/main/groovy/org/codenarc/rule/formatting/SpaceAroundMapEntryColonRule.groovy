@@ -34,7 +34,7 @@ class SpaceAroundMapEntryColonRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAroundMapEntryColonAstVisitor
 }
 
-class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor {
+class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor<SpaceAroundMapEntryColonRule> {
 
     @Override
     void visitMapEntryExpression(MapEntryExpression expression) {

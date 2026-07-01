@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.ASTNode
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.Rule
 
 /**
  * Abstract superclass for AstVisitor classes that checks that there is exactly one space (blank) after a keyword
@@ -25,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitor
  * @author Chris Mair
  */
 
-class AbstractSingleSpaceAfterKeywordAstVisitor extends AbstractAstVisitor {
+class AbstractSingleSpaceAfterKeywordAstVisitor<R extends Rule> extends AbstractAstVisitor<R> {
 
     protected void checkForSingleSpaceAndOpeningParenthesis(ASTNode node, String keyword) {
         if (isGeneratedCode(node)) {

@@ -34,7 +34,7 @@ class SpaceAfterMethodCallNameRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpaceAfterMethodCallNameRuleAstVisitor
 }
 
-class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
+class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor<SpaceAfterMethodCallNameRule> {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
