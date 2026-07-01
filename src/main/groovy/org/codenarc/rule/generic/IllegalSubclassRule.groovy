@@ -38,7 +38,7 @@ class IllegalSubclassRule extends AbstractAstVisitorRule {
     }
 }
 
-class IllegalSubclassAstVisitor extends AbstractAstVisitor {
+class IllegalSubclassAstVisitor extends AbstractAstVisitor<IllegalSubclassRule> {
 
     @Override
     protected void visitClassEx(ClassNode node) {

@@ -93,7 +93,7 @@ class IllegalClassMemberRule extends AbstractAstVisitorRule {
     }
 }
 
-class IllegalClassMemberAstVisitor extends AbstractAstVisitor {
+class IllegalClassMemberAstVisitor extends AbstractAstVisitor<IllegalClassMemberRule> {
 
     @Override
     void visitField(FieldNode node) {

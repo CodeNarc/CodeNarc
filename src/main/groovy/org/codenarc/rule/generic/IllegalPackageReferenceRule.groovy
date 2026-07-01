@@ -50,7 +50,7 @@ class IllegalPackageReferenceRule extends AbstractAstVisitorRule {
     }
 }
 
-class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
+class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor<IllegalPackageReferenceRule> {
 
     private WildcardPattern wildcard
 
