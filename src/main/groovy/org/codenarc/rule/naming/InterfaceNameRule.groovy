@@ -39,7 +39,7 @@ class InterfaceNameRule extends AbstractAstVisitorRule {
     }
 }
 
-class InterfaceNameAstVisitor extends AbstractTypeNameAstVisitor  {
+class InterfaceNameAstVisitor extends AbstractTypeNameAstVisitor<InterfaceNameRule> {
     @Override
     protected boolean shouldVisit(ClassNode classNode) {
         classNode.isInterface()

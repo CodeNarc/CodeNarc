@@ -31,7 +31,7 @@ class ClassNameSameAsSuperclassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ClassNameSameAsSuperclassAstVisitor
 }
 
-class ClassNameSameAsSuperclassAstVisitor extends AbstractAstVisitor {
+class ClassNameSameAsSuperclassAstVisitor extends AbstractAstVisitor<ClassNameSameAsSuperclassRule> {
 
     @Override
     protected void visitClassEx(ClassNode node) {

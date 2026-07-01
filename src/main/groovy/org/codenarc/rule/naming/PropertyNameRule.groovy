@@ -74,7 +74,7 @@ class PropertyNameRule extends AbstractAstVisitorRule {
     }
 }
 
-class PropertyNameAstVisitor extends AbstractAstVisitor  {
+class PropertyNameAstVisitor extends AbstractAstVisitor<PropertyNameRule> {
 
     @Override
     void visitProperty(PropertyNode node) {

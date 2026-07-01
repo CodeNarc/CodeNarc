@@ -79,7 +79,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
     }
 }
 
-class FieldNameAstVisitor extends AbstractAstVisitor  {
+class FieldNameAstVisitor extends AbstractAstVisitor<FieldNameRule> {
 
     private final Set propertyNames = []
 

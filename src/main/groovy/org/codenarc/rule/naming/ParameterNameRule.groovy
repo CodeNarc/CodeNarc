@@ -51,7 +51,7 @@ class ParameterNameRule extends AbstractAstVisitorRule {
     }
 }
 
-class ParameterNameAstVisitor extends AbstractAstVisitor  {
+class ParameterNameAstVisitor extends AbstractAstVisitor<ParameterNameRule> {
 
     @Override
     void visitMethodEx(MethodNode methodNode) {

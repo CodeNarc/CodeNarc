@@ -41,7 +41,7 @@ class AbstractClassNameRule extends AbstractAstVisitorRule {
     }
 }
 
-class AbstractClassNameAstVisitor extends AbstractTypeNameAstVisitor  {
+class AbstractClassNameAstVisitor extends AbstractTypeNameAstVisitor<AbstractClassNameRule> {
     @Override
     protected boolean shouldVisit(ClassNode classNode) {
         def isAbstract = classNode.isAbstract()

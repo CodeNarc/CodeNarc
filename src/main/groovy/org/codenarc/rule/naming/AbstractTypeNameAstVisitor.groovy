@@ -18,6 +18,7 @@ package org.codenarc.rule.naming
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.Rule
 
 /**
  * Abstract superclass for AstVisitor classes dealing with class/type names, e.g. classes,
@@ -26,7 +27,7 @@ import org.codenarc.rule.AbstractAstVisitor
  * @author Chris Mair
  * @author Hamlet D'Arcy
   */
-abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
+abstract class AbstractTypeNameAstVisitor<R extends Rule> extends AbstractAstVisitor<R> {
     @Override
     void visitClassEx(ClassNode classNode) {
         assert rule.regex

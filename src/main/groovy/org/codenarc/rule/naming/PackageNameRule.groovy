@@ -41,7 +41,7 @@ class PackageNameRule extends AbstractAstVisitorRule {
     boolean packageNameRequired = false
 }
 
-class PackageNameAstVisitor extends AbstractAstVisitor  {
+class PackageNameAstVisitor extends AbstractAstVisitor<PackageNameRule> {
     @Override
     void visitClassEx(ClassNode classNode) {
         assert rule.regex

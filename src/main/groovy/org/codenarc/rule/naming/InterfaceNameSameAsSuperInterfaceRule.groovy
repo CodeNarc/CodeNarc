@@ -31,7 +31,7 @@ class InterfaceNameSameAsSuperInterfaceRule extends AbstractAstVisitorRule {
     Class astVisitorClass = InterfaceNameSameAsSuperInterfaceAstVisitor
 }
 
-class InterfaceNameSameAsSuperInterfaceAstVisitor extends AbstractAstVisitor {
+class InterfaceNameSameAsSuperInterfaceAstVisitor extends AbstractAstVisitor<InterfaceNameSameAsSuperInterfaceRule> {
 
     @Override
     protected void visitClassEx(ClassNode node) {

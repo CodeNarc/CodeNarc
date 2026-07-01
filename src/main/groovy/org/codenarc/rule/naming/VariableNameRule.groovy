@@ -48,7 +48,7 @@ class VariableNameRule extends AbstractAstVisitorRule {
     Class astVisitorClass = VariableNameAstVisitor
 }
 
-class VariableNameAstVisitor extends AbstractAstVisitor  {
+class VariableNameAstVisitor extends AbstractAstVisitor<VariableNameRule> {
 
     @Override
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {

@@ -35,7 +35,7 @@ class ConfusingMethodNameRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConfusingMethodNameAstVisitor
 }
 
-class ConfusingMethodNameAstVisitor extends AbstractAstVisitor {
+class ConfusingMethodNameAstVisitor extends AbstractAstVisitor<ConfusingMethodNameRule> {
 
     @Override
     void visitClassEx(ClassNode node) {
@@ -43,7 +43,7 @@ class ConfusingMethodNameAstVisitor extends AbstractAstVisitor {
     }
 }
 
-class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
+class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor<ConfusingMethodNameRule> {
 
     Set lowercaseMethodNames = [] as Set
     Set lowercaseMethodNamesWithParameterTypes = [] as Set
