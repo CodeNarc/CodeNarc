@@ -74,7 +74,7 @@ class UnusedVariableRule extends AbstractAstVisitorRule {
 
 }
 
-class UnusedVariableAstVisitor extends AbstractAstVisitor  {
+class UnusedVariableAstVisitor extends AbstractAstVisitor<UnusedVariableRule> {
 
     private final Stack variablesByBlockScope = [] as Stack
     private Map variablesInCurrentBlockScope

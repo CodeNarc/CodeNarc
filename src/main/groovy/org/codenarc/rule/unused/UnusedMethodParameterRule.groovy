@@ -39,7 +39,7 @@ class UnusedMethodParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnusedMethodParameterAstVisitor
 }
 
-class UnusedMethodParameterAstVisitor extends AbstractAstVisitor {
+class UnusedMethodParameterAstVisitor extends AbstractAstVisitor<UnusedMethodParameterRule> {
 
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {

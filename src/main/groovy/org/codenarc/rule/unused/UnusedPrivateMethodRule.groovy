@@ -84,7 +84,7 @@ class UnusedPrivateMethodRule extends AbstractSharedAstVisitorRule {
     }
 }
 
-class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
+class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor<UnusedPrivateMethodRule> {
 
     private final Map<String, MethodNode> unusedPrivateMethods
     private final List<String> classNames

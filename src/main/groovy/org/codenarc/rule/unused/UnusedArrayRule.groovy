@@ -32,7 +32,7 @@ class UnusedArrayRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnusedArrayAstVisitor
 }
 
-class UnusedArrayAstVisitor extends AbstractLastStatementInBlockAstVisitor {
+class UnusedArrayAstVisitor extends AbstractLastStatementInBlockAstVisitor<UnusedArrayRule> {
 
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {

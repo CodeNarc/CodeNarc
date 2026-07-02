@@ -35,7 +35,7 @@ class UnusedObjectRule extends AbstractAstVisitorRule {
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 
-class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor {
+class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor<UnusedObjectRule> {
 
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {

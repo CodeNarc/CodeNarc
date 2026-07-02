@@ -18,6 +18,7 @@ package org.codenarc.rule.unused
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.Rule
 
 /**
  * Abstract superclass for AstVisitor classes that need to determine whether a Statement is
@@ -25,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitor
  *
  * @author Chris Mair
   */
-abstract class AbstractLastStatementInBlockAstVisitor extends AbstractAstVisitor {
+abstract class AbstractLastStatementInBlockAstVisitor<R extends Rule> extends AbstractAstVisitor<R> {
 
     private final Set lastStatements = [] as Set
 
