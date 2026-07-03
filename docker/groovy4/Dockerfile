@@ -1,8 +1,8 @@
-FROM openjdk:8-jre-slim AS gradle
+FROM eclipse-temurin:17-jdk AS gradle
 
-ARG CODENARC_VERSION=2.0.0
-ARG GROOVY_VERSION=2.5.12
-ARG GRADLE_VERSION=6.5.1
+ARG CODENARC_VERSION=4.0.0-groovy-4.0
+ARG GROOVY_VERSION=4.0.24
+ARG GRADLE_VERSION=8.12
 
 RUN apt-get update && apt-get install -y unzip curl
 WORKDIR /gradle
@@ -16,7 +16,7 @@ RUN sed -e "s/\${codenarc.version}/$CODENARC_VERSION/" -e "s/\${groovy.version}/
 
 RUN gradle --quiet --no-daemon shadowJar
 
-FROM openjdk:8-jre-slim
+FROM eclipse-temurin:8-jre
 
 WORKDIR /lib
 COPY --from=gradle /gradle/build/libs/codenarc-all.jar /lib/codenarc-all.jar

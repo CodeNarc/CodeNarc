@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'com.gradleup.shadow' version '8.3.9'
 }
 
 repositories {
@@ -8,17 +8,17 @@ repositories {
 }
 
 dependencies {
-    compile 'org.apache.groovy:groovy:${groovy.version}'
-    compile 'org.apache.groovy:groovy-xml:${groovy.version}'
-    compile 'org.apache.groovy:groovy-json:${groovy.version}'
-    compile 'org.apache.groovy:groovy-ant:${groovy.version}'
-    compile 'org.apache.groovy:groovy-templates:${groovy.version}'
+    implementation 'org.apache.groovy:groovy:${groovy.version}'
+    implementation 'org.apache.groovy:groovy-xml:${groovy.version}'
+    implementation 'org.apache.groovy:groovy-json:${groovy.version}'
+    implementation 'org.apache.groovy:groovy-ant:${groovy.version}'
+    implementation 'org.apache.groovy:groovy-templates:${groovy.version}'
 
-    compile('org.codenarc:CodeNarc:${codenarc.version}') {
+    implementation('org.codenarc:CodeNarc:${codenarc.version}') {
         exclude group: 'org.apache.groovy'
     }
 
-    compile 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
 }
 
 shadowJar {

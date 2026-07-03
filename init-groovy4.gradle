@@ -1,3 +1,0 @@
-settingsEvaluated { settings ->
-    settings.rootProject.buildFileName = 'build-groovy4.gradle'
-}

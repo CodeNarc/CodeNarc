@@ -53,7 +53,7 @@ to fit into your project. Build tool, framework support, and report generation a
          <h2>Requirements</h2>
          <strong>CodeNarc</strong> requires:
          <ul>
-              <li>Java 17 or later for CodeNarc 4.x.x (Groovy 5); Java 1.8 or later for CodeNarc 3.x.x (Groovy 4)</li>
+              <li>Java 17 or later for the default CodeNarc artifact (Groovy 5); Java 1.8 or later for the Groovy 4-compatible variant</li>
               <li><a href="http://groovy-lang.org/">Groovy</a> 4.0 or later</li>
               <li><a href="https://www.slf4j.org/">SLF4J</a> API and binding jar(s)</li>
               <li><a href="https://dx42.github.io/gmetrics/">GMetrics</a> 3.0.0 or later for CodeNarc 4.x.x; GMetrics-Groovy4 2.1.0 or later for CodeNarc 3.x.x, if using the Size/Complexity rules</li>
@@ -69,7 +69,7 @@ to fit into your project. Build tool, framework support, and report generation a
                 <ul>
                      <li>groupId = org.codenarc</li>
                      <li>artifactId = CodeNarc</li>
-                     <li>version = 3.x.x-groovy-4.x for Groovy 4; 4.x.x for Groovy 5</li>
+                     <li>version = 4.x.x-groovy-4.0 for the Groovy 4 variant (derived from the same release as the Groovy 5 variant); 4.x.x for Groovy 5</li>
                 </ul>
      </td>
      <td class="section">

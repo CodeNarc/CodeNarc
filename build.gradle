@@ -1,6 +1,5 @@
 plugins {
     id 'groovy'
-//    id 'maven-publish'
     id 'signing'
     id 'idea'
     id 'com.gradleup.shadow' version '9.3.0'
@@ -26,8 +25,35 @@ repositories {
 
 def groovyVersion = '5.0.3'
 def gmetricsVersion = '3.0.0'
+def apacheGroovy4Version = '4.0.24'
+def gmetricsGroovy4Version = '2.1.0'
+def groovy4Version = "${version}-groovy-4.0"
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"
+
+sourceSets {
+    main {
+        java { srcDirs = [] }
+        groovy { srcDirs = ['src/main/groovy', 'src/main/java'] }
+    }
+    groovy4 {
+        java { srcDirs = [] }
+        groovy { srcDirs = ['src/main/groovy', 'src/main/java'] }
+        resources { srcDirs = ['src/main/resources'] }
+    }
+    groovy4Test {
+        java { srcDirs = [] }
+        groovy { srcDirs = ['src/test/groovy'] }
+        resources { srcDirs = ['src/test/resources'] }
+        compileClasspath += sourceSets.groovy4.output
+        runtimeClasspath += sourceSets.groovy4.output
+    }
+}
+
+configurations {
+    groovy4TestImplementation.extendsFrom groovy4Implementation
+    groovy4TestRuntimeOnly.extendsFrom groovy4RuntimeOnly
+}
 
 dependencies {
 
@@ -53,13 +79,37 @@ dependencies {
     testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
     testImplementation 'commons-cli:commons-cli:1.4'
     testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
+
+    groovy4Implementation "org.apache.groovy:groovy:$apacheGroovy4Version"
+    groovy4Implementation "org.apache.groovy:groovy-xml:$apacheGroovy4Version"
+    groovy4Implementation "org.apache.groovy:groovy-groovydoc:$apacheGroovy4Version"
+    groovy4Implementation "org.apache.groovy:groovy-json:$apacheGroovy4Version"
+    groovy4Implementation "org.apache.groovy:groovy-ant:$apacheGroovy4Version"
+    groovy4Implementation "org.apache.groovy:groovy-templates:$apacheGroovy4Version"
+
+    groovy4Implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    groovy4Implementation("org.gmetrics:GMetrics-Groovy4:$gmetricsGroovy4Version") {
+        transitive = false
+    }
+
+    // JUnit is only required if you are using the CodeNarc testing framework, e.g. AbstractRuleTestCase
+    groovy4CompileOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+    groovy4TestImplementation("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    groovy4TestImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
+    groovy4TestRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    groovy4TestImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
+    groovy4TestImplementation 'commons-cli:commons-cli:1.4'
+    groovy4TestImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
 }
 
-sourceSets {
-    main {
-        java { srcDirs = [] }
-        groovy { srcDirs = ['src/main/groovy', 'src/main/java'] }
-    }
+tasks.named('compileGroovy4Java') {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+tasks.named('compileGroovy4Groovy') {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 }
 
 test {
@@ -67,6 +117,18 @@ test {
     maxParallelForks = 2
     jvmArgs '-Duser.language=en -Duser.country=US'
 }
+
+def groovy4Test = tasks.register('groovy4Test', Test) {
+    testClassesDirs = sourceSets.groovy4Test.output.classesDirs
+    classpath = sourceSets.groovy4Test.runtimeClasspath
+    useJUnitPlatform()
+    maxParallelForks = 2
+    jvmArgs '-Duser.language=en -Duser.country=US'
+    // src/test/groovy/org/codenarc/ant/CodeNarc_AntBuilderTest.groovy writes reports to hardcoded
+    // paths under target/; keep the two test tasks from ever racing on those files.
+    mustRunAfter(tasks.named('test'))
+}
+tasks.named('check') { dependsOn(groovy4Test) }
 
 java {
     //withJavadocJar()
@@ -88,6 +150,26 @@ task groovydocJar(type: Jar, dependsOn: groovydoc ) {
     from groovydoc.destinationDir
 }
 
+task groovy4SourcesJar(type: Jar) {
+    archiveBaseName = 'CodeNarc'
+    archiveVersion = groovy4Version
+    archiveClassifier = 'sources'
+    from sourceSets.groovy4.allSource
+}
+
+task groovy4Groovydoc(type: Groovydoc) {
+    source = sourceSets.groovy4.allSource
+    classpath = sourceSets.groovy4.compileClasspath
+    use = true
+}
+
+task groovy4GroovydocJar(type: Jar, dependsOn: groovy4Groovydoc) {
+    archiveBaseName = 'CodeNarc'
+    archiveVersion = groovy4Version
+    archiveClassifier = 'javadoc'
+    from groovy4Groovydoc.destinationDir
+}
+
 signing {
     required = { gradle.taskGraph.hasTask(publish) }
     sign publishing.publications
@@ -101,6 +183,27 @@ shadowJar {
 
 shadow {
     addShadowVariantIntoJavaComponent = false
+}
+
+task groovy4Jar(type: Jar) {
+    from sourceSets.groovy4.output
+    archiveBaseName = 'CodeNarc'
+    archiveVersion = groovy4Version
+}
+
+task groovy4ShadowJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+    from sourceSets.groovy4.output
+    configurations = [project.configurations.groovy4RuntimeClasspath]
+    archiveBaseName = 'CodeNarc'
+    archiveVersion = groovy4Version
+    archiveClassifier = 'all'
+    manifest {
+        attributes 'Main-Class': 'org.codenarc.CodeNarc'
+    }
+}
+
+tasks.named('assemble') {
+    dependsOn('groovy4Jar', 'groovy4ShadowJar', 'groovy4SourcesJar', 'groovy4GroovydocJar')
 }
 
 // Publish
@@ -140,59 +243,44 @@ mavenPublishing {
     }
 }
 
+publishing {
+    publications {
+        groovy4(MavenPublication) {
+            artifactId = 'CodeNarc'
+            version = groovy4Version
+            artifact(groovy4Jar)
+            artifact(groovy4SourcesJar)
+            artifact(groovy4GroovydocJar)
 
-// OLD
-// Publish to Sonatype (OSSRH) Maven Repository
-// See http://central.sonatype.org/pages/gradle.html
-//publishing {
-//    publications {
-//        maven(MavenPublication) {
-//            from components.java
-//
-//            artifactId = 'CodeNarc'
-//
-//            artifact(groovydocJar) {
-//                classifier = 'javadoc'
-//            }
-//
-//            pom {
-//                name = 'CodeNarc-Groovy4'
-//                description = 'The CodeNarc project provides a static analysis tool for Groovy code.'
-//                url = 'https://codenarc.org'
-//
-//                scm {
-//                    connection = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
-//                    developerConnection = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
-//                    url = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
-//                }
-//
-//                licenses {
-//                    license {
-//                        name = 'The Apache License, Version 2.0'
-//                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    }
-//                }
-//
-//                developers {
-//                    developer {
-//                        id = 'chrismair'
-//                        name = 'Chris Mair'
-//                        email = 'chrismair@users.sourceforge.net'
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    repositories {
-//        maven {
-//            def releasesUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-//            def snapshotsUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
-//            url = version.endsWith('SNAPSHOT') ? snapshotsUrl : releasesUrl
-//            credentials {
-//                username = ossrhUsername
-//                password = ossrhPassword
-//            }
-//        }
-//    }
-//}
+            pom {
+                // licenses/developers are already injected into every publication by the
+                // mavenPublishing{} block above (com.vanniktech.maven.publish applies them
+                // project-wide); declaring them again here would duplicate the POM entries.
+                name = "CodeNarc"
+                description = "The CodeNarc project provides a static analysis tool for Groovy code (Groovy 4.x-compatible variant)."
+                inceptionYear = "2010"
+                url = "https://codenarc.org"
+                scm {
+                    url = "https://github.com/CodeNarc/CodeNarc/"
+                    connection = "scm:git:git@github.com:CodeNarc/CodeNarc.git"
+                    developerConnection = "scm:git:git@github.com:CodeNarc/CodeNarc.git"
+                }
+                withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.groovy4Implementation.allDependencies.each { dep ->
+                        dependenciesNode.appendNode('dependency').with {
+                            appendNode('groupId', dep.group)
+                            appendNode('artifactId', dep.name)
+                            appendNode('version', dep.version)
+                            appendNode('scope', 'runtime')
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// This hand-built publication has no backing SoftwareComponent, so suppress Gradle Module
+// Metadata generation for it rather than publish a misleading empty .module file.
+tasks.matching { it.name == 'generateMetadataFileForGroovy4Publication' }.configureEach { enabled = false }

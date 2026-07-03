@@ -5,6 +5,7 @@ TODO Version 4.0.x  (??? 2026)
 --------------------------------------
 Breaking Changes
  - The default (Groovy 5-compatible) CodeNarc artifact requires Java 17. The Groovy 4 version of CodeNarc is available for use with Java 8+ and Groovy 4.
+ - The Groovy 4 variant's version is now derived from the main release version (`<version>-groovy-4.0`) instead of being independently numbered; the next Groovy 4 release jumps from `3.7.0-groovy-4.0` straight to `4.0.0-groovy-4.0`.
 
 New / Updated Rules
  - #820: Add **SpockUseVerifyEach** rule, [Leonard Brünings](https://github.com/leonard84)) 
@@ -12,6 +13,9 @@ New / Updated Rules
 Reports
  - #807: `SarifReportWriter`: New report writer for SARIF. ([Alexandre Garnier](https://github.com/zigarn))
  - #808: `CodeNarc_AntBuilderTest`: Consolidate sample report generation. Add report sample for Gitlab Code Quality. ([Alexandre Garnier](https://github.com/zigarn))
+
+Framework
+ - #827: Make `AbstractAstVisitor` type-specific using generic specification: `AbstractAstVisitor<R extends Rule>`.
 
 Build, Infrastructure and Tests
  - #804: Support Groovy 5.x.
@@ -28,6 +32,7 @@ Build, Infrastructure and Tests
  - #815: Delete integration-test folder and its tests.
  - #822: Fix build status badge from Travis to GitHub. [Thomas Rasmussen](https://github.com/dauer)
  - #826: Add comment to top of each rule index file indicating it is generated and should not be edited.
+ - Merge `build-groovy4.gradle`/`init-groovy4.gradle` into a single `build.gradle` with a `groovy4` source set, producing both the Groovy 5 and Groovy 4 variant jars from one build. Simplify CI to a single `./gradlew build` invocation.
 
 
 Version 3.7.0  (Nov 2025)
