@@ -5,7 +5,7 @@ TODO Version 4.0.x  (??? 2026)
 --------------------------------------
 Breaking Changes
  - The default (Groovy 5-compatible) CodeNarc artifact requires Java 17. The Groovy 4 version of CodeNarc is available for use with Java 8+ and Groovy 4.
- - The Groovy 4 variant's version is now derived from the main release version (`<version>-groovy-4.0`) instead of being independently numbered; the next Groovy 4 release jumps from `3.7.0-groovy-4.0` straight to `4.0.0-groovy-4.0`.
+ - The Groovy 4-compatible variant is now published as a separate artifact, **CodeNarc-Groovy4**, using the same version number as the main **CodeNarc** artifact, rather than being distinguished by a `-groovy-4.0` version suffix on the same `CodeNarc` artifact.
 
 New / Updated Rules
  - #820: Add **SpockUseVerifyEach** rule, [Leonard Brünings](https://github.com/leonard84)) 

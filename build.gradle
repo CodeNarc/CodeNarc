@@ -27,7 +27,7 @@ def groovyVersion = '5.0.3'
 def gmetricsVersion = '3.0.0'
 def apacheGroovy4Version = '4.0.24'
 def gmetricsGroovy4Version = '2.1.0'
-def groovy4Version = "${version}-groovy-4.0"
+def groovy4ArtifactName = 'CodeNarc-Groovy4'
 def slf4jVersion = '1.7.35'
 def junitVersion = "5.8.2"
 
@@ -151,8 +151,7 @@ task groovydocJar(type: Jar, dependsOn: groovydoc ) {
 }
 
 task groovy4SourcesJar(type: Jar) {
-    archiveBaseName = 'CodeNarc'
-    archiveVersion = groovy4Version
+    archiveBaseName = groovy4ArtifactName
     archiveClassifier = 'sources'
     from sourceSets.groovy4.allSource
 }
@@ -164,8 +163,7 @@ task groovy4Groovydoc(type: Groovydoc) {
 }
 
 task groovy4GroovydocJar(type: Jar, dependsOn: groovy4Groovydoc) {
-    archiveBaseName = 'CodeNarc'
-    archiveVersion = groovy4Version
+    archiveBaseName = groovy4ArtifactName
     archiveClassifier = 'javadoc'
     from groovy4Groovydoc.destinationDir
 }
@@ -187,15 +185,13 @@ shadow {
 
 task groovy4Jar(type: Jar) {
     from sourceSets.groovy4.output
-    archiveBaseName = 'CodeNarc'
-    archiveVersion = groovy4Version
+    archiveBaseName = groovy4ArtifactName
 }
 
 task groovy4ShadowJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
     from sourceSets.groovy4.output
     configurations = [project.configurations.groovy4RuntimeClasspath]
-    archiveBaseName = 'CodeNarc'
-    archiveVersion = groovy4Version
+    archiveBaseName = groovy4ArtifactName
     archiveClassifier = 'all'
     manifest {
         attributes 'Main-Class': 'org.codenarc.CodeNarc'
@@ -246,8 +242,7 @@ mavenPublishing {
 publishing {
     publications {
         groovy4(MavenPublication) {
-            artifactId = 'CodeNarc'
-            version = groovy4Version
+            artifactId = groovy4ArtifactName
             artifact(groovy4Jar)
             artifact(groovy4SourcesJar)
             artifact(groovy4GroovydocJar)
@@ -256,7 +251,7 @@ publishing {
                 // licenses/developers are already injected into every publication by the
                 // mavenPublishing{} block above (com.vanniktech.maven.publish applies them
                 // project-wide); declaring them again here would duplicate the POM entries.
-                name = "CodeNarc"
+                name = "CodeNarc-Groovy4"
                 description = "The CodeNarc project provides a static analysis tool for Groovy code (Groovy 4.x-compatible variant)."
                 inceptionYear = "2010"
                 url = "https://codenarc.org"

@@ -68,8 +68,8 @@ to fit into your project. Build tool, framework support, and report generation a
                <a href="https://repo1.maven.org/maven2/org/codenarc/CodeNarc/">Maven Central Repository</a>
                 <ul>
                      <li>groupId = org.codenarc</li>
-                     <li>artifactId = CodeNarc</li>
-                     <li>version = 4.x.x-groovy-4.0 for the Groovy 4 variant (derived from the same release as the Groovy 5 variant); 4.x.x for Groovy 5</li>
+                     <li>artifactId = CodeNarc for the default (Groovy 5-compatible) artifact; CodeNarc-Groovy4 for the Groovy 4-compatible variant</li>
+                     <li>version = 4.x.x (same version number for both artifactIds)</li>
                 </ul>
      </td>
      <td class="section">
