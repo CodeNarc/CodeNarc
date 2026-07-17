@@ -10,8 +10,9 @@ group = 'org.codenarc'
 version = '4.0.0-SNAPSHOT'
 
 java {
-    sourceCompatibility = '17'
-    targetCompatibility = '17'
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
 base {

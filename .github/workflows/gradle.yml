@@ -23,10 +23,13 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - name: Set up JDK 17
+    - name: Set up JDKs
       uses: actions/setup-java@v3
       with:
-        java-version: '17'
+        # JDK 11 is provided for the Gradle toolchain (build target); JDK 17 is required to run Gradle itself.
+        java-version: |
+          11
+          17
         distribution: 'temurin'
 
     - name: Build CodeNarc with Gradle
