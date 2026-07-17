@@ -4,7 +4,8 @@
 TODO Version 4.0.x  (??? 2026)
 --------------------------------------
 Breaking Changes
- - The default (Groovy 5-compatible) CodeNarc artifact requires Java 17. The Groovy 4 version of CodeNarc is available for use with Java 8+ and Groovy 4.
+ - Drop support for Groovy 3.x.
+ - The default CodeNarc artifact (compatible with Groovy 5.x and Groovy 4.x) requires Java 17. The Groovy 4 variant of CodeNarc is available for use with Java 8+ and Groovy 4.
  - The Groovy 4-compatible variant is now published as a separate artifact, **CodeNarc-Groovy4**, using the same version number as the main **CodeNarc** artifact, rather than being distinguished by a `-groovy-4.0` version suffix on the same `CodeNarc` artifact.
 
 New / Updated Rules
