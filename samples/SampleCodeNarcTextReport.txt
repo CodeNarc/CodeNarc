@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Nov 16, 2025 9:37:42 AM
+CodeNarc Report: Sample Project - 2026 Jul 18 09:27:32
 
-Summary: TotalFiles=431 FilesWithViolations=60 P1=0 P2=84 P3=39
+Summary: TotalFiles=432 FilesWithViolations=62 P1=0 P2=84 P3=41
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=UnnecessaryObjectReferences P=3 Line=185 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
@@ -19,6 +19,9 @@ File: AbstractRuleTest.groovy
 File: InlineViolationsParserTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=20 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.rule.InlineViolationsParser.inlineViolation]
     Violation: Rule=UnnecessaryReturnKeyword P=3 Line=199 Msg=[The return keyword is not needed and can be removed] Src=[return [lineNumber: lineNumber, sourceLineText: sourceLineText, messageText: messageText]]
+
+File: basic/MultipleUnaryOperatorsRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=72 Msg=[The return keyword is not needed and can be removed] Src=[return GroovyVersion.isGroovyVersion4() ? "(${operator1}${operator2}$operand)" : "(${operator1}(${operator2}($operand)))"]
 
 File: comments/AbstractJavadocEmptyTagRuleTestCase.groovy
     Violation: Rule=UnnecessaryReturnKeyword P=3 Line=53 Msg=[The return keyword is not needed and can be removed] Src=[return rule.name]
@@ -618,6 +621,9 @@ File: jenkins/JenkinsUtilTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=26 Msg=[Static imports should appear before normal imports] Src=[import static org.junit.jupiter.api.Assertions.*]
     Violation: Rule=NoWildcardImports P=3 Line=26 Msg=[Wildcard (star) import] Src=[import static org.junit.jupiter.api.Assertions.*]
 
+File: junit/SpockMissingAssertRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=735 Msg=[The return keyword is not needed and can be removed] Src=[return combinations.stream().map { Arguments.of(it[0], it[1]) }]
+
 File: naming/FieldNameRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.naming.FieldNameRuleTest has 32 methods] Src=[class FieldNameRuleTest extends AbstractRuleTestCase<FieldNameRule> {]
 
@@ -802,4 +808,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (https://codenarc.org) v3.7.0]
+[CodeNarc (https://codenarc.org) v4.0.0]

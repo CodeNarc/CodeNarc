@@ -6,7 +6,7 @@
             "tool": {
                 "driver": {
                     "name": "CodeNarc",
-                    "version": "3.7.0",
+                    "version": "4.0.0",
                     "informationUri": "https://codenarc.org",
                     "rules": [
                         {
@@ -1778,6 +1778,28 @@
                                     "startLine": 199,
                                     "snippet": {
                                         "text": "return [lineNumber: lineNumber, sourceLineText: sourceLineText, messageText: messageText]"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "ruleId": "UnnecessaryReturnKeyword",
+                    "level": "note",
+                    "message": {
+                        "text": "The return keyword is not needed and can be removed"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "basic/MultipleUnaryOperatorsRuleTest.groovy"
+                                },
+                                "region": {
+                                    "startLine": 72,
+                                    "snippet": {
+                                        "text": "return GroovyVersion.isGroovyVersion4() ? \"(${operator1}${operator2}$operand)\" : \"(${operator1}(${operator2}($operand)))\""
                                     }
                                 }
                             }
@@ -3601,6 +3623,28 @@
                                     "startLine": 26,
                                     "snippet": {
                                         "text": "import static org.junit.jupiter.api.Assertions.*"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "ruleId": "UnnecessaryReturnKeyword",
+                    "level": "note",
+                    "message": {
+                        "text": "The return keyword is not needed and can be removed"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "junit/SpockMissingAssertRuleTest.groovy"
+                                },
+                                "region": {
+                                    "startLine": 735,
+                                    "snippet": {
+                                        "text": "return combinations.stream().map { Arguments.of(it[0], it[1]) }"
                                     }
                                 }
                             }

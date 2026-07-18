@@ -146,6 +146,18 @@
     {
         "description": "The return keyword is not needed and can be removed",
         "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "1f31e0df513844c3c7c1767826e61e8c0df3a436",
+        "severity": "blocker",
+        "location": {
+            "path": "basic/MultipleUnaryOperatorsRuleTest.groovy",
+            "lines": {
+                "begin": 72
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
         "fingerprint": "f8dd73e73a44863ce0051c457b47f250d9ef4871",
         "severity": "blocker",
         "location": {
@@ -1136,6 +1148,18 @@
             "path": "jenkins/JenkinsUtilTest.groovy",
             "lines": {
                 "begin": 26
+            }
+        }
+    },
+    {
+        "description": "The return keyword is not needed and can be removed",
+        "check_name": "UnnecessaryReturnKeyword",
+        "fingerprint": "c985e69d64e5a77b68353e880f2954cfaac5efc0",
+        "severity": "blocker",
+        "location": {
+            "path": "junit/SpockMissingAssertRuleTest.groovy",
+            "lines": {
+                "begin": 735
             }
         }
     },
