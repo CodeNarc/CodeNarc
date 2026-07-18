@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://codenarc.org",
-        "version": "3.7.0"
+        "version": "4.0.0"
     },
     "report": {
-        "timestamp": "Nov 16, 2025 9:37:41 AM"
+        "timestamp": "2026 Jul 18 09:27:31"
     },
     "project": {
         "title": "Sample Project",
@@ -13,11 +13,11 @@
         ]
     },
     "summary": {
-        "totalFiles": 431,
-        "filesWithViolations": 60,
+        "totalFiles": 432,
+        "filesWithViolations": 62,
         "priority1": 0,
         "priority2": 84,
-        "priority3": 39
+        "priority3": 41
     },
     "packages": [
         {
@@ -168,10 +168,10 @@
         {
             "path": "basic",
             "totalFiles": 45,
-            "filesWithViolations": 0,
+            "filesWithViolations": 1,
             "priority1": 0,
             "priority2": 0,
-            "priority3": 0,
+            "priority3": 1,
             "files": [
                 {
                     "name": "AssertWithinFinallyBlockRuleTest.groovy",
@@ -410,7 +410,13 @@
                 {
                     "name": "MultipleUnaryOperatorsRuleTest.groovy",
                     "violations": [
-                        
+                        {
+                            "ruleName": "UnnecessaryReturnKeyword",
+                            "priority": 3,
+                            "lineNumber": 72,
+                            "sourceLine": "return GroovyVersion.isGroovyVersion4() ? \"(${operator1}${operator2}$operand)\" : \"(${operator1}(${operator2}($operand)))\"",
+                            "message": "The return keyword is not needed and can be removed"
+                        }
                     ]
                 },
                 {
@@ -2616,11 +2622,11 @@
         },
         {
             "path": "junit",
-            "totalFiles": 26,
-            "filesWithViolations": 0,
+            "totalFiles": 27,
+            "filesWithViolations": 1,
             "priority1": 0,
             "priority2": 0,
-            "priority3": 0,
+            "priority3": 1,
             "files": [
                 {
                     "name": "ChainedTestRuleTest.groovy",
@@ -2732,6 +2738,18 @@
                 },
                 {
                     "name": "SpockMissingAssertRuleTest.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "UnnecessaryReturnKeyword",
+                            "priority": 3,
+                            "lineNumber": 735,
+                            "sourceLine": "return combinations.stream().map { Arguments.of(it[0], it[1]) }",
+                            "message": "The return keyword is not needed and can be removed"
+                        }
+                    ]
+                },
+                {
+                    "name": "SpockUseVerifyEachRuleTest.groovy",
                     "violations": [
                         
                     ]
