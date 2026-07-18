@@ -14,7 +14,7 @@ dependencies {
     implementation 'org.apache.groovy:groovy-ant:${groovy.version}'
     implementation 'org.apache.groovy:groovy-templates:${groovy.version}'
 
-    implementation('org.codenarc:CodeNarc:${codenarc.version}') {
+    implementation('org.codenarc:CodeNarc-Groovy4:${codenarc.version}') {
         exclude group: 'org.apache.groovy'
     }
 
