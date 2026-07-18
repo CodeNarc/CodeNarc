@@ -337,8 +337,8 @@ ruleset {
     JUnitUnnecessaryTearDown 
     JUnitUnnecessaryThrowsException 
     SpockIgnoreRestUsed 
-    SpockMissingAssert
-    SpockUseVerifyEach
+    SpockMissingAssert 
+    SpockUseVerifyEach 
     UnnecessaryFail 
     UseAssertEqualsInsteadOfAssertTrue 
     UseAssertFalseInsteadOfNegation 
