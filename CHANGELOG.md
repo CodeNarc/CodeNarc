@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO Version 4.0.x  (??? 2026)
+Version 4.0.x  (Jul 2026)
 --------------------------------------
 Breaking Changes
  - Drop support for Groovy 3.x.
