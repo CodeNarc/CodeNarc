@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 the original author or authors.
+ * Copyright 2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test
  *
  * @author Josh Chorlton
  * @author Chris Mair
+ * @author Thanos Tsiamis
  */
 class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule> {
 
@@ -110,10 +111,38 @@ class NoScriptBindingsRuleTest extends AbstractRuleTestCase<NoScriptBindingsRule
                 isActive = false
             }
         '''
-        //assertNoViolations(SOURCE)
+        assertNoViolations(SOURCE)
+    }
 
-        // TODO: Fix this known Issue
-        assertSingleViolation(SOURCE, 3, 'isActive = false', 'The script variable [isActive]')
+    @Test
+    void ReassignClosureParameters() {
+        final SOURCE = '''
+            def explicit = { boolean isActive ->
+                isActive = false
+            }
+            def implicit = {
+                it = false
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void ParameterNamesDoNotLeakOutsideTheirScope() {
+        final SOURCE = '''
+            void doStuff(boolean isActive) {
+                isActive = false
+            }
+            isActive = true
+
+            def closure = { value ->
+                value = false
+            }
+            value = true
+        '''
+        assertTwoViolations(SOURCE,
+            5, 'isActive = true', 'The script variable [isActive]',
+            10, 'value = true', 'The script variable [value]')
     }
 
     @Test

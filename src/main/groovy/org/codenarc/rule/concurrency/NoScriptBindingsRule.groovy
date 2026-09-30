@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 the original author or authors.
+ * Copyright 2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.concurrency
 
+import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
@@ -28,6 +30,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Josh Chorlton
  * @author Chris Mair
+ * @author Thanos Tsiamis
  */
 class NoScriptBindingsRule extends AbstractAstVisitorRule {
 
@@ -40,7 +43,33 @@ class NoScriptBindingsRule extends AbstractAstVisitorRule {
 class NoScriptBindingsAstVisitor extends AbstractAstVisitor<NoScriptBindingsRule> {
 
     private final Stack variableNamesByBlockScope = [] as Stack
+    private final Stack closureParameterNamesByScope = [] as Stack
     private Set variableNamesInCurrentBlockScope
+    private List<String> currentMethodParameterNames = []
+
+    @Override
+    protected void visitMethodEx(MethodNode node) {
+        currentMethodParameterNames = node.parameters*.name
+        super.visitMethodEx(node)
+    }
+
+    @Override
+    protected void visitMethodComplete(MethodNode node) {
+        super.visitMethodComplete(node)
+        currentMethodParameterNames = []
+    }
+
+    @Override
+    void visitClosureExpression(ClosureExpression expression) {
+        Set<String> parameterNames = expression.parameterSpecified ? expression.parameters*.name as Set : ['it'] as Set
+        closureParameterNamesByScope.push(parameterNames)
+        try {
+            super.visitClosureExpression(expression)
+        }
+        finally {
+            closureParameterNamesByScope.pop()
+        }
+    }
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
@@ -85,7 +114,9 @@ class NoScriptBindingsAstVisitor extends AbstractAstVisitor<NoScriptBindingsRule
     }
 
     private boolean isVariableName(String name) {
-        return name in variableNamesByBlockScope.flatten()
+        return name in currentMethodParameterNames ||
+            name in closureParameterNamesByScope.flatten() ||
+            name in variableNamesByBlockScope.flatten()
     }
 
 }
