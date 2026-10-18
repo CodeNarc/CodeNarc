@@ -13,6 +13,7 @@ New Rules and RuleSets
 Updated/Enhanced Rules and Bug Fixes
 - #832: **ConfusingMethodNameRule** rule: Fix `ReadOnlyPropertyException` on Groovy 5 for a class with a field named `properties`. ([youdie006](https://github.com/youdie006))
 - #833: **MissingOverrideAnnotation** rule: Fix `MissingMethodException` on Groovy 5 when a superclass declares a `properties()` method.
+- #872: **NoScriptBindings** rule: Fix false positive violation when reassigning a method/closure parameter. ([Thanos Tsiamis](https://github.com/ThanosTsiamis))
 
 Build, Infrastructure and Tests
 - Add a `generateAll` Gradle task that runs `org.codenarc.tool.GenerateAll`, so the generated rule properties file, rule index pages and starter rule sets can be regenerated from the build. ([Leonard Brünings](https://github.com/leonard84))
