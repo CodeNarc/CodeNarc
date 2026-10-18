@@ -17,8 +17,6 @@ Updated/Enhanced Rules and Bug Fixes
 Build, Infrastructure and Tests
 - Add a `generateAll` Gradle task that runs `org.codenarc.tool.GenerateAll`, so the generated rule properties file, rule index pages and starter rule sets can be regenerated from the build. ([Leonard Brünings](https://github.com/leonard84))
 - `GenerateUtil`: Add `RULES_EXCLUDED_FROM_GENERATED_FILES`, the central list of the rules that the generated files must not list for a rule set, so a rule that has moved to another rule set is listed once, under its new rule set. ([Leonard Brünings](https://github.com/leonard84))
-- Drop the generation timestamp from the `codenarc-base-rules.properties` header, so that regenerating produces no spurious diff. ([Leonard Brünings](https://github.com/leonard84))
-- Regenerate the rule properties file, the rule index pages and the starter rule sets. They were out of date: the **OneTopLevelClass** rule was missing from `codenarc-base-rules.properties` (so `PropertiesFileRuleRegistry` could not resolve it by name) and from both rule index pages. ([Leonard Brünings](https://github.com/leonard84))
 - Add `AbstractSpockRule` and `AbstractSpockAstVisitor` as the shared base classes of the **spock** rule set. They hold the `specificationSuperclassNames` / `specificationClassNames` configuration, skip classes that are not Spock specifications, and track the current Spock block label, the nesting depth, the kind of the current method and the enclosing `with`/`verifyAll`/`verifyEach` closure. ([Leonard Brünings](https://github.com/leonard84))
 
 
