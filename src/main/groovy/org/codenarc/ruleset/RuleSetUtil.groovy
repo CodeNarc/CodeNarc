@@ -53,7 +53,7 @@ class RuleSetUtil {
         inputStream.withStream { input ->
             ClassLoader parentClassLoader = (System.getProperty(CLASS_LOADER_SYS_PROP) == 'true') ?
                 Thread.currentThread().getContextClassLoader() :
-                getClass().classLoader
+                RuleSetUtil.classLoader
             GroovyClassLoader gcl = new GroovyClassLoader(parentClassLoader)
             ruleClass = gcl.parseClass(input.text)
         }
