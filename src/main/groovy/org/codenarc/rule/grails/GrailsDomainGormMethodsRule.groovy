@@ -116,6 +116,7 @@ class GrailsDomainGormMethodsAstVisitor extends AbstractAstVisitor<GrailsDomainG
             }?.redirect()
             if (gormEntityNode) {
                 List<MethodNode> methods = gormEntityNode.getMethods(methodName)
+                methods.removeIf { it.isStatic() }
                 if (methods) {
                     addViolation(call, "Prefer GORM Data Services to GORM instance calls like '$methodName'")
                     return
