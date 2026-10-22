@@ -14,6 +14,7 @@ Updated/Enhanced Rules and Bug Fixes
 - #832: **ConfusingMethodNameRule** rule: Fix `ReadOnlyPropertyException` on Groovy 5 for a class with a field named `properties`. ([youdie006](https://github.com/youdie006))
 - #833: **MissingOverrideAnnotation** rule: Fix `MissingMethodException` on Groovy 5 when a superclass declares a `properties()` method.
 - #872: **NoScriptBindings** rule: Fix false positive violation when reassigning a method/closure parameter. ([Thanos Tsiamis](https://github.com/ThanosTsiamis))
+- #873: Fix `RuleSetUtil` to use its own classloader, rather than rely on `getClass().classLoader`, because that behavior changed in Groovy 6 when called within a closure.
 
 Build, Infrastructure and Tests
 - #873: Support for Groovy 6.x.
