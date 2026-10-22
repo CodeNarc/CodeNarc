@@ -27,7 +27,7 @@ import org.codenarc.rule.Violation
  */
 class SarifReportWriter extends AbstractJsonReportWriter {
 
-    private static final Map<int, String> PRIORITY_TO_LEVEL_MAPPING = [
+    private static final Map<Integer, String> PRIORITY_TO_LEVEL_MAPPING = [
         1: 'error',
         2: 'warning',
         3: 'note',

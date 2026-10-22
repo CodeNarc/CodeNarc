@@ -51,7 +51,7 @@ class SerializationUtilTest extends AbstractTestCase {
 
         @Test
         void ShouldReturnTrueForSerializableTypes() {
-            assert SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(ArrayList<Integer>))
+            assert SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(ArrayList))
         }
 
         @Test
@@ -65,14 +65,14 @@ class SerializationUtilTest extends AbstractTestCase {
         @Test
         void ShouldReturnFalseForNonSerializableGenericType() {
             ClassNode classNode = ClassHelper.make(ArrayList)
-            GenericsType[] genericsTypes = [new GenericsType(ClassHelper.make(Optional<String>))]
+            GenericsType[] genericsTypes = [new GenericsType(ClassHelper.make(Optional))]
             classNode.genericsTypes = genericsTypes
             assert !SerializationUtil.isSerializableOrDynamicType(classNode)
         }
 
         @Test
         void ShouldReturnFalseForNonSerializableTypes() {
-            assert !SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(Optional<String>))
+            assert !SerializationUtil.isSerializableOrDynamicType(ClassHelper.make(Optional))
         }
     }
 

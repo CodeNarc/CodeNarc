@@ -28,7 +28,7 @@ import org.codenarc.results.Results
 class GitlabCodeQualityReportWriter extends AbstractJsonReportWriter {
 
     // mapping between CodeNarc priorities and output severities
-    private static final Map<int, String> PRIORITY_TO_SEVERITY_MAPPING = [
+    private static final Map<Integer, String> PRIORITY_TO_SEVERITY_MAPPING = [
         1: 'info',
         2: 'major',
         3: 'blocker',
