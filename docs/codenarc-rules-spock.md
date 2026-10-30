@@ -325,6 +325,68 @@ with `unroll { ... }` / `runner { rollup ... }` in *SpockConfig.groovy*, which C
 rule there too.
 
 
+## SpockUseTempDir Rule
+
+*Since CodeNarc 4.1.0*
+
+Spock's own `@TempDir` is the lifecycle-correct temporary directory: one per iteration by default, one per
+specification when combined with `@Shared`, and always deleted afterwards. The alternatives leak.
+`@Rule TemporaryFolder` is a JUnit 4 carry-over that only works through Spock's JUnit rule interop, and
+`File.createTempDir()` / `Files.createTempDirectory(..)` are never cleaned up at all unless somebody
+hand-writes a `cleanup:` block for them.
+
+The rule reports two distinct shapes, with distinct messages, because the fixes differ in effort:
+
+1. a `@Rule` or `@ClassRule` field whose type - or whose initializer - is `TemporaryFolder`, and
+2. a call that creates a file or directory in the JVM-wide default temporary directory:
+   `File.createTempDir(..)`, `File.createTempFile(prefix, suffix)`,
+   `Files.createTempDirectory(prefix)`, `Files.createTempFile(prefix, suffix)`, and
+   `new File(System.getProperty('java.io.tmpdir'), ..)`.
+
+The second shape can be switched off with *checkAdHocCreation*, which leaves only the `TemporaryFolder`
+fields reported.
+
+Because CodeNarc runs without a classpath, the receiver of an ad-hoc creation call is matched textually
+against `File` and `Files`, and only calls that positively select the default temporary directory are
+reported. A call that is handed an explicit target directory - most importantly a `@TempDir` field or
+parameter, such as `Files.createTempFile(tempDir, 'a', 'b')` - is left alone. The overloads are told
+apart by their argument count, except where `Files` takes trailing `FileAttribute` varargs: there a call
+with extra arguments is only reported when its first argument is a String literal, as in
+`Files.createTempDirectory('x', attribute)`. This is a heuristic rule: it cannot tell whether a variable
+in that first position holds a prefix or a directory, which is why it stays silent whenever the evidence
+is not positively there.
+
+Example of violations:
+
+```
+    class MySpec extends spock.lang.Specification {
+        @Rule
+        TemporaryFolder tempFolder = new TemporaryFolder()      // violation - use a '@TempDir' field
+
+        @TempDir
+        File tempDir                                            // no violation - this is the fix
+
+        def "test"() {
+            given:
+            def a = File.createTempDir()                        // violation - never cleaned up
+            def b = Files.createTempDirectory('x')              // violation - never cleaned up
+            def c = new File(System.getProperty('java.io.tmpdir'), 'x')  // violation - never cleaned up
+            def d = new File(tempDir, 'sub')                    // no violation - inside the '@TempDir'
+            def e = Files.createTempFile(tempDir.toPath(), 'a', 'b')     // no violation - inside the '@TempDir'
+
+            expect:
+            a != null
+        }
+    }
+```
+
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| checkAdHocCreation          | If `true`, also report calls that create a file or directory in the JVM-wide default temporary directory, such as `File.createTempDir()` or `Files.createTempDirectory('x')`. If `false`, only `@Rule`/`@ClassRule` `TemporaryFolder` fields are reported. | `true` |
+| specificationClassNames     | Specifies one or more (comma-separated) class names that should be treated as Spock Specification classes. The class names may optionally contain wildcards (*,?), e.g. "*Spec". | `null` |
+| specificationSuperclassNames| Specifies one or more (comma-separated) class names that should be treated as Spock Specification superclasses. In other words, a class that extends a matching class name is considered a Spock Specification . The class names may optionally contain wildcards (*,?), e.g. "*Spec". | "*Specification" |
+
+
 ## SpockUseVerifyEach Rule
 
 *Since CodeNarc 3.7.0*
