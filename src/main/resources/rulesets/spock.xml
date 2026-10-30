@@ -13,6 +13,7 @@
     <rule class='org.codenarc.rule.spock.SpockMissingReasonRule'/>
     <rule class='org.codenarc.rule.spock.SpockUnnecessaryAssertRule'/>
     <rule class='org.codenarc.rule.spock.SpockUnnecessaryUnrollRule'/>
+    <rule class='org.codenarc.rule.spock.SpockUseRestoreSystemPropertiesRule'/>
     <rule class='org.codenarc.rule.spock.SpockUseVerifyEachRule'/>
 
 </ruleset>
