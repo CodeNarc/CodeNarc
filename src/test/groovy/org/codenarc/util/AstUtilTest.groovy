@@ -22,14 +22,22 @@ import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ArgumentListExpression
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.GStringExpression
+import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.StaticMethodCallExpression
+import org.codehaus.groovy.ast.expr.TupleExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.control.SourceUnit
+import org.codehaus.groovy.syntax.Token
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
 import org.junit.jupiter.api.BeforeEach
@@ -211,6 +219,65 @@ class AstUtilTest extends AbstractTestCase {
         // Fields
         assert AstUtil.findFirstNonAnnotationLine(fieldNamed('myIntField'), sourceCode) == 25
         assert AstUtil.findFirstNonAnnotationLine(fieldNamed('annotatedField1'), sourceCode) == 61
+    }
+
+    @Test
+    void testGetMethodArguments_NonMethodCallNode_ReturnsEmptyList() {
+        // Any AST node that is not a method/constructor call must return an empty List,
+        // never throw (previously the fallback branch threw a RuntimeException).
+        assert AstUtil.getMethodArguments(methodNamed('someMethod')).isEmpty()
+        assert AstUtil.getMethodArguments(classNamed('MyClass')).isEmpty()
+        assert AstUtil.getMethodArguments(fieldNamed('myIntField')).isEmpty()
+        assert AstUtil.getMethodArguments(constantExpression()).isEmpty()
+        assert AstUtil.getMethodArguments(new DeclarationExpression(
+            new VariableExpression('x'),
+            new Token(org.codehaus.groovy.syntax.Types.ASSIGN, '=', -1, -1),
+            new ConstantExpression(1))).isEmpty()
+    }
+
+    @Test
+    void testGetMethodArguments_StaticMethodCallExpression() {
+        def staticCall = new StaticMethodCallExpression(
+            org.codehaus.groovy.ast.ClassHelper.make(String), 'valueOf',
+            new ArgumentListExpression(new ConstantExpression(1)))
+        assert AstUtil.getMethodArguments(staticCall).size() == 1
+        assert AstUtil.getMethodArguments(staticCall)[0].value == 1
+    }
+
+    @Test
+    void testGetMethodArguments_ClosureArgument() {
+        def methodCall = new MethodCallExpression(
+            new VariableExpression('this'), 'foo',
+            new ArgumentListExpression(new ClosureExpression(null, new BlockStatement())))
+        assert AstUtil.getMethodArguments(methodCall).size() == 1
+    }
+
+    @Test
+    void testGetVariableExpressions_UnexpectedLeftExpression_ReturnsEmptyList() {
+        // The DeclarationExpression constructor only accepts a VariableExpression or TupleExpression on the
+        // left, so simulate an unexpected left expression by mutating the inherited field directly.
+        def declaration = new DeclarationExpression(
+            new VariableExpression('x'),
+            new Token(org.codehaus.groovy.syntax.Types.ASSIGN, '=', -1, -1),
+            new ConstantExpression(1))
+        def leftExpressionField = org.codehaus.groovy.ast.expr.BinaryExpression.declaredFields
+            .find { it.name == 'leftExpression' }
+        leftExpressionField.accessible = true
+        leftExpressionField.set(declaration, new ClosureExpression(null, new BlockStatement()))
+        assert AstUtil.getVariableExpressions(declaration).isEmpty()
+    }
+
+    @Test
+    void testGetVariableExpressions_MultipleAssignment() {
+        def declaration = new DeclarationExpression(
+            new TupleExpression(new VariableExpression('a'), new VariableExpression('b')),
+            new Token(org.codehaus.groovy.syntax.Types.ASSIGN, '=', -1, -1),
+            new ListExpression())
+        assert AstUtil.getVariableExpressions(declaration).name == ['a', 'b']
+    }
+
+    private ConstantExpression constantExpression() {
+        return new ConstantExpression('x')
     }
 
     @Test
