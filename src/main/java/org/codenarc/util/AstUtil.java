@@ -34,7 +34,6 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.*;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -222,10 +221,11 @@ public class AstUtil {
     }
 
     /**
-     * Return the List of Arguments for the specified MethodCallExpression or a ConstructorCallExpression.
+     * Return the List of Arguments for the specified MethodCallExpression, ConstructorCallExpression
+     * or StaticMethodCallExpression.
      * The returned List contains either ConstantExpression or MapEntryExpression objects.
-     * @param methodCall - the AST MethodCallExpression or ConstructorCalLExpression
-     * @return the List of argument objects
+     * @param methodCall - the AST MethodCallExpression, ConstructorCallExpression or StaticMethodCallExpression
+     * @return the List of argument objects, or an empty List if the node is not a method or constructor call
      */
     public static List<? extends Expression> getMethodArguments(ASTNode methodCall) {
         if (methodCall instanceof ConstructorCallExpression) {
@@ -234,13 +234,11 @@ public class AstUtil {
             return extractExpressions(((MethodCallExpression) methodCall).getArguments());
         } else if (methodCall instanceof StaticMethodCallExpression) {
             return extractExpressions(((StaticMethodCallExpression) methodCall).getArguments());
-        } else if (respondsTo(methodCall, "getArguments")) {
-            throw new RuntimeException(); // TODO: remove, should never happen
         }
         return new ArrayList<Expression>();
     }
 
-    private static List<? extends Expression> extractExpressions(Expression argumentsExpression ) {
+    private static List<? extends Expression> extractExpressions(Expression argumentsExpression) {
         if (argumentsExpression instanceof ArrayExpression) {
             return ((ArrayExpression) argumentsExpression).getExpressions();
         } else if (argumentsExpression instanceof ListExpression) {
@@ -249,11 +247,8 @@ public class AstUtil {
             return ((TupleExpression) argumentsExpression).getExpressions();
         } else if (argumentsExpression instanceof MapExpression) {
             return ((MapExpression) argumentsExpression).getMapEntryExpressions();
-        } else if (respondsTo(argumentsExpression, "getExpressions")) {
-            throw new RuntimeException(); // TODO: add warning
-        } else if (respondsTo(argumentsExpression, "getMapEntryExpressions")) {
-            throw new RuntimeException(); // TODO: add warning
         }
+        LOG.warn("extractExpressions argumentsExpression is not an expected type: " + argumentsExpression.getClass().getName());
         return new ArrayList<Expression>();
     }
 
@@ -526,7 +521,7 @@ public class AstUtil {
         } else if (leftExpression instanceof VariableExpression) {
             return Arrays.asList(leftExpression);
         }
-        // todo: write warning
+        LOG.warn("getVariableExpressions leftExpression is not an expected type: " + leftExpression.getClass().getName());
         return Collections.emptyList();
     }
 
@@ -951,95 +946,21 @@ public class AstUtil {
     /**
      * Supports discovering many common JDK types, but not all.
      */
-    public static Class getFieldType(ClassNode node, String fieldName) {
-        while (node != null) {
-            for (FieldNode field: node.getFields()) {
-                if (field.getName().equals(fieldName)) {
-                    return getFieldType(field);
-                }
-            }
-            node = node.getOuterClass();
-        }
-        return null;
+    public static Class getFieldType(FieldNode field) {
+        return InferenceUtil.getFieldType(field);
     }
 
     /**
      * Supports discovering many common JDK types, but not all.
      */
-    public static Class getFieldType(FieldNode field) {
-        // Step 1: Analyze the field's declared type
-        Class declaredType = getClassForClassNode(field.getType());
-        if (declaredType != null) {
-            return declaredType;
-        }
-
-        // Step 2: Analyze the cast type of the initial expression
-        if (field.getInitialExpression() != null) {
-            Class castType = getClassForClassNode(field.getInitialExpression().getType());
-            if (castType != null) {
-                return castType;
+    public static Class getFieldType(ClassNode node, String fieldName) {
+        while (node != null) {
+            for (FieldNode field: node.getFields()) {
+                if (field.getName().equals(fieldName)) {
+                    return InferenceUtil.getFieldType(field);
+                }
             }
-        }
-
-        // Step 3: Look at the literal within the constant
-        if (field.getInitialExpression() instanceof ConstantExpression) {
-            Object constantValue = ((ConstantExpression) field.getInitialExpression()).getValue();
-            if (constantValue == null) {
-                return null;
-            } else if (constantValue instanceof String) {
-                return String.class;
-            } else if (isBoolean(field.getInitialExpression())) {
-                return Boolean.class;
-            } else if (constantValue.getClass() == Integer.class || constantValue.getClass() == Integer.TYPE) {
-                return Integer.class;
-            } else if (constantValue.getClass() == Long.class || constantValue.getClass() == Long.TYPE) {
-                return Long.class;
-            } else if (constantValue.getClass() == Double.class || constantValue.getClass() == Double.TYPE) {
-                return Double.class;
-            } else if (constantValue.getClass() == Float.class || constantValue.getClass() == Float.TYPE) {
-                return Float.class;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * This is private. It is a helper function for the utils.
-     */
-    private static Class getClassForClassNode(ClassNode type) {
-        // todo hamlet - move to a different "InferenceUtil" object
-        Class primitiveType = getPrimitiveType(type);
-        if (primitiveType != null) {
-            return primitiveType;
-        } else if (classNodeImplementsType(type, String.class)) {
-            return String.class;
-        } else if (classNodeImplementsType(type, ReentrantLock.class)) {
-            return ReentrantLock.class;
-        } else if (type.getName() != null && type.getName().endsWith("[]")) {
-            return Object[].class;       // better type inference could be done, but oh well
-        }
-        return null;
-    }
-
-    private static Class getPrimitiveType(ClassNode type) {
-        if (classNodeImplementsType(type, Boolean.class) || classNodeImplementsType(type, Boolean.TYPE)) {
-            return Boolean.class;
-        } else if (classNodeImplementsType(type, Long.class) || classNodeImplementsType(type, Long.TYPE)) {
-            return Long.class;
-        } else if (classNodeImplementsType(type, Short.class) || classNodeImplementsType(type, Short.TYPE)) {
-            return Short.class;
-        } else if (classNodeImplementsType(type, Double.class) || classNodeImplementsType(type, Double.TYPE)) {
-            return Double.class;
-        } else if (classNodeImplementsType(type, Float.class) || classNodeImplementsType(type, Float.TYPE)) {
-            return Float.class;
-        } else if (classNodeImplementsType(type, Character.class) || classNodeImplementsType(type, Character.TYPE)) {
-            return Character.class;
-        } else if (classNodeImplementsType(type, Integer.class) || classNodeImplementsType(type, Integer.TYPE)) {
-            return Integer.class;
-        } else if (classNodeImplementsType(type, Long.class) || classNodeImplementsType(type, Long.TYPE)) {
-            return Long.class;
-        } else if (classNodeImplementsType(type, Byte.class) || classNodeImplementsType(type, Byte.TYPE)) {
-            return Byte.class;
+            node = node.getOuterClass();
         }
         return null;
     }
