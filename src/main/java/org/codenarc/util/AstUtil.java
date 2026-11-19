@@ -248,7 +248,7 @@ public class AstUtil {
         } else if (argumentsExpression instanceof MapExpression) {
             return ((MapExpression) argumentsExpression).getMapEntryExpressions();
         }
-        LOG.warn("extractExpressions argumentsExpression is not an expected type: " + argumentsExpression.getClass().getName());
+        LOG.warn("extractExpressions argumentsExpression is not an expected type: " + getExpressionClassName(argumentsExpression));
         return new ArrayList<Expression>();
     }
 
@@ -521,8 +521,12 @@ public class AstUtil {
         } else if (leftExpression instanceof VariableExpression) {
             return Arrays.asList(leftExpression);
         }
-        LOG.warn("getVariableExpressions leftExpression is not an expected type: " + leftExpression.getClass().getName());
+        LOG.warn("getVariableExpressions leftExpression is not an expected type: " + getExpressionClassName(leftExpression));
         return Collections.emptyList();
+    }
+
+    private static String getExpressionClassName(Expression expression) {
+        return expression == null ? "null" : expression.getClass().getName();
     }
 
     /**

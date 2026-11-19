@@ -270,6 +270,24 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     @Test
+    void testGetVariableExpressions_NullLeftExpression_ReturnsEmptyList() {
+        def declaration = new DeclarationExpression(
+            new VariableExpression('x'),
+            new Token(Types.ASSIGN, '=', -1, -1),
+            new ConstantExpression(1))
+        def leftExpressionField = BinaryExpression.declaredFields.find { it.name == 'leftExpression' }
+        leftExpressionField.accessible = true
+        leftExpressionField.set(declaration, null)
+        assert AstUtil.getVariableExpressions(declaration).isEmpty()
+    }
+
+    @Test
+    void testGetMethodArguments_NullArguments_ReturnsEmptyList() {
+        def staticCall = new StaticMethodCallExpression(ClassHelper.make(String), 'valueOf', null)
+        assert AstUtil.getMethodArguments(staticCall).isEmpty()
+    }
+
+    @Test
     void testGetVariableExpressions_MultipleAssignment() {
         def declaration = new DeclarationExpression(
             new TupleExpression(new VariableExpression('a'), new VariableExpression('b')),
