@@ -954,15 +954,7 @@ public class AstUtil {
      * Supports discovering many common JDK types, but not all.
      */
     public static Class getFieldType(ClassNode node, String fieldName) {
-        while (node != null) {
-            for (FieldNode field: node.getFields()) {
-                if (field.getName().equals(fieldName)) {
-                    return InferenceUtil.getFieldType(field);
-                }
-            }
-            node = node.getOuterClass();
-        }
-        return null;
+        return InferenceUtil.getFieldType(node, fieldName);
     }
 
     public static boolean isThisReference(Expression expression) {

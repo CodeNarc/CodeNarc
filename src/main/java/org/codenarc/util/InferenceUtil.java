@@ -75,6 +75,24 @@ class InferenceUtil {
     }
 
     /**
+     * Return the inferred type for the named field within the specified class, or null if it cannot be determined.
+     * If the class does not declare a field with that name, then search its outer classes, from innermost to outermost.
+     * Supports discovering many common JDK types, but not all.
+     */
+    public static Class getFieldType(ClassNode node, String fieldName) {
+        ClassNode currentNode = node;
+        while (currentNode != null) {
+            for (FieldNode field: currentNode.getFields()) {
+                if (field.getName().equals(fieldName)) {
+                    return getFieldType(field);
+                }
+            }
+            currentNode = currentNode.getOuterClass();
+        }
+        return null;
+    }
+
+    /**
      * This is private. It is a helper function for the utils.
      */
     private static Class getClassForClassNode(ClassNode type) {

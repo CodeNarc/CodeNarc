@@ -105,6 +105,44 @@ class InferenceUtilTest extends AbstractTestCase {
 
     private static final Map<String, FieldNode> FIELDS = parseFields(SOURCE)
 
+    private static final NESTED_CLASSES_SOURCE = '''
+        import java.util.concurrent.locks.ReentrantLock
+
+        class Outer {
+            String outerString
+            int outerInt
+            ReentrantLock outerLock
+            Object[] outerArray
+            def outerUntypedLong = 123L
+            List outerList
+            String shadowed
+            String innerShadowsWithUnknownType
+
+            class Inner {
+                boolean innerBoolean
+                Long shadowed
+                List innerShadowsWithUnknownType
+
+                class Innermost {
+                    double innermostDouble
+                }
+            }
+
+            static class StaticNested {
+            }
+
+            def anonymous = new Runnable() {
+                String anonymousString
+                void run() { }
+            }
+        }
+
+        class Subclass extends Outer {
+        }
+    '''
+
+    private static final Map<String, ClassNode> CLASSES = parseClasses(NESTED_CLASSES_SOURCE)
+
     //------------------------------------------------------------------------------------
     // Declared primitive types are mapped to their wrapper types
     //------------------------------------------------------------------------------------
@@ -321,6 +359,87 @@ class InferenceUtilTest extends AbstractTestCase {
     }
 
     //------------------------------------------------------------------------------------
+    // getFieldType(ClassNode, String): find the named field in the class or its outer classes
+    //------------------------------------------------------------------------------------
+
+    @Test
+    void test_getFieldType_ClassNode_FieldDeclaredInClass() {
+        def outer = classNamed('Outer')
+        assert InferenceUtil.getFieldType(outer, 'outerString') == String
+        assert InferenceUtil.getFieldType(outer, 'outerInt') == Integer
+        assert InferenceUtil.getFieldType(outer, 'outerLock') == ReentrantLock
+        assert InferenceUtil.getFieldType(outer, 'outerArray') == Object[]
+        assert InferenceUtil.getFieldType(outer, 'outerUntypedLong') == Long
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_FieldTypeCannotBeInferred() {
+        assert InferenceUtil.getFieldType(classNamed('Outer'), 'outerList') == null
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_NoSuchField() {
+        assert InferenceUtil.getFieldType(classNamed('Outer'), 'noSuchField') == null
+        assert InferenceUtil.getFieldType(classNamed('Outer$Inner'), 'noSuchField') == null
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_FieldNameIsCaseSensitive() {
+        assert InferenceUtil.getFieldType(classNamed('Outer'), 'OUTERSTRING') == null
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_NullClassNode() {
+        assert InferenceUtil.getFieldType((ClassNode) null, 'outerString') == null
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_FieldDeclaredInOuterClass() {
+        assert InferenceUtil.getFieldType(classNamed('Outer$Inner'), 'outerString') == String
+        assert InferenceUtil.getFieldType(classNamed('Outer$StaticNested'), 'outerLock') == ReentrantLock
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_FieldDeclaredTwoLevelsOut() {
+        def innermost = classNamed('Outer$Inner$Innermost')
+        assert InferenceUtil.getFieldType(innermost, 'outerInt') == Integer
+        assert InferenceUtil.getFieldType(innermost, 'innerBoolean') == Boolean
+        assert InferenceUtil.getFieldType(innermost, 'innermostDouble') == Double
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_InnerFieldShadowsOuterField() {
+        assert InferenceUtil.getFieldType(classNamed('Outer'), 'shadowed') == String
+        assert InferenceUtil.getFieldType(classNamed('Outer$Inner'), 'shadowed') == Long
+        assert InferenceUtil.getFieldType(classNamed('Outer$Inner$Innermost'), 'shadowed') == Long
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_FirstMatchingFieldDeterminesResult() {
+        // The inner field is found first, so the outer field is not used even though its type could be inferred
+        assert InferenceUtil.getFieldType(classNamed('Outer$Inner'), 'innerShadowsWithUnknownType') == null
+        assert InferenceUtil.getFieldType(classNamed('Outer'), 'innerShadowsWithUnknownType') == String
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_FieldOfInnerClassNotVisibleFromOuterClass() {
+        assert InferenceUtil.getFieldType(classNamed('Outer'), 'innerBoolean') == null
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_AnonymousInnerClass() {
+        def anonymousClass = CLASSES.values().find { it.name.startsWith('Outer$') && it.name ==~ /.*\$\d+/ }
+        assert anonymousClass
+        assert InferenceUtil.getFieldType(anonymousClass, 'anonymousString') == String
+        assert InferenceUtil.getFieldType(anonymousClass, 'outerInt') == Integer
+    }
+
+    @Test
+    void test_getFieldType_ClassNode_DoesNotSearchSuperclass() {
+        assert InferenceUtil.getFieldType(classNamed('Subclass'), 'outerString') == null
+    }
+
+    //------------------------------------------------------------------------------------
     // Helper methods
     //------------------------------------------------------------------------------------
 
@@ -338,6 +457,17 @@ class InferenceUtilTest extends AbstractTestCase {
 
     private static FieldNode fieldNode(ClassNode type, Expression initialExpression = null) {
         return new FieldNode('myField', Modifier.PRIVATE, type, ClassHelper.OBJECT_TYPE, initialExpression)
+    }
+
+    private static ClassNode classNamed(String name) {
+        ClassNode classNode = CLASSES[name]
+        assert classNode, "No class named [$name]"
+        return classNode
+    }
+
+    private static Map<String, ClassNode> parseClasses(String source) {
+        def ast = new SourceString(source).ast
+        return ast.classes.collectEntries { classNode -> [(classNode.name): classNode] }
     }
 
     private static Map<String, FieldNode> parseFields(String source) {
