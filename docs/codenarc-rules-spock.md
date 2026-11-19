@@ -325,6 +325,78 @@ with `unroll { ... }` / `runner { rollup ... }` in *SpockConfig.groovy*, which C
 rule there too.
 
 
+## SpockUseRestoreSystemProperties Rule
+
+*Since CodeNarc 4.1.0*
+
+A specification that mutates system properties and does not restore them leaks that state into every specification
+that runs after it, in a way that depends on the execution order and on whether the suite runs in parallel. The
+failure that results shows up in a *different* specification, which is the most expensive kind of test failure to
+diagnose.
+
+Spock ships `@RestoreSystemProperties` for exactly this: it snapshots the system properties before and restores
+them after the annotated feature - or, applied to the class, around every feature. This rule reports a mutation of
+the system properties in a Spock specification - in a feature method, a fixture method or a helper method alike -
+when neither the enclosing method, nor the specification class, nor a superclass declared in the same source file
+carries that annotation.
+
+Reported mutations, all of which have to name the receiver `System` or `java.lang.System`:
+
+* `System.setProperty(..)`, `System.clearProperty(..)`, `System.setProperties(..)`,
+* an assignment whose target is rooted at `System.properties` / `System.getProperties()`, e.g.
+  `System.properties['foo'] = 'bar'`, `System.properties.foo = 'bar'` or `System.properties = props`,
+* a mutating call on `System.properties` / `System.getProperties()`, i.e. `setProperty`, `put`, `putAll`,
+  `putIfAbsent`, `remove`, `clear`, `replace`, `replaceAll`, `merge`, `compute`, `computeIfAbsent`,
+  `computeIfPresent`, `load` or `loadFromXML`.
+
+The rule reports only positively identified mutations, so it stays silent for reads (`System.getProperty('x')`,
+`System.properties['x']`, `System.getenv(..)`), for anything that is not spelled out on `System` (a local alias such
+as `def props = System.properties; props.put(..)`, or an unrelated object that happens to have a `properties`
+property), and for a mutation outside any method, such as a field initializer.
+
+CodeNarc runs without a classpath, so a base specification declared in *another* file cannot be resolved and its
+`@RestoreSystemProperties` cannot be seen; a subclass of such a base specification is reported. Suppress those with
+`@SuppressWarnings('SpockUseRestoreSystemProperties')` on the method or class, or with the rule's `doNotApplyToClassNames`
+/ `doNotApplyToFileNames` properties.
+
+A specification that saves and restores the properties by hand in `setup()` / `cleanup()` is reported as well, since
+the rule cannot distinguish that from an unrestored mutation. Prefer replacing such custom handling with
+`@RestoreSystemProperties`: it is shorter, it also restores properties the test did not expect to change, and Spock
+takes it into account when running specifications in parallel.
+
+Example of violations:
+
+```
+    class MySpec extends spock.lang.Specification {
+        def "leaks the property"() {
+            given:
+            System.setProperty('user.language', 'de')      // violation
+            System.properties['user.region'] = 'DE'        // violation
+
+            expect:
+            System.getProperty('user.language') == 'de'    // no violation - a read
+
+            cleanup:
+            System.clearProperty('user.language')          // violation - restoring by hand is still a mutation
+        }
+
+        @spock.util.environment.RestoreSystemProperties
+        def "restores the property"() {
+            given:
+            System.setProperty('user.language', 'de')      // no violation - the annotation restores it
+
+            expect:
+            Locale.default != null
+        }
+    }
+```
+
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| specificationClassNames     | Specifies one or more (comma-separated) class names that should be treated as Spock Specification classes. The class names may optionally contain wildcards (*,?), e.g. "*Spec". | `null` |
+| specificationSuperclassNames| Specifies one or more (comma-separated) class names that should be treated as Spock Specification superclasses. In other words, a class that extends a matching class name is considered a Spock Specification . The class names may optionally contain wildcards (*,?), e.g. "*Spec". | "*Specification" |
+
+
 ## SpockUseVerifyEach Rule
 
 *Since CodeNarc 3.7.0*
