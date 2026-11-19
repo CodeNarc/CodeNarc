@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression;
  * <p/>
  * This is an internal class and its API is subject to change.
  */
-public class InferenceUtil {
+class InferenceUtil {
 
     /**
      * Private constructor. All methods are static.
@@ -94,8 +94,6 @@ public class InferenceUtil {
     private static Class getPrimitiveType(ClassNode type) {
         if (AstUtil.classNodeImplementsType(type, Boolean.class) || AstUtil.classNodeImplementsType(type, Boolean.TYPE)) {
             return Boolean.class;
-        } else if (AstUtil.classNodeImplementsType(type, Long.class) || AstUtil.classNodeImplementsType(type, Long.TYPE)) {
-            return Long.class;
         } else if (AstUtil.classNodeImplementsType(type, Short.class) || AstUtil.classNodeImplementsType(type, Short.TYPE)) {
             return Short.class;
         } else if (AstUtil.classNodeImplementsType(type, Double.class) || AstUtil.classNodeImplementsType(type, Double.TYPE)) {

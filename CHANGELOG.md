@@ -22,7 +22,8 @@ Build, Infrastructure and Tests
 - #837: Add a `generateAll` Gradle task that runs `org.codenarc.tool.GenerateAll`, so the generated rule properties file, rule index pages and starter rule sets can be regenerated from the build. ([Leonard Brünings](https://github.com/leonard84))
 - #837: `GenerateUtil`: Add `RULES_EXCLUDED_FROM_GENERATED_FILES`, the central list of the rules that the generated files must not list for a rule set, so a rule that has moved to another rule set is listed once, under its new rule set. ([Leonard Brünings](https://github.com/leonard84))
 - #869: Add `AbstractSpockRule` and `AbstractSpockAstVisitor` as the shared base classes of the **spock** rule set. They hold the `specificationSuperclassNames` / `specificationClassNames` configuration, skip classes that are not Spock specifications, and track the current Spock block label, the nesting depth, the kind of the current method and the enclosing `with`/`verifyAll`/`verifyEach` closure. ([Leonard Brünings](https://github.com/leonard84))
-- #879: Cleanup and refactor `AstUtil` and introduce `InferenceUtil`. ([Thanos Tsiamis](https://github.com/ThanosTsiamis))
+- #878: Cleanup and refactor `AstUtil` and introduce `InferenceUtil`. ([Thanos Tsiamis](https://github.com/ThanosTsiamis))
+- #879: Additional cleanup and refactor of `AstUtil` and `InferenceUtil` and their tests.
 
 
 Version 4.0.0  (Jul 2026)
