@@ -19,10 +19,12 @@ import org.codehaus.groovy.ast.ConstructorNode
 import org.slf4j.LoggerFactory
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
+import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ArgumentListExpression
+import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
@@ -38,6 +40,7 @@ import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.syntax.Token
+import org.codehaus.groovy.syntax.Types
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
 import org.junit.jupiter.api.BeforeEach
@@ -231,14 +234,14 @@ class AstUtilTest extends AbstractTestCase {
         assert AstUtil.getMethodArguments(constantExpression()).isEmpty()
         assert AstUtil.getMethodArguments(new DeclarationExpression(
             new VariableExpression('x'),
-            new Token(org.codehaus.groovy.syntax.Types.ASSIGN, '=', -1, -1),
+            new Token(Types.ASSIGN, '=', -1, -1),
             new ConstantExpression(1))).isEmpty()
     }
 
     @Test
     void testGetMethodArguments_StaticMethodCallExpression() {
         def staticCall = new StaticMethodCallExpression(
-            org.codehaus.groovy.ast.ClassHelper.make(String), 'valueOf',
+            ClassHelper.make(String), 'valueOf',
             new ArgumentListExpression(new ConstantExpression(1)))
         assert AstUtil.getMethodArguments(staticCall).size() == 1
         assert AstUtil.getMethodArguments(staticCall)[0].value == 1
@@ -258,9 +261,9 @@ class AstUtilTest extends AbstractTestCase {
         // left, so simulate an unexpected left expression by mutating the inherited field directly.
         def declaration = new DeclarationExpression(
             new VariableExpression('x'),
-            new Token(org.codehaus.groovy.syntax.Types.ASSIGN, '=', -1, -1),
+            new Token(Types.ASSIGN, '=', -1, -1),
             new ConstantExpression(1))
-        def leftExpressionField = org.codehaus.groovy.ast.expr.BinaryExpression.declaredFields
+        def leftExpressionField = BinaryExpression.declaredFields
             .find { it.name == 'leftExpression' }
         leftExpressionField.accessible = true
         leftExpressionField.set(declaration, new ClosureExpression(null, new BlockStatement()))
@@ -271,13 +274,9 @@ class AstUtilTest extends AbstractTestCase {
     void testGetVariableExpressions_MultipleAssignment() {
         def declaration = new DeclarationExpression(
             new TupleExpression(new VariableExpression('a'), new VariableExpression('b')),
-            new Token(org.codehaus.groovy.syntax.Types.ASSIGN, '=', -1, -1),
+            new Token(Types.ASSIGN, '=', -1, -1),
             new ListExpression())
         assert AstUtil.getVariableExpressions(declaration).name == ['a', 'b']
-    }
-
-    private ConstantExpression constantExpression() {
-        return new ConstantExpression('x')
     }
 
     @Test
@@ -539,6 +538,10 @@ class AstUtilTest extends AbstractTestCase {
 
     private DeclarationExpression declarationExpressionForVariableNamed(String name) {
         return visitor.declarationExpressions.find { declarationExpression -> declarationExpression.variableExpression.name == name }
+    }
+
+    private ConstantExpression constantExpression() {
+        return new ConstantExpression('x')
     }
 
 }
