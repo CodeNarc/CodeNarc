@@ -226,8 +226,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testGetMethodArguments_NonMethodCallNode_ReturnsEmptyList() {
-        // Any AST node that is not a method/constructor call must return an empty List,
-        // never throw (previously the fallback branch threw a RuntimeException).
+        // Any AST node that is not a method/constructor call must return an empty List, never throw
         assert AstUtil.getMethodArguments(methodNamed('someMethod')).isEmpty()
         assert AstUtil.getMethodArguments(classNamed('MyClass')).isEmpty()
         assert AstUtil.getMethodArguments(fieldNamed('myIntField')).isEmpty()
