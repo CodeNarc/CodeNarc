@@ -63,6 +63,8 @@ class InferenceUtilTest extends AbstractTestCase {
             java.util.concurrent.locks.ReentrantLock fullyQualifiedLock
             String[] stringArray
             int[] intArray
+            long[] longArray
+            boolean[] booleanArray
             Object[] objectArray
             Object declaredObject
             List declaredList
@@ -159,10 +161,11 @@ class InferenceUtilTest extends AbstractTestCase {
     }
 
     @Test
-    void test_getFieldType_DeclaredPrimitiveArray_NotInferred() {
-        // Current limitation: the ClassNode name for a primitive array is a JVM descriptor (e.g. "[I"),
-        // which does not end with "[]", so it is not recognized as an array
-        assertFieldType('intArray', null)
+    void test_getFieldType_DeclaredPrimitiveArray() {
+        assertFieldType('intArray', Object[])
+        assertFieldType('longArray', Object[])
+        assertFieldType('booleanArray', Object[])
+        assert InferenceUtil.getFieldType(fieldNode(ClassHelper.int_TYPE.makeArray())) == Object[]
     }
 
     @Test
@@ -292,8 +295,8 @@ class InferenceUtilTest extends AbstractTestCase {
 
     @Test
     void test_getFieldType_ConstantWithObjectType_UnsupportedValues() {
-        assert InferenceUtil.getFieldType(fieldWithObjectTypedConstant(new BigDecimal('1.5'))) == null
-        assert InferenceUtil.getFieldType(fieldWithObjectTypedConstant(new BigInteger('123'))) == null
+        assert InferenceUtil.getFieldType(fieldWithObjectTypedConstant(1.5G)) == null
+        assert InferenceUtil.getFieldType(fieldWithObjectTypedConstant(123G)) == null
         assert InferenceUtil.getFieldType(fieldWithObjectTypedConstant((short) 7)) == null
         assert InferenceUtil.getFieldType(fieldWithObjectTypedConstant((byte) 7)) == null
         assert InferenceUtil.getFieldType(fieldWithObjectTypedConstant('x' as char)) == null

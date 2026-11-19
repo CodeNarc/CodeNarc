@@ -85,7 +85,7 @@ public class InferenceUtil {
             return String.class;
         } else if (AstUtil.classNodeImplementsType(type, ReentrantLock.class)) {
             return ReentrantLock.class;
-        } else if (type.getName() != null && type.getName().endsWith("[]")) {
+        } else if (type.isArray() || (type.getName() != null && type.getName().endsWith("[]"))) {
             return Object[].class;       // better type inference could be done, but oh well
         }
         return null;

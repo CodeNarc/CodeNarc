@@ -68,6 +68,18 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase<VolatileArrayField
     }
 
     @Test
+    void testDeclarationType_PrimitiveArray() {
+        final SOURCE = '''
+            class MyClass {
+                private volatile int[] field1 = value()
+            }
+        '''
+        assertSingleViolation(SOURCE, 3,
+                'private volatile int[] field1',
+                'The array field field1 is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type')
+    }
+
+    @Test
     void testCastAsType() {
         final SOURCE = '''
             class MyClass {

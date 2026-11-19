@@ -55,6 +55,16 @@ class UnsafeArrayDeclarationRuleTest extends AbstractRuleTestCase<UnsafeArrayDec
     }
 
     @Test
+    void testPrimitiveArrayDeclaration() {
+        final SOURCE = '''
+              class MyClass {
+                public static final int[] myArray = init()
+              }
+        '''
+        assertSingleViolation(SOURCE, 3, 'public static final int[] myArray = init()', 'The Array field myArray is public, static, and final but still mutable')
+    }
+
+    @Test
     void testArrayInitialization() {
         final SOURCE = '''
               class MyClass {
